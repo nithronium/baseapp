@@ -1,8 +1,6 @@
-import * as React from 'react';
-import { FormattedMessage } from 'react-intl';
-
 import { History } from 'history';
-
+import * as React from 'react';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { getBalance } from '../../api';
@@ -21,7 +19,7 @@ interface HistoryProps {
 
 type Props = RouterProps & HistoryProps;
 
-class ProfileComponent extends React.Component<Props> {
+class ProfileComponent extends React.Component<Props, InjectedIntlProps> {
 
     public state = {
         balance: 0,
@@ -40,10 +38,7 @@ class ProfileComponent extends React.Component<Props> {
             });
     }
 
-    public goBack = () => {
-        this.props.history.goBack();
-    };
-//tslint:disable
+    //tslint:disable
     public render() {
         return (
             <div className="container pg-profile-page">
@@ -83,7 +78,7 @@ class ProfileComponent extends React.Component<Props> {
 }
 
 // tslint:disable-next-line:no-any
-const ProfileScreen = withRouter(ProfileComponent as any);
+const ProfileScreen = injectIntl(withRouter(ProfileComponent as any));
 
 export {
     ProfileScreen,

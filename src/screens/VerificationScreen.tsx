@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import {
     connect,
     MapDispatchToPropsFunction,
@@ -36,7 +37,7 @@ type Props = DispatchProps & RouterProps & ReduxProps;
 export const extractToken = (props: RouterProps) => new URLSearchParams(props.location.search).get('confirmation_token');
 export const extractLang = (props: RouterProps) => new URLSearchParams(props.location.search).get('lang');
 
-class Verification extends React.Component<Props> {
+class Verification extends React.Component<Props, InjectedIntlProps> {
     public componentDidMount() {
         const token = extractToken(this.props);
         const lang = extractLang(this.props);
@@ -75,7 +76,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
         changeLanguage: lang => dispatch(changeLanguage(lang)),
     });
 
-const VerificationScreen = connect(mapStateToProps, mapDispatchToProps)(Verification);
+const VerificationScreen = injectIntl(connect(mapStateToProps, mapDispatchToProps)(Verification));
 
 export {
     VerificationScreen,

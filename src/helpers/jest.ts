@@ -23,6 +23,7 @@ const mockConfig: Config = {
         captchaType: 'none',
         siteKey: '',
     },
+    gaTrackerKey: '',
     licenseKey: '',
     incrementalOrderBook: false,
     plugins: [],

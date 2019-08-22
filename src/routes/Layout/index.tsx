@@ -22,6 +22,7 @@ import { buildPath, saveParametersFromUrl } from '../../custom/helpers';
 import { LoginModal } from '../../custom/components/KYCLoginModal';
 import { ConfirmScreen } from '../../custom/screens';
 import { toggleColorTheme } from '../../helpers';
+import { gaTracker } from '../../helpers/gaTracker';
 import {
     changeLanguage,
     logoutFetch,
@@ -239,117 +240,117 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/signin'}
-                        component={SignInScreen}
+                        component={gaTracker(SignInScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/signin'}
-                        component={SignInScreen}
+                        component={gaTracker(SignInScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/accounts/confirmation'}
-                        component={VerificationScreen}
+                        component={gaTracker(VerificationScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/accounts/confirmation'}
-                        component={VerificationScreen}
+                        component={gaTracker(VerificationScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/signup'}
-                        component={SignUpScreen}
+                        component={gaTracker(SignUpScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/signup'}
-                        component={SignUpScreen}
+                        component={gaTracker(SignUpScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/forgot_password'}
-                        component={ForgotPasswordScreen}
+                        component={gaTracker(ForgotPasswordScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/forgot_password'}
-                        component={ForgotPasswordScreen}
+                        component={gaTracker(ForgotPasswordScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/accounts/password_reset'}
-                        component={ChangeForgottenPasswordScreen}
+                        component={gaTracker(ChangeForgottenPasswordScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/accounts/password_reset'}
-                        component={ChangeForgottenPasswordScreen}
+                        component={gaTracker(ChangeForgottenPasswordScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/email-verification'}
-                        component={EmailVerificationScreen}
+                        component={gaTracker(EmailVerificationScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/email-verification'}
-                        component={EmailVerificationScreen}
+                        component={gaTracker(EmailVerificationScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     {/* <Route loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral', currentLanguage)} component={ReferralScreen} /> */}
-                    <Route loading={userLoading} isLogged={isLoggedIn} path={'/ru/referral'} component={ReferralScreen} />
-                    <Route loading={userLoading} isLogged={isLoggedIn} path={'/referral'} component={ReferralScreen} />
-                    <Route path={'/trading/:market'} component={TradingScreen} />
-                    <Route path={'/ru/trading/:market'} component={TradingScreen} />
+                    <Route exact={true} path={'/ru/referral'} component={gaTracker(ReferralScreen, {})} />
+                    <Route exact={true} path={'/referral'} component={gaTracker(ReferralScreen, {})} />
+                    <Route exact={true} path={'/trading/:market'} component={gaTracker(TradingScreen, {})} />
+                    <Route exact={true} path={'/ru/trading/:market'} component={gaTracker(TradingScreen, {})} />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/orders'}
-                        component={OrdersTabScreen}
+                        component={gaTracker(OrdersTabScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/orders'}
-                        component={OrdersTabScreen}
+                        component={gaTracker(OrdersTabScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/history/:history'}
-                        component={HistoryScreen}
+                        component={gaTracker(HistoryScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/history/:history'}
-                        component={HistoryScreen}
+                        component={gaTracker(HistoryScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
@@ -363,77 +364,77 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/confirm'}
-                        component={ConfirmScreen}
+                        component={(ConfirmScreen)}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/profile'}
-                        component={ProfileScreen}
+                        component={gaTracker(ProfileScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/profile'}
-                        component={ProfileScreen}
+                        component={gaTracker(ProfileScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/wallets'}
-                        component={WalletsScreen}
+                        component={gaTracker(WalletsScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/wallets'}
-                        component={WalletsScreen}
+                        component={gaTracker(WalletsScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/security/2fa'}
-                        component={ProfileTwoFactorAuthScreen}
+                        component={gaTracker(ProfileTwoFactorAuthScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/security/2fa'}
-                        component={ProfileTwoFactorAuthScreen}
+                        component={gaTracker(ProfileTwoFactorAuthScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/referral-tickets'}
-                        component={ReferralTicketsScreen}
+                        component={gaTracker(ReferralTicketsScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/referral-tickets'}
-                        component={ReferralTicketsScreen}
+                        component={gaTracker(ReferralTicketsScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/referral-commission'}
-                        component={ReferralCommissionScreen}
+                        component={gaTracker(ReferralCommissionScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/referral-commission'}
-                        component={ReferralCommissionScreen}
+                        component={gaTracker(ReferralCommissionScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
@@ -441,7 +442,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         isLogged={isLoggedIn}
                         noReditect={true}
                         path={'/buycrypto'}
-                        component={BuyWithCreditCardScreen}
+                        component={gaTracker(BuyWithCreditCardScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
@@ -449,7 +450,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         isLogged={isLoggedIn}
                         noReditect={true}
                         path={'/ru/buycrypto'}
-                        component={BuyWithCreditCardScreen}
+                        component={gaTracker(BuyWithCreditCardScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
@@ -457,7 +458,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         isLogged={isLoggedIn}
                         noReditect={true}
                         path={'/zh/buycrypto'}
-                        component={BuyWithCreditCardScreen}
+                        component={gaTracker(BuyWithCreditCardScreen, {})}
                         currentLanguage={currentLanguage}
                     />
 
@@ -465,46 +466,46 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/signin'}
-                        component={SignInScreen}
+                        component={gaTracker(SignInScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/accounts/confirmation'}
-                        component={VerificationScreen}
+                        component={gaTracker(VerificationScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/signup'}
-                        component={SignUpScreen}
+                        component={gaTracker(SignUpScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/forgot_password'}
-                        component={ForgotPasswordScreen}
+                        component={gaTracker(ForgotPasswordScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/accounts/password_reset'}
-                        component={ChangeForgottenPasswordScreen}
+                        component={gaTracker(ChangeForgottenPasswordScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/email-verification'}
-                        component={EmailVerificationScreen}
+                        component={gaTracker(EmailVerificationScreen, {})}
                         currentLanguage={currentLanguage}
                     />
-                    <Route loading={userLoading} isLogged={isLoggedIn} path={'/zh/referral'} component={ReferralScreen} />
-                    <Route path={'/zh/trading/:market'} component={TradingScreen} />
+                    <Route path={'/zh/referral'} component={gaTracker(ReferralScreen, {})} />
+                    <Route path={'/zh/trading/:market'} component={gaTracker(TradingScreen, {})} />
 
                     <PublicRoute
                         loading={userLoading}
@@ -579,14 +580,14 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/orders'}
-                        component={OrdersTabScreen}
+                        component={gaTracker(OrdersTabScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/history/:history'}
-                        component={HistoryScreen}
+                        component={gaTracker(HistoryScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
@@ -600,56 +601,56 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/profile'}
-                        component={ProfileScreen}
+                        component={gaTracker(ProfileScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/wallets'}
-                        component={WalletsScreen}
+                        component={gaTracker(WalletsScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/security/2fa'}
-                        component={ProfileTwoFactorAuthScreen}
+                        component={gaTracker(ProfileTwoFactorAuthScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/referral-tickets'}
-                        component={ReferralTicketsScreen}
+                        component={gaTracker(ReferralTicketsScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/referral-commission'}
-                        component={ReferralCommissionScreen}
+                        component={gaTracker(ReferralCommissionScreen, )}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/kyc-levels'}
-                        component={PricePackagesScreen}
+                        component={gaTracker(PricePackagesScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/ru/kyc-levels'}
-                        component={PricePackagesScreen}
+                        component={gaTracker(PricePackagesScreen, {})}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         path={'/zh/kyc-levels'}
-                        component={PricePackagesScreen}
+                        component={gaTracker(PricePackagesScreen, {})}
                         currentLanguage={currentLanguage}
                     />
 
