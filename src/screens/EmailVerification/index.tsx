@@ -7,6 +7,7 @@ import {
 } from 'react-intl';
 import { connect, MapStateToProps } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import logo = require('../../assets/images/logo.svg');
 import { setDocumentTitle } from '../../helpers';
 import {
     emailVerificationFetch,
@@ -50,12 +51,17 @@ class EmailVerificationComponent extends React.Component<Props> {
         const button = this.props.intl.formatMessage({ id: 'page.resendConfirmation' });
         return (
             <div className="pg-emailverification-container">
-                <div className="pg-emailverification">
-                    <div className="pg-emailverification-title">{title}</div>
-                    <div className="pg-emailverification-body">
-                        <div className="pg-emailverification-body-text">{text}</div>
-                        <div className="pg-emailverification-body-container">
-                            {emailVerificationLoading ? <Loader /> : <button className="pg-emailverification-body-container-button" onClick={this.handleClick}>{button}</button>}
+                <div className="pg-emailverification-container__wrapper">
+                    <div className="cr-logo">
+                        <img src={logo} className="cr-logo__img" alt="Logo" />
+                    </div>
+                    <div className="pg-emailverification">
+                        <div className="pg-emailverification-title">{title}</div>
+                        <div className="pg-emailverification-body">
+                            <div className="pg-emailverification-body-text">{text}</div>
+                            <div className="pg-emailverification-body-container">
+                                {emailVerificationLoading ? <Loader /> : <button className="cr-button" onClick={this.handleClick}>{button}</button>}
+                            </div>
                         </div>
                     </div>
                 </div>

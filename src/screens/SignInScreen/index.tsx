@@ -4,6 +4,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import logo = require('../../assets/images/logo.svg');
 import { SignInComponent, TwoFactorAuth } from '../../components';
 import { EMAIL_REGEX, ERROR_EMPTY_PASSWORD, ERROR_INVALID_EMAIL, setDocumentTitle } from '../../helpers';
 import {
@@ -81,7 +82,12 @@ class SignIn extends React.Component<Props, SignInState> {
         const className = cx('pg-sign-in-screen__container', { loading });
         return (
             <div className="pg-sign-in-screen">
-                <div className={className}>{require2FA ? this.render2FA() : this.renderSignInForm()}</div>
+                <div className={className}>
+                    <div className="cr-logo">
+                        <img src={logo} className="cr-logo__img" alt="Logo" />
+                    </div>
+                    {require2FA ? this.render2FA() : this.renderSignInForm()}
+                </div>
             </div>
         );
     }

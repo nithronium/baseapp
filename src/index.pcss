@@ -4,7 +4,7 @@
 
 :root {
   /* typography */
-  --font-family: Roboto, Helvetica, sans-serif;
+  --font-family: "Noto Sans SC";
   --font-weight: normal;
   --font-size: 12px !important;
   --font-size-smaller: calc(var(--font-size) * 0.9);
@@ -39,6 +39,12 @@ input[type=text], input[type=button] {
   font-size: 1em !important;
   width: 100%;
   border-bottom: 1px solid var(--trading-header);
+}
+
+.cr-button {
+  font-family: Noto Sans !important;
+  font-weight: bold !important;
+  font-size: 16px !important;
 }
 
 .cr-table {
@@ -161,7 +167,11 @@ body {
 .cr-dropdown {
   &__list-item {
     cursor: default;
-    font-weight: var(--font-weight)
+    font-weight: var(--font-weight);
+
+    &:hover {
+      opacity: 1 !important;
+    }
   }
 }
 

@@ -1,0 +1,66 @@
+.pg-profile-page {
+  &__details-user > p,
+  &__verification-header > span {
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px !important;
+    color: var(--color-white);
+    opacity: 0.9;
+  }
+
+  #referral-id {
+    color: var(--color-white);
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: normal;
+    padding-left: 20px;
+  }
+
+  h2 {
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px !important;
+    line-height: 14px !important;
+  }
+
+  &__label {
+    color: var(--color-white);
+    font-family: Noto Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+  }
+
+  &__text-success, &__ml-gap {
+    color: var(--color-white);
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+
+    p:last-child {
+      color: var(--placeholder-text) !important;
+      font-size: 14px;
+      line-height: 19px;
+      margin-top: 5px;
+      margin-bottom: 10px;
+    }
+  }
+
+  &__text-success::after {
+    content: url(./custom/assets/images/tick.svg);
+    top: 0;
+  }
+
+  &__level-verification {
+    border-bottom: 1px solid var(--level-verification-border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}

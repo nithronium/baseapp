@@ -18,7 +18,7 @@ describe('Constants', () => {
     ];
 
     it('Rendering correct title prefix', () => {
-        expect(PG_TITLE_PREFIX).toBe('Cryptobase');
+        expect(PG_TITLE_PREFIX).toBe('Emirex');
     });
 
     it('Rendering correct storage default limit', () => {

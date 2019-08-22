@@ -1,4 +1,4 @@
-export const PG_TITLE_PREFIX = 'Cryptobase';
+export const PG_TITLE_PREFIX = 'Emirex';
 
 export const pgRoutes = (isLoggedIn: boolean): string[][] => {
     const routes = [
@@ -30,20 +30,20 @@ export const colors = {
             avatar: '#28334E',
             language: '#28334E',
             logout: '#28334E',
-            sun: '#959EAB',
-            moon: '#fff',
+            sun: '#648280',
+            moon: '#222627',
         },
     },
     basic: {
         chart: {
-            primary: '#1E2841',
+            primary: '#222627',
             up: '#54B489',
             down: '#E85E59',
         },
         navbar: {
-            avatar: '#737F92',
-            language: '#737F92',
-            logout: '#fff',
+            avatar: '#648280',
+            language: '#648280',
+            logout: 'fff',
             sun: '#fff',
             moon: '#28334E',
         },

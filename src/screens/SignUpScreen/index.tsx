@@ -13,6 +13,7 @@ import {
 } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { captchaType, siteKey } from '../../api';
+import logo = require('../../assets/images/logo.svg');
 import { Modal, SignUpForm } from '../../components';
 import {
     EMAIL_REGEX,
@@ -105,6 +106,9 @@ class SignUp extends React.Component<Props> {
         return (
             <div className="pg-sign-up-screen">
                 <div className={className}>
+                        <div className="cr-logo">
+                            <img src={logo} className="cr-logo__img" alt="Logo" />
+                        </div>
                     <SignUpForm
                         labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn'})}
                         labelSignUp={this.props.intl.formatMessage({ id: 'page.header.signUp'})}

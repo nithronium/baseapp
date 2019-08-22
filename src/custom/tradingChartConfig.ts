@@ -34,6 +34,11 @@ export const customWidgetOptions = (colorTheme?: string) => {
     }
 
     return ({
+        disabled_features: [
+            'timeframes_toolbar',
+            'use_localstorage_for_settings',
+            'header_symbol_search',
+        ],
         toolbar_bg: colors.basic.chart.primary,
         loading_screen: {
             backgroundColor:colors.basic.chart.primary,

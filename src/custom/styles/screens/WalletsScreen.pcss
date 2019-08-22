@@ -1,0 +1,47 @@
+.pg-wallet {
+  &__tabs-content {
+    background-color: var(--main-bg) !important;
+  }
+
+  .cr-tab-panel__navigation-container-navigation {
+    margin-left: 57px;
+  }
+
+  .cr-tab {
+    font-family: Noto Sans;
+    font-weight: bold;
+    font-size: 15px !important;
+    height: 40px !important;
+    display: flex;
+    align-items: center;
+    padding: 12px 20px !important; 
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  .cr-withdraw {
+    &__group__address--focused,
+    &__group__amount--focused,
+    &__group__code--focused {
+      .cr-withdraw__label {
+        color: var(--button-normal) !important;
+      }
+  
+      input {
+        border-color: var(--button-normal) !important;
+      }
+    }
+
+    &__deep {
+      .cr-button {
+        font-family: Noto Sans;
+        border-radius: 4px;
+        font-weight: bold;
+        font-size: 15px !important;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+    }
+  }
+}

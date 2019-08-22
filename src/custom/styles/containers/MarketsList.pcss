@@ -1,0 +1,28 @@
+.pg-dropdown-markets-list-container {
+  height: calc(100% - var(--big-gap) * 2);
+  overflow-x: hidden;
+  overflow-y: scroll;
+  padding-right: 5px;
+
+  .cr-table thead th {
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .cr-table tbody td {
+    font-family: Noto Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 19px;
+  }
+
+  .cr-table tbody .cr-table__row--selected td {
+    &:first-child {
+      font-weight: bold;
+    }
+  }
+}

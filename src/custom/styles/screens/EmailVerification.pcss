@@ -1,0 +1,46 @@
+.pg-emailverification-container {
+  &__wrapper {
+    .cr-logo {
+      display: flex;
+      height: 150px;
+      justify-content: center;
+      margin-top: -200px;
+      width: 100%;
+  
+      img {
+        width: 250px;
+      }
+    }
+
+    .pg-emailverification {
+      &-title {
+        border-bottom: 1px solid var(--placeholder-text);
+        font-family: Noto Sans;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 16px;
+        line-height: 40px;
+        text-transform: capitalize;
+      }
+
+      &-body {
+        padding: 0 25px;
+
+        &-text {
+          font-family: Noto Sans;
+          font-style: normal;
+          font-weight: normal;
+          font-size: 14px;
+          line-height: 19px;
+          color: var(--color-white);
+          text-align: left;
+          padding: 0;
+        }
+      }
+
+      .cr-button {
+        color: var(--white);
+      }
+    }
+  }
+}

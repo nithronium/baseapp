@@ -11,6 +11,7 @@ import {
 } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import logo = require('../../assets/images/logo.svg');
 import { CustomInput } from '../../components';
 import { PASSWORD_REGEX, setDocumentTitle } from '../../helpers';
 import {
@@ -105,6 +106,9 @@ class ChangeForgottenPasswordComponent extends React.Component<Props, ChangeForg
         return (
             <div className="pg-change-forgotten-password-screen">
                 <div className="pg-change-forgotten-password-screen__container">
+                    <div className="cr-logo">
+                        <img src={logo} className="cr-logo__img" alt="Logo" />
+                    </div>
                     <form>
                         <div className="cr-email-form">
                             <div className="cr-email-form__options-group">

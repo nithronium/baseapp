@@ -10,6 +10,7 @@ import {
 } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import logo = require('../../assets/images/logo.svg');
 import { EmailForm } from '../../components';
 import {
     EMAIL_REGEX,
@@ -64,6 +65,9 @@ class ForgotPasswordComponent extends React.Component<Props, ForgotPasswordState
         return (
             <div className="pg-forgot-password-screen">
                 <div className="pg-forgot-password-screen__container">
+                    <div className="cr-logo">
+                        <img src={logo} className="cr-logo__img" alt="Logo" />
+                    </div>
                     <div className="pg-forgot-password___form">
                         <EmailForm
                             OnSubmit={this.handleChangeEmail}
