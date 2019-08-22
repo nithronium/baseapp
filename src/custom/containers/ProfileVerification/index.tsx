@@ -219,7 +219,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                 </div>
             );
         }
-        
+
         const withdrawalLimitCurrency = withdrawLimitData.withdraw.currency.toLocaleLowerCase().includes('usd')
             ? '$'
             : ` ${withdrawLimitData.withdraw.currency.toUpperCase()}`;

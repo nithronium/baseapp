@@ -4,12 +4,10 @@ import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { getBalance } from '../../api';
+import { ProfileApiKeys } from '../../containers';
 import { ProfileAccountActivity } from '../../containers/ProfileAccountActivity';
-import { ProfileApiKeys } from '../../containers/ProfileApiKeys';
-import { ProfileApiKeysLite } from '../../containers/ProfileApiKeysLite';
 import { ReferralProgram } from '../../containers/ReferralProgram';
-import { ProfileAuthDetails } from '../../custom/containers';
-import { ProfileVerification } from '../../custom/containers/ProfileVerification';
+import { ProfileAuthDetails, ProfileVerification } from '../../custom/containers';
 import { VersionGuardWrapper } from '../../decorators';
 import { setDocumentTitle } from '../../helpers';
 
@@ -55,7 +53,7 @@ class ProfileComponent extends React.Component<Props, InjectedIntlProps> {
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
-                            <ProfileVerification history={this.props.history} balance={this.state.balance}/>
+                            <ProfileVerification />
                         </div>
                     </div>
                     <div className="row px-4">
@@ -66,7 +64,7 @@ class ProfileComponent extends React.Component<Props, InjectedIntlProps> {
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        {VersionGuardWrapper(ProfileApiKeys, ProfileApiKeysLite, false)}
+                        {VersionGuardWrapper(ProfileApiKeys, ProfileApiKeys, false)}
                     </div>
                     <div className="col-12">
                         <ProfileAccountActivity/>
@@ -78,8 +76,4 @@ class ProfileComponent extends React.Component<Props, InjectedIntlProps> {
 }
 
 // tslint:disable-next-line:no-any
-const ProfileScreen = injectIntl(withRouter(ProfileComponent as any));
-
-export {
-    ProfileScreen,
-};
+export const ProfileScreen = injectIntl(withRouter(ProfileComponent as any));

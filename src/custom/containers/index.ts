@@ -10,4 +10,5 @@ export * from './ProfileAuthDetails';
 export * from './TradeHistory/Market';
 export * from './TradeHistory/Yours';
 export * from './Balances';
+export * from './ProfileVerification';
 

@@ -15,17 +15,14 @@ import {
 interface ReduxProps {
     currentLanguage: string;
     label: Label[];
+    user: User;
 }
 
 interface DispatchProps {
     labelFetch: typeof labelFetch;
 }
 
-interface ProfileVerificationProps {
-    user: User;
-}
-
-type Props =  DispatchProps & ProfileVerificationProps & ReduxProps;
+type Props = DispatchProps & ReduxProps;
 
 class ProfileVerificationComponent extends React.Component<Props> {
     public componentDidMount() {

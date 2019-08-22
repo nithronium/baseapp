@@ -5,15 +5,11 @@ import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import {
-  CustomInput,
-  Modal,
-} from '../../components';
+import { ProfileTwoFactorAuth } from '../';
+import { CustomInput, Modal } from '../../components';
 import { buildPath } from '../../custom/helpers';
 import { VersionGuardWrapper } from '../../decorators';
-import {
-    PASSWORD_REGEX,
-} from '../../helpers';
+import { PASSWORD_REGEX } from '../../helpers';
 import {
     openGuardModal,
     RootState,
@@ -25,8 +21,7 @@ import {
     changePasswordFetch,
     selectChangePasswordSuccess,
 } from '../../modules/user/profile';
-import { ProfileTwoFactorAuth } from '../ProfileTwoFactorAuth';
-import { ProfileTwoFactorAuthLite } from '../ProfileTwoFactorAuthLite';
+
 
 interface ReduxProps {
     currentLanguage: string;
@@ -247,7 +242,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     private renderProfileTwoFactorLite = () => {
         return (
             <div className="pg-profile-page__row">
-                <ProfileTwoFactorAuthLite openModal={this.props.openGuardModal} />
+                <ProfileTwoFactorAuth openModal={this.props.openGuardModal}/>
             </div>
         );
     };
