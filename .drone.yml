@@ -43,8 +43,20 @@ steps:
       registry: reg.openware.work
       repo: reg.openware.work/emirex/baseapp
       build_args_from_env:
+        - BUILD_DOMAIN
+        - BUILD_EXPIRE
         - REACT_APP_BUILD_VERSION
-        - NPM_AUTH_TOKEN
+      json_key:
+        from_secret: openware_gcp_creds_base64
+
+  - name: "Build lite image"
+    image: plugins/docker
+    environment:
+      BUILD_EXPIRE: $(date -d "+1 month" +%s000)
+      REACT_APP_BUILD_VERSION: Lite
+      REACT_APP_TENKO_PUBLIC_KEY:
+        from_secret: tenko_public_key
+    settings:
       username:
         from_secret: ow_registry_username
       password:
