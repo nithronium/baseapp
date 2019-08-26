@@ -1,7 +1,7 @@
 .pg-profile-page {
   &__details-user > p,
   &__verification-header > span {
-    font-family: Noto Sans;
+    font-family: var(--font-family);
     font-style: normal;
     font-weight: bold;
     font-size: 20px !important;
@@ -11,14 +11,14 @@
 
   #referral-id {
     color: var(--color-white);
-    font-family: Noto Sans;
+    font-family: var(--font-family);
     font-style: normal;
     font-weight: normal;
     padding-left: 20px;
   }
 
   h2 {
-    font-family: Noto Sans;
+    font-family: var(--font-family);
     font-style: normal;
     font-weight: 500;
     font-size: 14px !important;
@@ -27,7 +27,7 @@
 
   &__label {
     color: var(--color-white);
-    font-family: Noto Sans;
+    font-family: var(--font-family);
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -36,7 +36,7 @@
 
   &__text-success, &__ml-gap {
     color: var(--color-white);
-    font-family: Noto Sans;
+    font-family: var(--font-family);
     font-style: normal;
     font-weight: 500;
     font-size: 12px;
@@ -62,5 +62,9 @@
     &:last-child {
       border-bottom: none;
     }
+  }
+
+  .pg-exchange-modal-submit-body {
+    text-align: center;
   }
 }

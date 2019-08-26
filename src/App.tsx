@@ -4,7 +4,7 @@ import { IntlProvider } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { Router } from 'react-router';
 import { GuardModal } from './components';
-import { Alerts, ErrorWrapper, Footer, Header } from './containers';
+import { Alerts, ErrorWrapper, Header } from './containers';
 import { GuardWrapper } from './containers/Guard';
 import {
     closeGuardModal,
@@ -13,7 +13,6 @@ import {
     selectAppVersion,
     selectBuildExpire,
     selectGuardModalOpened,
-    selectLicenseExpiration,
     selectTenkoPublicKey,
     selectToken,
     selectTokenFetching,
@@ -38,7 +37,6 @@ interface ReduxProps {
     tenkoKey: string;
     token: string;
     tokenFetching: boolean;
-    expiresAt: number | null;
 }
 
 interface DispatchProps {
@@ -60,7 +58,6 @@ class AppLayout extends React.Component<Props, {}, {}> {
             tenkoKey,
             token,
             tokenFetching,
-            expiresAt,
         } = this.props;
         const { lang, messages } = locale;
         return (
@@ -79,7 +76,6 @@ class AppLayout extends React.Component<Props, {}, {}> {
                             <Header/>
                             <Alerts/>
                             <Layout/>
-                            <Footer buildExpire={expiresAt}/>
                         </ErrorWrapper>
                     </Router>
                     {guardModal && <GuardModal onClose={this.props.closeGuardModal}/>}
@@ -98,7 +94,6 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> =
         tenkoKey: selectTenkoPublicKey(state),
         token: selectToken(state),
         tokenFetching: selectTokenFetching(state),
-        expiresAt: selectLicenseExpiration(state),
     });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
