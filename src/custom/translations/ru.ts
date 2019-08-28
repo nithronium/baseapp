@@ -11,6 +11,14 @@ export const ru: LangType = {
     'page.header.navbar.profile': 'Профиль',
     'page.header.navbar.logout': 'Выйти',
 
+    'page.body.trade.header.orderHistory': 'Order History',
+    'page.body.trade.header.balances': 'Balances',
+    'page.body.trade.header.tradeHistory': 'Trade History',
+
+    'page.body.trade.header.tradeHistory.content.side': 'Side',
+    'page.body.trade.header.tradeHistory.content.market': 'Market',
+    'page.body.trade.header.tradeHistory.content.funds': 'Funds',
+
     'page.body.trade.header.markets': 'Рынки',
     'page.body.trade.header.markets.content.pair': 'Пара',
     'page.body.trade.header.markets.content.price': 'Цена',

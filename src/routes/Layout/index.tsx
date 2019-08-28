@@ -6,6 +6,7 @@ import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { minutesUntilAutoLogout } from '../../api';
 import { WalletsFetch } from '../../containers';
+import { TradingScreen } from '../../custom/screens';
 import { toggleColorTheme } from '../../helpers';
 import {
     logoutFetch,
@@ -31,7 +32,6 @@ import {
     ProfileTwoFactorAuthScreen,
     SignInScreen,
     SignUpScreen,
-    TradingScreen,
     VerificationScreen,
     WalletsScreen,
 } from '../../screens';
