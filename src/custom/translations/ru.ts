@@ -19,6 +19,13 @@ export const ru: LangType = {
     'page.body.trade.header.tradeHistory.content.market': 'Market',
     'page.body.trade.header.tradeHistory.content.funds': 'Funds',
 
+    'page.body.trade.header.funds.content.coin': 'Currency',
+    'page.body.trade.header.funds.content.available': 'Available',
+    'page.body.trade.header.funds.content.locked': 'Locked',
+    'page.body.trade.header.funds.content.total': 'Total balance',
+    'page.body.trade.header.funds.content.value': 'Value in ',
+    'page.body.trade.header.funds.content.name': 'Name',
+
     'page.body.trade.header.markets': 'Рынки',
     'page.body.trade.header.markets.content.pair': 'Пара',
     'page.body.trade.header.markets.content.price': 'Цена',

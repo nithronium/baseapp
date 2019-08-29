@@ -5,7 +5,6 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { minutesUntilAutoLogout } from '../../api';
-import { WalletsFetch } from '../../containers';
 import { TradingScreen } from '../../custom/screens';
 import { toggleColorTheme } from '../../helpers';
 import {
@@ -167,7 +166,6 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/security/2fa" component={ProfileTwoFactorAuthScreen} />
                     <Route path="**"><Redirect to="/trading/" /></Route>
                 </Switch>
-                {isLoggedIn && <WalletsFetch/>}
             </div>
         );
     }

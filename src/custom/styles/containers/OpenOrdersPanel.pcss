@@ -1,0 +1,55 @@
+.pg-open-orders-panel {
+	.cr-tab-panel .cr-tab {
+		padding-top: 7px;
+		padding-bottom: 7px;
+	}
+
+	.cr-tab-panel {
+		&__optinal-head {
+			margin: 0 10px;
+
+			&-container {
+				display: flex;
+			}
+		}
+
+		&__navigation-container {
+			justify-content: space-between;
+			align-items: center;
+			position: sticky;
+			margin: 0;
+			top: 0;
+			z-index: 9999;
+
+			.cr-table-header {
+				&__close {
+					position: relative;
+					display: inline-block;
+					margin-left: calc(var(--gap) / 1.33);
+					height: calc(var(--gap) * 2);
+					width: calc(var(--gap) * 2);
+					cursor: pointer;
+
+					&::before,
+					&::after {
+						background: var(--text-table-grey);
+						content: '';
+						position: absolute;
+						top: 55%;
+						left: 0;
+						height: 2px;
+						width: 100%;
+					}
+
+					&::before {
+						transform: rotate(45deg);
+					}
+
+					&::after {
+						transform: rotate(-45deg);
+					}
+				}
+			}
+		}
+	}
+}

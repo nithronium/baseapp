@@ -112,7 +112,7 @@ class YoursComponent extends React.Component<Props> {
         const amountFixed = currentTradeMarket ? currentTradeMarket.amount_precision : 0;
         const takerSide = taker_type === 'sell' ?  'ask' : 'bid';
         const fullDate = localeDate(created_at, 'fullDate').split(' ');
-        const marketName = currentTradeMarket.name;
+        const marketName = currentTradeMarket && currentTradeMarket.name;
 
         return [
             <span key={id}><span style={{ color: '#FFFFFF' }}>{fullDate[0]}</span> {fullDate[1]}</span>,

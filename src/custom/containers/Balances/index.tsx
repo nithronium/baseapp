@@ -108,6 +108,7 @@ class BalancesComponent extends React.Component<Props> {
             'cr-tab-content__noData': wallets && wallets.length === 0,
         });
 
+
         return (
             <div className={className}>
                 {walletsLoading ? <Loader /> : this.renderContent()}
@@ -133,10 +134,11 @@ class BalancesComponent extends React.Component<Props> {
         const firstFIAT = firstWalletFIAT ? firstWalletFIAT.currency : '';
         return [
             this.translate('page.body.trade.header.funds.content.coin'),
-            this.translate('page.body.trade.header.funds.content.total'),
+            this.translate('page.body.trade.header.funds.content.name'),
             this.translate('page.body.trade.header.funds.content.available'),
-            this.translate('page.body.trade.header.funds.content.inOrder'),
-            <span key={4}>{firstFIAT} {this.translate('page.body.trade.header.funds.content.value')}</span>,
+            this.translate('page.body.trade.header.funds.content.locked'),
+            this.translate('page.body.trade.header.funds.content.total'),
+            <span key={4}>{this.translate('page.body.trade.header.funds.content.value')}{firstFIAT.toUpperCase()}</span>,
         ];
     };
 
@@ -151,12 +153,14 @@ class BalancesComponent extends React.Component<Props> {
         const valuationWallet = wallets.find(item => (item.currency === VALUATION_CURRENCY)) || wallets.find(item => (item.type === 'fiat'));
         const valuationCurrency = valuationWallet ? valuationWallet.currency : '';
 
-        const formattedWallets = wallets.map((wallet: WalletItemProps) => ({
-            ...wallet,
-            currency: wallet.currency.toUpperCase(),
-            valuation: estimateUnitValue(valuationCurrency, wallet.currency, getWalletTotal(wallet), currencies, marketsData, marketTickers),
-            walletPrecision: handleCCYPrecision(currencies, wallet.currency, DEFAULT_WALLET_PRECISION),
-        }));
+        const formattedWallets = wallets.map((wallet: WalletItemProps) => {
+            return ({
+                ...wallet,
+                currency: wallet.currency.toUpperCase(),
+                valuation: estimateUnitValue(valuationCurrency, wallet.currency, getWalletTotal(wallet), currencies, marketsData, marketTickers),
+                walletPrecision: handleCCYPrecision(currencies, wallet.currency, DEFAULT_WALLET_PRECISION),
+            });
+        });
 
         return [...formattedWallets].length > 0
             ? [...formattedWallets].map(this.renderRow)
@@ -170,15 +174,17 @@ class BalancesComponent extends React.Component<Props> {
             locked,
             valuation,
             walletPrecision,
+            name,
         } = item;
 
         const available = balance - locked;
 
         return [
             <span key={id}>{currency}</span>,
-            <span key={id}>{balance}</span>,
+            <span key={id}>{name}</span>,
             <span key={id}><Decimal fixed={walletPrecision}>{available.toString()}</Decimal></span>,
             <span key={id}><Decimal fixed={walletPrecision}>{locked.toString()}</Decimal></span>,
+            <span key={id}>{balance}</span>,
             <span key={id}>{valuation}</span>,
         ];
     }

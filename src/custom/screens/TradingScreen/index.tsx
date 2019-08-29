@@ -7,6 +7,7 @@ import {
     OrderComponent,
     ToolBar,
     TradingChart,
+    WalletsFetch,
 } from '../../../containers';
 import { getUrlPart, setDocumentTitle } from '../../../helpers';
 import {
@@ -153,7 +154,7 @@ class Trading extends React.Component<Props, StateProps> {
     public render() {
         const rowHeight = 14;
         const allGridItems = [...this.gridItems];
-        const {rgl} = this.props;
+        const { rgl, userLoggedIn } = this.props;
 
         return (
             <div className={'pg-trading-screen'}>
@@ -170,6 +171,7 @@ class Trading extends React.Component<Props, StateProps> {
                         onLayoutChange={() => {return;}}
                         handleResize={this.handleResize}
                     />
+                    {userLoggedIn && <WalletsFetch />}
                 </div>
             </div>
         );
