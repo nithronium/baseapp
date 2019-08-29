@@ -258,6 +258,21 @@ body {
   top: 40%;
 }
 
+.cr-loader .loader-block {
+  background: var(--loader-base-color);
+}
+
+@keyframes pulse {
+  from,
+  40% {
+    background: var(--loader-start-color);
+  }
+
+  to {
+    background: var(--loader-base-color);
+  }
+}
+
 input:-webkit-autofill {
   width: 100%;
   background: var(--transparent) !important;

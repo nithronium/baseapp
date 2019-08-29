@@ -203,13 +203,13 @@ export const en = {
 
     'page.body.profile.header.account.profile': 'Profile Verification',
     'page.body.profile.header.account.profile.email.title': 'Email verified',
-    'page.body.profile.header.account.profile.email.message': 'Deposit/Withdraw enabled',
+    'page.body.profile.header.account.profile.email.message': 'Deposit, Withdrawal and Trade are not allowed',
     'page.body.profile.header.account.profile.phone.unverified.title': 'Phone verification',
     'page.body.profile.header.account.profile.phone.title': 'Phone verified',
-    'page.body.profile.header.account.profile.phone.message': 'Deposit/Trade enabled',
+    'page.body.profile.header.account.profile.phone.message': 'Deposit and Trade are allowed',
     'page.body.profile.header.account.profile.identity.unverified.title': 'Identity verification',
     'page.body.profile.header.account.profile.identity.title': 'Identity verified',
-    'page.body.profile.header.account.profile.identity.message': 'Withdraw enabled',
+    'page.body.profile.header.account.profile.identity.message': 'Withdrawal allowed',
 
     'page.body.profile.header.referralProgram': 'Referral Link',
     'page.body.profile.content.copyLink': 'Copy',
