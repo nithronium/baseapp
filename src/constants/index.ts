@@ -64,6 +64,21 @@ export const userOption = (): object[] => ([
     return link;
 }));
 
+export const pgRoutes = (isLoggedIn: boolean, isLight?: boolean): string[][] => {
+    const routes = [
+        ['page.header.navbar.trade', '/trading/', `trade${isLight ? 'Light' : ''}`],
+        ['page.header.navbar.wallets', '/wallets', `wallets${isLight ? 'Light' : ''}`],
+        ['page.header.navbar.openOrders', '/orders', `orders${isLight ? 'Light' : ''}`],
+        ['page.header.navbar.history', '/history', `history${isLight ? 'Light' : ''}`],
+    ];
+    const routesUnloggedIn = [
+        ['page.header.navbar.signIn', '/signin', `signin${isLight ? 'Light' : ''}`],
+        ['page.header.signUp', '/signup', `signup${isLight ? 'Light' : ''}`],
+        ['page.header.navbar.trade', '/trading/', `trade${isLight ? 'Light' : ''}`],
+    ];
+    return isLoggedIn ? routes : routesUnloggedIn;
+};
+
 
 export const DEFAULT_CCY_PRECISION = 4;
 export const STORAGE_DEFAULT_LIMIT = 50;

@@ -135,9 +135,6 @@ class Trading extends React.Component<Props, StateProps> {
         if (!connected) {
             this.props.rangerConnect({ withAuth: userLoggedIn });
         }
-        if (!userLoggedIn && currentMarket) {
-            this.props.history.replace(`/trading/${currentMarket.id}`);
-        }
     }
 
     public componentWillUnmount() {
@@ -145,7 +142,11 @@ class Trading extends React.Component<Props, StateProps> {
     }
 
     public componentWillReceiveProps(nextProps) {
-        const { currentMarket, history, markets, userLoggedIn } = this.props;
+        const {
+            history,
+            markets,
+            userLoggedIn,
+        } = this.props;
 
         if (userLoggedIn !== nextProps.userLoggedIn) {
             this.props.rangerConnect({ withAuth: nextProps.userLoggedIn });
@@ -155,9 +156,13 @@ class Trading extends React.Component<Props, StateProps> {
             this.setMarketFromUrlIfExists(nextProps.markets);
         }
 
-        if (nextProps.currentMarket && currentMarket !== nextProps.currentMarket) {
-            history.replace(`/trading/${nextProps.currentMarket.id}`);
-            this.props.depthFetch(nextProps.currentMarket);
+        if (nextProps.currentMarket) {
+            const marketFromUrl = history.location.pathname.split('/');
+            const marketNotMatched = nextProps.currentMarket.id !== marketFromUrl[marketFromUrl.length - 1];
+            if (marketNotMatched) {
+                history.replace(`/trading/${nextProps.currentMarket.id}`);
+                this.props.depthFetch(nextProps.currentMarket);
+            }
         }
 
         if (nextProps.currentMarket && nextProps.tickers) {

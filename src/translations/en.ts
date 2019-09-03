@@ -55,6 +55,9 @@ export const en = {
     'page.header.navbar.refcommission': 'Referral commission',
     'page.header.navbar.logout': 'Logout',
 
+    'page.sidebar.group.text': 'Fee Group:',
+    'page.sidebar.group.value': 'Base',
+
     'page.body.trade.header.market': 'Market',
     'page.body.trade.header.yours': 'Yours',
 

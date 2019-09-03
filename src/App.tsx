@@ -5,7 +5,7 @@ import { IntlProvider } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { Router } from 'react-router';
 import { GuardModal } from './components';
-import { Alerts, ErrorWrapper, Header } from './containers';
+import { Alerts, ErrorWrapper, Header, Sidebar } from './containers';
 import { GuardWrapper } from './containers/Guard';
 import {
     closeGuardModal,
@@ -141,6 +141,7 @@ class AppLayout extends React.Component<Props, {}, {}> {
                                 {/* <span>The exchange is in alpha testing mode. Exchange operation is limited.</span> */}
                             {/* </CookieConsent> */}
                             <Header/>
+                            <Sidebar/>
                             <Alerts/>
                             <Layout/>
                         </ErrorWrapper>

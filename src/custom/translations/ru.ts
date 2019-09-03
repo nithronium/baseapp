@@ -65,6 +65,8 @@ export const ru: LangType = {
     'page.body.trade.header.upcoming': 'Предстоящие',
     'page.body.trade.header.inProgress': 'Текущие',
     'page.body.trade.header.past': 'Прошедшие',
+    'page.sidebar.group.text': 'Fee Group:',
+    'page.sidebar.group.value': 'Base',
 
     'page.body.trade.header.markets': 'Рынки',
     'page.body.trade.header.markets.content.pair': 'Пара',
