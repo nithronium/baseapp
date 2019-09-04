@@ -189,3 +189,42 @@ trigger:
   - master
   event:
   - push
+
+---
+kind: pipeline
+name: "Redeploy preprod"
+
+concurrency:
+  limit: 2
+
+steps:
+
+  - name: "Build enterprise image"
+    image: plugins/gcr
+    environment:
+      REACT_APP_BUILD_VERSION: Enterprise
+    settings:
+      repo: gcr.io/emirex-preprod/baseapp
+      json_key:
+        from_secret: emirex_gcp_creds_base64
+
+  - name: "Redeploy on Preprod"
+    image: komljen/drone-kubectl-helm
+    environment:
+      KUBERNETES_SERVER:
+        from_secret: emirex_preprod_k8s_server_url
+      KUBERNETES_CERT:
+        from_secret: emirex_preprod_k8s_server_cert
+      KUBERNETES_TOKEN:
+        from_secret: emirex_preprod_k8s_sa_token
+      KUBECTL_COMMAND:
+        from_secret: emirex_preprod_k8s_redeploy_cmd
+    commands:
+      - /run.sh
+      - kubectl set image deployment/frontend -n preprod-app frontend=gcr.io/emirex-preprod/baseapp:$(cat .tags)
+
+trigger:
+  branch:
+  - customer/emirex
+  event:
+  - push
