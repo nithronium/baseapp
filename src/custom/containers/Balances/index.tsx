@@ -1,6 +1,5 @@
 import {
     Decimal,
-    Loader,
     Table,
 } from '@openware/components';
 import classnames from 'classnames';
@@ -103,15 +102,14 @@ class BalancesComponent extends React.Component<Props> {
     }
 
     public render() {
-        const { wallets, walletsLoading } = this.props;
+        const { wallets } = this.props;
         const className = classnames('cr-funds', {
             'cr-tab-content__noData': wallets && wallets.length === 0,
         });
 
-
         return (
             <div className={className}>
-                {walletsLoading ? <Loader /> : this.renderContent()}
+                {this.renderContent()}
             </div>
         );
     }
