@@ -15,4 +15,6 @@ export const en = {
     'page.body.trade.header.funds.content.name': 'Name',
 
     'page.body.trade.header.openOrders.content.date': 'Time',
+
+    'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
 };

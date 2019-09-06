@@ -106,13 +106,11 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.admin': 'Для того, чтобы вывести эту валюту, обратитесь к администратору!',
 
     'page.body.wallets.tabs.withdraw': 'Вывод',
-    'page.body.wallets.tabs.withdraw.content.address': 'Адрес для вывода',
     'page.body.wallets.tabs.withdraw.content.amount': 'Сумма вывода',
     'page.body.wallets.tabs.withdraw.content.code2fa': '6-ти значный GAuthenticator код',
     'page.body.wallets.tabs.withdraw.content.fee': 'Комиссия',
     'page.body.wallets.tabs.withdraw.content.total': 'Сумма вывода',
     'page.body.wallets.tabs.withdraw.content.button': 'ВЫВЕСТИ',
-    'page.body.wallets.tabs.withdraw.content.addressPlaceholder': 'Адрес для вывода',
 
     'page.body.wallets.tabs.withdraw.modal.confirmation': 'Подтверждение',
     'page.body.wallets.tabs.withdraw.modal.message1': 'Вы получите ',
@@ -122,6 +120,46 @@ export const ru: LangType = {
 
     'page.body.wallets.tabs.withdraw.content.enable2fa': 'Вам нужно активировать 2FA, чтобы получить возможность выводить Ваши валюты!',
     'page.body.wallets.tabs.withdraw.content.enable2faButton': 'Активировать 2FA',
+
+    'success.beneficiaries.created': 'Beficiaries: successfully created',
+    'success.beneficiaries.activated': 'Beficiaries: successfully activated',
+    'success.beneficiaries.deleted': 'Beficiaries: successfully deleted',
+
+    'page.body.wallets.whitelist.title': 'Withdraw address',
+    'page.body.wallets.whitelist.fiat.title': 'Withdrawal details',
+    'page.body.wallets.whitelist.dropdown.address': 'Address',
+    'page.body.wallets.whitelist.dropdown.select': 'Select',
+
+    'page.body.wallets.whitelist.dropdown.fiat.account': 'Account',
+    'page.body.wallets.whitelist.dropdown.fiat.bankOfBeneficiary': 'Bank of Beneficiary',
+    'page.body.wallets.whitelist.dropdown.fiat.beneficiary': 'Beneficiary',
+    'page.body.wallets.whitelist.dropdown.fiat.description': 'Description',
+
+    'page.body.wallets.whitelist.addAddress': 'Add Address',
+    'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
+
+    'page.body.wallets.whitelist.addAddressModal.body.coinAddress': 'Blockchain Address',
+    'page.body.wallets.whitelist.addAddressModal.body.coinBeneficiaryName': 'Beneficiary Name',
+    'page.body.wallets.whitelist.addAddressModal.body.coinDescription': 'Description (optional)',
+
+    'page.body.wallets.whitelist.addAddressModal.body.fiatName': 'Description',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': 'Full Name',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatAccountNumber': 'Account Number',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatBankName': 'Bank Name',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatBankSwiftCode': 'Bank Swift Code (optional)',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankName': 'Intermediary Bank Name (optional)',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankSwiftCode': 'Intermediary Bank Swift Code (optional)',
+
+    'page.body.wallets.whitelist.addAddressModal.body.button': 'submit for confirmation',
+
+    'page.body.wallets.whitelist.confirmationModal.header': 'Confirm new address',
+    'page.body.wallets.whitelist.confirmationModal.body.text': 'We have sent you an email containing a confirmation code pin, please enter it below to save the new address:',
+    'page.body.wallets.whitelist.confirmationModal.body.confirmationModalCode': 'Pin code',
+    'page.body.wallets.whitelist.confirmationModal.body.button': 'confirm',
+
+    'page.body.wallets.whitelist.tipAddress': 'Address',
+    'page.body.wallets.whitelist.tipName': 'Name',
+    'page.body.wallets.whitelist.tipDescription': 'Note',
 
     'page.body.openOrders.tab.all': 'Все',
     'page.body.openOrders.tab.open': 'Открытые',
