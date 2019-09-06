@@ -11,10 +11,8 @@ import { ModalWithdrawSubmit } from '../../containers/ModalWithdrawSubmit';
 import { EstimatedValue } from '../../containers/Wallets/EstimatedValue';
 import { WalletHistory } from '../../containers/Wallets/History';
 import { Withdraw, WithdrawProps } from '../../containers/Wallets/Withdraw';
-import { WithdrawLite } from '../../containers/Wallets/WithdrawLite';
 import { BlurComponent } from '../../custom/components';
 import { buildPath } from '../../custom/helpers';
-import { VersionGuardWrapper } from '../../decorators';
 import { setDocumentTitle } from '../../helpers';
 import {
     alertPush,
@@ -65,13 +63,13 @@ interface ReduxProps {
     historyList: WalletHistoryList;
     mobileWalletChosen: string;
     selectedWalletAddress: string;
-    whitelistActivateSuccess: boolean;
-    whitelistDeleteSuccess: boolean;
     withdrawLimitData: WithdrawLimit;
+    beneficiariesActivateSuccess: boolean;
+    beneficiariesDeleteSuccess: boolean;
 }
 
 interface DispatchProps {
-    fetchWhitelist: typeof beneficiariesFetch;
+    fetchBeneficiaries: typeof beneficiariesFetch;
     fetchWallets: typeof walletsFetch;
     fetchAddress: typeof walletsAddressFetch;
     clearWallets: () => void;
@@ -158,7 +156,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         }
 
         if (wallets.length > 0) {
-            this.props.fetchWhitelist();
+            this.props.fetchBeneficiaries();
         }
 
         if (selectedWalletIndex === -1 && wallets.length) {
@@ -172,7 +170,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     }
 
     public componentWillReceiveProps(next: Props) {
-        const { wallets, whitelistActivateSuccess, whitelistDeleteSuccess, withdrawSuccess } = this.props;
+        const { wallets, beneficiariesActivateSuccess, beneficiariesDeleteSuccess, withdrawSuccess } = this.props;
 
         if (wallets.length === 0 && next.wallets.length > 0) {
             const isEurFirst = next.wallets[0].currency.toLowerCase() === 'eur';
@@ -182,7 +180,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 wire: !isEurFirst,
                 card: false,
             });
-            this.props.fetchWhitelist();
+            this.props.fetchBeneficiaries();
             next.wallets[0].type === 'coin' && this.props.fetchAddress({ currency: next.wallets[0].currency });
         }
 
@@ -190,11 +188,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             this.toggleSubmitModal();
         }
 
-        if (
-            (next.whitelistActivateSuccess && !whitelistActivateSuccess) ||
-            (next.whitelistDeleteSuccess && !whitelistDeleteSuccess)
-        ) {
-            this.props.fetchWhitelist();
+        if ((next.beneficiariesActivateSuccess && !beneficiariesActivateSuccess) ||
+            (next.beneficiariesDeleteSuccess && !beneficiariesDeleteSuccess)) {
+            this.props.fetchBeneficiaries();
         }
     }
 
@@ -395,7 +391,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                     {['usd', 'aed'].includes(currency.toLowerCase()) ? (
                         <div style={{ textAlign: 'center', fontSize: '18px', padding: '20px' }}>{this.translate('comingsoon')}</div>
                     ) : (
-                        this.renderWithdrawBlock()
+                        this.renderEnterpriseContent()
                     )}
                     {user.otp && currency && <WalletHistory label="withdraw" type="withdraws" currency={currency} />}
                </BlurComponent>
@@ -403,10 +399,6 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             </React.Fragment>
         );
     };
-
-    private renderWithdrawBlock = () => VersionGuardWrapper(this.renderEnterpriseContent, this.renderLiteContent);
-
-    private renderLiteContent = () => <WithdrawLite openModal={this.props.openGuardModal} />;
 
     private renderEnterpriseContent = () => {
         const { withdrawDone, selectedWalletIndex, sepa, wire, card } = this.state;
@@ -501,12 +493,12 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     mobileWalletChosen: selectMobileWalletUi(state),
     selectedWalletAddress: selectWalletAddress(state),
     withdrawLimitData: selectWithdrawLimit(state),
-    whitelistActivateSuccess: selectBeneficiariesActivateSuccess(state),
-    whitelistDeleteSuccess: selectBeneficiariesDeleteSuccess(state),
+    beneficiariesActivateSuccess: selectBeneficiariesActivateSuccess(state),
+    beneficiariesDeleteSuccess: selectBeneficiariesDeleteSuccess(state),
 });
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
-    fetchWhitelist: () => dispatch(beneficiariesFetch()),
+    fetchBeneficiaries: () => dispatch(beneficiariesFetch()),
     fetchWallets: () => dispatch(walletsFetch()),
     fetchAddress: ({ currency }) => dispatch(walletsAddressFetch({ currency })),
     walletsWithdrawCcy: params => dispatch(walletsWithdrawCcyFetch(params)),

@@ -167,7 +167,7 @@ export const en = {
 
     'success.beneficiaries.created': 'Beficiaries: successfully created',
     'success.beneficiaries.activated': 'Beficiaries: successfully activated',
-    'success.beneficiaries.deleted': 'Beficiaries: successfully deleted',
+    'success.beneficiaries.deleted': 'WBeficiaries: successfully deleted',
 
     'page.body.wallets.whitelist.title': 'Withdraw address',
     'page.body.wallets.whitelist.fiat.title': 'Withdrawal details',
