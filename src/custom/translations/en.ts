@@ -21,4 +21,6 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Bank address',
     'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Bank SWIFT',
     'page.body.wallets.tabs.deposit.fiat.message3': 'Please, ALWAYS mention the reference code during the wire transfer, otherwise it will take longer to deposit your funds.',
+
+    'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
 };
