@@ -119,6 +119,8 @@ export const en = {
     'page.body.wallets.whitelist.dropdown.fiat.bankOfBeneficiary': 'Bank of Beneficiary',
     'page.body.wallets.whitelist.dropdown.fiat.beneficiary': 'Beneficiary',
     'page.body.wallets.whitelist.dropdown.fiat.description': 'Description',
+    'page.body.wallets.whitelist.dropdown.fiat.name': 'Name',
+    'page.body.wallets.whitelist.dropdown.fiat.fullName': 'Full Name',
 
     'page.body.wallets.whitelist.addAddress': 'Add Address',
     'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
