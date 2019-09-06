@@ -199,12 +199,19 @@ concurrency:
 
 steps:
 
-  - name: "Build enterprise image"
+  - name: "Build Emirex Preprod image"
     image: plugins/gcr
     environment:
+      BUILD_EXPIRE: $(date -d "+1 year" +%s000)
+      BUILD_DOMAIN: .emirex.com
       REACT_APP_BUILD_VERSION: Enterprise
     settings:
       repo: gcr.io/emirex-preprod/baseapp
+      tags: ${DRONE_COMMIT_SHA:0:7}
+      build_args_from_env:
+        - BUILD_DOMAIN
+        - BUILD_EXPIRE
+        - REACT_APP_BUILD_VERSION
       json_key:
         from_secret: emirex_gcp_creds_base64
 
@@ -221,7 +228,7 @@ steps:
         from_secret: emirex_preprod_k8s_redeploy_cmd
     commands:
       - /run.sh
-      - kubectl set image deployment/frontend -n preprod-app frontend=gcr.io/emirex-preprod/baseapp:$(cat .tags)
+      - kubectl set image deployment/frontend -n preprod-app frontend=gcr.io/emirex-preprod/baseapp:${DRONE_COMMIT_SHA:0:7}
 
 trigger:
   branch:
