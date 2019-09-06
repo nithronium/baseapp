@@ -136,12 +136,12 @@ class WhiteListComponent extends React.Component<Props, State> {
             return (
                 <div key={index} className="cr-white-list__dropdown__body__item item">
                     <div className="item__left" onClick={this.handleClickSelectAddress(item)}>
-                        <span className="item__left__title">{this.translate('page.body.wallets.whitelist.dropdown.fiat.description')}</span>
-                        <span className="item__left__address">{item.description || ''}</span>
+                        <span className="item__left__title">{this.translate('page.body.wallets.whitelist.dropdown.fiat.name')}</span>
+                        <span className="item__left__address">{item.name}</span>
                     </div>
                     <div className="item__left" onClick={this.handleClickSelectAddress(item)}>
-                        <span className="item__left__title">{this.translate('page.body.wallets.whitelist.dropdown.fiat.beneficiary')}</span>
-                        <span className="item__left__address">{item.name}</span>
+                        <span className="item__left__title">{this.translate('page.body.wallets.whitelist.dropdown.fiat.fullName')}</span>
+                        <span className="item__left__address">{item.data ? (item.data as BeneficiaryBank).full_name : ''}</span>
                     </div>
                     <div className="item__right">
                         <span className="item__right__delete" onClick={this.handleClickDeleteAddress(item)}><TrashBin/></span>
@@ -224,11 +224,11 @@ class WhiteListComponent extends React.Component<Props, State> {
             return (
                 <div className="cr-white-list__dropdown__tip tip fiat-tip">
                     <div className="tip__content">
-                        {currentWithdrawalBeneficiary.description && this.renderDropdownTipFiatDescription(currentWithdrawalBeneficiary.description)}
                         <div className="tip__content__block">
-                            <span className="tip__content__block__label">{this.translate('page.body.wallets.whitelist.dropdown.fiat.beneficiary')}</span>
+                            <span className="tip__content__block__label">{this.translate('page.body.wallets.whitelist.dropdown.fiat.name')}</span>
                             <span className="tip__content__block__value">{currentWithdrawalBeneficiary.name}</span>
                         </div>
+                        {currentWithdrawalBeneficiary.description && this.renderDropdownTipFiatDescription(currentWithdrawalBeneficiary.description)}
                         <div className="tip__content__block">
                             <span className="tip__content__block__label">{this.translate('page.body.wallets.whitelist.dropdown.fiat.account')}</span>
                             <span className="tip__content__block__value">{(currentWithdrawalBeneficiary.data as BeneficiaryBank).account_number}</span>
@@ -257,10 +257,10 @@ class WhiteListComponent extends React.Component<Props, State> {
                 <div className={dropdownClassName}>
                     <div className="cr-white-list__dropdown__select fiat-select select" onClick={this.handleToggleDropdown}>
                         <div className="select__left">
-                            <span className="select__left__title">{this.translate('page.body.wallets.whitelist.dropdown.fiat.description')}</span>
-                            <span className="select__left__address">{currentWithdrawalBeneficiary.description || ''}</span>
-                            <span className="select__left__title">{this.translate('page.body.wallets.whitelist.dropdown.fiat.beneficiary')}</span>
+                            <span className="select__left__title">{this.translate('page.body.wallets.whitelist.dropdown.fiat.name')}</span>
                             <span className="select__left__address">{currentWithdrawalBeneficiary.name}</span>
+                            <span className="select_left__title">{this.translate('page.body.wallets.whitelist.dropdown.fiat.fullName')}</span>
+                            <span className="select__left__address">{currentWithdrawalBeneficiary.data ? (currentWithdrawalBeneficiary.data as BeneficiaryBank).full_name : ''}</span>
                         </div>
                         <div className="select__right">
                         <span className="select__right__tip" onMouseOver={this.handleToggleTip} onMouseOut={this.handleToggleTip}><TipIcon/></span>
