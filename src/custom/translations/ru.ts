@@ -602,5 +602,11 @@ export const ru: LangType = {
 
     'server.internal_error': 'Внутренняя ошибка сервера',
 
+    'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Валюта депозита',
+    'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Адрес банка',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Банковский SWIFT',
+    'page.body.wallets.tabs.deposit.fiat.message3': 'Пожалуйста, ВСЕГДА указывайте ссылочный код во время банковского перевода, в противном случае внесение средств займет больше времени.',
+
     ...nationalitiesNames,
 };

@@ -15,4 +15,10 @@ export const en = {
     'page.body.trade.header.funds.content.name': 'Name',
 
     'page.body.trade.header.openOrders.content.date': 'Time',
+
+    'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Deposit currency',
+    'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Bank address',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Bank SWIFT',
+    'page.body.wallets.tabs.deposit.fiat.message3': 'Please, ALWAYS mention the reference code during the wire transfer, otherwise it will take longer to deposit your funds.',
 };

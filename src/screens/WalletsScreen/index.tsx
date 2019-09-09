@@ -4,13 +4,14 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
-import { CurrencyInfo, DepositCrypto, DepositFiat, TabPanel, WalletItemProps, WalletList } from '../../components';
+import { CurrencyInfo, DepositCrypto, TabPanel, WalletItemProps, WalletList } from '../../components';
 import { ModalWithdrawConfirmation } from '../../containers/ModalWithdrawConfirmation';
 import { ModalWithdrawSubmit } from '../../containers/ModalWithdrawSubmit';
 import { EstimatedValue } from '../../containers/Wallets/EstimatedValue';
 import { WalletHistory } from '../../containers/Wallets/History';
 import { Withdraw, WithdrawProps } from '../../containers/Wallets/Withdraw';
 import { WithdrawLite } from '../../containers/Wallets/WithdrawLite';
+import { DepositFiat } from '../../custom/components';
 import { VersionGuardWrapper } from '../../decorators';
 import { formatCCYAddress, setDocumentTitle } from '../../helpers';
 import {
@@ -99,6 +100,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 
     private title = this.translate('page.body.wallets.tabs.deposit.fiat.message1');
     private description = this.translate('page.body.wallets.tabs.deposit.fiat.message2');
+    private details = this.translate('page.body.wallets.tabs.deposit.fiat.message3');
 
     public componentDidMount() {
         setDocumentTitle('Wallets');
@@ -282,7 +284,12 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             return (
                 <React.Fragment>
                     <CurrencyInfo wallet={wallets[selectedWalletIndex]}/>
-                    <DepositFiat title={this.title} description={this.description} uid={user ? user.uid : ''}/>
+                    <DepositFiat
+                        title={this.title}
+                        description={this.description}
+                        details={this.details}
+                        uid={user ? user.uid : ''}
+                    />
                     {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
                 </React.Fragment>
             );
