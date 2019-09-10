@@ -79,7 +79,11 @@ class AppLayout extends React.Component<Props, {}, {}> {
                                 contentClasses="cookie-consent__content"
                                 buttonClasses="cookie-consent__button"
                             >
-                                <span>The exchange is in alpha testing mode. Exchange operation is limited.</span>
+                                <span>The exchange works in BETA-testing mode. Some operations may be limited. All the
+                                    users and ballances will migrate from BITMEEX exchange within several days. We
+                                    would like to get your feedback and recommendations for improvement at
+                                    <a href="mailto:beta_testing@emirex.com">beta_testing@emirex.com</a>.
+                                </span>
                             </CookieConsent>
                             <Header/>
                             <Alerts/>
