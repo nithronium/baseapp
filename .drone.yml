@@ -207,6 +207,8 @@ steps:
   - name: "Build Emirex Preprod image"
     image: plugins/gcr
     environment:
+      NPM_AUTH_TOKEN:
+        from_secret: drone_npm_auth_token
       BUILD_EXPIRE: $(date -d "+1 year" +%s000)
       BUILD_DOMAIN: .emirex.com
       REACT_APP_BUILD_VERSION: Enterprise
@@ -214,6 +216,7 @@ steps:
       repo: gcr.io/emirex-preprod/baseapp
       tags: ${DRONE_COMMIT_SHA:0:7}
       build_args_from_env:
+        - NPM_AUTH_TOKEN
         - BUILD_DOMAIN
         - BUILD_EXPIRE
         - REACT_APP_BUILD_VERSION
