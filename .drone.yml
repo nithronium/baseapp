@@ -22,6 +22,71 @@ steps:
       - yarn install
       - yarn lint
       - yarn test:ci --collectCoverage=true
+      - yarn build
+
+  - name: "Stage with mock server"
+    image: alpine/git
+    environment:
+      PRIVATE_KEY:
+        from_secret: deploy_key
+    commands:
+      - echo "$PRIVATE_KEY" | base64 -d > id_rsa
+      - chmod 0600 id_rsa
+      - cd build/config/
+      - echo "window.env={api:{authUrl:'http://api-v2.mock.openware.work/api/v2/barong',tradeUrl:'http://api-v2.mock.openware.work/api/v2/peatio',applogicUrl:'http://api-v2.mock.openware.work/api/v2/applogic',rangerUrl:'ws://ranger.mock.openware.work/api/v2/ranger'},captcha:{captchaType:'none',siteKey:''}};" > env.js
+      - cat env.js
+      - cd /drone/src/
+      - scp -r -i id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null build mock@mock.openware.work:/home/mock/builds/${DRONE_COMMIT_SHA:0:7}
+      - scp -r -i id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null coverage/lcov-report mock@mock.openware.work:/home/mock/builds/${DRONE_COMMIT_SHA:0:7}-coverage
+      - echo "http://${DRONE_COMMIT_SHA:0:7}.mock.openware.work"
+      - echo "http://${DRONE_COMMIT_SHA:0:7}-coverage.mock.openware.work"
+
+  - name: "Notify staging"
+    image: plugins/slack
+    settings:
+      webhook:
+        from_secret: baseapp_slack_webhook
+      channel:
+        from_secret: baseapp_slack_channel
+      template: >
+        {{#success build.status}}
+          [SUCCESS] (Base Application) Branch {{ build.branch }} by {{ build.author }} staging has succeeded!
+
+          Visit http://{{ truncate build.commit 7 }}.mock.openware.work to check it out!
+          Coverage report: http://{{ truncate build.commit 7 }}-coverage.mock.openware.work
+        {{else}}
+          [FAILURE] Branch {{ build.branch }} by {{ build.author }} staging has failed!
+        {{/success}}
+        Check the build info here: {{ build.link }}
+    when:
+      status: [success, failure]
+
+trigger:
+  event:
+    - push
+  branch:
+    exclude:
+    - master
+
+---
+kind: pipeline
+name: "New version"
+
+concurrency:
+  limit: 2
+
+steps:
+  - name: "Test"
+    image: node:10.11
+    environment:
+      NPM_AUTH_TOKEN:
+        from_secret: drone_npm_auth_token
+    commands:
+      - echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > .npmrc
+      - npm -g install yarn
+      - yarn install
+      - yarn lint
+      - yarn test:ci --collectCoverage=true
 
   - name: "Build"
     image: node:10.11
