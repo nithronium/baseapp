@@ -13,8 +13,9 @@ ENV REACT_APP_BUILD_VERSION=${REACT_APP_BUILD_VERSION}
 ENV BUILD_EXPIRE=${BUILD_EXPIRE}
 ENV BUILD_DOMAIN=${BUILD_DOMAIN:-""}
 ENV REACT_APP_BUILD_EXPIRE=${BUILD_EXPIRE}
-COPY --chown=node:node package.json .
-COPY --chown=node:node yarn.lock .
+ENV NPM_AUTH_TOKEN=${NPM_AUTH_TOKEN}
+
+RUN cd src/containers/ && unlink index.ts && ln -s index${REACT_APP_BUILD_VERSION}.ts index.ts
 RUN echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > .npmrc
 RUN yarn install
 COPY --chown=node:node . .
