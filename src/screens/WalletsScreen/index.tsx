@@ -333,6 +333,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 <React.Fragment>
                     <CurrencyInfo wallet={wallets[selectedWalletIndex]}/>
                     <DepositFiat
+                        currency={currency.toLowerCase()}
                         title={this.title}
                         description={this.description}
                         details={this.details}
