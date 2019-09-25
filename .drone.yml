@@ -104,20 +104,23 @@ steps:
     environment:
       NPM_AUTH_TOKEN:
         from_secret: drone_npm_auth_token
+      BUILD_DOMAIN: $(cat .domains)
       REACT_APP_BUILD_VERSION: Enterprise
     settings:
       registry: reg.openware.work
       repo: reg.openware.work/emirex/baseapp
       build_args_from_env:
         - BUILD_DOMAIN
-        - BUILD_EXPIRE
         - REACT_APP_BUILD_VERSION
+        - NPM_AUTH_TOKEN
       json_key:
         from_secret: openware_gcp_creds_base64
 
   - name: "Build lite image"
     image: plugins/docker
     environment:
+      NPM_AUTH_TOKEN:
+        from_secret: drone_npm_auth_token
       BUILD_EXPIRE: $(date -d "+1 month" +%s000)
       REACT_APP_BUILD_VERSION: Lite
       REACT_APP_TENKO_PUBLIC_KEY:
@@ -126,7 +129,14 @@ steps:
       username:
         from_secret: ow_registry_username
       password:
-        from_secret: ow_registry_password
+        from_secret: quay_password
+      repo: quay.io/openware/baseapp-lite
+      build_args_from_env:
+        - REACT_APP_BUILD_VERSION
+        - REACT_APP_TENKO_PUBLIC_KEY
+        - BUILD_EXPIRE
+        - NPM_AUTH_TOKEN
+      registry: quay.io
 
   - name: "Redeploy on stage"
     image: rubykube/microkube:0.2.0
