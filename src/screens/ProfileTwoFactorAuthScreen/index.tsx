@@ -23,12 +23,12 @@ import {
     selectCurrentLanguage,
 } from '../../modules';
 import {
-    enableUser2fa,
     generate2faQRFetch,
     selectTwoFactorAuthBarcode,
     selectTwoFactorAuthQR,
     selectTwoFactorAuthSuccess,
     toggle2faFetch,
+    toggleUser2fa,
 } from '../../modules/user/profile';
 
 interface RouterProps {
@@ -45,7 +45,7 @@ interface ReduxProps {
 interface DispatchProps {
     toggle2fa: typeof toggle2faFetch;
     generateQR: typeof generate2faQRFetch;
-    enableUser2fa: typeof enableUser2fa;
+    toggleUser2fa: typeof toggleUser2fa;
     fetchSuccess: typeof alertPush;
 }
 
@@ -110,7 +110,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
 
     public componentDidUpdate(prev: Props) {
         if (!prev.success && this.props.success) {
-            this.props.enableUser2fa();
+            this.props.toggleUser2fa();
         }
     }
 
@@ -276,7 +276,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, Props, RootState> = state => 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
     generateQR: () => dispatch(generate2faQRFetch()),
     toggle2fa: ({ code, enable }) => dispatch(toggle2faFetch({ code, enable })),
-    enableUser2fa: () => dispatch(enableUser2fa()),
+    toggleUser2fa: () => dispatch(toggleUser2fa()),
     fetchSuccess: payload => dispatch(alertPush(payload)),
 });
 
