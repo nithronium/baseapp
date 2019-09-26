@@ -31,7 +31,7 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.bankSwift.usd.value': 'AJMNAEAJ',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.eur.value': 'EUR',
-    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'AE 240570000011101251020',
+    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'AE 880570000011101251032',
     'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'Ajman Bank PJSC',
     'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': 'Garhoud Branch, Dubai, UAE',
     'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'AJMNAEAJ',
