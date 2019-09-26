@@ -17,7 +17,6 @@ export interface SendIdentityFetch {
 export interface SendIdentityData {
     type: typeof SEND_IDENTITY_DATA;
     payload: {
-        data: IdentityData;
         message: string;
     };
 }
@@ -35,7 +34,6 @@ export interface EditIdentityFetch {
 export interface EditIdentityData {
     type: typeof EDIT_IDENTITY_DATA;
     payload: {
-        data: IdentityData;
         message: string;
     };
 }

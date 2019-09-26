@@ -17,9 +17,7 @@ import {
     labelFetch,
     RootState,
     selectCurrentLanguage,
-    selectEditIdentityData,
     selectEditIdentitySuccess,
-    selectSendIdentityData,
     selectUserInfo,
     User,
 } from '../../../../modules';
@@ -489,8 +487,6 @@ class ProfilePartialComponent extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
-    sendData: selectSendIdentityData(state),
-    editData: selectEditIdentityData(state),
     editSuccess: selectEditIdentitySuccess(state),
     lang: selectCurrentLanguage(state),
     sendSuccess: selectSendIdentitySuccess(state),

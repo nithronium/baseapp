@@ -5,6 +5,10 @@ import {
 } from './reducer';
 
 describe('Identity reducer', () => {
+    const confirmIdentityResponse = {
+        message: 'Confirmed',
+    };
+
     const confirmIdentityPayload = {
         first_name: 'first_name',
         last_name: 'last_name',
@@ -13,17 +17,7 @@ describe('Identity reducer', () => {
         postcode: 'postcode',
         city: 'city',
         country: 'country',
-        metadata: `{'nationality': 'nationality', 'state': 'some_state'}`,
-    };
-
-    const confirmIdentityResponse = {
-        data: confirmIdentityPayload,
-        message: 'Confirmed',
-    };
-
-    const editIdentityResponse = {
-        data: confirmIdentityPayload,
-        message: 'Confirmed',
+        metadata: `{'nationality': 'nationality'}`,
     };
 
     const error = {
@@ -46,7 +40,6 @@ describe('Identity reducer', () => {
             ...initialIdentityState,
             send: {
                 ...initialIdentityState.send,
-                data: editIdentityResponse.data,
                 success: confirmIdentityResponse.message,
             },
         };
@@ -79,11 +72,10 @@ describe('Identity reducer', () => {
             ...initialIdentityState,
             edit: {
                 ...initialIdentityState.edit,
-                data: editIdentityResponse.data,
-                success: editIdentityResponse.message,
+                success: confirmIdentityResponse.message,
             },
         };
-        expect(identityReducer(initialIdentityState, actions.editIdentityData(editIdentityResponse))).toEqual(expectedState);
+        expect(identityReducer(initialIdentityState, actions.editIdentityData(confirmIdentityResponse))).toEqual(expectedState);
     });
 
     it('should handle EDIT_IDENTITY_ERROR', () => {

@@ -12,7 +12,8 @@ export function* editIdentitySaga(action: EditIdentityFetch) {
     try {
         const response = yield call(API.put(sessionsConfig), '/resource/profiles', action.payload);
         const defaultMessage = 'success.identity.accepted';
-        yield put(editIdentityData({ data: response, message: defaultMessage }));
+        const { message = defaultMessage } = response;
+        yield put(editIdentityData({ message }));
         yield put(alertPush({message: [defaultMessage], type: 'success'}));
     } catch (error) {
         yield put(editIdentityError(error));

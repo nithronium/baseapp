@@ -14,7 +14,6 @@ import {
     labelFetch,
     RootState,
     selectCurrentLanguage,
-    selectEditIdentityData,
     selectEditIdentitySuccess,
     selectUserInfo,
     User,
@@ -372,7 +371,6 @@ class ProfileAddressComponent extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
-    editData: selectEditIdentityData(state),
     editSuccess: selectEditIdentitySuccess(state),
     lang: selectCurrentLanguage(state),
     user: selectUserInfo(state),
