@@ -648,5 +648,17 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Банковский SWIFT',
     'page.body.wallets.tabs.deposit.fiat.message3': 'Пожалуйста, ВСЕГДА указывайте ссылочный код во время банковского перевода, в противном случае внесение средств займет больше времени.',
 
+    'page.body.wallets.tabs.deposit.fiat.depositCurrency.usd.value': 'USD',
+    'page.body.wallets.tabs.deposit.fiat.iban.usd.value': 'AE 240570000011101251020',
+    'page.body.wallets.tabs.deposit.fiat.bankName.usd.value': 'Ajman Bank PJSC',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress.usd.value': 'Garhoud Branch, Dubai, UAE',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.usd.value': 'AJMNAEAJ',
+
+    'page.body.wallets.tabs.deposit.fiat.depositCurrency.eur.value': 'EUR',
+    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'AE 240570000011101251020',
+    'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'Ajman Bank PJSC',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': 'Garhoud Branch, Dubai, UAE',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'AJMNAEAJ',
+
     ...nationalitiesNames,
 };

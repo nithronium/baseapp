@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 
 interface DepositFiatProps {
+    currency: string;
     description: string;
     details: string;
     title: string;
@@ -10,26 +11,26 @@ interface DepositFiatProps {
 }
 
 
-const bankData = uid => [
+const bankData = (uid, currency) => [
     {
         key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.depositCurrency" />,
-        value: 'USD',
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.depositCurrency.${currency && `${currency}.`}value`} />,
     },
     {
         key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.iban" />,
-        value: 'AE 240570000011101251020',
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.iban.${currency && `${currency}.`}value`} />,
     },
     {
         key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.bankName" />,
-        value: 'Ajman Bank PJSC',
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.bankName.${currency && `${currency}.`}value`} />,
     },
     {
         key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.bankAddress" />,
-        value: 'Garhoud Branch, Dubai, UAE',
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.bankAddress.${currency && `${currency}.`}value`} />,
     },
     {
         key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.bankSwift" />,
-        value: 'AJMNAEAJ',
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.bankSwift.${currency && `${currency}.`}value`} />,
     },
     {
         key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.referenceCode" />,
@@ -43,6 +44,7 @@ const bankData = uid => [
  */
 const DepositFiat: React.FunctionComponent<DepositFiatProps> = (props: DepositFiatProps) => {
     const {
+        currency,
         description,
         details,
         title,
@@ -62,7 +64,7 @@ const DepositFiat: React.FunctionComponent<DepositFiatProps> = (props: DepositFi
         <div className="cr-deposit-fiat">
             <p className="cr-deposit-fiat__title">{title}</p>
             <p className="cr-deposit-fiat__description">{description}</p>
-            <div className="cr-deposit-fiat-credentials">{bankData(uid).map(renderDetails)}</div>
+            <div className="cr-deposit-fiat-credentials">{bankData(uid, currency).map(renderDetails)}</div>
             <p className="cr-deposit-fiat__description">{details}</p>
         </div>
     );
