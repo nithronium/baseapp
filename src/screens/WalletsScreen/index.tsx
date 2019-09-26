@@ -6,11 +6,11 @@ import { connect, MapDispatchToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { CurrencyInfo, TabPanel, WalletItemProps, WalletList } from '../../components';
+import { Withdraw, WithdrawProps } from '../../containers';
 import { ModalWithdrawConfirmation } from '../../containers/ModalWithdrawConfirmation';
 import { ModalWithdrawSubmit } from '../../containers/ModalWithdrawSubmit';
 import { EstimatedValue } from '../../containers/Wallets/EstimatedValue';
-import { WalletHistory } from '../../containers/Wallets/History';
-import { Withdraw, WithdrawProps } from '../../containers/Wallets/Withdraw';
+import { WalletHistory } from '../../containers/Wallets/History';;
 import { BlurComponent } from '../../custom/components';
 import { buildPath } from '../../custom/helpers';
 import { setDocumentTitle } from '../../helpers';
@@ -435,6 +435,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             withdrawButtonLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.button' }),
             inputErrorText: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.inputError' }),
             soon: this.props.intl.formatMessage({ id: 'comingsoon' }),
+            openModal: this.props.openGuardModal,
         };
 
         return otp ? <Withdraw {...withdrawProps} /> : this.isOtpDisabled();

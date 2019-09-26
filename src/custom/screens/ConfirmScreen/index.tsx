@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import logo = require('../../../assets/images/logo.svg');
 import logoLight = require('../../../assets/images/logoLight.svg');
-import { VersionGuardWrapper } from '../../../decorators';
 import { setDocumentTitle } from '../../../helpers';
 import {
     alertPush,
@@ -289,7 +288,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                         />
                         {this.progressBarRender(currentProfileLevel)}
                         <div className="pg-confirm__content">
-                            {VersionGuardWrapper(this.renderContent, Phone)}
+                            {this.renderContent()}
                         </div>
                     </div>
                 </div>

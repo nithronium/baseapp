@@ -8,7 +8,6 @@ import { ProfileApiKeys } from '../../containers';
 import { ProfileAccountActivity } from '../../containers/ProfileAccountActivity';
 import { ReferralProgram } from '../../containers/ReferralProgram';
 import { ProfileAuthDetails, ProfileVerification } from '../../custom/containers';
-import { VersionGuardWrapper } from '../../decorators';
 import { setDocumentTitle } from '../../helpers';
 
 interface HistoryProps {
@@ -53,18 +52,18 @@ class ProfileComponent extends React.Component<Props, InjectedIntlProps> {
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
-                            <ProfileVerification />
+                            <ProfileVerification/>
                         </div>
                     </div>
                     <div className="row px-4">
                         <div className="col-12 mx-0">
-                            {VersionGuardWrapper(ReferralProgram)}
+                            <ReferralProgram/>
                         </div>
                     </div>
                 </div>
                 <div className="row">
                     <div className="col-12">
-                        {VersionGuardWrapper(ProfileApiKeys, ProfileApiKeys, false)}
+                        <ProfileApiKeys/>
                     </div>
                     <div className="col-12">
                         <ProfileAccountActivity/>

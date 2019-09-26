@@ -31,6 +31,7 @@ interface WithdrawProps {
     inputErrorText?: string;
     withdrawDone: boolean;
     soon: string;
+    openModal?: () => void;
 }
 
 const defaultBeneficiary: Beneficiary = {

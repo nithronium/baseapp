@@ -8,7 +8,6 @@ import { withRouter } from 'react-router-dom';
 import { ProfileTwoFactorAuth } from '../';
 import { CustomInput, Modal } from '../../components';
 import { buildPath } from '../../custom/helpers';
-import { VersionGuardWrapper } from '../../decorators';
 import { PASSWORD_REGEX } from '../../helpers';
 import {
     openGuardModal,
@@ -236,7 +235,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                     </button>
                     {modal}
                 </div>
-                {VersionGuardWrapper(this.renderProfileTwoFactor, this.renderProfileTwoFactorLite)}
+                {this.renderProfileTwoFactor()}
                 <Modal
                     className="pg-profile-page__disable-2fa-modal"
                     show={this.state.showModal}
@@ -252,14 +251,6 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
         return (
             <div className="pg-profile-page__row">
                 <ProfileTwoFactorAuth is2faEnabled={this.props.user.otp} navigateTo2fa={this.handleNavigateTo2fa} />
-            </div>
-        );
-    };
-
-    private renderProfileTwoFactorLite = () => {
-        return (
-            <div className="pg-profile-page__row">
-                <ProfileTwoFactorAuth openModal={this.props.openGuardModal}/>
             </div>
         );
     };
