@@ -38,7 +38,7 @@ const bankData = (uid, currency) => [
     },
 ];
 
-const minimal = (currency) => <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.minimal.${currency && `${currency}.`}value`} />
+const minimal = currency => <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.minimal.${currency && `${currency}.`}value`} />
 
 /**
  * Component to display bank account details which can be used for a
