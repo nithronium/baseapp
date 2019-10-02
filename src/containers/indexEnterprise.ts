@@ -25,6 +25,7 @@ export * from './Confirm/Documents';
 export * from './Confirm/Identity';
 export * from './WalletsFetch';
 export * from './Sidebar';
+export * from './NavBar';
 
 // enterprise containers
 export * from './ProfileTwoFactorAuth';

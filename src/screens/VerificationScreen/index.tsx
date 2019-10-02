@@ -5,7 +5,7 @@ import {
     MapDispatchToPropsFunction,
     MapStateToProps,
 } from 'react-redux';
-import { buildPath } from '../custom/helpers';
+import { buildPath } from '../../custom/helpers';
 import {
     changeLanguage,
     RootState,

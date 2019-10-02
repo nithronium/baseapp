@@ -18,6 +18,7 @@
     "no-magic-numbers": false,
     "no-console": false,
     "jsx-no-multiline-js": false,
-    "no-debugger": false
+    "no-debugger": false,
+    "jsx-no-lambda": false
   }
 }
