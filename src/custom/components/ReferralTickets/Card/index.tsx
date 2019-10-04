@@ -3,7 +3,7 @@ import * as React from 'react';
 interface CardContextInterface {
     count: number;
     active: string;
-    action?: string;
+    action: string;
     l1_referral: number;
     l2_referrals: number;
     l2_active: number;

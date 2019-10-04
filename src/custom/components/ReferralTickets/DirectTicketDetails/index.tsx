@@ -2,7 +2,7 @@ import * as React from 'react';
 
 interface DirectTicketInterface {
     count: number;
-    action?: string;
+    action: string;
 }
 
 interface Props {
