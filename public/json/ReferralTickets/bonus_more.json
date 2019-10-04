@@ -1,0 +1,71 @@
+{
+	"bonus-ballance": {
+		"title": "Bonus",
+		"activeInactive": false,
+		"legend": [
+			{
+				"count": 1,
+				"subscription": "Facebook subscription",
+				"subscription_url": "https://facebook.com",
+				"network_post": "Facebook post",
+				"network_post_url": "https://facebook.com"
+			},
+			{
+				"count": 0,
+				"subscription": "No subscription",
+				"subscription_url": null,
+				"network_post": "Telegram post",
+				"network_post_url": "https://telegram.com"
+			},
+			{
+				"count": 1,
+				"subscription": "Twitter subscription",
+				"subscription_url": "https://twitter.com",
+				"network_post": "Twitter post",
+				"network_post_url": "https://twitter.com"
+            },
+            {
+				"count": 1,
+				"subscription": "Facebook subscription",
+				"subscription_url": "https://facebook.com",
+				"network_post": "Facebook post",
+				"network_post_url": "https://facebook.com"
+			},
+			{
+				"count": 0,
+				"subscription": "No subscription",
+				"subscription_url": null,
+				"network_post": "Telegram post",
+				"network_post_url": "https://telegram.com"
+			},
+			{
+				"count": 1,
+				"subscription": "Twitter subscription",
+				"subscription_url": "https://twitter.com",
+				"network_post": "Twitter post",
+				"network_post_url": "https://twitter.com"
+            },
+            {
+				"count": 1,
+				"subscription": "Facebook subscription",
+				"subscription_url": "https://facebook.com",
+				"network_post": "Facebook post",
+				"network_post_url": "https://facebook.com"
+			},
+			{
+				"count": 0,
+				"subscription": "No subscription",
+				"subscription_url": null,
+				"network_post": "Telegram post",
+				"network_post_url": "https://telegram.com"
+			},
+			{
+				"count": 1,
+				"subscription": "Twitter subscription",
+				"subscription_url": "https://twitter.com",
+				"network_post": "Twitter post",
+				"network_post_url": "https://twitter.com"
+			}
+		]
+	}
+}

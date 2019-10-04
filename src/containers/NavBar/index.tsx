@@ -265,6 +265,15 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     </Link>
                 </div>
                 <div className="dropdown-menu-item-user">
+                    <Link
+                        className="pg-navbar__admin-logout"
+                        to="/referral-tickets"
+                        onClick={this.handleRouteChange('/referral-tickets')}
+                    >
+                        <FormattedMessage id={'page.header.navbar.reftickets'} />
+                    </Link>
+                </div>
+                <div className="dropdown-menu-item-user">
                     <a className="pg-navbar__admin-logout" onClick={this.handleLogOut}>
                         <FormattedMessage id={'page.header.navbar.logout'} />
                     </a>

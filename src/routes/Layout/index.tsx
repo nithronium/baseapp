@@ -5,7 +5,7 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { minutesUntilAutoLogout } from '../../api';
-import { TradingScreen } from '../../custom/screens';
+import { ReferralTicketsScreen, TradingScreen  } from '../../custom/screens';
 import { toggleColorTheme } from '../../helpers';
 import {
     logoutFetch,
@@ -164,6 +164,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile" component={ProfileScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/wallets" component={WalletsScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/security/2fa" component={ProfileTwoFactorAuthScreen} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/referral-tickets" component={ReferralTicketsScreen} />
                     <Route path="**"><Redirect to="/trading/" /></Route>
                 </Switch>
             </div>

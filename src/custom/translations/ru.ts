@@ -9,6 +9,7 @@ export const ru: LangType = {
     'page.header.navbar.history': 'История',
 
     'page.header.navbar.profile': 'Профиль',
+    'page.header.navbar.reftickets': 'Реферальные тикеты',
     'page.header.navbar.logout': 'Выйти',
 
     'page.body.trade.header.orderHistory': 'Order History',

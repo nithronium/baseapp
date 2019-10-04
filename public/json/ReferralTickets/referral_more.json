@@ -1,0 +1,92 @@
+{
+	"referral-ballance": {
+		"title": "Referral",
+		"activeInactive": true,
+		"legend": [
+			{
+				"count": 9,
+				"l1_referral": "erfxxx@gmail.com",
+				"active": "yes",
+				"l2_referrals": 7,
+				"l2_active": 7
+			},
+			{
+				"count": 0,
+				"l1_referral": "erfxxx@gmail.com",
+				"active": "no",
+				"l2_referrals": 10,
+				"l2_active": 8
+			},
+			{
+				"count": 5,
+				"l1_referral": "erfxxx@gmail.com",
+				"active": "yes",
+				"l2_referrals": 15,
+				"l2_active": 3
+            },
+            {
+				"count": 9,
+				"l1_referral": "erfxxx@gmail.com",
+				"active": "yes",
+				"l2_referrals": 7,
+				"l2_active": 7
+			},
+			{
+				"count": 0,
+				"l1_referral": "erfxxx@gmail.com",
+				"active": "no",
+				"l2_referrals": 10,
+				"l2_active": 8
+			},
+			{
+				"count": 5,
+				"l1_referral": "erfxxx@gmail.com",
+				"active": "yes",
+				"l2_referrals": 15,
+				"l2_active": 3
+            },
+            {
+				"count": 9,
+				"l1_referral": "erfxxx@gmail.com",
+				"active": "yes",
+				"l2_referrals": 7,
+				"l2_active": 7
+			},
+			{
+				"count": 0,
+				"l1_referral": "erfxxx@gmail.com",
+				"active": "no",
+				"l2_referrals": 10,
+				"l2_active": 8
+			},
+			{
+				"count": 5,
+				"l1_referral": "erfxxx@gmail.com",
+				"active": "yes",
+				"l2_referrals": 15,
+				"l2_active": 3
+            },
+            {
+				"count": 9,
+				"l1_referral": "erfxxx@gmail.com",
+				"active": "yes",
+				"l2_referrals": 7,
+				"l2_active": 7
+			},
+			{
+				"count": 0,
+				"l1_referral": "erfxxx@gmail.com",
+				"active": "no",
+				"l2_referrals": 10,
+				"l2_active": 8
+			},
+			{
+				"count": 5,
+				"l1_referral": "erfxxx@gmail.com",
+				"active": "yes",
+				"l2_referrals": 15,
+				"l2_active": 3
+			}
+		]
+	}
+}
