@@ -1,26 +1,17 @@
 import * as React from 'react';
-import BonusTicketDetails from '../../components/ReferralTickets/BonusTicketDetails';
-import Card from '../../components/ReferralTickets/Card';
-import DirectTicketDetails from '../../components/ReferralTickets/DirectTicketDetails';
-import ReferralBallance from '../../components/ReferralTickets/ReferralBallance';
-import ReferralTicketDetails from '../../components/ReferralTickets/ReferralTicketDetails';
+import {
+    BonusTicketDetails,
+    Card,
+    CardContextProps,
+    DirectTicketDetails,
+    ReferralBallance,
+    ReferralTicketDetails,
+} from '../../components/ReferralTickets';
 
 interface State {
-  directDetails: {
-    legend: Array<{
-      count: number;
-    }>,
-  };
-  referralDetails: {
-    legend: Array<{
-      count: number;
-    }>,
-  };
-  bonusDetails: {
-    legend: Array<{
-      count: number;
-    }>,
-  };
+  directDetails: CardContextProps;
+  referralDetails: CardContextProps;
+  bonusDetails: CardContextProps;
 }
 
 class ReferralTicketsScreen extends React.Component<{}, State> {
@@ -31,12 +22,18 @@ class ReferralTicketsScreen extends React.Component<{}, State> {
         this.state = {
             directDetails: {
                 legend: [],
+                activeInactive: false,
+                title: '',
             },
             referralDetails: {
                 legend: [],
+                activeInactive: false,
+                title: '',
             },
             bonusDetails: {
                 legend: [],
+                activeInactive: false,
+                title: '',
             },
         };
     }
