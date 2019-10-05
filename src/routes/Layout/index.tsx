@@ -89,7 +89,11 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
     }
 
     if (isLogged) {
-        return <Route {...rest}><Redirect to={'/wallets'} /></Route>;
+        return (
+            <Route {...rest}>
+                <Redirect to={'/wallets'} />
+            </Route>
+        );
     }
 
     const renderCustomerComponent = props => <CustomComponent {...props} />;
@@ -97,15 +101,7 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
 };
 
 class LayoutComponent extends React.Component<LayoutProps> {
-    public static eventsListen = [
-        'click',
-        'keydown',
-        'scroll',
-        'resize',
-        'mousemove',
-        'TabSelect',
-        'TabHide',
-    ];
+    public static eventsListen = ['click', 'keydown', 'scroll', 'resize', 'mousemove', 'TabSelect', 'TabHide'];
 
     public timer;
     public walletsFetchInterval;
@@ -123,7 +119,9 @@ class LayoutComponent extends React.Component<LayoutProps> {
 
     public componentDidUpdate(next: LayoutProps) {
         const { isLoggedIn, history } = this.props;
-
+        if (isLoggedIn) {
+            localStorage.setItem('uil', 'true');
+        }
         if (!isLoggedIn && next.isLoggedIn) {
             this.props.walletsReset();
             if (!history.location.pathname.includes('/trading')) {
@@ -140,11 +138,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
     }
 
     public render() {
-        const {
-            colorTheme,
-            isLoggedIn,
-            userLoading,
-        } = this.props;
+        const { colorTheme, isLoggedIn, userLoading } = this.props;
 
         toggleColorTheme(colorTheme);
 
@@ -152,19 +146,46 @@ class LayoutComponent extends React.Component<LayoutProps> {
             <div className="container-fluid pg-layout">
                 <Switch>
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signin" component={SignInScreen} />
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/accounts/confirmation" component={VerificationScreen} />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path="/accounts/confirmation"
+                        component={VerificationScreen}
+                    />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signup" component={SignUpScreen} />
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/forgot_password" component={ForgotPasswordScreen} />
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/accounts/password_reset" component={ChangeForgottenPasswordScreen} />
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/email-verification" component={EmailVerificationScreen} />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path="/forgot_password"
+                        component={ForgotPasswordScreen}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path="/accounts/password_reset"
+                        component={ChangeForgottenPasswordScreen}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path="/email-verification"
+                        component={EmailVerificationScreen}
+                    />
                     <Route exact={true} path="/trading/:market?" component={TradingScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/orders" component={OrdersTabScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/history" component={HistoryScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/confirm" component={ConfirmScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile" component={ProfileScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/wallets" component={WalletsScreen} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/security/2fa" component={ProfileTwoFactorAuthScreen} />
-                    <Route path="**"><Redirect to="/trading/" /></Route>
+                    <PrivateRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path="/security/2fa"
+                        component={ProfileTwoFactorAuthScreen}
+                    />
+                    <Route path="**">
+                        <Redirect to="/trading/" />
+                    </Route>
                 </Switch>
             </div>
         );
@@ -179,24 +200,24 @@ class LayoutComponent extends React.Component<LayoutProps> {
 
     private setLastAction = (lastAction: number) => {
         localStorage.setItem(STORE_KEY, lastAction.toString());
-    }
+    };
 
     private initListener = () => {
         this.reset();
         for (const type of LayoutComponent.eventsListen) {
             document.body.addEventListener(type, this.reset);
         }
-    }
+    };
 
     private reset = () => {
         this.setLastAction(Date.now());
-    }
+    };
 
     private initInterval = () => {
         this.timer = setInterval(() => {
             this.check();
         }, CHECK_INTERVAL);
-    }
+    };
 
     private check = () => {
         const { user } = this.props;
@@ -207,7 +228,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
         if (isTimeout && user.email) {
             this.props.logout();
         }
-    }
+    };
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
@@ -224,9 +245,10 @@ const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
     walletsReset: () => dispatch(walletsReset()),
 });
 
-// tslint:disable-next-line no-any
-const Layout = withRouter(connect(mapStateToProps, mapDispatchToProps)(LayoutComponent) as any) as any;
+// tslint:disable no-any
+const Layout = withRouter(connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(LayoutComponent) as any) as any;
 
-export {
-    Layout,
-};
+export { Layout };
