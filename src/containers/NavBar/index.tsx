@@ -280,6 +280,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     }
 
     private handleLogOut = () => {
+        localStorage.removeItem('uil');
         this.setState({
             isOpen: false,
         }, () => {
