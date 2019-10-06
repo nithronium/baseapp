@@ -2,18 +2,10 @@ import classnames from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import {
-    connect,
-    MapDispatchToPropsFunction,
-    MapStateToProps,
-} from 'react-redux';
+import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { Link, RouteProps, withRouter } from 'react-router-dom';
 import { LogoutIcon } from '../../assets/images/LogoutIcon';
-import {
-    AvatarIcon,
-    CloseIcon,
-    OpenIcon,
-} from '../../assets/images/NavBarIcons';
+import { AvatarIcon, CloseIcon, OpenIcon } from '../../assets/images/NavBarIcons';
 import { colors, pgRoutes } from '../../constants';
 import {
     changeColorTheme,
@@ -103,11 +95,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     };
 
     public render() {
-        const {
-            lang,
-            location,
-            user,
-        } = this.props;
+        const { lang, location, user } = this.props;
         const { isOpenLanguage } = this.state;
         const address = location ? location.pathname : '';
         const languageName = lang.toUpperCase();
@@ -149,41 +137,45 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         const { isOpenLanguage } = this.state;
 
         if (colorTheme === 'light') {
-            return (
-                isOpenLanguage ? (
-                    <span className="icon"><OpenIcon fillColor={colors.light.navbar.language} /></span>
-                ) : (
-                    <span className="icon"><CloseIcon fillColor={colors.light.navbar.language} /></span>
-                )
+            return isOpenLanguage ? (
+                <span className="icon">
+                    <OpenIcon fillColor={colors.light.navbar.language} />
+                </span>
+            ) : (
+                <span className="icon">
+                    <CloseIcon fillColor={colors.light.navbar.language} />
+                </span>
             );
         }
 
-        return (
-            isOpenLanguage ? (
-                <span className="icon"><OpenIcon fillColor={colors.basic.navbar.language} /></span>
-            ) : (
-                <span className="icon"><CloseIcon fillColor={colors.basic.navbar.language} /></span>
-            )
+        return isOpenLanguage ? (
+            <span className="icon">
+                <OpenIcon fillColor={colors.basic.navbar.language} />
+            </span>
+        ) : (
+            <span className="icon">
+                <CloseIcon fillColor={colors.basic.navbar.language} />
+            </span>
         );
-    }
+    };
 
     private shouldUnderline = (address: string, url: string): boolean =>
         (url === '/trading/' && address.includes('/trading')) || address === url;
 
     private getProfile = () => {
-        const { colorTheme,  user } = this.props;
+        const { colorTheme, user } = this.props;
 
         return (
             <div className="pg-navbar__header-profile">
-                <Link
-                    className="pg-navbar__admin-logout"
-                    to="/profile"
-                    onClick={this.handleRouteChange('/profile')}
-                >
+                <Link className="pg-navbar__admin-logout" to="/profile" onClick={this.handleRouteChange('/profile')}>
                     <FormattedMessage id={'page.header.navbar.profile'} />
                 </Link>
                 <span>{user.email}</span>
-                <LogoutIcon onClick={() => this.handleLogOut()} className="pg-navbar__header-profile-logout" fillColor={colorTheme === 'light' ? colors.light.navbar.logout : colors.basic.navbar.logout}/>
+                <LogoutIcon
+                    onClick={() => this.handleLogOut()}
+                    className="pg-navbar__header-profile-logout"
+                    fillColor={colorTheme === 'light' ? colors.light.navbar.logout : colors.basic.navbar.logout}
+                />
             </div>
         );
     };
@@ -222,45 +214,45 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         const { isOpen } = this.state;
 
         if (colorTheme === 'light') {
-            return (
-                isOpen ? (
-                    <React.Fragment>
-                        <AvatarIcon fillColor={colors.light.navbar.avatar}/>
-                        <span className="icon"><OpenIcon fillColor={colors.light.navbar.avatar}/></span>
-                    </React.Fragment>
-                ) : (
-                    <React.Fragment>
-                        <AvatarIcon fillColor={colors.light.navbar.avatar}/>
-                        <span className="icon"><CloseIcon fillColor={colors.light.navbar.avatar}/></span>
-                    </React.Fragment>
-                )
-            );
-        }
-
-        return (
-            isOpen ? (
+            return isOpen ? (
                 <React.Fragment>
-                    <AvatarIcon fillColor={colors.basic.navbar.avatar}/>
-                    <span className="icon"><OpenIcon fillColor={colors.basic.navbar.avatar}/></span>
+                    <AvatarIcon fillColor={colors.light.navbar.avatar} />
+                    <span className="icon">
+                        <OpenIcon fillColor={colors.light.navbar.avatar} />
+                    </span>
                 </React.Fragment>
             ) : (
                 <React.Fragment>
-                    <AvatarIcon fillColor={colors.basic.navbar.avatar}/>
-                    <span className="icon"><CloseIcon fillColor={colors.basic.navbar.avatar}/></span>
+                    <AvatarIcon fillColor={colors.light.navbar.avatar} />
+                    <span className="icon">
+                        <CloseIcon fillColor={colors.light.navbar.avatar} />
+                    </span>
                 </React.Fragment>
-            )
+            );
+        }
+
+        return isOpen ? (
+            <React.Fragment>
+                <AvatarIcon fillColor={colors.basic.navbar.avatar} />
+                <span className="icon">
+                    <OpenIcon fillColor={colors.basic.navbar.avatar} />
+                </span>
+            </React.Fragment>
+        ) : (
+            <React.Fragment>
+                <AvatarIcon fillColor={colors.basic.navbar.avatar} />
+                <span className="icon">
+                    <CloseIcon fillColor={colors.basic.navbar.avatar} />
+                </span>
+            </React.Fragment>
         );
-    }
+    };
 
     private getUserMenu = () => {
         return (
             <div className="dropdown-menu dropdown-menu-user" role="menu">
                 <div className="dropdown-menu-item-user">
-                    <Link
-                        className="pg-navbar__admin-logout"
-                        to="/profile"
-                        onClick={this.handleRouteChange('/profile')}
-                    >
+                    <Link className="pg-navbar__admin-logout" to="/profile" onClick={this.handleRouteChange('/profile')}>
                         <FormattedMessage id={'page.header.navbar.profile'} />
                     </Link>
                 </div>
@@ -277,84 +269,98 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         this.setState({ isOpen: false }, () => {
             this.props.history.push(to);
         });
-    }
+    };
 
     private handleLogOut = () => {
-        this.setState({
-            isOpen: false,
-        }, () => {
-            this.props.logout();
-        });
+        localStorage.removeItem('uil');
+        this.setState(
+            {
+                isOpen: false,
+            },
+            () => {
+                this.props.logout();
+            },
+        );
     };
 
     private openMenu = () => {
-        this.setState({
-            isOpen: !this.state.isOpen,
-        }, () => {
-            if (this.state.isOpen) {
-                document.addEventListener('click', this.closeMenu);
-            } else {
-                document.removeEventListener('click', this.closeMenu);
-            }
-        });
+        this.setState(
+            {
+                isOpen: !this.state.isOpen,
+            },
+            () => {
+                if (this.state.isOpen) {
+                    document.addEventListener('click', this.closeMenu);
+                } else {
+                    document.removeEventListener('click', this.closeMenu);
+                }
+            },
+        );
     };
 
     private closeMenu = () => {
-        this.setState({
-            isOpen: false,
-        }, () => {
-            document.removeEventListener('click', this.closeMenu);
-        });
-    }
+        this.setState(
+            {
+                isOpen: false,
+            },
+            () => {
+                document.removeEventListener('click', this.closeMenu);
+            },
+        );
+    };
 
     private toggleLanguageMenu = () => {
-        this.setState({
-            isOpenLanguage: !this.state.isOpenLanguage,
-        }, () => {
-            if (this.state.isOpenLanguage) {
-                document.addEventListener('click', this.closeLanguageMenu);
-            } else {
-                document.removeEventListener('click', this.closeLanguageMenu);
-            }
-        });
-    }
+        this.setState(
+            {
+                isOpenLanguage: !this.state.isOpenLanguage,
+            },
+            () => {
+                if (this.state.isOpenLanguage) {
+                    document.addEventListener('click', this.closeLanguageMenu);
+                } else {
+                    document.removeEventListener('click', this.closeLanguageMenu);
+                }
+            },
+        );
+    };
 
     private closeLanguageMenu = () => {
-        this.setState({
-            isOpenLanguage: false,
-        }, () => {
-            document.removeEventListener('click', this.closeLanguageMenu);
-        });
-    }
+        this.setState(
+            {
+                isOpenLanguage: false,
+            },
+            () => {
+                document.removeEventListener('click', this.closeLanguageMenu);
+            },
+        );
+    };
 
     private handleChangeLanguage = (language: string) => {
         this.props.changeLanguage(language);
-    }
+    };
 }
 
-const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> =
-    (state: RootState): ReduxProps => ({
-        colorTheme: selectCurrentColorTheme(state),
-        currentMarket: selectCurrentMarket(state),
-        address: '',
-        lang: selectCurrentLanguage(state),
-        user: selectUserInfo(state),
-        isLoggedIn: selectUserLoggedIn(state),
-        version: selectAppVersion(state),
-    });
+const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (state: RootState): ReduxProps => ({
+    colorTheme: selectCurrentColorTheme(state),
+    currentMarket: selectCurrentMarket(state),
+    address: '',
+    lang: selectCurrentLanguage(state),
+    user: selectUserInfo(state),
+    isLoggedIn: selectUserLoggedIn(state),
+    version: selectAppVersion(state),
+});
 
-const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
-    dispatch => ({
-        changeColorTheme: payload => dispatch(changeColorTheme(payload)),
-        changeLanguage: payload => dispatch(changeLanguage(payload)),
-        logout: () => dispatch(logoutFetch()),
-        walletsReset: () => dispatch(walletsReset()),
-        openGuardModal: () => dispatch(openGuardModal()),
-    });
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
+    changeColorTheme: payload => dispatch(changeColorTheme(payload)),
+    changeLanguage: payload => dispatch(changeLanguage(payload)),
+    logout: () => dispatch(logoutFetch()),
+    walletsReset: () => dispatch(walletsReset()),
+    openGuardModal: () => dispatch(openGuardModal()),
+});
+// tslint:disable no-any
+const NavBar = withRouter(connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(NavBarComponent) as any) as any;
 
-// tslint:disable-next-line:no-any
-const NavBar = withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBarComponent) as any) as any;
-
-export {
-    NavBar,
-};
+export { NavBar };

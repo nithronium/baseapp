@@ -119,9 +119,15 @@ class LayoutComponent extends React.Component<LayoutProps> {
 
     public componentDidUpdate(next: LayoutProps) {
         const { isLoggedIn, history } = this.props;
-        if (isLoggedIn) {
+        const siteState = localStorage.getItem('uil');
+        if (isLoggedIn && !siteState) {
             localStorage.setItem('uil', 'true');
+        } else if (isLoggedIn && siteState === 'false') {
+            this.props.logout();
+        } else if (!isLoggedIn) {
+            localStorage.removeItem('uil');
         }
+
         if (!isLoggedIn && next.isLoggedIn) {
             this.props.walletsReset();
             if (!history.location.pathname.includes('/trading')) {
@@ -226,6 +232,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
         const diff = timeleft - now;
         const isTimeout = diff < 0;
         if (isTimeout && user.email) {
+            localStorage.removeItem('uil');
             this.props.logout();
         }
     };
