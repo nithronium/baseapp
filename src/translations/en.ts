@@ -10,6 +10,7 @@ export const en = {
 
     'page.header.navbar.profile': 'Profile',
     'page.header.navbar.reftickets': 'Referral tickets',
+    'page.header.navbar.refcomission': 'Referral comission',
     'page.header.navbar.logout': 'Logout',
 
     'page.body.trade.header.market': 'Market',

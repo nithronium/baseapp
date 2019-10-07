@@ -31,6 +31,8 @@ import { userActivityReducer  } from './user/userActivity';
 import { walletsReducer  } from './user/wallets';
 import { withdrawLimitReducer  } from './user/withdrawLimit';
 
+import { referralTicketsReducer } from '../custom/modules/referralTickets';
+
 export const publicReducer = combineReducers({
     colorTheme: changeColorThemeReducer,
     currencies: currenciesReducer,
@@ -65,4 +67,5 @@ export const userReducer = combineReducers({
     sendEmailVerification: sendEmailVerificationReducer,
     withdrawLimit: withdrawLimitReducer,
     guard: guardReducer,
+    referralTickets: referralTicketsReducer,
 });

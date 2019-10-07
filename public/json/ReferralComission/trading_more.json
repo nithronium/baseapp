@@ -1,0 +1,125 @@
+{
+	"trading-comission": {
+		"title": "Trading comission",
+		"earned": 2003909.8970953,
+		"details": [
+			{
+				"Referral L1": 50
+			},
+			{
+				"Referral L2": 20
+			}
+		],
+		"legend" : [
+			{
+				"mail": "erfxxx.@gmail.com",
+				"l1_trades": 20,
+				"comission_l1": 1003909.8970953,
+				"comission_l2": 1003909.8970953,
+				"referrals": 12,
+				"trades": 16,
+				"total_amount": 2003909.8970953
+			},
+			{
+				"mail": "erfxxx.@gmail.com",
+				"l1_trades": 16,
+				"comission_l1": 1003909.8970953,
+				"comission_l2": 1003909.8970953,
+				"referrals": 12,
+				"trades": 16,
+				"total_amount": 2003909.8970953
+			},
+			{
+				"mail": "erfxxx.@gmail.com",
+				"l1_trades": 16,
+				"comission_l1": 1003909.8970953,
+				"comission_l2": 1003909.8970953,
+				"referrals": 12,
+				"trades": 16,
+				"total_amount": 2003909.8970953
+			},
+			{
+				"mail": "erfxxx.@gmail.com",
+				"l1_trades": 20,
+				"comission_l1": 1003909.8970953,
+				"comission_l2": 1003909.8970953,
+				"referrals": 12,
+				"trades": 16,
+				"total_amount": 2003909.8970953
+			},
+			{
+				"mail": "erfxxx.@gmail.com",
+				"l1_trades": 16,
+				"comission_l1": 1003909.8970953,
+				"comission_l2": 1003909.8970953,
+				"referrals": 12,
+				"trades": 16,
+				"total_amount": 2003909.8970953
+			},
+			{
+				"mail": "erfxxx.@gmail.com",
+				"l1_trades": 16,
+				"comission_l1": 1003909.8970953,
+				"comission_l2": 1003909.8970953,
+				"referrals": 12,
+				"trades": 16,
+				"total_amount": 2003909.8970953
+			},
+			{
+				"mail": "erfxxx.@gmail.com",
+				"l1_trades": 20,
+				"comission_l1": 1003909.8970953,
+				"comission_l2": 1003909.8970953,
+				"referrals": 12,
+				"trades": 16,
+				"total_amount": 2003909.8970953
+			},
+			{
+				"mail": "erfxxx.@gmail.com",
+				"l1_trades": 16,
+				"comission_l1": 1003909.8970953,
+				"comission_l2": 1003909.8970953,
+				"referrals": 12,
+				"trades": 16,
+				"total_amount": 2003909.8970953
+			},
+			{
+				"mail": "erfxxx.@gmail.com",
+				"l1_trades": 16,
+				"comission_l1": 1003909.8970953,
+				"comission_l2": 1003909.8970953,
+				"referrals": 12,
+				"trades": 16,
+				"total_amount": 2003909.8970953
+			},
+			{
+				"mail": "erfxxx.@gmail.com",
+				"l1_trades": 20,
+				"comission_l1": 1003909.8970953,
+				"comission_l2": 1003909.8970953,
+				"referrals": 12,
+				"trades": 16,
+				"total_amount": 2003909.8970953
+			},
+			{
+				"mail": "erfxxx.@gmail.com",
+				"l1_trades": 16,
+				"comission_l1": 1003909.8970953,
+				"comission_l2": 1003909.8970953,
+				"referrals": 12,
+				"trades": 16,
+				"total_amount": 2003909.8970953
+			},
+			{
+				"mail": "erfxxx.@gmail.com",
+				"l1_trades": 16,
+				"comission_l1": 1003909.8970953,
+				"comission_l2": 1003909.8970953,
+				"referrals": 12,
+				"trades": 16,
+				"total_amount": 2003909.8970953
+			}
+
+		]
+	}
+}

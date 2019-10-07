@@ -33,6 +33,8 @@ import { rootUserActivitySaga, UserActivityState } from './user/userActivity';
 import { rootWalletsSaga, WalletsState } from './user/wallets';
 import { rootWithdrawLimitSaga, WithdrawLimitState } from './user/withdrawLimit';
 
+import { ReferralTicketsState, rootReferralTicketsSaga } from '../custom/modules/referralTickets';
+
 export * from './public/markets';
 export * from './public/orderBook';
 export * from './public/colorTheme';
@@ -56,6 +58,7 @@ export * from './user/kyc';
 export * from './user/emailVerification';
 export * from './user/withdrawLimit';
 export * from './user/guard';
+export * from '../custom/modules/referralTickets';
 
 export interface RootState {
     public: {
@@ -91,6 +94,7 @@ export interface RootState {
         sendEmailVerification: EmailVerificationState;
         withdrawLimit: WithdrawLimitState;
         guard: GuardState;
+        referralTickets: ReferralTicketsState;
     };
 }
 
@@ -126,5 +130,6 @@ export function* rootSaga() {
         call(rootKlineFetchSaga),
         call(rootWithdrawLimitSaga),
         call(rootGuardSaga),
+        call(rootReferralTicketsSaga),
     ]);
 }
