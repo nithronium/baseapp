@@ -33,14 +33,14 @@ const tableRow = (legendArray: ReferralTicketInterface[]): React.ReactNode => {
     });
 };
 
-class ReferralTicketDetails<RTInterface> extends React.Component<Props, State>{
+class ReferralTicketDetails extends React.Component<Props, State>{
     public unfiltered: ReferralTicketInterface[] = [];
 
     constructor(props){
 
         super(props);
         this.state = {
-            legend: this.props.context.legend,
+            legend: this.props.context && this.props.context.legend,
             filteredLegend: [],
         };
 
@@ -52,7 +52,7 @@ class ReferralTicketDetails<RTInterface> extends React.Component<Props, State>{
         const filter = e.target.dataset.filter;
         let activeArray;
         let inactiveArray;
-        const legendArray = this.state.legend.length ? this.state.legend : this.props.context.legend;
+        const legendArray = this.state.legend && this.state.legend.length ? this.state.legend : this.props.context && this.props.context.legend;
 
         // if filter is not all, preserve copy of original array
         if (filter !== 'all'){
@@ -94,7 +94,7 @@ class ReferralTicketDetails<RTInterface> extends React.Component<Props, State>{
 
     public getTotal(column, mode = 'default', condition?) {
 
-        let legendArray = this.state.legend.length ? this.state.legend : this.props.context.legend;
+        let legendArray = this.state.legend && this.state.legend.length ? this.state.legend : this.props.context && this.props.context.legend;
 
         if (this.state.filteredLegend.length !== 0) {
             legendArray = this.state.filteredLegend;
@@ -153,11 +153,11 @@ class ReferralTicketDetails<RTInterface> extends React.Component<Props, State>{
 
         let legendArray: ReferralTicketInterface[] = [];
 
-        if (this.props.context.legend) {
+        if (this.props.context && this.props.context.legend) {
             legendArray = this.props.context.legend;
         }
 
-        if (this.state.legend.length) {
+        if (this.state.legend && this.state.legend.length) {
             legendArray = this.state.legend;
         }
 

@@ -33,7 +33,7 @@ class DirectTicketDetails extends React.Component<Props, State>{
 
         super(props);
         this.state = {
-            legend: this.props.context.legend,
+            legend: this.props.context && this.props.context.legend,
         };
 
     }
@@ -42,7 +42,7 @@ class DirectTicketDetails extends React.Component<Props, State>{
 
         let legendArray: DirectTicketInterface[] = [];
 
-        if (this.props.context.legend) {
+        if (this.props.context && this.props.context.legend) {
             legendArray = this.props.context.legend;
         }
 

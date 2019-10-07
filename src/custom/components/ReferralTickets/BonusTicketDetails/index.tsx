@@ -33,7 +33,7 @@ class BonusTicketDetails extends React.Component<Props, State>{
 
         super(props);
         this.state = {
-            legend: this.props.context.legend,
+            legend: this.props.context && this.props.context.legend,
         };
 
         this.loadMore = this.loadMore.bind(this);
@@ -42,7 +42,7 @@ class BonusTicketDetails extends React.Component<Props, State>{
 
     public getTotal(column, mode = 'default', condition?){
 
-        const legendArray = this.state.legend.length ? this.state.legend : this.props.context.legend;
+        const legendArray = this.state.legend && this.state.legend.length ? this.state.legend : this.props.context && this.props.context.legend;
 
         if (!legendArray) {
             return 0;
@@ -102,11 +102,11 @@ class BonusTicketDetails extends React.Component<Props, State>{
 
         let legendArray: BonusDetailsInterface[] = [];
 
-        if (this.props.context.legend) {
+        if (this.props.context && this.props.context.legend) {
             legendArray = this.props.context.legend;
         }
 
-        if (this.state.legend.length) {
+        if (this.state.legend && this.state.legend.length) {
             legendArray = this.state.legend;
         }
 

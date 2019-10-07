@@ -29,7 +29,7 @@ class Card extends React.Component<CardProps>{
     public getTotal(mode = 'all', summMode = ''): number{
 
         let total = 0;
-        if (!this.props.context.legend) {
+        if (!(this.props.context && this.props.context.legend)) {
             return total;
         }
 
@@ -65,7 +65,7 @@ class Card extends React.Component<CardProps>{
 
 
     public activeInactive(){
-        if (this.props.context.activeInactive){
+        if (this.props.context && this.props.context.activeInactive){
             return(
                 <div className="card-middle">
                     <div className="card-details-row">
@@ -89,7 +89,7 @@ class Card extends React.Component<CardProps>{
     public render(){
 
         let preloader;
-        if (!this.props.context.legend){
+        if (!(this.props.context && this.props.context.legend)){
             preloader = (
                 <div className="preloader"/>
             );
@@ -102,7 +102,7 @@ class Card extends React.Component<CardProps>{
                 {preloader}
                 <div className="card-top">
                     <div className="card-top__left">
-                        <p className="card-top__left__header">{this.props.context.title}</p>
+                        <p className="card-top__left__header">{this.props.context && this.props.context.title}</p>
                         <span className="card-top__left__suffix">tickets</span>
                     </div>
                     <div className="card-top__right">

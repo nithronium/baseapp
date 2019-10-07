@@ -12,7 +12,7 @@ class ReferralBallance extends React.Component<Props>{
 
             <div className="container recalculate">
                 <div className="header">
-                    <h1>Referral ballance</h1>
+                    <h1>Referral balance</h1>
                 </div>
                 <div className="contexter">
                     <div className="cards-wrapper">

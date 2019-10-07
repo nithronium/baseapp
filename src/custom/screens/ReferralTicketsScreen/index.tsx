@@ -1,5 +1,21 @@
 import * as React from 'react';
 import {
+    InjectedIntlProps,
+    injectIntl,
+} from 'react-intl';
+import {
+    connect,
+    MapDispatchToPropsFunction,
+    MapStateToProps,
+} from 'react-redux';
+import { setDocumentTitle } from '../../../helpers';
+import {
+    referralTicketsFetch,
+    ReferralTicketsPayload,
+    RootState,
+    selectReferralTickets,
+} from '../../../modules';
+import {
     BonusTicketDetails,
     Card,
     CardContextProps,
@@ -8,76 +24,52 @@ import {
     ReferralTicketDetails,
 } from '../../components/ReferralTickets';
 
+interface DispatchProps {
+    fetchReferralTickets: typeof referralTicketsFetch;
+}
+
+interface ReduxProps {
+    referralTickets: ReferralTicketsPayload;
+    loading: boolean;
+}
+
+type Props = DispatchProps & InjectedIntlProps & ReduxProps;
+
 interface State {
   directDetails: CardContextProps;
   referralDetails: CardContextProps;
   bonusDetails: CardContextProps;
 }
 
-class ReferralTicketsScreen extends React.Component<{}, State> {
-
-    constructor(props){
-        super(props);
-
-        this.state = {
-            directDetails: {
-                legend: [],
-                activeInactive: false,
-                title: '',
-            },
-            referralDetails: {
-                legend: [],
-                activeInactive: false,
-                title: '',
-            },
-            bonusDetails: {
-                legend: [],
-                activeInactive: false,
-                title: '',
-            },
-        };
-    }
+class ReferralTickets extends React.Component<Props, State> {
 
     public componentDidMount() {
-        fetch('/json/ReferralTickets/referal.json')
-        .then(async res => res.json())
-        .then(
-            result => {
-                this.setState({
-                    directDetails: result['direct-ballance'],
-                    referralDetails: result['referral-ballance'],
-                    bonusDetails: result['bonus-ballance'],
-                });
-            },
-
-            error => {
-                //console.log(error);
-            },
-        );
+        setDocumentTitle('Referral Tickets');
+        this.props.fetchReferralTickets();
     }
 
     private getTotalTickets() {
         let total = 0;
+        if (!this.props.referralTickets) { return total; }
+        if (this.props.referralTickets.directDetails && this.props.referralTickets.directDetails.legend) {
 
-        if (this.state.directDetails.legend) {
-
-            this.state.directDetails.legend.map((record, index) => {
+            this.props.referralTickets.directDetails.legend.map((record, index) => {
                 total += record.count;
                 return true;
             });
         }
 
-        if (this.state.referralDetails.legend) {
+        if (this.props.referralTickets.referralDetails && this.props.referralTickets.referralDetails.legend) {
 
-            this.state.referralDetails.legend.map((record, index) => {
+            this.props.referralTickets.referralDetails.legend.map((record, index) => {
                 total += record.count;
                 return true;
             });
         }
 
-        if (this.state.bonusDetails.legend) {
+        if (this.props.referralTickets.bonusDetails && this.props.referralTickets.bonusDetails.legend) {
 
-            this.state.bonusDetails.legend.map((record, index) => {
+            this.props.referralTickets.bonusDetails.legend.map((record, index) => {
                 total += record.count;
                 return true;
             });
@@ -93,29 +85,37 @@ class ReferralTicketsScreen extends React.Component<{}, State> {
                 <div className="top-holder">
                     <section id="top">
                         <ReferralBallance totalTickets={this.getTotalTickets()}>
-                            <Card context={this.state.directDetails} link="#direct"/>
-                            <Card context={this.state.referralDetails} link="#referral"/>
-                            <Card context={this.state.bonusDetails} link="#bonus"/>
+                            <Card context={this.props.referralTickets && this.props.referralTickets.directDetails} link="#direct"/>
+                            <Card context={this.props.referralTickets && this.props.referralTickets.referralDetails} link="#referral"/>
+                            <Card context={this.props.referralTickets && this.props.referralTickets.bonusDetails} link="#bonus"/>
                         </ReferralBallance>
                     </section>
                     <section id="direct">
-                        <DirectTicketDetails context={this.state.directDetails} />
+                        <DirectTicketDetails context={this.props.referralTickets && this.props.referralTickets.directDetails} />
                     </section>
                 </div>
                 <section id="referral">
                     <div className="container">
-                        <ReferralTicketDetails context={this.state.referralDetails} />
+                        <ReferralTicketDetails context={this.props.referralTickets && this.props.referralTickets.referralDetails} />
                     </div>
                 </section>
                 <section id="bonus">
                     <div className="container">
-                        <BonusTicketDetails context={this.state.bonusDetails} />
+                        <BonusTicketDetails context={this.props.referralTickets && this.props.referralTickets.bonusDetails} />
                     </div>
                 </section>
-            </div>);
-        }
+            </div>
+        );
     }
+}
 
-export {
-  ReferralTicketsScreen,
-};
+const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
+    referralTickets: selectReferralTickets(state).data,
+    loading: selectReferralTickets(state).loading,
+});
+
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
+    fetchReferralTickets: () => dispatch(referralTicketsFetch()),
+});
+
+export const ReferralTicketsScreen = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ReferralTickets));
