@@ -1,18 +1,10 @@
-import {
-    Button,
-    Checkbox,
-} from '@openware/components';
+import { Button, Checkbox } from '@openware/components';
 import cr from 'classnames';
-import {
-    CustomInput,
-} from '../';
+import { CustomInput } from '../';
 
 import * as React from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
-import {
-    EMAIL_REGEX,
-    PASSWORD_REGEX,
-} from '../../helpers';
+import { EMAIL_REGEX, PASSWORD_REGEX } from '../../helpers';
 
 interface SignUpFormProps {
     siteKey?: string;
@@ -105,13 +97,15 @@ class SignUpForm extends React.Component<SignUpFormProps> {
                 <img className="cr-sign-up-form__image" src={image} alt="logo" />
             </h1>
         ) : null;
-        const captcha = hasConfirmed && captchaType !== 'none' ?
-            (
+        const termsLink = termsMessage ? (
+            <div className="cr-sign-up-form__terms-link">
+                {termsMessage.split(':')[0]} <a href="/en/terms">{termsMessage.split(':')[1]}</a>
+            </div>
+        ) : null;
+        const captcha =
+            hasConfirmed && captchaType !== 'none' ? (
                 <div className="cr-sign-up-form__recaptcha">
-                    <ReCAPTCHA
-                        sitekey={siteKey}
-                        onChange={this.props.recaptchaOnChange}
-                    />
+                    <ReCAPTCHA sitekey={siteKey} onChange={this.props.recaptchaOnChange} />
                 </div>
             ) : null;
 
@@ -195,14 +189,16 @@ class SignUpForm extends React.Component<SignUpFormProps> {
                             checked={hasConfirmed}
                             className="cr-sign-up-form__checkbox"
                             onChange={this.props.clickCheckBox}
-                            label={termsMessage ? termsMessage : 'I  agree all statements in terms of service'}
+                            label={''}
+                            // label={termsMessage ? termsMessage : 'I  agree all statements in '}
                         />
+                        {termsLink}
                         {captcha}
                         <div className="cr-sign-up-form__button-wrapper">
                             <Button
                                 type="submit"
                                 className="cr-sign-up-form__button"
-                                label={isLoading ? 'Loading...' : (labelSignUp ? labelSignUp : 'Sign up')}
+                                label={isLoading ? 'Loading...' : labelSignUp ? labelSignUp : 'Sign up'}
                                 disabled={this.disableButton()}
                                 onClick={this.handleClick}
                             />
@@ -214,15 +210,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
     }
 
     private disableButton = (): boolean => {
-        const {
-            email,
-            password,
-            confirmPassword,
-            hasConfirmed,
-            recaptchaConfirmed,
-            isLoading,
-            captchaType,
-        } = this.props;
+        const { email, password, confirmPassword, hasConfirmed, recaptchaConfirmed, isLoading, captchaType } = this.props;
 
         if (!hasConfirmed || isLoading || !email.match(EMAIL_REGEX) || !password || !confirmPassword) {
             return true;
@@ -243,9 +231,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
         const isPasswordValid = password.match(PASSWORD_REGEX);
         const isConfirmPasswordValid = password === confirmPassword;
 
-        return (email && isEmailValid) &&
-            (password && isPasswordValid) &&
-            (confirmPassword && isConfirmPasswordValid);
+        return email && isEmailValid && (password && isPasswordValid) && (confirmPassword && isConfirmPasswordValid);
     }
 
     private handleClick = (label?: string, e?: React.FormEvent<HTMLInputElement>) => {
@@ -260,7 +246,4 @@ class SignUpForm extends React.Component<SignUpFormProps> {
     };
 }
 
-export {
-    SignUpForm,
-    SignUpFormProps,
-};
+export { SignUpForm, SignUpFormProps };
