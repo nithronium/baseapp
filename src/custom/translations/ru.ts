@@ -88,7 +88,8 @@ export const ru: LangType = {
     'page.body.wallets.locked': 'В ордерах',
     'page.body.wallets.balance': 'Баланс',
     'page.body.wallets.tabs.deposit': 'Пополнить',
-    'page.body.wallets.tabs.deposit.ccy.message.submit': 'Пожалуйста, внесите депозитный платеж. Ваш депозит будет доступен после 6 подтверждений',
+    'page.body.wallets.tabs.deposit.ccy.message.submit':
+        'Пожалуйста, внесите депозитный платеж. Ваш депозит будет доступен после 6 подтверждений',
     'page.body.wallets.tabs.deposit.ccy.message.address': 'Пополнить кошелек',
     'page.body.wallets.tabs.deposit.ccy.message.button': 'Копировать',
     'page.body.wallets.tabs.deposit.ccy.message.success': 'Адрес скопирован',
@@ -118,7 +119,8 @@ export const ru: LangType = {
     'page.body.wallets.tabs.withdraw.modal.button.cancel': 'Отменить',
     'page.body.wallets.tabs.withdraw.modal.button.withdraw': 'Вывести',
 
-    'page.body.wallets.tabs.withdraw.content.enable2fa': 'Вам нужно активировать 2FA, чтобы получить возможность выводить Ваши валюты!',
+    'page.body.wallets.tabs.withdraw.content.enable2fa':
+        'Вам нужно активировать 2FA, чтобы получить возможность выводить Ваши валюты!',
     'page.body.wallets.tabs.withdraw.content.enable2faButton': 'Активировать 2FA',
 
     'success.beneficiaries.created': 'Beficiaries: successfully created',
@@ -155,7 +157,8 @@ export const ru: LangType = {
     'page.body.wallets.whitelist.addAddressModal.body.button': 'submit for confirmation',
 
     'page.body.wallets.whitelist.confirmationModal.header': 'Confirm new address',
-    'page.body.wallets.whitelist.confirmationModal.body.text': 'We have sent you an email containing a confirmation code pin, please enter it below to save the new address:',
+    'page.body.wallets.whitelist.confirmationModal.body.text':
+        'We have sent you an email containing a confirmation code pin, please enter it below to save the new address:',
     'page.body.wallets.whitelist.confirmationModal.body.confirmationModalCode': 'Pin code',
     'page.body.wallets.whitelist.confirmationModal.body.button': 'confirm',
 
@@ -246,16 +249,19 @@ export const ru: LangType = {
     'page.body.profile.header.account.content.twoFactorAuthentication.message.enable': 'Включен',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.disable': 'Отключен',
     'page.body.profile.header.account.content.twoFactorAuthentication.header': 'Google Authenticator',
-    'page.body.profile.header.account.content.twoFactorAuthentication.message.1': 'Скачайте и установите приложение Google Authenticator с ',
+    'page.body.profile.header.account.content.twoFactorAuthentication.message.1':
+        'Скачайте и установите приложение Google Authenticator с ',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.or': 'или ',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.2': 'Отсканируйте QR код или используйте код MFA:',
-    'page.body.profile.header.account.content.twoFactorAuthentication.message.3': '* Сохраните этот код в надежном месте. Он может быть использован для доступа 2FA кода с разных устройств.',
+    'page.body.profile.header.account.content.twoFactorAuthentication.message.3':
+        '* Сохраните этот код в надежном месте. Он может быть использован для доступа 2FA кода с разных устройств.',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.mfa': 'MFA код',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.4': 'Введите 2FA код с приложения',
     'page.body.profile.header.account.content.twoFactorAuthentication.subHeader': '6-ти значный код GAuthenticator',
     'page.body.profile.header.account.content.twoFactorAuthentication.enable': 'ВКЛЮЧИТЬ',
     'page.body.profile.header.account.content.twoFactorAuthentication.disable': 'ОТКЛЮЧИТЬ 2FA',
-    'page.body.profile.header.account.content.twoFactorAuthentication.modalBody': 'Пожалуйста, обратитесь с администратором, чтобы отключить 2FA',
+    'page.body.profile.header.account.content.twoFactorAuthentication.modalBody':
+        'Пожалуйста, обратитесь с администратором, чтобы отключить 2FA',
     'page.body.profile.header.account.content.twoFactorAuthentication.modalHeader': 'Двухфакторная аутентификация включена',
 
     'page.body.profile.header.account.profile': 'Верификация Вашего профиля',
@@ -291,7 +297,8 @@ export const ru: LangType = {
     'page.body.profile.apiKeys.modal.secret_key_info': 'Эта информация видна только один раз и не сможет быть восстановлена',
     'page.body.profile.apiKeys.modal.secret_key_store': 'Пожалуйста, сохраните это надежно',
     'page.body.profile.apiKeys.modal.note': 'Внимание',
-    'page.body.profile.apiKeys.modal.note_content': 'Для сохранности средств, не сообщайте свой Секретный и ключ Доступа другим.\
+    'page.body.profile.apiKeys.modal.note_content':
+        'Для сохранности средств, не сообщайте свой Секретный и ключ Доступа другим.\
  Если Вы забыли свой Секретный ключ, удалите его и создайте новую пару ключей.',
     'page.body.profile.apiKeys.modal.title': 'Введите 2FA код с приложения',
     'page.body.profile.apiKeys.modal.label': '6-ти значный Google Authenticator код',
@@ -387,16 +394,18 @@ export const ru: LangType = {
     'page.header.signUp.email': 'Почта',
     'page.header.signUp.email.message.error': 'Почта недействительная',
     'page.header.signUp.password': 'Пароль',
-    'page.header.signUp.password.message.error': 'Пароль должен содержать не менее 8 символов и не менее одной заглавной буквы и цифры',
+    'page.header.signUp.password.message.error':
+        'Пароль должен содержать не менее 8 символов и не менее одной заглавной буквы и цифры',
     'page.header.signUp.confirmPassword': 'Подтвердить пароль',
     'page.header.signUp.confirmPassword.message.error': 'Пароли не совпадают',
     'page.header.signUp.referalCode': 'Промо-код',
-    'page.header.signUp.terms': 'Я согласен со всеми заявлениями с точки зрения обслуживания',
+    'page.header.signUp.terms': 'Я согласен со всеми заявлениями с точки зрения: Правила использования',
     'page.header.signUp.modal.header': 'ПРОВЕРЬТЕ СВОЙ АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ',
-    'page.header.signUp.modal.body': 'Чтобы завершить регистрацию, найдите в своем' +
-                                     ' почтовом ящике электронное письмо с дальнейшими инструкциями. ' +
-                                     'Если вы не можете найти адрес электронной почты, проверьте свою' +
-                                     ' электронную почту со спамом.',
+    'page.header.signUp.modal.body':
+        'Чтобы завершить регистрацию, найдите в своем' +
+        ' почтовом ящике электронное письмо с дальнейшими инструкциями. ' +
+        'Если вы не можете найти адрес электронной почты, проверьте свою' +
+        ' электронную почту со спамом.',
 
     'page.resendConfirmation': 'Отправить подтверждение снова',
     'page.forgotPassword': 'Забыли пароль',
@@ -408,8 +417,9 @@ export const ru: LangType = {
     'page.noDataToShow': 'Нет данных для отображения',
 
     'page.modal.withdraw.success': 'Успешно!',
-    'page.modal.withdraw.success.message.content': 'Ваш вывод был успешно подтвержден. Пожалуйста, подождите, чтобы получить ' +
-                                                   'несколько обязательных подтверждений для завершения этой транзакции.',
+    'page.modal.withdraw.success.message.content':
+        'Ваш вывод был успешно подтвержден. Пожалуйста, подождите, чтобы получить ' +
+        'несколько обязательных подтверждений для завершения этой транзакции.',
     'page.modal.withdraw.success.button': 'OK',
 
     // success messages
@@ -533,7 +543,6 @@ export const ru: LangType = {
     'resource.documents.empty_doc_number': 'Номер документа отсутствует',
     'resource.documents.missing_upload': 'Фотография документа отсутствует',
 
-
     'resource.user.missing_topic': 'Тема отсутствует',
     'resource.user.empty_topic': 'Тема отсутствует',
     'resource.user.missing_old_password': 'Старый пароль отсутствует',
@@ -580,7 +589,8 @@ export const ru: LangType = {
     'account.withdraw.non_integer_otp': 'Значение 2FA не может быть проанализировано в тип Integer',
     'account.withdraw.empty_otp': '2FA отсутствует, 2FA пуст',
     'account.withdraw.empty_rid': 'Rid отсутствует, rid пуст',
-    'account.withdraw.non_decimal_amount': 'Значение суммы, которую вы отправили, не может быть проанализировано в десятичном виде',
+    'account.withdraw.non_decimal_amount':
+        'Значение суммы, которую вы отправили, не может быть проанализировано в десятичном виде',
     'account.withdraw.non_positive_amount': 'Значение суммы должно быть положительным',
     'account.deposit.not_permitted': 'Депозиты разрешены после подтверждения телефона',
     'account.withdraw.not_permitted': 'Пожалуйста, пройдите соответствующие шаги проверки для вывода средств',
@@ -622,7 +632,8 @@ export const ru: LangType = {
     'public.market.doesnt_exist': 'Рынок не существует',
     'public.order_book.non_integer_ask_limit': 'Не удалось проанализировать отправляемое вами предельное значение в тип Integer',
     'public.order_book.invalid_ask_limit': 'Неверный лимит спроса',
-    'public.order_book.non_integer_bid_limit': 'Отправленное вами предельное значение ставки не может быть проанализировано в типе Integer',
+    'public.order_book.non_integer_bid_limit':
+        'Отправленное вами предельное значение ставки не может быть проанализировано в типе Integer',
     'public.order_book.invalid_bid_limit': 'Неверный лимит ставок',
     'public.trade.non_integer_limit': 'Не удается проанализировать отправляемое вами предельное значение в тип Integer',
     'public.trade.invalid_limit': 'Неверный лимит',
@@ -646,7 +657,8 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN',
     'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Адрес банка',
     'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Банковский SWIFT',
-    'page.body.wallets.tabs.deposit.fiat.message3': 'Пожалуйста, ВСЕГДА указывайте ссылочный код во время банковского перевода, в противном случае внесение средств займет больше времени.',
+    'page.body.wallets.tabs.deposit.fiat.message3':
+        'Пожалуйста, ВСЕГДА указывайте ссылочный код во время банковского перевода, в противном случае внесение средств займет больше времени.',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.usd.value': 'USD',
     'page.body.wallets.tabs.deposit.fiat.iban.usd.value': 'AE 240570000011101251020',
