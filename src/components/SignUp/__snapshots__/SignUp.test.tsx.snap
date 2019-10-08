@@ -97,7 +97,7 @@ exports[`SignUp component should render 1`] = `
       <Component
         checked={false}
         className="cr-sign-up-form__checkbox"
-        label="I  agree all statements in terms of service"
+        label=""
         onChange={[MockFunction]}
       />
       <div
