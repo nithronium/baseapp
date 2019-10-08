@@ -80,8 +80,7 @@ class AppLayout extends React.Component<Props, {}, {}> {
                                 buttonClasses="cookie-consent__button"
                                 expires={1}
                             >
-                                <span>The exchange works in BETA-testing mode. Some operations may be limited. All the
-                                    users and ballances will migrate from BITMEEX exchange within several days. We
+                                <span>The exchange works in BETA-testing mode. Some operations may be limited. We
                                     would like to get your feedback and recommendations for improvement
                                     at <a href="mailto:beta_testing@emirex.com">beta_testing@emirex.com</a>.
                                 </span>

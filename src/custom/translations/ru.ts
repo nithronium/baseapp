@@ -97,8 +97,7 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.ccy.message.error': 'Генерация адреса',
 
     'page.body.wallets.tabs.deposit.fiat.message1': 'Вы можете внести депозит в банке, используя следующие реквизиты',
-    'page.body.wallets.tabs.deposit.fiat.message2':
-        'Пожалуйста, используйте предоставленную информацию для завершения банковского платежа. Ваш депозит станет доступным на протяжении 2-х рабочих дней.',
+    'page.body.wallets.tabs.deposit.fiat.message2': 'Пожалуйста, используйте предоставленную информацию для завершения банковского платежа. Ваш депозит станет доступным на протяжении 5-и рабочих дней.',
     'page.body.wallets.tabs.deposit.fiat.bankName': 'Название банка',
     'page.body.wallets.tabs.deposit.fiat.accountNumber': 'Номер счета',
     'page.body.wallets.tabs.deposit.fiat.accountName': 'Имя счета',
@@ -666,12 +665,15 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.bankName.usd.value': 'Ajman Bank PJSC',
     'page.body.wallets.tabs.deposit.fiat.bankAddress.usd.value': 'Garhoud Branch, Dubai, UAE',
     'page.body.wallets.tabs.deposit.fiat.bankSwift.usd.value': 'AJMNAEAJ',
+    'page.body.wallets.tabs.deposit.fiat.minimal.usd.value': 'Минимальный депозит 50 USD',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.eur.value': 'EUR',
-    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'AE 240570000011101251020',
+    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'AE 880570000011101251032',
     'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'Ajman Bank PJSC',
     'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': 'Garhoud Branch, Dubai, UAE',
     'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'AJMNAEAJ',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': 'Минимальный депозит 50 EUR',
+
 
     ...nationalitiesNames,
 };
