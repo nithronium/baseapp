@@ -19,7 +19,7 @@ class TradingDetails extends React.Component<Props, State>{
 
         super(props);
         this.state = {
-            legend: this.props.context.legend,
+            legend: this.props.context && this.props.context.legend,
             filteredLegend: null,
         };
 
@@ -51,11 +51,11 @@ class TradingDetails extends React.Component<Props, State>{
 
         let legendArray = [];
 
-        if (this.props.context.legend) {
-            legendArray = this.props.context.legend;
+        if (this.props.context && this.props.context.legend) {
+            legendArray = this.props.context && this.props.context.legend;
         }
 
-        if (this.state.legend.length) {
+        if (this.state.legend && this.state.legend.length) {
             legendArray = this.state.legend;
         }
 
@@ -112,7 +112,7 @@ class TradingDetails extends React.Component<Props, State>{
 
     private getTotal(column, mode = 'default', condition?){
 
-        let legendArray = this.state.legend.length ? this.state.legend : this.props.context.legend;
+        let legendArray = this.state.legend && this.state.legend.length ? this.state.legend : this.props.context && this.props.context.legend;
 
         if (this.state.filteredLegend !== null) {
             legendArray = this.state.filteredLegend;

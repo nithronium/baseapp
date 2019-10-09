@@ -40,7 +40,7 @@ export interface ReferralTicketsData {
     payload: ReferralTicketsPayload;
 }
 
-export type ReferralTicketsActions = ReferralTicketsFetch | ReferralTicketsData;
+export type ReferralTicketsActions = ReferralTicketsFetch | ReferralTicketsData | ReferralTicketsError;
 
 export const referralTicketsFetch = (): ReferralTicketsFetch => ({
     type: REFERRAL_TICKETS_FETCH,

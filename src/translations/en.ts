@@ -76,7 +76,8 @@ export const en = {
     'page.body.wallets.locked': 'Locked',
     'page.body.wallets.balance': 'Balance',
     'page.body.wallets.tabs.deposit': 'Deposit',
-    'page.body.wallets.tabs.deposit.ccy.message.submit': 'Submit a deposit using the following address or QR code. Your deposit will be reflected in your account after 6 confirmations',
+    'page.body.wallets.tabs.deposit.ccy.message.submit':
+        'Submit a deposit using the following address or QR code. Your deposit will be reflected in your account after 6 confirmations',
     'page.body.wallets.tabs.deposit.ccy.message.address': 'Deposit Address',
     'page.body.wallets.tabs.deposit.ccy.message.button': 'COPY',
     'page.body.wallets.tabs.deposit.ccy.message.success': 'Address copied',
@@ -139,11 +140,11 @@ export const en = {
     'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankName': 'Intermediary Bank Name (optional)',
     'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankSwiftCode': 'Intermediary Bank Swift Code (optional)',
 
-
     'page.body.wallets.whitelist.addAddressModal.body.button': 'submit for confirmation',
 
     'page.body.wallets.whitelist.confirmationModal.header': 'Confirm new address',
-    'page.body.wallets.whitelist.confirmationModal.body.text': 'We have sent you an email containing a confirmation code pin, please enter it below to save the new address:',
+    'page.body.wallets.whitelist.confirmationModal.body.text':
+        'We have sent you an email containing a confirmation code pin, please enter it below to save the new address:',
     'page.body.wallets.whitelist.confirmationModal.body.confirmationModalCode': 'Pin code',
     'page.body.wallets.whitelist.confirmationModal.body.button': 'confirm',
 
@@ -232,10 +233,12 @@ export const en = {
     'page.body.profile.header.account.content.twoFactorAuthentication.message.enable': 'Enabled',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.disable': 'Disabled',
     'page.body.profile.header.account.content.twoFactorAuthentication.header': 'Google Authenticator',
-    'page.body.profile.header.account.content.twoFactorAuthentication.message.1': 'Download and install Google Authenticator application from ',
+    'page.body.profile.header.account.content.twoFactorAuthentication.message.1':
+        'Download and install Google Authenticator application from ',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.or': 'or ',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.2': 'Scan QR code or use secret MFA code:',
-    'page.body.profile.header.account.content.twoFactorAuthentication.message.3': '* Save this secret in a secure location. This code can be used to gain 2FA access from a different device.',
+    'page.body.profile.header.account.content.twoFactorAuthentication.message.3':
+        '* Save this secret in a secure location. This code can be used to gain 2FA access from a different device.',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.mfa': 'MFA code',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.4': 'Enter 2fa code from the app',
     'page.body.profile.header.account.content.twoFactorAuthentication.subHeader': '2FA code',
@@ -274,7 +277,8 @@ export const en = {
     'page.body.profile.apiKeys.modal.created_header': 'Created',
     'page.body.profile.apiKeys.modal.access_key': 'Access Key',
     'page.body.profile.apiKeys.modal.secret_key': 'Secret Key',
-    'page.body.profile.apiKeys.modal.secret_key_info': 'This information will be shown only once and cannot be retrieved once lost.',
+    'page.body.profile.apiKeys.modal.secret_key_info':
+        'This information will be shown only once and cannot be retrieved once lost.',
     'page.body.profile.apiKeys.modal.secret_key_store': 'Please store it properly.',
     'page.body.profile.apiKeys.modal.note': 'Note',
     'page.body.profile.apiKeys.modal.note_content': `To avoid asset loss, please do not tell your Secret Key and Private Key to others.\
@@ -372,16 +376,18 @@ export const en = {
     'page.header.signUp.email': 'Email',
     'page.header.signUp.email.message.error': 'Email is invalid',
     'page.header.signUp.password': 'Password',
-    'page.header.signUp.password.message.error': 'Password must contain at least 8 characters, at least one capital letter and one digit',
+    'page.header.signUp.password.message.error':
+        'Password must contain at least 8 characters, at least one capital letter and one digit',
     'page.header.signUp.confirmPassword': 'Confirm Password',
     'page.header.signUp.confirmPassword.message.error': 'Passwords don\'t match',
     'page.header.signUp.referalCode': 'Referral Code',
-    'page.header.signUp.terms': 'I have read and agree to the Terms of Service',
+    'page.header.signUp.terms': 'I have read and agree to the: Terms of Use',
     'page.header.signUp.modal.header': 'VERIFY YOUR EMAIL ADDRESS',
-    'page.header.signUp.modal.body': 'To complete registration, check for an ' +
-                                      'email in your inbox with further ' +
-                                      'instruction. If you cannot find the email, ' +
-                                      'please check your spam folder',
+    'page.header.signUp.modal.body':
+        'To complete registration, check for an ' +
+        'email in your inbox with further ' +
+        'instruction. If you cannot find the email, ' +
+        'please check your spam folder',
 
     'page.resendConfirmation': 'Resend Confirmation',
     'page.forgotPassword': 'Forgot Password',
@@ -430,7 +436,7 @@ export const en = {
     'resource.phone.verification_invalid': 'Phone is not found or verification code is invalid',
     'resource.documents.limit_reached': 'Maximum number of documents already reached',
     'resource.documents.limit_will_be_reached': 'Documents amount will reach limit by this upload',
-    'resource.otp.already_enabled':'2FA has been already enabled for this account',
+    'resource.otp.already_enabled': '2FA has been already enabled for this account',
     'resource.otp.invalid': 'OTP code is invalid',
     'resource.password.doesnt_match': 'New passwords don\'t match',
     'resource.password.prev_pass_not_correct': 'Previous password is not correct',
@@ -517,7 +523,6 @@ export const en = {
     'resource.documents.missing_doc_number': 'Documents number is missing',
     'resource.documents.empty_doc_number': 'Documents number is missing or empty',
     'resource.documents.missing_upload': 'Attachment is missing',
-
 
     'resource.user.missing_topic': 'Topic is missing',
     'resource.user.empty_topic': 'Topic is missing or empty',

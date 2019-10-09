@@ -33,6 +33,7 @@ import { rootUserActivitySaga, UserActivityState } from './user/userActivity';
 import { rootWalletsSaga, WalletsState } from './user/wallets';
 import { rootWithdrawLimitSaga, WithdrawLimitState } from './user/withdrawLimit';
 
+import { ReferralComissionState, rootReferralComissionSaga } from '../custom/modules/referralComission';
 import { ReferralTicketsState, rootReferralTicketsSaga } from '../custom/modules/referralTickets';
 
 export * from './public/markets';
@@ -59,6 +60,7 @@ export * from './user/emailVerification';
 export * from './user/withdrawLimit';
 export * from './user/guard';
 export * from '../custom/modules/referralTickets';
+export * from '../custom/modules/referralComission';
 
 export interface RootState {
     public: {
@@ -95,6 +97,7 @@ export interface RootState {
         withdrawLimit: WithdrawLimitState;
         guard: GuardState;
         referralTickets: ReferralTicketsState;
+        referralComission: ReferralComissionState;
     };
 }
 
@@ -131,5 +134,6 @@ export function* rootSaga() {
         call(rootWithdrawLimitSaga),
         call(rootGuardSaga),
         call(rootReferralTicketsSaga),
+        call(rootReferralComissionSaga),
     ]);
 }
