@@ -1,5 +1,5 @@
 import { ReferralTicketsActions, ReferralTicketsPayload } from './actions';
-import { REFERRAL_TICKETS_DATA, REFERRAL_TICKETS_FETCH } from './constants';
+import { REFERRAL_TICKETS_DATA, REFERRAL_TICKETS_ERROR, REFERRAL_TICKETS_FETCH } from './constants';
 
 export interface ReferralTicketsState {
     loading: boolean;
@@ -27,6 +27,11 @@ export const referralTicketsReducer = (state = initialState, action: ReferralTic
                 ...state,
                 loading: false,
                 data: action.payload,
+            };
+        case REFERRAL_TICKETS_ERROR:
+            return {
+                ...state,
+                loading: false,
             };
         case REFERRAL_TICKETS_FETCH:
             return {

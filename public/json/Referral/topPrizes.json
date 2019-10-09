@@ -1,0 +1,24 @@
+{
+	"topPrizes": [
+		{
+			"place": "1st",
+			"bitcoin": "10,000",
+			"emrx": "10,000"
+		},
+		{
+			"place": "2nd",
+			"bitcoin": "8,000",
+			"emrx": "8,000"
+		},
+		{
+			"place": "3rd",
+			"bitcoin": "5,200",
+			"emrx": "5,200"
+		},
+		{
+			"place": "4&5th",
+			"bitcoin": "2,750",
+			"emrx": "2,750"
+		}
+	]
+}

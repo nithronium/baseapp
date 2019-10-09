@@ -36,7 +36,7 @@ class Card extends React.Component<Props>{
     public render(){
 
         let preloader;
-        if (!this.props.context.legend){
+        if (!(this.props.context && this.props.context.legend)){
             preloader = (
                 <div className="preloader"/>
             );

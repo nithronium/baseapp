@@ -1,6 +1,22 @@
 import * as React from 'react';
+import {
+    InjectedIntlProps,
+    injectIntl,
+} from 'react-intl';
+import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
+import { referralComissionFetch, ReferralComissionPayload, RootState, selectReferralComission } from '../../../modules';
 import {Card, CardContextInterface, ReferralHeader, ReferralHeaderInterface, Summary, TradingDetails} from '../../components/ReferralComission';
-//import './Comps/SCSS/styles.scss';
+
+interface DispatchProps {
+    fetchReferralComission: typeof referralComissionFetch;
+}
+
+interface ReduxProps {
+    referralComission: ReferralComissionPayload;
+    loading: boolean;
+}
+
+type Props = DispatchProps & InjectedIntlProps & ReduxProps;
 
 interface State {
     ieo: CardContextInterface;
@@ -8,7 +24,7 @@ interface State {
     trading: CardContextInterface;
 }
 
-class ReferralComissionScreen extends React.Component<{}, State> {
+class ReferralComission extends React.Component<Props, State> {
 
     constructor(props){
         super(props);
@@ -85,6 +101,13 @@ class ReferralComissionScreen extends React.Component<{}, State> {
     }
 }
 
-export {
-    ReferralComissionScreen,
-};
+const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
+    referralComission: selectReferralComission(state).data,
+    loading: selectReferralComission(state).loading,
+});
+
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
+    fetchReferralComission: () => dispatch(referralComissionFetch()),
+});
+
+export const ReferralComissionScreen = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ReferralComission));
