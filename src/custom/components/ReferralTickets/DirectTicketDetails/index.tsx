@@ -11,10 +11,6 @@ interface Props {
     };
 }
 
-interface State {
-    legend: DirectTicketInterface[];
-}
-
 const tableRow = (legendArray: DirectTicketInterface[]): React.ReactNode => {
     return legendArray.map((record, index) => {
         return(
@@ -27,27 +23,11 @@ const tableRow = (legendArray: DirectTicketInterface[]): React.ReactNode => {
     });
 };
 
-class DirectTicketDetails extends React.Component<Props, State>{
-
-    constructor(props){
-
-        super(props);
-        this.state = {
-            legend: this.props.context && this.props.context.legend,
-        };
-
-    }
+class DirectTicketDetails extends React.Component<Props>{
 
     public render(){
-
-        let legendArray: DirectTicketInterface[] = [];
-
-        if (this.props.context && this.props.context.legend) {
-            legendArray = this.props.context.legend;
-        }
-
+        const legendArray: DirectTicketInterface[] = this.props.context && this.props.context.legend || [];
         return(
-
             <div className="direct-ticket-details">
                 <div className="container">
                     <div className="container-wrapper">

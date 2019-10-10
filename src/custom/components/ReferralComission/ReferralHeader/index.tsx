@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { RootState, selectUserInfo, User } from '../../../../modules';
 
 export interface ReferralHeaderInterface {
     title: string;
@@ -7,12 +9,19 @@ export interface ReferralHeaderInterface {
     legend: [];
 }
 
-interface Props {
+
+interface ReduxProps {
+    user: User;
+}
+
+interface PassedProps {
     context: ReferralHeaderInterface;
     link: string;
 }
 
-class ReferralHeader extends React.Component<Props>{
+type Props = ReduxProps & PassedProps;
+
+class ReferralHeaderContainer extends React.Component<Props>{
 
     public render(){
 
@@ -37,7 +46,7 @@ class ReferralHeader extends React.Component<Props>{
                                         Your referral code:
                                     </div>
                                     <div className="code">
-                                        234823428574378234
+                                        {this.props.user.uid}
                                     </div>
                                 </div>
                             </div>
@@ -49,4 +58,8 @@ class ReferralHeader extends React.Component<Props>{
     }
 }
 
-export {ReferralHeader};
+const mapStateToProps = (state: RootState): ReduxProps => ({
+    user: selectUserInfo(state),
+});
+
+export const ReferralHeader = connect(mapStateToProps)(ReferralHeaderContainer);

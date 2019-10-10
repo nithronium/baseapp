@@ -11,10 +11,6 @@ interface Props {
     context: {legend: BonusDetailsInterface[]};
 }
 
-interface State {
-    legend: BonusDetailsInterface[];
-}
-
 const tableRow = (legendArray: BonusDetailsInterface[]): React.ReactNode => {return legendArray.map((record, index) => {
         return(
             <tr key={index}>
@@ -27,27 +23,16 @@ const tableRow = (legendArray: BonusDetailsInterface[]): React.ReactNode => {ret
     });
 };
 
-class BonusTicketDetails extends React.Component<Props, State>{
+class BonusTicketDetails extends React.Component<Props>{
 
     constructor(props){
-
         super(props);
-        this.state = {
-            legend: this.props.context && this.props.context.legend,
-        };
-
         //this.loadMore = this.loadMore.bind(this);
-
     }
 
     public getTotal(column, mode = 'default', condition?){
 
-        const legendArray = this.state.legend && this.state.legend.length ? this.state.legend : this.props.context && this.props.context.legend;
-
-        if (!legendArray) {
-            return 0;
-        }
-
+        const legendArray = (this.props.context && this.props.context.legend) || [];
         let total = 0;
 
         legendArray.map((record, index) => {
@@ -100,15 +85,7 @@ class BonusTicketDetails extends React.Component<Props, State>{
 
     public render(){
 
-        let legendArray: BonusDetailsInterface[] = [];
-
-        if (this.props.context && this.props.context.legend) {
-            legendArray = this.props.context.legend;
-        }
-
-        if (this.state.legend && this.state.legend.length) {
-            legendArray = this.state.legend;
-        }
+        const legendArray: BonusDetailsInterface[] = this.props.context && this.props.context.legend || [];
 
         return(
 
