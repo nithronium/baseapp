@@ -1,4 +1,6 @@
 import { RootState } from '../../../modules';
-import { ReferralComissionState } from './reducer';
+import { ReferralComissionSummaryInterface, ReferralComissionTradingInterface } from './reducer';
 
-export const selectReferralComission = (state: RootState): ReferralComissionState => state.user.referralComission;
+export const selectReferralComissionTrading = (state: RootState): ReferralComissionTradingInterface => state.user.referralComission.data.trading;
+export const selectReferralComissionIeo = (state: RootState): ReferralComissionTradingInterface => state.user.referralComission.data.ieo;
+export const selectReferralComissionSummary = (state: RootState): ReferralComissionSummaryInterface => state.user.referralComission.data.summary;

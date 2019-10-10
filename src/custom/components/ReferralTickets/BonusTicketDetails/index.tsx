@@ -36,7 +36,7 @@ class BonusTicketDetails extends React.Component<Props, State>{
             legend: this.props.context && this.props.context.legend,
         };
 
-        this.loadMore = this.loadMore.bind(this);
+        //this.loadMore = this.loadMore.bind(this);
 
     }
 
@@ -80,7 +80,7 @@ class BonusTicketDetails extends React.Component<Props, State>{
         return total;
     }
 
-    public loadMore(){
+    /*public loadMore(){
 
         fetch('/json/ReferralTickets/bonus_more.json')
         .then(async res => res.json())
@@ -96,7 +96,7 @@ class BonusTicketDetails extends React.Component<Props, State>{
             },
         );
 
-    }
+    }*/
 
     public render(){
 
@@ -120,12 +120,8 @@ class BonusTicketDetails extends React.Component<Props, State>{
                             {tableRow(legendArray)}
                         </tbody>
                         <tfoot>
-                            <tr>
-                                <td colSpan={4}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={4}><span className="table-summary-header">total</span></td>
-                            </tr>
+                            {/*<tr><td colSpan={4}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td></tr>*/}
+                            <tr><td style={{paddingBottom: 0}} colSpan={4}><span className="table-summary-header">total</span></td></tr>
                             <tr>
                                 <td><span className="count">{this.getTotal('count')}</span> tickets</td>
                                 <td>{this.getTotal('subscription', 'count', '!No subscription')} subscriptions</td>

@@ -31,6 +31,40 @@ import {
 } from '../../../modules';
 import { Hero, HIW, OurPrizes, ReferralCode, Terms, Tickets, Timelines } from '../../components/Referral';
 
+const prizes = [
+    {name: 'BMW 3 SERIES'},
+    {name: 'MACBOOK PRO'},
+    {name: 'IPHONE 11'},
+    {name: 'UAE TRAVEL'},
+    {name: 'PRIZE 5'},
+    {name: 'PRIZE 6'},
+    {name: 'PRIZE 7'},
+    {name: 'PRIZE 8'},
+];
+
+const topPrizes = [
+    {
+        place: '1st',
+        bitcoin: '10,000',
+        emrx: '10,000',
+    },
+    {
+        place: '2nd',
+        bitcoin: '8,000',
+        emrx: '8,000',
+    },
+    {
+        place: '3rd',
+        bitcoin: '5,200',
+        emrx: '5,200',
+    },
+    {
+        place: '4&5th',
+        bitcoin: '2,750',
+        emrx: '2,750',
+    },
+];
+
 interface ReduxProps {
     requireVerification?: boolean;
     loading?: boolean;
@@ -106,11 +140,11 @@ class Referral extends React.Component<Props> {
         const className = cx('pg-referral-screen__container', { loading });
         return (
             <div className="pg-referral-screen">
-                <Hero />
+                <Hero prizes={prizes}/>
                 <HIW />
                 <Timelines />
                 <Tickets />
-                <OurPrizes />
+                <OurPrizes prizes={prizes} topPrizes={topPrizes}/>
                 <ReferralCode />
                 <Terms />
                 <div className={className}>

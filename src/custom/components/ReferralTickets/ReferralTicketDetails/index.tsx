@@ -17,6 +17,7 @@ interface Props {
 interface State {
     legend: ReferralTicketInterface[];
     filteredLegend: ReferralTicketInterface[];
+    filter: string;
 }
 
 const tableRow = (legendArray: ReferralTicketInterface[]): React.ReactNode => {
@@ -42,14 +43,16 @@ class ReferralTicketDetails extends React.Component<Props, State>{
         this.state = {
             legend: this.props.context && this.props.context.legend,
             filteredLegend: [],
+            filter: 'all',
         };
 
-        this.loadMore = this.loadMore.bind(this);
+        //this.loadMore = this.loadMore.bind(this);
         this.filterLegend = this.filterLegend.bind(this);
     }
 
     public filterLegend(e) {
         const filter = e.target.dataset.filter;
+        this.setState({filter});
         let activeArray;
         let inactiveArray;
         const legendArray = this.state.legend && this.state.legend.length ? this.state.legend : this.props.context && this.props.context.legend;
@@ -127,7 +130,7 @@ class ReferralTicketDetails extends React.Component<Props, State>{
         return total;
     }
 
-    public loadMore(){
+    /*public loadMore(){
 
         this.setState({
             filteredLegend: [],
@@ -147,9 +150,13 @@ class ReferralTicketDetails extends React.Component<Props, State>{
             },
         );
 
-    }
+    }*/
+
 
     public render(){
+        const filterClassName = dataFilter => {
+            return `referral-filter${dataFilter === this.state.filter ? ' active' : ''}`;
+        };
 
         let legendArray: ReferralTicketInterface[] = [];
 
@@ -171,9 +178,9 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                 <div className="container">
                     <div className="left"><h2>Referral tickets details</h2></div>
                     <div className="right">
-                        <a href="#!" onClick={this.filterLegend} data-filter="all" className="referral-filter active">all</a> /
-                        <a href="#!" onClick={this.filterLegend} data-filter="active" className="referral-filter">active</a> /
-                        <a href="#!" onClick={this.filterLegend} data-filter="inactive" className="referral-filter">inactive</a>
+                        <a href="#!" onClick={this.filterLegend} data-filter="all" className={filterClassName('all')}>all</a> /
+                        <a href="#!" onClick={this.filterLegend} data-filter="active" className={filterClassName('active')}>active</a> /
+                        <a href="#!" onClick={this.filterLegend} data-filter="inactive" className={filterClassName('inactive')}>inactive</a>
                     </div>
                 </div>
                 <div className="container column">
@@ -191,12 +198,8 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                         {tableRow(legendArray)}
                         </tbody>
                         <tfoot>
-                            <tr>
-                                <td colSpan={5}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5}><span className="table-summary-header">total</span></td>
-                            </tr>
+                            {/*<tr><td colSpan={5}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td></tr>*/}
+                            <tr><td style={{paddingBottom: 0}} colSpan={5}><span className="table-summary-header">total</span></td></tr>
                             <tr>
                                 <td><span className="count">{this.getTotal('count')}</span> <span className="explanation">tickets</span></td>
                                 <td>{this.getTotal('l1_referral', 'count')} referreres</td>

@@ -1,18 +1,12 @@
 import * as React from 'react';
 
-interface State {
-    prizes: [];
+interface Props {
+    prizes: Array<{
+        name: string;
+    }>;
 }
 
-class Hero extends React.Component<{}, State>{
-
-    constructor(props){
-        super(props);
-
-        this.state = {
-            prizes: [],
-        };
-    }
+class Hero extends React.Component<Props>{
 
     public prizes(p) {
         return p.map((prize, index) => {
@@ -22,19 +16,6 @@ class Hero extends React.Component<{}, State>{
                 </div>
             );
         });
-    }
-
-    public componentDidMount(){
-        fetch('/json/Referral/prizes.json')
-            .then(async res => res.json())
-            .then(result => {
-                    this.setState({
-                        prizes: result.prizes,
-                    });
-                },error => {
-                    //console.error(error);
-                },
-            );
     }
 
     public render(){
@@ -73,7 +54,7 @@ class Hero extends React.Component<{}, State>{
                         </div>
                     </div>
                         <div className="prizes-holder">
-                            {this.prizes(this.state.prizes)}
+                            {this.prizes(this.props.prizes)}
                         </div>
                 </div>
             </section>

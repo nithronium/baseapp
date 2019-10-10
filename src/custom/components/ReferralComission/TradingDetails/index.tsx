@@ -23,7 +23,7 @@ class TradingDetails extends React.Component<Props, State>{
             filteredLegend: null,
         };
 
-        this.loadMore = this.loadMore.bind(this);
+        //this.loadMore = this.loadMore.bind(this);
 
     }
 
@@ -83,10 +83,7 @@ class TradingDetails extends React.Component<Props, State>{
                         </thead>
                         {this.tbodies(legendArray)}
                         <tfoot>
-                            <tr>
-                                <td colSpan={3}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td>
-                                <td colSpan={3}><a className="csv-trigger round-button" href="#!">export CSV</a></td>
-                            </tr>
+                            {/*<tr><td colSpan={3}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td><td colSpan={3}><a className="csv-trigger round-button" href="#!">export CSV</a></td></tr>*/}
                             <tr>
                                 <td><span className="table-summary-header">total</span></td>
                                 <td className="footer-header"># of L1 trades</td>
@@ -145,7 +142,7 @@ class TradingDetails extends React.Component<Props, State>{
         return total;
     }
 
-    private loadMore(){
+    /*private loadMore(){
 
         this.setState({
             filteredLegend: null,
@@ -167,7 +164,7 @@ class TradingDetails extends React.Component<Props, State>{
             },
         );
 
-    }
+    }*/
 }
 
 export { TradingDetails };
