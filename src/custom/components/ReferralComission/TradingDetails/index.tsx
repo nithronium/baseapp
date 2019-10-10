@@ -9,7 +9,6 @@ interface Props {
 }
 
 interface State {
-    filteredLegend: null | [];
     legend: [];
 }
 
@@ -20,7 +19,6 @@ class TradingDetails extends React.Component<Props, State>{
         super(props);
         this.state = {
             legend: this.props.context && this.props.context.legend,
-            filteredLegend: null,
         };
 
         //this.loadMore = this.loadMore.bind(this);
@@ -57,10 +55,6 @@ class TradingDetails extends React.Component<Props, State>{
 
         if (this.state.legend && this.state.legend.length) {
             legendArray = this.state.legend;
-        }
-
-        if (this.state.filteredLegend !== null) {
-            legendArray = this.state.filteredLegend;
         }
 
         return(
@@ -109,34 +103,24 @@ class TradingDetails extends React.Component<Props, State>{
 
     private getTotal(column, mode = 'default', condition?){
 
-        let legendArray = this.state.legend && this.state.legend.length ? this.state.legend : this.props.context && this.props.context.legend;
-
-        if (this.state.filteredLegend !== null) {
-            legendArray = this.state.filteredLegend;
-        }
-
-        if (!legendArray) {
-            return 0;
-        }
+        const legendArray = //this.state.legend && this.state.legend.length ? this.state.legend :
+            this.props.context && this.props.context.legend;
 
         let total = 0;
 
-        legendArray.map((record, index) => {
+        if (!legendArray) {
+            return total;
+        }
 
+        legendArray.map(record => {
             const value2add = mode === 'default' ? record[column] : 1;
-
             if (!condition){
                 total += value2add;
-                return true;
             }else{
-
                 if (record[column] === condition){
                     total += value2add;
                 }
             }
-
-            return true;
-
         });
 
         return total;

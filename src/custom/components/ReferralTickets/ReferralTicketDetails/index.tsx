@@ -15,8 +15,6 @@ interface Props {
 }
 
 interface State {
-    legend: ReferralTicketInterface[];
-    filteredLegend: ReferralTicketInterface[];
     filter: string;
 }
 
@@ -41,92 +39,49 @@ class ReferralTicketDetails extends React.Component<Props, State>{
 
         super(props);
         this.state = {
-            legend: this.props.context && this.props.context.legend,
-            filteredLegend: [],
-            filter: 'all',
+           filter: 'all',
         };
 
         //this.loadMore = this.loadMore.bind(this);
         this.filterLegend = this.filterLegend.bind(this);
     }
 
+    public filtered(): ReferralTicketInterface[] {
+        const legendArray = this.props.context && this.props.context.legend || [];
+        switch (this.state.filter) {
+            case 'active':
+                return legendArray.filter(record => record.active === 'yes');
+            case 'inactive':
+                return legendArray.filter(record => record.active === 'no');
+            case 'all':
+                default:
+                return legendArray;
+        }
+    }
+
     public filterLegend(e) {
         const filter = e.target.dataset.filter;
         this.setState({filter});
-        let activeArray;
-        let inactiveArray;
-        const legendArray = this.state.legend && this.state.legend.length ? this.state.legend : this.props.context && this.props.context.legend;
-
-        // if filter is not all, preserve copy of original array
-        if (filter !== 'all'){
-            this.unfiltered = this.state.legend;
-        }
-
-        inactiveArray = legendArray.filter(record => {
-            return record.active === 'no';
-        });
-
-        activeArray = legendArray.filter(record => {
-            return record.active === 'yes';
-        });
-
-        switch (filter){
-            case 'all':
-                this.setState({
-                    filteredLegend: [],
-                });
-                break;
-            case 'active':
-                this.setState({
-                    filteredLegend: activeArray,
-                });
-                break;
-            case 'inactive':
-                this.setState({
-                    filteredLegend: inactiveArray,
-                });
-                break;
-            default:
-                this.setState({
-                    filteredLegend: [],
-                });
-                break;
-
-        }
     }
 
     public getTotal(column, mode = 'default', condition?) {
 
-        let legendArray = this.state.legend && this.state.legend.length ? this.state.legend : this.props.context && this.props.context.legend;
-
-        if (this.state.filteredLegend.length !== 0) {
-            legendArray = this.state.filteredLegend;
-        }
-
-        if (!legendArray) {
-            return 0;
-        }
+        const legendArray = this.filtered();
 
         let total = 0;
 
         legendArray.map((record, index) => {
-
             const value2add = mode === 'default' ? record[column] : 1;
-
             if (!condition){
                 total += value2add;
                 return true;
             }else{
-
                 if (record[column] === condition){
                     total += value2add;
                 }
             }
-
             return true;
-
         });
-
         return total;
     }
 
@@ -158,19 +113,7 @@ class ReferralTicketDetails extends React.Component<Props, State>{
             return `referral-filter${dataFilter === this.state.filter ? ' active' : ''}`;
         };
 
-        let legendArray: ReferralTicketInterface[] = [];
-
-        if (this.props.context && this.props.context.legend) {
-            legendArray = this.props.context.legend;
-        }
-
-        if (this.state.legend && this.state.legend.length) {
-            legendArray = this.state.legend;
-        }
-
-        if (this.state.filteredLegend.length !== 0) {
-            legendArray = this.state.filteredLegend;
-        }
+        const legendArray = this.filtered();
 
         return(
 

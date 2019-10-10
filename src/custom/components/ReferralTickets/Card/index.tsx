@@ -25,15 +25,13 @@ interface CardProps {
 
 class Card extends React.Component<CardProps>{
 
-
     public getTotal(mode = 'all', summMode = ''): number{
-
         let total = 0;
         if (!(this.props.context && this.props.context.legend)) {
             return total;
         }
 
-        this.props.context.legend.map((record, index) => {
+        this.props.context.legend.map(record => {
 
             switch (mode){
                 case 'active':

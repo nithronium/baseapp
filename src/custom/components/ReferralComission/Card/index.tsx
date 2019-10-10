@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export interface CardContextInterface {
+interface CardContextInterface {
     details: [];
     legend: [];
     earned: number;
