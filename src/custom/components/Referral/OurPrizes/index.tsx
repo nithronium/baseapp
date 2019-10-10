@@ -1,51 +1,18 @@
 import * as React from 'react';
 import { TopPrize } from '../TopPrize';
 
-interface State {
-    topPrizes: [];
-    regularPrizes: [];
+interface Props {
+    topPrizes: Array<{
+        place: string;
+        bitcoin: string;
+        emrx: string;
+    }>;
+    prizes: Array<{
+        name: string;
+    }>;
 }
 
-export class OurPrizes extends React.Component<{}, State>{
-
-    constructor(props){
-        super(props);
-
-        this.state = {
-            topPrizes: [],
-            regularPrizes: [],
-        };
-    }
-
-    public componentDidMount(){
-        fetch('/json/Referral/topPrizes.json')
-            .then(async res => res.json())
-            .then(
-                result => {
-                    this.setState({
-                        topPrizes: result.topPrizes,
-                    });
-                },
-
-                error => {
-                    //console.log(error);
-                },
-            );
-
-        fetch('/json/Referral/prizes.json')
-            .then(async res => res.json())
-            .then(
-                result => {
-                    this.setState({
-                        regularPrizes: result.prizes,
-                    });
-                },
-
-                error => {
-                    //console.error(error);
-                },
-            );
-    }
+export class OurPrizes extends React.Component<Props>{
 
     public topPrizes(topPrizes){
         return topPrizes.map((prize, index) => {
@@ -73,11 +40,11 @@ export class OurPrizes extends React.Component<{}, State>{
                     <h2 className="center-align">Our 100 prizes</h2>
                 </div>
                 <div className="container" id="top-prizes">
-                    {this.topPrizes(this.state.topPrizes)}
+                    {this.topPrizes(this.props.topPrizes)}
                 </div>
                 <div className="container" id="regular-prizes">
                     <div className="prizes-holder">
-                    {this.regularPrizes(this.state.regularPrizes)}
+                    {this.regularPrizes(this.props.prizes)}
                     <div className="prizes-footer">
                         <div className="left"><a href="#!" className="hero-button">Get a code</a></div>
                         <div className="right"><div className="hash">#WinWithEmirex</div></div>

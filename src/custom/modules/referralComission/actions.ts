@@ -1,5 +1,6 @@
 import { CommonError } from '../../../modules/types';
 import { REFERRAL_COMISSION_DATA, REFERRAL_COMISSION_ERROR, REFERRAL_COMISSION_FETCH } from './constants';
+import { ReferralComissionSummaryInterface, ReferralComissionTradingInterface } from './reducer';
 
 export interface ReferralComissionFetch {
     type: typeof REFERRAL_COMISSION_FETCH;
@@ -11,8 +12,9 @@ export interface ReferralComissionError {
 }
 
 export interface ReferralComissionPayload {
-   // TODO: fix
-   legend: string;
+   ieo: ReferralComissionTradingInterface;
+   trading: ReferralComissionTradingInterface;
+   summary: ReferralComissionSummaryInterface;
 }
 
 export interface ReferralComissionData {
