@@ -140,63 +140,64 @@ class Referral extends React.Component<Props> {
         const className = cx('pg-referral-screen__container', { loading });
         return (
             <div className="pg-referral-screen">
-                <Hero prizes={prizes}/>
+                <Hero prizes={prizes}>
+                    <div className={className}>
+                        <div className="cr-logo">
+                            <img src={logo} className="cr-logo__img" alt="Logo" />
+                        </div>
+                        <SignUpForm
+                            labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn'})}
+                            labelSignUp={this.props.intl.formatMessage({ id: 'page.header.signUp'})}
+                            emailLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.email'})}
+                            passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.password'})}
+                            confirmPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.confirmPassword'})}
+                            referalCodeLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.referalCode'})}
+                            termsMessage={this.props.intl.formatMessage({ id: 'page.header.signUp.terms'})}
+                            refId={refId}
+                            handleChangeRefId={this.handleChangeRefId}
+                            isLoading={loading}
+                            onSignIn={this.handleSignIn}
+                            onSignUp={this.handleSignUp}
+                            siteKey={siteKey()}
+                            captchaType={captchaType()}
+                            email={email}
+                            handleChangeEmail={this.handleChangeEmail}
+                            password={password}
+                            handleChangePassword={this.handleChangePassword}
+                            confirmPassword={confirmPassword}
+                            handleChangeConfirmPassword={this.handleChangeConfirmPassword}
+                            recaptchaConfirmed={recaptchaConfirmed}
+                            recaptcha_response={recaptcha_response}
+                            recaptchaOnChange={this.onChange}
+                            hasConfirmed={hasConfirmed}
+                            clickCheckBox={this.handleCheckboxClick}
+                            validateForm={this.handleValidateForm}
+                            emailError={emailError}
+                            passwordError={passwordError}
+                            confirmationError={confirmationError}
+                            confirmPasswordFocused={confirmPasswordFocused}
+                            refIdFocused={refIdFocused}
+                            emailFocused={emailFocused}
+                            passwordFocused={passwordFocused}
+                            handleFocusEmail={this.handleFocusEmail}
+                            handleFocusPassword={this.handleFocusPassword}
+                            handleFocusConfirmPassword={this.handleFocusConfirmPassword}
+                            handleFocusRefId={this.handleFocusRefId}
+                        />
+                        <Modal
+                            show={this.state.showModal}
+                            header={this.renderModalHeader()}
+                            content={this.renderModalBody()}
+                            footer={this.renderModalFooter()}
+                        />
+                    </div>
+                </Hero>
                 <HIW />
                 <Timelines />
                 <Tickets />
                 <OurPrizes prizes={prizes} topPrizes={topPrizes}/>
                 <ReferralCode />
                 <Terms />
-                <div className={className}>
-                    <div className="cr-logo">
-                        <img src={logo} className="cr-logo__img" alt="Logo" />
-                    </div>
-                    <SignUpForm
-                        labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn'})}
-                        labelSignUp={this.props.intl.formatMessage({ id: 'page.header.signUp'})}
-                        emailLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.email'})}
-                        passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.password'})}
-                        confirmPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.confirmPassword'})}
-                        referalCodeLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.referalCode'})}
-                        termsMessage={this.props.intl.formatMessage({ id: 'page.header.signUp.terms'})}
-                        refId={refId}
-                        handleChangeRefId={this.handleChangeRefId}
-                        isLoading={loading}
-                        onSignIn={this.handleSignIn}
-                        onSignUp={this.handleSignUp}
-                        siteKey={siteKey()}
-                        captchaType={captchaType()}
-                        email={email}
-                        handleChangeEmail={this.handleChangeEmail}
-                        password={password}
-                        handleChangePassword={this.handleChangePassword}
-                        confirmPassword={confirmPassword}
-                        handleChangeConfirmPassword={this.handleChangeConfirmPassword}
-                        recaptchaConfirmed={recaptchaConfirmed}
-                        recaptcha_response={recaptcha_response}
-                        recaptchaOnChange={this.onChange}
-                        hasConfirmed={hasConfirmed}
-                        clickCheckBox={this.handleCheckboxClick}
-                        validateForm={this.handleValidateForm}
-                        emailError={emailError}
-                        passwordError={passwordError}
-                        confirmationError={confirmationError}
-                        confirmPasswordFocused={confirmPasswordFocused}
-                        refIdFocused={refIdFocused}
-                        emailFocused={emailFocused}
-                        passwordFocused={passwordFocused}
-                        handleFocusEmail={this.handleFocusEmail}
-                        handleFocusPassword={this.handleFocusPassword}
-                        handleFocusConfirmPassword={this.handleFocusConfirmPassword}
-                        handleFocusRefId={this.handleFocusRefId}
-                    />
-                    <Modal
-                        show={this.state.showModal}
-                        header={this.renderModalHeader()}
-                        content={this.renderModalBody()}
-                        footer={this.renderModalFooter()}
-                    />
-                </div>
             </div>
         );
     }
