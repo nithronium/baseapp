@@ -2,31 +2,14 @@ import { Button } from '@openware/components';
 import cr from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
-import {
-    FormattedMessage,
-    InjectedIntlProps,
-    injectIntl,
-} from 'react-intl';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import {
-  CustomInput,
-  Modal,
-} from '../../components';
+import { CustomInput, Modal } from '../../components';
 import { VersionGuardWrapper } from '../../decorators';
-import {
-    PASSWORD_REGEX,
-} from '../../helpers';
-import {
-    openGuardModal,
-  RootState,
-  selectUserInfo,
-  User,
-} from '../../modules';
-import {
-    changePasswordFetch,
-    selectChangePasswordSuccess,
-} from '../../modules/user/profile';
+import { PASSWORD_REGEX } from '../../helpers';
+import { openGuardModal, RootState, selectUserInfo, User } from '../../modules';
+import { changePasswordFetch, selectChangePasswordSuccess } from '../../modules/user/profile';
 import { ProfileTwoFactorAuth } from '../ProfileTwoFactorAuth';
 import { ProfileTwoFactorAuthLite } from '../ProfileTwoFactorAuthLite';
 
@@ -97,9 +80,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     }
 
     public render() {
-        const {
-            user,
-        } = this.props;
+        const { user } = this.props;
         const {
             oldPasswordFocus,
             newPasswordFocus,
@@ -120,14 +101,16 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
         const confirmPasswordClass = cr('cr-email-form__group', {
             'cr-email-form__group--focused': confirmPasswordFocus,
         });
-
+        // tslint:disable
         const changeModalBody = (
             <div className="cr-email-form__form-content">
                 <div className={oldPasswordClass}>
                     <CustomInput
                         type="password"
-                        label={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.old'})}
-                        placeholder={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.old'})}
+                        label={this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password.old' })}
+                        placeholder={this.props.intl.formatMessage({
+                            id: 'page.body.profile.header.account.content.password.old',
+                        })}
                         defaultLabel="Old password"
                         handleChangeInput={this.handleOldPassword}
                         inputValue={oldPassword}
@@ -140,8 +123,10 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                 <div className={newPasswordClass}>
                     <CustomInput
                         type="password"
-                        label={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.new'})}
-                        placeholder={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.new'})}
+                        label={this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password.new' })}
+                        placeholder={this.props.intl.formatMessage({
+                            id: 'page.body.profile.header.account.content.password.new',
+                        })}
                         defaultLabel="New password"
                         handleChangeInput={this.handleNewPassword}
                         inputValue={newPassword}
@@ -154,8 +139,10 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                 <div className={confirmPasswordClass}>
                     <CustomInput
                         type="password"
-                        label={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.conf'})}
-                        placeholder={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.conf'})}
+                        label={this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password.conf' })}
+                        placeholder={this.props.intl.formatMessage({
+                            id: 'page.body.profile.header.account.content.password.conf',
+                        })}
                         defaultLabel="Password confirmation"
                         handleChangeInput={this.handleConfPassword}
                         inputValue={confirmationPassword}
@@ -168,8 +155,12 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                 <div className="cr-email-form__button-wrapper">
                     <input
                         type={'submit'}
-                        value={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.button.change'})}
-                        className={this.isValidForm() ? 'cr-email-form__button' : 'cr-email-form__button cr-email-form__button--disabled'}
+                        value={this.props.intl.formatMessage({
+                            id: 'page.body.profile.header.account.content.password.button.change',
+                        })}
+                        className={
+                            this.isValidForm() ? 'cr-email-form__button' : 'cr-email-form__button cr-email-form__button--disabled'
+                        }
                         disabled={!this.isValidForm()}
                     />
                 </div>
@@ -178,15 +169,15 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
 
         const modal = this.state.showChangeModal ? (
             <div className="cr-modal">
-              <form className="cr-email-form" onSubmit={this.handleChangePassword}>
-                <div className="pg-change-password-screen">
-                  {this.renderChangeModalHeader()}
-                  {changeModalBody}
-                </div>
-              </form>
+                <form className="cr-email-form" onSubmit={this.handleChangePassword}>
+                    <div className="pg-change-password-screen">
+                        {this.renderChangeModalHeader()}
+                        {changeModalBody}
+                    </div>
+                </form>
             </div>
         ) : null;
-
+        // tslint:disable
         return (
             <div className="pg-profile-page__box pg-profile-page__left-col__basic">
                 <div className="pg-profile-page__box-header pg-profile-page__left-col__basic__info-row">
@@ -194,24 +185,25 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                         <div className="pg-profile-page__row pg-profile-page__details-user">
                             <p>{user.email}</p>
                         </div>
+
                         <div className="pg-profile-page__row">
-                            <h2>UID: {user.uid}</h2>
+                            <h2> {user.referral_uid ? `UID :${user.uid}` : ''} </h2>
                         </div>
                     </div>
                 </div>
                 <div className="pg-profile-page__row">
                     <div>
                         <div className="pg-profile-page__label">
-                            {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password'})}
+                            {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password' })}
                         </div>
-                        <div>
-                            ************
-                        </div>
+                        <div>************</div>
                     </div>
                     <Button
                         className="pg-profile-page__btn-secondary-change"
                         onClick={this.showChangeModal}
-                        label={this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password.button.change'})}
+                        label={this.props.intl.formatMessage({
+                            id: 'page.body.profile.header.account.content.password.button.change',
+                        })}
                     />
                     {modal}
                 </div>
@@ -229,7 +221,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     private renderProfileTwoFactor = () => {
         return (
             <div className="pg-profile-page__row">
-                <ProfileTwoFactorAuth is2faEnabled={this.props.user.otp} navigateTo2fa={this.handleNavigateTo2fa}/>
+                <ProfileTwoFactorAuth is2faEnabled={this.props.user.otp} navigateTo2fa={this.handleNavigateTo2fa} />
             </div>
         );
     };
@@ -237,7 +229,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     private renderProfileTwoFactorLite = () => {
         return (
             <div className="pg-profile-page__row">
-                <ProfileTwoFactorAuthLite openModal={this.props.openGuardModal}/>
+                <ProfileTwoFactorAuthLite openModal={this.props.openGuardModal} />
             </div>
         );
     };
@@ -245,7 +237,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     private renderModalHeader = () => {
         return (
             <div className="pg-exchange-modal-submit-header">
-                <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.modalHeader"/>
+                <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.modalHeader" />
             </div>
         );
     };
@@ -254,7 +246,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
         return (
             <div className="pg-exchange-modal-submit-body">
                 <h2>
-                    <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.modalBody"/>
+                    <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.modalBody" />
                 </h2>
             </div>
         );
@@ -263,11 +255,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     private renderModalFooter = () => {
         return (
             <div className="pg-exchange-modal-submit-footer">
-                <Button
-                    className="pg-exchange-modal-submit-footer__button-inverse"
-                    label="OK"
-                    onClick={this.closeModal}
-                />
+                <Button className="pg-exchange-modal-submit-footer__button-inverse" label="OK" onClick={this.closeModal} />
             </div>
         );
     };
@@ -275,12 +263,12 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     private renderChangeModalHeader = () => (
         <div className="cr-email-form__options-group">
             <div className="cr-email-form__option">
-              <div className="cr-email-form__option-inner">
-                  <FormattedMessage id="page.body.profile.header.account.content.password.change"/>
-                  <div className="cr-email-form__cros-icon" onClick={this.handleCancel}>
-                      <img src={require('./close.svg')}/>
-                  </div>
-              </div>
+                <div className="cr-email-form__option-inner">
+                    <FormattedMessage id="page.body.profile.header.account.content.password.change" />
+                    <div className="cr-email-form__cros-icon" onClick={this.handleCancel}>
+                        <img src={require('./close.svg')} />
+                    </div>
+                </div>
             </div>
         </div>
     );
@@ -300,13 +288,13 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
         this.setState({
             showModal: false,
         });
-      };
+    };
 
     private showChangeModal = () => {
         this.setState({
             showChangeModal: true,
         });
-    }
+    };
 
     private handleNavigateTo2fa = (enable2fa: boolean) => {
         if (enable2fa) {
@@ -316,25 +304,25 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                 showModal: !this.state.showModal,
             });
         }
-    }
+    };
 
     private handleOldPassword = (value: string) => {
         this.setState({
             oldPassword: value,
         });
-    }
+    };
 
     private handleConfPassword = (value: string) => {
         this.setState({
             confirmationPassword: value,
         });
-    }
+    };
 
     private handleNewPassword = (value: string) => {
         this.setState({
             newPassword: value,
         });
-    }
+    };
 
     private handleCancel = () => {
         this.setState({
@@ -343,7 +331,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
             newPassword: '',
             confirmationPassword: '',
         });
-    }
+    };
 
     private handleFieldFocus = (field: string) => {
         return () => {
@@ -367,14 +355,10 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                     break;
             }
         };
-    }
+    };
 
     private isValidForm() {
-        const {
-            confirmationPassword,
-            oldPassword,
-            newPassword,
-        } = this.state;
+        const { confirmationPassword, oldPassword, newPassword } = this.state;
         const isNewPasswordValid = newPassword.match(PASSWORD_REGEX);
         const isConfirmPasswordValid = newPassword === confirmationPassword;
 
@@ -393,10 +377,13 @@ const mapDispatchToProps = dispatch => ({
     openGuardModal: () => dispatch(openGuardModal()),
 });
 
-const ProfileAuthDetailsConnected = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ProfileAuthDetailsComponent));
+const ProfileAuthDetailsConnected = injectIntl(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(ProfileAuthDetailsComponent)
+);
 // tslint:disable-next-line:no-any
 const ProfileAuthDetails = withRouter(ProfileAuthDetailsConnected as any);
 
-export {
-    ProfileAuthDetails,
-};
+export { ProfileAuthDetails };
