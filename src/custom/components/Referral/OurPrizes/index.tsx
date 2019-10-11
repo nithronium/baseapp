@@ -46,7 +46,7 @@ export class OurPrizes extends React.Component<Props>{
                     <div className="prizes-holder">
                     {this.regularPrizes(this.props.prizes)}
                     <div className="prizes-footer">
-                        <div className="left"><a href="#!" className="hero-button">Get a code</a></div>
+                        <div className="center"><a href="#!" className="hero-button">Get a code</a></div>
                         <div className="right"><div className="hash">#WinWithEmirex</div></div>
                     </div>
                     </div>
