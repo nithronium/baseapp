@@ -1,23 +1,16 @@
 import * as React from 'react';
-
-interface BonusDetailsInterface {
-    count: number;
-    subscription: string;
-    network_post: string;
-    network_post_url: string;
-}
+import { ReferralTicketsPayload } from '../../../modules/referralTickets';
 
 interface Props {
-    context: {legend: BonusDetailsInterface[]};
+    context: ReferralTicketsPayload['bonuses'];
 }
 
-const tableRow = (legendArray: BonusDetailsInterface[]): React.ReactNode => {return legendArray.map((record, index) => {
+const tableRow = (legendArray: ReferralTicketsPayload['bonuses']): React.ReactNode => {return legendArray.map((record, index) => {
         return(
             <tr key={index}>
-                <td><span className="count">{record.count} <span className="explanation">tickets</span></span></td>
-                <td>{record.subscription}</td>
-                <td>{record.network_post}</td>
-                <td><a href={record.network_post_url}>Follow link</a></td>
+                <td><span className="count">{record.tickets} <span className="explanation">tickets</span></span></td>
+                <td>{record.action}</td>
+                <td><a href={record.link}>Follow link</a></td>
             </tr>
         );
     });
@@ -32,7 +25,7 @@ class BonusTicketDetails extends React.Component<Props>{
 
     public getTotal(column, mode = 'default', condition?){
 
-        const legendArray = (this.props.context && this.props.context.legend) || [];
+        const legendArray = this.props.context || [];
         let total = 0;
 
         legendArray.map((record, index) => {
@@ -85,7 +78,7 @@ class BonusTicketDetails extends React.Component<Props>{
 
     public render(){
 
-        const legendArray: BonusDetailsInterface[] = this.props.context && this.props.context.legend || [];
+        const legendArray: ReferralTicketsPayload['bonuses'] = this.props.context || [];
 
         return(
 
@@ -97,13 +90,12 @@ class BonusTicketDetails extends React.Component<Props>{
                             {tableRow(legendArray)}
                         </tbody>
                         <tfoot>
-                            {/*<tr><td colSpan={4}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td></tr>*/}
-                            <tr><td style={{paddingBottom: 0}} colSpan={4}><span className="table-summary-header">total</span></td></tr>
+                            {/*<tr><td colSpan={3}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td></tr>*/}
+                            <tr><td style={{paddingBottom: 0}} colSpan={3}><span className="table-summary-header">total</span></td></tr>
                             <tr>
                                 <td><span className="count">{this.getTotal('count')}</span> tickets</td>
-                                <td>{this.getTotal('subscription', 'count', '!No subscription')} subscriptions</td>
                                 <td>{this.getTotal('posts', 'count')} posts</td>
-                                <td><a href="#!">Open all links</a></td>
+                                <td>&nbsp;</td>
                             </tr>
                         </tfoot>
                     </table>

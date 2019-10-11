@@ -13,12 +13,16 @@ import {
     referralTicketsFetch,
     ReferralTicketsPayload,
     RootState,
-    selectReferralTickets,
+    selectReferralTicketsBonuses,
+    selectReferralTicketsDirect,
+    selectReferralTicketsLoading,
+    selectReferralTicketsReferrals,
 } from '../../../modules';
 import {
     BonusTicketDetails,
-    Card,
-    CardContextProps,
+    CardBonuses,
+    CardReferrals,
+    CardUser,
     DirectTicketDetails,
     ReferralBallance,
     ReferralTicketDetails,
@@ -29,19 +33,15 @@ interface DispatchProps {
 }
 
 interface ReduxProps {
-    referralTickets: ReferralTicketsPayload;
+    bonuses: ReferralTicketsPayload['bonuses'];
+    direct: ReferralTicketsPayload['user'];
+    referrals: ReferralTicketsPayload['referrals'];
     loading: boolean;
 }
 
 type Props = DispatchProps & InjectedIntlProps & ReduxProps;
 
-interface State {
-  directDetails: CardContextProps;
-  referralDetails: CardContextProps;
-  bonusDetails: CardContextProps;
-}
-
-class ReferralTickets extends React.Component<Props, State> {
+class ReferralTickets extends React.Component<Props> {
 
     public componentDidMount() {
         setDocumentTitle('Referral Tickets');
@@ -85,23 +85,23 @@ class ReferralTickets extends React.Component<Props, State> {
                 <div className="top-holder">
                     <section id="top">
                         <ReferralBallance totalTickets={this.getTotalTickets()}>
-                            <Card context={this.props.referralTickets && this.props.referralTickets.directDetails} link="#direct"/>
-                            <Card context={this.props.referralTickets && this.props.referralTickets.referralDetails} link="#referral"/>
-                            <Card context={this.props.referralTickets && this.props.referralTickets.bonusDetails} link="#bonus"/>
+                            <CardUser title="Direct" context={this.props.direct} link="#direct"/>
+                            <CardReferrals title="Referral" context={this.props.referrals} activeInactive={true} link="#referral"/>
+                            <CardBonuses title="Bonus" context={this.props.bonuses} link="#bonus"/>
                         </ReferralBallance>
                     </section>
                     <section id="direct">
-                        <DirectTicketDetails context={this.props.referralTickets && this.props.referralTickets.directDetails} />
+                        <DirectTicketDetails context={this.props.direct} />
                     </section>
                 </div>
                 <section id="referral">
                     <div className="container">
-                        <ReferralTicketDetails context={this.props.referralTickets && this.props.referralTickets.referralDetails} />
+                        <ReferralTicketDetails context={this.props.referrals} />
                     </div>
                 </section>
                 <section id="bonus">
                     <div className="container">
-                        <BonusTicketDetails context={this.props.referralTickets && this.props.referralTickets.bonusDetails} />
+                        <BonusTicketDetails context={this.props.bonuses} />
                     </div>
                 </section>
             </div>
@@ -110,8 +110,10 @@ class ReferralTickets extends React.Component<Props, State> {
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
-    referralTickets: selectReferralTickets(state).data,
-    loading: selectReferralTickets(state).loading,
+    bonuses: selectReferralTicketsBonuses(state),
+    direct: selectReferralTicketsDirect(state),
+    referrals: selectReferralTicketsReferrals(state),
+    loading: selectReferralTicketsLoading(state),
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
@@ -119,3 +121,74 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
 });
 
 export const ReferralTicketsScreen = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ReferralTickets));
+
+/*
+'direct-ballance': {
+        title: 'Direct',
+        activeInactive: false,
+        legend : [
+            {
+                count: 3,
+                action: 'ballance 150 USD',
+            },
+            {
+                count: 4,
+                action: 'EMRX tokens worth 100 USD',
+            },
+        ],
+    },
+    'referral-ballance': {
+        title: 'Referral',
+        activeInactive: true,
+        legend: [
+            {
+                count: 9,
+                l1_referral: 'erfxxx@gmail.com',
+                active: 'yes',
+                l2_referrals: 7,
+                l2_active: 7,
+            },
+            {
+                count: 0,
+                l1_referral: 'erfxxx@gmail.com',
+                active: 'no',
+                l2_referrals: 10,
+                l2_active: 8,
+            },
+            {
+                count: 5,
+                l1_referral: 'erfxxx@gmail.com',
+                active: 'yes',
+                l2_referrals: 15,
+                l2_active: 3,
+            },
+        ],
+    },
+    'bonus-ballance': {
+        title: 'Bonus',
+        activeInactive: false,
+        legend: [
+            {
+                count: 1,
+                subscription: 'Facebook subscription',
+                subscription_url: 'https://facebook.com',
+                network_post: 'Facebook post',
+                network_post_url: 'https://facebook.com',
+            },
+            {
+                count: 0,
+                subscription: 'No subscription',
+                subscription_url: null,
+                network_post: 'Telegram post',
+                network_post_url: 'https://telegram.com',
+            },
+            {
+                count: 1,
+                subscription: 'Twitter subscription',
+                subscription_url: 'https://twitter.com',
+                network_post: 'Twitter post',
+                network_post_url: 'https://twitter.com',
+            },
+        ],
+    },
+*/
