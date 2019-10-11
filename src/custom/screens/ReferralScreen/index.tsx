@@ -11,7 +11,7 @@ import {
     MapDispatchToPropsFunction,
     MapStateToProps,
 } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+//import { withRouter } from 'react-router-dom';
 import { captchaType, siteKey } from '../../../api';
 import logo = require('../../../assets/images/logo.svg');
 import { Modal, SignUpForm } from '../../../components';
@@ -27,7 +27,9 @@ import {
     RootState,
     selectCurrentLanguage,
     selectSignUpRequireVerification,
+    selectUserInfo,
     signUp,
+    User,
 } from '../../../modules';
 import { Hero, HIW, OurPrizes, ReferralCode, Terms, Tickets, Timelines } from '../../components/Referral';
 
@@ -68,6 +70,7 @@ const topPrizes = [
 interface ReduxProps {
     requireVerification?: boolean;
     loading?: boolean;
+    user: User;
 }
 
 interface DispatchProps {
@@ -105,7 +108,7 @@ class Referral extends React.Component<Props> {
     };
 
     public componentDidMount() {
-        setDocumentTitle('Sign Up');
+        setDocumentTitle('Referral');
         const referralCode = this.extractRefID(this.props.location.search) || '';
         this.setState({
             refId: referralCode,
@@ -138,59 +141,78 @@ class Referral extends React.Component<Props> {
         const { loading } = this.props;
 
         const className = cx('pg-referral-screen__container', { loading });
+
+        const signupForm = () => {
+            return (
+                <div className={className}>
+                <div className="cr-logo">
+                    <img src={logo} className="cr-logo__img" alt="Logo" />
+                </div>
+                <SignUpForm
+                    labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn'})}
+                    labelSignUp={this.props.intl.formatMessage({ id: 'page.header.signUp'})}
+                    emailLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.email'})}
+                    passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.password'})}
+                    confirmPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.confirmPassword'})}
+                    referalCodeLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.referalCode'})}
+                    termsMessage={this.props.intl.formatMessage({ id: 'page.header.signUp.terms'})}
+                    refId={refId}
+                    handleChangeRefId={this.handleChangeRefId}
+                    isLoading={loading}
+                    onSignIn={this.handleSignIn}
+                    onSignUp={this.handleSignUp}
+                    siteKey={siteKey()}
+                    captchaType={captchaType()}
+                    email={email}
+                    handleChangeEmail={this.handleChangeEmail}
+                    password={password}
+                    handleChangePassword={this.handleChangePassword}
+                    confirmPassword={confirmPassword}
+                    handleChangeConfirmPassword={this.handleChangeConfirmPassword}
+                    recaptchaConfirmed={recaptchaConfirmed}
+                    recaptcha_response={recaptcha_response}
+                    recaptchaOnChange={this.onChange}
+                    hasConfirmed={hasConfirmed}
+                    clickCheckBox={this.handleCheckboxClick}
+                    validateForm={this.handleValidateForm}
+                    emailError={emailError}
+                    passwordError={passwordError}
+                    confirmationError={confirmationError}
+                    confirmPasswordFocused={confirmPasswordFocused}
+                    refIdFocused={refIdFocused}
+                    emailFocused={emailFocused}
+                    passwordFocused={passwordFocused}
+                    handleFocusEmail={this.handleFocusEmail}
+                    handleFocusPassword={this.handleFocusPassword}
+                    handleFocusConfirmPassword={this.handleFocusConfirmPassword}
+                    handleFocusRefId={this.handleFocusRefId}
+                />
+                <Modal
+                    show={this.state.showModal}
+                    header={this.renderModalHeader()}
+                    content={this.renderModalBody()}
+                    footer={this.renderModalFooter()}
+                />
+            </div>
+
+            );
+        };
+
+        const totalTickets = () => {
+            return (
+            <div className="total-tickets-wrapper">
+                <div className="total-tickets">
+                    <div className="header">My total tickets: 25</div>
+                    <div className="content">Go to <a href="/referral-tickets">Referral balance</a></div>
+                </div>
+            </div>
+            );
+        };
+
         return (
             <div className="pg-referral-screen">
                 <Hero prizes={prizes}>
-                    <div className={className}>
-                        <div className="cr-logo">
-                            <img src={logo} className="cr-logo__img" alt="Logo" />
-                        </div>
-                        <SignUpForm
-                            labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn'})}
-                            labelSignUp={this.props.intl.formatMessage({ id: 'page.header.signUp'})}
-                            emailLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.email'})}
-                            passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.password'})}
-                            confirmPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.confirmPassword'})}
-                            referalCodeLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.referalCode'})}
-                            termsMessage={this.props.intl.formatMessage({ id: 'page.header.signUp.terms'})}
-                            refId={refId}
-                            handleChangeRefId={this.handleChangeRefId}
-                            isLoading={loading}
-                            onSignIn={this.handleSignIn}
-                            onSignUp={this.handleSignUp}
-                            siteKey={siteKey()}
-                            captchaType={captchaType()}
-                            email={email}
-                            handleChangeEmail={this.handleChangeEmail}
-                            password={password}
-                            handleChangePassword={this.handleChangePassword}
-                            confirmPassword={confirmPassword}
-                            handleChangeConfirmPassword={this.handleChangeConfirmPassword}
-                            recaptchaConfirmed={recaptchaConfirmed}
-                            recaptcha_response={recaptcha_response}
-                            recaptchaOnChange={this.onChange}
-                            hasConfirmed={hasConfirmed}
-                            clickCheckBox={this.handleCheckboxClick}
-                            validateForm={this.handleValidateForm}
-                            emailError={emailError}
-                            passwordError={passwordError}
-                            confirmationError={confirmationError}
-                            confirmPasswordFocused={confirmPasswordFocused}
-                            refIdFocused={refIdFocused}
-                            emailFocused={emailFocused}
-                            passwordFocused={passwordFocused}
-                            handleFocusEmail={this.handleFocusEmail}
-                            handleFocusPassword={this.handleFocusPassword}
-                            handleFocusConfirmPassword={this.handleFocusConfirmPassword}
-                            handleFocusRefId={this.handleFocusRefId}
-                        />
-                        <Modal
-                            show={this.state.showModal}
-                            header={this.renderModalHeader()}
-                            content={this.renderModalBody()}
-                            footer={this.renderModalFooter()}
-                        />
-                    </div>
+                    {this.props.user.uid ? totalTickets() : signupForm()}
                 </Hero>
                 <HIW />
                 <Timelines />
@@ -410,6 +432,7 @@ class Referral extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     requireVerification: selectSignUpRequireVerification(state),
     i18n: selectCurrentLanguage(state),
+    user: selectUserInfo(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
@@ -418,7 +441,7 @@ const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     });
 
 // tslint:disable-next-line:no-any
-const ReferralScreen = injectIntl(withRouter(connect(mapStateToProps, mapDispatchProps)(Referral) as any));
+const ReferralScreen = injectIntl(connect(mapStateToProps, mapDispatchProps)(Referral) as any);
 
 export {
     ReferralScreen,
