@@ -1,56 +1,38 @@
 import * as React from 'react';
-import {Card, CardContextInterface, ReferralHeader, ReferralHeaderInterface, Summary, TradingDetails} from '../../components/ReferralComission';
-//import './Comps/SCSS/styles.scss';
+import {
+    InjectedIntlProps,
+    injectIntl,
+} from 'react-intl';
+import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
+import { setDocumentTitle } from '../../../helpers';
+import {
+    referralComissionFetch,
+    ReferralComissionSummaryInterface,
+    ReferralComissionTradingInterface,
+    RootState,
+    selectReferralComissionIeo,
+    selectReferralComissionSummary,
+    selectReferralComissionTrading,
+} from '../../../modules';
+import {Card, ReferralHeader, Summary, TradingDetails} from '../../components/ReferralComission';
 
-interface State {
-    ieo: CardContextInterface;
-    summary: ReferralHeaderInterface;
-    trading: CardContextInterface;
+interface DispatchProps {
+    fetchReferralComission: typeof referralComissionFetch;
 }
 
-class ReferralComissionScreen extends React.Component<{}, State> {
+interface ReduxProps {
+    trading: ReferralComissionTradingInterface;
+    ieo: ReferralComissionTradingInterface;
+    summary: ReferralComissionSummaryInterface;
+}
 
-    constructor(props){
-        super(props);
+type Props = DispatchProps & InjectedIntlProps & ReduxProps;
 
-        this.state = {
-            trading: {
-                details: [],
-                legend: [],
-                earned: 0,
-                title: '',
-            },
-            ieo: {
-                details: [],
-                legend: [],
-                earned: 0,
-                title: '',
-            },
-            summary: {
-                title: '',
-                legend: [],
-                btc: 0,
-                usd: 0,
-            },
-        };
-    }
+class ReferralComission extends React.Component<Props> {
 
-    public componentDidMount(){
-        fetch('/json/ReferralComission/transitions.json')
-        .then(async res => res.json())
-        .then(
-            result => {
-                this.setState({
-                    ieo: result['ieo-comission'],
-                    trading: result['trading-comission'],
-                    summary: result.summary,
-                });
-            },
-
-            error => {
-                //console.log(error);
-            },
-        );
+    public componentDidMount() {
+        setDocumentTitle('Referral Comission');
+        this.props.fetchReferralComission();
     }
 
     public render(){
@@ -58,26 +40,26 @@ class ReferralComissionScreen extends React.Component<{}, State> {
         return (
             <div className="pg-referral-comission">
                 <div className="top-holder">
-                    <section className="top">
-                        <ReferralHeader context={this.state.summary} link="#summary">
-                            <Card context={this.state.trading} link="#trading"/>
-                            <Card context={this.state.ieo} link="#ieo"/>
+                    <section id="top">
+                        <ReferralHeader context={this.props.summary} link="#summary">
+                            <Card context={this.props.trading} link="#trading"/>
+                            <Card context={this.props.ieo} link="#ieo"/>
                         </ReferralHeader>
                     </section>
                 </div>
-                <section className="trading">
+                <section id="trading">
                     <div className="container">
-                        <TradingDetails entity="trading" context={this.state.trading} header="Trading commision details"/>
+                        <TradingDetails entity="trading" context={this.props.trading} header="Trading commision details"/>
                     </div>
                 </section>
-                <section className="ieo">
+                <section id="ieo">
                     <div className="container">
-                        <TradingDetails entity="ieo" context={this.state.ieo} header="IEO comission commision details"/>
+                        <TradingDetails entity="ieo" context={this.props.ieo} header="IEO comission commision details"/>
                     </div>
                 </section>
-                <section className="summary">
+                <section id="summary">
                     <div className="container">
-                        <Summary entity="summary" context={this.state.summary} header="Transaction commision details" />
+                        <Summary entity="summary" context={this.props.summary} header="Transaction commision details" />
                     </div>
                 </section>
             </div>
@@ -85,6 +67,14 @@ class ReferralComissionScreen extends React.Component<{}, State> {
     }
 }
 
-export {
-    ReferralComissionScreen,
-};
+const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
+    trading: selectReferralComissionTrading(state),
+    ieo: selectReferralComissionIeo(state),
+    summary: selectReferralComissionSummary(state),
+});
+
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
+    fetchReferralComission: () => dispatch(referralComissionFetch()),
+});
+
+export const ReferralComissionScreen = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ReferralComission));

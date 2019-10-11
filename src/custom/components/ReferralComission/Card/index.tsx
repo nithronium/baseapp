@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export interface CardContextInterface {
+interface CardContextInterface {
     details: [];
     legend: [];
     earned: number;
@@ -36,7 +36,7 @@ class Card extends React.Component<Props>{
     public render(){
 
         let preloader;
-        if (!this.props.context.legend){
+        if (!(this.props.context && this.props.context.legend)){
             preloader = (
                 <div className="preloader"/>
             );

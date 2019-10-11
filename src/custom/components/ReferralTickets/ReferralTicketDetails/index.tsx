@@ -1,133 +1,82 @@
 import * as React from 'react';
+import { ReferralTicketsPayload } from '../../../modules/referralTickets';
 
-interface ReferralTicketInterface {
-    l1_referral: number;
-    count: number;
-    active: string;
-    l2_referrals: number;
-    l2_active: number;
-}
 
 interface Props {
-    context: {
-        legend: ReferralTicketInterface[];
-    };
+    context: ReferralTicketsPayload['referrals'];
 }
 
 interface State {
-    legend: ReferralTicketInterface[];
-    filteredLegend: ReferralTicketInterface[];
+    filter: string;
 }
 
-const tableRow = (legendArray: ReferralTicketInterface[]): React.ReactNode => {
+const tableRow = (legendArray: ReferralTicketsPayload['referrals']): React.ReactNode => {
     return legendArray.map((record, index) => {
         return(
             <tr key={index}>
-                <td><span className="count">{record.count}</span> <span className="explanation">tickets</span></td>
-                <td>{record.l1_referral}</td>
-                <td>{record.active}</td>
-                <td>{record.l2_referrals} <span className="explanation">referrals</span></td>
-                <td>{record.l2_active} <span className="explanation">referrals</span></td>
+                <td><span className="count">{record.tickets}</span> <span className="explanation">tickets</span></td>
+                <td>{record.email}</td>
+                <td>{record.isActive ? 'yes' : 'no'}</td>
+                <td>{record.subreferrals} <span className="explanation">referrals</span></td>
+                <td>{record.activeSubreferrals} <span className="explanation">referrals</span></td>
             </tr>
         );
     });
 };
 
 class ReferralTicketDetails extends React.Component<Props, State>{
-    public unfiltered: ReferralTicketInterface[] = [];
 
     constructor(props){
 
         super(props);
         this.state = {
-            legend: this.props.context && this.props.context.legend,
-            filteredLegend: [],
+           filter: 'all',
         };
 
-        this.loadMore = this.loadMore.bind(this);
+        //this.loadMore = this.loadMore.bind(this);
         this.filterLegend = this.filterLegend.bind(this);
+    }
+
+    public filtered(): ReferralTicketsPayload['referrals'] {
+        const legendArray = this.props.context || [];
+        switch (this.state.filter) {
+            case 'active':
+                return legendArray.filter(record => record.isActive);
+            case 'inactive':
+                return legendArray.filter(record => !record.isActive);
+            case 'all':
+                default:
+                return legendArray;
+        }
     }
 
     public filterLegend(e) {
         const filter = e.target.dataset.filter;
-        let activeArray;
-        let inactiveArray;
-        const legendArray = this.state.legend && this.state.legend.length ? this.state.legend : this.props.context && this.props.context.legend;
-
-        // if filter is not all, preserve copy of original array
-        if (filter !== 'all'){
-            this.unfiltered = this.state.legend;
-        }
-
-        inactiveArray = legendArray.filter(record => {
-            return record.active === 'no';
-        });
-
-        activeArray = legendArray.filter(record => {
-            return record.active === 'yes';
-        });
-
-        switch (filter){
-            case 'all':
-                this.setState({
-                    filteredLegend: [],
-                });
-                break;
-            case 'active':
-                this.setState({
-                    filteredLegend: activeArray,
-                });
-                break;
-            case 'inactive':
-                this.setState({
-                    filteredLegend: inactiveArray,
-                });
-                break;
-            default:
-                this.setState({
-                    filteredLegend: [],
-                });
-                break;
-
-        }
+        this.setState({filter});
     }
 
     public getTotal(column, mode = 'default', condition?) {
 
-        let legendArray = this.state.legend && this.state.legend.length ? this.state.legend : this.props.context && this.props.context.legend;
-
-        if (this.state.filteredLegend.length !== 0) {
-            legendArray = this.state.filteredLegend;
-        }
-
-        if (!legendArray) {
-            return 0;
-        }
+        const legendArray = this.filtered();
 
         let total = 0;
 
         legendArray.map((record, index) => {
-
             const value2add = mode === 'default' ? record[column] : 1;
-
             if (!condition){
                 total += value2add;
                 return true;
             }else{
-
                 if (record[column] === condition){
                     total += value2add;
                 }
             }
-
             return true;
-
         });
-
         return total;
     }
 
-    public loadMore(){
+    /*public loadMore(){
 
         this.setState({
             filteredLegend: [],
@@ -147,23 +96,15 @@ class ReferralTicketDetails extends React.Component<Props, State>{
             },
         );
 
-    }
+    }*/
+
 
     public render(){
+        const filterClassName = dataFilter => {
+            return `referral-filter${dataFilter === this.state.filter ? ' active' : ''}`;
+        };
 
-        let legendArray: ReferralTicketInterface[] = [];
-
-        if (this.props.context && this.props.context.legend) {
-            legendArray = this.props.context.legend;
-        }
-
-        if (this.state.legend && this.state.legend.length) {
-            legendArray = this.state.legend;
-        }
-
-        if (this.state.filteredLegend.length !== 0) {
-            legendArray = this.state.filteredLegend;
-        }
+        const legendArray = this.filtered();
 
         return(
 
@@ -171,9 +112,9 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                 <div className="container">
                     <div className="left"><h2>Referral tickets details</h2></div>
                     <div className="right">
-                        <a href="#!" onClick={this.filterLegend} data-filter="all" className="referral-filter active">all</a> /
-                        <a href="#!" onClick={this.filterLegend} data-filter="active" className="referral-filter">active</a> /
-                        <a href="#!" onClick={this.filterLegend} data-filter="inactive" className="referral-filter">inactive</a>
+                        <a href="#!" onClick={this.filterLegend} data-filter="all" className={filterClassName('all')}>all</a> /
+                        <a href="#!" onClick={this.filterLegend} data-filter="active" className={filterClassName('active')}>active</a> /
+                        <a href="#!" onClick={this.filterLegend} data-filter="inactive" className={filterClassName('inactive')}>inactive</a>
                     </div>
                 </div>
                 <div className="container column">
@@ -191,18 +132,14 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                         {tableRow(legendArray)}
                         </tbody>
                         <tfoot>
+                            {/*<tr><td colSpan={5}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td></tr>*/}
+                            <tr><td style={{paddingBottom: 0}} colSpan={5}><span className="table-summary-header">total</span></td></tr>
                             <tr>
-                                <td colSpan={5}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td>
-                            </tr>
-                            <tr>
-                                <td colSpan={5}><span className="table-summary-header">total</span></td>
-                            </tr>
-                            <tr>
-                                <td><span className="count">{this.getTotal('count')}</span> <span className="explanation">tickets</span></td>
-                                <td>{this.getTotal('l1_referral', 'count')} referreres</td>
-                                <td>yes {this.getTotal('active', 'count', 'yes')} / no {this.getTotal('active', 'count', 'no')} </td>
-                                <td>{this.getTotal('l2_referrals')} <span className="explanation">referrals</span></td>
-                                <td>{this.getTotal('l2_active')} <span className="explanation">referrals</span></td>
+                                <td><span className="count">{this.getTotal('tickets')}</span> <span className="explanation">tickets</span></td>
+                                <td>{this.getTotal('email', 'count')} referreres</td>
+                                <td>yes {this.getTotal('isActive', 'count', true)} / no {this.getTotal('isActive', 'count', false)} </td>
+                                <td>{this.getTotal('subreferrals')} <span className="explanation">referrals</span></td>
+                                <td>{this.getTotal('activeSubreferrals')} <span className="explanation">referrals</span></td>
                             </tr>
                         </tfoot>
                     </table>

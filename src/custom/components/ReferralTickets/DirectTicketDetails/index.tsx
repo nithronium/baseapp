@@ -1,60 +1,34 @@
 import * as React from 'react';
-
+import { ReferralTicketsPayload } from '../../../modules/referralTickets';
 interface DirectTicketInterface {
     count: number;
     action: string;
 }
 
 interface Props {
-    context: {
-        legend: DirectTicketInterface[];
-    };
+    context: ReferralTicketsPayload['user'];
 }
 
-interface State {
-    legend: DirectTicketInterface[];
-}
-
-const tableRow = (legendArray: DirectTicketInterface[]): React.ReactNode => {
-    return legendArray.map((record, index) => {
-        return(
-            <tr key={index}>
-                <td><span className="count">{record.count} </span><span className="explanation">tickets</span></td>
-                <td><span className="count">{record.action}</span></td>
-                <td><span className="count"><button className="button">get more</button></span></td>
-            </tr>
-        );
-    });
-};
-
-class DirectTicketDetails extends React.Component<Props, State>{
-
-    constructor(props){
-
-        super(props);
-        this.state = {
-            legend: this.props.context && this.props.context.legend,
-        };
-
-    }
+class DirectTicketDetails extends React.Component<Props>{
 
     public render(){
-
-        let legendArray: DirectTicketInterface[] = [];
-
-        if (this.props.context && this.props.context.legend) {
-            legendArray = this.props.context.legend;
-        }
-
         return(
-
             <div className="direct-ticket-details">
                 <div className="container">
                     <div className="container-wrapper">
                         <h2>Direct ticket details</h2>
                         <table>
                             <tbody>
-                            {tableRow(legendArray)}
+                            <tr>
+                                <td><span className="count">{this.props.context.usdTickets} </span><span className="explanation">tickets</span></td>
+                                <td><span className="count">{`Balance ${this.props.context.usdBalance} USD`}</span></td>
+                                <td><span className="count"><button className="button">get more</button></span></td>
+                            </tr>
+                            <tr>
+                                <td><span className="count">{this.props.context.emrxTickets} </span><span className="explanation">tickets</span></td>
+                                <td><span className="count">{`EMRX tokens worth ${this.props.context.emrxBalance} USD`}</span></td>
+                                <td><span className="count"><button className="button">get more</button></span></td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>

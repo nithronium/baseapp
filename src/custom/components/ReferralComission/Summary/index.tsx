@@ -8,40 +8,14 @@ interface Props {
     header: string;
 }
 
-interface State {
-    filteredLegend: null | [];
-    legend: [];
-}
-
-class Summary extends React.Component<Props, State>{
-
-    constructor(props){
-
-        super(props);
-        this.state = {
-            legend: this.props.context.legend,
-            filteredLegend: null,
-        };
-
-        this.loadMore = this.loadMore.bind(this);
-
-    }
+class Summary extends React.Component<Props>{
 
     public getTotal(column, mode = 'default', condition?){
 
-        let legendArray = this.state.legend.length ? this.state.legend : this.props.context.legend;
-
-        if (this.state.filteredLegend !== null) {
-            legendArray = this.state.filteredLegend;
-        }
-
-        if (!legendArray) {
-            return 0;
-        }
-
+        const legendArray = this.props.context && this.props.context.legend || [];
         let total = 0;
 
-        legendArray.map((record, index) => {
+        legendArray.map(record => {
 
             const value2add = mode === 'default' ? record[column] : 1;
 
@@ -54,9 +28,7 @@ class Summary extends React.Component<Props, State>{
                     total += value2add;
                 }
             }
-
             return true;
-
         });
 
         return total;
@@ -76,7 +48,7 @@ class Summary extends React.Component<Props, State>{
             );
     });}
 
-    public loadMore() {
+    /*public loadMore() {
 
         this.setState({
             filteredLegend: null,
@@ -98,22 +70,14 @@ class Summary extends React.Component<Props, State>{
             },
         );
 
-    }
+    }*/
 
     public render() {
 
         let legendArray = [];
 
-        if (this.props.context.legend) {
+        if (this.props.context && this.props.context.legend) {
             legendArray = this.props.context.legend;
-        }
-
-        if (this.state.legend.length) {
-            legendArray = this.state.legend;
-        }
-
-        if (this.state.filteredLegend !== null) {
-            legendArray = this.state.filteredLegend;
         }
 
         return(

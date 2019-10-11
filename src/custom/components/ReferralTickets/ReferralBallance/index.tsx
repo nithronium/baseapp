@@ -1,10 +1,18 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { RootState, selectUserInfo, User } from '../../../../modules';
 
-interface Props {
+interface ReduxProps {
+    user: User;
+}
+
+interface PassedProps {
     totalTickets: number;
 }
 
-class ReferralBallance extends React.Component<Props>{
+type Props = ReduxProps & PassedProps;
+
+class ReferralBallanceContainer extends React.Component<Props>{
 
     public render(){
 
@@ -21,7 +29,7 @@ class ReferralBallance extends React.Component<Props>{
                     <div className="referral-summary">
                         <div className="total-container">Total tickets: {this.props.totalTickets}</div>
                         <div className="referral-container">
-                            Your referral code: 234823428574378234
+                            Your referral code: {this.props.user.uid}
                             <a href="#!">&nbsp;</a>
                         </div>
                     </div>
@@ -31,4 +39,8 @@ class ReferralBallance extends React.Component<Props>{
     }
 }
 
-export {ReferralBallance};
+const mapStateToProps = (state: RootState): ReduxProps => ({
+    user: selectUserInfo(state),
+});
+
+export const ReferralBallance = connect(mapStateToProps)(ReferralBallanceContainer);

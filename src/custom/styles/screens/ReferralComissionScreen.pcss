@@ -517,7 +517,7 @@
 
                     td{
             
-                        padding: 20px 8px;
+                        padding: 0 8px 20px;
             
                         &:last-of-type{
             
@@ -526,6 +526,18 @@
                     }
                 }
             }
+        }
+    }
+
+    #ieo {
+        h2 {
+            border-left-color: #FFD541;
+        }
+    }
+
+    #summary {
+        h2 {
+            border-left-color: #F0F0F0;
         }
     }
 
@@ -541,7 +553,7 @@
             display: none;
         }
 
-        .trading, .ieo, .summary{
+        #trading, #ieo, #summary{
             & > .container{
                 margin: 0;
                 max-width: calc(100vw - 20px);

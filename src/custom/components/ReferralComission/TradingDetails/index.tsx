@@ -9,7 +9,6 @@ interface Props {
 }
 
 interface State {
-    filteredLegend: null | [];
     legend: [];
 }
 
@@ -19,11 +18,10 @@ class TradingDetails extends React.Component<Props, State>{
 
         super(props);
         this.state = {
-            legend: this.props.context.legend,
-            filteredLegend: null,
+            legend: this.props.context && this.props.context.legend,
         };
 
-        this.loadMore = this.loadMore.bind(this);
+        //this.loadMore = this.loadMore.bind(this);
 
     }
 
@@ -51,16 +49,12 @@ class TradingDetails extends React.Component<Props, State>{
 
         let legendArray = [];
 
-        if (this.props.context.legend) {
-            legendArray = this.props.context.legend;
+        if (this.props.context && this.props.context.legend) {
+            legendArray = this.props.context && this.props.context.legend;
         }
 
-        if (this.state.legend.length) {
+        if (this.state.legend && this.state.legend.length) {
             legendArray = this.state.legend;
-        }
-
-        if (this.state.filteredLegend !== null) {
-            legendArray = this.state.filteredLegend;
         }
 
         return(
@@ -83,10 +77,7 @@ class TradingDetails extends React.Component<Props, State>{
                         </thead>
                         {this.tbodies(legendArray)}
                         <tfoot>
-                            <tr>
-                                <td colSpan={3}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td>
-                                <td colSpan={3}><a className="csv-trigger round-button" href="#!">export CSV</a></td>
-                            </tr>
+                            {/*<tr><td colSpan={3}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td><td colSpan={3}><a className="csv-trigger round-button" href="#!">export CSV</a></td></tr>*/}
                             <tr>
                                 <td><span className="table-summary-header">total</span></td>
                                 <td className="footer-header"># of L1 trades</td>
@@ -112,40 +103,30 @@ class TradingDetails extends React.Component<Props, State>{
 
     private getTotal(column, mode = 'default', condition?){
 
-        let legendArray = this.state.legend.length ? this.state.legend : this.props.context.legend;
-
-        if (this.state.filteredLegend !== null) {
-            legendArray = this.state.filteredLegend;
-        }
-
-        if (!legendArray) {
-            return 0;
-        }
+        const legendArray = //this.state.legend && this.state.legend.length ? this.state.legend :
+            this.props.context && this.props.context.legend;
 
         let total = 0;
 
-        legendArray.map((record, index) => {
+        if (!legendArray) {
+            return total;
+        }
 
+        legendArray.map(record => {
             const value2add = mode === 'default' ? record[column] : 1;
-
             if (!condition){
                 total += value2add;
-                return true;
             }else{
-
                 if (record[column] === condition){
                     total += value2add;
                 }
             }
-
-            return true;
-
         });
 
         return total;
     }
 
-    private loadMore(){
+    /*private loadMore(){
 
         this.setState({
             filteredLegend: null,
@@ -167,7 +148,7 @@ class TradingDetails extends React.Component<Props, State>{
             },
         );
 
-    }
+    }*/
 }
 
 export { TradingDetails };
