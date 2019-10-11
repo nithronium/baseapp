@@ -52,6 +52,9 @@ class Hero extends React.Component<Props>{
                                 <a href="#!" className="hero-button">Get a code</a>
                             </div>
                         </div>
+                        <div className="aside-block">
+                            {this.props.children}
+                        </div>
                     </div>
                         <div className="prizes-holder">
                             {this.prizes(this.props.prizes)}

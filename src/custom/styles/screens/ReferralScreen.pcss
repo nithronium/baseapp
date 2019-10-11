@@ -7,20 +7,63 @@
 
     .pg-referral-screen__container {
         background: var(--transparent);
-        margin-top: calc(var(--gap) * 3.33);
-        width: calc(var(--gap) * 70.66);
+        //margin-top: calc(var(--gap) * 3.33);
+        //width: calc(var(--gap) * 70.66);
+        width: 330px;
+    }
+    .cr-logo {
+        display: none;
     }
     .cr-sign-up-form {
-        background: white;
-        .cr-sign-up-form__option:first-child {
+        background: var(--transparent);
+        color: white;
+        &__button-wrapper {
+            position: relative;
+        }
+        &__button {
+            color: black;
+            background: var(--referral-gold) !important;
+        }
+        &__checkbox .cr-checkbox__checkitem:after {
+            border-color: white;
+        }
+        &__group {
+            border: 2px solid #475354;
+            border-radius: 5px;
+        }
+        &__group--focused {
+            .cr-sign-up-form__label {
+                color: var(--accent);
+            }
+            input {
+                border: 2px solid white !important;
+            }
+        }
+        &__input input {
+            color: white; 
+        }
+        &__option:first-child {
             display: none;
         }
-        .cr-sign-up-form__option {
+        &__option {
             width: 100%;
             background: black;
+            text-align: left;
         }
-        .cr-sign-up-form__option.selected {
-            color: var(--referral-gold);
+        &__option .__selected {
+            border-bottom: none;
+            text-align: left;
+        }
+        &__option_inner{
+            text-align: left;
+        }
+        
+        &__label {
+            background: var(--base-bright);
+            color: var(--text-muted);
+            font-size: calc(var(--gap) * 2);
+            top: calc(var(--gap) * -1.33);
+            position: absolute;
         }
     }
 
@@ -93,18 +136,23 @@
 
     #top{
         display: flex;
-        height: calc(100vh - 58px);
-        background: #000 url(./custom/assets/images/referral/hero-bgr.jpg) no-repeat;
-        background-position: top -160px center;
-        background-size: cover;
+        min-height: calc(100vh - 58px);
+        background: #000 url(./custom/assets/images/referral/lamp2.svg) no-repeat;
+        background-position: bottom 180px right 20%;
+        background-size: 45%;
         color: #fff;
         
         & .container{
             flex-direction: column;
         }
-        
+
+        & .hero-content{
+            display: flex;
+        }
+        & .aside-block{
+            width: 330px;
+        }
         & .main-block{
-            
             width: 780px;
             
             & .hash{
@@ -249,6 +297,11 @@
                 }
             }
         }
+        @media(max-width: 1140px) {
+            & .hero-content{
+                flex-direction: column;
+            }
+        }
 
         @media (max-width: 800px){
             
@@ -380,6 +433,7 @@
 
             & .steps{
                 flex-direction: column;
+                align-items: center;
 
                 & .step{
                     margin: 0 auto !important;
@@ -405,7 +459,7 @@
             display: flex;
             flex-direction: column;
             background: radial-gradient(circle at center center, #333 0%, black 36%);
-            
+              
             & .top-prize{
                 display: flex;
                 padding: 20px;
@@ -488,12 +542,12 @@
                 flex-grow: 1;
             }
         }
-        
+
         & #regular-prizes{
             width: 720px;
             flex-direction: column;
             min-height: 560px;
-            background: url(./custom/assets/images/referral/chest.png) bottom left no-repeat;
+            background: url(./custom/assets/images/referral/chest2.svg) bottom left no-repeat;
             background-size: 70% auto;
             
             & .prizes-holder{
