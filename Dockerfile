@@ -1,4 +1,5 @@
 FROM node:10.11 AS builder
+
 WORKDIR /home/node
 ARG BUILD_EXPIRE
 ARG BUILD_DOMAIN
