@@ -5,6 +5,7 @@ export interface Config {
         applogicUrl: string;
         rangerUrl: string;
         tenkoUrl: string;
+        nodelogicUrl: string;
     };
     minutesUntilAutoLogout?: string;
     rangerReconnectPeriod?: string;
