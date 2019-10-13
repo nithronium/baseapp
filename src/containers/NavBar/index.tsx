@@ -4,7 +4,7 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { Link, RouteProps, withRouter } from 'react-router-dom';
-import { LogoutIcon } from '../../assets/images/LogoutIcon';
+// import { LogoutIcon } from '../../assets/images/LogoutIcon';
 import { AvatarIcon, CloseIcon, OpenIcon } from '../../assets/images/NavBarIcons';
 import { colors, pgRoutes } from '../../constants';
 import {
@@ -161,21 +161,39 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
 
     private shouldUnderline = (address: string, url: string): boolean =>
         (url === '/trading/' && address.includes('/trading')) || address === url;
-
+    // tslint:disable
     private getProfile = () => {
-        const { colorTheme, user } = this.props;
+        const { /*colorTheme,*/ user } = this.props;
 
         return (
             <div className="pg-navbar__header-profile">
+                <span>{user.email}</span>
                 <Link className="pg-navbar__admin-logout" to="/profile" onClick={this.handleRouteChange('/profile')}>
                     <FormattedMessage id={'page.header.navbar.profile'} />
                 </Link>
-                <span>{user.email}</span>
-                <LogoutIcon
+                <Link
+                    className="pg-navbar__admin-logout"
+                    to="/referral-tickets"
+                    onClick={this.handleRouteChange('/referral-tickets')}
+                >
+                    <FormattedMessage id={'page.header.navbar.reftickets'} />
+                </Link>
+                <Link
+                    className="pg-navbar__admin-logout"
+                    to="/referral-tickets"
+                    onClick={this.handleRouteChange('/referral-comission')}
+                >
+                    <FormattedMessage id={'page.header.navbar.refcomission'} />
+                </Link>
+
+                {/* <LogoutIcon
                     onClick={() => this.handleLogOut()}
                     className="pg-navbar__header-profile-logout"
                     fillColor={colorTheme === 'light' ? colors.light.navbar.logout : colors.basic.navbar.logout}
-                />
+                />  */}
+                <a className="pg-navbar__admin-logout" onClick={this.handleLogOut}>
+                    <FormattedMessage id={'page.header.navbar.logout'} />
+                </a>
             </div>
         );
     };
@@ -266,14 +284,14 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     </Link>
                 </div>
                 <div className="dropdown-menu-item-user">
-                <Link
-                    className="pg-navbar__admin-logout"
-                    to="/referral-tickets"
-                    onClick={this.handleRouteChange('/referral-comission')}
-                >
-                    <FormattedMessage id={'page.header.navbar.refcomission'} />
-                </Link>
-            </div>
+                    <Link
+                        className="pg-navbar__admin-logout"
+                        to="/referral-tickets"
+                        onClick={this.handleRouteChange('/referral-comission')}
+                    >
+                        <FormattedMessage id={'page.header.navbar.refcomission'} />
+                    </Link>
+                </div>
                 <div className="dropdown-menu-item-user">
                     <a className="pg-navbar__admin-logout" onClick={this.handleLogOut}>
                         <FormattedMessage id={'page.header.navbar.logout'} />
@@ -297,7 +315,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             },
             () => {
                 this.props.logout();
-            },
+            }
         );
     };
 
@@ -312,7 +330,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 } else {
                     document.removeEventListener('click', this.closeMenu);
                 }
-            },
+            }
         );
     };
 
@@ -323,7 +341,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             },
             () => {
                 document.removeEventListener('click', this.closeMenu);
-            },
+            }
         );
     };
 
@@ -338,7 +356,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 } else {
                     document.removeEventListener('click', this.closeLanguageMenu);
                 }
-            },
+            }
         );
     };
 
@@ -349,7 +367,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             },
             () => {
                 document.removeEventListener('click', this.closeLanguageMenu);
-            },
+            }
         );
     };
 
@@ -378,7 +396,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
 // tslint:disable no-any
 const NavBar = withRouter(connect(
     mapStateToProps,
-    mapDispatchToProps,
+    mapDispatchToProps
 )(NavBarComponent) as any) as any;
 
 export { NavBar };
