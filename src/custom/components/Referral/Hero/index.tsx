@@ -6,20 +6,19 @@ interface Props {
     }>;
 }
 
-class Hero extends React.Component<Props>{
-
+class Hero extends React.Component<Props> {
     public prizes(p) {
         return p.map((prize, index) => {
-            return(
+            return (
                 <div className="prize" key={index}>
                     {prize.name}
                 </div>
             );
         });
     }
-
-    public render(){
-        return(
+    // tslint:disable
+    public render() {
+        return (
             <section id="top">
                 <div className="container">
                     <div className="hero-content">
@@ -31,9 +30,7 @@ class Hero extends React.Component<Props>{
                             </p>
                             <div className="plus-block">
                                 <div className="left">
-                                    <div className="currency">
-                                        in Bitcoin
-                                    </div>
+                                    <div className="currency">in Bitcoin</div>
                                     <div className="value">
                                         <span className="prefix">USD</span> $100,000
                                     </div>
@@ -43,26 +40,24 @@ class Hero extends React.Component<Props>{
                                     <div className="value">
                                         <span className="prefix">USD</span> $100,000
                                     </div>
-                                    <div className="currency">
-                                        in EMRX
-                                    </div>
+                                    <div className="currency">in EMRX</div>
                                 </div>
                             </div>
                             <div className="button-holder">
-                                <a href="#!" className="hero-button">Get a code</a>
+                                <a href="#referral-code" className="hero-button">
+                                    Get a code
+                                </a>
                             </div>
                         </div>
-                        <div className="aside-block">
-                            {this.props.children}
-                        </div>
+                        <div className="aside-block">{this.props.children}</div>
                     </div>
-                        <div className="prizes-holder">
+                    {/* <div className="prizes-holder">
                             {this.prizes(this.props.prizes)}
-                        </div>
+                        </div> */}
                 </div>
             </section>
         );
     }
 }
 
-export {Hero};
+export { Hero };
