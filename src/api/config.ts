@@ -38,7 +38,7 @@ Cryptobase.config.storage = Cryptobase.config.storage || {};
 Cryptobase.config.captcha = Cryptobase.config.captcha || defaultConfig.captcha;
 
 export const authUrl = () => Cryptobase.config.api.authUrl;
-export const nodelogicUrl = () => 'https://stage.emirex.com/api/v2/nodelogic';
+export const nodelogicUrl = () => 'https://emirex.com/api/v2/nodelogic';
 export const tradeUrl = () => Cryptobase.config.api.tradeUrl;
 export const applogicUrl = () => Cryptobase.config.api.applogicUrl;
 export const tenkoUrl = () => Cryptobase.config.api.tenkoUrl;
