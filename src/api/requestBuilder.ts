@@ -1,23 +1,7 @@
-import axios, {
-    AxiosError,
-    AxiosPromise,
-    AxiosRequestConfig,
-    AxiosResponse,
-} from 'axios';
-import {
-    applogicUrl,
-    authUrl,
-    tenkoUrl,
-    tradeUrl,
-    withCredentials,
-} from './config';
+import axios, { AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
+import { applogicUrl, authUrl, nodelogicUrl, tenkoUrl, tradeUrl, withCredentials } from './config';
 
-export type HTTPMethod =
-    'get'
-    | 'post'
-    | 'delete'
-    | 'put'
-    | 'patch';
+export type HTTPMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
 
 export interface JsonBody {
     // tslint:disable-next-line no-any
@@ -25,7 +9,7 @@ export interface JsonBody {
 }
 
 export interface RequestOptions {
-    apiVersion: 'applogic' | 'peatio' | 'barong' | 'tenko';
+    apiVersion: 'applogic' | 'nodelogic' | 'peatio' | 'barong' | 'tenko';
     withHeaders?: boolean;
 }
 
@@ -46,6 +30,7 @@ const getAPI = () => ({
     applogic: `${applogicUrl()}`,
     peatio: `${tradeUrl()}`,
     tenko: `${tenkoUrl()}`,
+    nodelogic: `${nodelogicUrl()}`,
 });
 
 const buildRequest = (request: Request, configData: RequestOptions) => {
@@ -53,9 +38,7 @@ const buildRequest = (request: Request, configData: RequestOptions) => {
     const { apiVersion } = configData;
     const api = getAPI();
 
-    const contentType = body instanceof FormData
-        ? 'multipart/form-data'
-        : 'application/json';
+    const contentType = body instanceof FormData ? 'multipart/form-data' : 'application/json';
 
     const headers = {
         'content-type': contentType,
@@ -84,7 +67,7 @@ export const defaultResponse: Partial<AxiosError['response']> = {
 
 export const formatError = (responseError: AxiosError) => {
     const response = responseError.response || defaultResponse;
-    const errors = response.data && (response.data.errors || [response.data.error]) || [];
+    const errors = (response.data && (response.data.errors || [response.data.error])) || [];
     return {
         code: response.status,
         message: errors,

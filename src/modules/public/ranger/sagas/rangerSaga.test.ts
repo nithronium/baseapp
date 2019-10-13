@@ -49,6 +49,7 @@ describe('Ranger module', () => {
                 applogicUrl: '',
                 rangerUrl: `ws://localhost:${echoServerPort}`,
                 tenkoUrl: '',
+                nodelogicUrl: '',
             },
             rangerReconnectPeriod: '0.1',
         };
@@ -481,7 +482,7 @@ describe('Ranger module', () => {
                                 });
                                 return;
 
-                           case 2:
+                            case 2:
                                 expect(lastAction).toEqual({ type: RANGER_CONNECT_DATA });
                                 store.dispatch(rangerDirectMessage(mockOrderBookUpdate));
                                 return;
@@ -602,17 +603,16 @@ describe('Ranger module', () => {
                             case 5:
                                 expect(lastAction).toEqual({
                                     type: 'ordersHistory/RANGER_DATA',
-                                    payload:
-                                        {
-                                            id: 758,
-                                            at: 1546605232,
-                                            market: 'eurbtc',
-                                            kind: 'bid',
-                                            price: '1.17',
-                                            state: 'wait',
-                                            remaining_volume: '0.1',
-                                            origin_volume: '0.1',
-                                        },
+                                    payload: {
+                                        id: 758,
+                                        at: 1546605232,
+                                        market: 'eurbtc',
+                                        kind: 'bid',
+                                        price: '1.17',
+                                        state: 'wait',
+                                        remaining_volume: '0.1',
+                                        origin_volume: '0.1',
+                                    },
                                 });
                                 return;
                             default:
@@ -667,17 +667,16 @@ describe('Ranger module', () => {
                             case 5:
                                 expect(lastAction).toEqual({
                                     type: 'ordersHistory/RANGER_DATA',
-                                    payload:
-                                        {
-                                            id: 758,
-                                            at: 1546605232,
-                                            market: 'eurbtc',
-                                            kind: 'bid',
-                                            price: '1.17',
-                                            state: 'done',
-                                            remaining_volume: '0.0',
-                                            origin_volume: '0.1',
-                                        },
+                                    payload: {
+                                        id: 758,
+                                        at: 1546605232,
+                                        market: 'eurbtc',
+                                        kind: 'bid',
+                                        price: '1.17',
+                                        state: 'done',
+                                        remaining_volume: '0.0',
+                                        origin_volume: '0.1',
+                                    },
                                 });
                                 return;
                             default:

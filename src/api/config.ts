@@ -8,6 +8,7 @@ export const defaultConfig: Config = {
         applogicUrl: '',
         rangerUrl: '',
         tenkoUrl: '',
+        nodelogicUrl: '',
     },
     minutesUntilAutoLogout: '5',
     rangerReconnectPeriod: '1',
@@ -37,6 +38,7 @@ Cryptobase.config.storage = Cryptobase.config.storage || {};
 Cryptobase.config.captcha = Cryptobase.config.captcha || defaultConfig.captcha;
 
 export const authUrl = () => Cryptobase.config.api.authUrl;
+export const nodelogicUrl = () => 'https://stage.emirex.com/api/v2/nodelogic';
 export const tradeUrl = () => Cryptobase.config.api.tradeUrl;
 export const applogicUrl = () => Cryptobase.config.api.applogicUrl;
 export const tenkoUrl = () => Cryptobase.config.api.tenkoUrl;
@@ -47,4 +49,5 @@ export const defaultStorageLimit = () => Cryptobase.config.storage.defaultStorag
 export const siteKey = () => Cryptobase.config.captcha.siteKey;
 export const captchaType = () => Cryptobase.config.captcha.captchaType;
 export const msAlertDisplayTime = (): string => Cryptobase.config.msAlertDisplayTime || '5000';
-export const rangerReconnectPeriod = (): number => Cryptobase.config.rangerReconnectPeriod ? Number(Cryptobase.config.rangerReconnectPeriod) : 1;
+export const rangerReconnectPeriod = (): number =>
+    Cryptobase.config.rangerReconnectPeriod ? Number(Cryptobase.config.rangerReconnectPeriod) : 1;
