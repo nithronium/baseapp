@@ -6,7 +6,7 @@ import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { minutesUntilAutoLogout } from '../../api';
 import {
-    ReferralComissionScreen,
+    ReferralCommissionScreen,
     ReferralScreen,
     ReferralTicketsScreen,
     TradingScreen,
@@ -191,7 +191,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/wallets" component={WalletsScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/security/2fa" component={ProfileTwoFactorAuthScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/referral-tickets" component={ReferralTicketsScreen} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/referral-comission" component={ReferralComissionScreen} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/referral-commission" component={ReferralCommissionScreen} />
                     <Route path="**"><Redirect to="/trading/" /></Route>
                 </Switch>
             </div>

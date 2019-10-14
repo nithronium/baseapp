@@ -32,10 +32,10 @@ class TradingDetails extends React.Component<Props, State>{
                 <tr>
                     <td><div className="mobile-card-header">E-mail</div><div className="mobile-value">{record.mail}</div></td>
                     <td><div className="mobile-card-header"># of L1</div><div className="mobile-value">{record.l1_trades}</div></td>
-                    <td><div className="mobile-card-header">Commission L1 (BTC)</div><div className="mobile-value">{record.comission_l1}</div></td>
+                    <td><div className="mobile-card-header">Commission L1 (BTC)</div><div className="mobile-value">{record.commission_l1}</div></td>
                     <td><div className="mobile-card-header"># of L2</div><div className="mobile-value">{record.referrals} <span className="explanation">referrals</span></div></td>
                     <td><div className="mobile-card-header"># of L2 trades</div><div className="mobile-value">{record.trades} <span className="explanation">trades</span></div></td>
-                    <td><div className="mobile-card-header"/><div className="mobile-value">{record.comission_l2} <span className="explanation">BTC</span></div></td>
+                    <td><div className="mobile-card-header"/><div className="mobile-value">{record.commission_l2} <span className="explanation">BTC</span></div></td>
                 </tr>
                 <tr>
                     <td colSpan={6}>total amount: {record.total_amount} BTC</td>
@@ -59,7 +59,7 @@ class TradingDetails extends React.Component<Props, State>{
 
         return(
 
-            <div className="trading-comission-details">
+            <div className="trading-commission-details">
                 <div className="container">
                     <h2>{this.props.header}</h2>
                 </div>
@@ -89,10 +89,10 @@ class TradingDetails extends React.Component<Props, State>{
                             <tr>
                                 <td>{this.getTotal('total_amount')} BTC</td>
                                 <td>{this.getTotal('l1_trades')}</td>
-                                <td>{this.getTotal('comission_l1')}</td>
+                                <td>{this.getTotal('commission_l1')}</td>
                                 <td>{this.getTotal('referrals')}</td>
                                 <td>{this.getTotal('trades')}</td>
-                                <td>{this.getTotal('comission_l2')} BTC</td>
+                                <td>{this.getTotal('commission_l2')} BTC</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -132,14 +132,14 @@ class TradingDetails extends React.Component<Props, State>{
             filteredLegend: null,
         });
 
-        const url = `/json/ReferralComission/${this.props.entity}_more.json`;
+        const url = `/json/ReferralCommission/${this.props.entity}_more.json`;
 
         fetch(url)
         .then(async res => res.json())
         .then(
             result => {
                 this.setState({
-                    legend: result[`${this.props.entity}-comission`].legend,
+                    legend: result[`${this.props.entity}-commission`].legend,
                 });
             },
 

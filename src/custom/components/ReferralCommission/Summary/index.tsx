@@ -54,7 +54,7 @@ class Summary extends React.Component<Props>{
             filteredLegend: null,
         });
 
-        const url = `/json/ReferralComission/${this.props.entity}_more.json`;
+        const url = `/json/ReferralCommission/${this.props.entity}_more.json`;
 
         fetch(url)
         .then(async res => res.json())
@@ -82,7 +82,7 @@ class Summary extends React.Component<Props>{
 
         return(
 
-            <div className="trading-comission-details">
+            <div className="trading-commission-details">
                 <div className="container">
                     <h2>{this.props.header}</h2>
                 </div>

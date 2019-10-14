@@ -1,31 +1,31 @@
-import { ReferralComissionActions } from './actions';
-import { REFERRAL_COMISSION_DATA, REFERRAL_COMISSION_ERROR, REFERRAL_COMISSION_FETCH } from './constants';
+import { ReferralCommissionActions } from './actions';
+import { REFERRAL_COMMISSION_DATA, REFERRAL_COMMISSION_ERROR, REFERRAL_COMMISSION_FETCH } from './constants';
 
 
-export interface ReferralComissionTradingInterface {
+export interface ReferralCommissionTradingInterface {
     details: [];
     legend: [];
     earned: number;
     title: string;
 }
 
-export interface ReferralComissionSummaryInterface {
+export interface ReferralCommissionSummaryInterface {
     title: string;
     legend: [];
     btc: number;
     usd: number;
 }
 
-export interface ReferralComissionState {
+export interface ReferralCommissionState {
     loading: boolean;
     data: {
-        trading: ReferralComissionTradingInterface;
-        ieo: ReferralComissionTradingInterface;
-        summary: ReferralComissionSummaryInterface;
+        trading: ReferralCommissionTradingInterface;
+        ieo: ReferralCommissionTradingInterface;
+        summary: ReferralCommissionSummaryInterface;
     };
 }
 
-const initialState: ReferralComissionState = {
+const initialState: ReferralCommissionState = {
     loading: false,
     data: {
         trading: {
@@ -49,20 +49,20 @@ const initialState: ReferralComissionState = {
     },
 };
 
-export const referralComissionReducer = (state = initialState, action: ReferralComissionActions) => {
+export const referralCommissionReducer = (state = initialState, action: ReferralCommissionActions) => {
     switch (action.type) {
-        case REFERRAL_COMISSION_DATA:
+        case REFERRAL_COMMISSION_DATA:
             return {
                 ...state,
                 loading: false,
                 data: action.payload,
             };
-        case REFERRAL_COMISSION_ERROR:
+        case REFERRAL_COMMISSION_ERROR:
             return {
                 ...state,
                 loading: false,
             };
-        case REFERRAL_COMISSION_FETCH:
+        case REFERRAL_COMMISSION_FETCH:
             return {
                 ...state,
                 loading: true,
