@@ -2,14 +2,14 @@
 import { /*call,*/ put } from 'redux-saga/effects';
 //import { API, RequestOptions } from '../../../../api';
 import {
-    referralComissionData,
-    referralComissionError,
-    ReferralComissionFetch,
+    referralCommissionData,
+    referralCommissionError,
+    ReferralCommissionFetch,
 } from '../actions';
 
-const comissionData = {
-    'trading-comission': {
-        title: 'Trading comission',
+const commissionData = {
+    'trading-commission': {
+        title: 'Trading commission',
         earned: 2003909.8970953,
         details: [
             {
@@ -23,8 +23,8 @@ const comissionData = {
             {
                 mail: 'erfxxx.@gmail.com',
                 l1_trades: 20,
-                comission_l1: 1003909.8970953,
-                comission_l2: 1003909.8970953,
+                commission_l1: 1003909.8970953,
+                commission_l2: 1003909.8970953,
                 referrals: 12,
                 trades: 16,
                 total_amount: 2003909.8970953,
@@ -32,8 +32,8 @@ const comissionData = {
             {
                 mail: 'erfxxx.@gmail.com',
                 l1_trades: 16,
-                comission_l1: 1003909.8970953,
-                comission_l2: 1003909.8970953,
+                commission_l1: 1003909.8970953,
+                commission_l2: 1003909.8970953,
                 referrals: 12,
                 trades: 16,
                 total_amount: 2003909.8970953,
@@ -41,8 +41,8 @@ const comissionData = {
             {
                 mail: 'erfxxx.@gmail.com',
                 l1_trades: 16,
-                comission_l1: 1003909.8970953,
-                comission_l2: 1003909.8970953,
+                commission_l1: 1003909.8970953,
+                commission_l2: 1003909.8970953,
                 referrals: 12,
                 trades: 16,
                 total_amount: 2003909.8970953,
@@ -50,8 +50,8 @@ const comissionData = {
 
         ],
     },
-    'ieo-comission': {
-        title: 'IEO comission',
+    'ieo-commission': {
+        title: 'IEO commission',
         earned: 2003909.8970953,
         details: [
             {
@@ -65,8 +65,8 @@ const comissionData = {
             {
                 mail: 'erfxxx.@gmail.com',
                 l1_trades: 16,
-                comission_l1: 1003909.8970953,
-                comission_l2: 1003909.8970953,
+                commission_l1: 1003909.8970953,
+                commission_l2: 1003909.8970953,
                 referrals: 12,
                 trades: 16,
                 total_amount: 2003909.8970953,
@@ -74,8 +74,8 @@ const comissionData = {
             {
                 mail: 'erfxxx.@gmail.com',
                 l1_trades: 16,
-                comission_l1: 1003909.8970953,
-                comission_l2: 1003909.8970953,
+                commission_l1: 1003909.8970953,
+                commission_l2: 1003909.8970953,
                 referrals: 12,
                 trades: 16,
                 total_amount: 2003909.8970953,
@@ -83,8 +83,8 @@ const comissionData = {
             {
                 mail: 'erfxxx.@gmail.com',
                 l1_trades: 16,
-                comission_l1: 1003909.8970953,
-                comission_l2: 1003909.8970953,
+                commission_l1: 1003909.8970953,
+                commission_l2: 1003909.8970953,
                 referrals: 12,
                 trades: 16,
                 total_amount: 2003909.8970953,
@@ -93,7 +93,7 @@ const comissionData = {
         ],
     },
     summary: {
-        title: 'Total comission',
+        title: 'Total commission',
         btc: 4007819.794191,
         usd: 480.938375,
         legend: [
@@ -125,23 +125,23 @@ const comissionData = {
     },
 };
 
-/*const referralComissionOptions: RequestOptions = {
+/*const referralCommissionOptions: RequestOptions = {
     apiVersion: 'applogic',
 };*/
 
-export function* referralComissionFetchSaga(action: ReferralComissionFetch) {
+export function* referralCommissionFetchSaga(action: ReferralCommissionFetch) {
     try {
-        // const referrals = yield call(API.get(referralComissionOptions), `/tickets`);
+        // const referrals = yield call(API.get(referralCommissionOptions), `/tickets`);
 
         const referrals = yield (data => {
                 return {
-                    trading: data['trading-comission'],
-                    ieo: data['ieo-comission'],
+                    trading: data['trading-commission'],
+                    ieo: data['ieo-commission'],
                     summary: data.summary,
                 };
-            })(comissionData);
-        yield put(referralComissionData(referrals));
+            })(commissionData);
+        yield put(referralCommissionData(referrals));
     } catch (error) {
-        yield put(referralComissionError(error));
+        yield put(referralCommissionError(error));
     }
 }
