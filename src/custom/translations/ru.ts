@@ -10,7 +10,7 @@ export const ru: LangType = {
 
     'page.header.navbar.profile': 'Профиль',
     'page.header.navbar.reftickets': 'Реферальные тикеты',
-    'page.header.navbar.refcomission': 'Реферальная комиссия',
+    'page.header.navbar.refcommission': 'Реферальная комиссия',
     'page.header.navbar.logout': 'Выйти',
 
     'page.body.trade.header.orderHistory': 'Order History',

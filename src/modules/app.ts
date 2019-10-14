@@ -31,7 +31,7 @@ import { userActivityReducer  } from './user/userActivity';
 import { walletsReducer  } from './user/wallets';
 import { withdrawLimitReducer  } from './user/withdrawLimit';
 
-import { referralComissionReducer } from '../custom/modules/referralComission';
+import { referralCommissionReducer } from '../custom/modules/referralCommission';
 import { referralTicketsReducer } from '../custom/modules/referralTickets';
 
 export const publicReducer = combineReducers({
@@ -69,5 +69,5 @@ export const userReducer = combineReducers({
     withdrawLimit: withdrawLimitReducer,
     guard: guardReducer,
     referralTickets: referralTicketsReducer,
-    referralComission: referralComissionReducer,
+    referralCommission: referralCommissionReducer,
 });
