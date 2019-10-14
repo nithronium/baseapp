@@ -10,117 +10,37 @@ import {
 const commissionData = {
     'trading-commission': {
         title: 'Trading commission',
-        earned: 2003909.8970953,
+        earned: 0,
         details: [
             {
-                'Referral L1': 50,
+                'Referral L1': 0,
             },
             {
-                'Referral L2': 20,
+                'Referral L2': 0,
             },
         ],
         legend : [
-            {
-                mail: 'erfxxx.@gmail.com',
-                l1_trades: 20,
-                commission_l1: 1003909.8970953,
-                commission_l2: 1003909.8970953,
-                referrals: 12,
-                trades: 16,
-                total_amount: 2003909.8970953,
-            },
-            {
-                mail: 'erfxxx.@gmail.com',
-                l1_trades: 16,
-                commission_l1: 1003909.8970953,
-                commission_l2: 1003909.8970953,
-                referrals: 12,
-                trades: 16,
-                total_amount: 2003909.8970953,
-            },
-            {
-                mail: 'erfxxx.@gmail.com',
-                l1_trades: 16,
-                commission_l1: 1003909.8970953,
-                commission_l2: 1003909.8970953,
-                referrals: 12,
-                trades: 16,
-                total_amount: 2003909.8970953,
-            },
-
         ],
     },
     'ieo-commission': {
         title: 'IEO commission',
-        earned: 2003909.8970953,
+        earned: 0,
         details: [
             {
-                'Referral L1': 10,
+                'Referral L1': 0,
             },
             {
-                'Referral L2': 5,
+                'Referral L2': 0,
             },
         ],
         legend : [
-            {
-                mail: 'erfxxx.@gmail.com',
-                l1_trades: 16,
-                commission_l1: 1003909.8970953,
-                commission_l2: 1003909.8970953,
-                referrals: 12,
-                trades: 16,
-                total_amount: 2003909.8970953,
-            },
-            {
-                mail: 'erfxxx.@gmail.com',
-                l1_trades: 16,
-                commission_l1: 1003909.8970953,
-                commission_l2: 1003909.8970953,
-                referrals: 12,
-                trades: 16,
-                total_amount: 2003909.8970953,
-            },
-            {
-                mail: 'erfxxx.@gmail.com',
-                l1_trades: 16,
-                commission_l1: 1003909.8970953,
-                commission_l2: 1003909.8970953,
-                referrals: 12,
-                trades: 16,
-                total_amount: 2003909.8970953,
-            },
-
         ],
     },
     summary: {
         title: 'Total commission',
-        btc: 4007819.794191,
-        usd: 480.938375,
+        btc: 0,
+        usd: 0,
         legend: [
-            {
-                email: 'erfxxx@gmail.com',
-                level: 'L1',
-                type: 'Trade',
-                ieo_name: '',
-                earned: 1003909.8970953,
-                date: '29.12.2019  22:00',
-            },
-            {
-                email: 'erfxxx@gmail.com',
-                level: 'L1',
-                type: 'Trade',
-                ieo_name: '',
-                earned: 1003909.8970953,
-                date: '29.12.2019  22:00',
-            },
-            {
-                email: 'erfxxx@gmail.com',
-                level: 'L1',
-                type: 'Trade',
-                ieo_name: '',
-                earned: 1003909.8970953,
-                date: '29.12.2019  22:00',
-            },
         ],
     },
 };
