@@ -7,7 +7,7 @@ export class Terms extends React.Component {
                 <div className="container">
                     <div className="left">
                         <h2>Terms and Conditions</h2>
-                        <p>Please read the terms and conditions to make sure that you are eligible to participate. </p>
+                        <p>Please read the <a href="/terms">terms and conditions</a> to make sure that you are eligible to participate. </p>
                         <p>
                             The draw will take place through the use of blockchain technology, self executing smart contracts will
                             select the winners without human interference, guided by math and computer code only. This is to
