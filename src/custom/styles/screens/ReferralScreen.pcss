@@ -81,6 +81,7 @@
     .total-tickets-wrapper {
         box-sizing: border-box;
         position: relative;
+        height: 160px;
         .total-tickets {
             border: 2px solid var(--referral-gold);
             border-radius: 15px;
@@ -189,6 +190,7 @@
         }
         & .aside-block{
             width: 330px;
+            min-height: 330px;
         }
         & .main-block{
             width: 780px;
@@ -341,6 +343,10 @@
             & .hero-content{
                 flex-direction: column;
             }
+            .total-tickets {
+                top: unset;
+                right: unset;
+            }
         }
 
         @media (max-width: 800px){
@@ -379,7 +385,7 @@
                                 line-height: 60px;
                             }
                             
-                            & .right{
+                            & .right, & .left{
                                 padding: 10px;
                             }
                             
@@ -982,7 +988,6 @@
         height: 800px;
         position: relative;
         
-
         &:before{
             content: '';
             display: block;
@@ -1028,7 +1033,6 @@
         }
         
         & #jin-block1{
-            position: relative;
             position: absolute;
             width: 480px;
             height: 446px;
@@ -1055,7 +1059,6 @@
         }
         
         & #jin-block2{
-            position: relative;
             position: absolute;
             width: 480px;
             height: 370px;
@@ -1069,6 +1072,13 @@
                 top: 40px;
                 left: 60px;
             }
+
+            & .jin-p {
+                position: absolute;
+                left: 60px;
+                top: 165px;
+                width: 210px;
+            }
         }
         
         & #jin-block3{
@@ -1077,7 +1087,7 @@
             height: 446px;
             bottom: -42px;
             left: calc(50% - 213px);
-            background: url(./custom/assets/images/referral/jin2.png) left center no-repeat;;
+            background: url(./custom/assets/images/referral/jin2.png) left center no-repeat;
             background-size: 400px auto;
             
             & .jin-ul{
@@ -1130,6 +1140,10 @@
                         & .jin-ul{
                             left: 20px;
                         }
+
+                        & .jin-p {
+                            left: 20px;
+                        }
                     }
                     
                     &#jin-block3{
@@ -1163,6 +1177,57 @@
         @media(max-width: 1000px){
             &:before{
                 display: none;
+            }
+        }
+
+
+        @media(max-width: 530px) {
+            padding: 40px 0;
+            & .container {
+                padding-left: 0;
+                padding-right: 0;
+            }
+            font-size: 12px;
+            .container {
+                #jin-block2{
+                    background-position: right 20px top;
+                }
+
+                #jin-block1, #jin-block3 {
+                    & .jin-ul, .jin-p{
+                        left: 150px;
+                    }
+                }
+                #jin-block2#jin-block2{
+                    background-position: right 50px top;
+                    
+                    & .jin-ul{
+                        left: 20px;
+                    }
+                    & .jin-p{
+                        left: 20px;
+                        top: 120px;
+                    }
+                }
+                #jin-block3#jin-block3{
+                    &:before{
+                        right: 50px;
+                    }
+                }    
+            }
+        }
+        @media(max-width: 360px) {
+            #jin-block1, #jin-block3 {
+                .jin-ul {
+                    .jin-li {
+                        .text {
+                            width: 120px;
+                        }
+                    }
+                }
+                .jin-p {
+                    width: 120px;
+                }
             }
         }
     }

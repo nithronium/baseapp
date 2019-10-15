@@ -181,9 +181,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 <Link
                     className="pg-navbar__admin-logout"
                     to="/referral-tickets"
-                    onClick={this.handleRouteChange('/referral-comission')}
+                    onClick={this.handleRouteChange('/referral-commission')}
                 >
-                    <FormattedMessage id={'page.header.navbar.refcomission'} />
+                    <FormattedMessage id={'page.header.navbar.refcommission'} />
                 </Link>
 
                 {/* <LogoutIcon

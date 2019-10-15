@@ -34,6 +34,9 @@ export class Tickets extends React.Component{
                             <div className="text">Sends her referral code to Lorenzo.</div>
                         </div>
                     </div>
+                    <div className="jin-p">
+                        <div className="text">Receives two pending tickets for Lorenzo signing up.</div>
+                    </div>
                 </div>
                 <div id="jin-block3">
                     <div className="jin-ul">
