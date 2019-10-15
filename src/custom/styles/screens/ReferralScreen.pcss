@@ -178,6 +178,8 @@
         background-position: bottom 80px right 0;
         color: #fff;
         
+
+
         & .container{
             flex-direction: column;
         }
@@ -316,7 +318,10 @@
                 }
             }
         }
-
+        @media(max-width: 500px){
+            background-size: 137% auto;
+            background-position: bottom 60px left 0;
+        }
         @media(max-width: 1260px){
             
             & .container{
@@ -397,6 +402,29 @@
                             &:after{
                                 bottom: -20px;
                                 left: 20vw;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        @media (max-width: 800px){
+            
+            & .container{
+                
+                & .hero-content{
+                    
+                    & .main-block{
+                        & .plus-block{
+                            &:before{
+                                top: -20px;
+                                right: 0vw;
+                            }
+                            
+                            &:after{
+                                bottom: -20px;
+                                left: 0vw;
                             }
                         }
                     }
@@ -554,7 +582,7 @@
                 }
                 
                 & .explanation{
-                    color: darken(var(--referral-gold), 20);
+                    color: var(--referral-gold);
                     
                     &:before{
                         content: '';
@@ -579,6 +607,15 @@
             }
             & .center {
                 margin-right: 55px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            & .prizes-footer{
+                justify-content: flex-start;
+                & .center {
+                    margin-right: 20px;
+                }
             }
         }
 
@@ -650,52 +687,9 @@
             font-size: 24px;
         }
 
-        @media(max-width: 1140px){
-            
-            & .container{
-                padding: 0 10px;
-                box-sizing: border-box;
-                width: 100%;
-            }
-        }
-        
-        @MEDIA (max-width: 766px){
-
-            & .container{
-                
-                &#regular-prizes{
-                    
-                    width: 90vw;
-                    
-                    & .prizes-holder{
-                        
-                        & .regular-prize{
-                            margin: 20px;
-                            width: 16%;
-                            
-                            @media(max-width: 740px){
-                                width: 40%;
-                            }
-                        }
-                    }
-
-                }
-            }
-        }
-        
-        @media(max-width: 840px){
-            & #top-prizes{
-                width: 90vw;
-                margin: auto;
-                
-                & .top-prize{
-                    width: 100%;
-                    
-                    & .place{
-                        width: 140px;
-                        font-size: 24px;
-                    }
-                }
+        @media(max-width: 440px) {
+            & .hash {
+                font-size:18px;
             }
         }
 
@@ -732,7 +726,7 @@
             }
         }
         
-        @media(max-width: 840px){
+        @media (min-width: 431px) and (max-width: 840px){
             & #top-prizes{
                 width: 90vw;
                 margin: auto;
@@ -746,7 +740,60 @@
                     }
                 }
             }
-        }  
+        }
+
+        @media(max-width: 430px){
+            & #top-prizes{
+                width: 95vw;
+                margin: auto;
+                
+                & .top-prize{
+                    width: 100%;
+                    & .value {
+                        font-size: 18px;
+                    }
+                    & .place{
+                        width: auto;
+                        font-size: 14px;
+                        margin-right: 1em;
+                    }
+                }
+            }
+        }
+
+        @media(max-width: 1140px){
+            
+            & .container{
+                padding: 0 10px;
+                box-sizing: border-box;
+                width: 100%;
+            }
+        }
+        
+        @MEDIA (max-width: 766px){
+
+            & .container{
+                
+                &#regular-prizes{
+                    
+                    width: 90vw;
+                    
+                    & .prizes-holder{
+                        
+                        & .regular-prize{
+                            margin: 20px;
+                            width: 16%;
+                            
+                            @media(max-width: 740px){
+                                width: 40%;
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
+         
     }    
     #referral-code{
         background: #fff;
