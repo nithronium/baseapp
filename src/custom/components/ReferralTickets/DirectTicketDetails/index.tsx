@@ -22,12 +22,12 @@ class DirectTicketDetails extends React.Component<Props>{
                             <tr>
                                 <td><span className="count">{this.props.context.usdTickets} </span><span className="explanation">tickets</span></td>
                                 <td><span className="count">{`Balance ${this.props.context.usdBalance} USD`}</span></td>
-                                <td><span className="count"><button className="button">get more</button></span></td>
+                                <td><span className="count"><button className="button"><a href="/wallets">get more</a></button></span></td>
                             </tr>
                             <tr>
                                 <td><span className="count">{this.props.context.emrxTickets} </span><span className="explanation">tickets</span></td>
                                 <td><span className="count">{`EMRX tokens worth ${this.props.context.emrxBalance} USD`}</span></td>
-                                <td><span className="count"><button className="button">get more</button></span></td>
+                                <td><span className="count"><button className="button"><a href="/wallets">get more</a></button></span></td>
                             </tr>
                             </tbody>
                         </table>
