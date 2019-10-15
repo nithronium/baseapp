@@ -5,7 +5,7 @@ interface Props {
     context: ReferralTicketsPayload['bonuses'];
 }
 
-const tableRow = (legendArray: ReferralTicketsPayload['bonuses']): React.ReactNode => {return legendArray.map((record, index) => {
+const tableRows = (legendArray: ReferralTicketsPayload['bonuses']): React.ReactNode => {return legendArray.map((record, index) => {
         return(
             <tr key={index}>
                 <td><span className="count">{record.tickets} <span className="explanation">tickets</span></span></td>
@@ -30,7 +30,7 @@ class BonusTicketDetails extends React.Component<Props>{
 
         legendArray.map((record, index) => {
 
-            const value2add = mode === 'default' ? record[column] : 1;
+            const value2add = mode === 'default' ? parseInt(record[column], 10) : 1;
 
             if (!condition){
                 total += value2add;
@@ -86,8 +86,15 @@ class BonusTicketDetails extends React.Component<Props>{
                 <div className="container column">
                     <h2>Bonus ticket details</h2>
                     <table>
+                        <thead>
+                            <tr>
+                                <td>Tickets</td>
+                                <td>Action</td>
+                                <td>Link</td>
+                            </tr>
+                        </thead>
                         <tbody>
-                            {tableRow(legendArray)}
+                            {tableRows(legendArray)}
                         </tbody>
                         <tfoot>
                             {/*<tr><td colSpan={3}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td></tr>*/}
