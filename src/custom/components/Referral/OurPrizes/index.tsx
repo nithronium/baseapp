@@ -43,7 +43,7 @@ export class OurPrizes extends React.Component<Props> {
                 <div className="container" id="regular-prizes">
                     <div className="prizes-holder">
                         {/* {this.regularPrizes(this.props.prizes)} */}
-                        <div className="prizes-footer">
+                        <div className="prizes-footer wrap">
                             <div className="center">
                                 <a href="#referral-code" className="hero-button">
                                     Get a code
