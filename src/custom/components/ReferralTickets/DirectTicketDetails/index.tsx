@@ -17,6 +17,7 @@ class DirectTicketDetails extends React.Component<Props>{
                 <div className="container">
                     <div className="container-wrapper">
                         <h2>Direct ticket details</h2>
+                        <p>overall {this.props.context.usdTickets + this.props.context.emrxTickets} tickets</p>
                         <table>
                             <tbody>
                             <tr>
