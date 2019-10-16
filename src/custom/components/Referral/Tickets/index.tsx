@@ -27,12 +27,15 @@ export class Tickets extends React.Component{
                     <div className="jin-ul">
                         <div className="jin-li">
                             <div className="digit">3.</div>
-                            <div className="text">Sends his referralcode to Mike.</div>
+                            <div className="text">Sends his referral code to Mike.</div>
                         </div>
                         <div className="jin-li">
                             <div className="digit">4.</div>
                             <div className="text">Sends her referral code to Lorenzo.</div>
                         </div>
+                    </div>
+                    <div className="jin-p">
+                        <div className="text">Receives two pending tickets for Lorenzo signing up.</div>
                     </div>
                 </div>
                 <div id="jin-block3">

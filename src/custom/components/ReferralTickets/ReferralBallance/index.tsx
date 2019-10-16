@@ -27,7 +27,7 @@ class ReferralBallanceContainer extends React.Component<Props>{
                         {this.props.children}
                     </div>
                     <div className="referral-summary">
-                        <div className="total-container">Total tickets: {this.props.totalTickets}</div>
+                        <div className="total-container"><b>Total tickets</b>: {this.props.totalTickets}</div>
                         <div className="referral-container">
                             Your referral code: {this.props.user.uid}
                             <a href="#!">&nbsp;</a>
