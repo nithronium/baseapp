@@ -9,7 +9,6 @@ export interface ReferralHeaderInterface {
     legend: [];
 }
 
-
 interface ReduxProps {
     user: User;
 }
@@ -20,17 +19,16 @@ interface PassedProps {
 }
 
 type Props = ReduxProps & PassedProps;
-
-class ReferralHeaderContainer extends React.Component<Props>{
-
-    public render(){
-
-        return(
-
+//tslint:disable
+class ReferralHeaderContainer extends React.Component<Props> {
+    public render() {
+        return (
             <div className="container recalculate">
                 <div className="header">
                     <h1>Referral ballance</h1>
-                    <a href="#!" className="round-button default arrow">BTC</a>
+                    <a href="#!" className="round-button default arrow">
+                        BTC
+                    </a>
                 </div>
                 <div className="contexter">
                     <div className="cards-wrapper">
@@ -40,14 +38,17 @@ class ReferralHeaderContainer extends React.Component<Props>{
                             <div className="summary-container">
                                 <div className="btc">{this.props.context.btc} BTC</div>
                                 <div className="usd">{this.props.context.usd} USD</div>
-                                <a className="details-link" href={this.props.link}>view details</a>
+                                <a className="details-link" href={this.props.link}>
+                                    view details
+                                </a>
                                 <div className="referral-code">
-                                    <div className="header">
+                                    {/* <div className="header">
                                         Your referral code:
                                     </div>
                                     <div className="code">
                                         {this.props.user.uid}
-                                    </div>
+                                    </div> */}
+                                    <a href="/profile">Get Your Referral Code</a>
                                 </div>
                             </div>
                         </div>
