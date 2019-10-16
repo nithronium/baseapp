@@ -6,10 +6,12 @@ import { Header } from './Header';
 const Footer = () => {
     return (
         <div id="footer">
-            {/* <MobileStartTrading /> */}
-            <Header />
-            {/* <FooterBodyComponent />  */}
-            <Copyright />
+            <div className="footer-wrapper">
+                {/* <MobileStartTrading /> */}
+                <Header />
+                {/* <FooterBodyComponent />  */}
+                <Copyright />
+            </div>
         </div>
     );
 };
