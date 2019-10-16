@@ -89,7 +89,7 @@ class BonusTicketDetails extends React.Component<Props>{
                         <thead>
                             <tr>
                                 <td>Tickets</td>
-                                <td>Action</td>
+                                <td>Network Post</td>
                                 <td>Link</td>
                             </tr>
                         </thead>

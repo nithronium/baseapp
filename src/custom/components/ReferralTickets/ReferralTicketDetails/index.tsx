@@ -109,7 +109,7 @@ class ReferralTicketDetails extends React.Component<Props, State>{
         return(
 
             <div className="referral-ticket-details">
-                <div className="container">
+                <div className="container wrap">
                     <div className="left"><h2>Referral tickets details</h2></div>
                     <div className="right">
                         <a href="#!" onClick={this.filterLegend} data-filter="all" className={filterClassName('all')}>all</a> /

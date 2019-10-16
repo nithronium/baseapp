@@ -693,13 +693,13 @@
             font-size: 24px;
         }
 
-        @media(max-width: 440px) {
+        @media (max-width: 440px) {
             & .hash {
                 font-size:18px;
             }
         }
 
-        @media(max-width: 1140px){
+        @media (max-width: 1140px){
             
             & .container{
                 padding: 0 10px;
@@ -708,7 +708,7 @@
             }
         }
         
-        @MEDIA (max-width: 766px){
+        @media (max-width: 766px){
 
             & .container{
                 
@@ -776,7 +776,7 @@
             }
         }
         
-        @MEDIA (max-width: 766px){
+        @media (max-width: 766px){
 
             & .container{
                 
@@ -1206,7 +1206,7 @@
                     }
                     & .jin-p{
                         left: 20px;
-                        top: 120px;
+                        top: 140px;
                     }
                 }
                 #jin-block3#jin-block3{
@@ -1217,17 +1217,64 @@
             }
         }
         @media(max-width: 360px) {
-            #jin-block1, #jin-block3 {
-                .jin-ul {
-                    .jin-li {
-                        .text {
-                            width: 120px;
+            .container {
+                #jin-block1, #jin-block3 {
+                    .jin-ul {
+                        .jin-li {
+                            .text {
+                                width: 120px;
+                            }
                         }
                     }
+                    .jin-p {
+                        width: 120px;
+                    }
                 }
-                .jin-p {
-                    width: 120px;
+                #jin-block1 {
+                    height: 346px;
+                    width: 320px;
+                    background-size: 300px auto;
+                    .jin-p {
+                        left: 140px;
+                    }
+                    .jin-ul {
+                        left: 140px;
+                    }
                 }
+                #jin-block2 {
+                    height: 346px;
+                    width: 320px;
+                    bottom: 75px;
+                    left: unset;
+                    background-size: 300px auto;
+                    &#jin-block2{
+                        background-position: right 70px top;
+                    }
+                    .jin-p {
+                        top: 140px;
+                    }
+                }
+                #jin-block3 {
+                    height: 346px;
+                    width: 320px;
+                    &#jin-block3 {
+                        top: -190px;
+                    }
+                    background-size: 300px auto;
+                    &#jin-block3:before {
+                        right: 120px;
+                        top: -401px;
+                        width: 180px;
+                        height: 520px;
+                    }
+                    .jin-p {
+                        left: 140px;
+                    }
+                    .jin-ul {
+                        left: 140px;
+                    }
+                }
+
             }
         }
     }
