@@ -2,6 +2,7 @@ import { Button } from '@openware/components';
 import cx from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
+import { Helmet } from 'react-helmet';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 //import { withRouter } from 'react-router-dom';
@@ -204,15 +205,36 @@ class Referral extends React.Component<Props> {
         };
 
         return (
-            <div className="pg-referral-screen">
-                <Hero prizes={prizes}>{this.props.user.uid ? totalTickets() : signupForm()}</Hero>
-                <HIW />
-                <Timelines />
-                <Tickets />
-                <OurPrizes prizes={prizes} topPrizes={topPrizes} />
-                <ReferralCode />
-                <Terms />
-                <Footer />
+            <div>
+                <Helmet>
+                    <title>Emirex: Bitcoin Referral Program - Make BTC from your traffic</title>
+                    <meta
+                        name="description"
+                        content="Earn bitcoins for each transaction your referrals make - join Emirex referral program. Earn up commission every time your friends make a trade on Emirex. We are offering prizes: $100k in Bitcoin and $100k in EMRX."
+                    />
+                    <link rel="canonical" href="https://emirex.com/referral" />
+
+                    <link key="ru" rel="alternate" href="https://emirex.com/ru/referral" hrefLang="ru" />
+                    <link key="ar" rel="alternate" href="https://emirex.com/ar/referral" hrefLang="ar" />
+                    <link key="en" rel="alternate" href="https://emirex.com/en/referral" hrefLang="en" />
+
+                    <meta name="og:title" content="Bitcoin Referral Program - Make BTC from your traffic | Emirex.com" />
+                    <meta
+                        name="og:description"
+                        content="Earn bitcoins for each transaction your referrals make - join Emirex referral program. Earn up commission every time your friends make a trade on Emirex. We are offering prizes: $100k in Bitcoin and $100k in EMRX."
+                    />
+                    <meta name="og:image" content="https://emirex.com/public/img/logo-emirex.svg" />
+                </Helmet>
+                <div className="pg-referral-screen">
+                    <Hero prizes={prizes}>{this.props.user.uid ? totalTickets() : signupForm()}</Hero>
+                    <HIW />
+                    <Timelines />
+                    <Tickets />
+                    <OurPrizes prizes={prizes} topPrizes={topPrizes} />
+                    <ReferralCode />
+                    <Terms />
+                    <Footer />
+                </div>
             </div>
         );
     }
