@@ -5,3 +5,4 @@ export * from './ReferralCode';
 export * from './Terms';
 export * from './Tickets';
 export * from './Timelines';
+export * from './Footer';

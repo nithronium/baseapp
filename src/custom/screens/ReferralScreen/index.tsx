@@ -24,7 +24,7 @@ import {
     signUp,
     User,
 } from '../../../modules';
-import { Hero, HIW, OurPrizes, ReferralCode, Terms, Tickets, Timelines } from '../../components/Referral';
+import { Footer, Hero, HIW, OurPrizes, ReferralCode, Terms, Tickets, Timelines } from '../../components/Referral';
 
 const prizes = [
     { name: 'BMW 3 SERIES' },
@@ -212,6 +212,7 @@ class Referral extends React.Component<Props> {
                 <OurPrizes prizes={prizes} topPrizes={topPrizes} />
                 <ReferralCode />
                 <Terms />
+                <Footer />
             </div>
         );
     }
