@@ -1350,20 +1350,18 @@
         }
     }
     #footer { 
+        box-sizing: border-box;
+        width: 100%;
             max-width: 1140px;
             margin: 0 auto;
-            
+           
 
-        & .footer-wrapper {
+        & .logo {
             
-            display: flex;
-            flex-direction: column;
-            & .logo {
-            
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            padding: 80px 0
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    padding: 80px 0;
         }
         & .copyright {
 
@@ -1372,9 +1370,11 @@
             align-items: center;       
             font-size: 11px;
             padding: 20px 0;
-            border-top: 1px solid #FFFFFF55
+            border-top: 1px solid #FFFFFF55;
+
         }
         & .licenses {
+  
                 h5 {
                     padding-bottom: 10px;
                     letter-spacing: 0.05em;
@@ -1382,11 +1382,50 @@
                     color: rgba(255, 255, 255, 0.6);
                 }
                p {
-                   font-size: 12px;
+                   font-size: 13px;
                    letter-spacing: 0.05em;
                    color: rgba(255, 255, 255, 0.4);
                }
            }
+        & .social-block {
+
+            & .social-links {
+            display: flex;
+            flex-wrap: wrap;
+            width: 200px;
+             list-style-type: none;
+            padding: 0;
+
+            & .icon {
+                width: 36px;
+                height: 36px;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 50%; 
+                img {
+                    margin: 10px;
+                }
+            }
+            li {
+                margin: 4px;
+                
+            }
+
+        }
+        @media screen and (max-width: 700px) {
+              & h5 {
+                  text-align: center;
+              }
+
+                & .social-links {
+               width: 100%;
+               justify-content: center;
+           }
+        }
+
+        }
+        
+
+         
         @media screen and (max-width: 700px) {
         & .logo  {
                flex-direction: column;
@@ -1398,7 +1437,9 @@
                justify-content: center;
                align-items: center;
                text-align: center;
+               
            }
+          
            
         }
         @media screen and (max-width: 580px) {
@@ -1413,7 +1454,7 @@
                align-items: center;
                text-align: center;
            }
-        }
+        
         }
 
         
