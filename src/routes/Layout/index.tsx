@@ -183,6 +183,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         component={EmailVerificationScreen}
                     />
                     <Route loading={userLoading} isLogged={isLoggedIn} path="/referral" component={ReferralScreen} />
+                    <Route loading={userLoading} isLogged={isLoggedIn} path="/en/referral" component={ReferralScreen} />
                     <Route exact={true} path="/trading/:market?" component={TradingScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/orders" component={OrdersTabScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/history" component={HistoryScreen} />
