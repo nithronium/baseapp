@@ -19,15 +19,15 @@ export class Tickets extends React.Component{
                         </div>
                     </div>
                     <div className="jin-p">
-                        <div className="text">Signs up and receives one pending ticket.</div>
-                        <div className="text">Receives two pending tickets for Lorenzo signing up.</div>
+                        <div className="text">Receives one pending ticket for Lorenzo signing up.</div>
+                        <div className="text">Receives two pending tickets for Mike signing up.</div>
                     </div>
                 </div>
                 <div id="jin-block2">
                     <div className="jin-ul">
                         <div className="jin-li">
                             <div className="digit">3.</div>
-                            <div className="text">Sends his referral code to Mike.</div>
+                            <div className="text">Signs up and receives one pending ticket.</div>
                         </div>
                         <div className="jin-li">
                             <div className="digit">4.</div>
