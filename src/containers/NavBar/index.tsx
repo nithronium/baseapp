@@ -180,7 +180,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 </Link>
                 <Link
                     className="pg-navbar__admin-logout"
-                    to="/referral-tickets"
+                    to="/referral-commission"
                     onClick={this.handleRouteChange('/referral-commission')}
                 >
                     <FormattedMessage id={'page.header.navbar.refcommission'} />
@@ -274,7 +274,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         <FormattedMessage id={'page.header.navbar.profile'} />
                     </Link>
                 </div>
-                <div className="dropdown-menu-item-user">
+                {/*<div className="dropdown-menu-item-user">
                     <Link
                         className="pg-navbar__admin-logout"
                         to="/referral-tickets"
@@ -284,14 +284,14 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     </Link>
                 </div>
                 <div className="dropdown-menu-item-user">
-                <Link
-                    className="pg-navbar__admin-logout"
-                    to="/referral-tickets"
-                    onClick={this.handleRouteChange('/referral-commission')}
-                >
-                    <FormattedMessage id={'page.header.navbar.refcommission'} />
-                </Link>
-            </div>
+                    <Link
+                        className="pg-navbar__admin-logout"
+                        to="/referral-commission"
+                        onClick={this.handleRouteChange('/referral-commission')}
+                    >
+                        <FormattedMessage id={'page.header.navbar.refcommission'} />
+                    </Link>
+                </div>*/}
                 <div className="dropdown-menu-item-user">
                     <a className="pg-navbar__admin-logout" onClick={this.handleLogOut}>
                         <FormattedMessage id={'page.header.navbar.logout'} />
