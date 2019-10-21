@@ -1,47 +1,60 @@
 import * as React from 'react';
+import './hiw.css';
 
-class HIW extends React.Component {
-    public render() {
-        return (
-            <section id="hiw">
-                <div className="container">
-                    <h2>How it works</h2>
-                    <p className="subheader">No purchase is necessary to take part in the referral program giveaway.</p>
-                    <div className="steps">
-                        <div className="step">
-                            <h3>Step1</h3>
-                            <p className="intro">Create an account with an existing referral code.</p>
-                            <p className="text">
-                                Once your account is set up, you’ll receive your own referral code to share. You’ll also receive
-                                your first ticket for the draw!
-                            </p>
-                        </div>
-                        <div className="step">
-                            <h3>Step2</h3>
-                            <p className="intro">Share your code to gain more tickets!</p>
-                            <p className="text">
-                                You’ll receive two tickets for every person you refer and one ticket for every person they refer.
-                                Invite your friends!
-                            </p>
-                        </div>
-                        <div className="step">
-                            <h3>Step3</h3>
-                            <p className="intro">Activate tickets on Emirex.com.</p>
-                            <p className="text">
-                                All tickets are initially set as ‘pending’. For a ticket to count toward the draw, it must be
-                                activated.
-                            </p>
-                        </div>
-                    </div>
-                    <div className="button-holder center-align">
-                        <a href="#referral-code" className="hero-button">
-                            Get a code
-                        </a>
-                    </div>
-                </div>
-            </section>
-        );
-    }
+interface Step {
+  h3: string;
+  h4Green: string;
+  h4Rest: string;
+  text: string;
 }
 
-export { HIW };
+const step = (data: Step) => {
+  return (
+    <div className="step">
+      <h3><span>{data.h3}</span></h3>
+      <h4><span className="green">{data.h4Green}</span>{data.h4Rest}</h4>
+      <p>{data.text}</p>
+    </div>
+  );
+};
+
+const steps = [
+  {
+    h3: 'Step 1',
+    h4Green: 'Create',
+    h4Rest: ' an account using a referral code.',
+    text: 'Once your account is set up, you’ll receive your own referral code to share. You’ll also receive your first ticket for the draw!',
+  },
+  {
+    h3: 'Step 2',
+    h4Green: 'Share, Follow & Top up',
+    h4Rest: ' for tickets!',
+    text: 'You’ll receive 2 tickets for everyone you refer and 1 ticket for everyone they refer. Plus tickets for social media follows and balance topups! ',
+  },
+  {
+    h3: 'Step 3',
+    h4Green: 'Activate',
+    h4Rest: ' tickets on Emirex.com.',
+    text: 'All tickets are initially set as ‘pending’. For a ticket to count toward the draw, it must be activated. Activate and win with Emirex!',
+  },
+  {
+    h3: 'Step 4',
+    h4Green: 'Continue earning',
+    h4Rest: ' from your referrals!',
+    text: 'You’ll continue earning referral commission on trading and sales activities from everyone you refer, as well as a % from everyone they refer!',
+  },
+];
+
+const HIW: React.FC = () => {
+  return (
+    <section id="how-it-works">
+      <h2 className="center">How It Works</h2>
+      <h4 className="center">No purchase is necessary to take part in this giveaway.</h4>
+      <div className="steps">
+        {steps.map(step)}
+      </div>
+    </section>
+  );
+};
+
+export {HIW};

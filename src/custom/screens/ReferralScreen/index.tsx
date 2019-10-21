@@ -25,41 +25,7 @@ import {
     signUp,
     User,
 } from '../../../modules';
-import { Footer, Hero, HIW, OurPrizes, ReferralCode, Terms, Tickets, Timelines } from '../../components/Referral';
-
-const prizes = [
-    { name: 'BMW 3 SERIES' },
-    { name: 'MACBOOK PRO' },
-    { name: 'IPHONE 11' },
-    { name: 'UAE TRAVEL' },
-    { name: 'PRIZE 5' },
-    { name: 'PRIZE 6' },
-    { name: 'PRIZE 7' },
-    { name: 'PRIZE 8' },
-];
-
-const topPrizes = [
-    {
-        place: '1st',
-        bitcoin: '10,000',
-        emrx: '10,000',
-    },
-    {
-        place: '2nd',
-        bitcoin: '8,000',
-        emrx: '8,000',
-    },
-    {
-        place: '3rd',
-        bitcoin: '5,250',
-        emrx: '5,250',
-    },
-    {
-        place: '4&5th',
-        bitcoin: '2,750',
-        emrx: '2,750',
-    },
-];
+import {  Banner, GetCode, HIW, HowTo, Prizes, Timelines, Video } from '../../components/Referral';
 
 interface ReduxProps {
     requireVerification?: boolean;
@@ -144,7 +110,7 @@ class Referral extends React.Component<Props> {
                     </div>
                     <SignUpForm
                         labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn' })}
-                        labelSignUp={this.props.intl.formatMessage({ id: 'page.header.signUp' })}
+                        labelSignUp="Sign up to WIN!"
                         emailLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.email' })}
                         passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.password' })}
                         confirmPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.confirmPassword' })}
@@ -226,14 +192,13 @@ class Referral extends React.Component<Props> {
                     <meta name="og:image" content="https://emirex.com/public/img/logo-emirex.svg" />
                 </Helmet>
                 <div className="pg-referral-screen">
-                    <Hero prizes={prizes}>{this.props.user.uid ? totalTickets() : signupForm()}</Hero>
+                    <Banner>{this.props.user.uid ? totalTickets() : signupForm()}</Banner>
                     <HIW />
+                    <Video />
                     <Timelines />
-                    <Tickets />
-                    <OurPrizes prizes={prizes} topPrizes={topPrizes} />
-                    <ReferralCode />
-                    <Terms />
-                    <Footer />
+                    <HowTo />
+                    <Prizes />
+                    <GetCode />
                 </div>
             </div>
         );
