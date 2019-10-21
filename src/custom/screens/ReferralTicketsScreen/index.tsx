@@ -19,8 +19,8 @@ import {
     selectReferralTicketsReferrals,
 } from '../../../modules';
 import {
-    BonusTicketDetails,
-    CardBonuses,
+    /*BonusTicketDetails,
+    CardBonuses,*/
     CardReferrals,
     CardUser,
     DirectTicketDetails,
@@ -87,7 +87,7 @@ class ReferralTickets extends React.Component<Props> {
                         <ReferralBallance totalTickets={this.getTotalTickets()}>
                             <CardUser title="Direct" context={this.props.direct} link="#direct"/>
                             <CardReferrals title="Referral" context={this.props.referrals} activeInactive={true} link="#referral"/>
-                            <CardBonuses title="Bonus" context={this.props.bonuses} link="#bonus"/>
+                            {/*<CardBonuses title="Bonus" context={this.props.bonuses} link="#bonus"/>*/}
                         </ReferralBallance>
                     </section>
                     <section id="direct">
@@ -99,11 +99,12 @@ class ReferralTickets extends React.Component<Props> {
                         <ReferralTicketDetails context={this.props.referrals} />
                     </div>
                 </section>
-                <section id="bonus">
+                {// tslint:disable-next-line: jsx-no-multiline-js
+                /*<section id="bonus">
                     <div className="container">
                         <BonusTicketDetails context={this.props.bonuses} />
                     </div>
-                </section>
+                </section>*/}
             </div>
         );
     }
