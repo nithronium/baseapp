@@ -207,7 +207,7 @@ class Referral extends React.Component<Props> {
         return (
             <div>
                 <Helmet>
-                    <title>Emirex: Bitcoin Referral Program - Make BTC from your traffic</title>
+                    <title>Emirex: Bitcoin Referral Program - Make BTC from your traffic | Emirex.com</title>
                     <meta
                         name="description"
                         content="Earn bitcoins for each transaction your referrals make - join Emirex referral program. Earn up commission every time your friends make a trade on Emirex. We are offering prizes: $100k in Bitcoin and $100k in EMRX."

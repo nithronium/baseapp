@@ -55,11 +55,11 @@ class CardReferrals extends React.Component<CardProps>{
                 <div className="card-middle">
                     <div className="card-details-row">
                         <div className="card-details-row__left">referrals active</div>
-                        <div className="card-details-row__right">{this.getTotal('active', 'count')}</div>
+                        <div className="card-details-row__right">{this.getTotal('active')}</div>
                     </div>
                     <div className="card-details-row">
                         <div className="card-details-row__left">referrals inactive</div>
-                        <div className="card-details-row__right">{this.getTotal('inactive', 'count')}</div>
+                        <div className="card-details-row__right">{this.getTotal('inactive')}</div>
                     </div>
                 </div>
             );

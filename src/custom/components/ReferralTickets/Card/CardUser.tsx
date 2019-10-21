@@ -21,8 +21,8 @@ class CardUser extends React.Component<CardProps>{
         }else{
             preloader = null;
         }
+        const ctx = this.props.context;
         return(
-
             <div className="Card">
                 {preloader}
                 <div className="card-top">
@@ -31,7 +31,7 @@ class CardUser extends React.Component<CardProps>{
                         <span className="card-top__left__suffix">tickets</span>
                     </div>
                     <div className="card-top__right">
-                        {this.props.context.emrxTickets + this.props.context.usdTickets}
+                        {ctx.emrxTickets + ctx.usdTickets + ctx.ticketForRegistration}
                     </div>
                 </div>
                 <div className="card-middle"/>

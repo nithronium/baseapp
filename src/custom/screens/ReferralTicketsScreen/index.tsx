@@ -10,6 +10,7 @@ import {
 } from 'react-redux';
 import { setDocumentTitle } from '../../../helpers';
 import {
+    ReferralPayload,
     referralTicketsFetch,
     ReferralTicketsPayload,
     RootState,
@@ -51,29 +52,26 @@ class ReferralTickets extends React.Component<Props> {
     private getTotalTickets() {
         let total = 0;
         if (!this.props.referralTickets) { return total; }
-        if (this.props.referralTickets.directDetails && this.props.referralTickets.directDetails.legend) {
+        if (this.props.direct) {
+            total += this.props.direct.emrxTickets;
+            total += this.props.direct.usdTickets;
+            total += this.props.direct.ticketForRegistration;
+        }
 
-            this.props.referralTickets.directDetails.legend.map((record, index) => {
-                total += record.count;
-                return true;
+        if (this.props.referral) {
+
+            this.props.referrals.map((record: ReferralPayload) => {
+                total += record.isActive * (record.tickets + record.activeSubreferrals);
             });
         }
 
-        if (this.props.referralTickets.referralDetails && this.props.referralTickets.referralDetails.legend) {
-
-            this.props.referralTickets.referralDetails.legend.map((record, index) => {
-                total += record.count;
-                return true;
-            });
-        }
-
-        if (this.props.referralTickets.bonusDetails && this.props.referralTickets.bonusDetails.legend) {
+        /*if (this.props.referralTickets.bonusDetails && this.props.referralTickets.bonusDetails.legend) {
 
             this.props.referralTickets.bonusDetails.legend.map((record, index) => {
                 total += record.count;
                 return true;
             });
-        }
+        }*/
 
         return total;
     }

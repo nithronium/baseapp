@@ -13,7 +13,7 @@ export interface ReferralTicketsError {
 export interface ReferralPayload {
     tickets: number; // кол-во тикетов, полученных за реферала
     email: string; // email реферала
-    isActive: boolean; // статус реферала
+    isActive: number; // статус реферала, 0/1
     subreferrals: number; // кол-во рефералов 2-го уровня
     activeSubreferrals: number; // кол-во активных рефералов 2-го уровня
 }
@@ -26,6 +26,7 @@ export interface BonusPayload {
 
 export interface ReferralTicketsPayload {
     user: {
+        ticketForRegistration: number,
         usdBalance: number, // баланс пользователя в USD
         emrxBalance: number, // баланс пользователя в EMRX
         usdTickets: number, // тикеты, полученные за пополнение баланса в USD

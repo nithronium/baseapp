@@ -33,7 +33,6 @@ class ReferralTicketDetails extends React.Component<Props, State>{
            filter: 'all',
         };
 
-        //this.loadMore = this.loadMore.bind(this);
         this.filterLegend = this.filterLegend.bind(this);
     }
 
@@ -41,11 +40,11 @@ class ReferralTicketDetails extends React.Component<Props, State>{
         const legendArray = this.props.context || [];
         switch (this.state.filter) {
             case 'active':
-                return legendArray.filter(record => record.isActive);
+                return legendArray.filter(record => !!record.isActive);
             case 'inactive':
                 return legendArray.filter(record => !record.isActive);
             case 'all':
-                default:
+            default:
                 return legendArray;
         }
     }
@@ -62,8 +61,9 @@ class ReferralTicketDetails extends React.Component<Props, State>{
         let total = 0;
 
         legendArray.map((record, index) => {
+            const isCondition = !(condition === undefined || condition === null);
             const value2add = mode === 'default' ? record[column] : 1;
-            if (!condition){
+            if (!isCondition){
                 total += value2add;
                 return true;
             }else{
@@ -75,29 +75,6 @@ class ReferralTicketDetails extends React.Component<Props, State>{
         });
         return total;
     }
-
-    /*public loadMore(){
-
-        this.setState({
-            filteredLegend: [],
-        });
-
-        fetch('/json/ReferralTickets/referral_more.json')
-        .then(async res => res.json())
-        .then(
-            result => {
-                this.setState({
-                    legend: result['referral-ballance'].legend,
-                });
-            },
-
-            error => {
-                //console.log(error);
-            },
-        );
-
-    }*/
-
 
     public render(){
         const filterClassName = dataFilter => {
@@ -132,12 +109,11 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                         {tableRow(legendArray)}
                         </tbody>
                         <tfoot>
-                            {/*<tr><td colSpan={5}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td></tr>*/}
                             <tr><td style={{paddingBottom: 0}} colSpan={5}><span className="table-summary-header">total</span></td></tr>
                             <tr>
                                 <td><span className="count">{this.getTotal('tickets')}</span> <span className="explanation">tickets</span></td>
                                 <td>{this.getTotal('email', 'count')} referreres</td>
-                                <td>yes {this.getTotal('isActive', 'count', true)} / no {this.getTotal('isActive', 'count', false)} </td>
+                                <td>yes {this.getTotal('isActive', 'count', 1)} / no {this.getTotal('isActive', 'count', 0)} </td>
                                 <td>{this.getTotal('subreferrals')} <span className="explanation">referrals</span></td>
                                 <td>{this.getTotal('activeSubreferrals')} <span className="explanation">referrals</span></td>
                             </tr>
