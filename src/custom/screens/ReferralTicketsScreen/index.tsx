@@ -20,8 +20,8 @@ import {
     selectReferralTicketsReferrals,
 } from '../../../modules';
 import {
-    /*BonusTicketDetails,
-    CardBonuses,*/
+    BonusTicketDetails,
+    CardBonuses,
     CardReferrals,
     CardUser,
     DirectTicketDetails,
@@ -85,7 +85,7 @@ class ReferralTickets extends React.Component<Props> {
                         <ReferralBallance totalTickets={this.getTotalTickets()}>
                             <CardUser title="Direct" context={this.props.direct} link="#direct"/>
                             <CardReferrals title="Referral" context={this.props.referrals} activeInactive={true} link="#referral"/>
-                            {/*<CardBonuses title="Bonus" context={this.props.bonuses} link="#bonus"/>*/}
+                            <CardBonuses title="Bonus" context={this.props.bonuses} link="#bonus"/>
                         </ReferralBallance>
                     </section>
                     <section id="direct">
@@ -97,12 +97,11 @@ class ReferralTickets extends React.Component<Props> {
                         <ReferralTicketDetails context={this.props.referrals} />
                     </div>
                 </section>
-                {// tslint:disable-next-line: jsx-no-multiline-js
-                /*<section id="bonus">
+                <section id="bonus">
                     <div className="container">
                         <BonusTicketDetails context={this.props.bonuses} />
                     </div>
-                </section>*/}
+                </section>
             </div>
         );
     }
@@ -121,73 +120,3 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
 
 export const ReferralTicketsScreen = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ReferralTickets));
 
-/*
-'direct-ballance': {
-        title: 'Direct',
-        activeInactive: false,
-        legend : [
-            {
-                count: 3,
-                action: 'ballance 150 USD',
-            },
-            {
-                count: 4,
-                action: 'EMRX tokens worth 100 USD',
-            },
-        ],
-    },
-    'referral-ballance': {
-        title: 'Referral',
-        activeInactive: true,
-        legend: [
-            {
-                count: 9,
-                l1_referral: 'erfxxx@gmail.com',
-                active: 'yes',
-                l2_referrals: 7,
-                l2_active: 7,
-            },
-            {
-                count: 0,
-                l1_referral: 'erfxxx@gmail.com',
-                active: 'no',
-                l2_referrals: 10,
-                l2_active: 8,
-            },
-            {
-                count: 5,
-                l1_referral: 'erfxxx@gmail.com',
-                active: 'yes',
-                l2_referrals: 15,
-                l2_active: 3,
-            },
-        ],
-    },
-    'bonus-ballance': {
-        title: 'Bonus',
-        activeInactive: false,
-        legend: [
-            {
-                count: 1,
-                subscription: 'Facebook subscription',
-                subscription_url: 'https://facebook.com',
-                network_post: 'Facebook post',
-                network_post_url: 'https://facebook.com',
-            },
-            {
-                count: 0,
-                subscription: 'No subscription',
-                subscription_url: null,
-                network_post: 'Telegram post',
-                network_post_url: 'https://telegram.com',
-            },
-            {
-                count: 1,
-                subscription: 'Twitter subscription',
-                subscription_url: 'https://twitter.com',
-                network_post: 'Twitter post',
-                network_post_url: 'https://twitter.com',
-            },
-        ],
-    },
-*/
