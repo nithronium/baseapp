@@ -213,13 +213,15 @@ const FooterBody = () => {
 
 const Footer = () => {
     return (
-        <div id="footer">
-            {/* <MobileStartTrading /> */}
-            <Header />
-            <FooterBody />
-            <Licenses />
-            <Copyright />
-        </div>
+        <section id="footer">
+            <div>
+                {/* <MobileStartTrading /> */}
+                <Header />
+                <FooterBody />
+                <Licenses />
+                <Copyright />
+            </div>
+        </section>
     );
 };
 

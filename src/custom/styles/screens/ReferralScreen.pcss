@@ -8,7 +8,7 @@
         background: var(--referral-gold);
         //margin-top: calc(var(--gap) * 3.33);
         //width: calc(var(--gap) * 70.66);
-        width: 330px;
+        width: 360px;
     }
     .cr-logo {
         display: none;
@@ -76,7 +76,8 @@
         &__terms-link {
             display: inline;
             vertical-align: -webkit-baseline-middle;
-            margin-left: 18px;
+            margin-left: -18px;
+            padding-left: 0;
             color: black;
             a {
                 color: black;
@@ -136,6 +137,11 @@ h4 {
 }
 .bold {
   font-weight: bold;
+}
+
+#banner {
+  background: #F2F2F2;
+  padding-top: 56px;
 }
 
 #banner .grab-container {
@@ -489,7 +495,12 @@ h4 {
   padding-bottom: 84px;
 }
 
+#prizes h2 {
+  padding-bottom: 10px;
+}
+
 #prizes .prizes {
+  padding-top: 63px;
   max-width: 970px;
   margin: 0 auto;
   padding-bottom: 84px;
@@ -796,11 +807,13 @@ h4 {
 }
 
    #footer { 
-        box-sizing: border-box;
-        width: 100%;
+        background: black;
+        & > div {
+            box-sizing: border-box;
+            width: 100%;
             max-width: 1140px;
             margin: 0 auto;
-           
+        }
 
         & .logo {
             
@@ -818,6 +831,9 @@ h4 {
             padding: 20px 0;
             border-top: 1px solid #FFFFFF55;
 
+        }
+        h5 {
+          color: white;
         }
         & .licenses {
   
