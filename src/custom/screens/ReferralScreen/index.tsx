@@ -32,7 +32,7 @@ import {
     signUp,
     User,
 } from '../../../modules';
-import {  Banner, GetCode, HIW, HowTo, Prizes, Timelines, Video } from '../../components/Referral';
+import {  Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, Video } from '../../components/Referral';
 
 interface ReduxProps {
     requireVerification?: boolean;
@@ -211,6 +211,7 @@ class Referral extends React.Component<Props> {
                     <HowTo />
                     <Prizes />
                     <GetCode />
+                    <Footer />
                 </div>
             </div>
         );
