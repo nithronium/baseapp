@@ -10,6 +10,7 @@ import {
 } from 'react-redux';
 import { setDocumentTitle } from '../../../helpers';
 import {
+    BonusPayload,
     ReferralPayload,
     referralTicketsFetch,
     ReferralTicketsPayload,
@@ -51,7 +52,7 @@ class ReferralTickets extends React.Component<Props> {
 
     private getTotalTickets() {
         let total = 0;
-        if (!this.props.referralTickets) { return total; }
+
         if (this.props.direct) {
             total += this.props.direct.emrxTickets;
             total += this.props.direct.usdTickets;
@@ -59,19 +60,17 @@ class ReferralTickets extends React.Component<Props> {
         }
 
         if (this.props.referral) {
-
             this.props.referrals.map((record: ReferralPayload) => {
                 total += record.isActive * (record.tickets + record.activeSubreferrals);
             });
         }
 
-        /*if (this.props.referralTickets.bonusDetails && this.props.referralTickets.bonusDetails.legend) {
-
-            this.props.referralTickets.bonusDetails.legend.map((record, index) => {
-                total += record.count;
+        if (this.props.bonus) {
+            this.props.bonus.map((record: BonusPayload) => {
+                total += record.tickets;
                 return true;
             });
-        }*/
+        }
 
         return total;
     }

@@ -11,7 +11,7 @@ import graphic = require ('../../../assets/images/referral/referral-graphic.svg'
 const GetCode: React.FC = () => {
   return (
     <section id="get-code">
-      <div className="container">
+      <div className="container_">
         <div>
           <img src={graphic} alt="" style={{maxWidth: '100%'}}/>
         </div>

@@ -236,13 +236,15 @@ h4 {
 #get-code {
   background: linear-gradient(180deg, #E8E8E8 10.17%, #FFFFFF 95.23%);
   padding-bottom: 60px;
+  margin: 0 auto;
 }
 
-#get-code .container {
+#get-code .container_ {
   padding-top: 103px;
   display: flex;
-  flex-wrap: wrap;
   padding-bottom: 103px;
+  max-width: 1150px;
+  margin: 0 auto;
 }
 
 #get-code .social {
@@ -258,6 +260,7 @@ h4 {
 #get-code .terms {
   max-width: 970px;
   margin: 0 auto;
+  padding: 0 20px;
   font-size: 13px;
 }
 
@@ -270,6 +273,13 @@ h4 {
   color: black;
 }
 
+@media (max-width: 1150px) {
+  #get-code .container_ {
+    flex-wrap: wrap;
+    max-width: 600px;
+  }
+}
+
 @media (max-width: 520px) {
   #get-code .social {
     justify-content: space-evenly;
@@ -277,6 +287,9 @@ h4 {
 
   #get-code .social a {
     margin: 8px;
+  }
+  #get-code .terms {
+    padding: 0;
   }
 }
 
@@ -679,7 +692,7 @@ h4 {
     top: unset;
     left: unset;
     right: unset;
-    width: 160px;
+    width: 200px;
     position: relative;
     padding-bottom: 1.6em;
     padding-left: 42px;

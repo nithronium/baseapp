@@ -18,8 +18,15 @@ import {
     setDocumentTitle,
 } from '../../../helpers';
 import {
+    BonusPayload,
+    ReferralPayload,
+    referralTicketsFetch,
+    ReferralTicketsPayload,
     RootState,
     selectCurrentLanguage,
+    selectReferralTicketsBonuses,
+    selectReferralTicketsDirect,
+    selectReferralTicketsReferrals,
     selectSignUpRequireVerification,
     selectUserInfo,
     signUp,
@@ -31,10 +38,14 @@ interface ReduxProps {
     requireVerification?: boolean;
     loading?: boolean;
     user: User;
+    bonuses: ReferralTicketsPayload['bonuses'];
+    direct: ReferralTicketsPayload['user'];
+    referrals: ReferralTicketsPayload['referrals'];
 }
 
 interface DispatchProps {
     signUp: typeof signUp;
+    fetchReferralTickets: typeof referralTicketsFetch;
 }
 
 interface RouterProps {
@@ -73,6 +84,7 @@ class Referral extends React.Component<Props> {
         this.setState({
             refId: referralCode,
         });
+        this.props.fetchReferralTickets();
     }
 
     public componentWillReceiveProps(props: Props) {
@@ -161,7 +173,7 @@ class Referral extends React.Component<Props> {
             return (
                 <div className="total-tickets-wrapper">
                     <div className="total-tickets">
-                        <div className="header">My total tickets: 0</div>
+                        <div className="header">My total tickets: {this.getTotalTickets()}</div>
                         <div className="content">
                             Go to <a href="/referral-tickets">Referral balance</a>
                         </div>
@@ -396,16 +408,45 @@ class Referral extends React.Component<Props> {
             return;
         }
     };
+
+    private getTotalTickets = () => {
+        let total = 0;
+
+        if (this.props.direct) {
+            total += this.props.direct.emrxTickets;
+            total += this.props.direct.usdTickets;
+            total += this.props.direct.ticketForRegistration;
+        }
+
+        if (this.props.referral) {
+            this.props.referrals.map((record: ReferralPayload) => {
+                total += record.isActive * (record.tickets + record.activeSubreferrals);
+            });
+        }
+
+        if (this.props.bonus) {
+            this.props.bonus.map((record: BonusPayload) => {
+                total += record.tickets;
+                return true;
+            });
+        }
+
+        return total;
+    }
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     requireVerification: selectSignUpRequireVerification(state),
     i18n: selectCurrentLanguage(state),
     user: selectUserInfo(state),
+    bonuses: selectReferralTicketsBonuses(state),
+    direct: selectReferralTicketsDirect(state),
+    referrals: selectReferralTicketsReferrals(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
     signUp: credentials => dispatch(signUp(credentials)),
+    fetchReferralTickets: () => dispatch(referralTicketsFetch()),
 });
 
 // tslint:disable
