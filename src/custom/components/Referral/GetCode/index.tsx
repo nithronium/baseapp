@@ -20,13 +20,17 @@ const GetCode: React.FC = () => {
           <p>Watch out for the codes being shared or search for the hashtag <b>#WinWithEmirex</b></p>
           <p><b>Follow us on social media!</b></p>
           <div className="social">
+            <div>
             <a href="https://www.facebook.com/emirex.official/"><img src={facebook} alt=""/></a>
             <a href="https://www.instagram.com/emirex_official/"><img src={instagram} alt=""/></a>
             <a href="https://twitter.com/EMIREX_OFFICIAL"><img src={twitter} alt=""/></a>
             <a href="https://t.me/joinchat/DqGU61OCcKlwpg073YO0fA"><img src={telegram} alt=""/></a>
+            </div>
+            <div>
             <a href="https://medium.com/@EMIREX_OFFICIAL"><img src={medium} alt=""/></a>
             <a href="https://www.linkedin.com/company/emirexgroup/?viewAsMember=true"><img src={linkedin} alt=""/></a>
             <a href="https://www.reddit.com/user/Emirex__official/comments/d1vsum/introducing_the_next_stage_in_the_technology_roll/"><img src={reddit} alt=""/></a>
+            </div>
           </div>
         </div>
       </div>

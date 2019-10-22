@@ -1,12 +1,11 @@
 import * as React from 'react';
 import campaign = require ('../../../assets/images/referral/campaign-bar.png');
 import video = require ('../../../assets/images/referral/video.svg');
-import './video.css';
 
 const Video: React.FC = () => {
   return (
     <section id="video">
-      <div className="container">
+      <div className="container_">
         <div className="header">
           <h4>Watch the video to see how you can</h4>
           <div className="win-with-emirex">#WinWithEmirex</div>

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import './timelines.css';
 
 const Timelines: React.FC = () => {
   return (

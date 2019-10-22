@@ -233,6 +233,7 @@ h4 {
   #banner .grab {
     display: block;
     margin: 0 auto;
+    padding: 0 30px;
     max-width: 100%;
   }
 
@@ -262,7 +263,7 @@ h4 {
 
 #get-code .social {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -290,6 +291,7 @@ h4 {
   #get-code .container_ {
     flex-wrap: wrap;
     max-width: 600px;
+    padding: 0 20px;
   }
 }
 
@@ -302,7 +304,11 @@ h4 {
     margin: 8px;
   }
   #get-code .terms {
-    padding: 0;
+    padding: 0 20px;
+  }
+
+  #get-code .container_ {
+    max-width: 100%;
   }
 }
 
@@ -732,7 +738,7 @@ h4 {
   background: url('./custom/assets/images/referral/background-lines-white.svg') bottom left no-repeat #FFD542;
   position: relative;
 }
-#video .container {
+#video .container_ {
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -785,22 +791,25 @@ h4 {
 
 #video .button-container {
   width: 224px;
-  position: absolute;
+  position: relative;
   bottom: -12px;
   left: calc(50% - 110px);
 }
 
 @media (max-width: 768px) {
-  #video .container {
-    padding-top: 0px;
+  #video .container_ {
+    padding: 0px 25px;
+  }
+
+  #video .button-container {
+    padding-top: 33px;
+    padding-bottom: 73px;
   }
 
   #video img.campaign {
     max-width: 95%;
   }
-}
 
-@media (max-width: 768px) {
   #video .win-with-emirex, #video h4 {
     font-size: 36px;
   }
