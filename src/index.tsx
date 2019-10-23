@@ -13,22 +13,27 @@ import { rootSaga } from './modules';
 import { rangerSagas } from './modules/public/ranger';
 import { rangerMiddleware, sagaMiddleware, store } from './store';
 
-
 const history = createBrowserHistory();
 
 // tslint:disable-next-line:no-submodule-imports
 import en = require('react-intl/locale-data/en');
 
-
 addLocaleData([...en, ...customLocaleData]);
 sagaMiddleware.run(rootSaga);
 rangerMiddleware.run(rangerSagas);
 
-const render = () => ReactDOM.render(
-    <Provider store={store}>
-        <App history={history} />
-    </Provider>,
-    document.getElementById('root') as HTMLElement,
-);
+const render = () =>
+    ReactDOM.render(
+        <Provider store={store}>
+            <App history={history} />
+        </Provider>,
+        document.getElementById('root') as HTMLElement,
+    );
 
-render();
+const ua = navigator.userAgent.toLowerCase();
+const isIe = /trident/gi.test(ua) || /msie/gi.test(ua);
+if (!isIe) {
+    render();
+} else {
+    history.push('/en/ie');
+}
