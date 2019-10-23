@@ -1,9 +1,9 @@
 import * as React from 'react';
+import { Link } from 'react-scroll';
 import backFull = require('../../../assets/images/referral/back-full.svg');
 import backLeft = require('../../../assets/images/referral/back-left.svg');
 import backRight = require('../../../assets/images/referral/back-right.svg');
 import ticket = require('../../../assets/images/referral/ticket.svg');
-import './howto.css';
 
 const HowTo: React.FC = () => {
   return (
@@ -40,7 +40,7 @@ const HowTo: React.FC = () => {
 
 
       <div className="button-container">
-        <a href="#get-code" className="button yellow-button">Get a Code</a>
+        <Link to="get-code" smooth={true} duration={300} className="button yellow-button">Get a Code</Link>
       </div>
     </section>
   );

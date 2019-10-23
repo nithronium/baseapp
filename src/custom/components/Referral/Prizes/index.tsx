@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { Link } from 'react-scroll';
 import bitcoin = require('../../../assets/images/referral/bitcoin.svg');
 import emrx = require('../../../assets/images/referral/emrx.svg');
-import './prizes.css';
 
 interface Prize {
   heading: string;
@@ -77,7 +77,7 @@ const Prizes: React.FC = () => {
         </div>
       </div>
       <div className="button-container">
-        <a href="#get-code" className="button yellow-button">Get a Code</a>
+        <Link to="get-code" smooth={true} duration={300} className="button yellow-button">Get a Code</Link>
       </div>
       </section>
   );

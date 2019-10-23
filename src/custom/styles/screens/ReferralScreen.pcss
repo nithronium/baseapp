@@ -6,9 +6,20 @@
     background: white;
     .pg-referral-screen__container {
         background: var(--referral-gold);
-        //margin-top: calc(var(--gap) * 3.33);
-        //width: calc(var(--gap) * 70.66);
+        width: 430px;
+    }
+    @media (max-width:430px) {
+      .pg-referral-screen__container {
         width: 360px;
+      } 
+    }
+    @media (max-width:360px) {
+      .pg-referral-screen__container {
+        width: 100%;
+      } 
+      #banner .signup-container {
+        width: 100%;
+      }
     }
     .cr-logo {
         display: none;
@@ -186,7 +197,6 @@ h4 {
 }
 
 #banner .signup-container {
-  width: 330px;
   height: 620px;
   background: transparent;
   margin: 0 auto;
@@ -250,6 +260,7 @@ h4 {
 #get-code {
   background: linear-gradient(180deg, #E8E8E8 10.17%, #FFFFFF 95.23%);
   padding-bottom: 60px;
+  padding-top: 50px;
   margin: 0 auto;
 }
 
@@ -274,7 +285,7 @@ h4 {
 #get-code .terms {
   max-width: 970px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 30px;
   font-size: 13px;
 }
 
@@ -291,7 +302,7 @@ h4 {
   #get-code .container_ {
     flex-wrap: wrap;
     max-width: 600px;
-    padding: 0 20px;
+    padding: 0 30px;
   }
 }
 
@@ -327,7 +338,7 @@ h4 {
 }
 
 #how-it-works h4 {
-  margin-top: 3px;
+  margin: 3px 40px 0;
 }
 
 #how-it-works .step {
@@ -362,8 +373,16 @@ h4 {
     flex-direction: column;
   }
 
+  #how-it-works .step {
+    margin: 0 40px;
+  }
+
   #how-it-works .step:first-of-type {
-    margin-left: 24px;
+    margin-left: 40px;
+  }
+
+  #how-it-works .step:last-of-type {
+    margin-right: 40px;
   }
 }
 

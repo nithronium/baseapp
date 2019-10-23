@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './banner.css';
+import { Link } from 'react-scroll';
 
 const Banner: React.FC = ({children}) => {
   return (
@@ -10,7 +10,7 @@ const Banner: React.FC = ({children}) => {
             <img src={require('../../../../custom/assets/images/referral/banner-text.png')} className="grab" alt="" />
             <img src={require('../../../../custom/assets/images/referral/header-graphic.svg')} className="header-graphic" alt="" />
             <div className="button-container">
-              <a href="#get-code" className="button yellow-button">Get a Code</a>
+              <Link to="get-code" smooth={true} duration={300} className="button yellow-button">Get a Code</Link>
             </div>
           </div>
         </div>
@@ -18,7 +18,6 @@ const Banner: React.FC = ({children}) => {
           {children}
         </div>
       </div>
-      <div className="scroll-icon-container"/>
     </section>
   );
 };

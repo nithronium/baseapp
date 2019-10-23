@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-scroll';
 import campaign = require ('../../../assets/images/referral/campaign-bar.png');
 import video = require ('../../../assets/images/referral/video.svg');
 
@@ -16,7 +17,7 @@ const Video: React.FC = () => {
         </div>
       </div>
       <div className="button-container">
-        <a href="#get-code" className="button black-button">Get a Code</a>
+        <Link to="get-code" smooth={true} duration={300} className="button black-button">Get a Code</Link>
       </div>
     </section>
   );
