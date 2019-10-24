@@ -164,7 +164,6 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     // tslint:disable
     private getProfile = () => {
         const { /*colorTheme,*/ user } = this.props;
-        const linkToReferral = user.state === 'pending' ? '/email-verifiacation' : '/referral'
         return (
             <div className="pg-navbar__header-profile">
                 <span>{user.email}</span>
@@ -173,8 +172,8 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 </Link>
                 <Link
                     className="pg-navbar__admin-logout"
-                    to={linkToReferral}
-                    onClick={this.handleRouteChange(linkToReferral)}
+                    to="/referral"
+                    onClick={this.handleRouteChange('/referral')}
                 >
                     <FormattedMessage id={'page.header.navbar.refprogram'} />
                 </Link>
@@ -274,7 +273,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     };
 
     private getUserMenu = () => {
-        const linkToReferral = this.props.user.state === 'pending' ? '/email-verifiacation' : '/referral'
+
         return (
             <div className="dropdown-menu dropdown-menu-user" role="menu">
                 <div className="dropdown-menu-item-user">
@@ -285,8 +284,8 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 <div className="dropdown-menu-item-user">
                     <Link
                         className="pg-navbar__admin-logout"
-                        to={linkToReferral}
-                        onClick={this.handleRouteChange(linkToReferral)}
+                        to="/referral"
+                        onClick={this.handleRouteChange('/referral')}
                     >
                         <FormattedMessage id={'page.header.navbar.refprogram'} />
                     </Link>

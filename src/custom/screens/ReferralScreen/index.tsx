@@ -88,7 +88,7 @@ class Referral extends React.Component<Props> {
     }
 
     public componentWillReceiveProps(props: Props) {
-        if (props.requireVerification || (props.user && props.user.state === 'pending')) {
+        if (props.requireVerification) {
             props.history.push('/email-verification', { email: this.state.email });
         }
     }
