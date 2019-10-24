@@ -10,7 +10,7 @@ const Banner: React.FC = ({children}) => {
             <img src={require('../../../../custom/assets/images/referral/banner-text.png')} className="grab" alt="" />
             <img src={require('../../../../custom/assets/images/referral/header-graphic.svg')} className="header-graphic" alt="" />
             <div className="button-container">
-              <Link to="get-code" smooth={true} duration={300} className="button yellow-button">Get a Code</Link>
+              <Link to="get-code" smooth={true} duration={500} className="button yellow-button">Get a Code</Link>
             </div>
           </div>
         </div>

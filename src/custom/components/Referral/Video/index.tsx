@@ -17,7 +17,7 @@ const Video: React.FC = () => {
         </div>
       </div>
       <div className="button-container">
-        <Link to="get-code" smooth={true} duration={300} className="button black-button">Get a Code</Link>
+        <Link to="get-code" smooth={true} duration={500} className="button black-button">Get a Code</Link>
       </div>
     </section>
   );
