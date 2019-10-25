@@ -419,8 +419,8 @@ class Referral extends React.Component<Props> {
             total += this.props.direct.ticketForRegistration;
         }
 
-        if (this.props.referral) {
-            this.props.referral.map((record: ReferralPayload) => {
+        if (this.props.referrals) {
+            this.props.referrals.map((record: ReferralPayload) => {
                 total += /* record.isActive * */ (record.tickets + record.subreferrals);
             });
         }
