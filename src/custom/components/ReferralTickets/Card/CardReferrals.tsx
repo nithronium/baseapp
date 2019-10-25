@@ -12,6 +12,14 @@ interface CardProps {
 
 class CardReferrals extends React.Component<CardProps>{
 
+    public sumSubreferrals(): number {
+        let total = 0;
+        this.props.context.map(record => {
+            total += record.subreferrals;
+        });
+        return total;
+    }
+
     public getTotal(mode = 'all', summMode = ''): number{
         let total = 0;
         if (!(this.props.context)) {
@@ -91,7 +99,7 @@ class CardReferrals extends React.Component<CardProps>{
                         <span className="card-top__left__suffix">tickets</span>
                     </div>
                     <div className="card-top__right">
-                        {this.getTotal()}
+                        {this.getTotal() + this.sumSubreferrals()}
                     </div>
                 </div>
                 {this.activeInactive()}
