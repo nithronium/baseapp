@@ -52,9 +52,12 @@ class ReferralProgramClass extends React.Component<Props> {
     public sendRefCode = async () => {
         const { refId } = this.state;
         const { user } = this.props;
-
+        const domen =
+            window.document.location.origin === 'http://www.app.local'
+                ? 'http://stage.emirex.com'
+                : window.document.location.origin;
         // console.log(refId);
-        const url = `${window.document.location.origin}/api/v1/referral-code?user_id=${user.uid}&referral_id=${refId}`;
+        const url = `${domen}/api/v1/referral-code?user_id=${user.uid}&referral_id=${refId}`;
         // const url = 'www.stage.emirex.com/api/v1/referral-code?user_uid=IDBFC6DFEFBF&referral_code=IDBF19BD26D5';
         try {
             const resp = await axios.get(url);
@@ -71,7 +74,9 @@ class ReferralProgramClass extends React.Component<Props> {
                 this.props.fetchSuccess({ message: ['identity.user.referral_doesnt_exist'], type: 'error' });
             }
         } catch (err) {
-            this.props.fetchSuccess({ message: ['server.internal_error'], type: 'error' });
+            const refId = '';
+            this.setState({ refId });
+            this.props.fetchSuccess({ nessage: ['identity.user.referral_doesnt_exist'], type: 'error' });
         }
     };
 
