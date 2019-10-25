@@ -49,15 +49,12 @@ class ReferralProgramClass extends React.Component<Props> {
     };
 
     public sendRefCode = async () => {
-        // const { refId } = this.state;
+        const { refId } = this.state;
         const { user } = this.props;
-        const domen =
-            window.document.location.origin === 'http://www.app.local'
-                ? 'http://stage.emirex.com'
-                : window.document.location.origin;
+        const domen = window.document.location.origin;
         // console.log(refId);
-        // const url = `${domen}/api/v1/referral-code?user_uid=${user.uid}&referral_code=${refId}`;
-        const url = `${domen}/api/v1/referral-code?user_uid=${user.uid}&referral_code=IDBF19BD26D5`;
+        const url = `${domen}/api/v1/referral-code?user_uid=${user.uid}&referral_code=${refId}`;
+        // const url = `${domen}/api/v1/referral-code?user_uid=${user.uid}&referral_code=IDBF19BD26D5`;
         try {
             const resp = await axios.get(url);
             // const resp2 = await saveCode(refId);
@@ -80,7 +77,11 @@ class ReferralProgramClass extends React.Component<Props> {
     };
 
     componentDidMount = () => {
-        const userRefUid = localStorage.getItem('ref_id') ? localStorage.getItem('ref_id') : this.props.user.referral_uid;
+        const userRefUid = this.props.user.referral_uid;
+        const ref_id = localStorage.getItem('ref_id') || '';
+        if (userRefUid && ref_id) {
+            localStorage.removeItem('ref_id');
+        }
         // console.log(userRefUid);
         this.setState({ userRefUid });
     };
@@ -125,7 +126,7 @@ class ReferralProgramClass extends React.Component<Props> {
                         />
                         <Button
                             type="submit"
-                            className=""
+                            className="ref-code-button"
                             label={'Save Code'}
                             onClick={() => {
                                 this.sendRefCode();
