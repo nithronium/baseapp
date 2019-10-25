@@ -20,6 +20,14 @@ class CardReferrals extends React.Component<CardProps>{
         return total;
     }
 
+    public sumActiveSubreferrals(): number {
+        let total = 0;
+        this.props.context.map(record => {
+            total += record.activeSubreferrals;
+        });
+        return total;
+    }
+
     public getTotal(mode = 'all', summMode = ''): number{
         let total = 0;
         if (!(this.props.context)) {
@@ -63,11 +71,11 @@ class CardReferrals extends React.Component<CardProps>{
                 <div className="card-middle">
                     <div className="card-details-row">
                         <div className="card-details-row__left">referrals active</div>
-                        <div className="card-details-row__right">{this.getTotal('active')}</div>
+                        <div className="card-details-row__right">{this.getTotal('active') + this.sumActiveSubreferrals()}</div>
                     </div>
                     <div className="card-details-row">
                         <div className="card-details-row__left">referrals inactive</div>
-                        <div className="card-details-row__right">{this.getTotal('inactive')}</div>
+                        <div className="card-details-row__right">{this.getTotal('inactive') + this.sumSubreferrals() - this.sumActiveSubreferrals()}</div>
                     </div>
                 </div>
             );
