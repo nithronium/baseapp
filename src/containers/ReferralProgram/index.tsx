@@ -1,7 +1,10 @@
+import { Button } from '@openware/components';
+import axios from 'axios';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl, intlShape } from 'react-intl';
 import { connect, MapDispatchToProps } from 'react-redux';
-import { CopyableTextField } from '../../components';
+// import { saveCode } from '../../api';
+import { CopyableTextField, CustomInput } from '../../components';
 import { alertPush, RootState, selectUserInfo, User } from '../../modules';
 
 interface ReduxProps {
@@ -26,11 +29,15 @@ const copy = (id: string) => {
 };
 
 type Props = ReduxProps & DispatchProps & InjectedIntlProps;
-
+//tslint:disable
 class ReferralProgramClass extends React.Component<Props> {
     //tslint:disable-next-line:no-any
     public static propsTypes: React.ValidationMap<any> = {
         intl: intlShape.isRequired,
+    };
+    public readonly state = {
+        refId: '',
+        userRefUid: '',
     };
 
     public translate = (e: string) => {
@@ -42,13 +49,46 @@ class ReferralProgramClass extends React.Component<Props> {
         this.props.fetchSuccess({ message: ['page.body.wallets.tabs.deposit.ccy.message.success'], type: 'success' });
     };
 
+    public sendRefCode = async () => {
+        const { refId } = this.state;
+        const { user } = this.props;
+
+        // console.log(refId);
+        const url = `${window.document.location.origin}/api/v1/referral-code?user_id=${user.uid}&referral_id=${refId}`;
+        // const url = 'www.stage.emirex.com/api/v1/referral-code?user_uid=IDBFC6DFEFBF&referral_code=IDBF19BD26D5';
+        try {
+            const resp = await axios.get(url);
+            // const resp2 = await saveCode(refId);
+            // console.log(resp);
+            // console.log(resp2);
+            if (resp.status === 200) {
+                const userRefUid = this.state.refId;
+                this.setState({ userRefUid });
+                localStorage.setItem('ref_id', userRefUid);
+            } else {
+                const refId = '';
+                this.setState({ refId });
+                this.props.fetchSuccess({ message: ['identity.user.referral_doesnt_exist'], type: 'error' });
+            }
+        } catch (err) {
+            this.props.fetchSuccess({ message: ['server.internal_error'], type: 'error' });
+        }
+    };
+
+    componentDidMount = () => {
+        const userRefUid = localStorage.getItem('ref_id') ? localStorage.getItem('ref_id') : this.props.user.referral_uid;
+        // console.log(userRefUid);
+        this.setState({ userRefUid });
+    };
+
     public render() {
         const { user } = this.props;
+        const { refId, userRefUid } = this.state;
         // tslint:disable
-        const referralLink = `${window.document.location.origin}/signup?refid=${user.uid}`;
+        const referralLink = `${window.document.location.origin}/referral?refid=${user.uid}`;
         return (
             <div className="pg-profile-page__referral mb-3">
-                {user.referral_uid ? (
+                {userRefUid ? (
                     <fieldset className="pg-copyable-text__section" onClick={this.doCopy}>
                         <legend className="cr-deposit-crypto__copyable-title">
                             <FormattedMessage id="page.body.profile.header.referralProgram" />
@@ -61,7 +101,33 @@ class ReferralProgramClass extends React.Component<Props> {
                         />
                     </fieldset>
                 ) : (
-                    <span></span>
+                    <div className="ref-code-input-field">
+                        <p>
+                            <a href="/referral#get-code">How to find a code?</a>
+                        </p>
+                        <CustomInput
+                            type="text"
+                            label={''}
+                            placeholder={'Enter Your Referral Code'}
+                            defaultLabel=""
+                            handleChangeInput={value => {
+                                this.setState({ refId: value });
+                            }}
+                            inputValue={refId}
+                            handleFocusInput={() => {}}
+                            classNameLabel=""
+                            classNameInput="cr-email-form__input"
+                            autoFocus={true}
+                        />
+                        <Button
+                            type="submit"
+                            className=""
+                            label={'Save Code'}
+                            onClick={() => {
+                                this.sendRefCode();
+                            }}
+                        />
+                    </div>
                 )}
             </div>
         );
