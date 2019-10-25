@@ -1,7 +1,28 @@
-import axios, { AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { applogicUrl, authUrl, exchangeRatesUrl, instexServiceUrl, nodelogicUrl, referralCommissionUrl, referralUrl, tradeUrl, withCredentials } from './config';
+import {
+    applogicUrl,
+    authUrl,
+    exchangeRatesUrl,
+    instexServiceUrl,
+    nodelogicUrl,
+    referralCommissionUrl,
+    referralUrl,
+    tradeUrl,
+    withCredentials,
+    arkeUrl,
+} from './config';
+import axios, {
+    AxiosError,
+    AxiosPromise,
+    AxiosRequestConfig,
+    AxiosResponse,
+} from 'axios';
 
-export type HTTPMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
+export type HTTPMethod =
+    'get'
+    | 'post'
+    | 'delete'
+    | 'put'
+    | 'patch';
 
 export interface JsonBody {
     // tslint:disable-next-line no-any
@@ -9,7 +30,7 @@ export interface JsonBody {
 }
 
 export interface RequestOptions {
-    apiVersion: 'applogic' | 'nodelogic' | 'peatio' | 'barong' | 'referral' | 'referralCommission' | 'exchangeRates' | 'instexService';
+    apiVersion: 'applogic' | 'nodelogic' | 'peatio' | 'barong' | 'referral' | 'referralCommission' | 'exchangeRates' | 'instexService' | 'arke';
     withHeaders?: boolean;
 }
 
@@ -34,6 +55,7 @@ const getAPI = () => ({
     exchangeRates: `${exchangeRatesUrl()}`,
     referralCommission: `${referralCommissionUrl()}`,
     instexService: `${instexServiceUrl()}`,
+    arke: `${arkeUrl()}`,
 });
 
 const buildRequest = (request: Request, configData: RequestOptions) => {

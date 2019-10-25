@@ -6,6 +6,7 @@ export interface Config {
         rangerUrl: string;
         nodelogicUrl: string;
         exchangeRatesUrl: string;
+        arkeUrl: string;
     };
     minutesUntilAutoLogout?: string;
     rangerReconnectPeriod?: string;

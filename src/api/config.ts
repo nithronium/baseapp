@@ -9,6 +9,7 @@ export const defaultConfig: Config = {
         rangerUrl: '',
         nodelogicUrl: '',
         exchangeRatesUrl: '',
+        arkeUrl: '',
     },
     minutesUntilAutoLogout: '5',
     rangerReconnectPeriod: '1',
@@ -49,6 +50,7 @@ export const authUrl = () => Cryptobase.config.api.authUrl;
 export const nodelogicUrl = () => Cryptobase.config.api.nodelogicUrl;
 export const exchangeRatesUrl = () => Cryptobase.config.api.exchangeRatesUrl;
 export const tradeUrl = () => Cryptobase.config.api.tradeUrl;
+export const arkeUrl = () => Cryptobase.config.api.arkeUrl || tradeUrl();
 export const applogicUrl = () => Cryptobase.config.api.applogicUrl;
 export const rangerUrl = () => Cryptobase.config.api.rangerUrl;
 export const minutesUntilAutoLogout = (): string => Cryptobase.config.minutesUntilAutoLogout || '5';

@@ -15,6 +15,7 @@ const mockConfig: Config = {
         rangerUrl: '/api/v2/ranger',
         nodelogicUrl: '/api/v2/nodelogic',
         exchangeRatesUrl: '/api/v2/exchange-rates',
+        arkeUrl: '/api/v2/arke',
     },
     minutesUntilAutoLogout: '5',
     rangerReconnectPeriod: '1',

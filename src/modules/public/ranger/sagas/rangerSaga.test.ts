@@ -51,6 +51,7 @@ describe('Ranger module', () => {
                 rangerUrl: `ws://localhost:${echoServerPort}`,
                 nodelogicUrl: '',
                 exchangeRatesUrl: '',
+                arkeUrl: '',
             },
             rangerReconnectPeriod: '0.1',
         };
