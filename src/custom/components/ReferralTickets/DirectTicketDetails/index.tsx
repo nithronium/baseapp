@@ -18,7 +18,7 @@ class DirectTicketDetails extends React.Component<Props>{
                 <div className="container">
                     <div className="container-wrapper">
                         <h2 style={{paddingBottom: '30px'}}>Direct ticket details</h2>
-                        <p className="table-margin">overall {ctx.usdTickets + ctx.emrxTickets + ctx.ticketForRegistration} tickets<br/>&nbsp;</p>
+                        <p className="table-margin">overall {ctx.usdTickets + ctx.emrxTickets + 1} tickets<br/>&nbsp;</p>
                         <table>
                             <tbody>
                             <tr>

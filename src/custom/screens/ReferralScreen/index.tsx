@@ -416,7 +416,7 @@ class Referral extends React.Component<Props> {
         if (this.props.direct) {
             total += this.props.direct.emrxTickets;
             total += this.props.direct.usdTickets;
-            total += this.props.direct.ticketForRegistration;
+            total += 1; // this.props.direct.ticketForRegistration;
         }
 
         if (this.props.referrals) {
