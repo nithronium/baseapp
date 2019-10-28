@@ -19,6 +19,8 @@ import {
     selectReferralTicketsDirect,
     selectReferralTicketsLoading,
     selectReferralTicketsReferrals,
+    selectUserInfo,
+    User,
 } from '../../../modules';
 import {
     BonusTicketDetails,
@@ -39,6 +41,7 @@ interface ReduxProps {
     direct: ReferralTicketsPayload['user'];
     referrals: ReferralTicketsPayload['referrals'];
     loading: boolean;
+    user: User;
 }
 
 type Props = DispatchProps & InjectedIntlProps & ReduxProps;
@@ -88,7 +91,7 @@ class ReferralTickets extends React.Component<Props> {
                         </ReferralBallance>
                     </section>
                     <section id="direct">
-                        <DirectTicketDetails context={this.props.direct} />
+                        <DirectTicketDetails context={this.props.direct} user={this.props.user}/>
                     </section>
                 </div>
                 <section id="referral">
@@ -107,6 +110,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     direct: selectReferralTicketsDirect(state),
     referrals: selectReferralTicketsReferrals(state),
     loading: selectReferralTicketsLoading(state),
+    user: selectUserInfo(state),
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
