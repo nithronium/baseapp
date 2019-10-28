@@ -22,8 +22,8 @@ class DirectTicketDetails extends React.Component<Props>{
                         <table>
                             <tbody>
                             <tr>
-                                <td><span className="count">1</span><span className="explanation">tickets</span></td>
-                                <td><span className="count">tickets for registration (activated: {ctx.ticketForRegistration})</span></td>
+                                <td><span className="count">1</span><span className="explanation"> ticket</span></td>
+                                <td><span className="count">{ctx.ticketForRegistration ? 'activated' : 'not activated'}</span></td>
                                 <td><span className="count">{ctx.ticketForRegistration ? null : <button className="button"><a href="/wallets">activate</a></button>}</span></td>
                             </tr>
                             <tr>
