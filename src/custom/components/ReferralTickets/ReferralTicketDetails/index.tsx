@@ -86,39 +86,41 @@ class ReferralTicketDetails extends React.Component<Props, State>{
         return(
 
             <div className="referral-ticket-details">
-                <div className="container wrap">
-                    <div className="left"><h2>Referral tickets details</h2></div>
-                    <div className="right">
-                        <a href="#!" onClick={this.filterLegend} data-filter="all" className={filterClassName('all')}>all</a> /
-                        <a href="#!" onClick={this.filterLegend} data-filter="active" className={filterClassName('active')}>active</a> /
-                        <a href="#!" onClick={this.filterLegend} data-filter="inactive" className={filterClassName('inactive')}>inactive</a>
+                <div className="container column">
+                    <div className="container wrap">
+                        <div className="left"><h2>Referral tickets details</h2></div>
+                        <div className="right">
+                            <a href="#!" onClick={this.filterLegend} data-filter="all" className={filterClassName('all')}>all</a> /
+                            <a href="#!" onClick={this.filterLegend} data-filter="active" className={filterClassName('active')}>active</a> /
+                            <a href="#!" onClick={this.filterLegend} data-filter="inactive" className={filterClassName('inactive')}>inactive</a>
+                        </div>
                     </div>
-                </div>
-                <div className="table-wrap">
-                    <table id="referral-details-list">
-                        <thead>
-                            <tr>
-                                <td>Tickets</td>
-                                <td>L1 referral</td>
-                                <td>Active</td>
-                                <td>L2 referrals</td>
-                                <td>L2 active</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        {tableRow(legendArray)}
-                        </tbody>
-                        <tfoot>
-                            <tr><td style={{paddingBottom: 0}} colSpan={5}><span className="table-summary-header">total</span></td></tr>
-                            <tr>
-                                <td><span className="count">{this.getTotal('tickets') + this.getTotal('subreferrals')}</span> <span className="explanation">tickets</span></td>
-                                <td>{this.getTotal('email', 'count')} referreres</td>
-                                <td>yes {this.getTotal('isActive', 'count', 1)} / no {this.getTotal('isActive', 'count', 0)} </td>
-                                <td>{this.getTotal('subreferrals')} <span className="explanation">referrals</span></td>
+                    <div className="table-wrap">
+                        <table id="referral-details-list">
+                            <thead>
+                                <tr>
+                                    <td>Tickets</td>
+                                    <td>L1 referral</td>
+                                    <td>Active</td>
+                                    <td>L2 referrals</td>
+                                    <td>L2 active</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            {tableRow(legendArray)}
+                            </tbody>
+                            <tfoot>
+                                <tr><td style={{paddingBottom: 0}} colSpan={5}><span className="table-summary-header">total</span></td></tr>
+                                <tr>
+                                    <td><span className="count">{this.getTotal('tickets') + this.getTotal('subreferrals')}</span> <span className="explanation">tickets</span></td>
+                                    <td>{this.getTotal('email', 'count')} referreres</td>
+                                    <td>yes {this.getTotal('isActive', 'count', 1)} / no {this.getTotal('isActive', 'count', 0)} </td>
+                                    <td>{this.getTotal('subreferrals')} <span className="explanation">referrals</span></td>
                                 <td>{this.getTotal('activeSubreferrals')} <span className="explanation">referrals</span></td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
         );
