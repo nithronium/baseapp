@@ -9,6 +9,7 @@ const tableRows = (legendArray: ReferralTicketsPayload['bonuses']): React.ReactN
         return(
             <tr key={index}>
                 <td><span className="count">{record.tickets} <span className="explanation">tickets</span></span></td>
+                <td/>
                 <td>{record.action}</td>
                 <td><a href={record.link}>Follow link</a></td>
             </tr>
@@ -85,27 +86,31 @@ class BonusTicketDetails extends React.Component<Props>{
             <div className="bonus-ticket-details">
                 <div className="container column">
                     <h2>Bonus ticket details</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Tickets</td>
-                                <td>Network Post</td>
-                                <td>Link</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {tableRows(legendArray)}
-                        </tbody>
-                        <tfoot>
-                            {/*<tr><td colSpan={3}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td></tr>*/}
-                            <tr><td style={{paddingBottom: 0}} colSpan={3}><span className="table-summary-header">total</span></td></tr>
-                            <tr>
-                                <td><span className="count">{this.getTotal('count')}</span> tickets</td>
-                                <td>{this.getTotal('posts', 'count')} posts</td>
-                                <td>&nbsp;</td>
-                            </tr>
-                        </tfoot>
-                    </table>
+                    <div className="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Tickets</td>
+                                    <td>Subscription</td>
+                                    <td>Network Post</td>
+                                    <td>Link</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {tableRows(legendArray)}
+                            </tbody>
+                            <tfoot>
+                                {/*<tr><td colSpan={3}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td></tr>*/}
+                                <tr><td style={{paddingBottom: 0}} colSpan={3}><span className="table-summary-header">total</span></td></tr>
+                                <tr>
+                                    <td><span className="count">{this.getTotal('count')}</span> tickets</td>
+                                    <td/>
+                                    <td>{this.getTotal('posts', 'count')} posts</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
         );

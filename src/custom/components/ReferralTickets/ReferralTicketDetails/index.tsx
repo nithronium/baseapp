@@ -16,7 +16,7 @@ const tableRow = (legendArray: ReferralTicketsPayload['referrals']): React.React
             <tr key={index}>
                 <td><span className="count">{record.tickets}</span> <span className="explanation">tickets</span></td>
                 <td>{record.email}</td>
-                <td>{record.isActive ? 'yes' : 'no'}</td>
+                <td>{record.isActive ? 'YES' : 'NO'}</td>
                 <td>{record.subreferrals} <span className="explanation">referrals</span></td>
                 <td>{record.activeSubreferrals} <span className="explanation">referrals</span></td>
             </tr>
@@ -94,13 +94,13 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                         <a href="#!" onClick={this.filterLegend} data-filter="inactive" className={filterClassName('inactive')}>inactive</a>
                     </div>
                 </div>
-                <div className="container column">
+                <div className="table-wrap">
                     <table id="referral-details-list">
                         <thead>
                             <tr>
                                 <td>Tickets</td>
                                 <td>L1 referral</td>
-                                <td>L1 active</td>
+                                <td>Active</td>
                                 <td>L2 referrals</td>
                                 <td>L2 active</td>
                             </tr>
