@@ -1,7 +1,10 @@
 import * as React from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+
+import beta = require('../../assets/images/beta.svg');
 import logo = require('../../assets/images/logo.svg');
+
 import logoLight = require('../../assets/images/logoLight.svg');
 import { RootState, selectCurrentColorTheme, selectMobileWalletUi, setMobileWalletUi } from '../../modules';
 import { NavBar } from '../NavBar';
@@ -41,9 +44,23 @@ class Head extends React.Component<any, HeaderState> {
                             <a href={baseURL} className="pg-header__logo">
                                 <div className="pg-logo">
                                     {colorTheme === 'light' ? (
-                                        <img src={logoLight} className="pg-logo__img" alt="Logo" />
+                                        <span>
+                                            <img src={logoLight} className="pg-logo__img" alt="Logo" />
+                                            <img
+                                                src={beta}
+                                                alt="EMIREX LOGO"
+                                                style={{ marginBottom: '20px', marginLeft: '10px' }}
+                                            />
+                                        </span>
                                     ) : (
-                                        <img src={logo} className="pg-logo__img" alt="Logo" />
+                                        <span>
+                                            <img src={logo} className="pg-logo__img" alt="Logo" />
+                                            <img
+                                                src={beta}
+                                                alt="EMIREX LOGO"
+                                                style={{ marginBottom: '20px', marginLeft: '10px' }}
+                                            />
+                                        </span>
                                     )}
                                 </div>
                             </a>
