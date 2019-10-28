@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import logo = require('../../assets/images/logo.svg');
 import logoLight = require('../../assets/images/logoLight.svg');
 import { RootState, selectCurrentColorTheme, selectMobileWalletUi, setMobileWalletUi } from '../../modules';
@@ -32,13 +32,13 @@ class Head extends React.Component<any, HeaderState> {
     public render() {
         const { colorTheme, location, mobileWallet } = this.props;
         const { isActive } = this.state;
-
+        const baseURL = window.document.location.origin;
         return (
             <React.Fragment>
                 {!['/confirm'].some(r => location.pathname.includes(r)) && (
                     <header className={`pg-header ${isActive ? 'pg-header--active' : ''}`}>
                         <div className="pg-container pg-header__content">
-                            <Link to={'/'} className="pg-header__logo">
+                            <a href={baseURL} className="pg-header__logo">
                                 <div className="pg-logo">
                                     {colorTheme === 'light' ? (
                                         <img src={logoLight} className="pg-logo__img" alt="Logo" />
@@ -46,7 +46,7 @@ class Head extends React.Component<any, HeaderState> {
                                         <img src={logo} className="pg-logo__img" alt="Logo" />
                                     )}
                                 </div>
-                            </Link>
+                            </a>
                             <div className="pg-header__location">
                                 {mobileWallet ? <span>{mobileWallet}</span> : <span>{location.pathname.split('/')[1]}</span>}
                             </div>
