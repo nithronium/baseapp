@@ -85,7 +85,8 @@ export const en = {
     'page.body.wallets.tabs.deposit.ccy.message.error': 'Generating deposit address',
 
     'page.body.wallets.tabs.deposit.fiat.message1': 'Deposit using bank transfer',
-    'page.body.wallets.tabs.deposit.fiat.message2': 'Please use the following credentials to initiate your bank transfer. Your deposit will be reflected in your account within 5 business days.',
+    'page.body.wallets.tabs.deposit.fiat.message2':
+        'Please use the following credentials to initiate your bank transfer. Your deposit will be reflected in your account within 5 business days.',
     'page.body.wallets.tabs.deposit.fiat.bankName': 'Bank Name',
     'page.body.wallets.tabs.deposit.fiat.accountNumber': 'Account number',
     'page.body.wallets.tabs.deposit.fiat.accountName': 'Account name',
@@ -260,6 +261,9 @@ export const en = {
 
     'page.body.profile.header.referralProgram': 'Referral Link',
     'page.body.profile.content.copyLink': 'Copy',
+    'page.body.profile.refcode.input.placeholder': 'Enter an Existing Referral Code.',
+    'page.body.profile.refcode.how': 'How to find an Existing Referral Code? ',
+    'page.body.profile.refcode.link': ' Click Here.',
 
     'page.body.profile.apiKeys.header': 'My API Keys',
     'page.body.profile.apiKeys.header.create': 'Create new',
