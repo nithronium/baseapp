@@ -18,12 +18,12 @@ class DirectTicketDetails extends React.Component<Props>{
                 <div className="container">
                     <div className="container-wrapper">
                         <h2 style={{paddingBottom: '30px'}}>Direct ticket details</h2>
-                        <p className="table-margin">overall {ctx.usdTickets + ctx.emrxTickets + ctx.ticketForRegistration} tickets<br/>&nbsp;</p>
+                        <p className="table-margin">overall {ctx.usdTickets + ctx.emrxTickets + 1} tickets<br/>&nbsp;</p>
                         <table>
                             <tbody>
                             <tr>
-                                <td><span className="count">{ctx.ticketForRegistration} </span><span className="explanation">tickets</span></td>
-                                <td><span className="count">activated tickets for registration</span></td>
+                                <td><span className="count">1</span><span className="explanation"> ticket</span></td>
+                                <td><span className="count">{ctx.ticketForRegistration ? 'activated' : 'not activated'}</span></td>
                                 <td><span className="count">{ctx.ticketForRegistration ? null : <button className="button"><a href="/wallets">activate</a></button>}</span></td>
                             </tr>
                             <tr>

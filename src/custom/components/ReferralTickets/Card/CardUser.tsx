@@ -31,7 +31,7 @@ class CardUser extends React.Component<CardProps>{
                         <span className="card-top__left__suffix">tickets</span>
                     </div>
                     <div className="card-top__right">
-                        {ctx.emrxTickets + ctx.usdTickets + ctx.ticketForRegistration}
+                        {ctx.emrxTickets + ctx.usdTickets + 1}
                     </div>
                 </div>
                 <div className="card-middle"/>
