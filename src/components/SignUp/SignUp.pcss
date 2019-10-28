@@ -7,8 +7,11 @@
   position: relative;
 
   &__terms-link {
+    display: inline;
+    vertical-align: -webkit-baseline-middle;
     font-size: 14px;
     padding-left: 10px;
+    padding-top: 10px;
     a {      
       color: white;
     }
@@ -187,6 +190,8 @@
   }
 
   &__checkbox {
+    display: inline;
+    vertical-align: -webkit-baseline-middle;
     word-wrap: break-word;
     background: var(--transparent);
     margin-left: 10px;
@@ -222,8 +227,9 @@
   }
 
   &__recaptcha {
+    padding-top: 30px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     position: absolute;
     z-index: 2;
     right: 0;

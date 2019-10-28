@@ -10,8 +10,8 @@ window.env = {
     minutesUntilAutoLogout: '5',
     withCredentials: false,
     captcha: {
-        captchaType: 'none',
-        siteKey: '',
+        captchaType: 'recaptcha',
+        siteKey: '6Le4gLQUAAAAAGRqFa2ErLeQwLR1XDdBOQF7dJ-z',
     },
     rangerReconnectPeriod: '1',
     msAlertDisplayTime: '5000',
