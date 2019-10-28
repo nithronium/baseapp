@@ -249,9 +249,9 @@ export const ru: LangType = {
     'page.body.profile.header.account.content.password.change.success': 'Успешно!',
     'page.body.profile.header.account.content.password.change': 'Смена пароля',
 
-    'page.body.profile.refcode.input.placeholder': 'Enter an Existing Referral Code.',
+    'page.body.profile.refcode.input.placeholder': 'Enter an Existing Referral Code',
     'page.body.profile.refcode.how': 'How to find an Existing Referral Code?',
-    'page.body.profile.refcode.link': ' Click Here.',
+    'page.body.profile.refcode.link': ' Click Here',
 
     'page.body.profile.header.account.content.twoFactorAuthentication': 'Двухфакторная аутентификация',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.enable': 'Включен',

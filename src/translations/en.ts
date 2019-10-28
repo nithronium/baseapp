@@ -261,9 +261,9 @@ export const en = {
 
     'page.body.profile.header.referralProgram': 'Referral Link',
     'page.body.profile.content.copyLink': 'Copy',
-    'page.body.profile.refcode.input.placeholder': 'Enter an Existing Referral Code.',
+    'page.body.profile.refcode.input.placeholder': 'Enter an Existing Referral Code',
     'page.body.profile.refcode.how': 'How to find an Existing Referral Code? ',
-    'page.body.profile.refcode.link': ' Click Here.',
+    'page.body.profile.refcode.link': ' Click Here',
 
     'page.body.profile.apiKeys.header': 'My API Keys',
     'page.body.profile.apiKeys.header.create': 'Create new',
