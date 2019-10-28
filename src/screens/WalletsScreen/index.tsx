@@ -18,12 +18,15 @@ import {
     alertPush,
     beneficiariesFetch,
     Beneficiary,
+    currenciesFetch,
+    Currency,
     openGuardModal,
     RootState,
     selectBeneficiariesActivateSuccess,
     selectBeneficiariesDeleteSuccess,
     selectCurrentColorTheme,
     selectCurrentLanguage,
+    selectCurrencies,
     selectHistory,
     selectMobileWalletUi,
     selectUserInfo,
@@ -66,6 +69,7 @@ interface ReduxProps {
     withdrawLimitData: WithdrawLimit;
     beneficiariesActivateSuccess: boolean;
     beneficiariesDeleteSuccess: boolean;
+    currencies: Currency[];
 }
 
 interface DispatchProps {
@@ -78,6 +82,7 @@ interface DispatchProps {
     setMobileWalletUi: typeof setMobileWalletUi;
     openGuardModal: typeof openGuardModal;
     fetchWithdrawLimit: typeof withdrawLimitFetch;
+    currenciesFetch: typeof currenciesFetch;
 }
 
 const defaultBeneficiary: Beneficiary = {
@@ -162,6 +167,10 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         if (selectedWalletIndex === -1 && wallets.length) {
             this.setState({ selectedWalletIndex: 0 });
             wallets[0].type === 'coin' && fetchAddress({ currency: wallets[0].currency });
+        }
+
+        if (!this.props.currencies.length) {
+            this.props.currenciesFetch();
         }
     }
 
@@ -497,6 +506,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     withdrawLimitData: selectWithdrawLimit(state),
     beneficiariesActivateSuccess: selectBeneficiariesActivateSuccess(state),
     beneficiariesDeleteSuccess: selectBeneficiariesDeleteSuccess(state),
+    currencies: selectCurrencies(state),
 });
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
@@ -510,6 +520,7 @@ const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
     setMobileWalletUi: payload => dispatch(setMobileWalletUi(payload)),
     openGuardModal: () => dispatch(openGuardModal()),
     paymentError: payload => dispatch(alertPush(payload)),
+    currenciesFetch: () => dispatch(currenciesFetch()),
 });
 
 // tslint:disable-next-line:no-any
