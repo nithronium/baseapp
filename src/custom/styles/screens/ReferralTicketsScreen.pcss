@@ -42,10 +42,12 @@
   .table-margin {
     margin-left: 30px;
   }
+  .table-wrap {
+    margin-left: 30px;
+  }
   table {
     border-spacing: 0;
-    margin-left: 30px;
-
+    
     & td {
       font-size: 14px;
     }
@@ -360,7 +362,16 @@
 
     position: relative;
     padding-top: 40px;
-
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 900px;
+      white-space: nowrap;
+    }
+    thead td {
+      border-bottom: 1px solid #ccc;
+    }
     &:before {
       content: '';
       display: block;
@@ -398,7 +409,16 @@
     & h2 {
       border-color: #00C620;
     }
-
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 640px;
+      white-space: nowrap;
+    }
+    thead td {
+      border-bottom: 1px solid #ccc;
+    }
     &:before {
       content: '';
       display: block;

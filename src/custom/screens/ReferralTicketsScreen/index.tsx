@@ -92,14 +92,10 @@ class ReferralTickets extends React.Component<Props> {
                     </section>
                 </div>
                 <section id="referral">
-                    <div className="container">
-                        <ReferralTicketDetails context={this.props.referrals} />
-                    </div>
+                    <ReferralTicketDetails context={this.props.referrals} />
                 </section>
                 <section id="bonus">
-                    <div className="container">
-                        <BonusTicketDetails context={this.props.bonuses} />
-                    </div>
+                    <BonusTicketDetails context={this.props.bonuses} />
                 </section>
             </div>
         );
