@@ -72,7 +72,9 @@ class Withdraw extends React.Component<Props, WithdrawState> {
     };
 
     public componentWillReceiveProps(nextProps) {
-        if (this.props.currency !== nextProps.currency || nextProps.withdrawDone) {
+        const { currency, withdrawDone } = this.props;
+
+        if (nextProps && (JSON.stringify(nextProps.currency) !== JSON.stringify(currency)) || (nextProps.withdrawDone && !withdrawDone)) {
             this.setState({
                 amount: 0,
                 otpCode: '',
