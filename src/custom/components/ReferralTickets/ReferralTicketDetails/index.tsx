@@ -116,7 +116,7 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                                     <td>{this.getTotal('email', 'count')} referreres</td>
                                     <td>yes {this.getTotal('isActive', 'count', 1)} / no {this.getTotal('isActive', 'count', 0)} </td>
                                     <td>{this.getTotal('subreferrals')} <span className="explanation">referrals</span></td>
-                                <td>{this.getTotal('activeSubreferrals')} <span className="explanation">referrals</span></td>
+                                    <td>{this.getTotal('activeSubreferrals')} <span className="explanation">referrals</span></td>
                                 </tr>
                             </tfoot>
                         </table>
