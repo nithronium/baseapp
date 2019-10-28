@@ -100,7 +100,8 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.ccy.message.error': 'Генерация адреса',
 
     'page.body.wallets.tabs.deposit.fiat.message1': 'Вы можете внести депозит в банке, используя следующие реквизиты',
-    'page.body.wallets.tabs.deposit.fiat.message2': 'Пожалуйста, используйте предоставленную информацию для завершения банковского платежа. Ваш депозит станет доступным на протяжении 5-и рабочих дней.',
+    'page.body.wallets.tabs.deposit.fiat.message2':
+        'Пожалуйста, используйте предоставленную информацию для завершения банковского платежа. Ваш депозит станет доступным на протяжении 5-и рабочих дней.',
     'page.body.wallets.tabs.deposit.fiat.bankName': 'Название банка',
     'page.body.wallets.tabs.deposit.fiat.accountNumber': 'Номер счета',
     'page.body.wallets.tabs.deposit.fiat.accountName': 'Имя счета',
@@ -126,9 +127,9 @@ export const ru: LangType = {
         'Вам нужно активировать 2FA, чтобы получить возможность выводить Ваши валюты!',
     'page.body.wallets.tabs.withdraw.content.enable2faButton': 'Активировать 2FA',
 
-    'success.beneficiaries.created': 'Beficiaries: successfully created',
-    'success.beneficiaries.activated': 'Beficiaries: successfully activated',
-    'success.beneficiaries.deleted': 'Beficiaries: successfully deleted',
+    'success.beneficiaries.created': 'Beneficiaries: successfully created',
+    'success.beneficiaries.activated': 'Beneficiaries: successfully activated',
+    'success.beneficiaries.deleted': 'Beneficiaries: successfully deleted',
 
     'page.body.wallets.whitelist.title': 'Withdraw address',
     'page.body.wallets.whitelist.fiat.title': 'Withdrawal details',
@@ -676,7 +677,6 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': 'Garhoud Branch, Dubai, UAE',
     'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'AJMNAEAJ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': 'Минимальный депозит 50 EUR',
-
 
     ...nationalitiesNames,
 };
