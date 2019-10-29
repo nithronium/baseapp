@@ -107,10 +107,10 @@ class ReferralProgramClass extends React.Component<Props> {
                     </fieldset>
                 ) : (
                     <div className="ref-code-input-field">
-                        <p>
-                            {this.translate('page.body.profile.refcode.how')}{' '}
-                            <a href="/referral#get-code">{this.translate('page.body.profile.refcode.link')}</a>
-                        </p>
+                            <div className="ref-code-input-field-link">
+                                <p>{this.translate('page.body.profile.refcode.how')}{' '}</p>
+                                <p><a href="/referral#get-code">{this.translate('page.body.profile.refcode.link')}</a></p>
+                        </div>
                         <CustomInput
                             type="text"
                             label={''}
