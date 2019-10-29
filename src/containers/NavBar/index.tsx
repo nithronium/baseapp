@@ -93,13 +93,12 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             </li>
         );
     };
-
+    //tslint:disable
     public render() {
         const { lang, location, user } = this.props;
         const { isOpenLanguage } = this.state;
         const address = location ? location.pathname : '';
         const languageName = lang.toUpperCase();
-
         const languageClassName = classnames('dropdown-menu-language-field', {
             'dropdown-menu-language-field-active': isOpenLanguage,
         });
@@ -108,10 +107,10 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             <div className={'pg-navbar'}>
                 {user.email ? this.getProfile() : null}
                 <ul className="pg-navbar__content">
-                    {pgRoutes(!!user.email).map(this.navItem(address, this.props.onLinkChange))}
+                    {pgRoutes(user.state === 'active').map(this.navItem(address, this.props.onLinkChange))}
                 </ul>
                 <div className="pg-navbar__header-settings">
-                    {user.email ? this.getUserEmailMenu() : null}
+                    {user.state === 'active' ? this.getUserEmailMenu() : null}
                     <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-toggle dropdown-menu-language-container">
                         <div onClick={this.toggleLanguageMenu} className={languageClassName}>
                             {languageName}
@@ -170,11 +169,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 <Link className="pg-navbar__admin-logout" to="/profile" onClick={this.handleRouteChange('/profile')}>
                     <FormattedMessage id={'page.header.navbar.profile'} />
                 </Link>
-                <Link
-                    className="pg-navbar__admin-logout"
-                    to="/referral"
-                    onClick={this.handleRouteChange('/referral')}
-                >
+                <Link className="pg-navbar__admin-logout" to="/referral" onClick={this.handleRouteChange('/referral')}>
                     <FormattedMessage id={'page.header.navbar.refprogram'} />
                 </Link>
                 <Link
@@ -273,7 +268,6 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     };
 
     private getUserMenu = () => {
-
         return (
             <div className="dropdown-menu dropdown-menu-user" role="menu">
                 <div className="dropdown-menu-item-user">
@@ -282,11 +276,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     </Link>
                 </div>
                 <div className="dropdown-menu-item-user">
-                    <Link
-                        className="pg-navbar__admin-logout"
-                        to="/referral"
-                        onClick={this.handleRouteChange('/referral')}
-                    >
+                    <Link className="pg-navbar__admin-logout" to="/referral" onClick={this.handleRouteChange('/referral')}>
                         <FormattedMessage id={'page.header.navbar.refprogram'} />
                     </Link>
                 </div>
