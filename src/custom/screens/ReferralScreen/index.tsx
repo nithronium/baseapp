@@ -32,7 +32,7 @@ import {
     signUp,
     User,
 } from '../../../modules';
-import {  Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, Video } from '../../components/Referral';
+import { Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, Video } from '../../components/Referral';
 
 interface ReduxProps {
     requireVerification?: boolean;
@@ -204,7 +204,7 @@ class Referral extends React.Component<Props> {
                     <meta name="og:image" content="https://emirex.com/public/img/logo-emirex.svg" />
                 </Helmet>
                 <div className="pg-referral-screen">
-                    <Banner>{this.props.user.uid ? totalTickets() : signupForm()}</Banner>
+                    <Banner>{this.props.user.state === 'active' ? totalTickets() : signupForm()}</Banner>
                     <HIW />
                     <Video />
                     <Timelines />
@@ -421,7 +421,7 @@ class Referral extends React.Component<Props> {
 
         if (this.props.referrals) {
             this.props.referrals.map((record: ReferralPayload) => {
-                total += /* record.isActive * */ (record.tickets + record.subreferrals);
+                total += /* record.isActive * */ record.tickets + record.subreferrals;
             });
         }
 
