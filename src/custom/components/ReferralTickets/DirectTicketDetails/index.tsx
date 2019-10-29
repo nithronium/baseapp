@@ -14,6 +14,8 @@ interface Props {
 class DirectTicketDetails extends React.Component<Props>{
 
     public render(){
+        const { user } = this.props;
+        const isNeededRefcode = !user.referral_uid;
         const ctx = this.props.context;
         const reg = ctx.ticketForRegistration;
         return(
@@ -42,13 +44,13 @@ class DirectTicketDetails extends React.Component<Props>{
                                 {!reg ? this.ticketActivation() : null}
                                 <tr>
                                     <td><span className="count">{ctx.usdTickets} </span><span className="explanation">tickets</span></td>
-                                    <td><span className="count">0 </span><span className="explanation">tickets</span></td>
+                                    <td><span className="count">{isNeededRefcode ? `${Math.floor(ctx.usdBalance / 50)}` : '0'} </span><span className="explanation">tickets</span></td>
                                     <td><span className="count">{`balance ${ctx.usdBalance.toFixed(2)} USD`}</span></td>
                                     <td><span className="count"><button className="button"><a href="/wallets">Get More</a></button></span></td>
                                 </tr>
                                 <tr>
                                     <td><span className="count">{ctx.emrxTickets} </span><span className="explanation">tickets</span></td>
-                                    <td><span className="count">0 </span><span className="explanation">tickets</span></td>
+                                    <td><span className="count">{isNeededRefcode ? `${Math.floor(ctx.emrxBalance / 25)}` : '0'} </span><span className="explanation">tickets</span></td>
                                     <td><span className="count">{`EMRX tokens worth ${ctx.emrxBalance.toFixed(2)} USD`}</span></td>
                                     <td><span className="count"><button className="button"><a href="/wallets">Get More</a></button></span></td>
                                 </tr>
