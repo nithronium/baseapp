@@ -85,7 +85,9 @@ class BonusTicketDetails extends React.Component<Props>{
 
             <div className="bonus-ticket-details">
                 <div className="container column">
-                    <h2>Bonus ticket details</h2>
+                    <div className="container wrap">
+                        <div className="left"><h2>Bonus ticket details</h2></div>
+                    </div>
                     <div className="table-wrap">
                         <table>
                             <thead>
