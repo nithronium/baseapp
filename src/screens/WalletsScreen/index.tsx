@@ -337,7 +337,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                         title={this.title}
                         description={this.description}
                         details={this.details}
-                        uid={user.referral_uid ? user.uid : ''}
+                        uid={user.uid}
                     />
                     {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
                 </React.Fragment>
