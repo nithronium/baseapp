@@ -65,7 +65,7 @@ class DirectTicketDetails extends React.Component<Props>{
     private ticketActivation(){
         const ctx = this.props.context;
         const user = this.props.user;
-        const isNeededTopup = ctx.usdBalance + ctx.emrxBalance < 1;
+        const isNeededTopup = ctx.usdBalance < 50 && ctx.emrxBalance < 25;
         const isNeededRefcode = !user.referral_uid;
 
         const topup = (
