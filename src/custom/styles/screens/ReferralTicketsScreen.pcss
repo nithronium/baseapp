@@ -379,11 +379,28 @@
           border-color: #FFD541;
         }
       }
+      @media (max-width: 960px) {
+        & .left {
+          width: unset;
+          flex-grow: 1;
+        }
+      }
 
       & .right {
-        padding-top: 30px;
+        padding-top: 29px;
       }
     }
+
+    @media (max-width: 520px) {
+      & .container:first-of-type {
+        justify-content: flex-end;
+
+        & .right {
+          padding-top: unset;
+        }
+      }
+    }
+
     a.active {
       font-weight: 700;
     }
@@ -544,10 +561,6 @@
       .container-wrapper {
         width: calc(100vw - 40px) !important;
       }
-    }
-
-    .explanation {
-      display: none;
     }
 
     .contexter {
