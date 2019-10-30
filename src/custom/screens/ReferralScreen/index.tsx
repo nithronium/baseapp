@@ -425,8 +425,8 @@ class Referral extends React.Component<Props> {
             });
         }
 
-        if (this.props.bonus) {
-            this.props.bonus.map((record: BonusPayload) => {
+        if (this.props.bonuses) {
+            this.props.bonuses.map((record: BonusPayload) => {
                 total += record.tickets;
                 return true;
             });
