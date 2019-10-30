@@ -598,3 +598,30 @@
     }
   }
 }
+.loader {
+  width: 300px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -150px;
+  margin-top: -150px;
+  animation: loop 3s linear infinite;
+}
+
+@keyframes loop {   
+  0% {     
+    transform: rotateY(0deg);
+  }   
+  25% {     
+    transform: rotateY(90deg);  
+  } 
+  50% {
+    transform: rotateY(180deg);
+   }
+   75% {
+    transform: rotateY(270deg);
+   }
+   100% {
+    transform: rotateY(360deg);
+   }
+}
