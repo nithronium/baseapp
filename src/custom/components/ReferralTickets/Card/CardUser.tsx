@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ReferralTicketsPayload } from '../../../modules/referralTickets';
 
-type CardContextProps = ReferralTicketsPayload['user'];
+type CardContextProps = ReferralTicketsPayload['direct'];
 type Overall = ReferralTicketsPayload['overall'];
 interface CardProps {
     context: CardContextProps;

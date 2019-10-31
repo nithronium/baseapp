@@ -32,7 +32,7 @@ interface DispatchProps {
 interface ReduxProps {
     bonuses: ReferralTicketsPayload['bonuses'];
     overall: ReferralTicketsPayload['overall'];
-    direct: ReferralTicketsPayload['user'];
+    direct: ReferralTicketsPayload['direct'];
     referrals: ReferralTicketsPayload['referrals'];
     loading: boolean;
     user: User;
@@ -109,7 +109,7 @@ class ReferralTickets extends React.Component<Props> {
                         <ReferralBallance totalTickets={this.getTotalTickets()}>
                             <CardUser title="Direct" context={this.props.direct} activeInactive={true} overall={this.props.overall.direct} link="#direct"/>
                             <CardReferrals title="Referral" context={this.props.referrals} activeInactive={true} overall={this.props.overall.referrals} link="#referral"/>
-                            <CardBonuses title="Bonus" context={this.props.bonuses} activeInactive={true} overall={this.props.overall.bonuses} link="#bonus"/>
+                            <CardBonuses title="Bonus" context={this.props.bonuses} activeInactive={false} overall={this.props.overall.bonuses} link="#bonus"/>
                         </ReferralBallance>
                     </section>
                     <section id="direct">
