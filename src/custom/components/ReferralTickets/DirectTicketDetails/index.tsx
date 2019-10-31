@@ -7,7 +7,7 @@ interface DirectTicketInterface {
 }
 
 interface Props {
-    context: ReferralTicketsPayload['user'];
+    context: ReferralTicketsPayload['direct'];
     overall: ReferralTicketsPayload['overall']['direct'];
     user: User;
 }
