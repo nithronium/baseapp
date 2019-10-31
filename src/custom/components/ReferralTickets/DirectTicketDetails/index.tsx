@@ -12,6 +12,10 @@ interface Props {
     user: User;
 }
 
+const tickets = (n: number): string => {
+    return n === 1 ? 'ticket' : 'tickets';
+};
+
 class DirectTicketDetails extends React.Component<Props>{
 
     public render(){
@@ -37,19 +41,18 @@ class DirectTicketDetails extends React.Component<Props>{
                                 <tr>
                                     <td><span className="count">{reg}</span><span className="explanation"> ticket{reg ? '' : 's'}</span></td>
                                     <td><span className="count">{1 - reg}</span><span className="explanation"> ticket{reg ? 's' : ''}</span></td>
-                                    <td><span className="count">tickets for registration</span></td>
-                                    <td/>
+                                    <td colSpan={2}><span className="count">tickets for registration</span></td>
                                 </tr>
                                 {!reg ? this.ticketActivation() : null}
                                 <tr>
-                                    <td><span className="count">{ctx.usd.active} </span><span className="explanation">tickets</span></td>
-                                    <td><span className="count">{ctx.usd.inactive} </span><span className="explanation">tickets</span></td>
+                                    <td><span className="count">{ctx.usd.active} </span><span className="explanation">{tickets(ctx.usd.active)}</span></td>
+                                    <td><span className="count">{ctx.usd.inactive} </span><span className="explanation">{tickets(ctx.usd.inactive)}</span></td>
                                     <td><span className="count">{`balance ${ctx.usd.balance.toFixed(2)} USD`}</span></td>
                                     <td><span className="count"><button className="button"><a href="/wallets">Get More</a></button></span></td>
                                 </tr>
                                 <tr>
-                                    <td><span className="count">{ctx.emrx.active} </span><span className="explanation">tickets</span></td>
-                                    <td><span className="count">{ctx.emrx.inactive} </span><span className="explanation">tickets</span></td>
+                                    <td><span className="count">{ctx.emrx.active} </span><span className="explanation">{tickets(ctx.emrx.active)}</span></td>
+                                    <td><span className="count">{ctx.emrx.inactive} </span><span className="explanation">{tickets(ctx.emrx.inactive)}</span></td>
                                     <td><span className="count">{`EMRX tokens worth ${ctx.emrx.balance.toFixed(2)} USD`}</span></td>
                                     <td><span className="count"><button className="button"><a href="/wallets">Get More</a></button></span></td>
                                 </tr>
@@ -88,8 +91,7 @@ class DirectTicketDetails extends React.Component<Props>{
         return (
             <>
             <tr>
-                <td colSpan={2}>To Activate a Ticket:</td>
-                <td colSpan={2}/>
+                <td colSpan={4}>To Activate a Ticket:</td>
             </tr>
             {isNeededRefcode ? refcode : null}
             {isNeededTopup ? topup : null}
