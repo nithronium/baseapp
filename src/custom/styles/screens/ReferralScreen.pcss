@@ -234,10 +234,15 @@ h4 {
   cursor: pointer;
   position: relative;
   transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
-  box-shadow: 0 2px 25px rgba(15, 0, 13, 0.5);
+  /* box-shadow: none; */
+  
   &:active{
     transform: scale(0.9);
     box-shadow: 0 2px 25px rgba(15, 0, 13, 0.2);
+  }
+  &:hover {
+transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+  box-shadow: 0 2px 25px rgba(15, 0, 13, 0.5);
   }
   &:focus {
     outline: 0;
