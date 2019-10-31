@@ -1,14 +1,8 @@
 import * as React from 'react';
-import {
-    InjectedIntlProps,
-    injectIntl,
-} from 'react-intl';
-import {
-    connect,
-    MapDispatchToPropsFunction,
-    MapStateToProps,
-} from 'react-redux';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { setDocumentTitle } from '../../../helpers';
+
 import {
     referralTicketsFetch,
     ReferralTicketsPayload,
@@ -45,13 +39,43 @@ interface ReduxProps {
 }
 
 type Props = DispatchProps & InjectedIntlProps & ReduxProps;
+//tslint:disable
+const Loader = ({ display }) => {
+    return (
+        <div
+            style={{
+                display: display ? 'block' : 'none',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                zIndex: 99,
+                background: 'rgba(0,0,0,0.6)',
+            }}
+        >
+            <img src={require('../../../assets/images/loader.svg')} alt="loader" className="loader" />
+        </div>
+    );
+};
 
 class ReferralTickets extends React.Component<Props> {
-
+    tId: any;
+    public state = {
+        isNotLoaded: true,
+    };
+    //tslint:disable
     public componentDidMount() {
         setDocumentTitle('Referral Tickets');
         this.props.fetchReferralTickets();
+        this.tId = setTimeout(() => {
+            this.setState({ isNotLoaded: false });
+        }, 6000);
     }
+
+    public componentWillUnmount = () => {
+        clearTimeout(this.tId);
+    };
 
     private getTotalTickets() {
         let total = 0;
@@ -68,10 +92,18 @@ class ReferralTickets extends React.Component<Props> {
         return total;
     }
 
-    // tslint:disable-next-line:member-ordering
+    // tslint:disable
     public render() {
+        const { isNotLoaded } = this.state;
+        console.log(isNotLoaded);
+        if (isNotLoaded) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'scroll';
+        }
         return (
             <div className="pg-referral-tickets">
+                <Loader display={isNotLoaded} />
                 <div className="top-holder">
                     <section id="top">
                         <ReferralBallance totalTickets={this.getTotalTickets()}>
@@ -108,5 +140,9 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
     fetchReferralTickets: () => dispatch(referralTicketsFetch()),
 });
 
-export const ReferralTicketsScreen = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ReferralTickets));
-
+export const ReferralTicketsScreen = injectIntl(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(ReferralTickets)
+);

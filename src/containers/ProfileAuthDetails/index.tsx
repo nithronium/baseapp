@@ -187,7 +187,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                         </div>
 
                         <div className="pg-profile-page__row">
-                            <h2> {user.referral_uid ? `UID :${user.uid}` : ''} </h2>
+                            <h2> {user.referral_uid ? `UID : ${user.uid}` : ''} </h2>
                         </div>
                     </div>
                 </div>
