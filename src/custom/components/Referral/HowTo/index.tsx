@@ -6,44 +6,75 @@ import backRight = require('../../../assets/images/referral/back-right.svg');
 import ticket = require('../../../assets/images/referral/ticket.svg');
 
 const HowTo: React.FC = () => {
-  return (
-    <section id="how-to">
-      <h2 className="center">How to get tickets?</h2>
-      <h4 className="center">Receive tickets for the draw as follows:</h4>
-      <img src={ticket} className="ticket-img" alt=""/>
-      <div className="axis" />
-      <div className="how-tos">
-        <div className="how-to">
-          <div className="number-wrap"><div className="number">1</div></div>
-          <div className="text">Get tickets for <b>referring</b> your friends</div>
-        </div>
-        <div className="how-to">
-          <div className="number-wrap"><div className="number">2</div></div>
-          <div className="text">Get tickets for <b>following</b> us on social media</div>
-        </div>
-        <div className="how-to">
-          <div className="number-wrap"><div className="number">3</div></div>
-          <div className="text">Get tickets for <b>posting</b> on social media</div>
-        </div>
-        <div className="how-to">
-          <div className="number-wrap"><div className="number">4</div></div>
-          <div className="text"><b>Top up</b> your balances to get more tickets</div>
-        </div>
-      </div>
-      <div className="back-full">
-        <img src={backFull} alt="" />
-      </div>
-      <div className="back-halves">
-        <div style={{textAlign: 'left'}}><img src={backRight} alt="" /></div>
-        <div style={{textAlign: 'right'}}><img src={backLeft} alt="" /></div>
-      </div>
+    const animateButton = () => {
+        const el = document.getElementById('ab3');
+        el!.classList.remove('animate');
+        el!.classList.add('animate');
+        setTimeout(() => {
+            el!.classList.remove('animate');
+        }, 700);
+    };
+    return (
+        <section id="how-to">
+            <h2 className="center">How to get tickets?</h2>
+            <h4 className="center">Receive tickets for the draw as follows:</h4>
+            <img src={ticket} className="ticket-img" alt="" />
+            <div className="axis" />
+            <div className="how-tos">
+                <div className="how-to">
+                    <div className="number-wrap">
+                        <div className="number">1</div>
+                    </div>
+                    <div className="text">
+                        Get tickets for <b>referring</b> your friends
+                    </div>
+                </div>
+                <div className="how-to">
+                    <div className="number-wrap">
+                        <div className="number">2</div>
+                    </div>
+                    <div className="text">
+                        Get tickets for <b>following</b> us on social media
+                    </div>
+                </div>
+                <div className="how-to">
+                    <div className="number-wrap">
+                        <div className="number">3</div>
+                    </div>
+                    <div className="text">
+                        Get tickets for <b>posting</b> on social media
+                    </div>
+                </div>
+                <div className="how-to">
+                    <div className="number-wrap">
+                        <div className="number">4</div>
+                    </div>
+                    <div className="text">
+                        <b>Top up</b> your balances to get more tickets
+                    </div>
+                </div>
+            </div>
+            <div className="back-full">
+                <img src={backFull} alt="" />
+            </div>
+            <div className="back-halves">
+                <div style={{ textAlign: 'left' }}>
+                    <img src={backRight} alt="" />
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                    <img src={backLeft} alt="" />
+                </div>
+            </div>
 
-
-      <div className="button-container">
-        <Link to="get-code" smooth={true} duration={500} className="button yellow-button">Get a Code</Link>
-      </div>
-    </section>
-  );
+            <div className="button-container">
+                <Link to="get-code" smooth={true} duration={500} delay={500}>
+                    <div id="ab3" className="button yellow-button " onClick={animateButton}>
+                        Get a Code
+                    </div>
+                </Link>
+            </div>
+        </section>
+    );
 };
 
-export { HowTo};
+export { HowTo };
