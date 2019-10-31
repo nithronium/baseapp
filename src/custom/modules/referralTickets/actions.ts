@@ -25,12 +25,32 @@ export interface BonusPayload {
 }
 
 export interface ReferralTicketsPayload {
+    overall: {
+        direct: {
+            active: number,
+            inactive: number,
+        },
+        referrals: {
+            active: number,
+            inactive: number,
+        },
+        bonuses: {
+            active: number,
+            inactive: number,
+        },
+    };
     user: {
-        ticketForRegistration: number,
-        usdBalance: number, // баланс пользователя в USD
-        emrxBalance: number, // баланс пользователя в EMRX
-        usdTickets: number, // тикеты, полученные за пополнение баланса в USD
-        emrxTickets: number, // тикеты, полученные за покупку EMRX
+        ticketsForRegistration: number,
+        emrx: {
+            balance: number,
+            active: number,
+            inactive: number,
+        },
+        usd: {
+            balance: number,
+            active: number,
+            inactive: number,
+        },
     };
     referrals: ReferralPayload[];
     bonuses: BonusPayload[];

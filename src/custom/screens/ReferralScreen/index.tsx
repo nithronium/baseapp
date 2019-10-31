@@ -18,15 +18,11 @@ import {
     setDocumentTitle,
 } from '../../../helpers';
 import {
-    BonusPayload,
-    ReferralPayload,
     referralTicketsFetch,
     ReferralTicketsPayload,
     RootState,
     selectCurrentLanguage,
-    selectReferralTicketsBonuses,
-    selectReferralTicketsDirect,
-    selectReferralTicketsReferrals,
+    selectReferralTicketsOverall,
     selectSignUpRequireVerification,
     selectUserInfo,
     signUp,
@@ -38,9 +34,7 @@ interface ReduxProps {
     requireVerification?: boolean;
     loading?: boolean;
     user: User;
-    bonuses: ReferralTicketsPayload['bonuses'];
-    direct: ReferralTicketsPayload['user'];
-    referrals: ReferralTicketsPayload['referrals'];
+    overall: ReferralTicketsPayload['overall'];
 }
 
 interface DispatchProps {
@@ -413,24 +407,15 @@ class Referral extends React.Component<Props> {
     private getTotalTickets() {
         let total = 0;
 
-        if (this.props.direct) {
-            total += this.props.direct.emrxTickets;
-            total += this.props.direct.usdTickets;
-            total += 1; // this.props.direct.ticketForRegistration;
-        }
+        const overall = this.props.overall;
+        total += overall.direct.active;
+        total += overall.direct.inactive;
 
-        if (this.props.referrals) {
-            this.props.referrals.map((record: ReferralPayload) => {
-                total += /* record.isActive * */ record.tickets + record.subreferrals;
-            });
-        }
+        total += overall.bonuses.active;
+        total += overall.bonuses.inactive;
 
-        if (this.props.bonuses) {
-            this.props.bonuses.map((record: BonusPayload) => {
-                total += record.tickets;
-                return true;
-            });
-        }
+        total += overall.referrals.active;
+        total += overall.referrals.inactive;
 
         return total;
     }
@@ -440,9 +425,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     requireVerification: selectSignUpRequireVerification(state),
     i18n: selectCurrentLanguage(state),
     user: selectUserInfo(state),
-    bonuses: selectReferralTicketsBonuses(state),
-    direct: selectReferralTicketsDirect(state),
-    referrals: selectReferralTicketsReferrals(state),
+    overall: selectReferralTicketsOverall(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({

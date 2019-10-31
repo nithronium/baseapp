@@ -9,14 +9,34 @@ export interface ReferralTicketsState {
 const initialState: ReferralTicketsState = {
     loading: false,
     data: {
+        overall: {
+            direct: {
+                active: 0,
+                inactive: 0,
+            },
+            referrals: {
+                active: 0,
+                inactive: 0,
+            },
+            bonuses: {
+                active: 0,
+                inactive: 0,
+            },
+        },
         bonuses: [],
         referrals: [],
         user: {
-            ticketForRegistration: 0,
-            usdBalance: 0,
-            usdTickets: 0,
-            emrxBalance: 0,
-            emrxTickets: 0,
+            ticketsForRegistration: -1,
+            emrx: {
+                balance: 0,
+                active: 0,
+                inactive: 0,
+            },
+            usd: {
+                balance: 0,
+                active: 0,
+                inactive: 0,
+            },
         },
     },
 };

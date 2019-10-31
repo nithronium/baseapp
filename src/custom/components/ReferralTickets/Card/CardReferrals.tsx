@@ -2,10 +2,11 @@ import * as React from 'react';
 import { ReferralTicketsPayload } from '../../../modules/referralTickets';
 
 type CardContextProps = ReferralTicketsPayload['referrals'];
-
+type Overall = ReferralTicketsPayload['overall'];
 interface CardProps {
     activeInactive?: boolean;
     context: CardContextProps;
+    overall: Overall['referrals'];
     link: string;
     title: string;
 }
@@ -71,11 +72,11 @@ class CardReferrals extends React.Component<CardProps>{
                 <div className="card-middle">
                     <div className="card-details-row">
                         <div className="card-details-row__left">referrals active</div>
-                        <div className="card-details-row__right">{this.getTotal('active') + this.sumActiveSubreferrals()}</div>
+                        <div className="card-details-row__right">{this.props.overall.active}</div>
                     </div>
                     <div className="card-details-row">
                         <div className="card-details-row__left">referrals inactive</div>
-                        <div className="card-details-row__right">{this.getTotal('inactive') + this.sumSubreferrals() - this.sumActiveSubreferrals()}</div>
+                        <div className="card-details-row__right">{this.props.overall.inactive}</div>
                     </div>
                 </div>
             );
@@ -107,7 +108,7 @@ class CardReferrals extends React.Component<CardProps>{
                         <span className="card-top__left__suffix">tickets</span>
                     </div>
                     <div className="card-top__right">
-                        {this.getTotal() + this.sumSubreferrals()}
+                        {this.props.overall.active + this.props.overall.inactive}
                     </div>
                 </div>
                 {this.activeInactive()}

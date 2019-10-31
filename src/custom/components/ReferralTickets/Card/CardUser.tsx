@@ -2,14 +2,37 @@ import * as React from 'react';
 import { ReferralTicketsPayload } from '../../../modules/referralTickets';
 
 type CardContextProps = ReferralTicketsPayload['user'];
-
+type Overall = ReferralTicketsPayload['overall'];
 interface CardProps {
     context: CardContextProps;
+    overall: Overall['direct'];
+    activeInactive: boolean;
     link: string;
     title: string;
 }
 
 class CardUser extends React.Component<CardProps>{
+
+    public activeInactive(){
+        if (this.props.activeInactive){
+            return(
+                <div className="card-middle">
+                    <div className="card-details-row">
+                        <div className="card-details-row__left">direct active</div>
+                        <div className="card-details-row__right">{this.props.overall.active}</div>
+                    </div>
+                    <div className="card-details-row">
+                        <div className="card-details-row__left">direct inactive</div>
+                        <div className="card-details-row__right">{this.props.overall.inactive}</div>
+                    </div>
+                </div>
+            );
+        }else{
+            return(
+                <div className="card-middle"/>
+            );
+        }
+    }
 
     public render(){
 
@@ -21,7 +44,6 @@ class CardUser extends React.Component<CardProps>{
         }else{
             preloader = null;
         }
-        const ctx = this.props.context;
         return(
             <div className="Card">
                 {preloader}
@@ -31,10 +53,10 @@ class CardUser extends React.Component<CardProps>{
                         <span className="card-top__left__suffix">tickets</span>
                     </div>
                     <div className="card-top__right">
-                        {ctx.emrxTickets + ctx.usdTickets + 1}
+                        {this.props.overall.active + this.props.overall.inactive}
                     </div>
                 </div>
-                <div className="card-middle"/>
+                {this.activeInactive()}
                 <div className="card-bottom">
                     <a href={this.props.link}>view details</a>
                 </div>

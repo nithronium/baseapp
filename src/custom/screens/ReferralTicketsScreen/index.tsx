@@ -10,14 +10,13 @@ import {
 } from 'react-redux';
 import { setDocumentTitle } from '../../../helpers';
 import {
-    BonusPayload,
-    ReferralPayload,
     referralTicketsFetch,
     ReferralTicketsPayload,
     RootState,
     selectReferralTicketsBonuses,
     selectReferralTicketsDirect,
     selectReferralTicketsLoading,
+    selectReferralTicketsOverall,
     selectReferralTicketsReferrals,
     selectUserInfo,
     User,
@@ -38,6 +37,7 @@ interface DispatchProps {
 
 interface ReduxProps {
     bonuses: ReferralTicketsPayload['bonuses'];
+    overall: ReferralTicketsPayload['overall'];
     direct: ReferralTicketsPayload['user'];
     referrals: ReferralTicketsPayload['referrals'];
     loading: boolean;
@@ -55,25 +55,15 @@ class ReferralTickets extends React.Component<Props> {
 
     private getTotalTickets() {
         let total = 0;
+        const overall = this.props.overall;
+        total += overall.direct.active;
+        total += overall.direct.inactive;
 
-        if (this.props.direct) {
-            total += this.props.direct.emrxTickets;
-            total += this.props.direct.usdTickets;
-            total += 1;// this.props.direct.ticketForRegistration;
-        }
+        total += overall.bonuses.active;
+        total += overall.bonuses.inactive;
 
-        if (this.props.referrals) {
-            this.props.referrals.map((record: ReferralPayload) => {
-                total += /* record.isActive * */ (record.tickets + record.subreferrals);
-            });
-        }
-
-        if (this.props.bonuses) {
-            this.props.bonuses.map((record: BonusPayload) => {
-                total += record.tickets;
-                return true;
-            });
-        }
+        total += overall.referrals.active;
+        total += overall.referrals.inactive;
 
         return total;
     }
@@ -85,20 +75,20 @@ class ReferralTickets extends React.Component<Props> {
                 <div className="top-holder">
                     <section id="top">
                         <ReferralBallance totalTickets={this.getTotalTickets()}>
-                            <CardUser title="Direct" context={this.props.direct} link="#direct"/>
-                            <CardReferrals title="Referral" context={this.props.referrals} activeInactive={true} link="#referral"/>
-                            <CardBonuses title="Bonus" context={this.props.bonuses} link="#bonus"/>
+                            <CardUser title="Direct" context={this.props.direct} activeInactive={true} overall={this.props.overall.direct} link="#direct"/>
+                            <CardReferrals title="Referral" context={this.props.referrals} activeInactive={true} overall={this.props.overall.referrals} link="#referral"/>
+                            <CardBonuses title="Bonus" context={this.props.bonuses} activeInactive={true} overall={this.props.overall.bonuses} link="#bonus"/>
                         </ReferralBallance>
                     </section>
                     <section id="direct">
-                        <DirectTicketDetails context={this.props.direct} user={this.props.user}/>
+                        <DirectTicketDetails context={this.props.direct} overall={this.props.overall.direct} user={this.props.user} />
                     </section>
                 </div>
                 <section id="referral">
-                    <ReferralTicketDetails context={this.props.referrals} />
+                    <ReferralTicketDetails context={this.props.referrals} overall={this.props.overall.referrals} />
                 </section>
                 <section id="bonus">
-                    <BonusTicketDetails context={this.props.bonuses} />
+                    <BonusTicketDetails context={this.props.bonuses} overall={this.props.overall.bonuses} />
                 </section>
             </div>
         );
@@ -108,6 +98,7 @@ class ReferralTickets extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     bonuses: selectReferralTicketsBonuses(state),
     direct: selectReferralTicketsDirect(state),
+    overall: selectReferralTicketsOverall(state),
     referrals: selectReferralTicketsReferrals(state),
     loading: selectReferralTicketsLoading(state),
     user: selectUserInfo(state),

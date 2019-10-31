@@ -4,6 +4,7 @@ import { ReferralTicketsPayload } from '../../../modules/referralTickets';
 
 interface Props {
     context: ReferralTicketsPayload['referrals'];
+    overall: ReferralTicketsPayload['overall']['referrals'];
 }
 
 interface State {

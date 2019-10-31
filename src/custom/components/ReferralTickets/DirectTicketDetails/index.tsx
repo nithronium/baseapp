@@ -8,22 +8,21 @@ interface DirectTicketInterface {
 
 interface Props {
     context: ReferralTicketsPayload['user'];
+    overall: ReferralTicketsPayload['overall']['direct'];
     user: User;
 }
 
 class DirectTicketDetails extends React.Component<Props>{
 
     public render(){
-        const { user } = this.props;
-        const isNeededRefcode = !user.referral_uid;
         const ctx = this.props.context;
-        const reg = ctx.ticketForRegistration;
+        const reg = ctx.ticketsForRegistration;
         return(
             <div className="direct-ticket-details">
                 <div className="container">
                     <div className="container-wrapper">
                         <h2 style={{paddingBottom: '30px'}}>Direct ticket details</h2>
-                        <p className="table-margin">overall {ctx.usdTickets + ctx.emrxTickets + reg} active tickets, {1 - reg} inactive tickets<br/>&nbsp;</p>
+                        <p className="table-margin">overall {this.props.overall.active} active tickets, {this.props.overall.inactive} inactive tickets<br/>&nbsp;</p>
                         <div className="table-wrap">
                             <table>
                                 <thead>
@@ -43,15 +42,15 @@ class DirectTicketDetails extends React.Component<Props>{
                                 </tr>
                                 {!reg ? this.ticketActivation() : null}
                                 <tr>
-                                    <td><span className="count">{ctx.usdTickets} </span><span className="explanation">tickets</span></td>
-                                    <td><span className="count">{isNeededRefcode ? `${Math.floor(ctx.usdBalance / 50)}` : '0'} </span><span className="explanation">tickets</span></td>
-                                    <td><span className="count">{`balance ${ctx.usdBalance.toFixed(2)} USD`}</span></td>
+                                    <td><span className="count">{ctx.usd.active} </span><span className="explanation">tickets</span></td>
+                                    <td><span className="count">{ctx.usd.inactive} </span><span className="explanation">tickets</span></td>
+                                    <td><span className="count">{`balance ${ctx.usd.balance.toFixed(2)} USD`}</span></td>
                                     <td><span className="count"><button className="button"><a href="/wallets">Get More</a></button></span></td>
                                 </tr>
                                 <tr>
-                                    <td><span className="count">{ctx.emrxTickets} </span><span className="explanation">tickets</span></td>
-                                    <td><span className="count">{isNeededRefcode ? `${Math.floor(ctx.emrxBalance / 25)}` : '0'} </span><span className="explanation">tickets</span></td>
-                                    <td><span className="count">{`EMRX tokens worth ${ctx.emrxBalance.toFixed(2)} USD`}</span></td>
+                                    <td><span className="count">{ctx.emrx.active} </span><span className="explanation">tickets</span></td>
+                                    <td><span className="count">{ctx.emrx.inactive} </span><span className="explanation">tickets</span></td>
+                                    <td><span className="count">{`EMRX tokens worth ${ctx.emrx.balance.toFixed(2)} USD`}</span></td>
                                     <td><span className="count"><button className="button"><a href="/wallets">Get More</a></button></span></td>
                                 </tr>
                                 </tbody>
@@ -67,7 +66,7 @@ class DirectTicketDetails extends React.Component<Props>{
     private ticketActivation(){
         const ctx = this.props.context;
         const user = this.props.user;
-        const isNeededTopup = ctx.usdBalance < 50 && ctx.emrxBalance < 25;
+        const isNeededTopup = ctx.usd.balance < 50 && ctx.emrx.balance < 25;
         const isNeededRefcode = !user.referral_uid;
 
         const topup = (

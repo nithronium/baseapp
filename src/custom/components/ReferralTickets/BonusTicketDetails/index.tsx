@@ -3,6 +3,7 @@ import { ReferralTicketsPayload } from '../../../modules/referralTickets';
 
 interface Props {
     context: ReferralTicketsPayload['bonuses'];
+    overall: ReferralTicketsPayload['overall']['bonuses'];
 }
 
 const tableRows = (legendArray: ReferralTicketsPayload['bonuses']): React.ReactNode => {return legendArray.map((record, index) => {
@@ -29,7 +30,7 @@ class BonusTicketDetails extends React.Component<Props>{
         const legendArray = this.props.context || [];
         let total = 0;
 
-        legendArray.map((record, index) => {
+        legendArray.map(record => {
 
             const value2add = mode === 'default' ? parseInt(record[column], 10) : 1;
 
