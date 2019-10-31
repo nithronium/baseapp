@@ -32,6 +32,15 @@
         &__button {
             color: white;
             background: black !important;
+            transition: transform ease-in 0.1s, box-shadow ease-in 0.25s;
+            /* box-shadow: 0 2px 25px rgba(15, 0, 13, 0.5); */
+            &:active{
+                transform: scale(0.9);
+                box-shadow: 0 2px 25px rgba(15, 0, 13, 0.2);
+            }
+            &:hover {
+              box-shadow: 0 2px 25px rgba(15, 0, 13, 0.5);
+            }
         }
         &__checkbox {
           display: inline;
