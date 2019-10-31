@@ -26,7 +26,10 @@ const initialState: ReferralTicketsState = {
         bonuses: [],
         referrals: [],
         direct: {
-            ticketsForRegistration: -1,
+            ticketsForRegistration: {
+                active: 0,
+                inactive: 0,
+            },
             emrx: {
                 balance: 0,
                 active: 0,

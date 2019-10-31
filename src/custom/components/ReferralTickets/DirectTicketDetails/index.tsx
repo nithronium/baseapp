@@ -39,11 +39,11 @@ class DirectTicketDetails extends React.Component<Props>{
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td><span className="count">{reg}</span><span className="explanation"> ticket{reg ? '' : 's'}</span></td>
-                                    <td><span className="count">{1 - reg}</span><span className="explanation"> ticket{reg ? 's' : ''}</span></td>
+                                    <td><span className="count">{reg.active}</span><span className="explanation"> {tickets(reg.active)}</span></td>
+                                    <td><span className="count">{reg.inactive}</span><span className="explanation"> {tickets(reg.inactive)}</span></td>
                                     <td colSpan={2}><span className="count">tickets for registration</span></td>
                                 </tr>
-                                {!reg ? this.ticketActivation() : null}
+                                {!reg.active ? this.ticketActivation() : null}
                                 <tr>
                                     <td><span className="count">{ctx.usd.active} </span><span className="explanation">{tickets(ctx.usd.active)}</span></td>
                                     <td><span className="count">{ctx.usd.inactive} </span><span className="explanation">{tickets(ctx.usd.inactive)}</span></td>

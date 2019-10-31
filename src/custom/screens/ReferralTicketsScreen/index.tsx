@@ -95,7 +95,6 @@ class ReferralTickets extends React.Component<Props> {
     // tslint:disable
     public render() {
         const { isNotLoaded } = this.state;
-        console.log(isNotLoaded);
         if (isNotLoaded) {
             document.body.style.overflow = 'hidden';
         } else {

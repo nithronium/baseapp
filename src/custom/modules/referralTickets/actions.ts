@@ -40,7 +40,10 @@ export interface ReferralTicketsPayload {
         },
     };
     direct: {
-        ticketsForRegistration: number,
+        ticketsForRegistration: {
+            active: number,
+            inactive: number,
+        },
         emrx: {
             balance: number,
             active: number,
