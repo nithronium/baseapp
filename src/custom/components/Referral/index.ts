@@ -6,3 +6,4 @@ export * from './HowTo';
 export * from './Prizes';
 export * from './GetCode';
 export * from './Footer';
+export * from './Button';

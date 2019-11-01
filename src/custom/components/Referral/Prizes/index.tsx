@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Link } from 'react-scroll';
+import { Button } from '../Button';
+
 import bitcoin = require('../../../assets/images/referral/bitcoin.svg');
 import emrx = require('../../../assets/images/referral/emrx.svg');
 
@@ -46,14 +47,6 @@ const mainPrize = (prize: Prize) => {
 };
 
 const Prizes: React.FC = () => {
-    const animateButton = () => {
-        const el = document.getElementById('ab4');
-        el!.classList.remove('animate');
-        el!.classList.add('animate');
-        setTimeout(() => {
-            el!.classList.remove('animate');
-        }, 700);
-    };
     return (
         <section id="prizes">
             <h2 className="center">
@@ -85,11 +78,7 @@ const Prizes: React.FC = () => {
                 </div>
             </div>
             <div className="button-container">
-                <Link to="get-code" smooth={true} duration={500} delay={500}>
-                    <div id="ab4" className="button yellow-button " onClick={animateButton}>
-                        Get a Code
-                    </div>
-                </Link>
+                <Button />
             </div>
         </section>
     );
