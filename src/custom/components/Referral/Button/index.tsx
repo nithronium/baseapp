@@ -20,7 +20,7 @@ const Button = props => {
     const { theme } = props;
     return (
         <Link to="get-code" smooth={true} duration={500} delay={500}>
-            <div className="button yellow-button " onClick={animateButton} style={getStyle(theme)}>
+            <div className="button-get " onClick={animateButton} style={getStyle(theme)}>
                 Get a Code
             </div>
         </Link>
