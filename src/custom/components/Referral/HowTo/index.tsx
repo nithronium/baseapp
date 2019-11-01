@@ -1,19 +1,13 @@
 import * as React from 'react';
-import { Link } from 'react-scroll';
+
+import { Button } from '../Button';
+
 import backFull = require('../../../assets/images/referral/back-full.svg');
 import backLeft = require('../../../assets/images/referral/back-left.svg');
 import backRight = require('../../../assets/images/referral/back-right.svg');
 import ticket = require('../../../assets/images/referral/ticket.svg');
 
 const HowTo: React.FC = () => {
-    const animateButton = () => {
-        const el = document.getElementById('ab3');
-        el!.classList.remove('animate');
-        el!.classList.add('animate');
-        setTimeout(() => {
-            el!.classList.remove('animate');
-        }, 700);
-    };
     return (
         <section id="how-to">
             <h2 className="center">How to get tickets?</h2>
@@ -67,11 +61,7 @@ const HowTo: React.FC = () => {
             </div>
 
             <div className="button-container">
-                <Link to="get-code" smooth={true} duration={500} delay={500}>
-                    <div id="ab3" className="button yellow-button " onClick={animateButton}>
-                        Get a Code
-                    </div>
-                </Link>
+                <Button />
             </div>
         </section>
     );

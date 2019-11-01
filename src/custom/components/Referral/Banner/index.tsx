@@ -1,16 +1,9 @@
 import * as React from 'react';
-import { Link } from 'react-scroll';
+// import { Link } from 'react-scroll';
+import { Button } from '../Button';
 //tslint:disable
 
 const Banner: React.FC = ({ children }) => {
-    const animateButton = () => {
-        const el = document.getElementById('ab1');
-        el!.classList.remove('animate');
-        el!.classList.add('animate');
-        setTimeout(() => {
-            el!.classList.remove('animate');
-        }, 700);
-    };
     return (
         <section id="banner">
             <div className="grab-container">
@@ -23,11 +16,7 @@ const Banner: React.FC = ({ children }) => {
                             alt=""
                         />
                         <div className="button-container">
-                            <Link to="get-code" smooth={true} duration={500} delay={500}>
-                                <div id="ab1" className="button yellow-button " onClick={animateButton}>
-                                    Get a Code
-                                </div>
-                            </Link>
+                            <Button />
                         </div>
                     </div>
                 </div>
