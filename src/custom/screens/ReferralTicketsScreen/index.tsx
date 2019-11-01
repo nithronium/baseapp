@@ -39,25 +39,6 @@ interface ReduxProps {
 }
 
 type Props = DispatchProps & InjectedIntlProps & ReduxProps;
-//tslint:disable
-const Loader = ({ display }) => {
-    return (
-        <div
-            style={{
-                display: display ? 'block' : 'none',
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                zIndex: 99,
-                background: 'rgba(0,0,0,0.6)',
-            }}
-        >
-            <img src={require('../../../assets/images/loader.svg')} alt="loader" className="loader" />
-        </div>
-    );
-};
 
 class ReferralTickets extends React.Component<Props> {
 
@@ -84,15 +65,9 @@ class ReferralTickets extends React.Component<Props> {
 
     // tslint:disable
     public render() {
-        const isNotLoaded = this.props.loading;
-        if (isNotLoaded) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'scroll';
-        }
+        
         return (
             <div className="pg-referral-tickets">
-                <Loader display={isNotLoaded} />
                 <div className="top-holder">
                     <section id="top">
                         <ReferralBallance totalTickets={this.getTotalTickets()}>
@@ -102,14 +77,14 @@ class ReferralTickets extends React.Component<Props> {
                         </ReferralBallance>
                     </section>
                     <section id="direct">
-                        <DirectTicketDetails context={this.props.direct} overall={this.props.overall.direct} user={this.props.user} />
+                        <DirectTicketDetails context={this.props.direct} overall={this.props.overall.direct} user={this.props.user} loading={this.props.loading}/>
                     </section>
                 </div>
                 <section id="referral">
-                    <ReferralTicketDetails context={this.props.referrals} overall={this.props.overall.referrals} />
+                    <ReferralTicketDetails context={this.props.referrals} overall={this.props.overall.referrals} loading={this.props.loading}/>
                 </section>
                 <section id="bonus">
-                    <BonusTicketDetails context={this.props.bonuses} overall={this.props.overall.bonuses} />
+                    <BonusTicketDetails context={this.props.bonuses} overall={this.props.overall.bonuses} loading={this.props.loading}/>
                 </section>
             </div>
         );

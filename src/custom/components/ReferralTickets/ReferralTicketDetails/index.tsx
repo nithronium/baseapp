@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { ReferralTicketsPayload } from '../../../modules/referralTickets';
+import { Loader } from '../../Loader';
 
 
 interface Props {
     context: ReferralTicketsPayload['referrals'];
     overall: ReferralTicketsPayload['overall']['referrals'];
+    loading: boolean;
 }
 
 interface State {
@@ -97,6 +99,7 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                         </div>
                     </div>
                     <div className="table-wrap">
+                        <Loader display={this.props.loading} />
                         <table id="referral-details-list">
                             <thead>
                                 <tr>

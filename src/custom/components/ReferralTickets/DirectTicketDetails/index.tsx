@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { User } from '../../../../modules';
 import { ReferralTicketsPayload } from '../../../modules/referralTickets';
+import { Loader } from '../../Loader';
 interface DirectTicketInterface {
     count: number;
     action: string;
@@ -9,6 +10,7 @@ interface DirectTicketInterface {
 interface Props {
     context: ReferralTicketsPayload['direct'];
     overall: ReferralTicketsPayload['overall']['direct'];
+    loading: boolean;
     user: User;
 }
 
@@ -26,38 +28,41 @@ class DirectTicketDetails extends React.Component<Props>{
                 <div className="container">
                     <div className="container-wrapper">
                         <h2 style={{paddingBottom: '30px'}}>Direct ticket details</h2>
-                        <p className="table-margin">overall {this.props.overall.active} active tickets, {this.props.overall.inactive} inactive tickets<br/>&nbsp;</p>
-                        <div className="table-wrap">
-                            <table>
-                                <thead>
+                        <div style={{position: 'relative'}}>
+                            <Loader display={this.props.loading} />
+                            <p className="table-margin">overall {this.props.overall.active} active tickets, {this.props.overall.inactive} inactive tickets<br/>&nbsp;</p>
+                            <div className="table-wrap">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <td>Active tickets</td>
+                                            <td>Inactive tickets</td>
+                                            <td/>
+                                            <td/>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
                                     <tr>
-                                        <td>Active tickets</td>
-                                        <td>Inactive tickets</td>
-                                        <td/>
-                                        <td/>
+                                        <td><span className="count">{reg.active}</span><span className="explanation"> {tickets(reg.active)}</span></td>
+                                        <td><span className="count">{reg.inactive}</span><span className="explanation"> {tickets(reg.inactive)}</span></td>
+                                        <td colSpan={2}><span className="count">tickets for registration</span></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td><span className="count">{reg.active}</span><span className="explanation"> {tickets(reg.active)}</span></td>
-                                    <td><span className="count">{reg.inactive}</span><span className="explanation"> {tickets(reg.inactive)}</span></td>
-                                    <td colSpan={2}><span className="count">tickets for registration</span></td>
-                                </tr>
-                                {reg.inactive ? this.ticketActivation() : null}
-                                <tr>
-                                    <td><span className="count">{ctx.usd.active} </span><span className="explanation">{tickets(ctx.usd.active)}</span></td>
-                                    <td><span className="count">{ctx.usd.inactive} </span><span className="explanation">{tickets(ctx.usd.inactive)}</span></td>
-                                    <td><span className="count">{`balance ${ctx.usd.balance.toFixed(2)} USD`}</span></td>
-                                    <td><span className="count"><a href="/wallets"><button className="button">Get More</button></a></span></td>
-                                </tr>
-                                <tr>
-                                    <td><span className="count">{ctx.emrx.active} </span><span className="explanation">{tickets(ctx.emrx.active)}</span></td>
-                                    <td><span className="count">{ctx.emrx.inactive} </span><span className="explanation">{tickets(ctx.emrx.inactive)}</span></td>
-                                    <td><span className="count">{`EMRX tokens worth ${ctx.emrx.balance.toFixed(2)} USD`}</span></td>
-                                    <td><span className="count"><a href="/wallets"><button className="button">Get More</button></a></span></td>
-                                </tr>
-                                </tbody>
-                            </table>
+                                    {reg.inactive ? this.ticketActivation() : null}
+                                    <tr>
+                                        <td><span className="count">{ctx.usd.active} </span><span className="explanation">{tickets(ctx.usd.active)}</span></td>
+                                        <td><span className="count">{ctx.usd.inactive} </span><span className="explanation">{tickets(ctx.usd.inactive)}</span></td>
+                                        <td><span className="count">{`balance ${ctx.usd.balance.toFixed(2)} USD`}</span></td>
+                                        <td><span className="count"><a href="/wallets"><button className="button">Get More</button></a></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td><span className="count">{ctx.emrx.active} </span><span className="explanation">{tickets(ctx.emrx.active)}</span></td>
+                                        <td><span className="count">{ctx.emrx.inactive} </span><span className="explanation">{tickets(ctx.emrx.inactive)}</span></td>
+                                        <td><span className="count">{`EMRX tokens worth ${ctx.emrx.balance.toFixed(2)} USD`}</span></td>
+                                        <td><span className="count"><a href="/wallets"><button className="button">Get More</button></a></span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
