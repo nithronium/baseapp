@@ -48,13 +48,13 @@ class DirectTicketDetails extends React.Component<Props>{
                                     <td><span className="count">{ctx.usd.active} </span><span className="explanation">{tickets(ctx.usd.active)}</span></td>
                                     <td><span className="count">{ctx.usd.inactive} </span><span className="explanation">{tickets(ctx.usd.inactive)}</span></td>
                                     <td><span className="count">{`balance ${ctx.usd.balance.toFixed(2)} USD`}</span></td>
-                                    <td><span className="count"><button className="button"><a href="/wallets">Get More</a></button></span></td>
+                                    <td><span className="count"><a href="/wallets"><button className="button">Get More</button></a></span></td>
                                 </tr>
                                 <tr>
                                     <td><span className="count">{ctx.emrx.active} </span><span className="explanation">{tickets(ctx.emrx.active)}</span></td>
                                     <td><span className="count">{ctx.emrx.inactive} </span><span className="explanation">{tickets(ctx.emrx.inactive)}</span></td>
                                     <td><span className="count">{`EMRX tokens worth ${ctx.emrx.balance.toFixed(2)} USD`}</span></td>
-                                    <td><span className="count"><button className="button"><a href="/wallets">Get More</a></button></span></td>
+                                    <td><span className="count"><a href="/wallets"><button className="button">Get More</button></a></span></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -76,7 +76,7 @@ class DirectTicketDetails extends React.Component<Props>{
             <tr>
                 <td/>
                 <td colSpan={2}><span className="explanation"> - Top up your balance</span></td>
-                <td><span className="count"><button className="button"><a href="/wallets">Top Up</a></button></span></td>
+                <td><span className="count"><a href="/wallets"><button className="button">Top Up</button></a></span></td>
                
             </tr>
         );
@@ -85,7 +85,7 @@ class DirectTicketDetails extends React.Component<Props>{
             <tr>
                 <td/>
                 <td colSpan={2}><span className="explanation"> - Enter an existing referral code</span></td>
-                <td><span className="count"><button className="button"><a href="/profile">Enter Code</a></button></span></td>
+                <td><span className="count"><a href="/profile"><button className="button">Enter Code</button></a></span></td>
             </tr>
         )
         return (
