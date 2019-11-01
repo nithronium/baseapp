@@ -45,7 +45,7 @@ const Loader = ({ display }) => {
         <div
             style={{
                 display: display ? 'block' : 'none',
-                position: 'absolute',
+                position: 'fixed',
                 top: 0,
                 left: 0,
                 right: 0,
@@ -60,22 +60,12 @@ const Loader = ({ display }) => {
 };
 
 class ReferralTickets extends React.Component<Props> {
-    tId: any;
-    public state = {
-        isNotLoaded: true,
-    };
+
     //tslint:disable
     public componentDidMount() {
         setDocumentTitle('Referral Tickets');
         this.props.fetchReferralTickets();
-        this.tId = setTimeout(() => {
-            this.setState({ isNotLoaded: false });
-        }, 6000);
     }
-
-    public componentWillUnmount = () => {
-        clearTimeout(this.tId);
-    };
 
     private getTotalTickets() {
         let total = 0;
@@ -94,7 +84,7 @@ class ReferralTickets extends React.Component<Props> {
 
     // tslint:disable
     public render() {
-        const { isNotLoaded } = this.state;
+        const isNotLoaded = this.props.loading;
         if (isNotLoaded) {
             document.body.style.overflow = 'hidden';
         } else {
