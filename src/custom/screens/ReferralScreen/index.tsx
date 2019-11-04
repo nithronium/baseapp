@@ -355,7 +355,10 @@ class Referral extends React.Component<Props> {
         this.props.history.push('/signin');
     };
 
-    private extractRefID = (url: string) => new URLSearchParams(url).get('refid');
+    private extractRefID = (url: string) => {
+        const refId = new URLSearchParams(url).get('refid');
+        return refId!.split('?')[0];
+    };
 
     private handleValidateForm = () => {
         const { email, password, confirmPassword } = this.state;
