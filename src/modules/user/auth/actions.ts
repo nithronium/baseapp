@@ -41,7 +41,7 @@ export interface SignUpFetch {
         email: string;
         password: string;
         recaptcha_response?: string;
-        refId?: string;
+        refid?: string;
     };
 }
 
