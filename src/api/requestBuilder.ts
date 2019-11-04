@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { applogicUrl, authUrl, nodelogicUrl, tenkoUrl, tradeUrl, withCredentials } from './config';
+import { applogicUrl, authUrl, nodelogicUrl, referralUrl, tenkoUrl, tradeUrl, withCredentials } from './config';
 
 export type HTTPMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
 
@@ -9,7 +9,7 @@ export interface JsonBody {
 }
 
 export interface RequestOptions {
-    apiVersion: 'applogic' | 'nodelogic' | 'peatio' | 'barong' | 'tenko';
+    apiVersion: 'applogic' | 'nodelogic' | 'peatio' | 'barong' | 'tenko' | 'referral';
     withHeaders?: boolean;
 }
 
@@ -31,6 +31,7 @@ const getAPI = () => ({
     peatio: `${tradeUrl()}`,
     tenko: `${tenkoUrl()}`,
     nodelogic: `${nodelogicUrl()}`,
+    referral: `${referralUrl()}`,
 });
 
 const buildRequest = (request: Request, configData: RequestOptions) => {
