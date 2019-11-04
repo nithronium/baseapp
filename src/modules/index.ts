@@ -63,6 +63,7 @@ export * from './user/withdrawLimit';
 export * from './user/guard';
 export * from '../custom/modules/referralTickets';
 export * from '../custom/modules/referralCommission';
+export * from '../custom/modules/fees';
 
 export interface RootState {
     public: {

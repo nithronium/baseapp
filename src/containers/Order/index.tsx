@@ -8,6 +8,7 @@ import {
     selectCurrentPrice,
     selectDepthAsks,
     selectDepthBids,
+    selectFees,
     selectUserLoggedIn,
     selectWallets,
     setCurrentPrice,
@@ -44,7 +45,7 @@ interface DispatchProps {
     accountWallets: typeof walletsFetch;
     setCurrentPrice: typeof setCurrentPrice;
     orderExecute: typeof orderExecuteFetch;
-    fees: typeof feessFetch;
+    fetchFees: typeof feessFetch;
 }
 
 type Props = ReduxProps & DispatchProps & InjectedIntlProps;
@@ -68,7 +69,11 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
     ];
 
     private orderRef;
+    //tslint:disable
 
+    public componentDidMount() {
+        this.props.fetchFees();
+    }
     public componentDidUpdate() {
         if (this.orderRef.current && this.state.width !== this.orderRef.current.clientWidth) {
             this.setState({
@@ -88,7 +93,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
             });
         }
     }
-    //tslint:disable
+
     public render() {
         const { executeLoading, marketTickers, currentMarket, wallets, asks, bids, fees } = this.props;
         if (!currentMarket) {
@@ -102,9 +107,8 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
         const to = currentMarket.base_unit;
         const from = currentMarket.quote_unit;
 
-        const currentFees = fees.filter(item => item.market_id === currentMarket);
-        console.log(currentFees);
-
+        const currentFees = fees.filter(item => item.market_id === currentMarket.id);
+        console.log(fees);
         const currentTicker = marketTickers[currentMarket.id];
         const defaultCurrentTicker = { last: '0' };
         const headerContent = (
@@ -118,6 +122,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
             <div className={'pg-order'} ref={this.orderRef}>
                 {this.state.width > 448 ? headerContent : undefined}
                 <Order
+                    currentFees={currentFees}
                     asks={asks}
                     bids={bids}
                     disabled={executeLoading}
@@ -207,13 +212,14 @@ const mapStateToProps = (state: RootState) => ({
     wallets: selectWallets(state),
     currentPrice: selectCurrentPrice(state),
     userLoggedIn: selectUserLoggedIn(state),
+    fees: selectFees(state),
 });
 
 const mapDispatchToProps = dispatch => ({
     accountWallets: () => dispatch(walletsFetch()),
     orderExecute: payload => dispatch(orderExecuteFetch(payload)),
     setCurrentPrice: payload => dispatch(setCurrentPrice(payload)),
-    fees: () => dispatch(feessFetch()),
+    fetchFees: () => dispatch(feessFetch()),
 });
 
 // tslint:disable-next-line no-any

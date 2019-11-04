@@ -1,7 +1,11 @@
 window.env = {
     api: {
         authUrl: 'http://www.app.local/api/v2/barong',
+<<<<<<< HEAD
         tradeUrl: 'http://localhost:9002/api/v2/peatio',
+=======
+        tradeUrl: 'http://www.app.local/api/v2/peatio',
+>>>>>>> Add mockData, pass data as props => Order => OrderForm
         applogicUrl: 'http://www.app.local/api/v2/applogic',
         rangerUrl: 'ws://localhost:9011/api/v2/ranger',
         tenkoUrl: 'http://localhost:9002/api/v2/tenko',

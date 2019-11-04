@@ -1,6 +1,7 @@
 import { TabPanel } from '@openware/components';
 import * as React from 'react';
 import { OrderForm } from '../';
+import { Fees } from '../../modules';
 
 export type FormType = 'buy' | 'sell';
 
@@ -141,21 +142,20 @@ export interface OrderComponentProps {
      * start handling change price
      */
     listenInputPrice?: () => void;
+    /**
+     * fees
+     */
+    currentFees?: Fees[];
 }
 
-const defaultOrderTypes: DropdownElem[] = [
-    'Limit',
-    'Market',
-];
+const defaultOrderTypes: DropdownElem[] = ['Limit', 'Market'];
 
 const splitBorder = 449;
 const defaultWidth = 635;
 
 class Order extends React.PureComponent<OrderComponentProps> {
     public render() {
-        const {
-            width = defaultWidth,
-        } = this.props;
+        const { width = defaultWidth } = this.props;
 
         if (width < splitBorder) {
             return (
@@ -221,6 +221,7 @@ class Order extends React.PureComponent<OrderComponentProps> {
             asks,
             bids,
             listenInputPrice,
+            currentFees,
         } = this.props;
         return [
             {
@@ -248,6 +249,7 @@ class Order extends React.PureComponent<OrderComponentProps> {
                         estimatedFeeText={estimatedFeeText}
                         submitButtonText={submitBuyButtonText}
                         listenInputPrice={listenInputPrice}
+                        currentFees={currentFees}
                     />
                 ),
                 label: labelFirst ? labelFirst : 'Buy',
@@ -276,6 +278,7 @@ class Order extends React.PureComponent<OrderComponentProps> {
                         estimatedFeeText={estimatedFeeText}
                         submitButtonText={submitSellButtonText}
                         listenInputPrice={listenInputPrice}
+                        currentFees={currentFees}
                     />
                 ),
                 label: labelSecond ? labelSecond : 'Sell',
@@ -306,11 +309,13 @@ class Order extends React.PureComponent<OrderComponentProps> {
             orderTypesIndex,
             asks,
             listenInputPrice,
+            currentFees,
         } = this.props;
         return [
             {
                 content: (
                     <OrderForm
+                        currentFees={currentFees}
                         proposals={asks}
                         disabled={disabled}
                         fee={feeBuy}
@@ -362,11 +367,13 @@ class Order extends React.PureComponent<OrderComponentProps> {
             orderTypesIndex,
             bids,
             listenInputPrice,
+            currentFees,
         } = this.props;
         return [
             {
                 content: (
                     <OrderForm
+                        currentFees={currentFees}
                         proposals={bids}
                         fee={feeSell}
                         type="sell"
@@ -397,11 +404,9 @@ class Order extends React.PureComponent<OrderComponentProps> {
 
     private handleChangeTab = (index: number, label?: string) => {
         if (this.props.handleSendType && label) {
-          this.props.handleSendType(index, label);
+            this.props.handleSendType(index, label);
         }
-    }
+    };
 }
 
-export {
-    Order,
-};
+export { Order };
