@@ -357,7 +357,10 @@ class Referral extends React.Component<Props> {
 
     private extractRefID = (url: string) => {
         const refId = new URLSearchParams(url).get('refid');
-        return refId!.split('?')[0];
+        if (refId) {
+            return refId!.split('?')[0];
+        }
+        return refId;
     };
 
     private handleValidateForm = () => {
