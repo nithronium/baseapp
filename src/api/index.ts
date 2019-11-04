@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { JsonBody, makeRequest, RequestOptions } from './requestBuilder';
 
 export * from './types';
@@ -71,9 +71,13 @@ const conf: RequestOptions = {
     apiVersion: 'barong',
 };
 
-const refConf: RequestOptions = {
-    apiVersion: 'referral',
-};
-
+// const refConf: RequestOptions = {
+//     apiVersion: 'referral',
+// };
+const refUrl = `${window.document.location.origin}/api/v1/referral-code`;
 export const changePassword = async body => API.post(conf)('/identity/users/password/confirm_code', body);
-export const checkReferralCode = async body => API.post(refConf)('', body);
+// export const checkReferralCode = async body => API.post(refConf)('', body);
+export const checkReferralCode = async body => {
+    const res = await axios.post(refUrl, body);
+    return res;
+};

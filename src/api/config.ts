@@ -37,8 +37,8 @@ Cryptobase.config = { ...window.env };
 Cryptobase.config.storage = Cryptobase.config.storage || {};
 Cryptobase.config.captcha = Cryptobase.config.captcha || defaultConfig.captcha;
 
-// export const referralUrl = () => `${window.document.location.origin}/api/v1/referral-code`;
-export const referralUrl = () => `https://stage.emirex.com/api/v1/referral-code`;
+export const referralUrl = () => `${window.document.location.origin}/api/v1/referral-code`;
+// export const referralUrl = () => `https://stage.emirex.com/api/v1/referral-code`;
 export const authUrl = () => Cryptobase.config.api.authUrl;
 export const nodelogicUrl = () => Cryptobase.config.api.nodelogicUrl;
 export const tradeUrl = () => Cryptobase.config.api.tradeUrl;

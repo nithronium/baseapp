@@ -10,6 +10,7 @@ const signUpConfig: RequestOptions = {
 
 //tslint:disable
 export function* signUpSaga(action: SignUpFetch) {
+    let checkCode = true;
     if (action.payload.refid) {
     }
     try {
@@ -17,13 +18,16 @@ export function* signUpSaga(action: SignUpFetch) {
             yield call(API.post(signUpConfig), '/identity/users', action.payload);
             yield put(signUpRequireVerification({ requireVerification: true }));
         } else {
-            const existCode = yield checkReferralCode({ referral_code: action.payload.refid });
-            console.log(existCode);
-            if (existCode.ok) {
+            try {
+                yield checkReferralCode({ referral_code: action.payload.refid });
+            } catch (error) {
+                checkCode = false;
+                yield put(alertPush({ message: ['Referral Code Invalid'], type: 'error' }));
+            }
+
+            if (checkCode) {
                 yield call(API.post(signUpConfig), '/identity/users', action.payload);
                 yield put(signUpRequireVerification({ requireVerification: true }));
-            } else {
-                yield put(alertPush({ message: ['Referral Code Invalid'], type: 'error' }));
             }
         }
     } catch (error) {
@@ -31,3 +35,4 @@ export function* signUpSaga(action: SignUpFetch) {
         yield put(alertPush({ message: error.message, code: error.code, type: 'error' }));
     }
 }
+//   ID46E6FCAE18
