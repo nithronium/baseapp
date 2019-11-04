@@ -169,7 +169,7 @@ class Referral extends React.Component<Props> {
                     <div className="total-tickets">
                         <div className="header">My total tickets: {this.getTotalTickets()}</div>
                         <div className="content">
-                            Go to <a href="/referral-tickets">Referral balance</a>
+                            Go to <a href="/referral-tickets">Ticket balance</a>
                         </div>
                     </div>
                 </div>
