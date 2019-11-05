@@ -3,12 +3,9 @@ import * as React from 'react';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Grid } from '../../../components/Grid';
-import {
-    OrderComponent,
-    ToolBar,
-    TradingChart,
-    WalletsFetch,
-} from '../../../containers';
+import { ToolBar, TradingChart, WalletsFetch } from '../../../containers';
+import { OpenOrdersPanel, OrderBook, OrderComponent } from '../../containers';
+
 import { getUrlPart, setDocumentTitle } from '../../../helpers';
 import {
     RootState,
@@ -28,7 +25,6 @@ import { rangerConnectFetch, RangerConnectFetch } from '../../../modules/public/
 import { RangerState } from '../../../modules/public/ranger/reducer';
 import { selectRanger } from '../../../modules/public/ranger/selectors';
 import { selectWallets, Wallet, walletsFetch } from '../../../modules/user/wallets';
-import { OpenOrdersPanel, OrderBook } from '../../containers';
 
 const breakpoints = {
     lg: 1200,
@@ -49,13 +45,13 @@ const cols = {
 interface ReduxProps {
     currentMarket: Market | undefined;
     markets: Market[];
-    wallets: Wallet [];
+    wallets: Wallet[];
     user: User;
     rangerState: RangerState;
     userLoggedIn: boolean;
     rgl: GridLayoutState;
     tickers: {
-        [pair: string]: Ticker,
+        [pair: string]: Ticker;
     };
 }
 
@@ -102,7 +98,13 @@ class Trading extends React.Component<Props, StateProps> {
 
     public componentDidMount() {
         setDocumentTitle('Trading');
-        const { wallets, markets, currentMarket, userLoggedIn, rangerState: { connected } } = this.props;
+        const {
+            wallets,
+            markets,
+            currentMarket,
+            userLoggedIn,
+            rangerState: { connected },
+        } = this.props;
 
         if (markets.length < 1) {
             this.props.marketsFetch();
@@ -126,12 +128,7 @@ class Trading extends React.Component<Props, StateProps> {
     }
 
     public componentWillReceiveProps(nextProps) {
-        const {
-            currentMarket,
-            history,
-            markets,
-            userLoggedIn,
-        } = this.props;
+        const { currentMarket, history, markets, userLoggedIn } = this.props;
 
         if (userLoggedIn !== nextProps.userLoggedIn) {
             this.props.rangerConnect({ withAuth: nextProps.userLoggedIn });
@@ -159,7 +156,7 @@ class Trading extends React.Component<Props, StateProps> {
         return (
             <div className={'pg-trading-screen'}>
                 <div className={'pg-trading-wrap'}>
-                    <ToolBar/>
+                    <ToolBar />
                     <Grid
                         breakpoints={breakpoints}
                         className="layout"
@@ -168,7 +165,10 @@ class Trading extends React.Component<Props, StateProps> {
                         draggableHandle=".cr-table-header__content, .pg-trading-screen__tab-panel, .draggable-container"
                         layouts={rgl.layouts}
                         rowHeight={rowHeight}
-                        onLayoutChange={() => {return;}}
+                        // tslint:disable-next-line: jsx-no-multiline-js
+                        onLayoutChange={() => {
+                            return;
+                        }}
                         handleResize={this.handleResize}
                     />
                     {userLoggedIn && <WalletsFetch />}
@@ -225,9 +225,10 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
     saveLayouts: payload => dispatch(saveLayouts(payload)),
 });
 
-// tslint:disable-next-line no-any
-const TradingScreen = withRouter(connect(mapStateToProps, mapDispatchToProps)(Trading) as any);
+const TradingScreen = withRouter(connect(
+    mapStateToProps,
+    mapDispatchToProps,
+    // tslint:disable-next-line: no-any
+)(Trading) as any);
 
-export {
-    TradingScreen,
-};
+export { TradingScreen };
