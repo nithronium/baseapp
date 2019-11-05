@@ -335,18 +335,16 @@ class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
                         <label className="cr-order-item__fee__label">{handleSetValue(estimatedFeeText, 'Estimated fee')}</label>
                         <div className="cr-order-item__fee__content">
                             <span className="cr-order-item__fee__content__amount">
-                                {/* {fee ? (
-                                    type === 'buy' ? (
-                                        Decimal.format(fee * +amount, currentMarketAskPrecision)
-                                    ) : (
-                                        Decimal.format(fee * total, currentMarketAskPrecision)
-                                    )
-                                ) : ''} */}
-                                {maker ? maker : ''}
+                                {maker
+                                    ? type === 'buy'
+                                        ? Decimal.format(+taker * +amount, currentMarketAskPrecision)
+                                        : Decimal.format(+maker * total, currentMarketAskPrecision)
+                                    : ''}
+                                {/* {maker ? (type === 'buy' ? maker : taker) : ''} */}
                             </span>
                             <span className="cr-order-item__fee__content__currency">
-                                {/* {fee ? (type === 'buy' ? to.toUpperCase() : from.toUpperCase()) : ''} */}
-                                {taker ? taker : ''}
+                                {maker ? (type === 'buy' ? to.toUpperCase() : from.toUpperCase()) : ''}
+                                {/* {taker ? taker : ''} */}
                             </span>
                         </div>
                     </div>

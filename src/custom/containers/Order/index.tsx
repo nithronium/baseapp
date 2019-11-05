@@ -108,7 +108,9 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
         const from = currentMarket.quote_unit;
 
         const currentFees = fees.filter(item => item.market_id === currentMarket.id);
-        console.log(fees);
+        // console.log(fees);
+        // console.log(currentMarket);
+
         const currentTicker = marketTickers[currentMarket.id];
         const defaultCurrentTicker = { last: '0' };
         const headerContent = (
