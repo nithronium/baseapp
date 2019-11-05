@@ -343,7 +343,7 @@ export const en = {
     'page.body.kyc.documents.drag': 'Drag and drop or browse files',
     'page.body.kyc.documents.maxFile': 'Maximum file size is 10MB',
     'page.body.kyc.documents.maxNum': 'Maximum number of files is 5',
-    'page.body.kyc.documents.upload': 'Upload your Photo ID',
+    'page.body.kyc.documents.upload': 'Please upload your selfie and a copy of your ID/passport',
     'page.body.kyc.documents.select.passport': 'Passport',
     'page.body.kyc.documents.select.identityCard': 'Identity Card',
     'page.body.kyc.documents.select.driverLicense': 'Driver License',
