@@ -1,26 +1,24 @@
 import { Loader } from '@openware/components';
 import * as React from 'react';
-import {
-    FormattedMessage,
-    InjectedIntlProps,
-    injectIntl,
-} from 'react-intl';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
-import { Order, OrderProps, WalletItemProps } from '../../components';
+import { Order, OrderProps, WalletItemProps } from '../../../components';
 import {
     RootState,
     selectCurrentPrice,
     selectDepthAsks,
-    selectDepthBids, selectUserLoggedIn,
+    selectDepthBids,
+    selectFees,
+    selectUserLoggedIn,
     selectWallets,
     setCurrentPrice,
-    Wallet, walletsFetch,
-} from '../../modules';
-import { Market, selectCurrentMarket, selectMarketTickers } from '../../modules/public/markets';
-import {
-    orderExecuteFetch,
-    selectOrderExecuteLoading,
-} from '../../modules/user/orders';
+    Wallet,
+    walletsFetch,
+} from '../../../modules';
+import { Market, selectCurrentMarket, selectMarketTickers } from '../../../modules/public/markets';
+import { orderExecuteFetch, selectOrderExecuteLoading } from '../../../modules/user/orders';
+
+import { Fees, feessFetch } from '../../modules/fees';
 
 interface ReduxProps {
     currentMarket: Market | undefined;
@@ -28,12 +26,13 @@ interface ReduxProps {
     marketTickers: {
         [key: string]: {
             last: string;
-        },
+        };
     };
     bids: string[][];
     asks: string[][];
     wallets: WalletItemProps[];
     currentPrice: number | undefined;
+    fees: Fees[];
 }
 
 interface StoreProps {
@@ -46,6 +45,7 @@ interface DispatchProps {
     accountWallets: typeof walletsFetch;
     setCurrentPrice: typeof setCurrentPrice;
     orderExecute: typeof orderExecuteFetch;
+    fetchFees: typeof feessFetch;
 }
 
 type Props = ReduxProps & DispatchProps & InjectedIntlProps;
@@ -69,7 +69,11 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
     ];
 
     private orderRef;
+    //tslint:disable
 
+    public componentDidMount() {
+        this.props.fetchFees();
+    }
     public componentDidUpdate() {
         if (this.orderRef.current && this.state.width !== this.orderRef.current.clientWidth) {
             this.setState({
@@ -79,7 +83,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
     }
 
     public componentWillReceiveProps(next: Props) {
-        const {userLoggedIn, accountWallets} = this.props;
+        const { userLoggedIn, accountWallets } = this.props;
         if (userLoggedIn && (!next.wallets || next.wallets.length === 0)) {
             accountWallets();
         }
@@ -91,7 +95,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
     }
 
     public render() {
-        const { executeLoading, marketTickers, currentMarket, wallets, asks, bids } = this.props;
+        const { executeLoading, marketTickers, currentMarket, wallets, asks, bids, fees } = this.props;
         if (!currentMarket) {
             return null;
         }
@@ -103,18 +107,22 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
         const to = currentMarket.base_unit;
         const from = currentMarket.quote_unit;
 
+        const currentFees = fees.filter(item => item.market_id === currentMarket.id);
+        console.log(fees);
         const currentTicker = marketTickers[currentMarket.id];
         const defaultCurrentTicker = { last: '0' };
         const headerContent = (
             <div className="cr-table-header__content">
-                <div className="cr-title-component"><FormattedMessage id="page.body.trade.header.newOrder" /></div>
+                <div className="cr-title-component">
+                    <FormattedMessage id="page.body.trade.header.newOrder" />
+                </div>
             </div>
         );
         return (
-
             <div className={'pg-order'} ref={this.orderRef}>
                 {this.state.width > 448 ? headerContent : undefined}
                 <Order
+                    currentFees={currentFees}
                     asks={asks}
                     bids={bids}
                     disabled={executeLoading}
@@ -139,9 +147,15 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
                     totalText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.total' })}
                     labelFirst={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.buy' })}
                     labelSecond={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.sell' })}
-                    estimatedFeeText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.estimatedFee' })}
-                    submitBuyButtonText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.buy' })}
-                    submitSellButtonText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.sell' })}
+                    estimatedFeeText={this.props.intl.formatMessage({
+                        id: 'page.body.trade.header.newOrder.content.estimatedFee',
+                    })}
+                    submitBuyButtonText={this.props.intl.formatMessage({
+                        id: 'page.body.trade.header.newOrder.content.tabs.buy',
+                    })}
+                    submitSellButtonText={this.props.intl.formatMessage({
+                        id: 'page.body.trade.header.newOrder.content.tabs.sell',
+                    })}
                     width={this.state.width}
                     listenInputPrice={this.listenInputPrice}
                 />
@@ -175,7 +189,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
         this.setState({
             orderSide: label.toLowerCase(),
         });
-    }
+    };
 
     private getAvailableValue(wallet: Wallet | undefined) {
         return wallet ? wallet.balance : 0;
@@ -186,7 +200,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
             priceLimit: undefined,
         });
         this.props.setCurrentPrice();
-    }
+    };
 }
 
 const mapStateToProps = (state: RootState) => ({
@@ -198,17 +212,22 @@ const mapStateToProps = (state: RootState) => ({
     wallets: selectWallets(state),
     currentPrice: selectCurrentPrice(state),
     userLoggedIn: selectUserLoggedIn(state),
+    fees: selectFees(state),
 });
 
 const mapDispatchToProps = dispatch => ({
     accountWallets: () => dispatch(walletsFetch()),
     orderExecute: payload => dispatch(orderExecuteFetch(payload)),
     setCurrentPrice: payload => dispatch(setCurrentPrice(payload)),
+    fetchFees: () => dispatch(feessFetch()),
 });
 
 // tslint:disable-next-line no-any
-const OrderComponent = injectIntl(connect(mapStateToProps, mapDispatchToProps)(OrderInsert as any)) as any;
+const OrderComponent = injectIntl(
+    connect(
+        mapStateToProps,
+        mapDispatchToProps
+    )(OrderInsert as any)
+) as any;
 
-export {
-    OrderComponent,
-};
+export { OrderComponent };

@@ -47,17 +47,17 @@ const cols = {
     xs: 12,
     xxs: 12,
 };
-
+//tslint:disable
 interface ReduxProps {
     currentMarket: Market | undefined;
     markets: Market[];
-    wallets: Wallet [];
+    wallets: Wallet[];
     user: User;
     rangerState: RangerState;
     userLoggedIn: boolean;
     rgl: GridLayoutState;
     tickers: {
-        [pair: string]: Ticker,
+        [pair: string]: Ticker;
     };
 }
 
@@ -104,17 +104,23 @@ class Trading extends React.Component<Props, StateProps> {
         },
         {
             i: 5,
-            render: () => <OpenOrdersComponent/>,
+            render: () => <OpenOrdersComponent />,
         },
         {
             i: 6,
-            render: () => <RecentTrades/>,
+            render: () => <RecentTrades />,
         },
     ];
 
     public componentDidMount() {
         setDocumentTitle('Trading');
-        const { wallets, markets, currentMarket, userLoggedIn, rangerState: { connected } } = this.props;
+        const {
+            wallets,
+            markets,
+            currentMarket,
+            userLoggedIn,
+            rangerState: { connected },
+        } = this.props;
 
         if (markets.length < 1) {
             this.props.marketsFetch();
@@ -138,12 +144,7 @@ class Trading extends React.Component<Props, StateProps> {
     }
 
     public componentWillReceiveProps(nextProps) {
-        const {
-            currentMarket,
-            history,
-            markets,
-            userLoggedIn,
-        } = this.props;
+        const { currentMarket, history, markets, userLoggedIn } = this.props;
 
         if (userLoggedIn !== nextProps.userLoggedIn) {
             this.props.rangerConnect({ withAuth: nextProps.userLoggedIn });
@@ -166,12 +167,12 @@ class Trading extends React.Component<Props, StateProps> {
     public render() {
         const rowHeight = 14;
         const allGridItems = [...this.gridItems];
-        const {rgl} = this.props;
+        const { rgl } = this.props;
 
         return (
             <div className={'pg-trading-screen'}>
                 <div className={'pg-trading-wrap'}>
-                    <ToolBar/>
+                    <ToolBar />
                     <Grid
                         breakpoints={breakpoints}
                         className="layout"
@@ -180,7 +181,9 @@ class Trading extends React.Component<Props, StateProps> {
                         draggableHandle=".cr-table-header__content, .pg-trading-screen__tab-panel, .draggable-container"
                         layouts={rgl.layouts}
                         rowHeight={rowHeight}
-                        onLayoutChange={() => {return;}}
+                        onLayoutChange={() => {
+                            return;
+                        }}
                         handleResize={this.handleResize}
                     />
                 </div>
@@ -242,8 +245,9 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
 });
 
 // tslint:disable-next-line no-any
-const TradingScreen = withRouter(connect(mapStateToProps, mapDispatchToProps)(Trading) as any);
+const TradingScreen = withRouter(connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Trading) as any);
 
-export {
-    TradingScreen,
-};
+export { TradingScreen };
