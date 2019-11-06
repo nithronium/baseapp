@@ -2,7 +2,6 @@ import * as React from 'react';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import beta = require('../../assets/images/beta.svg');
 import logo = require('../../assets/images/logo.svg');
 
 import logoLight = require('../../assets/images/logoLight.svg');
@@ -46,20 +45,10 @@ class Head extends React.Component<any, HeaderState> {
                                     {colorTheme === 'light' ? (
                                         <span>
                                             <img src={logoLight} className="pg-logo__img" alt="Logo" />
-                                            <img
-                                                src={beta}
-                                                alt="EMIREX LOGO"
-                                                style={{ marginBottom: '20px', marginLeft: '10px' }}
-                                            />
                                         </span>
                                     ) : (
                                         <span>
                                             <img src={logo} className="pg-logo__img" alt="Logo" />
-                                            <img
-                                                src={beta}
-                                                alt="EMIREX LOGO"
-                                                style={{ marginBottom: '20px', marginLeft: '10px' }}
-                                            />
                                         </span>
                                     )}
                                 </div>
