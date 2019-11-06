@@ -135,7 +135,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
 
         if (!isLoggedIn && next.isLoggedIn) {
             this.props.walletsReset();
-            if (!history.location.pathname.includes('/trading')) {
+            if ((!history.location.pathname.includes('/trading')) && (!history.location.pathname.includes('/referral'))) {
                 history.push('/trading/');
             }
         }
