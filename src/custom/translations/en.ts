@@ -33,7 +33,7 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.minimal.usd.value': 'USD 50',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.eur.value': 'EUR',
-    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'LU07 6131 7122 1721 4160',
+    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'LU07 6131 7122 1721 4160 (SEPA)',
     'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'ONPEX S.A.',
     'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': '59 Boulevard Royal L-2449 Luxembourg',
     'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'ONPXLULMXXX',
