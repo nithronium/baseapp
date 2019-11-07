@@ -38,6 +38,9 @@ const bankData = (uid, currency) => [
     },
 ];
 
+
+const minimal1 = currency => <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.minimal.${currency && `${currency}.`}text`} />;
+
 const minimal = currency => <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.minimal.${currency && `${currency}.`}value`} />;
 
 /**
@@ -66,7 +69,7 @@ const DepositFiat: React.FunctionComponent<DepositFiatProps> = (props: DepositFi
         <div className="cr-deposit-fiat">
             <p className="cr-deposit-fiat__title">{title}</p>
             <p className="cr-deposit-fiat__description">{description}</p>
-            {currency ? <p className="cr-deposit-fiat__description"><b>{minimal(currency)}</b></p> : null}
+            {currency ? <p className="cr-deposit-fiat__description">{minimal1(currency)}<b>{minimal(currency)}</b></p> : null}
             <div className="cr-deposit-fiat-credentials">{bankData(uid, currency).map(renderDetails)}</div>
             <p className="cr-deposit-fiat__description">{details}</p>
         </div>
