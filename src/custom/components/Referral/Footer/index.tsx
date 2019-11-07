@@ -152,7 +152,7 @@ const links3 = [
 
 const title4 = 'Support';
 const links4 = [
-    { key: '', href: '/en/faq', label: 'FAQ' },
+    { key: '', href: 'https://knowledge-base.emirex.com/', label: 'Knoweledge Base' },
     { key: '', href: 'mailto:support@emirex.com', label: 'Submit a request' },
     { key: '', href: '/en/fees', label: 'Fees' },
 ].map((link, index) => {
