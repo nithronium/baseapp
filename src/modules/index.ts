@@ -36,6 +36,8 @@ import { rootWithdrawLimitSaga, WithdrawLimitState } from './user/withdrawLimit'
 import { ReferralCommissionState, rootReferralCommissionSaga } from '../custom/modules/referralCommission';
 import { ReferralTicketsState, rootReferralTicketsSaga } from '../custom/modules/referralTickets';
 
+import { FeesState, rootFeesSaga } from '../custom/modules/fees';
+
 export * from './public/markets';
 export * from './public/orderBook';
 export * from './public/colorTheme';
@@ -61,6 +63,7 @@ export * from './user/withdrawLimit';
 export * from './user/guard';
 export * from '../custom/modules/referralTickets';
 export * from '../custom/modules/referralCommission';
+export * from '../custom/modules/fees';
 
 export interface RootState {
     public: {
@@ -75,6 +78,7 @@ export interface RootState {
         alerts: AlertState;
         kline: KlineState;
         rgl: GridLayoutState;
+        fees: FeesState;
     };
     user: {
         auth: AuthState;
@@ -135,5 +139,6 @@ export function* rootSaga() {
         call(rootGuardSaga),
         call(rootReferralTicketsSaga),
         call(rootReferralCommissionSaga),
+        call(rootFeesSaga),
     ]);
 }

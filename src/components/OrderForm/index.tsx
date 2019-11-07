@@ -2,6 +2,7 @@ import { Button, CryptoIcon, Decimal, Dropdown, OrderInput, PercentageButton } f
 import classnames from 'classnames';
 import * as React from 'react';
 import { getAmount, getTotalPrice } from '../../helpers/getTotalPrice';
+// import { Fees } from '../../modules';
 import { OrderProps } from '../Order';
 
 // tslint:disable:no-magic-numbers jsx-no-lambda jsx-no-multiline-js
@@ -110,6 +111,8 @@ interface OrderFormProps {
      * start handling change price
      */
     listenInputPrice?: () => void;
+
+    // currentFees?: Fees[];
 }
 
 interface OrderFormState {
@@ -220,7 +223,6 @@ class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
         const cx = classnames('cr-order-form', className);
         const currencyCodeFrom = `${from.toUpperCase()}-alt`;
         const availableCurrency = type === 'buy' ? from : to;
-
         return (
             <div className={cx}>
                 <div className="cr-order-item">
@@ -322,21 +324,17 @@ class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
                 </div>
                 {/* <div className="cr-order-item">
                     <div className="cr-order-item__fee">
-                        <label className="cr-order-item__fee__label">
-                            {handleSetValue(estimatedFeeText, 'Estimated fee')}
-                        </label>
+                        <label className="cr-order-item__fee__label">{handleSetValue(estimatedFeeText, 'Estimated fee')}</label>
                         <div className="cr-order-item__fee__content">
                             <span className="cr-order-item__fee__content__amount">
-                                {fee ? (
-                                    type === 'buy' ? (
-                                        Decimal.format(fee * +amount, currentMarketAskPrecision)
-                                    ) : (
-                                        Decimal.format(fee * total, currentMarketAskPrecision)
-                                    )
-                                ) : ''}
+                                {maker
+                                    ? type === 'buy'
+                                        ? Decimal.format(+taker * +amount, currentMarketAskPrecision)
+                                        : Decimal.format(+maker * total, currentMarketAskPrecision)
+                                    : ''}
                             </span>
                             <span className="cr-order-item__fee__content__currency">
-                                {fee ? (type === 'buy' ? to.toUpperCase() : from.toUpperCase()) : ''}
+                                {maker ? (type === 'buy' ? to.toUpperCase() : from.toUpperCase()) : ''}
                             </span>
                         </div>
                     </div>
