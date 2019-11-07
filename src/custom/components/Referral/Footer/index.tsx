@@ -121,7 +121,7 @@ const links1 = [
     /* { href: '/team', label: 'footer.links.team'},
   { href: '/careers', label: 'footer.links.careers'},
   { href: '/blog', label: 'footer.links.blog'},*/
-    { key: '', href: '/referral', label: 'Referrlal Giveaway', className: 'gold' },
+    { key: '', href: '/referral', label: 'Referral Giveaway', className: 'gold' },
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
     return link;
@@ -152,7 +152,7 @@ const links3 = [
 
 const title4 = 'Support';
 const links4 = [
-    { key: '', href: 'https://knowledge-base.emirex.com/', label: 'Knoweledge Base' },
+    { key: '', href: 'https://knowledge-base.emirex.com/', label: 'Knowledge Base' },
     { key: '', href: 'https://knowledge-base.emirex.com/kb-tickets/new', label: 'Submit a request' },
     { key: '', href: '/en/fees', label: 'Fees' },
 ].map((link, index) => {
