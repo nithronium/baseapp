@@ -12,10 +12,6 @@ type FormType = 'buy' | 'sell';
 
 interface OrderFormProps {
     /**
-     * Fee that is applied during total order amount calculation
-     */
-    fee: number;
-    /**
      * Price that is applied during total order amount calculation when type is Market
      */
     priceMarket: number;
@@ -93,11 +89,6 @@ interface OrderFormProps {
      * Text for Available field Text.
      */
     availableText?: string;
-    /**
-     * @default 'Estimated fee'
-     * Text for Estimated fee field Text.
-     */
-    estimatedFeeText?: string;
     /**
      * @default type.toUpperCase()
      * Text for submit Button.
@@ -188,7 +179,6 @@ class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
     public render() {
         const {
             type,
-            // fee,
             orderTypes,
             className,
             from,
@@ -199,7 +189,6 @@ class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
             amountText,
             totalText,
             availableText,
-            // estimatedFeeText,
             submitButtonText,
             proposals,
         } = this.props;
@@ -322,23 +311,6 @@ class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
                         </div>
                     </div>
                 </div>
-                {/* <div className="cr-order-item">
-                    <div className="cr-order-item__fee">
-                        <label className="cr-order-item__fee__label">{handleSetValue(estimatedFeeText, 'Estimated fee')}</label>
-                        <div className="cr-order-item__fee__content">
-                            <span className="cr-order-item__fee__content__amount">
-                                {maker
-                                    ? type === 'buy'
-                                        ? Decimal.format(+taker * +amount, currentMarketAskPrecision)
-                                        : Decimal.format(+maker * total, currentMarketAskPrecision)
-                                    : ''}
-                            </span>
-                            <span className="cr-order-item__fee__content__currency">
-                                {maker ? (type === 'buy' ? to.toUpperCase() : from.toUpperCase()) : ''}
-                            </span>
-                        </div>
-                    </div>
-                </div> */}
                 <div className="cr-order-item">
                     <div className="cr-order-item-space">
                         <Button

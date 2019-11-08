@@ -76,7 +76,7 @@ class MarketComponent extends React.Component<Props> {
         const amountFixed = currentMarket ? currentMarket.amount_precision : 0;
 
         const renderRow = item => {
-            const { id, created_at, taker_type, price, volume, market, funds } = item;
+            const { id, created_at, taker_type, price, amount, market, total } = item;
             const fullDate = localeDate(created_at, 'fullDate').split(' ');
             const marketName = currentMarket ? currentMarket.name : market;
 
@@ -85,8 +85,8 @@ class MarketComponent extends React.Component<Props> {
                 <span style={{ color: setTradeColor(taker_type).color }} key={id}>{capitalize(taker_type)}</span>,
                 marketName,
                 <span key={id}><Decimal fixed={priceFixed} thousSep=",">{price}</Decimal></span>,
-                <span key={id}><Decimal fixed={amountFixed} thousSep=",">{volume}</Decimal></span>,
-                <span key={id}><Decimal fixed={amountFixed} thousSep=",">{funds}</Decimal></span>,
+                <span key={id}><Decimal fixed={amountFixed} thousSep=",">{amount}</Decimal></span>,
+                <span key={id}><Decimal fixed={amountFixed} thousSep=",">{total}</Decimal></span>,
             ];
         };
         return (trades.length > 0)
