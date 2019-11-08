@@ -430,9 +430,7 @@ class IdentityComponent extends React.Component<Props, IdentityState> {
             postcode: this.state.postcode,
             city: this.state.city,
             country: this.state.countryOfBirth,
-            metadata: {
-                nationality: this.state.metadata.nationality,
-            },
+            metadata: JSON.stringify(this.state.metadata),
         };
         this.props.sendIdentity(profileInfo);
     }
