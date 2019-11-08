@@ -106,7 +106,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         const {
             lang,
             location,
-            user,
+            isLoggedIn,
         } = this.props;
         const { isOpenLanguage } = this.state;
         const address = location ? location.pathname : '';
@@ -118,12 +118,12 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
 
         return (
             <div className={'pg-navbar'}>
-                {user.email ? this.getProfile() : null}
+                {isLoggedIn ? this.getProfile() : null}
                 <ul className="pg-navbar__content">
-                    {pgRoutes(!!user.email).map(this.navItem(address, this.props.onLinkChange))}
+                    {pgRoutes(!!isLoggedIn).map(this.navItem(address, this.props.onLinkChange))}
                 </ul>
                 <div className="pg-navbar__header-settings">
-                    {user.email ? this.getUserEmailMenu() : null}
+                    {isLoggedIn ? this.getUserEmailMenu() : null}
                     <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-toggle dropdown-menu-language-container">
                         <div onClick={this.toggleLanguageMenu} className={languageClassName}>
                             {languageName}
