@@ -30,6 +30,9 @@ const HowTo: React.FC = () => {
                     <div className="text">
                         Get tickets for <b>following</b> us on social media
                     </div>
+                    <div className="text golden">
+                        <b>(COMING SOON)</b>
+                    </div>
                 </div>
                 <div className="how-to">
                     <div className="number-wrap">
