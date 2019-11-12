@@ -39,7 +39,7 @@ const GetCode: React.FC = () => {
         <p>Please read the <a href="/terms"><b>Terms and Conditions</b></a> to make sure that you are eligible to participate. No purchase is necessary to take part in this giveaway.</p>
         <p>The draw will take place through the use of blockchain technology, self-executing smart contracts will select the winners without human interference, guided by math and computer code only. This is to ensure complete transparency and independence. The draw will take place in Estonia, under the relevant EU rules.</p>
         <p>To ensure that there is no fraud, only tickets activated by accounts at the time of the draw will count as valid. </p>
-        <p>Please read our <a href="/faq"><b>FAQ</b></a>, which will answer all of your questions. </p>
+        <p>Please read our <a href="https://knowledge-base.emirex.com"><b>FAQ</b></a>, which will answer all of your questions. </p>
       </div>
     </section>
   );
