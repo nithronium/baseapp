@@ -48,7 +48,6 @@ export const ru: LangType = {
     'page.body.trade.header.newOrder.content.amount': 'Кол.',
     'page.body.trade.header.newOrder.content.total': 'Всего',
     'page.body.trade.header.newOrder.content.available': 'Доступно',
-    'page.body.trade.header.newOrder.content.estimatedFee': 'Комиссия',
 
     'page.body.trade.header.marketDepths': 'Глубина рынка',
     'page.body.trade.header.marketDepths.content.price': 'Цена:',
@@ -232,7 +231,7 @@ export const ru: LangType = {
 
     'page.body.history.trade.header.market': 'Рынок',
     'page.body.history.trade.header.price': 'Цена',
-    'page.body.history.trade.header.funds': 'Сумма',
+    'page.body.history.trade.header.total': 'Всего',
     'page.body.history.trade.header.amount': 'Кол.',
     'page.body.history.trade.header.balance': 'Баланс',
 
@@ -445,6 +444,7 @@ export const ru: LangType = {
     'success.order.created': 'Запрос успешно создан',
     'success.phone.verification.send': 'Код верификации был отправлен на ваш телефон',
     'success.phone.confirmed': 'Ваш телефон подтвержден',
+    'success.phone.confirmation.message': 'Успех!',
     'success.message.sent': 'Письмо было успешно отправлено',
     'success.email.confirmed': 'Email был успешно подтвержден',
 

@@ -120,16 +120,12 @@ exports[`OrderForm should match snapshot 1`] = `
   <div
     className="cr-order-item"
   >
-    <div
-      className="cr-order-item-space"
-    >
-      <Component
-        disabled={true}
-        label="buy"
-        noMargin={true}
-        onClick={[Function]}
-      />
-    </div>
+    <Component
+      disabled={true}
+      label="buy"
+      noMargin={true}
+      onClick={[Function]}
+    />
   </div>
 </div>
 `;

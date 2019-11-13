@@ -4,7 +4,8 @@ import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redu
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Grid } from '../../../components/Grid';
 import { ToolBar, TradingChart, WalletsFetch } from '../../../containers';
-import { OpenOrdersPanel, OrderBook, OrderComponent } from '../../containers';
+import { OrderComponent } from '../../../containers/Order';
+import { OpenOrdersPanel, OrderBook } from '../../containers';
 
 import { getUrlPart, setDocumentTitle } from '../../../helpers';
 import {

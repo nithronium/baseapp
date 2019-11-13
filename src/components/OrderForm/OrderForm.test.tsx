@@ -17,7 +17,6 @@ const defaultProps = {
     currentMarketAskPrecision: 4,
     currentMarketBidPrecision: 5,
     available: 50,
-    fee: 1,
     priceMarket: 5,
     priceLimit: 12,
     price: '',
@@ -275,9 +274,8 @@ describe('OrderForm', () => {
     });
 
     it('should set correct values by percentage buttons when type is buy', () => {
-        const fee = 0.0001;
         const type = 'buy';
-        const wrapper = setup({ fee, type });
+        const wrapper = setup({type});
         const nextState = { price: '2' };
 
         wrapper.setState(nextState);
@@ -309,9 +307,8 @@ describe('OrderForm', () => {
     });
 
     it('should set correct values by percentage buttons when type is sell', () => {
-        const fee = 0.0001;
         const type = 'sell';
-        const wrapper = setup({ fee, type });
+        const wrapper = setup({type});
         const nextState = { price: '2' };
 
         wrapper.setState(nextState);
@@ -343,10 +340,9 @@ describe('OrderForm', () => {
     });
 
     it('should display correct values', () => {
-        const fee = 0.0001;
         const type = 'buy';
         const proposals = [['2', '200']];
-        const wrapper = setup({ fee, type, proposals });
+        const wrapper = setup({type, proposals});
         const nextState = { total: '0', price: '2' };
 
         wrapper.setState(nextState);
@@ -356,30 +352,19 @@ describe('OrderForm', () => {
 
         expect(wrapper.state('amount')).toBe('110');
 
-        const total = wrapper
-            .find('.cr-order-item__total')
-            .find('.cr-order-item__total__content')
-            .find('.cr-order-item__total__content__amount')
-            .props().children;
-        const available = wrapper
-            .find('.cr-order-item__available')
-            .find('.cr-order-item__available__content')
-            .find('.cr-order-item__available__content__amount')
-            .props().children;
-        // const estimatedFee = wrapper.find('.cr-order-item__fee').find('.cr-order-item__fee__content').find('.cr-order-item__fee__content__amount').props().children;
+        const total = wrapper.find('.cr-order-item__total').find('.cr-order-item__total__content').find('.cr-order-item__total__content__amount').props().children;
+        const available = wrapper.find('.cr-order-item__available').find('.cr-order-item__available__content').find('.cr-order-item__available__content__amount').props().children;
 
         expect(total).toEqual('220.0000');
         expect(available).toEqual('50.0000');
-        // expect(estimatedFee).toEqual('0.0110');
     });
 
     it('should display values with correct precision', () => {
-        const fee = 0.0001;
         const type = 'buy';
         const currentMarketAskPrecision = 3;
         const currentMarketBidPrecision = 2;
         const proposals = [['2', '5']];
-        const wrapper = setup({ fee, type, currentMarketAskPrecision, currentMarketBidPrecision, proposals });
+        const wrapper = setup({type, currentMarketAskPrecision, currentMarketBidPrecision, proposals});
         const nextState = { total: '0', price: '2' };
 
         wrapper.setState(nextState);
@@ -389,55 +374,14 @@ describe('OrderForm', () => {
 
         expect(wrapper.state('amount')).toBe('0.1');
 
-        const total = wrapper
-            .find('.cr-order-item__total')
-            .find('.cr-order-item__total__content')
-            .find('.cr-order-item__total__content__amount')
-            .props().children;
-        const available = wrapper
-            .find('.cr-order-item__available')
-            .find('.cr-order-item__available__content')
-            .find('.cr-order-item__available__content__amount')
-            .props().children;
-        // const estimatedFee = wrapper
-        //     .find('.cr-order-item__fee')
-        //     .find('.cr-order-item__fee__content')
-        //     .find('.cr-order-item__fee__content__amount')
-        //     .props().children;
+        const total = wrapper.find('.cr-order-item__total').find('.cr-order-item__total__content').find('.cr-order-item__total__content__amount').props().children;
+        const available = wrapper.find('.cr-order-item__available').find('.cr-order-item__available__content').find('.cr-order-item__available__content__amount').props().children;
 
         expect(total).toEqual('0.200');
         expect(available).toEqual('50.000');
-        // expect(estimatedFee).toEqual('0.000');
     });
 
-    it('should display correct value of estimated fee when type is sell', () => {
-        const fee = 0.0002;
-        const type = 'sell';
-        const wrapper = setup({ fee, type });
-        const nextState = { total: '0', price: '2' };
-
-        wrapper.setState(nextState);
-
-        const amountState = { amount: '110' };
-        wrapper.setState(amountState);
-
-        // const estimatedFee = wrapper
-        //     .find('.cr-order-item__fee')
-        //     .find('.cr-order-item__fee__content')
-        //     .find('.cr-order-item__fee__content__amount')
-        //     .props().children;
-
-        // expect(estimatedFee).toEqual('0.0440');
-    });
-
-    const findInputPrice = (wrapper: ShallowWrapper) =>
-        wrapper
-            .find('.cr-order-item')
-            .at(1)
-            .find('div')
-            .last()
-            .children()
-            .last();
+    const findInputPrice = (wrapper: ShallowWrapper) => wrapper.find('.cr-order-item').at(1).find('div').last().children().last();
 
     it('should handle change price when it was set as priceLimit', () => {
         const wrapper = setup();

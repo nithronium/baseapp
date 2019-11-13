@@ -105,7 +105,7 @@ class YoursComponent extends React.Component<Props> {
 
     private renderRow = item => {
         const { marketsData } = this.props;
-        const { id, created_at, price, volume, taker_type, market, funds } = item;
+        const { id, created_at, price, amount, taker_type, market, total } = item;
 
         const currentTradeMarket = marketsData.find(i => i.id === market);
         const priceFixed = currentTradeMarket ? currentTradeMarket.price_precision : 0;
@@ -119,8 +119,8 @@ class YoursComponent extends React.Component<Props> {
             <span style={{ color: setTradesType(takerSide).color }} key={id}>{capitalize(takerSide)}</span>,
             marketName,
             <span key={id}><Decimal key={id} fixed={priceFixed} thousSep=",">{price}</Decimal></span>,
-            <span key={id}><Decimal key={id} fixed={amountFixed} thousSep=",">{volume}</Decimal></span>,
-            <span key={id}><Decimal fixed={amountFixed} thousSep=",">{funds}</Decimal></span>,
+            <span key={id}><Decimal key={id} fixed={amountFixed} thousSep=",">{amount}</Decimal></span>,
+            <span key={id}><Decimal fixed={amountFixed} thousSep=",">{total}</Decimal></span>,
         ];
     };
 

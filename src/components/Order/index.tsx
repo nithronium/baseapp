@@ -26,14 +26,6 @@ export interface OrderComponentProps {
      */
     availableQuote: number;
     /**
-     * Payment fee that is used in total price calculation
-     */
-    feeBuy: number;
-    /**
-     * Payment fee that is used in total price calculation
-     */
-    feeSell: number;
-    /**
      * Callback which is called when a form is submitted
      */
     onSubmit: OnSubmitCallback;
@@ -99,11 +91,6 @@ export interface OrderComponentProps {
      * Text for Available field Text.
      */
     availableText?: string;
-    /**
-     * @default 'Estimated fee'
-     * Text for Estimated fee field Text.
-     */
-    estimatedFeeText?: string;
     /**
      * @default 'BUY'
      * Text for buy order submit button.
@@ -197,8 +184,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
             availableBase,
             availableQuote,
             disabled,
-            feeBuy,
-            feeSell,
             priceMarketBuy,
             priceMarketSell,
             priceLimit,
@@ -211,7 +196,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
             amountText,
             totalText,
             availableText,
-            estimatedFeeText,
             submitBuyButtonText,
             submitSellButtonText,
             labelFirst,
@@ -229,7 +213,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
                     <OrderForm
                         proposals={asks}
                         disabled={disabled}
-                        fee={feeBuy}
                         type="buy"
                         from={from}
                         to={to}
@@ -246,7 +229,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
                         amountText={amountText}
                         totalText={totalText}
                         availableText={availableText}
-                        estimatedFeeText={estimatedFeeText}
                         submitButtonText={submitBuyButtonText}
                         listenInputPrice={listenInputPrice}
                         // currentFees={currentFees}
@@ -258,7 +240,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
                 content: (
                     <OrderForm
                         proposals={bids}
-                        fee={feeSell}
                         type="sell"
                         from={from}
                         to={to}
@@ -275,7 +256,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
                         amountText={amountText}
                         totalText={totalText}
                         availableText={availableText}
-                        estimatedFeeText={estimatedFeeText}
                         submitButtonText={submitSellButtonText}
                         listenInputPrice={listenInputPrice}
                         // currentFees={currentFees}
@@ -290,7 +270,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
         const {
             availableQuote,
             disabled,
-            feeBuy,
             priceMarketBuy,
             priceLimit,
             from,
@@ -302,7 +281,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
             amountText,
             totalText,
             availableText,
-            estimatedFeeText,
             submitBuyButtonText,
             labelFirst,
             orderTypes,
@@ -318,7 +296,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
                         // currentFees={currentFees}
                         proposals={asks}
                         disabled={disabled}
-                        fee={feeBuy}
                         type="buy"
                         from={from}
                         to={to}
@@ -335,7 +312,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
                         amountText={amountText}
                         totalText={totalText}
                         availableText={availableText}
-                        estimatedFeeText={estimatedFeeText}
                         submitButtonText={submitBuyButtonText}
                         listenInputPrice={listenInputPrice}
                     />
@@ -348,7 +324,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
     private getPanelsSell = () => {
         const {
             availableBase,
-            feeSell,
             priceMarketSell,
             priceLimit,
             from,
@@ -360,7 +335,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
             amountText,
             totalText,
             availableText,
-            estimatedFeeText,
             submitSellButtonText,
             labelSecond,
             orderTypes,
@@ -375,7 +349,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
                     <OrderForm
                         // currentFees={currentFees}
                         proposals={bids}
-                        fee={feeSell}
                         type="sell"
                         from={from}
                         to={to}
@@ -392,7 +365,6 @@ class Order extends React.PureComponent<OrderComponentProps> {
                         amountText={amountText}
                         totalText={totalText}
                         availableText={availableText}
-                        estimatedFeeText={estimatedFeeText}
                         submitButtonText={submitSellButtonText}
                         listenInputPrice={listenInputPrice}
                     />
