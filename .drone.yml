@@ -89,11 +89,22 @@ steps:
       - yarn lint
       - yarn test:ci --collectCoverage=true
 
-  - name: "Build"
-    image: node:10.11
+  - name: "Bump & Tag"
+    image: quay.io/openware/sdk-tools:0.0.3
     environment:
-      NPM_AUTH_TOKEN:
-        from_secret: drone_npm_auth_token
+      BRANCH_NAME: ${DRONE_BRANCH}
+      REPO_NAME: ${DRONE_REPO}
+      GITHUB_API_KEY:
+        from_secret: kite_bot_key
+    commands:
+      - BUNDLE_GEMFILE=/sdk/Gemfile bundle exec rake --rakefile=/sdk/Rakefile release:push
+
+
+  - name: "Publish to Gitolite"
+    image: alpine/git
+    environment:
+      GITOLITE_KEY:
+        from_secret: gitolite_rsa_key_b64
     commands:
       - echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > .npmrc
       - npm -g install yarn
@@ -180,51 +191,5 @@ trigger:
   event:
   - push
 
----
-kind: pipeline
-name: "Redeploy preprod"
-
-concurrency:
-  limit: 2
-
-steps:
-
-  - name: "Build Emirex Preprod image"
-    image: plugins/gcr
-    environment:
-      NPM_AUTH_TOKEN:
-        from_secret: drone_npm_auth_token
-      BUILD_EXPIRE: $(date -d "+1 year" +%s000)
-      BUILD_DOMAIN: .emirex.com
-      REACT_APP_BUILD_VERSION: Enterprise
-    settings:
-      repo: gcr.io/emirex-preprod/baseapp
-      tags: ${DRONE_COMMIT_SHA:0:7}
-      build_args_from_env:
-        - NPM_AUTH_TOKEN
-        - BUILD_DOMAIN
-        - BUILD_EXPIRE
-        - REACT_APP_BUILD_VERSION
-      json_key:
-        from_secret: emirex_gcp_creds_base64
-
-  - name: "Redeploy on Preprod"
-    image: komljen/drone-kubectl-helm
-    environment:
-      KUBERNETES_SERVER:
-        from_secret: emirex_preprod_k8s_server_url
-      KUBERNETES_CERT:
-        from_secret: emirex_preprod_k8s_server_cert
-      KUBERNETES_TOKEN:
-        from_secret: emirex_preprod_k8s_sa_token
-      KUBECTL_COMMAND:
-        from_secret: emirex_preprod_k8s_redeploy_cmd
-    commands:
-      - /run.sh
-      - kubectl set image deployment/frontend -n preprod-app frontend=gcr.io/emirex-preprod/baseapp:${DRONE_COMMIT_SHA:0:7}
-
-trigger:
-  branch:
-  - customer/emirex
-  event:
-  - push
+image_pull_secrets:
+  - dockerconfigjson
