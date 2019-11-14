@@ -179,21 +179,21 @@ class Referral extends React.Component<Props> {
         return (
             <div>
                 <Helmet>
-                    <title>Emirex: Bitcoin Referral Program - Make BTC from your traffic | Emirex.com</title>
+                    <title>Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex</title>
                     <meta
                         name="description"
-                        content="Earn bitcoins for each transaction your referrals make - join Emirex referral program. Earn up commission every time your friends make a trade on Emirex. We are offering prizes: $100k in Bitcoin and $100k in EMRX."
+                        content="Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex"
                     />
                     <link rel="canonical" href="https://emirex.com/referral" />
 
-                    <link key="ru" rel="alternate" href="https://emirex.com/ru/referral" hrefLang="ru" />
-                    <link key="ar" rel="alternate" href="https://emirex.com/ar/referral" hrefLang="ar" />
-                    <link key="en" rel="alternate" href="https://emirex.com/en/referral" hrefLang="en" />
+                    {/* <link key="ru" rel="alternate" href="https://emirex.com/ru/referral" hrefLang="ru" /> */}
+                    {/* <link key="ar" rel="alternate" href="https://emirex.com/ar/referral" hrefLang="ar" /> */}
+                    {/* <link key="en" rel="alternate" href="https://emirex.com/en/referral" hrefLang="en" /> */}
 
-                    <meta name="og:title" content="Bitcoin Referral Program - Make BTC from your traffic | Emirex.com" />
+                    <meta name="og:title" content="Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex" />
                     <meta
                         name="og:description"
-                        content="Earn bitcoins for each transaction your referrals make - join Emirex referral program. Earn up commission every time your friends make a trade on Emirex. We are offering prizes: $100k in Bitcoin and $100k in EMRX."
+                        content="Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex"
                     />
                     <meta name="og:image" content="https://emirex.com/public/img/logo-emirex.svg" />
                 </Helmet>

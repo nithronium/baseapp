@@ -1,4 +1,4 @@
-import { Decimal } from '@openware/components';
+// import { Decimal } from '@openware/components';
 import * as React from 'react';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
@@ -6,6 +6,8 @@ import { Grid } from '../../../components/Grid';
 import { ToolBar, TradingChart, WalletsFetch } from '../../../containers';
 import { OrderComponent } from '../../../containers/Order';
 import { OpenOrdersPanel, OrderBook } from '../../containers';
+
+import { Helmet } from 'react-helmet';
 
 import { getUrlPart, setDocumentTitle } from '../../../helpers';
 import {
@@ -74,8 +76,9 @@ type Props = DispatchProps & ReduxProps & RouteComponentProps;
 
 // tslint:disable:jsx-no-lambda
 class Trading extends React.Component<Props, StateProps> {
-    public readonly state = {
+    public  state = {
         orderComponentResized: 10,
+        marketId: '',
     };
 
     private gridItems = [
@@ -96,6 +99,15 @@ class Trading extends React.Component<Props, StateProps> {
             render: () => <OpenOrdersPanel />,
         },
     ];
+
+    private pageTitles = {
+         'BTC/USDT': { title: 'BTC to USDT. Bitcoin Exchange | Emirex.com', description: 'BTC to USDT Exchange and converter BTC/USDT. Real-time prices and charts. 24/7 global customer support. You can buy & sell using up to date Bitcoin exchange rates' } ,
+         'ETH/USDT': { title: 'ETH to USDT. Ethereum Exchange | Emirex.com', description: 'ETH to USDT Exchange and converter ETH/USDT. Real-time prices and charts. 24/7 global customer support. You can buy & sell using up to date exchange rates' } ,
+         'ETH/BTC': { title: 'ETH to BTC. Price Ethereum Bitcoin | Emirex.com', description: 'ETH to BTC Exchange and converter BTC/ETH. Real-time prices and charts. 24/7 global customer support. You can buy & sell using up to date exchange rates' } ,
+         'EMRX/BTC': { title: 'EMRX to BTC. EMRX Exchange | Emirex.com', description: 'EMRX to BTC Exchange and converter Emirex Token (EMRX) in Bitcoin. Real-time prices and charts. 24/7 support. You can buy & sell using up to date exchange rates' } ,
+         'LTC/BTC': { title: 'LTC to BTC Converter | Price | Emirex.com', description: 'LTC to BTC Exchange. Real-time prices and charts. Converter Litecoin (LTC) in Bitcoin (BTC). 24/7 support. You can buy & sell using up to date exchange rates' } ,
+         'BCH/BTC': { title: 'BCH to BTC. Bitcoin Cash Exchange | Emirex.com', description: 'BCH to BTC Exchange. Real-time prices and charts. Converter Bitcoin Cash in Bitcoin (BTC). 24/7 support. You can buy & sell using up to date exchange rates' } ,
+    };
 
     public componentDidMount() {
         setDocumentTitle('Trading');
@@ -144,19 +156,20 @@ class Trading extends React.Component<Props, StateProps> {
             this.props.depthFetch(nextProps.currentMarket);
         }
 
-        if (nextProps.currentMarket && nextProps.tickers) {
-            this.setTradingTitle(nextProps.currentMarket, nextProps.tickers);
-        }
+        // if (nextProps.currentMarket && nextProps.tickers) {
+        //     this.setTradingTitle(nextProps.currentMarket, nextProps.tickers);
+        // }
     }
 
     public render() {
         const rowHeight = 14;
         const allGridItems = [...this.gridItems];
-        const { rgl, userLoggedIn } = this.props;
+        const { rgl, userLoggedIn, currentMarket } = this.props;
 
         return (
             <div className={'pg-trading-screen'}>
                 <div className={'pg-trading-wrap'}>
+                    {this.setPageTitle(currentMarket)}
                     <ToolBar />
                     <Grid
                         breakpoints={breakpoints}
@@ -187,10 +200,37 @@ class Trading extends React.Component<Props, StateProps> {
         }
     };
 
-    private setTradingTitle = (market: Market, tickers: ReduxProps['tickers']) => {
-        const tickerPrice = tickers[market.id] ? tickers[market.id].last : '0.0';
-        document.title = `${Decimal.format(tickerPrice, market.price_precision)} ${market.name}`;
-    };
+    private setPageTitle = (market?: Market) => {
+        let marketName = 'ETH/USDT';
+        if (market) {
+            marketName = market.name;
+        }
+        if (this.pageTitles[marketName]) {
+            const title = this.pageTitles[`${marketName}`].title;
+
+            const description = this.pageTitles[marketName].description;
+            const link = `https://emirex.com/trading/${marketName.replace('/','').toLowerCase()}`;
+            return (
+                <Helmet>
+                    <title>{title}</title>
+                    <meta name="description" content={description} />
+                    <link rel="canonical" href={link}/>
+                </Helmet>
+            );
+        } else {
+            return (
+                <Helmet>
+                    <title>Trading</title>
+                </Helmet>
+            );
+        }
+
+    }
+
+    // private setTradingTitle = (market: Market, tickers: ReduxProps['tickers']) => {
+    //     const tickerPrice = tickers[market.id] ? tickers[market.id].last : '0.0';
+    //     document.title = `${Decimal.format(tickerPrice, market.price_precision)} ${market.name}`;
+    // };
 
     private handleResize = (layout, oldItem, newItem) => {
         switch (oldItem.i) {
