@@ -179,7 +179,7 @@ class Referral extends React.Component<Props> {
         return (
             <div>
                 <Helmet>
-                    <title>Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex</title>
+                    <title>Get Bitcoin. Crypto Referral Program | Emirex.com</title>
                     <meta
                         name="description"
                         content="Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex"
