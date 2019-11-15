@@ -129,7 +129,7 @@ const links1 = [
 
 const title2 = 'Our Services';
 const links2 = [
-    { key: '', href: '/trading', label: 'Trading Platform' },
+    { key: '', href: '/trading/btcusdt', label: 'Trading Platform' },
     { key: '', href: 'https://emrx.emirex.com', label: 'EMRX Token' },
     { key: '', href: 'https://advisory.emirex.com', label: 'Advisory' },
     /*  { href: '/listing', label: 'footer.links.listing'},*/
@@ -140,8 +140,8 @@ const links2 = [
 
 const title3 = 'Buy/Sell Crypto';
 const links3 = [
-    { key: '', href: '/en/trading/btcusdt', label: 'Buy Bitcoin' },
-    { key: '', href: '/en/trading/ethusdt', label: 'Buy Ethereum' },
+    { key: '', href: '/trading/btcusdt', label: 'Buy Bitcoin' },
+    { key: '', href: '/trading/ethusdt', label: 'Buy Ethereum' },
     /*{ href: '/trading', label: 'footer.links.buyRipple'},
   { href: '/trading', label: 'footer.links.buyLitecoin'},
   { href: '/trading', label: 'footer.links.buyEmrx'},*/
@@ -154,7 +154,7 @@ const title4 = 'Support';
 const links4 = [
     { key: '', href: 'https://knowledge-base.emirex.com/', label: 'Knowledge Base' },
     { key: '', href: 'https://knowledge-base.emirex.com/kb-tickets/new', label: 'Submit a request' },
-    { key: '', href: '/en/fees', label: 'Fees' },
+    { key: '', href: '/fees', label: 'Fees' },
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
     return link;
@@ -162,9 +162,9 @@ const links4 = [
 
 const title5 = 'Legal';
 const links5 = [
-    { key: '', href: '/en/terms', label: 'Terms of Use' },
-    { key: '', href: '/en/privacy', label: 'Privacy Policy' },
-    { key: '', href: '/en/kyc_policy', label: 'KYC/AML policy' },
+    { key: '', href: '/terms', label: 'Terms of Use' },
+    { key: '', href: '/privacy', label: 'Privacy Policy' },
+    { key: '', href: '/kyc_policy', label: 'KYC/AML policy' },
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
     return link;

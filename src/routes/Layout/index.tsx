@@ -183,7 +183,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         component={EmailVerificationScreen}
                     />
                     <Route loading={userLoading} isLogged={isLoggedIn} path="/referral" component={ReferralScreen} />
-                    <Route loading={userLoading} isLogged={isLoggedIn} path="/en/referral" component={ReferralScreen} />
+                    {/* <Route loading={userLoading} isLogged={isLoggedIn} path="/en/referral" component={ReferralScreen} /> */}
                     <Route exact={true} path="/trading/:market?" component={TradingScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/orders" component={OrdersTabScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/history" component={HistoryScreen} />
@@ -193,7 +193,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/security/2fa" component={ProfileTwoFactorAuthScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/referral-tickets" component={ReferralTicketsScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/referral-commission" component={ReferralCommissionScreen} />
-                    <Route path="**"><Redirect to="/trading/" /></Route>
+                    <Route path="**"><Redirect to="/trading/btcusdt" /></Route>
                 </Switch>
             </div>
         );
