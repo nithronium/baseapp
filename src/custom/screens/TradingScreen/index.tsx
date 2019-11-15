@@ -212,9 +212,9 @@ class Trading extends React.Component<Props, StateProps> {
             const link = `https://emirex.com/trading/${marketName.replace('/','').toLowerCase()}`;
             return (
                 <Helmet>
+                    <link rel="canonical" href={link}/>
                     <title>{title}</title>
                     <meta name="description" content={description} />
-                    <link rel="canonical" href={link}/>
                 </Helmet>
             );
         } else {
