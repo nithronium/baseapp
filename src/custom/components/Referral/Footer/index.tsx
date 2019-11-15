@@ -116,8 +116,8 @@ const Address = () => {
 
 const title1 = 'Company';
 const links1 = [
-    { key: '', href: '/en/about', label: 'About' },
-    { key: '', href: '/en/whitepaper', label: 'White Paper' },
+    { key: '', href: '/about', label: 'About' },
+    { key: '', href: '/whitepaper', label: 'White Paper' },
     /* { href: '/team', label: 'footer.links.team'},
   { href: '/careers', label: 'footer.links.careers'},
   { href: '/blog', label: 'footer.links.blog'},*/
