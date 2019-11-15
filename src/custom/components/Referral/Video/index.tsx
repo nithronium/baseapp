@@ -1,8 +1,12 @@
 import * as React from 'react';
 import { Button } from '../Button';
 
+// tslint:disable
+import "node_modules/video-react/dist/video-react.css";
+import { Player } from 'video-react';
+
 import campaign = require('../../../assets/images/referral/campaign-bar.png');
-import video = require('../../../assets/images/referral/video.svg');
+// import video = require('../../../assets/images/referral/video.svg');
 
 const Video: React.FC = () => {
     return (
@@ -14,9 +18,17 @@ const Video: React.FC = () => {
                     <img src={campaign} className="campaign" alt="" />
                 </div>
                 <div className="video-wrap">
-                    <img src={video} alt="" />
+                <Player
+                    fluid={false}
+                    playsInline
+                    src={require('../../../assets/video/Referral.mp4')}
+                    width={360}
+                        height={200}
+                        autoPlay={true}
+                        muted={true}
+                />
                 </div>
-            </div>
+                </div>
             <div className="button-container">
                 <Button theme={'black'}/>
             </div>
