@@ -46,6 +46,8 @@ class ReferralTickets extends React.Component<Props> {
     public componentDidMount() {
         setDocumentTitle('Referral Tickets');
         this.props.fetchReferralTickets();
+        const { history } = this.props;
+        history.replace('/referral-tickets')
     }
 
     private getTotalTickets() {

@@ -148,6 +148,16 @@ class LayoutComponent extends React.Component<LayoutProps> {
         clearInterval(this.walletsFetchInterval);
     }
 
+    // public removeSlash = (path: string): string => {
+    //     const { history } = this.props;
+    //     if (path.slice(-1) === '/') {
+    //         history.replace(path.slice(0, -1));
+    //         return path.slice(0, -1);
+    //     } else {
+    //         return path;
+    //     }
+    // }
+
     public render() {
         const { colorTheme, isLoggedIn, userLoading } = this.props;
 
@@ -183,7 +193,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         component={EmailVerificationScreen}
                     />
                     <Route loading={userLoading} isLogged={isLoggedIn} path="/referral" component={ReferralScreen} />
-                    {/* <Route loading={userLoading} isLogged={isLoggedIn} path="/en/referral" component={ReferralScreen} /> */}
+                        {/* <Route loading={userLoading} isLogged={isLoggedIn} path="/en/referral" component={ReferralScreen} /> */}
                     <Route exact={true} path="/trading/:market?" component={TradingScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/orders" component={OrdersTabScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/history" component={HistoryScreen} />
@@ -198,6 +208,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
             </div>
         );
     }
+
 
     private getLastAction = () => {
         if (localStorage.getItem(STORE_KEY) !== null) {

@@ -73,12 +73,14 @@ class Referral extends React.Component<Props> {
     };
 
     public componentDidMount() {
+        const { history } = this.props;
         setDocumentTitle('Referral');
         const referralCode = this.extractRefID(this.props.location.search) || '';
         this.setState({
             refId: referralCode,
         });
         this.props.fetchReferralTickets();
+        history.replace('/referral');
     }
 
     public componentWillReceiveProps(props: Props) {
