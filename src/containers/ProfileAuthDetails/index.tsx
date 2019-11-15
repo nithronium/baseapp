@@ -5,15 +5,31 @@ import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { CustomInput, Modal } from '../../components';
+import {
+  CustomInput,
+  Modal,
+} from '../../components';
+import { buildPath } from '../../custom/helpers';
 import { VersionGuardWrapper } from '../../decorators';
-import { PASSWORD_REGEX } from '../../helpers';
-import { openGuardModal, RootState, selectUserInfo, User } from '../../modules';
-import { changePasswordFetch, selectChangePasswordSuccess } from '../../modules/user/profile';
+import {
+    PASSWORD_REGEX,
+} from '../../helpers';
+import {
+    openGuardModal,
+    RootState,
+    selectCurrentLanguage,
+    selectUserInfo,
+    User,
+} from '../../modules';
+import {
+    changePasswordFetch,
+    selectChangePasswordSuccess,
+} from '../../modules/user/profile';
 import { ProfileTwoFactorAuth } from '../ProfileTwoFactorAuth';
 import { ProfileTwoFactorAuthLite } from '../ProfileTwoFactorAuthLite';
 
 interface ReduxProps {
+    currentLanguage: string;
     user: User;
     passwordChangeSuccess?: boolean;
 }
@@ -297,8 +313,10 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     };
 
     private handleNavigateTo2fa = (enable2fa: boolean) => {
+        const { currentLanguage } = this.props;
+
         if (enable2fa) {
-            this.props.history.push('/security/2fa', { enable2fa });
+            this.props.history.push(buildPath('/security/2fa', currentLanguage), { enable2fa });
         } else {
             this.setState({
                 showModal: !this.state.showModal,
@@ -367,6 +385,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
+    currentLanguage: selectCurrentLanguage(state),
     user: selectUserInfo(state),
     passwordChangeSuccess: selectChangePasswordSuccess(state),
 });

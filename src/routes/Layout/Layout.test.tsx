@@ -5,6 +5,7 @@ import { Layout, LayoutProps } from './';
 
 const defaults: LayoutProps = {
     colorTheme: 'basic',
+    currentLanguage: '',
     currentMarket: undefined,
     user: {
         email: '',

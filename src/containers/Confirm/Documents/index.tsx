@@ -17,9 +17,14 @@ import {
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import close = require('../../../assets/images/close.svg');
+import { buildPath } from '../../../custom/helpers';
 import { formatDate } from '../../../helpers';
 import { isDateInFuture } from '../../../helpers/checkDate';
-import { alertPush, RootState } from '../../../modules';
+import {
+    alertPush,
+    RootState,
+    selectCurrentLanguage,
+} from '../../../modules';
 import {
     selectSendDocumentsLoading,
     selectSendDocumentsSuccess,
@@ -27,6 +32,7 @@ import {
 } from '../../../modules/user/kyc/documents';
 
 interface ReduxProps {
+    currentLanguage: string;
     success?: string;
     loading: boolean;
 }
@@ -76,8 +82,10 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
     };
 
     public componentWillReceiveProps(next: Props) {
+        const { currentLanguage, history } = this.props;
+
         if (next.success){
-            this.props.history.push('/profile');
+            history.push(buildPath('/profile', currentLanguage));
         }
     }
 
@@ -338,6 +346,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
+    currentLanguage: selectCurrentLanguage(state),
     success: selectSendDocumentsSuccess(state),
     loading: selectSendDocumentsLoading(state),
 });

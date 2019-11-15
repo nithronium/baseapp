@@ -6,10 +6,12 @@ import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import logo = require('../../assets/images/logo.svg');
 import { SignInComponent, TwoFactorAuth } from '../../components';
+import { buildPath } from '../../custom/helpers';
 import { EMAIL_REGEX, ERROR_EMPTY_PASSWORD, ERROR_INVALID_EMAIL, setDocumentTitle } from '../../helpers';
 import {
     RootState,
     selectAlertState,
+    selectCurrentLanguage,
     selectSignInRequire2FA,
     selectSignUpRequireVerification,
     selectUserFetching,
@@ -21,6 +23,7 @@ import {
 } from '../../modules';
 
 interface ReduxProps {
+    currentLanguage: string;
     isLoggedIn: boolean;
     loading?: boolean;
     require2FA?: boolean;
@@ -68,11 +71,13 @@ class SignIn extends React.Component<Props, SignInState> {
     }
 
     public componentWillReceiveProps(props: Props) {
+        const { currentLanguage, history } = this.props;
+
         if (props.isLoggedIn) {
-            this.props.history.push('/wallets');
+            history.push(buildPath('/wallets', currentLanguage));
         }
         if (props.requireEmailVerification) {
-            props.history.push('/email-verification', { email: this.state.email });
+            props.history.push(buildPath('/email-verification', currentLanguage), { email: this.state.email });
         }
     }
 
@@ -184,11 +189,11 @@ class SignIn extends React.Component<Props, SignInState> {
     };
 
     private handleSignUp = () => {
-        this.props.history.push('/signup');
+        this.props.history.push(buildPath('/signup', this.props.currentLanguage));
     };
 
     private forgotPassword = () => {
-        this.props.history.push('/forgot_password');
+        this.props.history.push(buildPath('/forgot_password', this.props.currentLanguage));
     };
 
     private handleFieldFocus = (field: string) => {
@@ -253,6 +258,7 @@ class SignIn extends React.Component<Props, SignInState> {
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     alert: selectAlertState(state),
+    currentLanguage: selectCurrentLanguage(state),
     isLoggedIn: selectUserLoggedIn(state),
     loading: selectUserFetching(state),
     require2FA: selectSignInRequire2FA(state),
