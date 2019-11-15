@@ -99,7 +99,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
         ) : null;
         const termsLink = termsMessage ? (
             <div className="cr-sign-up-form__terms-link">
-                {termsMessage.split(':')[0]} <a href="/en/terms">{termsMessage.split(':')[1]}</a>
+                {termsMessage.split(':')[0]} <a href="/terms">{termsMessage.split(':')[1]}</a>
             </div>
         ) : null;
         const captcha =
