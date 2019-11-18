@@ -13,6 +13,7 @@ export * from './getTotalPrice';
 export * from './getUrlPart';
 export * from './getUserAgent';
 export * from './handleCCYPrecision';
+export * from './handleIncrementalUpdate';
 export * from './historyTableUtils';
 export * from './localeDate';
 export * from './preciseNumber';

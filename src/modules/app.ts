@@ -7,9 +7,13 @@ import { gridLayoutReducer } from './public/gridLayout/reducer';
 import { changeLanguageReducer } from './public/i18n';
 import { klineReducer } from './public/kline';
 import { marketsReducer } from './public/markets';
-import { depthReducer, orderBookReducer } from './public/orderBook';
-import { rangerReducer } from './public/ranger/reducer';
-import { recentTradesReducer } from './public/recentTrades';
+import {
+    depthReducer,
+    incrementDepthReducer,
+    orderBookReducer,
+} from './public/orderBook';
+import { rangerReducer  } from './public/ranger/reducer';
+import { recentTradesReducer  } from './public/recentTrades';
 import { apiKeysReducer } from './user/apiKeys';
 import { authReducer  } from './user/auth';
 import { beneficiariesReducer } from './user/beneficiaries';
@@ -41,6 +45,7 @@ export const publicReducer = combineReducers({
     markets: marketsReducer,
     orderBook: orderBookReducer,
     depth: depthReducer,
+    incrementDepth: incrementDepthReducer,
     ranger: rangerReducer,
     i18n: changeLanguageReducer,
     kline: klineReducer,
