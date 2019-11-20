@@ -683,6 +683,11 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'AJMNAEAJ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text': 'Минимальный депозит ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': '50 EUR',
+    'refcode.code_owner_not_found': 'Владелец кода не найден',
+    'refcode.inactive_code': 'Код не активирован',
+    'refcode.user_not_found': 'Пользователь не найден',
+    'refcode.self_code_user': 'Неверный код',
+    'refcode.update_failed':'Обновление не удалось завершить',
 
     ...nationalitiesNames,
 };

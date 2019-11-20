@@ -49,12 +49,12 @@ class ReferralProgramClass extends React.Component<Props> {
     };
 
     public sendRefCode = async () => {
-        // const { refId } = this.state;
+        const { refId } = this.state;
         const { user } = this.props;
-        // const domen = window.document.location.origin;
+        const domen = window.document.location.origin;
 
-        // const url = `${domen}/api/v1/referral-code?user_uid=${user.uid}&referral_code=${refId}`;
-        const url = `https://stage.emirex.com/api/v1/referral-code?user_uid=${user.uid}&referral_code=IDBF19BD26D5`;
+        const url = `${domen}/api/v1/referral-code?user_uid=${user.uid}&referral_code=${refId}`;
+        // const url = `https://stage.emirex.com/api/v1/referral-code?user_uid=${user.uid}&referral_code=IDBF19BD26D5`;
 
         try {
             const resp = await axios.get(url);

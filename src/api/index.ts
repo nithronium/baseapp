@@ -75,6 +75,7 @@ const conf: RequestOptions = {
 //     apiVersion: 'referral',
 // };
 const refUrl = `${window.document.location.origin}/api/v1/referral-code`;
+// const refUrl = `https://stage.emirex.com/api/v1/referral-code`;
 export const changePassword = async body => API.post(conf)('/identity/users/password/confirm_code', body);
 // export const checkReferralCode = async body => API.post(refConf)('', body);
 export const checkReferralCode = async body => {
