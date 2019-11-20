@@ -6,6 +6,7 @@ import {
   DEPTH_DATA_SNAPSHOT,
   DEPTH_ERROR,
   DEPTH_FETCH,
+  DEPTH_INCREMENT_SUBSCRIBE,
   ORDER_BOOK_DATA,
   ORDER_BOOK_ERROR,
   ORDER_BOOK_FETCH,
@@ -34,6 +35,7 @@ export const initialDepth: DepthState = {
 export const initialIncrementDepth: DepthIncrementState = {
   asks: [],
   bids: [],
+  loading: false,
 };
 
 export const orderBookReducer = (state = initialOrderBook, action: OrderBookActions): OrderBookState => {
@@ -95,6 +97,11 @@ export const depthReducer = (state = initialDepth, action: DepthActions): DepthS
 
 export const incrementDepthReducer = (state = initialIncrementDepth, action: DepthActions): DepthIncrementState => {
   switch (action.type) {
+    case DEPTH_INCREMENT_SUBSCRIBE:
+      return {
+        ...state,
+        loading: true,
+      };
     case DEPTH_DATA_INCREMENT:
       if (action.payload.asks) {
         return {
@@ -116,6 +123,7 @@ export const incrementDepthReducer = (state = initialIncrementDepth, action: Dep
         ...state,
         asks: action.payload.asks,
         bids: action.payload.bids,
+        loading: false,
       };
     default:
       return state;

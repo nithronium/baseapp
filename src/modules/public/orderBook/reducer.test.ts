@@ -103,6 +103,7 @@ describe('orderBook reducer', () => {
     const fakeInitialState: DepthIncrementState = {
       asks: [],
       bids: [],
+      loading: false,
     };
 
     const fakeUpdatedDepth: DepthIncrementState = {
@@ -117,6 +118,7 @@ describe('orderBook reducer', () => {
         ['0.49', '0.5'],
         ['0.26', '25'],
       ],
+      loading: false,
     };
 
     const expectedState = { ...fakeUpdatedDepth };
@@ -136,6 +138,7 @@ describe('orderBook reducer', () => {
         ['0.49', '0.5'],
         ['0.26', '25'],
       ],
+      loading: false,
     };
 
     const fakeOrder: DepthIncrementUpdateData = {
@@ -155,9 +158,26 @@ describe('orderBook reducer', () => {
         ['0.49', '0.5'],
         ['0.26', '25'],
       ],
+      loading: false,
     };
 
     const expectedState = { ...fakeUpdatedDepth };
     expect(incrementDepthReducer(fakeInitialState, actions.depthDataIncrement(fakeOrder))).toEqual(expectedState);
+  });
+
+  it('should handle DEPTH_INCREMENT_SUBSCRIBE', () => {
+    const fakeInitialState: DepthIncrementState = {
+      asks: [],
+      bids: [],
+      loading: false,
+    };
+
+    const expectedState: DepthIncrementState = {
+      asks: [],
+      bids: [],
+      loading: true,
+    };
+
+    expect(incrementDepthReducer(fakeInitialState, actions.depthIncrementSubscribe())).toEqual(expectedState);
   });
 });
