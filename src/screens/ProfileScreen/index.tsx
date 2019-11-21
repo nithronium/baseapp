@@ -6,8 +6,8 @@ import { ProfileAccountActivity } from '../../containers/ProfileAccountActivity'
 import { ProfileApiKeys } from '../../containers/ProfileApiKeys';
 import { ProfileApiKeysLite } from '../../containers/ProfileApiKeysLite';
 import { ProfileAuthDetails } from '../../containers/ProfileAuthDetails';
-import { ProfileVerification } from '../../containers/ProfileVerification';
 import { ReferralProgram } from '../../containers/ReferralProgram';
+import { ProfileVerification } from '../../custom/containers/ProfileVerification';
 import { VersionGuardWrapper } from '../../decorators';
 import { setDocumentTitle } from '../../helpers';
 

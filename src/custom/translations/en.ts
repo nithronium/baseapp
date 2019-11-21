@@ -1,4 +1,10 @@
 export const en = {
+    'page.body.profile.header.account.profile.upgrade': 'Upgrade your level now',
+    'page.body.profile.header.account.profile.abilities.first': '- Ability to deposit / withdraw up to 20,000$ / year',
+    'page.body.profile.header.account.profile.abilities.second': '- Ability to deposit using Credit-Card',
+    'page.body.profile.header.account.profile.abilities.third': '-',
+    'page.body.profile.header.account.profile.withdraw': 'Your WITHDRAW limit: ',
+    'page.body.profile.header.account.profile.knowMore': 'Know more about verification levels',
 
     'page.body.trade.header.orderHistory': 'Order History',
     'page.body.trade.header.balances': 'Balances',
