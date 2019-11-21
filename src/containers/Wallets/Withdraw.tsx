@@ -1,10 +1,10 @@
 // tslint:disable:jsx-no-lambda
-import { Button, Decimal, Input } from '@openware/components';
+import { Button ,/*Decimal,*/ Input } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
 import {
     CustomInput,
-    SummaryField,
+    /*SummaryField,*/
     WhiteList,
 } from '../../components';
 import { Beneficiary } from '../../modules';
@@ -74,14 +74,14 @@ class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
             otpCode,
         } = this.state;
         const {
-            borderItem,
+            // borderItem,
             className,
             currency,
             type,
             twoFactorAuthRequired,
             withdrawAmountLabel,
-            withdrawFeeLabel,
-            withdrawTotalLabel,
+            // withdrawFeeLabel,
+            // withdrawTotalLabel,
             withdrawButtonLabel,
         } = this.props;
 
@@ -94,7 +94,7 @@ class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
         const withdrawAmountClass = classnames('cr-withdraw__group__amount', {
           'cr-withdraw__group__amount--focused': withdrawAmountFocused,
         });
-
+// tslint:disable
         return (
             <div className={cx}>
                 <div className="cr-withdraw-column">
@@ -123,8 +123,10 @@ class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
                     <div className={lastDividerClassName} />
                     {twoFactorAuthRequired && this.renderOtpCodeInput()}
                 </div>
-                <div className="cr-withdraw-column">
-                    <div>
+                
+                <div className="cr-withdraw-column" style={{justifyContent: 'flex-end'}}>
+                    
+                    {/* <div>
                         <SummaryField
                             className="cr-withdraw__summary-field"
                             message={withdrawFeeLabel ? withdrawFeeLabel : 'Fee'}
@@ -137,8 +139,8 @@ class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
                             content={this.renderTotal()}
                             borderItem={borderItem}
                         />
-                    </div>
-                    <div className="cr-withdraw__deep">
+                    </div> */}
+                    <div className="cr-withdraw__deep" style={{maxWidth: '200px'}}>
                         <Button
                             className="cr-withdraw__button"
                             label={withdrawButtonLabel ? withdrawButtonLabel : 'WITHDRAW'}
@@ -151,24 +153,24 @@ class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
         );
     }
 
-    private renderFee = () => {
-        const { fee, fixed, currency } = this.props;
-        return (
-            <span>
-                <Decimal fixed={fixed}>{fee.toString()}</Decimal> {currency.toUpperCase()}
-            </span>
-        );
-    };
+    // private renderFee = () => {
+    //     const { fee, fixed, currency } = this.props;
+    //     return (
+    //         <span>
+    //             <Decimal fixed={fixed}>{fee.toString()}</Decimal> {currency.toUpperCase()}
+    //         </span>
+    //     );
+    // };
 
-    private renderTotal = () => {
-        const total = this.state.total;
-        const { fixed, currency } = this.props;
-        return total ? (
-            <span>
-                <Decimal fixed={fixed}>{total.toString()}</Decimal> {currency.toUpperCase()}
-            </span>
-        ) : <span>0 {currency.toUpperCase()}</span>;
-    };
+    // private renderTotal = () => {
+    //     const total = this.state.total;
+    //     const { fixed, currency } = this.props;
+    //     return total ? (
+    //         <span>
+    //             <Decimal fixed={fixed}>{total.toString()}</Decimal> {currency.toUpperCase()}
+    //         </span>
+    //     ) : <span>0 {currency.toUpperCase()}</span>;
+    // };
 
     private renderOtpCodeInput = () => {
         const { otpCode, withdrawCodeFocused } = this.state;
