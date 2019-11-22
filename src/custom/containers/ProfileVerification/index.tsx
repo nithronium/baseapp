@@ -75,8 +75,21 @@ class ProfileVerificationComponent extends React.Component<Props> {
         );
     }
 
-    public renderWithdrawLimit(withdrawLimitData: WithdrawLimit) {
+    public renderWithdrawLimit(userLevel: number, withdrawLimitData: WithdrawLimit) {
         const percentage = Math.round(+withdrawLimitData.withdrawal_amount / +withdrawLimitData.limit * 100);
+
+        if (!userLevel) {
+            return (
+                <div className="pg-profile-verification__withdraw-limit">
+                    <div className="pg-profile-verification__withdraw-limit__wrap" />
+                    <div className="pg-profile-verification__withdraw-limit__know-more">
+                        <Link to="#">
+                            <FormattedMessage id="page.body.profile.header.account.profile.knowMore" />
+                        </Link>
+                    </div>
+                </div>
+            );
+        }
 
         return (
             <div className="pg-profile-verification__withdraw-limit">
@@ -110,7 +123,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
                 {this.renderUserLevel(userLevel)}
                 {userLevel < 3 && this.renderUpgradeLevelLink()}
                 {this.renderUserAbilities(userLevel)}
-                {this.renderWithdrawLimit(withdrawLimitData)}
+                {this.renderWithdrawLimit(userLevel, withdrawLimitData)}
             </div>
         );
     }

@@ -368,6 +368,9 @@ export const ru: LangType = {
     'page.body.kyc.head.phone': 'Верификация телефона',
     'page.body.kyc.head.identity': 'Верификация личности',
     'page.body.kyc.head.document': 'Верификация документов',
+    'page.body.kyc.head.level.first': 'Level 1',
+    'page.body.kyc.head.level.second': 'Level 2',
+    'page.body.kyc.head.level.third': 'Level 3',
 
     'page.body.lock.oops': 'Ой!',
     'page.body.lock.expired': 'Похоже, что ваш пробный период истек',

@@ -20,6 +20,10 @@ export const en = {
     'page.body.trade.header.funds.content.value': 'Value in ',
     'page.body.trade.header.funds.content.name': 'Name',
 
+    'page.body.kyc.head.level.first': 'Level 1',
+    'page.body.kyc.head.level.second': 'Level 2',
+    'page.body.kyc.head.level.third': 'Level 3',
+
     'page.body.trade.header.openOrders.content.date': 'Time',
 
     'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',

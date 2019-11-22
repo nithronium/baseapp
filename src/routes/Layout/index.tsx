@@ -5,7 +5,7 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { minutesUntilAutoLogout } from '../../api';
-import { TradingScreen } from '../../custom/screens';
+import { ConfirmScreen, TradingScreen } from '../../custom/screens';
 import { toggleColorTheme } from '../../helpers';
 import {
     logoutFetch,
@@ -22,7 +22,6 @@ import {
 } from '../../modules';
 import {
     ChangeForgottenPasswordScreen,
-    ConfirmScreen,
     EmailVerificationScreen,
     ForgotPasswordScreen,
     HistoryScreen,

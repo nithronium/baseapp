@@ -1,3 +1,4 @@
+export * from './Confirm/ProfilePartial';
 export * from './OrderBook';
 export * from './OpenOrders';
 export * from './OpenOrdersPanel';
