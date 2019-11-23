@@ -88,4 +88,4 @@ const nodelogicUrl = `${window.document.location.origin}/api/v2/nodelogic`;
 export const getReferralTickets = async body => {
     const res = await axios.get(nodelogicUrl, body);
     return res;
-}
+};

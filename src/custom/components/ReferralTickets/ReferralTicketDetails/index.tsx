@@ -2,11 +2,15 @@ import * as React from 'react';
 import { ReferralTicketsPayload } from '../../../modules/referralTickets';
 import { Loader } from '../../Loader';
 
-
 interface Props {
     context: ReferralTicketsPayload['referrals'];
     overall: ReferralTicketsPayload['overall']['referrals'];
     loading: boolean;
+    turnRight: () => void;
+    turnLeft: () => void;
+    disableLeft: boolean;
+    disableRight: boolean;
+    page: number;
 }
 
 interface State {
@@ -124,6 +128,11 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                                 </tr>
                             </tfoot>
                         </table>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '200px'}}>
+                            <button style={{background: this.props.disableLeft ? 'gray' : '#00732F'}} disabled={this.props.disableLeft} onClick={this.props.turnLeft}>PREV</button>
+                            <span>{this.props.page + 1}</span>
+                            <button style={{background: this.props.disableRight ? 'gray' : '#00732F'}} disabled={this.props.disableRight} onClick={this.props.turnRight}>NEXT</button>
+                        </div>
                     </div>
                 </div>
             </div>

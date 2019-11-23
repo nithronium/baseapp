@@ -42,12 +42,41 @@ type Props = DispatchProps & InjectedIntlProps & ReduxProps;
 
 class ReferralTickets extends React.Component<Props> {
 
+    public constructor(props) {
+        super(props);
+        this.turnLeft = this.turnLeft.bind(this);
+        this.turnRight = this.turnRight.bind(this);
+    }
+
     //tslint:disable
+    public state = {
+        skip: 0,
+        count: 0,
+        page: 0,
+        disableLeft: true,
+        disableRight: false,
+        limit: 10,
+        totalPages: 0,
+    };
+
     public componentDidMount() {
         setDocumentTitle('Referral Tickets');
-        this.props.fetchReferralTickets();
-        const { history } = this.props;
-        history.replace('/referral-tickets')
+        let  { skip, limit, disableRight } = this.state;
+        this.getTickets(skip, limit);
+        const totalPages = this.getTotalPages();        
+        if (totalPages <= 1) {
+            disableRight = true;
+        };
+        this.setState({
+            totalPages,
+            disableRight
+        })
+    }
+
+    private getTotalPages() {
+        const { overall } = this.props;
+        return (overall.referrals.active + overall.referrals.inactive) / this.state.limit;  
+        // return 10;
     }
 
     private getTotalTickets() {
@@ -64,8 +93,54 @@ class ReferralTickets extends React.Component<Props> {
 
         return total;
     }
+// tslint:disable
+    private getTickets(skip, limit) {
+        const query = `/tickets?limit=${limit}&skip=${skip}`;
+        this.props.fetchReferralTickets(query);        
+    }
 
-    // tslint:disable
+    public turnRight() {
+        let { totalPages, limit, page, skip, disableLeft, disableRight } = this.state; 
+        page += 1;
+        skip += 10;
+        disableLeft = false;
+        if (totalPages -1 === page) {
+            disableRight = true;
+        }
+        this.setState({
+            page,
+            skip,
+            disableLeft,
+            disableRight
+        });
+        this.getTickets(skip, limit);
+        // console.log(skip);
+    }
+
+    public turnLeft() {
+        let {  totalPages, limit, page, skip, disableLeft, disableRight } = this.state;
+            page -= 1;
+            skip -= 10;
+        if (page <= 0) {
+            page = 0;
+            disableLeft = true;
+            skip = 0;
+            page = 0;
+        }
+        if (totalPages - 1 > page) {
+            disableRight = false;
+        }
+        this.setState({
+            page,
+            skip,
+            disableLeft,
+            disableRight
+        });
+        this.getTickets(skip, limit);
+        // console.log(skip);
+    }
+
+    
     public render() {
         
         return (
@@ -83,7 +158,7 @@ class ReferralTickets extends React.Component<Props> {
                     </section>
                 </div>
                 <section id="referral">
-                    <ReferralTicketDetails context={this.props.referrals} overall={this.props.overall.referrals} loading={this.props.loading}/>
+                    <ReferralTicketDetails page={this.state.page} disableLeft={this.state.disableLeft} disableRight={this.state.disableRight} turnLeft={this.turnLeft} turnRight={this.turnRight} context={this.props.referrals} overall={this.props.overall.referrals} loading={this.props.loading}/>
                 </section>
                 <section id="bonus">
                     <BonusTicketDetails context={this.props.bonuses} overall={this.props.overall.bonuses} loading={this.props.loading}/>
@@ -103,7 +178,9 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
-    fetchReferralTickets: () => dispatch(referralTicketsFetch()),
+    fetchReferralTickets: (data) => {
+        return dispatch(referralTicketsFetch(data));
+    },
 });
 
 export const ReferralTicketsScreen = injectIntl(

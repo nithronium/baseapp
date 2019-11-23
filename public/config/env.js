@@ -5,9 +5,9 @@ window.env = {
         applogicUrl: 'http://www.app.local/api/v2/applogic',
         rangerUrl: 'ws://www.app.local/api/v2/ranger',
         tenkoUrl: 'http://www.app.local/api/v2/tenko',
-        nodelogicUrl: 'https://stage.emirex.com/api/v2/nodelogic',
+        nodelogicUrl: 'https://www.app.local/api/v2/nodelogic',
     },
-    minutesUntilAutoLogout: '5',
+    minutesUntilAutoLogout: '60',
     withCredentials: false,
     captcha: {
         captchaType: 'none',

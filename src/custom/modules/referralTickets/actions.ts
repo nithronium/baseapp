@@ -1,8 +1,10 @@
 import { CommonError } from '../../../modules/types';
 import { REFERRAL_TICKETS_DATA, REFERRAL_TICKETS_ERROR, REFERRAL_TICKETS_FETCH } from './constants';
 
+
 export interface ReferralTicketsFetch {
     type: typeof REFERRAL_TICKETS_FETCH;
+    payload: string;
 }
 
 export interface ReferralTicketsError {
@@ -66,8 +68,9 @@ export interface ReferralTicketsData {
 
 export type ReferralTicketsActions = ReferralTicketsFetch | ReferralTicketsData | ReferralTicketsError;
 
-export const referralTicketsFetch = (): ReferralTicketsFetch => ({
+export const referralTicketsFetch = (payload: string): ReferralTicketsFetch => ({
     type: REFERRAL_TICKETS_FETCH,
+    payload,
 });
 
 export const referralTicketsData = (payload: ReferralTicketsData['payload']): ReferralTicketsData => ({

@@ -34,10 +34,12 @@ import { referralTicketsData, referralTicketsError, ReferralTicketsFetch } from 
 const referralTicketsOptions: RequestOptions = {
     apiVersion: 'nodelogic',
 };
-
+//tslint:disable
 export function* referralTicketsFetchSaga(action: ReferralTicketsFetch) {
+  // const a = action.payload;
+  // console.log(a);
     try {
-        const referrals = yield call(API.get(referralTicketsOptions), `/tickets`);
+        const referrals = yield call(API.get(referralTicketsOptions), action.payload);
 
          /*const referrals = yield (data => {
                  return data;
