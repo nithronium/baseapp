@@ -33,6 +33,13 @@ import { rootUserActivitySaga, UserActivityState } from './user/userActivity';
 import { rootWalletsSaga, WalletsState } from './user/wallets';
 import { rootWithdrawLimitSaga, WithdrawLimitState } from './user/withdrawLimit';
 
+import {
+    customUserReducer,
+    KycAuthState,
+    rootKycAuthSaga,
+} from '../custom/modules';
+
+export * from '../custom/modules';
 export * from './public/markets';
 export * from './public/orderBook';
 export * from './public/colorTheme';
@@ -92,11 +99,15 @@ export interface RootState {
         withdrawLimit: WithdrawLimitState;
         guard: GuardState;
     };
+    customUser: {
+        kycAuth: KycAuthState;
+    };
 }
 
 export const rootReducer = combineReducers({
     public: publicReducer,
     user: userReducer,
+    customUser: customUserReducer,
 });
 
 export function* rootSaga() {
@@ -126,5 +137,6 @@ export function* rootSaga() {
         call(rootKlineFetchSaga),
         call(rootWithdrawLimitSaga),
         call(rootGuardSaga),
+        call(rootKycAuthSaga),
     ]);
 }

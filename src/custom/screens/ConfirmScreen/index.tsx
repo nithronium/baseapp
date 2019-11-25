@@ -7,7 +7,6 @@ import { withRouter } from 'react-router-dom';
 import logo = require('../../../assets/images/logo.svg');
 import logoLight = require('../../../assets/images/logoLight.svg');
 import { Documents } from '../../../containers/Confirm/Documents';
-import { Identity } from '../../../containers/Confirm/Identity';
 import { Phone } from '../../../containers/Confirm/Phone';
 import { VersionGuardWrapper } from '../../../decorators';
 import { setDocumentTitle } from '../../../helpers';
@@ -20,6 +19,7 @@ import {
     selectUserInfo,
     User,
 } from '../../../modules';
+import { Idenfy } from '../../containers/Confirm/Idenfy';
 import { ProfilePartial } from '../../containers/Confirm/ProfilePartial';
 
 interface ReduxProps {
@@ -135,8 +135,8 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             userData: { level },
         } = this.props;
 
-        if (level >= 3 || !labels.length) {
-            history.push('/profile');
+        if (!labels.length) {
+            return null;
         }
 
         const emailVerified = labels.find(l => l.key === 'email' && l.value === 'verified' && l.scope === 'private');
@@ -157,7 +157,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             const identityPending = labels.find(l => l.key === 'identity' && l.value === 'pending' && l.scope === 'private');
 
             if (phoneVerified && !identityPending) {
-                return <Identity />;
+                return <Idenfy />;
             }
         }
 
@@ -166,6 +166,8 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         if (level < 3 && !documentsPending) {
             return <Documents />;
         }
+
+        history.push('/profile');
 
         return null;
     };
