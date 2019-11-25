@@ -74,3 +74,29 @@
     width: 72px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .pg-wrapper {
+    background: url(assets/images/background.svg);
+    background-size: cover;
+    height: 100vh;
+  
+    .pg-logo {
+      padding-top: 50px;
+    }
+  }
+
+  .pg-confirm {
+    margin-left: 20px;
+    margin-right: 20px;
+
+    &__progress-items {
+      width: 70%;
+    }
+
+    &__content-profile-partial-forms {
+      height: calc(var(--big-gap) * 4.4) !important;
+      margin: 0 calc(var(--gap) * 1.2) calc(var(--gap) * 2) calc(var(--gap) * 3) !important;
+    }
+  }
+}

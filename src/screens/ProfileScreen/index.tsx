@@ -37,7 +37,7 @@ class ProfileComponent extends React.Component<RouterProps> {
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
-                            {VersionGuardWrapper(ProfileVerification, ProfileVerification)}
+                            <ProfileVerification />
                         </div>
                     </div>
                     <div className="row px-4">

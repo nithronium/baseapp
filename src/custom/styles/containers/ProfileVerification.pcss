@@ -61,6 +61,7 @@
     height: 28px;
     margin-bottom: 40px;
     text-decoration: none;
+    width: fit-content;
   }
 
   &__abilities {
@@ -81,7 +82,7 @@
     }
   }
 
-  &__withdraw-limit {
+  &__withdraw-limit, &__deposit-limit {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -139,11 +140,17 @@
       }
     }
   }
+
+  &__deposit-limit {
+    &__wrap__progress-bar--filled {
+      background: var(--button-normal);
+    }
+  }
 }
 
 @media screen and (max-width: 1199px) {
   .pg-profile-verification {
-    &__withdraw-limit {
+    &__withdraw-limit, &__deposit-limit {
       align-items: flex-end;
       display: flex;
       flex-direction: column;
@@ -175,7 +182,7 @@
       line-height: 19px;
     }
 
-    &__withdraw-limit {
+    &__withdraw-limit, &__deposit-limit {
       padding-right: 0;
   
       &__know-more {

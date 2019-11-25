@@ -268,10 +268,13 @@ export const ru: LangType = {
     'page.body.profile.header.account.profile.identity.message': 'Вывод средств разрешен',
 
     'page.body.profile.header.account.profile.upgrade': 'Upgrade your level now',
-    'page.body.profile.header.account.profile.abilities.first': '- Ability to deposit / withdraw up to 20,000$ / year',
-    'page.body.profile.header.account.profile.abilities.second': '- Ability to deposit using Credit-Card',
-    'page.body.profile.header.account.profile.abilities.third': '-',
+    'page.body.profile.header.account.profile.abilities.first.message1': '- Ability to deposit / withdraw up to {amount}{currency} equivalent per year',
+    'page.body.profile.header.account.profile.abilities.first.message2': '- Ability to trade',
+    'page.body.profile.header.account.profile.abilities.second.message1': '- Ability to deposit / withdraw up to {amount}{currency} equivalent per year',
+    'page.body.profile.header.account.profile.abilities.second.message2': '- Ability to deposit / withdraw using a Credit / Debit card {amount}{currency}',
+    'page.body.profile.header.account.profile.abilities.third': '- No limit of deposit / withdrawals',
     'page.body.profile.header.account.profile.withdraw': 'Your WITHDRAW limit: ',
+    'page.body.profile.header.account.profile.deposit': 'Your DEPOSIT limit: ',
     'page.body.profile.header.account.profile.knowMore': 'Know more about verification levels',
 
     'page.body.profile.header.referralProgram': 'Реферальная программа',
