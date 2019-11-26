@@ -12,12 +12,13 @@ import {
   MapDispatchToPropsFunction,
 } from 'react-redux';
 import { formatDate, isDateInFuture } from '../../../../helpers';
-import {RootState, selectCurrentLanguage} from '../../../../modules';
+import { RootState, selectCurrentLanguage } from '../../../../modules';
 import {
     selectSendIdentitySuccess,
     sendIdentity,
 } from '../../../../modules/user/kyc/identity';
 import { labelFetch } from '../../../../modules/user/kyc/label';
+import { changeUserLevel } from '../../../../modules/user/profile';
 import { nationalities } from '../../../../translations/nationalities';
 
 interface ReduxProps {
@@ -26,6 +27,7 @@ interface ReduxProps {
 }
 
 interface DispatchProps {
+    changeUserLevel: typeof changeUserLevel;
     sendIdentity: typeof sendIdentity;
     labelFetch: typeof labelFetch;
 }
@@ -71,6 +73,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
 
     public componentDidUpdate(prev: Props) {
         if (!prev.success && this.props.success) {
+            this.props.changeUserLevel({ level: 1 });
             this.props.labelFetch();
         }
     }
@@ -320,6 +323,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     dispatch => ({
+        changeUserLevel: payload => dispatch(changeUserLevel(payload)),
         sendIdentity: payload => dispatch(sendIdentity(payload)),
         labelFetch: () => dispatch(labelFetch()),
     });

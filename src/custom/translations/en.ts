@@ -27,6 +27,12 @@ export const en = {
     'page.body.kyc.head.level.second': 'Level 2',
     'page.body.kyc.head.level.third': 'Level 3',
 
+    'page.body.kyc.documents.upload': 'Upload your proof of residence',
+    'page.body.kyc.documents.expiration': 'Document must be 3 months old maximum',
+    'page.body.kyc.documents.select.bankStatement': 'Bank statement',
+    'page.body.kyc.documents.select.taxCertificate': 'Tax certificate',
+    'page.body.kyc.documents.select.leaseOfRentalAgreement': 'Lease of rental agreement',
+
     'page.body.trade.header.openOrders.content.date': 'Time',
 
     'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
@@ -48,4 +54,13 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'Ajman Bank PJSC',
     'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': 'Garhoud Branch, Dubai, UAE',
     'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'AJMNAEAJ',
+
+    'resource.documents.expirationDate': 'Expiration date is invalid',
+
+    'resource.profile.email': 'Email is pending',
+    'resource.profile.profile_partial': 'Profile is pending',
+    'resource.profile.phone': 'Phone is pending',
+    'resource.profile.kyc': 'KYC is pending',
+    'resource.profile.document': 'Proof of residence is pending',
+    'resource.profile.questionnaire': 'Questionnaire is pending',
 };

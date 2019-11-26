@@ -59,6 +59,7 @@ interface DispatchProps {
 
 interface State {
     formattedDepositHistory: WalletItemProps[];
+    evaluatedDepositsTotal: string;
 }
 
 type Props = ReduxProps & DispatchProps & InjectedIntlProps;
@@ -69,6 +70,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
 
         this.state = {
             formattedDepositHistory: [],
+            evaluatedDepositsTotal: '',
         };
     }
 
@@ -105,12 +107,29 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
 
     public componentWillReceiveProps(nextProps: Props) {
         const { currencies, depositHistory } = this.props;
+        const { formattedDepositHistory } = this.state;
 
-        if (nextProps.depositHistory.length && JSON.stringify(nextProps.depositHistory) !== JSON.stringify(depositHistory) && currencies.length) {
+        if (nextProps.depositHistory.length && currencies.length &&
+            (JSON.stringify(nextProps.depositHistory) !== JSON.stringify(depositHistory) || !formattedDepositHistory.length)) {
             if (nextProps.depositHistory[0].confirmations !== undefined) {
                 const fiatDepositHistory = this.handleFilterDepositHistory(currencies, nextProps.depositHistory);
                 this.setState({ formattedDepositHistory: this.handleFormatDepositHistory(fiatDepositHistory) });
             }
+        }
+    }
+
+    public componentDidUpdate(prevProps: Props, prevState: State) {
+        const {
+            currencies,
+            markets,
+            tickers,
+        } = this.props;
+        const { formattedDepositHistory } = this.state;
+        if (formattedDepositHistory.length && currencies.length && markets.length && tickers &&
+            JSON.stringify(prevState.formattedDepositHistory) !== JSON.stringify(formattedDepositHistory)) {
+            this.setState({
+                evaluatedDepositsTotal: estimateValue(VALUATION_PRIMARY_CURRENCY, currencies, formattedDepositHistory, markets, tickers),
+            });
         }
     }
 
@@ -227,6 +246,8 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
     }
 
     public renderDepositLimit(userLevel: number, withdrawLimitData: WithdrawLimit) {
+        const { evaluatedDepositsTotal } = this.state;
+
         if (!userLevel) {
             return (
                 <div className="pg-profile-verification__deposit-limit">
@@ -240,7 +261,6 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
             );
         }
 
-        const evaluatedDepositsTotal = this.handleCalcDepositAmount();
         const percentage = Math.round(+evaluatedDepositsTotal / +withdrawLimitData.limit * 100);
         const withdrawalLimitCurrency = withdrawLimitData.currency.toLocaleLowerCase().includes('usd') ?
             '$' : ` ${withdrawLimitData.currency.toUpperCase()}`;
@@ -318,17 +338,6 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
         }
 
         return depositsAsWallets;
-    }
-
-    private handleCalcDepositAmount = () => {
-        const {
-            currencies,
-            markets,
-            tickers,
-        } = this.props;
-        const { formattedDepositHistory } = this.state;
-
-        return estimateValue(VALUATION_PRIMARY_CURRENCY, currencies, formattedDepositHistory, markets, tickers);
     }
 }
 

@@ -357,14 +357,18 @@ export const ru: LangType = {
     'page.body.kyc.documents.drag': 'Перетащите или загрузите файлы',
     'page.body.kyc.documents.maxFile': 'Максимальный размер 10MB',
     'page.body.kyc.documents.maxNum': 'Максимальное число 5',
-    'page.body.kyc.documents.upload': 'Загрузите свое удостоверение личности с фотографией',
     'page.body.kyc.documents.number': ': Номер документа',
     'page.body.kyc.documentsType': 'Тип документа',
 
+    'page.body.kyc.documents.upload': 'Upload your proof of residence',
+    'page.body.kyc.documents.expiration': 'Document must be 3 months old maximum',
     'page.body.kyc.documents.select.passport': 'Паспорт',
     'page.body.kyc.documents.select.identityCard': 'Удостоверение личности',
     'page.body.kyc.documents.select.driverLicense': 'Водительское удостоверение',
     'page.body.kyc.documents.select.utilityBill': 'Коммунальная квитанция',
+    'page.body.kyc.documents.select.bankStatement': 'Bank statement',
+    'page.body.kyc.documents.select.taxCertificate': 'Tax certificate',
+    'page.body.kyc.documents.select.leaseOfRentalAgreement': 'Lease of rental agreement',
 
     'page.body.kyc.next': 'Дальше',
     'page.body.kyc.submit': 'Отправить',
@@ -467,6 +471,13 @@ export const ru: LangType = {
     'resource.document.empty_doc_expire': 'Срок действия недействителен',
     'password.requirements': 'Пароль не соответствует минимальным требованиям',
     'password.password.password_strength': 'Пароль слишком слабый',
+    'resource.profile.email': 'Почта проверяется',
+    'resource.profile.profile_partial': 'Профиль проверяется',
+    'resource.profile.phone': 'Телефон проверяется',
+    'resource.profile.kyc': 'Личность проверяется',
+    'resource.profile.document': 'Место жительства проверяется',
+    'resource.profile.questionnaire': 'Анкета проверяется',
+    'resource.documents.expirationDate': 'Expiration date is invalid',
 
     'email.taken': 'Почта уже зарегистрирована',
 
