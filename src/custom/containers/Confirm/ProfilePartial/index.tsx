@@ -32,6 +32,10 @@ interface DispatchProps {
     labelFetch: typeof labelFetch;
 }
 
+interface ProfilePartialProps {
+    toggleNationalityBlockedModal: () => void;
+}
+
 interface OnChangeEvent {
     target: {
         value: string;
@@ -51,7 +55,7 @@ interface State {
     lastNameFocused: boolean;
 }
 
-type Props = ReduxProps & DispatchProps & InjectedIntlProps;
+type Props = ReduxProps & DispatchProps & InjectedIntlProps & ProfilePartialProps;
 
 class ProfilePartialComponent extends React.Component<Props, State> {
     public state = {
@@ -108,7 +112,9 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         const dataNationalities = nationalities.map(value => {
             return this.translate(value);
         });
-        const onSelectNationality = value => this.selectNationality(dataNationalities[value]);
+        const onSelectNationality = value => {
+            this.selectNationality(dataNationalities[value]);
+        };
 
         /* tslint:disable */
         countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
@@ -120,92 +126,92 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         const onSelectCountry = value => this.selectCountry(dataCountries[value]);
 
         return (
-          <div className="pg-confirm__content-profile-partial">
-            <div className="pg-confirm__content-profile-partial-forms">
-                <div className="pg-confirm__content-profile-partial-col">
-                    <div className="pg-confirm__content-profile-partial-col-row">
-                      <fieldset className={firstNameGroupClass}>
-                          {firstName && <legend>{this.translate('page.body.kyc.identity.firstName')}</legend>}
-                              <input
-                                  className="pg-confirm__content-profile-partial-col-row-content-number"
-                                  type="string"
-                                  placeholder={this.translate('page.body.kyc.identity.firstName')}
-                                  value={firstName}
-                                  onChange={this.handleChange('firstName')}
-                                  onFocus={this.handleFieldFocus('firstName')}
-                                  onBlur={this.handleFieldFocus('firstName')}
-                                  autoFocus={true}
-                              />
-                      </fieldset>
-                    </div>
-                    <div className="pg-confirm__content-profile-partial-col-row">
-                        <fieldset className={lastNameGroupClass}>
-                            {lastName && <legend>{this.translate('page.body.kyc.identity.lastName')}</legend>}
+            <div className="pg-confirm__content-profile-partial">
+              <div className="pg-confirm__content-profile-partial-forms">
+                  <div className="pg-confirm__content-profile-partial-col">
+                      <div className="pg-confirm__content-profile-partial-col-row">
+                        <fieldset className={firstNameGroupClass}>
+                            {firstName && <legend>{this.translate('page.body.kyc.identity.firstName')}</legend>}
                                 <input
                                     className="pg-confirm__content-profile-partial-col-row-content-number"
                                     type="string"
-                                    placeholder={this.translate('page.body.kyc.identity.lastName')}
-                                    value={lastName}
-                                    onChange={this.handleChange('lastName')}
-                                    onFocus={this.handleFieldFocus('lastName')}
-                                    onBlur={this.handleFieldFocus('lastName')}
+                                    placeholder={this.translate('page.body.kyc.identity.firstName')}
+                                    value={firstName}
+                                    onChange={this.handleChange('firstName')}
+                                    onFocus={this.handleFieldFocus('firstName')}
+                                    onBlur={this.handleFieldFocus('firstName')}
+                                    autoFocus={true}
                                 />
                         </fieldset>
-                    </div>
-                    <div className="pg-confirm__content-profile-partial-col-row">
-                        <div className="pg-confirm__content-profile-partial-col-row-content">
-                            <div className="pg-confirm__content-profile-partial-col-row-content-label">
-                                {countryOfBirth && this.translate('page.body.kyc.identity.CoR')}
-                            </div>
-                            <Dropdown
-                                className="pg-confirm__content-documents-col-row-content-number"
-                                list={dataCountries}
-                                onSelect={onSelectCountry}
-                                placeholder={this.translate('page.body.kyc.identity.CoR')}
-                            />
-                        </div>
-                    </div>
-                    <div className="pg-confirm__content-profile-partial-col-row">
-                        <div className="pg-confirm__content-profile-partial-col-row-content">
-                            <div className="pg-confirm__content-profile-partial-col-row-content-label">
-                                {metadata.nationality && this.translate('page.body.kyc.identity.nationality')}
-                            </div>
-                            <Dropdown
-                                className="pg-confirm__content-documents-col-row-content-number"
-                                list={dataNationalities}
-                                onSelect={onSelectNationality}
-                                placeholder={this.translate('page.body.kyc.identity.nationality')}
-                            />
-                        </div>
-                    </div>
-                    <div className="pg-confirm__content-profile-partial-col-row">
-                        <fieldset className={dateOfBirthGroupClass}>
-                            {dateOfBirth && <legend>{this.translate('page.body.kyc.identity.dateOfBirth')}</legend>}
-                            <MaskInput
-                                className="pg-confirm__content-profile-partial-col-row-content-number"
-                                maskString="00/00/0000"
-                                mask="00/00/0000"
-                                onChange={this.handleChangeDate}
-                                onFocus={this.handleFieldFocus('dateOfBirth')}
-                                onBlur={this.handleFieldFocus('dateOfBirth')}
-                                value={dateOfBirth}
-                                placeholder={this.translate('page.body.kyc.identity.dateOfBirth')}
-                            />
-                        </fieldset>
-                    </div>
-                    <div className="pg-confirm__content-profile-partial-col-row" />
+                      </div>
+                      <div className="pg-confirm__content-profile-partial-col-row">
+                          <fieldset className={lastNameGroupClass}>
+                              {lastName && <legend>{this.translate('page.body.kyc.identity.lastName')}</legend>}
+                                  <input
+                                      className="pg-confirm__content-profile-partial-col-row-content-number"
+                                      type="string"
+                                      placeholder={this.translate('page.body.kyc.identity.lastName')}
+                                      value={lastName}
+                                      onChange={this.handleChange('lastName')}
+                                      onFocus={this.handleFieldFocus('lastName')}
+                                      onBlur={this.handleFieldFocus('lastName')}
+                                  />
+                          </fieldset>
+                      </div>
+                      <div className="pg-confirm__content-profile-partial-col-row">
+                          <div className="pg-confirm__content-profile-partial-col-row-content">
+                              <div className="pg-confirm__content-profile-partial-col-row-content-label">
+                                  {countryOfBirth && this.translate('page.body.kyc.identity.CoR')}
+                              </div>
+                              <Dropdown
+                                  className="pg-confirm__content-documents-col-row-content-number"
+                                  list={dataCountries}
+                                  onSelect={onSelectCountry}
+                                  placeholder={this.translate('page.body.kyc.identity.CoR')}
+                              />
+                          </div>
+                      </div>
+                      <div className="pg-confirm__content-profile-partial-col-row">
+                          <div className="pg-confirm__content-profile-partial-col-row-content">
+                              <div className="pg-confirm__content-profile-partial-col-row-content-label">
+                                  {metadata.nationality && this.translate('page.body.kyc.identity.nationality')}
+                              </div>
+                              <Dropdown
+                                  className="pg-confirm__content-documents-col-row-content-number"
+                                  list={dataNationalities}
+                                  onSelect={onSelectNationality}
+                                  placeholder={this.translate('page.body.kyc.identity.nationality')}
+                              />
+                          </div>
+                      </div>
+                      <div className="pg-confirm__content-profile-partial-col-row">
+                          <fieldset className={dateOfBirthGroupClass}>
+                              {dateOfBirth && <legend>{this.translate('page.body.kyc.identity.dateOfBirth')}</legend>}
+                              <MaskInput
+                                  className="pg-confirm__content-profile-partial-col-row-content-number"
+                                  maskString="00/00/0000"
+                                  mask="00/00/0000"
+                                  onChange={this.handleChangeDate}
+                                  onFocus={this.handleFieldFocus('dateOfBirth')}
+                                  onBlur={this.handleFieldFocus('dateOfBirth')}
+                                  value={dateOfBirth}
+                                  placeholder={this.translate('page.body.kyc.identity.dateOfBirth')}
+                              />
+                          </fieldset>
+                      </div>
+                      <div className="pg-confirm__content-profile-partial-col-row" />
+                  </div>
                 </div>
-              </div>
-              {success && <p className="pg-confirm__success">{this.translate(success)}</p>}
-              <div className="pg-confirm__content-deep">
-                  <Button
-                      className="pg-confirm__content-phone-deep-button"
-                      label={this.translate('page.body.kyc.next')}
-                      onClick={this.sendData}
-                      disabled={this.handleCheckButtonDisabled()}
-                  />
-              </div>
-          </div>
+                {success && <p className="pg-confirm__success">{this.translate(success)}</p>}
+                <div className="pg-confirm__content-deep">
+                    <Button
+                        className="pg-confirm__content-phone-deep-button"
+                        label={this.translate('page.body.kyc.next')}
+                        onClick={this.sendData}
+                        disabled={this.handleCheckButtonDisabled()}
+                    />
+                </div>
+            </div>
         );
     }
 
@@ -258,12 +264,22 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     }
 
     private selectNationality = (value: string) => {
+        if (value === 'American') {
+            this.props.toggleNationalityBlockedModal();
+            return;
+        }
+
         this.setState({
             metadata: { nationality: value },
         });
     };
 
     private selectCountry = (value: string) => {
+        if (value === 'United States of America') {
+            this.props.toggleNationalityBlockedModal();
+            return;
+        }
+
         this.setState({
             countryOfBirth: countries.getAlpha2Code(value, this.props.lang),
         });
@@ -312,6 +328,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             country: this.state.countryOfBirth,
             metadata: JSON.stringify(this.state.metadata),
         };
+
         this.props.sendIdentity(profileInfo);
     }
 }

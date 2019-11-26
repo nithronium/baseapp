@@ -18,6 +18,7 @@ import {
     selectUserInfo,
     User,
 } from '../../../modules';
+import { BlockNationalityModal } from '../../components/BlockedNationalityModal';
 import { Documents } from '../../containers/Confirm/Documents';
 import { Idenfy } from '../../containers/Confirm/Idenfy';
 import { Phone } from '../../containers/Confirm/Phone';
@@ -36,6 +37,7 @@ interface HistoryProps {
 interface ConfirmState {
     title: string;
     level: number;
+    toggleNationalityBlockedModalCheck: boolean;
 }
 
 interface DispatchProps {
@@ -52,6 +54,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         this.state = {
             title: '',
             level: 0,
+            toggleNationalityBlockedModalCheck: false,
         };
     }
 
@@ -79,6 +82,11 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             'pg-confirm__progress-second': currentProfileLevel === 1,
             'pg-confirm__progress-third': currentProfileLevel === 2,
         });
+
+        const classNameModal = classnames('pg-denied', {
+            'd-flex': this.state.toggleNationalityBlockedModalCheck,
+        });
+
         return (
             <div className="pg-wrapper">
                 <div className="pg-logo">
@@ -121,6 +129,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                         </div>
                     </div>
                 </div>
+                <BlockNationalityModal classname={classNameModal} toggleNationalityBlockedModal={this.handleChangeUS} />
             </div>
         );
     }
@@ -145,6 +154,12 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         }
     }
 
+    private handleChangeUS = () => {
+        this.setState({
+            toggleNationalityBlockedModalCheck: !this.state.toggleNationalityBlockedModalCheck,
+        });
+    }
+
     private renderContent = () => {
         const {
             history,
@@ -161,7 +176,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const emailVerified = labels.find(l => l.key === 'email' && l.value === 'verified' && l.scope === 'private');
 
         if (level === 0 && emailVerified) {
-            return <ProfilePartial />;
+            return <ProfilePartial toggleNationalityBlockedModal={this.handleChangeUS} />;
         }
 
         if (level === 1) {

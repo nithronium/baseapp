@@ -55,6 +55,10 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': 'Garhoud Branch, Dubai, UAE',
     'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'AJMNAEAJ',
 
+    'page.body.modal.denied': 'Access denied',
+    'page.body.modal.appologies': 'Sorry, due to your local legislation we are not able to proceed your registration.',
+    'page.body.modal.understand': 'I understand',
+
     'resource.documents.expirationDate': 'Expiration date is invalid',
 
     'resource.profile.email': 'Email is pending',
