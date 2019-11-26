@@ -59,23 +59,36 @@ class ReferralTickets extends React.Component<Props> {
         totalPages: 0,
     };
 
+    public componentWillMount() {
+       
+    }
+
     public componentDidMount() {
         setDocumentTitle('Referral Tickets');
-        let  { skip, limit, disableRight } = this.state;
-        this.getTickets(skip, limit);
-        const totalPages = this.getTotalPages();        
+        let  { skip, limit } = this.state;
+        this.getTickets(skip, limit);        
+        
+    }
+    public componentWillReceiveProps() {
+        let  { disableRight } = this.state;
+        const totalPages = this.getTotalPages(); 
+      
         if (totalPages <= 1) {
             disableRight = true;
+        } else {
+            disableRight = false;
         };
+
         this.setState({
             totalPages,
             disableRight
         })
     }
 
+  
     private getTotalPages() {
         const { overall } = this.props;
-        return (overall.referrals.active + overall.referrals.inactive) / this.state.limit;  
+        return Math.ceil((overall.referrals.active + overall.referrals.inactive) / this.state.limit);  
         // return 10;
     }
 
@@ -104,17 +117,25 @@ class ReferralTickets extends React.Component<Props> {
         page += 1;
         skip += 10;
         disableLeft = false;
-        if (totalPages -1 === page) {
+        // console.log(totalPages);
+        if (totalPages <= page + 1) {
             disableRight = true;
+            this.setState({
+                page,
+                skip,
+                disableLeft,
+                disableRight
+            });
+        } else {
+            this.setState({
+                page,
+                skip,
+                disableLeft,
+                disableRight
+            });
+            this.getTickets(skip, limit);
+
         }
-        this.setState({
-            page,
-            skip,
-            disableLeft,
-            disableRight
-        });
-        this.getTickets(skip, limit);
-        // console.log(skip);
     }
 
     public turnLeft() {
@@ -126,18 +147,26 @@ class ReferralTickets extends React.Component<Props> {
             disableLeft = true;
             skip = 0;
             page = 0;
+            this.setState({
+                page,
+                skip,
+                disableLeft,
+                disableRight
+            });
+        }  else  {
+            if (totalPages - 1 > page) {
+                disableRight = false;
+            }
+            this.setState({
+                page,
+                skip,
+                disableLeft,
+                disableRight
+            });
+            this.getTickets(skip, limit);
+            // console.log(skip);
         }
-        if (totalPages - 1 > page) {
-            disableRight = false;
-        }
-        this.setState({
-            page,
-            skip,
-            disableLeft,
-            disableRight
-        });
-        this.getTickets(skip, limit);
-        // console.log(skip);
+        
     }
 
     

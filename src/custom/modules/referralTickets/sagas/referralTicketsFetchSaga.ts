@@ -1,7 +1,10 @@
-// tslint:disable-next-line
+// tslint:disable
 import { call, put } from 'redux-saga/effects';
 import { API, RequestOptions } from '../../../../api';
 import { referralTicketsData, referralTicketsError, ReferralTicketsFetch } from '../actions';
+
+
+// const data = require('./data.json');
 
 /*const referalData = {
     user: {
@@ -31,6 +34,7 @@ import { referralTicketsData, referralTicketsError, ReferralTicketsFetch } from 
       ],
 };*/
 
+
 const referralTicketsOptions: RequestOptions = {
     apiVersion: 'nodelogic',
 };
@@ -40,7 +44,8 @@ export function* referralTicketsFetchSaga(action: ReferralTicketsFetch) {
   // console.log(a);
     try {
         const referrals = yield call(API.get(referralTicketsOptions), action.payload);
-
+        // let referrals = data;
+        // console.log(data);
          /*const referrals = yield (data => {
                  return data;
              })(referalData);*/
