@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button } from '../Button';
+import Button from '../Button';
 
 import bitcoin = require('../../../assets/images/referral/bitcoin.svg');
 import emrx = require('../../../assets/images/referral/emrx.svg');

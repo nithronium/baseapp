@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Button } from '../Button';
+import Button from '../Button';
 
 // tslint:disable
 import "node_modules/video-react/dist/video-react.css";

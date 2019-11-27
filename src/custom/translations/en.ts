@@ -50,4 +50,6 @@ export const en = {
     'profile.click_here': 'Click Here',
     'profile.enter_code': 'Enter an existing referral code',
     'profile.save_code': 'Save Code',
+    'page.referral.get_a_code': 'GET A CODE',
+    'page.referral.hiw': 'How It Works',
 };

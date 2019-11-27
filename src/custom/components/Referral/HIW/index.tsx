@@ -58,10 +58,10 @@ const steps = [
     },
 ];
 
-const HIW: React.FC = () => {
+const HIW = (props) => {
     return (
         <section id="how-it-works">
-            <h2 className="center">How It Works</h2>
+            <h2 className="center">{props.hiw}</h2>
             <h4 className="center">No purchase is necessary to take part in the referral program giveaway.</h4>
             <div className="steps">{steps.map(step)}</div>
         </section>

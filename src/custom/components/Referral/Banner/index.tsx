@@ -1,9 +1,11 @@
 import * as React from 'react';
 // import { Link } from 'react-scroll';
-import { Button } from '../Button';
+import Button from '../Button';
 //tslint:disable
 
+
 const Banner: React.FC = ({ children }) => {
+
     return (
         <section id="banner">
             <div className="grab-container">
@@ -16,7 +18,7 @@ const Banner: React.FC = ({ children }) => {
                             alt=""
                         />
                         <div className="button-container">
-                            <Button />
+                            <Button/>
                         </div>
                     </div>
                 </div>

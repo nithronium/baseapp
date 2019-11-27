@@ -694,6 +694,8 @@ export const ru: LangType = {
     'profile.click_here': 'Нажать на ссылку',
     'profile.enter_code': 'Ввести существующий реферальный код',
     'profile.save_code': 'Сохранить код',
+    'page.referral.get_a_code': 'ПОЛУЧИТЬ КОД',
+    'page.referral.hiw': 'Как Это Работает',
 
     ...nationalitiesNames,
 };

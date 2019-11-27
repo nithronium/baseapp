@@ -203,7 +203,7 @@ class Referral extends React.Component<Props> {
                 </Helmet>
                 <div className="pg-referral-screen">
                     <Banner>{this.props.user.state === 'active' ? totalTickets() : signupForm()}</Banner>
-                    <HIW />
+                    <HIW hiw={this.props.intl.formatMessage({ id: 'page.referral.hiw' })}/>
                     <Video />
                     <Timelines />
                     <HowTo />

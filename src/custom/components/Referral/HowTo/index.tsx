@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Button } from '../Button';
+import Button from '../Button';
 
 import backFull = require('../../../assets/images/referral/back-full.svg');
 import backLeft = require('../../../assets/images/referral/back-left.svg');
