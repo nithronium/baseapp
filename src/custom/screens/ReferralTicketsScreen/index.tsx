@@ -29,6 +29,7 @@ interface ReduxProps {
 interface State {
     skip: number;
     page: number;
+    maxPages: number;
     limit: number;
     overall: any;
     referrals: any;
@@ -54,12 +55,15 @@ class ReferralTickets extends React.Component<Props> {
         skip: 0,
         page: 1,
         limit: 10,
+        maxPages: 0,
         overall: {
             direct: {
               active: 0,
               inactive: 0
             },
             referrals: {
+              count: 0,
+              subreferralsCount: 0,  
               active: 0,
               inactive: 0
             },
@@ -98,7 +102,8 @@ class ReferralTickets extends React.Component<Props> {
         getReferralTickets(query).then(data => {
             const { bonuses, direct, overall, referrals } = data;
             let disabledNext = false;
-            if (referrals.lenght < limit) {
+            const maxPages = Math.ceil(overall.referrals.count / limit);
+            if (maxPages <= 1) {
                 disabledNext = true;
             }
             this.setState({
@@ -107,7 +112,8 @@ class ReferralTickets extends React.Component<Props> {
                 overall,
                 referrals,
                 loaded: true,
-                disabledNext
+                disabledNext,
+                maxPages,
             });
         }).catch(() => {
             this.setState({
@@ -139,7 +145,7 @@ class ReferralTickets extends React.Component<Props> {
 
 
     public turnRight() {
-        let { limit, page, skip, disabledNext, disabledPrev } = this.state; 
+        let { limit, page, skip, disabledNext, disabledPrev, maxPages } = this.state; 
         skip += 10;
         page += 1;        
         this.setState({
@@ -150,7 +156,7 @@ class ReferralTickets extends React.Component<Props> {
             const {  referrals } = data;
             disabledPrev = false;
             
-            if (referrals.length < limit) {
+            if (maxPages === page) {
                 disabledNext = true;
             }
             this.setState({

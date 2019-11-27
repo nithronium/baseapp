@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ReferralTicketsPayload } from '../../../modules/referralTickets';
+
 // import { Loader } from '../../Loader';
 //tslint:disable
 interface Props {
@@ -87,6 +88,9 @@ class ReferralTicketDetails extends React.Component<Props, State>{
         return total;
     }
 
+    public getOverall(key) {
+        return this.props.overall[key];
+    }
 
 
 
@@ -127,16 +131,25 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                             </tbody>
                             <tfoot>
                                 <tr><td style={{paddingBottom: 0}} colSpan={5}><span className="table-summary-header">total</span></td></tr>
-                                <tr>
+                                <tr >
                                     <td><span className="count">{this.getTotal('tickets') + this.getTotal('subreferrals')}</span> <span className="explanation">tickets</span></td>
                                     <td>{this.getTotal('email', 'count')} referreres</td>
                                     <td>yes {this.getTotal('isActive', 'count', 1)} / no {this.getTotal('isActive', 'count', 0)} </td>
                                     <td>{this.getTotal('subreferrals')} <span className="explanation">referrals</span></td>
                                     <td>{this.getTotal('activeSubreferrals')} <span className="explanation">referrals</span></td>
                                 </tr>
+                                
+                                <tr><td style={{paddingBottom: 0, paddingTop: '15px'}} colSpan={5}><span className="table-summary-header">overall</span></td></tr>
+                                <tr>
+                                    <td><span className="count">{this.getOverall('active') + this.getOverall('inactive') + this.getOverall('subreferralsCount')}</span> <span className="explanation">tickets</span></td>
+                                    <td>{this.getOverall('count')} referreres</td>
+                                    <td>yes {this.getOverall('active')} / no {this.getOverall('inactive')} </td>
+                                    <td>{this.getOverall('subreferralsCount')} <span className="explanation">referrals</span></td>
+                                    <td>{this.getTotal('activeSubreferrals')} <span className="explanation">referrals</span></td>
+                                </tr>
                             </tfoot>
                         </table>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '200px'}}>
+                        <div style={{ padding: '40px 0',display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '200px'}}>
                             <button style={{background: this.props.disabledPrev ? 'gray' : '#00732F'}} disabled={this.props.disabledPrev} onClick={this.props.turnLeft}>PREV</button>
                             <span>{this.props.page}</span>
                             <button style={{background: this.props.disabledNext ? 'gray' : '#00732F'}} disabled={this.props.disabledNext} onClick={this.props.turnRight}>NEXT</button>

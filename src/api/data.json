@@ -1,12 +1,14 @@
-{ "tickets": {
+{ 
     "overall": {
       "direct": {
         "active": 6,
         "inactive": 0
       },
       "referrals": {
-        "active": 3,
-        "inactive": 33
+        "count": 22,
+        "subreferralsCount": 8,
+        "active": 4,
+        "inactive": 38
       },
       "bonuses": {
         "active": 0,
@@ -81,6 +83,13 @@
       },
       {
         "tickets": 2,
+        "email": "iogancombatiente+388@gmail.com",
+        "isActive": 1,
+        "subreferrals": 2,
+        "activeSubreferrals": 1
+      },
+      {
+        "tickets": 2,
         "email": "inna.lisovskaya100+ivan6@gmail.com",
         "isActive": 0,
         "subreferrals": 0,
@@ -108,32 +117,25 @@
         "activeSubreferrals": 0
       },
       {
-        "tickets": 3,
+        "tickets": 2,
         "email": "inna.lisovskaya100+ivan6@gmail.com",
         "isActive": 0,
         "subreferrals": 0,
         "activeSubreferrals": 0
       },
       {
-        "tickets": 11,
+        "tickets": 2,
         "email": "inna.lisovskaya100+ivan7@gmail.com",
         "isActive": 0,
         "subreferrals": 0,
         "activeSubreferrals": 0
       },
       {
-        "tickets": 5,
+        "tickets": 2,
         "email": "inna.lisovskaya100+ivan8@gmail.com",
         "isActive": 0,
         "subreferrals": 0,
         "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "iogancombatiente+388@gmail.com",
-        "isActive": 1,
-        "subreferrals": 2,
-        "activeSubreferrals": 1
       },
       {
         "tickets": 2,
@@ -169,9 +171,23 @@
         "isActive": 0,
         "subreferrals": 0,
         "activeSubreferrals": 0
-      }  
+      },
+      {
+        "tickets": 2,
+        "email": "inna.lisovskaya100+ivan3@gmail.com",
+        "isActive": 0,
+        "subreferrals": 0,
+        "activeSubreferrals": 0
+      },
+      {
+        "tickets": 2,
+        "email": "inna.lisovskaya100+ivan4@gmail.com",
+        "isActive": 0,
+        "subreferrals": 0,
+        "activeSubreferrals": 0
+      }
      
     ],
     "bonuses": []
-  }
+
   }

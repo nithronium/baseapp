@@ -33,6 +33,8 @@ export interface ReferralTicketsPayload {
             inactive: number,
         },
         referrals: {
+            count: number,
+            subreferralsCount: number,
             active: number,
             inactive: number,
         },

@@ -15,6 +15,8 @@ const initialState: ReferralTicketsState = {
                 inactive: 0,
             },
             referrals: {
+                count: 0,
+                subreferralsCount: 0,
                 active: 0,
                 inactive: 0,
             },
