@@ -120,7 +120,7 @@ class Referral extends React.Component<Props> {
                     </div>
                     <SignUpForm
                         labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn' })}
-                        labelSignUp="Sign up to WIN!"
+                        labelSignUp={this.props.intl.formatMessage({ id: 'page.referral.signup' })}
                         emailLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.email' })}
                         passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.password' })}
                         confirmPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.confirmPassword' })}
@@ -180,6 +180,38 @@ class Referral extends React.Component<Props> {
             );
         };
 
+        const steps = [
+            {
+                h3: `${this.props.intl.formatMessage({ id: 'page.referral.hiw.step' })} 1`,
+                h4Green: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4green1' }),
+                h4Rest: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4_1' }),
+                text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text_1' }),
+                    
+            },
+            {
+                h3: `${this.props.intl.formatMessage({ id: 'page.referral.hiw.step' })} 2`,
+                h4Green: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4green2' }),
+                h4Rest: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4_2' }),
+                soon: this.props.intl.formatMessage({ id: 'page.referral.soon' }),
+                text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text2' }),
+                    
+            },
+            {
+                h3: `${this.props.intl.formatMessage({ id: 'page.referral.hiw.step' })} 3`,
+                h4Green: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4green3' }),
+                h4Rest: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4_3' }),
+                text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text3' }),
+                    
+            },
+            {
+                h3: `${this.props.intl.formatMessage({ id: 'page.referral.hiw.step' })} 4`,
+                h4Green: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4green4' }),
+                h4Rest: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4_4' }),
+                text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text4' }),
+                    
+            },
+        ];
+
         return (
             <div>
                 <Helmet>
@@ -203,7 +235,11 @@ class Referral extends React.Component<Props> {
                 </Helmet>
                 <div className="pg-referral-screen">
                     <Banner>{this.props.user.state === 'active' ? totalTickets() : signupForm()}</Banner>
-                    <HIW hiw={this.props.intl.formatMessage({ id: 'page.referral.hiw' })}/>
+                    <HIW
+                        hiw={this.props.intl.formatMessage({ id: 'page.referral.hiw' })}
+                        subtitle={this.props.intl.formatMessage({id: 'page.referral.hiw.subtitle'})}
+                        steps={steps}
+                    />
                     <Video />
                     <Timelines />
                     <HowTo />
