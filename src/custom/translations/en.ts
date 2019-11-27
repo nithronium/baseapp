@@ -46,4 +46,8 @@ export const en = {
     'refcode.user_not_found': 'User not found',
     'refcode.self_code_user': 'You try to enter your own code',
     'refcode.update_failed':'Update filed',
+    'profile.how_find_code': 'How to find Existing Referral Code?',
+    'profile.click_here': 'Click Here',
+    'profile.enter_code': 'Enter an existing referral code',
+    'profile.save_code': 'Save Code',
 };

@@ -690,6 +690,10 @@ export const ru: LangType = {
     'refcode.user_not_found': 'Пользователь не найден',
     'refcode.self_code_user': 'Вы пытались ввести свой код',
     'refcode.update_failed':'Обновление не удалось завершить',
+    'profile.how_find_code': 'Как найти существующий реферальный код?',
+    'profile.click_here': 'Нажать на ссылку',
+    'profile.enter_code': 'Ввести существующий реферальный код',
+    'profile.save_code': 'Сохранить код',
 
     ...nationalitiesNames,
 };

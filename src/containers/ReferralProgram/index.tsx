@@ -107,13 +107,13 @@ class ReferralProgramClass extends React.Component<Props> {
                 ) : (
                     <div className="ref-code-input-field">
                             <div className="ref-code-input-field-link">
-                                <p>{this.translate('page.body.profile.refcode.how')}{' '}</p>
-                                <p><a href="/referral#get-code">{this.translate('page.body.profile.refcode.link')}</a></p>
+                                <p>{this.translate('profile.how_find_code')}{' '}</p>
+                                <p><a href="/referral#get-code">{this.translate('profile.click_here')}</a></p>
                         </div>
                         <CustomInput
                             type="text"
                             label={''}
-                            placeholder={this.translate('page.body.profile.refcode.input.placeholder')}
+                            placeholder={this.translate('profile.enter_code')}
                             defaultLabel=""
                             handleChangeInput={value => {
                                 this.setState({ refId: value });
@@ -127,7 +127,7 @@ class ReferralProgramClass extends React.Component<Props> {
                         <Button
                             type="submit"
                             className="ref-code-button"
-                            label={'Save Code'}
+                            label={this.translate('profile.save_code')}
                             onClick={() => {
                                 this.sendRefCode();
                             }}
