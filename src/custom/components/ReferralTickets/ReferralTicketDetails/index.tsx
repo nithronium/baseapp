@@ -1,20 +1,21 @@
 import * as React from 'react';
 import { ReferralTicketsPayload } from '../../../modules/referralTickets';
-import { Loader } from '../../Loader';
-
+// import { Loader } from '../../Loader';
+//tslint:disable
 interface Props {
     context: ReferralTicketsPayload['referrals'];
     overall: ReferralTicketsPayload['overall']['referrals'];
-    loading: boolean;
+    // loading: boolean;
     turnRight: () => void;
     turnLeft: () => void;
-    disableLeft: boolean;
-    disableRight: boolean;
     page: number;
+    disabledNext: boolean;
+    disabledPrev: boolean;
 }
 
 interface State {
     filter: string;
+
 }
 
 const tableRow = (legendArray: ReferralTicketsPayload['referrals']): React.ReactNode => {
@@ -38,10 +39,13 @@ class ReferralTicketDetails extends React.Component<Props, State>{
         super(props);
         this.state = {
            filter: 'all',
-        };
+
+          };
 
         this.filterLegend = this.filterLegend.bind(this);
+
     }
+
 
     public filtered(): ReferralTicketsPayload['referrals'] {
         const legendArray = this.props.context || [];
@@ -83,6 +87,10 @@ class ReferralTicketDetails extends React.Component<Props, State>{
         return total;
     }
 
+
+
+
+
     public render(){
         const filterClassName = dataFilter => {
             return `referral-filter${dataFilter === this.state.filter ? ' active' : ''}`;
@@ -103,7 +111,7 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                         </div>
                     </div>
                     <div className="table-wrap">
-                        <Loader display={this.props.loading} />
+                        {/* <Loader display={this.props.loading} /> */}
                         <table id="referral-details-list">
                             <thead>
                                 <tr>
@@ -129,9 +137,9 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                             </tfoot>
                         </table>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '200px'}}>
-                            <button style={{background: this.props.disableLeft ? 'gray' : '#00732F'}} disabled={this.props.disableLeft} onClick={this.props.turnLeft}>PREV</button>
-                            <span>{this.props.page + 1}</span>
-                            <button style={{background: this.props.disableRight ? 'gray' : '#00732F'}} disabled={this.props.disableRight} onClick={this.props.turnRight}>NEXT</button>
+                            <button style={{background: this.props.disabledPrev ? 'gray' : '#00732F'}} disabled={this.props.disabledPrev} onClick={this.props.turnLeft}>PREV</button>
+                            <span>{this.props.page}</span>
+                            <button style={{background: this.props.disabledNext ? 'gray' : '#00732F'}} disabled={this.props.disabledNext} onClick={this.props.turnRight}>NEXT</button>
                         </div>
                     </div>
                 </div>

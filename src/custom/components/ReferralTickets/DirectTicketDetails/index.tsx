@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { User } from '../../../../modules';
 import { ReferralTicketsPayload } from '../../../modules/referralTickets';
-import { Loader } from '../../Loader';
+// import { Loader } from '../../Loader';
 interface DirectTicketInterface {
     count: number;
     action: string;
@@ -10,7 +10,7 @@ interface DirectTicketInterface {
 interface Props {
     context: ReferralTicketsPayload['direct'];
     overall: ReferralTicketsPayload['overall']['direct'];
-    loading: boolean;
+    // loading: boolean;
     user: User;
 }
 
@@ -29,7 +29,7 @@ class DirectTicketDetails extends React.Component<Props>{
                     <div className="container-wrapper">
                         <h2 style={{paddingBottom: '30px'}}>Direct ticket details</h2>
                         <div style={{position: 'relative'}}>
-                            <Loader display={this.props.loading} />
+                            {/* <Loader display={this.props.loading} /> */}
                             <p className="table-margin">overall {this.props.overall.active} active tickets, {this.props.overall.inactive} inactive tickets<br/>&nbsp;</p>
                             <div className="table-wrap">
                                 <table>

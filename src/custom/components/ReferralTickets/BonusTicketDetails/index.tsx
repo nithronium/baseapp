@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { ReferralTicketsPayload } from '../../../modules/referralTickets';
-import { Loader } from '../../Loader';
+// import { Loader } from '../../Loader';
 
 interface Props {
     context: ReferralTicketsPayload['bonuses'];
     overall: ReferralTicketsPayload['overall']['bonuses'];
-    loading: boolean;
+    // loading: boolean;
 }
 
 const tableRows = (legendArray: ReferralTicketsPayload['bonuses']): React.ReactNode => {return legendArray.map((record, index) => {
@@ -92,7 +92,7 @@ class BonusTicketDetails extends React.Component<Props>{
                         <div className="left"><h2>Bonus ticket details</h2></div>
                     </div>
                     <div className="table-wrap">
-                        <Loader display={this.props.loading} />
+                        {/* <Loader display={this.props.loading} /> */}
                         <table>
                             <thead>
                                 <tr>

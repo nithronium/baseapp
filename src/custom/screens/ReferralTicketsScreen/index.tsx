@@ -1,17 +1,10 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
+import { connect, MapStateToProps } from 'react-redux';
 import { setDocumentTitle } from '../../../helpers';
 
 import {
-    referralTicketsFetch,
-    ReferralTicketsPayload,
     RootState,
-    selectReferralTicketsBonuses,
-    selectReferralTicketsDirect,
-    selectReferralTicketsLoading,
-    selectReferralTicketsOverall,
-    selectReferralTicketsReferrals,
     selectUserInfo,
     User,
 } from '../../../modules';
@@ -25,20 +18,28 @@ import {
     ReferralTicketDetails,
 } from '../../components/ReferralTickets';
 
-interface DispatchProps {
-    fetchReferralTickets: typeof referralTicketsFetch;
-}
+import { getReferralTickets } from '../../../api';
+
+// import { Loader } from '../../components/Loader';
 
 interface ReduxProps {
-    bonuses: ReferralTicketsPayload['bonuses'];
-    overall: ReferralTicketsPayload['overall'];
-    direct: ReferralTicketsPayload['direct'];
-    referrals: ReferralTicketsPayload['referrals'];
-    loading: boolean;
     user: User;
 }
+//tslint:disable
+interface State {
+    skip: number;
+    page: number;
+    limit: number;
+    overall: any;
+    referrals: any;
+    direct:any;
+    bonuses: any;
+    loaded: boolean;
+    disabledNext: boolean;
+    disabledPrev: boolean;
+};
 
-type Props = DispatchProps & InjectedIntlProps & ReduxProps;
+type Props =  InjectedIntlProps & ReduxProps;
 
 class ReferralTickets extends React.Component<Props> {
 
@@ -48,53 +49,79 @@ class ReferralTickets extends React.Component<Props> {
         this.turnRight = this.turnRight.bind(this);
     }
 
-    //tslint:disable
-    public state = {
+ 
+    public state: State = {
         skip: 0,
-        count: 0,
-        page: 0,
-        disableLeft: true,
-        disableRight: false,
+        page: 1,
         limit: 10,
-        totalPages: 0,
+        overall: {
+            direct: {
+              active: 0,
+              inactive: 0
+            },
+            referrals: {
+              active: 0,
+              inactive: 0
+            },
+            bonuses: {
+              active: 0,
+              inactive: 0
+            }
+          },
+          direct: {
+            ticketsForRegistration: {
+              active: 0,
+              inactive: 0
+            },
+            usd: {
+              balance: 0,
+              active: 0,
+              inactive: 0
+            },
+            emrx: {
+              balance: 0,
+              active: 0,
+              inactive: 0
+            }
+          },
+          referrals: [],
+          bonuses: [],
+        loaded: false,
+        disabledNext: false,
+        disabledPrev: true
     };
-
-    public componentWillMount() {
-       
-    }
 
     public componentDidMount() {
         setDocumentTitle('Referral Tickets');
         let  { skip, limit } = this.state;
-        this.getTickets(skip, limit);        
+        const query = `/tickets?limit=${limit}&skip=${skip}`;
+        getReferralTickets(query).then(data => {
+            const { bonuses, direct, overall, referrals } = data;
+            let disabledNext = false;
+            if (referrals.lenght < limit) {
+                disabledNext = true;
+            }
+            this.setState({
+                bonuses,
+                direct,
+                overall,
+                referrals,
+                loaded: true,
+                disabledNext
+            });
+        }).catch(() => {
+            this.setState({
+                disabledNext: true
+            })
+        })
+          
         
     }
-    public componentWillReceiveProps() {
-        let  { disableRight } = this.state;
-        const totalPages = this.getTotalPages(); 
-      
-        if (totalPages <= 1) {
-            disableRight = true;
-        } else {
-            disableRight = false;
-        };
-
-        this.setState({
-            totalPages,
-            disableRight
-        })
-    }
-
-  
-    private getTotalPages() {
-        const { overall } = this.props;
-        return Math.ceil((overall.referrals.active + overall.referrals.inactive) / this.state.limit);  
-        // return 10;
-    }
-
-    private getTotalTickets() {
+   
+    private getTotalTickets(_overall) {
         let total = 0;
-        const overall = this.props.overall;
+        if (_overall.direct && _overall.bonuses && _overall.referrals ) {
+            const overall = _overall;
         total += overall.direct.active;
         total += overall.direct.inactive;
 
@@ -104,117 +131,107 @@ class ReferralTickets extends React.Component<Props> {
         total += overall.referrals.active;
         total += overall.referrals.inactive;
 
+        }
+        
+
         return total;
     }
-// tslint:disable
-    private getTickets(skip, limit) {
-        const query = `/tickets?limit=${limit}&skip=${skip}`;
-        this.props.fetchReferralTickets(query);        
-    }
+
 
     public turnRight() {
-        let { totalPages, limit, page, skip, disableLeft, disableRight } = this.state; 
-        page += 1;
+        let { limit, page, skip, disabledNext, disabledPrev } = this.state; 
         skip += 10;
-        disableLeft = false;
-        // console.log(totalPages);
-        if (totalPages <= page + 1) {
-            disableRight = true;
+        page += 1;        
+        this.setState({
+            loaded: false
+        })      
+       const query = `/tickets?limit=${limit}&skip=${skip}`;
+        getReferralTickets(query).then(data => {
+            const {  referrals } = data;
+            disabledPrev = false;
+            
+            if (referrals.length < limit) {
+                disabledNext = true;
+            }
             this.setState({
-                page,
+                referrals,
+                loaded: true,
                 skip,
-                disableLeft,
-                disableRight
-            });
-        } else {
-            this.setState({
                 page,
-                skip,
-                disableLeft,
-                disableRight
+                disabledNext,
+                disabledPrev
             });
-            this.getTickets(skip, limit);
-
-        }
+        });
     }
 
     public turnLeft() {
-        let {  totalPages, limit, page, skip, disableLeft, disableRight } = this.state;
-            page -= 1;
-            skip -= 10;
-        if (page <= 0) {
-            page = 0;
-            disableLeft = true;
-            skip = 0;
-            page = 0;
-            this.setState({
-                page,
-                skip,
-                disableLeft,
-                disableRight
-            });
-        }  else  {
-            if (totalPages - 1 > page) {
-                disableRight = false;
+        let { limit, page, skip, disabledPrev, disabledNext } = this.state; 
+        skip -= 10;
+        page -= 1;   
+        this.setState({
+            loaded: false
+        })           
+       const query = `/tickets?limit=${limit}&skip=${skip}`;
+        getReferralTickets(query).then(data => {
+            const {  referrals } = data;
+            disabledNext = false;            
+            if (page === 1) {
+                disabledPrev = true;
             }
             this.setState({
-                page,
+                referrals,
+                loaded: true,
                 skip,
-                disableLeft,
-                disableRight
+                page,
+                disabledPrev,
+                disabledNext
             });
-            this.getTickets(skip, limit);
-            // console.log(skip);
-        }
-        
+        });        
     }
+
+ 
 
     
     public render() {
-        
-        return (
-            <div className="pg-referral-tickets">
-                <div className="top-holder">
-                    <section id="top">
-                        <ReferralBallance totalTickets={this.getTotalTickets()}>
-                            <CardUser title="Direct" context={this.props.direct} activeInactive={true} overall={this.props.overall.direct} link="#direct"/>
-                            <CardReferrals title="Referral" context={this.props.referrals} activeInactive={true} overall={this.props.overall.referrals} link="#referral"/>
-                            <CardBonuses title="Bonus" context={this.props.bonuses} activeInactive={false} overall={this.props.overall.bonuses} link="#bonus"/>
-                        </ReferralBallance>
+        // if (!this.state.loaded) {
+        //     return <Loader display={true}/>
+        // } else {
+            return (
+                <div className="pg-referral-tickets">
+                    <div className="top-holder">
+                        <section id="top">
+                            <ReferralBallance totalTickets={this.getTotalTickets(this.state.overall)}>
+                                <CardUser title="Direct" context={this.state.direct} activeInactive={true} overall={this.state.overall.direct} link="#direct"/>
+                                <CardReferrals title="Referral" context={this.state.referrals} activeInactive={true} overall={this.state.overall.referrals} link="#referral"/>
+                                <CardBonuses title="Bonus" context={this.state.bonuses} activeInactive={false} overall={this.state.overall.bonuses} link="#bonus"/>
+                            </ReferralBallance>
+                        </section>
+                        <section id="direct">
+                            <DirectTicketDetails context={this.state.direct} overall={this.state.overall.direct} user={this.props.user} />
+                        </section>
+                    </div>
+                    <section id="referral">
+                        <ReferralTicketDetails disabledPrev={this.state.disabledPrev} disabledNext={this.state.disabledNext} page={this.state.page}  turnLeft={this.turnLeft} turnRight={this.turnRight} context={this.state.referrals} overall={this.state.overall.referrals} />
                     </section>
-                    <section id="direct">
-                        <DirectTicketDetails context={this.props.direct} overall={this.props.overall.direct} user={this.props.user} loading={this.props.loading}/>
+                    <section id="bonus">
+                        <BonusTicketDetails context={this.state.bonuses} overall={this.state.overall.bonuses} />
                     </section>
                 </div>
-                <section id="referral">
-                    <ReferralTicketDetails page={this.state.page} disableLeft={this.state.disableLeft} disableRight={this.state.disableRight} turnLeft={this.turnLeft} turnRight={this.turnRight} context={this.props.referrals} overall={this.props.overall.referrals} loading={this.props.loading}/>
-                </section>
-                <section id="bonus">
-                    <BonusTicketDetails context={this.props.bonuses} overall={this.props.overall.bonuses} loading={this.props.loading}/>
-                </section>
-            </div>
-        );
+            );
+
+        // }
+        
+        
     }
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
-    bonuses: selectReferralTicketsBonuses(state),
-    direct: selectReferralTicketsDirect(state),
-    overall: selectReferralTicketsOverall(state),
-    referrals: selectReferralTicketsReferrals(state),
-    loading: selectReferralTicketsLoading(state),
     user: selectUserInfo(state),
 });
 
-const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
-    fetchReferralTickets: (data) => {
-        return dispatch(referralTicketsFetch(data));
-    },
-});
 
 export const ReferralTicketsScreen = injectIntl(
     connect(
-        mapStateToProps,
-        mapDispatchToProps
+        mapStateToProps
     )(ReferralTickets)
 );

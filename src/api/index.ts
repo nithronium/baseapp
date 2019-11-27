@@ -74,6 +74,7 @@ const conf: RequestOptions = {
 // const refConf: RequestOptions = {
 //     apiVersion: 'referral',
 // };
+
 const refUrl = `${window.document.location.origin}/api/v1/referral-code`;
 // const refUrl = `https://stage.emirex.com/api/v1/referral-code`;
 export const changePassword = async body => API.post(conf)('/identity/users/password/confirm_code', body);
@@ -82,10 +83,16 @@ export const checkReferralCode = async body => {
     const res = await axios.post(refUrl, body);
     return res;
 };
-
+//tslint:disable
 const nodelogicUrl = `${window.document.location.origin}/api/v2/nodelogic`;
-
+// const nodelogicUrl = 'http://localhost:3004';
+// const data = require('./data.json');
+// const referrals = data.referrals.slice();
 export const getReferralTickets = async body => {
-    const res = await axios.get(nodelogicUrl, body);
-    return res;
+    const data = await axios.get(nodelogicUrl + body);
+//     const skip = parseInt(body.split('=')[2]);
+    
+//    data.referrals = referrals.slice(skip, 10+skip);
+
+    return data.data;
 };

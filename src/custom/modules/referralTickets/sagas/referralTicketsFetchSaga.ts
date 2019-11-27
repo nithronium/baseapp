@@ -46,9 +46,9 @@ export function* referralTicketsFetchSaga(action: ReferralTicketsFetch) {
         const referrals = yield call(API.get(referralTicketsOptions), action.payload);
         // let referrals = data;
         // console.log(data);
-         /*const referrals = yield (data => {
-                 return data;
-             })(referalData);*/
+        //  const referrals = yield (data => {
+        //          return data;
+        //      })(data);
         yield put(referralTicketsData(referrals));
     } catch (error) {
         yield put(referralTicketsError(error));
