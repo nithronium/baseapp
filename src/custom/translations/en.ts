@@ -68,5 +68,12 @@ export const en = {
     'page.referral.hiw.text2': 'You’ll receive 2 tickets for everyone you refer and 1 ticket for everyone they refer. Plus tickets for social media follows and balance topups! ',
     'page.referral.hiw.text3': 'All tickets are initially set as ‘pending’. For a ticket to count toward the draw, it must be activated. Activate and win with Emirex!',
     'page.referral.hiw.text4':'You’ll continue earning referral commission on trading and sales activities from everyone you refer, as well as a % from everyone they refer!',
-
+    'page.referral.video.text': 'Watch the video to see how you can',
+    'timeline.title': 'Timelines',
+    'timeline.start.text': 'The giveaway starts on',
+    'timeline.start.date': 'October 21, 2019,',
+    'timeline.start.time': '09:00 GMT+3',
+    'timeline.end.text': 'The giveaway ends on',
+    'timeline.end.date': 'December 24, 2019,',
+    'timeline.end.time': '18:00 GMT+3',
 };

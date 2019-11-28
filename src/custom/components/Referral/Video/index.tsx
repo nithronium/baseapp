@@ -8,12 +8,12 @@ import { Player } from 'video-react';
 import campaign = require('../../../assets/images/referral/campaign-bar.png');
 // import video = require('../../../assets/images/referral/video.svg');
 
-const Video: React.FC = () => {
+const Video = (props) => {
     return (
         <section id="video">
             <div className="container_">
                 <div className="header">
-                    <h4>Watch the video to see how you can</h4>
+                    <h4>{props.text}</h4>
                     <div className="win-with-emirex">#WinWithEmirex</div>
                     <img src={campaign} className="campaign" alt="" />
                 </div>
