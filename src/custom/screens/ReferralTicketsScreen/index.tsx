@@ -100,16 +100,13 @@ class ReferralTickets extends React.Component<Props> {
     public componentDidMount() {
         setDocumentTitle('Referral Tickets');
         let  { skip, limit, disabledNext } = this.state;
-        const query = `/tickets?limit=${limit}&skip=${skip}`;
-        Promise.all([getReferralTickets(query), getOverall()]).then(values => {
-            
+        const query = `/tickets/referral?limit=${limit}&skip=${skip}`;
+        Promise.all([getReferralTickets(query), getOverall()]).then(values => {            
             const { bonuses, direct, overall } = values[1];
             const referrals = values[0].list;
             const count = values[0].overall.count;
             const L2count = values[0].overall.L2count;
             const maxPages = Math.ceil(count / limit);
-    
-            console.log(overall);
             if (maxPages <= 1) {
                         disabledNext = true;
                     }
@@ -157,7 +154,7 @@ class ReferralTickets extends React.Component<Props> {
    
     private getTotalTickets(_overall) {
         let total = 0;
-        if (_overall.direct && _overall.bonuses && _overall.referrals ) {
+        if (_overall.direct ) {
             const overall = _overall;
         total += overall.direct.active;
         total += overall.direct.inactive;
@@ -182,7 +179,7 @@ class ReferralTickets extends React.Component<Props> {
         this.setState({
             loaded: false
         })      
-       const query = `/tickets?limit=${limit}&skip=${skip}`;
+        const query = `/tickets/referral?limit=${limit}&skip=${skip}`;
         getReferralTickets(query).then(data => {
             const {  list } = data;
             disabledPrev = false;
@@ -208,7 +205,7 @@ class ReferralTickets extends React.Component<Props> {
         this.setState({
             loaded: false
         })           
-       const query = `/tickets?limit=${limit}&skip=${skip}`;
+       const query = `/tickets/referral?limit=${limit}&skip=${skip}`;
         getReferralTickets(query).then(data => {
             const {  list } = data;
             disabledNext = false;            

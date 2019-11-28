@@ -1,6 +1,8 @@
 import axios, { AxiosResponse } from 'axios';
 import { JsonBody, makeRequest, RequestOptions } from './requestBuilder';
 
+import { nodelogicUrl } from './config';
+
 export * from './types';
 export * from './config';
 export { RequestOptions } from './requestBuilder';
@@ -84,15 +86,20 @@ export const checkReferralCode = async body => {
     return res;
 };
 //tslint:disable
-const nodelogicUrl = `${window.document.location.origin}/api/v2/nodelogic`;
+// const nodelogicUrl = `${window.document.location.origin}/api/v2/nodelogic`;
 // const nodelogicUrl = 'http://localhost:3004';
 // const data = require('./data.json');
-// const referrals = data.referrals.slice();
+// const overAll = require('./overall.json');
+// console.log(data, overAll);
+// const referrals = data.list.slice();
 export const getReferralTickets = async body => {
-    const data = await axios.get(nodelogicUrl + body);
-//     const skip = parseInt(body.split('=')[2]);
-    
-//    data.referrals = referrals.slice(skip, 10+skip);
-
-    return data.data;
+    const res = await axios.get(nodelogicUrl + body);
+    // const skip = parseInt(body.split('=')[2]);    
+//    data.list = referrals.slice(skip, 10+skip);
+    return  res.data;
 };
+
+export const getOverall = async() => {
+    const res = await axios.get(`${nodelogicUrl}/tickets/all`);
+    return res.data;
+}

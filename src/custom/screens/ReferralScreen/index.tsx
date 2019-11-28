@@ -80,7 +80,7 @@ class Referral extends React.Component<Props> {
         this.setState({
             refId: referralCode,
         });
-        const query = '/tikets?limit=10&skip=0';
+        const query = '/tikets/all';
         this.props.fetchReferralTickets(query);
 
     }
