@@ -708,10 +708,10 @@ export const ru: LangType = {
     'page.referral.hiw.h4_2': ' для получения билетов!',
     'page.referral.hiw.h4_3': ' билеты на Emirex.com',
     'page.referral.hiw.h4_4': ' на своих рефералах!',
-    'page.referral.hiw.text1': 'Once your account is set up, you’ll receive your own referral code to share. You’ll also receive your first ticket for the draw!',
-    'page.referral.hiw.text2': 'You’ll receive 2 tickets for everyone you refer and 1 ticket for everyone they refer. Plus tickets for social media follows and balance topups! ',
-    'page.referral.hiw.text3': 'All tickets are initially set as ‘pending’. For a ticket to count toward the draw, it must be activated. Activate and win with Emirex!',
-    'page.referral.hiw.text4':'You’ll continue earning referral commission on trading and sales activities from everyone you refer, as well as a % from everyone they refer!',
+    'page.referral.hiw.text1': 'Как только ваша учетная запись будет настроена, вы получите собственный реферальный код и сможете им поделиться. Вы также получите свой первый билет на розыгрыш!',
+    'page.referral.hiw.text2': 'Вы получите 2 билета за каждого реферала первой линии,  и 1 билет за каждого реферала второй линии. Дополнительно Вы получаете билеты за полписку в соцсетях и пополнение баланса!  ',
+    'page.referral.hiw.text3': 'Все билеты изначально отображаются, как «ожидающие». Для участия билета в розыгрыше его нужно активировать. Активируйте и выиграй с Emirex!',
+    'page.referral.hiw.text4':'Вы продолжите получать реферальные комиссии за операции по торговле и продажам  рефералов первой линии и % от всех операций рефералов второй линии!',
 
     ...nationalitiesNames,
 };

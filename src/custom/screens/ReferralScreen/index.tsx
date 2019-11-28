@@ -185,8 +185,7 @@ class Referral extends React.Component<Props> {
                 h3: `${this.props.intl.formatMessage({ id: 'page.referral.hiw.step' })} 1`,
                 h4Green: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4green1' }),
                 h4Rest: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4_1' }),
-                text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text_1' }),
-                    
+                text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text1' }),
             },
             {
                 h3: `${this.props.intl.formatMessage({ id: 'page.referral.hiw.step' })} 2`,
@@ -194,21 +193,18 @@ class Referral extends React.Component<Props> {
                 h4Rest: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4_2' }),
                 soon: this.props.intl.formatMessage({ id: 'page.referral.soon' }),
                 text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text2' }),
-                    
             },
             {
                 h3: `${this.props.intl.formatMessage({ id: 'page.referral.hiw.step' })} 3`,
                 h4Green: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4green3' }),
                 h4Rest: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4_3' }),
                 text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text3' }),
-                    
             },
             {
                 h3: `${this.props.intl.formatMessage({ id: 'page.referral.hiw.step' })} 4`,
                 h4Green: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4green4' }),
                 h4Rest: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4_4' }),
                 text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text4' }),
-                    
             },
         ];
 
