@@ -1,193 +1,92 @@
-{ 
-    "overall": {
-      "direct": {
-        "active": 6,
-        "inactive": 0
+{
+  "overall": {
+      "count": 12,
+      "L2count": 4
+  },
+  "list": [
+      {
+          "tickets": 2,
+          "email": "gumurzhi.denis+ttest1@gmail.com",
+          "isActive": 0,
+          "subreferrals": 0,
+          "activeSubreferrals": 0
       },
-      "referrals": {
-        "count": 22,
-        "subreferralsCount": 8,
-        "active": 4,
-        "inactive": 38
+      {
+          "tickets": 2,
+          "email": "gumurzhi.denis+ttest2@gmail.com",
+          "isActive": 0,
+          "subreferrals": 0,
+          "activeSubreferrals": 0
       },
-      "bonuses": {
-        "active": 0,
-        "inactive": 0
-      }
+      {
+          "tickets": 2,
+          "email": "gumurzhi.denis+b1@gmail.com",
+          "isActive": 0,
+          "subreferrals": 0,
+          "activeSubreferrals": 0
+      },
+      {
+          "tickets": 2,
+          "email": "gumurzhi.denis+b2@gmail.com",
+          "isActive": 1,
+          "subreferrals": 1,
+          "activeSubreferrals": 0
+      },
+      {
+          "tickets": 2,
+          "email": "gumurzhi.denis+b3@gmail.com",
+          "isActive": 0,
+          "subreferrals": 0,
+          "activeSubreferrals": 0
+      },
+      {
+          "tickets": 2,
+          "email": "gumurzhi.denis+b4@gmail.com",
+          "isActive": 0,
+          "subreferrals": 1,
+          "activeSubreferrals": 0
+      },
+      {
+        "tickets": 2,
+        "email": "gumurzhi.denis+ttest1@gmail.com",
+        "isActive": 0,
+        "subreferrals": 0,
+        "activeSubreferrals": 0
     },
-    "direct": {
-      "ticketsForRegistration": {
-        "active": 1,
-        "inactive": 0
-      },
-      "usd": {
-        "balance": 250,
-        "active": 5,
-        "inactive": 0
-      },
-      "emrx": {
-        "balance": 0,
-        "active": 0,
-        "inactive": 0
-      }
+    {
+        "tickets": 2,
+        "email": "gumurzhi.denis+ttest2@gmail.com",
+        "isActive": 0,
+        "subreferrals": 0,
+        "activeSubreferrals": 0
     },
-    "referrals": [
-      {
+    {
         "tickets": 2,
-        "email": "iogancombatiente+388@gmail.com",
+        "email": "gumurzhi.denis+b1@gmail.com",
+        "isActive": 0,
+        "subreferrals": 0,
+        "activeSubreferrals": 0
+    },
+    {
+        "tickets": 2,
+        "email": "gumurzhi.denis+b2@gmail.com",
         "isActive": 1,
-        "subreferrals": 2,
-        "activeSubreferrals": 1
-      },
-      {
-        "tickets": 2,
-        "email": "iogancombatiente+777@gmail.com",
-        "isActive": 0,
-        "subreferrals": 2,
+        "subreferrals": 1,
         "activeSubreferrals": 0
-      },
-      {
+    },
+    {
         "tickets": 2,
-        "email": "inna.lisovskaya100+ivan1@gmail.com",
+        "email": "gumurzhi.denis+b3@gmail.com",
         "isActive": 0,
         "subreferrals": 0,
         "activeSubreferrals": 0
-      },
-      {
+    },
+    {
         "tickets": 2,
-        "email": "inna.lisovskaya100+ivan2@gmail.com",
+        "email": "gumurzhi.denis+b4@gmail.com",
         "isActive": 0,
-        "subreferrals": 0,
+        "subreferrals": 1,
         "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan3@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan4@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan5@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "iogancombatiente+388@gmail.com",
-        "isActive": 1,
-        "subreferrals": 2,
-        "activeSubreferrals": 1
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan6@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan7@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan8@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan5@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan6@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan7@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan8@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "iogancombatiente+777@gmail.com",
-        "isActive": 0,
-        "subreferrals": 2,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan1@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan2@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan3@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan4@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan3@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      },
-      {
-        "tickets": 2,
-        "email": "inna.lisovskaya100+ivan4@gmail.com",
-        "isActive": 0,
-        "subreferrals": 0,
-        "activeSubreferrals": 0
-      }
-     
-    ],
-    "bonuses": []
-
-  }
+    }
+  ]
+}

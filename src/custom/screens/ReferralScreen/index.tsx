@@ -1,3 +1,4 @@
+//tslint:disable
 import { Button } from '@openware/components';
 import cx from 'classnames';
 import { History } from 'history';
@@ -19,7 +20,7 @@ import {
 } from '../../../helpers';
 import {
     referralTicketsFetch,
-    ReferralTicketsPayload,
+    ReferralOverallPayload,
     RootState,
     selectCurrentLanguage,
     selectReferralTicketsOverall,
@@ -34,7 +35,7 @@ interface ReduxProps {
     requireVerification?: boolean;
     loading?: boolean;
     user: User;
-    overall: ReferralTicketsPayload['overall'];
+    overall: ReferralOverallPayload['overall'];
 }
 
 interface DispatchProps {

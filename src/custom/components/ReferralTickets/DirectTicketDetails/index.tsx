@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { User } from '../../../../modules';
-import { ReferralTicketsPayload } from '../../../modules/referralTickets';
+import { ReferralOverallPayload } from '../../../modules/referralTickets';
 // import { Loader } from '../../Loader';
 interface DirectTicketInterface {
     count: number;
@@ -8,8 +8,8 @@ interface DirectTicketInterface {
 }
 
 interface Props {
-    context: ReferralTicketsPayload['direct'];
-    overall: ReferralTicketsPayload['overall']['direct'];
+    context: ReferralOverallPayload['direct'];
+    overall: ReferralOverallPayload['overall']['direct'];
     // loading: boolean;
     user: User;
 }

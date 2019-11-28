@@ -2,7 +2,7 @@ import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapStateToProps } from 'react-redux';
 import { setDocumentTitle } from '../../../helpers';
-
+//tslint:disable
 import {
     RootState,
     selectUserInfo,
@@ -18,7 +18,7 @@ import {
     ReferralTicketDetails,
 } from '../../components/ReferralTickets';
 
-import { getReferralTickets } from '../../../api';
+import { getReferralTickets, getOverall } from '../../../api';
 
 // import { Loader } from '../../components/Loader';
 
@@ -38,6 +38,8 @@ interface State {
     loaded: boolean;
     disabledNext: boolean;
     disabledPrev: boolean;
+    L2count: number;
+    count: number;
 };
 
 type Props =  InjectedIntlProps & ReduxProps;
@@ -62,8 +64,6 @@ class ReferralTickets extends React.Component<Props> {
               inactive: 0
             },
             referrals: {
-              count: 0,
-              subreferralsCount: 0,  
               active: 0,
               inactive: 0
             },
@@ -88,38 +88,69 @@ class ReferralTickets extends React.Component<Props> {
               inactive: 0
             }
           },
-          referrals: [],
           bonuses: [],
         loaded: false,
         disabledNext: false,
-        disabledPrev: true
+        disabledPrev: true,
+        referrals: [],
+        L2count: 0,
+        count: 0,
     };
 
     public componentDidMount() {
         setDocumentTitle('Referral Tickets');
-        let  { skip, limit } = this.state;
+        let  { skip, limit, disabledNext } = this.state;
         const query = `/tickets?limit=${limit}&skip=${skip}`;
-        getReferralTickets(query).then(data => {
-            const { bonuses, direct, overall, referrals } = data;
-            let disabledNext = false;
-            const maxPages = Math.ceil(overall.referrals.count / limit);
+        Promise.all([getReferralTickets(query), getOverall()]).then(values => {
+            
+            const { bonuses, direct, overall } = values[1];
+            const referrals = values[0].list;
+            const count = values[0].overall.count;
+            const L2count = values[0].overall.L2count;
+            const maxPages = Math.ceil(count / limit);
+    
+            console.log(overall);
             if (maxPages <= 1) {
-                disabledNext = true;
-            }
+                        disabledNext = true;
+                    }
             this.setState({
                 bonuses,
-                direct,
+                direct, 
                 overall,
-                referrals,
-                loaded: true,
-                disabledNext,
                 maxPages,
-            });
-        }).catch(() => {
+                L2count,
+                referrals,
+                disabledNext,
+                count,
+            })
+        }).catch(()=>{
             this.setState({
                 disabledNext: true
             })
         })
+
+        // getReferralTickets(query).then(([overallD, data]) => {
+        //     const { bonuses, direct, overall } = overallD;
+        //     const { list, overall  } = data;
+        //     let disabledNext = false;
+        //     const maxPages = Math.ceil(overall.referrals.count / limit);
+        //     if (maxPages <= 1) {
+        //         disabledNext = true;
+        //     }
+        //     this.setState({
+        //         bonuses,
+        //         direct,
+        //         overall,
+        //         referrals,
+        //         loaded: true,
+        //         disabledNext,
+        //         maxPages,
+        //     });
+        // }).catch(() => {
+        //     this.setState({
+        //         disabledNext: true
+        //     })
+        // })
           
         
     }
@@ -153,9 +184,9 @@ class ReferralTickets extends React.Component<Props> {
         })      
        const query = `/tickets?limit=${limit}&skip=${skip}`;
         getReferralTickets(query).then(data => {
-            const {  referrals } = data;
+            const {  list } = data;
             disabledPrev = false;
-            
+            const referrals = list;
             if (maxPages === page) {
                 disabledNext = true;
             }
@@ -179,11 +210,12 @@ class ReferralTickets extends React.Component<Props> {
         })           
        const query = `/tickets?limit=${limit}&skip=${skip}`;
         getReferralTickets(query).then(data => {
-            const {  referrals } = data;
+            const {  list } = data;
             disabledNext = false;            
             if (page === 1) {
                 disabledPrev = true;
             }
+            const referrals = list;
             this.setState({
                 referrals,
                 loaded: true,
@@ -217,7 +249,7 @@ class ReferralTickets extends React.Component<Props> {
                         </section>
                     </div>
                     <section id="referral">
-                        <ReferralTicketDetails disabledPrev={this.state.disabledPrev} disabledNext={this.state.disabledNext} page={this.state.page}  turnLeft={this.turnLeft} turnRight={this.turnRight} context={this.state.referrals} overall={this.state.overall.referrals} />
+                        <ReferralTicketDetails L2count={this.state.L2count} count={this.state.count} disabledPrev={this.state.disabledPrev} disabledNext={this.state.disabledNext} page={this.state.page}  turnLeft={this.turnLeft} turnRight={this.turnRight} context={this.state.referrals} overall={this.state.overall.referrals} />
                     </section>
                     <section id="bonus">
                         <BonusTicketDetails context={this.state.bonuses} overall={this.state.overall.bonuses} />

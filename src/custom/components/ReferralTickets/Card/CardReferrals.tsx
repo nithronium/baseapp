@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { ReferralTicketsPayload } from '../../../modules/referralTickets';
-
-type CardContextProps = ReferralTicketsPayload['referrals'];
-type Overall = ReferralTicketsPayload['overall'];
+import { ReferralOverallPayload } from '../../../modules/referralTickets';
+//tslint:disable
+// type CardContextProps = ReferralOverallPayload['referrals'];
+type Overall = ReferralOverallPayload['overall'];
 interface CardProps {
     activeInactive?: boolean;
-    context: CardContextProps;
+    context: any;
     overall: Overall['referrals'];
     link: string;
     title: string;

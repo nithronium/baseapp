@@ -34,7 +34,7 @@ import { rootWalletsSaga, WalletsState } from './user/wallets';
 import { rootWithdrawLimitSaga, WithdrawLimitState } from './user/withdrawLimit';
 
 import { ReferralCommissionState, rootReferralCommissionSaga } from '../custom/modules/referralCommission';
-import { ReferralTicketsState, rootReferralTicketsSaga } from '../custom/modules/referralTickets';
+import { ReferralOverallState, rootReferralTicketsSaga } from '../custom/modules/referralTickets';
 
 import { FeesState, rootFeesSaga } from '../custom/modules/fees';
 
@@ -100,7 +100,7 @@ export interface RootState {
         sendEmailVerification: EmailVerificationState;
         withdrawLimit: WithdrawLimitState;
         guard: GuardState;
-        referralTickets: ReferralTicketsState;
+        referralTickets: ReferralOverallState;
         referralCommission: ReferralCommissionState;
     };
 }

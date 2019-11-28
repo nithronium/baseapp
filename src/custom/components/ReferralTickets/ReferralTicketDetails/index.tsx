@@ -1,17 +1,19 @@
 import * as React from 'react';
-import { ReferralTicketsPayload } from '../../../modules/referralTickets';
+import { ReferralOverallPayload } from '../../../modules/referralTickets';
 
 // import { Loader } from '../../Loader';
 //tslint:disable
 interface Props {
-    context: ReferralTicketsPayload['referrals'];
-    overall: ReferralTicketsPayload['overall']['referrals'];
+    context: any;
+    overall: ReferralOverallPayload['overall']['referrals'];
     // loading: boolean;
     turnRight: () => void;
     turnLeft: () => void;
     page: number;
     disabledNext: boolean;
     disabledPrev: boolean;
+    count: number;
+    L2count: number;
 }
 
 interface State {
@@ -19,7 +21,7 @@ interface State {
 
 }
 
-const tableRow = (legendArray: ReferralTicketsPayload['referrals']): React.ReactNode => {
+const tableRow = (legendArray: any): React.ReactNode => {
     return legendArray.map((record, index) => {
         return(
             <tr key={index}>
@@ -48,7 +50,7 @@ class ReferralTicketDetails extends React.Component<Props, State>{
     }
 
 
-    public filtered(): ReferralTicketsPayload['referrals'] {
+    public filtered(): any {
         const legendArray = this.props.context || [];
         switch (this.state.filter) {
             case 'active':
@@ -96,9 +98,9 @@ class ReferralTicketDetails extends React.Component<Props, State>{
 
 
     public render(){
-        const filterClassName = dataFilter => {
-            return `referral-filter${dataFilter === this.state.filter ? ' active' : ''}`;
-        };
+        // const filterClassName = dataFilter => {
+        //     return `referral-filter${dataFilter === this.state.filter ? ' active' : ''}`;
+        // };
 
         const legendArray = this.filtered();
 
@@ -106,14 +108,14 @@ class ReferralTicketDetails extends React.Component<Props, State>{
 
             <div className="referral-ticket-details">
                 <div className="container column">
-                    <div className="container wrap">
+                    {/* <div className="container wrap">
                         <div className="left"><h2>Referral tickets details</h2></div>
                         <div className="right">
                             <a href="#!" onClick={this.filterLegend} data-filter="all" className={filterClassName('all')}>all</a> /
                             <a href="#!" onClick={this.filterLegend} data-filter="active" className={filterClassName('active')}>active</a> /
                             <a href="#!" onClick={this.filterLegend} data-filter="inactive" className={filterClassName('inactive')}>inactive</a>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="table-wrap">
                         {/* <Loader display={this.props.loading} /> */}
                         <table id="referral-details-list">
@@ -141,10 +143,10 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                                 
                                 <tr><td style={{paddingBottom: 0, paddingTop: '15px'}} colSpan={5}><span className="table-summary-header">overall</span></td></tr>
                                 <tr>
-                                    <td><span className="count">{this.getOverall('active') + this.getOverall('inactive') + this.getOverall('subreferralsCount')}</span> <span className="explanation">tickets</span></td>
-                                    <td>{this.getOverall('count')} referreres</td>
+                                    <td><span className="count">{this.getOverall('active') + this.getOverall('inactive') }</span> <span className="explanation">tickets</span></td>
+                                    <td>{this.props.count} referreres</td>
                                     <td>yes {this.getOverall('active')} / no {this.getOverall('inactive')} </td>
-                                    <td>{this.getOverall('subreferralsCount')} <span className="explanation">referrals</span></td>
+                                    <td>{this.props.L2count} <span className="explanation"> referrals</span></td>
                                     <td>{this.getTotal('activeSubreferrals')} <span className="explanation">referrals</span></td>
                                 </tr>
                             </tfoot>

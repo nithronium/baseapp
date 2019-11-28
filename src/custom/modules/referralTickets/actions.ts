@@ -26,15 +26,15 @@ export interface BonusPayload {
     link: string; // ссылка на пост
 }
 
-export interface ReferralTicketsPayload {
+export interface ReferralOverallPayload {
     overall: {
         direct: {
             active: number,
             inactive: number,
         },
         referrals: {
-            count: number,
-            subreferralsCount: number,
+            // count: number,
+            // subreferralsCount: number,
             active: number,
             inactive: number,
         },
@@ -59,13 +59,13 @@ export interface ReferralTicketsPayload {
             inactive: number,
         },
     };
-    referrals: ReferralPayload[];
+    // referrals: ReferralPayload[];
     bonuses: BonusPayload[];
 }
 
 export interface ReferralTicketsData {
     type: typeof REFERRAL_TICKETS_DATA;
-    payload: ReferralTicketsPayload;
+    payload: ReferralOverallPayload;
 }
 
 export type ReferralTicketsActions = ReferralTicketsFetch | ReferralTicketsData | ReferralTicketsError;
