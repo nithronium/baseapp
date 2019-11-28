@@ -246,7 +246,15 @@ class Referral extends React.Component<Props> {
                         date2={this.props.intl.formatMessage({ id: 'timeline.end.date' })}
                         time2={this.props.intl.formatMessage({ id: 'timeline.end.time' })}
                     />
-                    <HowTo />
+                    <HowTo
+                        h2={this.props.intl.formatMessage({ id: 'howto.h2' })}
+                        h4={this.props.intl.formatMessage({ id: 'howto.h4' })}
+                        soon={this.props.intl.formatMessage({id: 'page.referral.soon'})}
+                        text1={this.props.intl.formatMessage({id: 'howto.text1'})}
+                        text2={this.props.intl.formatMessage({id: 'howto.text2'})}
+                        text3={this.props.intl.formatMessage({id: 'howto.text3'})}
+                        text4={this.props.intl.formatMessage({id: 'howto.text4'})}
+                    />
                     <Prizes />
                     <GetCode />
                     <Footer />

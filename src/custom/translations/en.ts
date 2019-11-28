@@ -1,3 +1,4 @@
+//tslint:disable
 export const en = {
 
     'page.body.trade.header.orderHistory': 'Order History',
@@ -76,4 +77,10 @@ export const en = {
     'timeline.end.text': 'The giveaway ends on',
     'timeline.end.date': 'December 24, 2019,',
     'timeline.end.time': '18:00 GMT+3',
+    'howto.h2': 'How to get tickets?',
+    'howto.h4': 'Receive tickets for the draw as follows:',
+    'howto.text1': 'Get tickets for <b>referring</b> your friends',
+    'howto.text2': 'Get tickets for <b>following</b> us on social media',
+    'howto.text3': 'Get tickets for <b>posting</b> on social media',
+    'howto.text4': '<b>Top up</b> your balances to get more tickets',
 };

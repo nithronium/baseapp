@@ -7,11 +7,11 @@ import backLeft = require('../../../assets/images/referral/back-left.svg');
 import backRight = require('../../../assets/images/referral/back-right.svg');
 import ticket = require('../../../assets/images/referral/ticket.svg');
 
-const HowTo: React.FC = () => {
+const HowTo = props => {
     return (
         <section id="how-to">
-            <h2 className="center">How to get tickets?</h2>
-            <h4 className="center">Receive tickets for the draw as follows:</h4>
+            <h2 className="center">{props.h2}</h2>
+    <h4 className="center">{props.h4}</h4>
             <img src={ticket} className="ticket-img" alt="" />
             <div className="axis" />
             <div className="how-tos">
@@ -19,39 +19,33 @@ const HowTo: React.FC = () => {
                     <div className="number-wrap">
                         <div className="number">1</div>
                     </div>
-                    <div className="text">
-                        Get tickets for <b>referring</b> your friends
-                    </div>
+                    <div className="text" dangerouslySetInnerHTML={{__html:props.text1}}/>
                 </div>
                 <div className="how-to">
                     <div className="number-wrap">
                         <div className="number">2</div>
                     </div>
-                    <div className="text">
-                        Get tickets for <b>following</b> us on social media
-                    </div>
+                    <div className="text" dangerouslySetInnerHTML={{__html:props.text2}}/>
+
                     <div className="text golden">
-                        <b>(COMING SOON)</b>
+                        <b>({props.soon})</b>
                     </div>
                 </div>
                 <div className="how-to">
                     <div className="number-wrap">
                         <div className="number">3</div>
                     </div>
-                    <div className="text">
-                        Get tickets for <b>posting</b> on social media
-                    </div>
+                    <div className="text" dangerouslySetInnerHTML={{__html:props.text3}}/>
+
                     <div className="text golden">
-                        <b>(COMING SOON)</b>
+                        <b>({props.soon})</b>
                     </div>
                 </div>
                 <div className="how-to">
                     <div className="number-wrap">
                         <div className="number">4</div>
                     </div>
-                    <div className="text">
-                        <b>Top up</b> your balances to get more tickets
-                    </div>
+                    <div className="text" dangerouslySetInnerHTML={{__html:props.text4}}/>
                 </div>
             </div>
             <div className="back-full">
