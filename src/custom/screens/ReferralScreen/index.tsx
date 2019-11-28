@@ -171,9 +171,9 @@ class Referral extends React.Component<Props> {
             return (
                 <div className="total-tickets-wrapper">
                     <div className="total-tickets">
-                        <div className="header">My total tickets: {this.getTotalTickets()}</div>
+                        <div className="header">{this.props.intl.formatMessage({ id: 'referral.teaser.total' })} {this.getTotalTickets()}</div>
                         <div className="content">
-                            Go to <a href="/referral-tickets">Ticket balance</a>
+                        {this.props.intl.formatMessage({ id: 'referral.teaser.goto' })} <a href="/referral-tickets">{this.props.intl.formatMessage({ id: 'referral.teaser.balance' })}</a>
                         </div>
                     </div>
                 </div>

@@ -83,4 +83,7 @@ export const en = {
     'howto.text2': 'Get tickets for <b>following</b> us on social media',
     'howto.text3': 'Get tickets for <b>posting</b> on social media',
     'howto.text4': '<b>Top up</b> your balances to get more tickets',
+    'referral.teaser.total': 'My total tickets :',
+    'referral.teaser.goto': 'Go to ',
+    'referral.teaser.balance': 'Tickets balance',
 };

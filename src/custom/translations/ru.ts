@@ -726,6 +726,9 @@ export const ru: LangType = {
     'howto.text2': 'Получите билеты за <b>подписку</b> на наши соцсети',
     'howto.text3': 'Получите билеты за <b>посты</b> в соцсетях',
     'howto.text4': '<b>Пополните</b> Ваш баланс и получите еще больше билетов',
+    'referral.teaser.total': 'Мои билеты :',
+    'referral.teaser.goto': 'Перейти на ',
+    'referral.teaser.balance': 'Страницу баланса билетов',
 
     ...nationalitiesNames,
 };
