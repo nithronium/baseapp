@@ -686,7 +686,7 @@ export const ru: LangType = {
     'refcode.code_owner_not_found': 'Владелец кода не найден',
     'refcode.inactive_code': 'Код не активирован',
     'refcode.user_not_found': 'Пользователь не найден',
-    'refcode.self_code_user': 'Неверный код',
+    'refcode.self_code_user': 'Вы пытались ввести свой код',
     'refcode.update_failed':'Обновление не удалось завершить',
 
     ...nationalitiesNames,

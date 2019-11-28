@@ -63,7 +63,7 @@ class ReferralProgramClass extends React.Component<Props> {
                 this.setState({ userRefUid });
                 localStorage.setItem('ref_id', userRefUid);
             } else  if (resp.status === 200 && resp.data) {
-                const message = resp.data.errors[0];
+                const message = `refcode.${resp.data.errors[0]}`;
                 const refId = '';
                 this.setState({ refId });
                 this.props.fetchSuccess({ message: [message], type: 'error' });

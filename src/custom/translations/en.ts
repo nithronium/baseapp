@@ -40,8 +40,8 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text': 'Minimal deposit amount is ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': 'EUR 50',
     'refcode.code_owner_not_found': 'Code Owner not found',
-    'refcode.inactive_code': 'Code inactive',
+    'refcode.inactive_code': 'Code is inactive',
     'refcode.user_not_found': 'User not found',
-    'refcode.self_code_user': 'Incorrect code',
+    'refcode.self_code_user': 'You try to enter your own code',
     'refcode.update_failed':'Update filed',
 };
