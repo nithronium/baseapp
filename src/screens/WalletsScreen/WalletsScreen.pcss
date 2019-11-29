@@ -209,7 +209,7 @@
         &__group__receive,
         &__group__transaction,
         &__group__code {
-            background: var(--transparent);
+            background: transparent;
             margin-bottom: calc(var(--gap) * 1.83);
             position: relative;
             width: 100%;
@@ -220,12 +220,24 @@
                 padding: calc(var(--gap) * 0.33) var(--gap);
                 border-radius: calc(var(--gap) * 0.33);
                 background: var(--estimated-value-background);
-                @media screen and (max-width: 768px) {
-                    left: calc(var(--gap) * 1);
-                    font-size: 12px;
-                    width: 90%;
+            }
+            .cr-withdraw__input {
+                width: 100%;
+                .cr-withdraw__label {
+                    position: absolute;
+                    top: 0px;
+                    left: calc(var(--gap) * 1.66);
+                    padding: calc(var(--gap) * 0.33) var(--gap);
+                    border-radius: calc(var(--gap) * 0.33);
+                    background: var(--estimated-value-background);
+                    @media screen and (max-width: 768px) {
+                        left: calc(var(--gap) * 1);
+                        font-size: 12px;
+                        width: 90%;
+                    }
                 }
             }
+
             .cr-withdraw__input {
                 width: 100%;
                 margin-top: calc(var(--gap) * 1.33);
@@ -341,7 +353,7 @@
     }
 
     .cr-tab {
-        background: var(--transparent);
+        background: transparent;
         border: 0;
         box-shadow: none;
         cursor: pointer;
@@ -349,7 +361,7 @@
 
         &__active {
             border-bottom: 1px solid var(--active-tab-color);
-            background: var(--transparent);
+            background: transparent;
         }
     }
 
@@ -461,7 +473,7 @@
         font-size: calc(var(--gap) * 2.66);
 
         & > * {
-            background: var(--transparent);
+            background: transparent;
         }
 
         &__icon {
@@ -582,7 +594,7 @@
             display: none;
         }
         .cr-table {
-            background: var(--transparent);
+            background: transparent;
             border-collapse: collapse;
             &__head {
                 margin: 10px;

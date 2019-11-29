@@ -10,7 +10,6 @@ import {
 import { Beneficiary } from '../../modules';
 
 interface WithdrawProps {
-    borderItem?: string;
     currency: string;
     fee: number;
     sepa: boolean;
@@ -216,13 +215,11 @@ class Withdraw extends React.Component<Props, WithdrawState> {
                             className="cr-withdraw__summary-field"
                             message={withdrawFeeLabel ? withdrawFeeLabel : 'Fee'}
                             content={this.renderFee()}
-                            borderItem={borderItem}
                         />
                         <SummaryField
                             className="cr-withdraw__summary-field"
                             message={withdrawTotalLabel ? withdrawTotalLabel : 'Total Withdraw Amount'}
                             content={this.renderTotal()}
-                            borderItem={borderItem}
                         />
                     </div> */}
                     <div className="cr-withdraw__deep">

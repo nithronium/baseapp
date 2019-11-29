@@ -430,7 +430,6 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             wire,
             card,
             onClick: this.toggleConfirmModal,
-            borderItem: 'empty-circle',
             twoFactorAuthRequired: this.isTwoFactorAuthRequired(level, otp),
             fixed,
             type,
