@@ -21,10 +21,10 @@ const Header = () => {
 const Copyright = props => {
     return (
         <div className="copyright">
-            <div className="text">
+            <div style={{color:'white'}} className="text">
                 Emirex.com, BME Technologies OU is a licensed crypto to fiat exchange, authorised by the Central Bank of Estonia.
             </div>
-    <div>{props.intl.formatMessage({id: 'footer_copyright'})}</div>
+    <div style={{color:'white'}}>{props.intl.formatMessage({id: 'footer_copyright'})}</div>
         </div>
     );
 };

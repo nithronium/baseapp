@@ -14,6 +14,7 @@ interface Props {
     disabledPrev: boolean;
     count: number;
     L2count: number;
+    message: () => void;
 }
 
 interface State {

@@ -5,9 +5,10 @@ import { RootState, selectUserInfo, User } from '../../../../modules';
 interface ReduxProps {
     user: User;
 }
-
+//tslint:disable
 interface PassedProps {
     totalTickets: number;
+    message: ({})=>string;
 }
 
 type Props = ReduxProps & PassedProps;
@@ -17,16 +18,16 @@ class ReferralBallanceContainer extends React.Component<Props> {
         return (
             <div className="container recalculate">
                 <div className="header">
-                    <h1>Referral balance</h1>
+                    <h1>{this.props.message({id: 'ticketsbalance.title'})}</h1>
                 </div>
                 <div className="contexter">
                     <div className="cards-wrapper">{this.props.children}</div>
                     <div className="referral-summary">
                         <div className="total-container">
-                            <b>Total tickets</b>: {this.props.totalTickets}
+                            <b> {this.props.message({id: 'tickets.total_tickets'})}</b>: {this.props.totalTickets}
                         </div>
                         <div className="referral-container">
-                            <a href="/profile">Get your referral code</a>
+                            <a href="/profile">{this.props.message({id: 'tickets.get_code'})}</a>
                         </div>
                     </div>
                 </div>

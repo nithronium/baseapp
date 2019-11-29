@@ -6,6 +6,7 @@ interface Props {
     context: ReferralOverallPayload['bonuses'];
     overall: ReferralOverallPayload['overall']['bonuses'];
     // loading: boolean;
+    message: () => void;
 }
 
 const tableRows = (legendArray: ReferralOverallPayload['bonuses']): React.ReactNode => {return legendArray.map((record, index) => {
