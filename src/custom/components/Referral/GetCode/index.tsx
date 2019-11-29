@@ -7,8 +7,8 @@ import reddit = require('../../../assets/images/referral/icons-yellow/reddit.svg
 import telegram = require('../../../assets/images/referral/icons-yellow/telegram.svg');
 import twitter = require('../../../assets/images/referral/icons-yellow/twitter.svg');
 import graphic = require ('../../../assets/images/referral/referral-graphic.svg');
-
-const GetCode: React.FC = () => {
+//tslint:disable
+const GetCode = props => {
   return (
     <section id="get-code">
       <div className="container_">
@@ -16,9 +16,9 @@ const GetCode: React.FC = () => {
           <img src={graphic} alt="" style={{maxWidth: '100%'}}/>
         </div>
         <div>
-          <h2>Get a referral code now</h2>
-          <p>Watch out for the codes being shared or search for the hashtag <b>#WinWithEmirex</b></p>
-          <p><b>Follow us on social media!</b></p>
+        <h2>{props.intl.formatMessage({id: 'get.get_now'})}</h2>
+          <p>{props.intl.formatMessage({id: 'get.watch'})} <b>#WinWithEmirex</b></p>
+          <p><b>{props.intl.formatMessage({id: 'get.follow'})}</b></p>
           <div className="social">
             <div>
             <a href="https://www.facebook.com/emirex.official/"><img src={facebook} alt=""/></a>
@@ -35,11 +35,11 @@ const GetCode: React.FC = () => {
         </div>
       </div>
       <div className="terms">
-        <h3>Terms and Conditions</h3>
-        <p>Please read the <a href="/terms"><b>Terms and Conditions</b></a> to make sure that you are eligible to participate. No purchase is necessary to take part in this giveaway.</p>
-        <p>The draw will take place through the use of blockchain technology, self-executing smart contracts will select the winners without human interference, guided by math and computer code only. This is to ensure complete transparency and independence. The draw will take place in Estonia, under the relevant EU rules.</p>
-        <p>To ensure that there is no fraud, only tickets activated by accounts at the time of the draw will count as valid. </p>
-        <p>Please read our <a href="https://knowledge-base.emirex.com"><b>FAQ</b></a>, which will answer all of your questions. </p>
+        <h3>{props.intl.formatMessage({id: 'get.h3'})}</h3>
+        <p dangerouslySetInnerHTML={{__html: `${props.intl.formatMessage({id: 'get.text1'})}`}}/>
+        <p>{props.intl.formatMessage({id: 'get.text2'})}</p>
+        <p>{props.intl.formatMessage({id: 'get.text3'})} </p>
+        <p dangerouslySetInnerHTML={{__html: `${props.intl.formatMessage({id: 'get.text4'})}`}}/>
       </div>
     </section>
   );
