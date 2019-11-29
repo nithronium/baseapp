@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { JsonBody, makeRequest, RequestOptions } from './requestBuilder';
 
-import { nodelogicUrl } from './config';
+// import { nodelogicUrl } from './config';
 
 export * from './types';
 export * from './config';
@@ -86,7 +86,7 @@ export const checkReferralCode = async body => {
     return res;
 };
 //tslint:disable
-// const nodelogicUrl = `${window.document.location.origin}/api/v2/nodelogic`;
+const nodelogicUrl = `${window.document.location.origin}/api/v2/nodelogic`;
 // const nodelogicUrl = 'http://localhost:3004';
 // const data = require('./data.json');
 // const overAll = require('./overall.json');
