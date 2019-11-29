@@ -19,9 +19,13 @@ import { authReducer  } from './user/auth';
 import { beneficiariesReducer } from './user/beneficiaries';
 import { getGeetestCaptchaReducer } from './user/captcha';
 import { sendEmailVerificationReducer } from './user/emailVerification';
-import { guardReducer } from './user/guard';
-import { historyReducer } from './user/history';
-import { documentsReducer, identityReducer, labelReducer, phoneReducer } from './user/kyc';
+import { historyReducer  } from './user/history';
+import {
+    documentsReducer,
+    identityReducer,
+    labelReducer,
+    phoneReducer,
+} from './user/kyc';
 import { newHistoryReducer } from './user/newHistory';
 import { openOrdersReducer } from './user/openOrders';
 import { ordersReducer } from './user/orders';
@@ -74,7 +78,6 @@ export const userReducer = combineReducers({
     sendEmailVerification: sendEmailVerificationReducer,
     captchaKeys: getGeetestCaptchaReducer,
     withdrawLimit: withdrawLimitReducer,
-    guard: guardReducer,
     referralTickets: referralTicketsReducer,
     referralCommission: referralCommissionReducer,
     buyWithCreditCard: buyWithCreditCardReducer,

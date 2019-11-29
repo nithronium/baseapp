@@ -11,7 +11,6 @@ const mockConfig: Config = {
         tradeUrl: '/api/v2/peatio',
         applogicUrl: '/api/v2/applogic',
         rangerUrl: '/api/v2/ranger',
-        tenkoUrl: '/api/v2/tenko',
         nodelogicUrl: '/api/v2/nodelogic',
         exchangeRatesUrl: '/api/v2/exchange-rates',
     },
@@ -24,7 +23,6 @@ const mockConfig: Config = {
         siteKey: '',
     },
     gaTrackerKey: '',
-    licenseKey: '',
     incrementalOrderBook: false,
     plugins: [],
 };

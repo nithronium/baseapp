@@ -2,27 +2,11 @@ import { History } from 'history';
 import * as React from 'react';
 // import CookieConsent from 'react-cookie-consent';
 import { IntlProvider } from 'react-intl';
-import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
+import { connect, MapStateToProps } from 'react-redux';
 import { Router } from 'react-router';
-import { GuardModal } from './components';
 import { Alerts, ErrorWrapper, Footer, Sidebar } from './containers';
-import { GuardWrapper } from './containers/Guard';
 import { Header } from './custom/containers';
-import {
-    closeGuardModal,
-    licenseFetch,
-    RootState,
-    selectAppVersion,
-    selectBuildExpire,
-    selectGuardModalOpened,
-    selectTenkoPublicKey,
-    selectToken,
-    selectTokenFetching,
-    selectUserInfo,
-    selectUserLoggedIn,
-    setLicenseExpiration,
-    User,
-} from './modules';
+import { RootState } from './modules';
 import { Layout } from './routes';
 
 import { googleTranslateElementInit, initLanguageChangeEvent } from './helpers/googleTranslate';
@@ -38,23 +22,9 @@ interface AppProps {
 
 interface ReduxProps {
     locale: Locale;
-    guardModal: boolean;
-    version: string;
-    buildExpire: string;
-    tenkoKey: string;
-    token: string;
-    tokenFetching: boolean;
-    userData: User;
-    isLoggedIn: boolean;
 }
 
-interface DispatchProps {
-    closeGuardModal: typeof closeGuardModal;
-    licenseFetch: typeof licenseFetch;
-    setLicenseExpiration: typeof setLicenseExpiration;
-}
-
-type Props = AppProps & ReduxProps & DispatchProps;
+type Props = AppProps & ReduxProps;
 
 class AppLayout extends React.Component<Props, {}, {}> {
 
@@ -112,44 +82,20 @@ class AppLayout extends React.Component<Props, {}, {}> {
         const {
             locale,
             history,
-            guardModal,
-            version,
-            buildExpire,
-            tenkoKey,
-            token,
-            tokenFetching,
         } = this.props;
         const { lang, messages } = locale;
 
         return (
             <IntlProvider locale={lang} messages={messages} key={lang}>
-                <GuardWrapper
-                    version={version}
-                    buildExpire={buildExpire}
-                    tenkoKey={tenkoKey}
-                    licenseFetch={this.props.licenseFetch}
-                    setLicenseExpiration={this.props.setLicenseExpiration}
-                    token={token}
-                    tokenFetching={tokenFetching}
-                >
-                    <Router history={history}>
-                        <ErrorWrapper>
-                            {/* <CookieConsent */}
-                                {/* buttonText="Got it!" */}
-                                {/* contentClasses="cookie-consent__content" */}
-                                {/* buttonClasses="cookie-consent__button" */}
-                            {/* > */}
-                                {/* <span>The exchange is in alpha testing mode. Exchange operation is limited.</span> */}
-                            {/* </CookieConsent> */}
-                            <Header/>
-                            <Sidebar/>
-                            <Alerts/>
-                            <Layout/>
-                            <Footer intl={lang} />
-                        </ErrorWrapper>
-                    </Router>
-                    {guardModal && <GuardModal onClose={this.props.closeGuardModal}/>}
-                </GuardWrapper>
+                <Router history={history}>
+                    <ErrorWrapper>
+                        <Header/>
+                        <Sidebar/>
+                        <Alerts/>
+                        <Layout/>
+                        <Footer/>
+                    </ErrorWrapper>
+                </Router>
             </IntlProvider>
         );
     }
@@ -158,25 +104,10 @@ class AppLayout extends React.Component<Props, {}, {}> {
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> =
     (state: RootState): ReduxProps => ({
         locale: state.public.i18n,
-        guardModal: selectGuardModalOpened(state),
-        version: selectAppVersion(state),
-        buildExpire: selectBuildExpire(state),
-        tenkoKey: selectTenkoPublicKey(state),
-        token: selectToken(state),
-        tokenFetching: selectTokenFetching(state),
-        userData: selectUserInfo(state),
-        isLoggedIn: selectUserLoggedIn(state),
-    });
-
-const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
-    dispatch => ({
-        closeGuardModal: () => dispatch(closeGuardModal()),
-        licenseFetch: () => dispatch(licenseFetch()),
-        setLicenseExpiration: payload => dispatch(setLicenseExpiration(payload)),
     });
 
 // tslint:disable-next-line:no-any
-const App = connect(mapStateToProps, mapDispatchToProps)(AppLayout) as any;
+const App = connect(mapStateToProps, null)(AppLayout) as any;
 
 export {
     AppProps,

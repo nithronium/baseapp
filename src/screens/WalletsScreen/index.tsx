@@ -20,7 +20,6 @@ import {
     Beneficiary,
     currenciesFetch,
     Currency,
-    openGuardModal,
     RootState,
     selectBeneficiariesActivateSuccess,
     selectBeneficiariesDeleteSuccess,
@@ -80,7 +79,6 @@ interface DispatchProps {
     walletsWithdrawCcy: typeof walletsWithdrawCcyFetch;
     fetchSuccess: typeof alertPush;
     setMobileWalletUi: typeof setMobileWalletUi;
-    openGuardModal: typeof openGuardModal;
     fetchWithdrawLimit: typeof withdrawLimitFetch;
     currenciesFetch: typeof currenciesFetch;
 }
@@ -396,15 +394,15 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                    : <React.Fragment>
                 {currency.toLowerCase() === 'usd'}
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
-               <BlurComponent isBlur={user < 4}>
-                   {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}
-                    {['usd', 'aed'].includes(currency.toLowerCase()) ? (
-                        <div style={{ textAlign: 'center', fontSize: '18px', padding: '20px' }}>{this.translate('comingsoon')}</div>
-                    ) : (
-                        this.renderEnterpriseContent()
-                    )}
-                    {user.otp && currency && <WalletHistory label="withdraw" type="withdraws" currency={currency} />}
-               </BlurComponent>
+                <BlurComponent isBlur={user < 4}>
+                    {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}
+                        {['usd', 'aed'].includes(currency.toLowerCase()) ? (
+                            <div style={{ textAlign: 'center', fontSize: '18px', padding: '20px' }}>{this.translate('comingsoon')}</div>
+                        ) : (
+                            this.renderEnterpriseContent()
+                        )}
+                        {user.otp && currency && <WalletHistory label="withdraw" type="withdraws" currency={currency} />}
+                </BlurComponent>
                 </React.Fragment>  }
             </React.Fragment>
         );
@@ -445,7 +443,6 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             withdrawButtonLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.button' }),
             inputErrorText: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.inputError' }),
             soon: this.props.intl.formatMessage({ id: 'comingsoon' }),
-            openModal: this.props.openGuardModal,
         };
 
         return otp ? <Withdraw {...withdrawProps} /> : this.isOtpDisabled();
@@ -518,7 +515,6 @@ const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
     fetchSuccess: payload => dispatch(alertPush(payload)),
     fetchWithdrawLimit: () => dispatch(withdrawLimitFetch()),
     setMobileWalletUi: payload => dispatch(setMobileWalletUi(payload)),
-    openGuardModal: () => dispatch(openGuardModal()),
     paymentError: payload => dispatch(alertPush(payload)),
     currenciesFetch: () => dispatch(currenciesFetch()),
 });

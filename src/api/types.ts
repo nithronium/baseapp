@@ -4,7 +4,6 @@ export interface Config {
         tradeUrl: string;
         applogicUrl: string;
         rangerUrl: string;
-        tenkoUrl: string;
         nodelogicUrl: string;
         exchangeRatesUrl: string;
     };
@@ -20,7 +19,6 @@ export interface Config {
     };
     gaTrackerKey?: string;
     msAlertDisplayTime?: string;
-    licenseKey?: string;
     incrementalOrderBook: boolean;
     // tslint:disable-next-line: no-any
     plugins: any[];

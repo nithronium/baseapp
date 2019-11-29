@@ -24,7 +24,6 @@ import { AuthState, rootAuthSaga } from './user/auth';
 import { BeneficiariesState, rootBeneficiariesSaga } from './user/beneficiaries';
 import { GeetestCaptchaState, rootGeetestCaptchaSaga } from './user/captcha';
 import { EmailVerificationState, rootEmailVerificationSaga } from './user/emailVerification';
-import { GuardState, rootGuardSaga } from './user/guard';
 import { HistoryState, rootHistorySaga } from './user/history';
 import { DocumentsState, rootSendDocumentsSaga } from './user/kyc/documents';
 import { IdentityState, rootSendIdentitySaga } from './user/kyc/identity';
@@ -78,7 +77,6 @@ export * from './user/newHistory';
 export * from './user/kyc';
 export * from './user/emailVerification';
 export * from './user/withdrawLimit';
-export * from './user/guard';
 export * from '../custom/modules/referralTickets';
 export * from '../custom/modules/referralCommission';
 export * from '../custom/modules/fees';
@@ -120,7 +118,6 @@ export interface RootState {
         sendEmailVerification: EmailVerificationState;
         captchaKeys: GeetestCaptchaState;
         withdrawLimit: WithdrawLimitState;
-        guard: GuardState;
         referralTickets: ReferralOverallState;
         referralCommission: ReferralCommissionState;
         buyWithCreditCard: CreaditCardState;
@@ -164,7 +161,6 @@ export function* rootSaga() {
         call(rootEmailVerificationSaga),
         call(rootKlineFetchSaga),
         call(rootWithdrawLimitSaga),
-        call(rootGuardSaga),
         call(rootReferralTicketsSaga),
         call(rootReferralCommissionSaga),
         call(rootCreditCardSaga),

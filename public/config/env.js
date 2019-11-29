@@ -4,8 +4,7 @@ window.env = {
         tradeUrl: 'http://localhost:9002/api/v2/peatio',
         applogicUrl: 'http://localhost:9002/api/v2/applogic',
         exchangeRatesUrl: 'http://localhost:9002/api/v2/exchange-rates',
-        rangerUrl: '',
-        tenkoUrl: 'http://localhost:9002/api/v2/tenko',
+        rangerUrl: 'ws://localhost:9011/api/v2/ranger',
         nodelogicUrl: 'http://localhost:9002/api/v2/nodelogic',
         exchangeRatesUrl: 'http://localhost:9002/api/v2/exchange-rates',
     },
@@ -23,7 +22,6 @@ window.env = {
     gaTrackerKey: '',
     rangerReconnectPeriod: '1',
     msAlertDisplayTime: '5000',
-    licenseKey: '',
     incrementalOrderBook: true,
     plugins: [
         {

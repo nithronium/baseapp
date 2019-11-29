@@ -10,7 +10,6 @@ import { CustomInput, Modal } from '../../components';
 import { buildPath } from '../../custom/helpers';
 import { PASSWORD_REGEX } from '../../helpers';
 import {
-    openGuardModal,
     RootState,
     selectCurrentLanguage,
     selectUserInfo,
@@ -45,7 +44,6 @@ interface OnChangeEvent {
 interface DispatchProps {
     changePassword: typeof changePasswordFetch;
     clearPasswordChangeError: () => void;
-    openGuardModal: typeof openGuardModal;
     toggle2fa: typeof toggle2faFetch;
     toggleUser2fa: typeof toggleUser2fa;
 }
@@ -437,7 +435,6 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
 const mapDispatchToProps = dispatch => ({
     changePassword: ({ old_password, new_password, confirm_password }) =>
         dispatch(changePasswordFetch({ old_password, new_password, confirm_password })),
-    openGuardModal: () => dispatch(openGuardModal()),
     toggle2fa: ({ code, enable }) => dispatch(toggle2faFetch({ code, enable })),
     toggleUser2fa: () => dispatch(toggleUser2fa()),
 });

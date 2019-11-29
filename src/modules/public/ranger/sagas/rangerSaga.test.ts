@@ -49,7 +49,6 @@ describe('Ranger module', () => {
                 tradeUrl: '',
                 applogicUrl: '',
                 rangerUrl: `ws://localhost:${echoServerPort}`,
-                tenkoUrl: '',
                 nodelogicUrl: '',
                 exchangeRatesUrl: '',
             },

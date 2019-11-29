@@ -29,9 +29,7 @@ import {
     getBalanceFetch,
     logoutFetch,
     Market,
-    openGuardModal,
     RootState,
-    selectAppVersion,
     selectCurrentColorTheme,
     selectCurrentLanguage,
     selectCurrentMarket,
@@ -52,7 +50,6 @@ export interface ReduxProps {
     lang: string;
     success?: boolean;
     user: User;
-    version: string;
     currentLanguage: string;
 }
 
@@ -61,7 +58,6 @@ interface DispatchProps {
     changeLanguage: typeof changeLanguage;
     logout: typeof logoutFetch;
     walletsReset: typeof walletsReset;
-    openGuardModal: typeof openGuardModal;
     getBalanceFetch: typeof getBalanceFetch;
 }
 
@@ -662,7 +658,6 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (state: Root
     lang: selectCurrentLanguage(state),
     user: selectUserInfo(state),
     isLoggedIn: selectUserLoggedIn(state),
-    version: selectAppVersion(state),
     currentLanguage: selectCurrentLanguage(state),
 });
 
@@ -672,7 +667,6 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
     getBalanceFetch: payload => dispatch(getBalanceFetch(payload)),
     logout: () => dispatch(logoutFetch()),
     walletsReset: () => dispatch(walletsReset()),
-    openGuardModal: () => dispatch(openGuardModal()),
 });
 // tslint:disable no-any
 const NavBar = withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBarComponent) as any) as any;

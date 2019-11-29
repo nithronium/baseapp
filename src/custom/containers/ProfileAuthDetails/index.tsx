@@ -18,7 +18,6 @@ import {
     PASSWORD_REGEX,
 } from '../../../helpers';
 import {
-    openGuardModal,
     RootState,
     selectUserInfo,
     User,
@@ -49,7 +48,6 @@ interface OnChangeEvent {
 interface DispatchProps {
     changePassword: typeof changePasswordFetch;
     clearPasswordChangeError: () => void;
-    openGuardModal: typeof openGuardModal;
 }
 
 interface ProfileProps {
@@ -493,7 +491,6 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
 const mapDispatchToProps = dispatch => ({
     changePassword: ({ old_password, new_password, confirm_password }) =>
         dispatch(changePasswordFetch({ old_password, new_password, confirm_password })),
-    openGuardModal: () => dispatch(openGuardModal()),
 });
 
 const ProfileAuthDetailsConnected = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ProfileAuthDetailsComponent));
