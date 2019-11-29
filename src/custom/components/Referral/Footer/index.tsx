@@ -18,27 +18,27 @@ const Header = () => {
 };
 
 /******** start component */
-const Copyright = () => {
+const Copyright = props => {
     return (
         <div className="copyright">
             <div className="text">
                 Emirex.com, BME Technologies OU is a licensed crypto to fiat exchange, authorised by the Central Bank of Estonia.
             </div>
-            <div>© 2019 Emirex.com All rights reserved.</div>
+    <div>{props.intl.formatMessage({id: 'footer_copyright'})}</div>
         </div>
     );
 };
 
 /******** start component */
-const Licenses = () => {
+const Licenses = props => {
     return (
         <div className="licenses">
-            <h5>Operating Licenses</h5>
-            <p>Financial services, providing a virtual currency wallet service; Number FRK000909</p>
+            <h5>{props.intl.formatMessage({id: 'footer_licenses_title'})}</h5>
+            <p>{props.intl.formatMessage({id: 'footer_licenses_text1'})}</p>
             <p>
-                Financial services, providing services of exchanging a virtual currency against a fiat currency; Number FVR001017
+            {props.intl.formatMessage({id: 'footer_licenses_text2'})}
             </p>
-            <p>Issuer of licences: Estonian Police and Boarder Guard Board (Politsei - ja Piirivalveamet)</p>
+            <p>{props.intl.formatMessage({id: 'footer_licenses_text3'})}</p>
         </div>
     );
 };
@@ -94,10 +94,10 @@ const IconList = ({ links }) => {
     );
 };
 
-const GetInTouch = () => {
+const GetInTouch = props => {
     return (
         <div className="social-block">
-            <h5>Get in Touch</h5>
+            <h5>{props.intl.formatMessage({id: 'footer_headers_getintouch'})}</h5>
             <IconList links={links6} />
         </div>
     );
@@ -105,43 +105,43 @@ const GetInTouch = () => {
 
 /******** start component */
 
-const Address = () => {
+const Address = props => {
     return (
         <div className="address">
-            <h5>Address</h5>
+            <h5>{props.intl.formatMessage({id: 'footer_addresses_title'})}</h5>
             <p>47, Peterburi tee, Lasnamäe linnaosa, Harju maakond, Tallinn, Estonia</p>
         </div>
     );
 };
 
-const title1 = 'Company';
+const title1 = 'footer_headers_company';
 const links1 = [
-    { key: '', href: '/about', label: 'About' },
-    { key: '', href: '/whitepaper', label: 'White Paper' },
+    { key: '', href: '/about', label: 'footer_links_about' },
+    { key: '', href: '/whitepaper', label: 'footer_links_wp' },
     /* { href: '/team', label: 'footer.links.team'},
   { href: '/careers', label: 'footer.links.careers'},
   { href: '/blog', label: 'footer.links.blog'},*/
-    { key: '', href: '/referral', label: 'Referral Giveaway', className: 'gold' },
+    { key: '', href: '/referral', label: 'footer_links_referral', className: 'gold' },
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
     return link;
 });
 
-const title2 = 'Our Services';
+const title2 = 'footer_headers_services';
 const links2 = [
-    { key: '', href: '/trading/btcusdt', label: 'Trading Platform' },
-    { key: '', href: 'https://emrx.emirex.com', label: 'EMRX Token' },
-    { key: '', href: 'https://advisory.emirex.com', label: 'Advisory' },
+    { key: '', href: '/trading/btcusdt', label: 'footer_links_platform' },
+    { key: '', href: 'https://emrx.emirex.com', label: 'footer_links_emrx' },
+    { key: '', href: 'https://advisory.emirex.com', label: 'footer_links_ad' },
     /*  { href: '/listing', label: 'footer.links.listing'},*/
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
     return link;
 });
 
-const title3 = 'Buy/Sell Crypto';
+const title3 = 'footer_headers_buysell';
 const links3 = [
-    { key: '', href: '/trading/btcusdt', label: 'Buy Bitcoin' },
-    { key: '', href: '/trading/ethusdt', label: 'Buy Ethereum' },
+    { key: '', href: '/trading/btcusdt', label: 'footer_links_buyBitcoin' },
+    { key: '', href: '/trading/ethusdt', label: 'footer_links_buyEthereum' },
     /*{ href: '/trading', label: 'footer.links.buyRipple'},
   { href: '/trading', label: 'footer.links.buyLitecoin'},
   { href: '/trading', label: 'footer.links.buyEmrx'},*/
@@ -150,33 +150,33 @@ const links3 = [
     return link;
 });
 
-const title4 = 'Support';
+const title4 = 'footer_headers_support';
 const links4 = [
-    { key: '', href: 'https://knowledge-base.emirex.com/', label: 'Knowledge Base' },
-    { key: '', href: 'https://knowledge-base.emirex.com/kb-tickets/new', label: 'Submit a request' },
+    { key: '', href: 'https://knowledge-base.emirex.com/', label: 'footer_links_kb' },
+    { key: '', href: 'https://knowledge-base.emirex.com/kb-tickets/new', label: 'footer_links_submitRequest' },
     { key: '', href: '/fees', label: 'Fees' },
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
     return link;
 });
 
-const title5 = 'Legal';
+const title5 = 'footer_headers_legal';
 const links5 = [
-    { key: '', href: '/terms', label: 'Terms of Use' },
-    { key: '', href: '/privacy', label: 'Privacy Policy' },
-    { key: '', href: '/kyc_policy', label: 'KYC/AML policy' },
+    { key: '', href: '/terms', label: 'footer_links_terms' },
+    { key: '', href: '/privacy', label: 'footer_links_privacy' },
+    { key: '', href: '/kyc_policy', label: 'footer_links_kyc' },
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
     return link;
 });
 
-const LinksList = ({ links }) => {
+const LinksList = ({ links, intl }) => {
     return (
         <ul className="footer-link-list">
             {links.map(({ key, href, label, className }) => (
                 <li key={key}>
                     <a className={className} href={href}>
-                        {label}
+                        {intl.formatMessage({ id: label})}
                     </a>
                 </li>
             ))}
@@ -184,42 +184,42 @@ const LinksList = ({ links }) => {
     );
 };
 
-const LinksColumn = ({ title, links }) => {
+const LinksColumn = ({ title, links, intl }) => {
     return (
         <div className="link-list-column">
-            <h5>{title}</h5>
-            <LinksList links={links} />
+<h5>{intl.formatMessage({id: title})}</h5>
+            <LinksList intl={intl} links={links} />
         </div>
     );
 };
 
-const FooterBody = () => {
+const FooterBody = props => {
     return (
         <div className="footer-row">
-            <LinksColumn title={title1} links={links1} />
-            <LinksColumn title={title2} links={links2} />
-            <LinksColumn title={title3} links={links3} />
+            <LinksColumn intl={props.intl} title={title1} links={links1} />
+            <LinksColumn intl={props.intl} title={title2} links={links2} />
+            <LinksColumn intl={props.intl} title={title3} links={links3} />
             <div>
-                <LinksColumn title={title4} links={links4} />
-                <LinksColumn title={title5} links={links5} />
+                <LinksColumn intl={props.intl} title={title4} links={links4} />
+                <LinksColumn intl={props.intl} title={title5} links={links5} />
             </div>
             <div>
-                <GetInTouch />
-                <Address />
+                <GetInTouch intl={props.intl}/>
+                <Address intl={props.intl}/>
             </div>
         </div>
     );
 };
 
-const Footer = () => {
+const Footer = props => {
     return (
         <section id="footer">
             <div>
                 {/* <MobileStartTrading /> */}
                 <Header />
-                <FooterBody />
-                <Licenses />
-                <Copyright />
+                <FooterBody intl={props.intl}/>
+                <Licenses intl={props.intl}/>
+                <Copyright intl={props.intl}/>
             </div>
         </section>
     );

@@ -257,7 +257,7 @@ class Referral extends React.Component<Props> {
                     />
                     <Prizes intl={this.props.intl}/>
                     <GetCode intl={this.props.intl}/>
-                    <Footer />
+                    <Footer intl={this.props.intl}/>
                 </div>
             </div>
         );
