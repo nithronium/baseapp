@@ -1,6 +1,6 @@
 import { LangType } from '../../translations';
 import { nationalitiesNames } from '../../translations/nationalities';
-
+//tslint:disable
 export const ru: LangType = {
     'page.header.navbar.signIn': 'Войти',
     'page.header.navbar.trade': 'Биржа',
@@ -729,6 +729,10 @@ export const ru: LangType = {
     'referral.teaser.total': 'Мои билеты :',
     'referral.teaser.goto': 'Перейти на ',
     'referral.teaser.balance': 'Страницу баланса билетов',
+    'prize.our': 'Наши',
+    'prize.prizes':'призов',
+    'prize.h4': 'Получите шанс на выигрыш любого из следующих призов:',
+    'prize.prize': 'ПРИЗ',
 
     ...nationalitiesNames,
 };

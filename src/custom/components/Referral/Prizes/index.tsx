@@ -46,13 +46,13 @@ const mainPrize = (prize: Prize) => {
     );
 };
 
-const Prizes: React.FC = () => {
+const Prizes = props => {
     return (
         <section id="prizes">
             <h2 className="center">
-                Our 100 <span className="gold">prizes</span>
+               {props.intl.formatMessage({id: 'prize.our'})} 100 <span className="gold">{props.intl.formatMessage({id: 'prize.prizes'})}</span>
             </h2>
-            <h4 className="center">Stand a chance to win any of the following prizes:</h4>
+            <h4 className="center">{props.intl.formatMessage({id: 'prize.h4'})}</h4>
             <div className="prizes">
                 {mainPrizes.map(mainPrize)}
 

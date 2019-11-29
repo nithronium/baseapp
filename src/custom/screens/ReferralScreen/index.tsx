@@ -255,7 +255,7 @@ class Referral extends React.Component<Props> {
                         text3={this.props.intl.formatMessage({id: 'howto.text3'})}
                         text4={this.props.intl.formatMessage({id: 'howto.text4'})}
                     />
-                    <Prizes />
+                    <Prizes intl={this.props.intl}/>
                     <GetCode />
                     <Footer />
                 </div>

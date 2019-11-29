@@ -86,4 +86,8 @@ export const en = {
     'referral.teaser.total': 'My total tickets :',
     'referral.teaser.goto': 'Go to ',
     'referral.teaser.balance': 'Tickets balance',
+    'prize.our': 'Our',
+    'prize.prizes': 'prizes',
+    'prize.h4': 'Stand a chance to win any of the following prizes:',
+    'prize.prize': 'PRIZE',
 };
