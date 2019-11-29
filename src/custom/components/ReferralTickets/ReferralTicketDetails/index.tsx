@@ -1,19 +1,27 @@
 import * as React from 'react';
-import { ReferralTicketsPayload } from '../../../modules/referralTickets';
-import { Loader } from '../../Loader';
+import { ReferralOverallPayload } from '../../../modules/referralTickets';
 
-
+// import { Loader } from '../../Loader';
+//tslint:disable
 interface Props {
-    context: ReferralTicketsPayload['referrals'];
-    overall: ReferralTicketsPayload['overall']['referrals'];
-    loading: boolean;
+    context: any;
+    overall: ReferralOverallPayload['overall']['referrals'];
+    // loading: boolean;
+    turnRight: () => void;
+    turnLeft: () => void;
+    page: number;
+    disabledNext: boolean;
+    disabledPrev: boolean;
+    count: number;
+    L2count: number;
 }
 
 interface State {
     filter: string;
+
 }
 
-const tableRow = (legendArray: ReferralTicketsPayload['referrals']): React.ReactNode => {
+const tableRow = (legendArray: any): React.ReactNode => {
     return legendArray.map((record, index) => {
         return(
             <tr key={index}>
@@ -34,12 +42,15 @@ class ReferralTicketDetails extends React.Component<Props, State>{
         super(props);
         this.state = {
            filter: 'all',
-        };
+
+          };
 
         this.filterLegend = this.filterLegend.bind(this);
+
     }
 
-    public filtered(): ReferralTicketsPayload['referrals'] {
+
+    public filtered(): any {
         const legendArray = this.props.context || [];
         switch (this.state.filter) {
             case 'active':
@@ -79,10 +90,17 @@ class ReferralTicketDetails extends React.Component<Props, State>{
         return total;
     }
 
+    public getOverall(key) {
+        return this.props.overall[key];
+    }
+
+
+
+
     public render(){
-        const filterClassName = dataFilter => {
-            return `referral-filter${dataFilter === this.state.filter ? ' active' : ''}`;
-        };
+        // const filterClassName = dataFilter => {
+        //     return `referral-filter${dataFilter === this.state.filter ? ' active' : ''}`;
+        // };
 
         const legendArray = this.filtered();
 
@@ -90,16 +108,16 @@ class ReferralTicketDetails extends React.Component<Props, State>{
 
             <div className="referral-ticket-details">
                 <div className="container column">
-                    <div className="container wrap">
+                    {/* <div className="container wrap">
                         <div className="left"><h2>Referral tickets details</h2></div>
                         <div className="right">
                             <a href="#!" onClick={this.filterLegend} data-filter="all" className={filterClassName('all')}>all</a> /
                             <a href="#!" onClick={this.filterLegend} data-filter="active" className={filterClassName('active')}>active</a> /
                             <a href="#!" onClick={this.filterLegend} data-filter="inactive" className={filterClassName('inactive')}>inactive</a>
                         </div>
-                    </div>
+                    </div> */}
                     <div className="table-wrap">
-                        <Loader display={this.props.loading} />
+                        {/* <Loader display={this.props.loading} /> */}
                         <table id="referral-details-list">
                             <thead>
                                 <tr>
@@ -115,15 +133,29 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                             </tbody>
                             <tfoot>
                                 <tr><td style={{paddingBottom: 0}} colSpan={5}><span className="table-summary-header">total</span></td></tr>
-                                <tr>
+                                <tr >
                                     <td><span className="count">{this.getTotal('tickets') + this.getTotal('subreferrals')}</span> <span className="explanation">tickets</span></td>
                                     <td>{this.getTotal('email', 'count')} referreres</td>
                                     <td>yes {this.getTotal('isActive', 'count', 1)} / no {this.getTotal('isActive', 'count', 0)} </td>
                                     <td>{this.getTotal('subreferrals')} <span className="explanation">referrals</span></td>
                                     <td>{this.getTotal('activeSubreferrals')} <span className="explanation">referrals</span></td>
                                 </tr>
+                                
+                                <tr><td style={{paddingBottom: 0, paddingTop: '15px'}} colSpan={5}><span className="table-summary-header">overall</span></td></tr>
+                                <tr>
+                                    <td><span className="count">{this.getOverall('active') + this.getOverall('inactive') }</span> <span className="explanation">tickets</span></td>
+                                    <td>{this.props.count} referreres</td>
+                                    <td>yes {this.getOverall('active')} / no {this.getOverall('inactive')} </td>
+                                    <td>{this.props.L2count} <span className="explanation"> referrals</span></td>
+                                    <td>{this.getTotal('activeSubreferrals')} <span className="explanation">referrals</span></td>
+                                </tr>
                             </tfoot>
                         </table>
+                        <div style={{ padding: '40px 0',display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '200px'}}>
+                            <button style={{background: this.props.disabledPrev ? 'gray' : '#00732F'}} disabled={this.props.disabledPrev} onClick={this.props.turnLeft}>PREV</button>
+                            <span>{this.props.page}</span>
+                            <button style={{background: this.props.disabledNext ? 'gray' : '#00732F'}} disabled={this.props.disabledNext} onClick={this.props.turnRight}>NEXT</button>
+                        </div>
                     </div>
                 </div>
             </div>

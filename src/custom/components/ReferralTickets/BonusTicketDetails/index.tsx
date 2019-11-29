@@ -1,14 +1,14 @@
 import * as React from 'react';
-import { ReferralTicketsPayload } from '../../../modules/referralTickets';
-import { Loader } from '../../Loader';
+import { ReferralOverallPayload } from '../../../modules/referralTickets';
+// import { Loader } from '../../Loader';
 
 interface Props {
-    context: ReferralTicketsPayload['bonuses'];
-    overall: ReferralTicketsPayload['overall']['bonuses'];
-    loading: boolean;
+    context: ReferralOverallPayload['bonuses'];
+    overall: ReferralOverallPayload['overall']['bonuses'];
+    // loading: boolean;
 }
 
-const tableRows = (legendArray: ReferralTicketsPayload['bonuses']): React.ReactNode => {return legendArray.map((record, index) => {
+const tableRows = (legendArray: ReferralOverallPayload['bonuses']): React.ReactNode => {return legendArray.map((record, index) => {
         return(
             <tr key={index}>
                 <td><span className="count">{record.tickets} <span className="explanation">tickets</span></span></td>
@@ -82,7 +82,7 @@ class BonusTicketDetails extends React.Component<Props>{
 
     public render(){
 
-        const legendArray: ReferralTicketsPayload['bonuses'] = this.props.context || [];
+        const legendArray: ReferralOverallPayload['bonuses'] = this.props.context || [];
 
         return(
 
@@ -92,7 +92,7 @@ class BonusTicketDetails extends React.Component<Props>{
                         <div className="left"><h2>Bonus ticket details</h2></div>
                     </div>
                     <div className="table-wrap">
-                        <Loader display={this.props.loading} />
+                        {/* <Loader display={this.props.loading} /> */}
                         <table>
                             <thead>
                                 <tr>

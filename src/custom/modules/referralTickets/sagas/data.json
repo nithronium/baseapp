@@ -1,0 +1,33 @@
+{
+    "overall": {
+      "direct": {
+        "active": 6,
+        "inactive": 0
+      },
+      "referrals": {
+        "active": 3,
+        "inactive": 33
+      },
+      "bonuses": {
+        "active": 0,
+        "inactive": 0
+      }
+    },
+    "direct": {
+      "ticketsForRegistration": {
+        "active": 1,
+        "inactive": 0
+      },
+      "usd": {
+        "balance": 250,
+        "active": 5,
+        "inactive": 0
+      },
+      "emrx": {
+        "balance": 0,
+        "active": 0,
+        "inactive": 0
+      }
+    },   
+    "bonuses": []
+  }

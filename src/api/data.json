@@ -1,0 +1,92 @@
+{
+  "overall": {
+      "count": 12,
+      "L2count": 4
+  },
+  "list": [
+      {
+          "tickets": 2,
+          "email": "gumurzhi.denis+ttest1@gmail.com",
+          "isActive": 0,
+          "subreferrals": 0,
+          "activeSubreferrals": 0
+      },
+      {
+          "tickets": 2,
+          "email": "gumurzhi.denis+ttest2@gmail.com",
+          "isActive": 0,
+          "subreferrals": 0,
+          "activeSubreferrals": 0
+      },
+      {
+          "tickets": 2,
+          "email": "gumurzhi.denis+b1@gmail.com",
+          "isActive": 0,
+          "subreferrals": 0,
+          "activeSubreferrals": 0
+      },
+      {
+          "tickets": 2,
+          "email": "gumurzhi.denis+b2@gmail.com",
+          "isActive": 1,
+          "subreferrals": 1,
+          "activeSubreferrals": 0
+      },
+      {
+          "tickets": 2,
+          "email": "gumurzhi.denis+b3@gmail.com",
+          "isActive": 0,
+          "subreferrals": 0,
+          "activeSubreferrals": 0
+      },
+      {
+          "tickets": 2,
+          "email": "gumurzhi.denis+b4@gmail.com",
+          "isActive": 0,
+          "subreferrals": 1,
+          "activeSubreferrals": 0
+      },
+      {
+        "tickets": 2,
+        "email": "gumurzhi.denis+ttest1@gmail.com",
+        "isActive": 0,
+        "subreferrals": 0,
+        "activeSubreferrals": 0
+    },
+    {
+        "tickets": 2,
+        "email": "gumurzhi.denis+ttest2@gmail.com",
+        "isActive": 0,
+        "subreferrals": 0,
+        "activeSubreferrals": 0
+    },
+    {
+        "tickets": 2,
+        "email": "gumurzhi.denis+b1@gmail.com",
+        "isActive": 0,
+        "subreferrals": 0,
+        "activeSubreferrals": 0
+    },
+    {
+        "tickets": 2,
+        "email": "gumurzhi.denis+b2@gmail.com",
+        "isActive": 1,
+        "subreferrals": 1,
+        "activeSubreferrals": 0
+    },
+    {
+        "tickets": 2,
+        "email": "gumurzhi.denis+b3@gmail.com",
+        "isActive": 0,
+        "subreferrals": 0,
+        "activeSubreferrals": 0
+    },
+    {
+        "tickets": 2,
+        "email": "gumurzhi.denis+b4@gmail.com",
+        "isActive": 0,
+        "subreferrals": 1,
+        "activeSubreferrals": 0
+    }
+  ]
+}

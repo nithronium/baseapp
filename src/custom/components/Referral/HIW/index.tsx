@@ -9,7 +9,7 @@ interface Step {
 //tslint:disable
 const step = (data: Step) => {
     return (
-        <div className="step">
+        <div key={data.h3} className="step">
             <h3 style={{ display: 'inline-block' }}>
                 <span>{data.h3}</span>
             </h3>{' '}

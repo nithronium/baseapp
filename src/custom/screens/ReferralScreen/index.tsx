@@ -1,3 +1,4 @@
+//tslint:disable
 import { Button } from '@openware/components';
 import cx from 'classnames';
 import { History } from 'history';
@@ -19,7 +20,7 @@ import {
 } from '../../../helpers';
 import {
     referralTicketsFetch,
-    ReferralTicketsPayload,
+    ReferralOverallPayload,
     RootState,
     selectCurrentLanguage,
     selectReferralTicketsOverall,
@@ -34,7 +35,7 @@ interface ReduxProps {
     requireVerification?: boolean;
     loading?: boolean;
     user: User;
-    overall: ReferralTicketsPayload['overall'];
+    overall: ReferralOverallPayload['overall'];
 }
 
 interface DispatchProps {
@@ -73,14 +74,15 @@ class Referral extends React.Component<Props> {
     };
 
     public componentDidMount() {
-        const { history } = this.props;
+
         setDocumentTitle('Referral');
         const referralCode = this.extractRefID(this.props.location.search) || '';
         this.setState({
             refId: referralCode,
         });
-        this.props.fetchReferralTickets();
-        history.replace('/referral');
+        const query = '/tickets/all';
+        this.props.fetchReferralTickets(query);
+
     }
 
     public componentWillReceiveProps(props: Props) {
@@ -438,7 +440,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
     signUp: credentials => dispatch(signUp(credentials)),
-    fetchReferralTickets: () => dispatch(referralTicketsFetch()),
+    fetchReferralTickets:data => dispatch(referralTicketsFetch(data)),
 });
 
 // tslint:disable

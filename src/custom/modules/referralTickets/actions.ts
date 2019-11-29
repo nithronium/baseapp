@@ -1,8 +1,10 @@
 import { CommonError } from '../../../modules/types';
 import { REFERRAL_TICKETS_DATA, REFERRAL_TICKETS_ERROR, REFERRAL_TICKETS_FETCH } from './constants';
 
+
 export interface ReferralTicketsFetch {
     type: typeof REFERRAL_TICKETS_FETCH;
+    payload: string;
 }
 
 export interface ReferralTicketsError {
@@ -24,13 +26,15 @@ export interface BonusPayload {
     link: string; // ссылка на пост
 }
 
-export interface ReferralTicketsPayload {
+export interface ReferralOverallPayload {
     overall: {
         direct: {
             active: number,
             inactive: number,
         },
         referrals: {
+            // count: number,
+            // subreferralsCount: number,
             active: number,
             inactive: number,
         },
@@ -55,19 +59,20 @@ export interface ReferralTicketsPayload {
             inactive: number,
         },
     };
-    referrals: ReferralPayload[];
+    // referrals: ReferralPayload[];
     bonuses: BonusPayload[];
 }
 
 export interface ReferralTicketsData {
     type: typeof REFERRAL_TICKETS_DATA;
-    payload: ReferralTicketsPayload;
+    payload: ReferralOverallPayload;
 }
 
 export type ReferralTicketsActions = ReferralTicketsFetch | ReferralTicketsData | ReferralTicketsError;
 
-export const referralTicketsFetch = (): ReferralTicketsFetch => ({
+export const referralTicketsFetch = (payload: string): ReferralTicketsFetch => ({
     type: REFERRAL_TICKETS_FETCH,
+    payload,
 });
 
 export const referralTicketsData = (payload: ReferralTicketsData['payload']): ReferralTicketsData => ({

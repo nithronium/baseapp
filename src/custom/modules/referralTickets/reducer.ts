@@ -1,12 +1,13 @@
-import { ReferralTicketsActions, ReferralTicketsPayload } from './actions';
+//tslint:disable
+import { ReferralTicketsActions, ReferralOverallPayload } from './actions';
 import { REFERRAL_TICKETS_DATA, REFERRAL_TICKETS_ERROR, REFERRAL_TICKETS_FETCH } from './constants';
 
-export interface ReferralTicketsState {
+export interface ReferralOverallState {
     loading: boolean;
-    data: ReferralTicketsPayload;
+    data: ReferralOverallPayload;
 }
 
-const initialState: ReferralTicketsState = {
+const initialState: ReferralOverallState = {
     loading: false,
     data: {
         overall: {
@@ -24,7 +25,6 @@ const initialState: ReferralTicketsState = {
             },
         },
         bonuses: [],
-        referrals: [],
         direct: {
             ticketsForRegistration: {
                 active: 0,

@@ -34,7 +34,7 @@ const mainPrizes = [
 
 const mainPrize = (prize: Prize) => {
     return (
-        <div className="prize-container">
+        <div key={prize.heading} className="prize-container">
             <div className="prize">
                 <div className="heading">{prize.heading}</div>
                 <div className="value">
