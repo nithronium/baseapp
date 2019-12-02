@@ -393,6 +393,8 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
 
     private handleChangeLanguage = (language: string) => {
         this.props.changeLanguage(language);
+        const location = this.props.history.location.pathname.slice(language.length + 1);
+        this.props.history.push(buildPath(location, language));
     };
 }
 
