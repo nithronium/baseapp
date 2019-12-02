@@ -33,8 +33,8 @@ const bankData = (uid, currency) => [
         value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.bankSwift.${currency && `${currency}.`}value`} />,
     },
     {
-        key: currency === 'usd' ? <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.referenceCode"/> : '',
-        value: currency === 'usd' ? uid : '' ,
+        key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.referenceCode"/>,
+        value: uid,
     },
 ];
 
