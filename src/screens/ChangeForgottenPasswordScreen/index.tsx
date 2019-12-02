@@ -13,12 +13,14 @@ import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import logo = require('../../assets/images/logo.svg');
 import { CustomInput } from '../../components';
+import { buildPath } from '../../custom/helpers';
 import { PASSWORD_REGEX, setDocumentTitle } from '../../helpers';
 import {
     changeForgotPasswordFetch,
     changeLanguage,
     RootState,
     selectChangeForgotPasswordSuccess,
+    selectCurrentLanguage,
 } from '../../modules';
 
 interface ChangeForgottenPasswordState {
@@ -32,6 +34,7 @@ interface ChangeForgottenPasswordState {
 
 interface ReduxProps {
     changeForgotPassword?: boolean;
+    currentLanguage: string;
 }
 
 interface DispatchProps {
@@ -79,8 +82,10 @@ class ChangeForgottenPasswordComponent extends React.Component<Props, ChangeForg
     }
 
     public componentWillReceiveProps(next: Props) {
-        if (next.changeForgotPassword && (!this.props.changeForgotPassword)) {
-            this.props.history.push('/signin');
+        const { changeForgotPassword, currentLanguage } = this.props;
+
+        if (next.changeForgotPassword && (!changeForgotPassword)) {
+            this.props.history.push(buildPath('/signin', currentLanguage));
         }
     }
 
@@ -220,6 +225,7 @@ class ChangeForgottenPasswordComponent extends React.Component<Props, ChangeForg
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     changeForgotPassword: selectChangeForgotPasswordSuccess(state),
+    currentLanguage: selectCurrentLanguage(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =

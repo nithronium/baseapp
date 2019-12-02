@@ -5,7 +5,14 @@ import { withRouter } from 'react-router-dom';
 import logo = require('../../assets/images/logo.svg');
 
 import logoLight = require('../../assets/images/logoLight.svg');
-import { RootState, selectCurrentColorTheme, selectMobileWalletUi, setMobileWalletUi } from '../../modules';
+import { buildPath } from '../../custom/helpers';
+import {
+  RootState,
+  selectCurrentColorTheme,
+  selectCurrentLanguage,
+  selectMobileWalletUi,
+  setMobileWalletUi,
+} from '../../modules';
 import { NavBar } from '../NavBar';
 
 interface HeaderState {
@@ -14,6 +21,7 @@ interface HeaderState {
 
 interface ReduxProps {
     colorTheme: string;
+    currentLanguage: string;
     mobileWallet: string;
 }
 
@@ -32,7 +40,12 @@ class Head extends React.Component<any, HeaderState> {
     }
 
     public render() {
-        const { colorTheme, location, mobileWallet } = this.props;
+        const {
+            colorTheme,
+            currentLanguage,
+            location,
+            mobileWallet,
+        } = this.props;
         const { isActive } = this.state;
         const baseURL = window.document.location.origin;
         return (
@@ -40,7 +53,7 @@ class Head extends React.Component<any, HeaderState> {
                 {!['/confirm'].some(r => location.pathname.includes(r)) && (
                     <header className={`pg-header ${isActive ? 'pg-header--active' : ''}`}>
                         <div className="pg-container pg-header__content">
-                            <a href={baseURL} className="pg-header__logo">
+                            <a href={buildPath(baseURL, currentLanguage)} className="pg-header__logo">
                                 <div className="pg-logo">
                                     {colorTheme === 'light' ? (
                                         <span>
@@ -110,6 +123,7 @@ class Head extends React.Component<any, HeaderState> {
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
     colorTheme: selectCurrentColorTheme(state),
+    currentLanguage: selectCurrentLanguage(state),
     mobileWallet: selectMobileWalletUi(state),
 });
 

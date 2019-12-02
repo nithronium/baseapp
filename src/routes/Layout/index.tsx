@@ -5,6 +5,7 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { minutesUntilAutoLogout } from '../../api';
+import { buildPath } from '../../custom/helpers';
 import {
     ReferralCommissionScreen,
     ReferralScreen,
@@ -17,6 +18,7 @@ import {
     Market,
     RootState,
     selectCurrentColorTheme,
+    selectCurrentLanguage,
     selectCurrentMarket,
     selectUserFetching,
     selectUserInfo,
@@ -41,6 +43,7 @@ import {
 } from '../../screens';
 
 interface ReduxProps {
+    currentLanguage: string;
     colorTheme: string;
     currentMarket: Market | undefined;
     user: User;
@@ -82,7 +85,7 @@ const PrivateRoute: React.FunctionComponent<any> = ({ component: CustomComponent
 
     return (
         <Route {...rest}>
-            <Redirect to={'/signin'} />
+            <Redirect to={buildPath('/signin', rest.currentLanguage)} />
         </Route>
     );
 };
@@ -94,9 +97,9 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
     }
 
     if (isLogged) {
-        return (
+        return(
             <Route {...rest}>
-                <Redirect to={'/wallets'} />
+                <Redirect to={buildPath('/wallets', rest.currentLanguage)} />
             </Route>
         );
     }
@@ -123,8 +126,13 @@ class LayoutComponent extends React.Component<LayoutProps> {
     }
 
     public componentDidUpdate(next: LayoutProps) {
-        const { isLoggedIn, history } = this.props;
+        const {
+            currentLanguage,
+            isLoggedIn,
+            history,
+        } = this.props;
         const siteState = localStorage.getItem('uil');
+
         if (isLoggedIn && !siteState) {
             localStorage.setItem('uil', 'true');
         } else if (isLoggedIn && siteState === 'false') {
@@ -136,7 +144,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
         if (!isLoggedIn && next.isLoggedIn) {
             this.props.walletsReset();
             if ((!history.location.pathname.includes('/trading')) && (!history.location.pathname.includes('/referral'))) {
-                history.push('/trading/');
+                history.push(buildPath('/trading/', currentLanguage));
             }
         }
     }
@@ -159,51 +167,36 @@ class LayoutComponent extends React.Component<LayoutProps> {
     // }
 
     public render() {
-        const { colorTheme, isLoggedIn, userLoading } = this.props;
+        const {
+            colorTheme,
+            currentLanguage,
+            isLoggedIn,
+            userLoading,
+        } = this.props;
 
         toggleColorTheme(colorTheme);
 
         return (
             <div className="container-fluid pg-layout">
                 <Switch>
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signin" component={SignInScreen} />
-                    <PublicRoute
-                        loading={userLoading}
-                        isLogged={isLoggedIn}
-                        path="/accounts/confirmation"
-                        component={VerificationScreen}
-                    />
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path="/signup" component={SignUpScreen} />
-                    <PublicRoute
-                        loading={userLoading}
-                        isLogged={isLoggedIn}
-                        path="/forgot_password"
-                        component={ForgotPasswordScreen}
-                    />
-                    <PublicRoute
-                        loading={userLoading}
-                        isLogged={isLoggedIn}
-                        path="/accounts/password_reset"
-                        component={ChangeForgottenPasswordScreen}
-                    />
-                    <PublicRoute
-                        loading={userLoading}
-                        isLogged={isLoggedIn}
-                        path="/email-verification"
-                        component={EmailVerificationScreen}
-                    />
-                    <Route loading={userLoading} isLogged={isLoggedIn} path="/referral" component={ReferralScreen} />
-                        {/* <Route loading={userLoading} isLogged={isLoggedIn} path="/en/referral" component={ReferralScreen} /> */}
-                    <Route exact={true} path="/trading/:market?" component={TradingScreen} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/orders" component={OrdersTabScreen} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/history" component={HistoryScreen} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/confirm" component={ConfirmScreen} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/profile" component={ProfileScreen} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/wallets" component={WalletsScreen} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/security/2fa" component={ProfileTwoFactorAuthScreen} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/referral-tickets" component={ReferralTicketsScreen} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path="/referral-commission" component={ReferralCommissionScreen} />
-                    <Route path="**"><Redirect to="/trading/btcusdt" /></Route>
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/signin', currentLanguage)} component={SignInScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/accounts/confirmation', currentLanguage)} component={VerificationScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/signup', currentLanguage)} component={SignUpScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/forgot_password', currentLanguage)} component={ForgotPasswordScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/accounts/password_reset', currentLanguage)} component={ChangeForgottenPasswordScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/email-verification', currentLanguage)} component={EmailVerificationScreen} currentLanguage={currentLanguage} />
+                    <Route loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral', currentLanguage)} component={ReferralScreen} />
+                    <Route loading={userLoading} isLogged={isLoggedIn} path={buildPath('/en/referral', currentLanguage)} component={ReferralScreen} />
+                    <Route exact={true} path={buildPath('/trading/:market?', currentLanguage)} component={TradingScreen} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/orders', currentLanguage)} component={OrdersTabScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/history', currentLanguage)} component={HistoryScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/confirm', currentLanguage)} component={ConfirmScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/profile', currentLanguage)} component={ProfileScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/wallets', currentLanguage)} component={WalletsScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/security/2fa', currentLanguage)} component={ProfileTwoFactorAuthScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral-tickets', currentLanguage)} component={ReferralTicketsScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral-commission', currentLanguage)} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
+                    <Route path="**"><Redirect to={buildPath('/trading/', currentLanguage)} /></Route>
                 </Switch>
             </div>
         );
@@ -253,6 +246,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     colorTheme: selectCurrentColorTheme(state),
+    currentLanguage: selectCurrentLanguage(state),
     currentMarket: selectCurrentMarket(state),
     user: selectUserInfo(state),
     isLoggedIn: selectUserLoggedIn(state),

@@ -12,6 +12,7 @@ import { WalletHistory } from '../../containers/Wallets/History';
 import { Withdraw, WithdrawProps } from '../../containers/Wallets/Withdraw';
 import { WithdrawLite } from '../../containers/Wallets/WithdrawLite';
 import { DepositFiat } from '../../custom/components';
+import { buildPath } from '../../custom/helpers';
 import { VersionGuardWrapper } from '../../decorators';
 import { formatCCYAddress, setDocumentTitle } from '../../helpers';
 import {
@@ -22,6 +23,7 @@ import {
     RootState,
     selectBeneficiariesActivateSuccess,
     selectBeneficiariesDeleteSuccess,
+    selectCurrentLanguage,
     selectHistory,
     selectMobileWalletUi,
     selectUserInfo,
@@ -41,6 +43,7 @@ import {
 import { CommonError } from '../../modules/types';
 
 interface ReduxProps {
+    currentLanguage: string;
     user: User;
     wallets: WalletItemProps[];
     withdrawSuccess: boolean;
@@ -412,7 +415,8 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         );
     };
 
-    private redirectToEnable2fa = () => this.props.history.push('/security/2fa', { enable2fa: true });
+
+    private redirectToEnable2fa = () => this.props.history.push(buildPath('/security/2fa', this.props.currentLanguage), { enable2fa: true });
 
     private isTwoFactorAuthRequired(level: number, is2faEnabled: boolean) {
         return level > 1 || (level === 1 && is2faEnabled);
@@ -432,6 +436,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
+    currentLanguage: selectCurrentLanguage(state),
     user: selectUserInfo(state),
     wallets: selectWallets(state),
     walletsLoading: selectWalletsLoading(state),

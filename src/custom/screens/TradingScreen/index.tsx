@@ -12,6 +12,7 @@ import { Helmet } from 'react-helmet';
 import { getUrlPart, setDocumentTitle } from '../../../helpers';
 import {
     RootState,
+    selectCurrentLanguage,
     selectCurrentMarket,
     selectMarketTickers,
     selectUserInfo,
@@ -28,6 +29,8 @@ import { rangerConnectFetch, RangerConnectFetch } from '../../../modules/public/
 import { RangerState } from '../../../modules/public/ranger/reducer';
 import { selectRanger } from '../../../modules/public/ranger/selectors';
 import { selectWallets, Wallet, walletsFetch } from '../../../modules/user/wallets';
+// import { OpenOrdersPanel, OrderBook, OrderComponent } from '../../containers';
+import { buildPath } from '../../helpers';
 
 const breakpoints = {
     lg: 1200,
@@ -46,6 +49,7 @@ const cols = {
 };
 
 interface ReduxProps {
+    currentLanguage: string;
     currentMarket: Market | undefined;
     markets: Market[];
     wallets: Wallet[];
@@ -112,11 +116,12 @@ class Trading extends React.Component<Props, StateProps> {
     public componentDidMount() {
         setDocumentTitle('Trading');
         const {
-            wallets,
-            markets,
+            currentLanguage,
             currentMarket,
-            userLoggedIn,
+            markets,
             rangerState: { connected },
+            userLoggedIn,
+            wallets,
         } = this.props;
 
         if (markets.length < 1) {
@@ -132,7 +137,7 @@ class Trading extends React.Component<Props, StateProps> {
             this.props.rangerConnect({ withAuth: userLoggedIn });
         }
         if (!userLoggedIn && currentMarket) {
-            this.props.history.replace(`/trading/${currentMarket.id}`);
+            this.props.history.replace(buildPath(`/trading/${currentMarket.id}`, currentLanguage));
         }
     }
 
@@ -141,7 +146,13 @@ class Trading extends React.Component<Props, StateProps> {
     }
 
     public componentWillReceiveProps(nextProps) {
-        const { currentMarket, history, markets, userLoggedIn } = this.props;
+        const {
+            currentLanguage,
+            currentMarket,
+            history,
+            markets,
+            userLoggedIn,
+        } = this.props;
 
         if (userLoggedIn !== nextProps.userLoggedIn) {
             this.props.rangerConnect({ withAuth: nextProps.userLoggedIn });
@@ -152,7 +163,7 @@ class Trading extends React.Component<Props, StateProps> {
         }
 
         if (nextProps.currentMarket && currentMarket !== nextProps.currentMarket) {
-            history.replace(`/trading/${nextProps.currentMarket.id}`);
+            history.replace(buildPath(`/trading/${nextProps.currentMarket.id}`, currentLanguage));
             this.props.depthFetch(nextProps.currentMarket);
         }
 
@@ -192,7 +203,7 @@ class Trading extends React.Component<Props, StateProps> {
     }
 
     private setMarketFromUrlIfExists = (markets: Market[]): void => {
-        const urlMarket: string = getUrlPart(2, window.location.pathname);
+        const urlMarket: string = getUrlPart(3, window.location.pathname);
         const market: Market | undefined = markets.find(item => item.id === urlMarket);
 
         if (market) {
@@ -246,6 +257,7 @@ class Trading extends React.Component<Props, StateProps> {
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
+    currentLanguage: selectCurrentLanguage(state),
     currentMarket: selectCurrentMarket(state),
     markets: selectMarkets(state),
     wallets: selectWallets(state),

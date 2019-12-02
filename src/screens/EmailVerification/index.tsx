@@ -8,6 +8,7 @@ import {
 import { connect, MapStateToProps } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import logo = require('../../assets/images/logo.svg');
+import { buildPath } from '../../custom/helpers';
 import { setDocumentTitle } from '../../helpers';
 import {
     emailVerificationFetch,
@@ -37,9 +38,16 @@ type Props = DispatchProps & ReduxProps & OwnProps & InjectedIntlProps;
 
 class EmailVerificationComponent extends React.Component<Props> {
     public componentDidMount() {
+        const {
+            history,
+            i18n,
+            location,
+        } = this.props;
+
         setDocumentTitle('Email verification');
-        if (!this.props.location.state || !this.props.location.state.email) {
-            this.props.history.push('/signin');
+
+        if (!location.state || !location.state.email) {
+            history.push(buildPath('/signin', i18n));
         }
     }
 
