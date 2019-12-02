@@ -105,7 +105,7 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.accountNumber': 'Номер счета',
     'page.body.wallets.tabs.deposit.fiat.accountName': 'Имя счета',
     'page.body.wallets.tabs.deposit.fiat.phoneNumber': 'Номер телефона',
-    'page.body.wallets.tabs.deposit.fiat.referenceCode': 'Ваш уникальный код',
+    'page.body.wallets.tabs.deposit.fiat.referenceCode': 'Ваш уникальный код :',
     'page.body.wallets.table.pending': 'Обрабатывается',
     'page.body.wallets.tabs.deposit.fiat.admin': 'Для того, чтобы вывести эту валюту, обратитесь к администратору!',
 
@@ -661,10 +661,12 @@ export const ru: LangType = {
 
     'server.internal_error': 'Внутренняя ошибка сервера',
 
-    'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Валюта депозита',
-    'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN',
-    'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Адрес банка',
-    'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Банковский SWIFT',
+    'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Валюта депозита :',
+    'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN :',
+    'page.body.wallets.tabs.deposit.fiat.usd.iban': 'IBAN :',
+    'page.body.wallets.tabs.deposit.fiat.eur.iban': 'SEPA IBAN :',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Адрес банка :',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Банковский SWIFT :',
     'page.body.wallets.tabs.deposit.fiat.message3':
         'Пожалуйста, ВСЕГДА указывайте ссылочный код во время банковского перевода, в противном случае внесение средств займет больше времени.',
 

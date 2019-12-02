@@ -16,10 +16,12 @@ export const en = {
 
     'page.body.trade.header.openOrders.content.date': 'Time',
 
-    'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Deposit currency',
-    'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN',
-    'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Bank address',
-    'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Bank SWIFT',
+    'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Deposit currency :',
+    'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN :',
+    'page.body.wallets.tabs.deposit.fiat.usd.iban': 'IBAN :',
+    'page.body.wallets.tabs.deposit.fiat.eur.iban': 'SEPA IBAN :',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Bank address :',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Bank SWIFT :',
     'page.body.wallets.tabs.deposit.fiat.message3': 'Please, ALWAYS mention the reference code during the wire transfer, otherwise it will take longer to deposit your funds.',
 
     'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
@@ -33,10 +35,10 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.minimal.usd.value': 'USD 50',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.eur.value': 'EUR',
-    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'LU07 6131 7122 1721 4160 (SEPA)',
-    'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'ONPEX S.A.',
-    'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': '59 Boulevard Royal L-2449 Luxembourg',
-    'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'ONPXLULMXXX',
+    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'MT45PHPY270070PHOENIX0000000013',
+    'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'PHOENIX PAYMENTS LTD',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': 'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'PHPYMTM1XXX',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text': 'Minimal deposit amount is ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': 'EUR 50',
     'refcode.code_owner_not_found': 'Code Owner not found',
