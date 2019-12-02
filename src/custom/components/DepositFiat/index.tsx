@@ -17,7 +17,7 @@ const bankData = (uid, currency) => [
         value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.depositCurrency.${currency && `${currency}.`}value`} />,
     },
     {
-        key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.iban" />,
+        key: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.${currency}.iban`} />,
         value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.iban.${currency && `${currency}.`}value`} />,
     },
     {
@@ -33,8 +33,8 @@ const bankData = (uid, currency) => [
         value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.bankSwift.${currency && `${currency}.`}value`} />,
     },
     {
-        key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.referenceCode" />,
-        value: uid,
+        key: currency === 'usd' ? <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.referenceCode"/> : '',
+        value: currency === 'usd' ? uid : '' ,
     },
 ];
 
@@ -59,7 +59,7 @@ const DepositFiat: React.FunctionComponent<DepositFiatProps> = (props: DepositFi
     const renderDetails = (detail, index: number) => {
         return (
             <div className="cr-deposit-fiat-detail" key={index}>
-                <p className="cr-deposit-fiat-detail__label">{detail.key}:</p>
+                <p className="cr-deposit-fiat-detail__label">{detail.key}</p>
                 <p className="cr-deposit-fiat-detail__value">{detail.value}</p>
             </div>
         );
