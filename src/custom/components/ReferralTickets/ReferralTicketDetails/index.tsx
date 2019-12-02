@@ -108,14 +108,14 @@ class ReferralTicketDetails extends React.Component<Props, State>{
 
             <div className="referral-ticket-details">
                 <div className="container column">
-                    {/* <div className="container wrap">
+                    <div className="container wrap">
                         <div className="left"><h2>Referral tickets details</h2></div>
-                        <div className="right">
+                        {/* <div className="right">
                             <a href="#!" onClick={this.filterLegend} data-filter="all" className={filterClassName('all')}>all</a> /
                             <a href="#!" onClick={this.filterLegend} data-filter="active" className={filterClassName('active')}>active</a> /
                             <a href="#!" onClick={this.filterLegend} data-filter="inactive" className={filterClassName('inactive')}>inactive</a>
-                        </div>
-                    </div> */}
+                        </div> */}
+                    </div>
                     <div className="table-wrap">
                         {/* <Loader display={this.props.loading} /> */}
                         <table id="referral-details-list">
