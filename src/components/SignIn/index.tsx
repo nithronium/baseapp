@@ -1,6 +1,6 @@
-
 import cr from 'classnames';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
 import { CustomInput } from '../';
 import { EMAIL_REGEX } from '../../helpers';
 
@@ -116,14 +116,16 @@ export class SignInComponent extends React.Component<SignInProps> {
                             {passwordError && <div className={'cr-sign-in-form__error'}>{passwordError}</div>}
                         </div>
                         <div className="cr-sign-in-form__button-wrapper">
-                            <button
-                                type="button"
-                                className={'cr-sign-in-form__button'}
+                            <Button
+                                block={true}
+                                type="submit"
                                 disabled={isLoading || !email.match(EMAIL_REGEX) || !password}
-                                onClick={this.handleClick}
+                                onClick={e => this.handleClick(e)}
+                                size="lg"
+                                variant="primary"
                             >
                                 {isLoading ? 'Loading...' : (labelSignIn ? labelSignIn : 'Sign in')}
-                            </button>
+                            </Button>
                         </div>
                         <div className="cr-sign-in-form__bottom-section">
                             <div

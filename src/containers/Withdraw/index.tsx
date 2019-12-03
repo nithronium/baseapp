@@ -2,6 +2,7 @@
 import { /*Decimal,*/ Input } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
 import {
     CustomInput,
     /*SummaryField,*/
@@ -221,13 +222,14 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
                         />
                     </div> */}
                     <div className="cr-withdraw__deep">
-                        <button
-                            className={`cr-button cr-withdraw__button ${buttonDisabled ? 'cr-button--disabled' : ''}`}
+                        <Button
+                            variant="primary"
+                            size="lg"
                             onClick={this.handleClick}
                             disabled={buttonDisabled}
                         >
-                            {withdrawButtonLabel ? withdrawButtonLabel : 'WITHDRAW'}
-                        </button>
+                            {withdrawButtonLabel ? withdrawButtonLabel : 'Withdraw'}
+                        </Button>
                     </div>
                 </div>
             </div>

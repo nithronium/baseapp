@@ -677,20 +677,14 @@ export const ru: LangType = {
     'page.header.signUp.email': 'Почта',
     'page.header.signUp.email.message.error': 'Почта недействительная',
     'page.header.signUp.password': 'Пароль',
-    'page.header.signUp.password.message.error':
-        'Пароль должен содержать не менее 8 символов и не менее одной заглавной буквы и цифры',
+    'page.header.signUp.password.message.error': 'Пароль должен содержать не менее 8 символов и не менее одной заглавной буквы и цифры',
     'page.header.signUp.confirmPassword': 'Подтвердить пароль',
     'page.header.signUp.confirmPassword.message.error': 'Пароли не совпадают',
     'page.header.signUp.referalCode': 'Промо-код',
     'page.header.signUp.corporateLink': 'Нужен корпоративный аккаунт? Жмите сюда!',
-    'page.header.signUp.terms':
-        'Я подтверждаю, что мне исполнился как минимум 18 лет, а также то, что я прочитал и согласен с: Правилами использования',
+    'page.header.signUp.terms': 'Я подтверждаю, что мне исполнился как минимум 18 лет, а также то, что я прочитал и согласен с: Правилами использования',
     'page.header.signUp.modal.header': 'ПРОВЕРЬТЕ СВОЙ АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ',
-    'page.header.signUp.modal.body':
-        'Чтобы завершить регистрацию, найдите в своем' +
-        ' почтовом ящике электронное письмо с дальнейшими инструкциями. ' +
-        'Если вы не можете найти адрес электронной почты, проверьте свою' +
-        ' электронную почту со спамом.',
+    'page.header.signUp.modal.body': 'Чтобы завершить регистрацию, найдите в своем почтовом ящике электронное письмо с дальнейшими инструкциями. Если вы не можете найти адрес электронной почты, проверьте свою электронную почту со спамом.',
     'page.signup.pwdvalidation.header': 'Ваш пароль должен содержать:',
     'page.signup.pwdvalidation.length': '8 или более знаков',
     'page.signup.pwdvalidation.letters': 'Знаки малого и Большого регистра',
@@ -709,9 +703,7 @@ export const ru: LangType = {
     'page.noDataToShow': 'Нет данных для отображения',
 
     'page.modal.withdraw.success': 'Успешно!',
-    'page.modal.withdraw.success.message.content':
-        'Ваш вывод был успешно подтвержден. Пожалуйста, подождите, чтобы получить ' +
-        'несколько обязательных подтверждений для завершения этой транзакции.',
+    'page.modal.withdraw.success.message.content': 'Ваш вывод был успешно подтвержден. Пожалуйста, подождите, чтобы получить несколько обязательных подтверждений для завершения этой транзакции.',
     'page.modal.withdraw.success.button': 'OK',
 
     // success messages
@@ -1559,6 +1551,8 @@ export const ru: LangType = {
     'page.wallets.eth.notice.button': 'Да, я подтверждаю',
     'page.wallets.coin.notice':
         'Внося депозит, я подтверждаю, что Emirex не несет ответственности за любые монеты, отправленные на неправильный адрес.',
+
+    'page.header.signUp.modal.footer': 'OK',
 
     ...nationalitiesNames,
     ...pluginsTranslations,

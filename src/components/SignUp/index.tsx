@@ -1,7 +1,8 @@
 import { Checkbox } from '@openware/components';
 import cr from 'classnames';
-import { CustomInput } from '../';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
+import { CustomInput } from '../';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../helpers';
 import { PasswordValidationPopup } from './PasswordValidationPopup';
 
@@ -200,14 +201,16 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
                         </div>
                         {this.props.renderCaptcha}
                         <div className="cr-sign-up-form__button-wrapper">
-                            <button
+                        <Button
+                                block={true}
                                 type="submit"
-                                className="cr-sign-up-form__button"
                                 disabled={this.disableButton()}
-                                onClick={this.handleClick}
+                                onClick={e => this.handleClick(e)}
+                                size="lg"
+                                variant="primary"
                             >
-                                {isLoading ? 'Loading...' : labelSignUp ? labelSignUp : 'Sign up'}
-                            </button>
+                                {isLoading ? 'Loading...' : (labelSignUp ? labelSignUp : 'Sign up')}
+                            </Button>
                             <a className="cr-sign-up-form__corporate-link" key="ru" rel="alternate noopener noreferrer" href={'https://kb.emirex.com/corporate_account_verification'} hrefLang="ru" title={corporateTextLink} target="_blank">{corporateTextLink}</a>
                         </div>
                     </div>
