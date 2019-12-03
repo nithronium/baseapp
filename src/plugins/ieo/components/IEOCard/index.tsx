@@ -118,7 +118,7 @@ class IEOCardComponent extends React.Component<Props, State> {
         return (
             <div className="pg-ieo__card" onClick={this.handleClick}>
                 <div className="pg-ieo__card-header">
-                    {metadata && metadata.icon_url && <img className="pg-ieo__card-header__icon" src={metadata.icon_url} />}
+                    {metadata && metadata.icon_url && <img className="pg-ieo__card-header__icon" src={metadata.icon_url} alt="" />}
                     <span className="pg-ieo__card-header__text">{currency_id && currency_id.toUpperCase()}</span>
                 </div>
                 <div className="pg-ieo__card-content">

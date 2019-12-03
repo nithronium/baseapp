@@ -41,11 +41,11 @@ import { rangerConnectFetch, RangerConnectFetch } from '../../../modules/public/
 import { RangerState } from '../../../modules/public/ranger/reducer';
 import { selectRanger } from '../../../modules/public/ranger/selectors';
 import { WithdrawLimit } from '../../../modules/user/withdrawLimit';
-import checkCircleSvg = require('../../assets/images/check-circle.svg');
-import clockSvg = require('../../assets/images/clock.svg');
-import infoSvg = require('../../assets/images/info.svg');
-
 import { getBalance } from '../../../api';
+
+const checkCircleSvg = require('../../assets/images/check-circle.svg');
+const clockSvg = require('../../assets/images/clock.svg');
+const infoSvg = require('../../assets/images/info.svg');
 
 interface ReduxProps {
     currencies: Currency[];
@@ -341,7 +341,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                     {this.renderUserLevel(userLevel)}
                 </div>
                 <div className="pg-profile-verification__know-more">
-                    <a href="https://knowledge-base.emirex.com/emirex" target="_blank" rel="nofollow noopener">
+                    <a href="https://knowledge-base.emirex.com/emirex" target="_blank" rel="noopener noreferrer">
                         <FormattedMessage id="page.body.profile.header.account.profile.knowMore" />
                     </a>
                 </div>
@@ -390,13 +390,13 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         return depositsAsWallets;
     };
 
-    
+
     private renderStatusIcon(label: Label[]) {
         const identityLabel = label.find(l => l.key === 'identity' && l.scope === 'private');
         const documentLabel = label.find(l => l.key === 'document' && l.scope === 'private');
         const questionnaireRecordedLabel = label.find(l => l.key === 'questionnaire' && l.value === 'recorded' && l.scope === 'private');
         if (questionnaireRecordedLabel) return null;
-        
+
         if (identityLabel) {
             switch (identityLabel.value) {
                 case 'pending' : {
@@ -407,7 +407,6 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                         </div>
                     );
                 }
-    
                 case 'denied' : {
                     return (
                         <div className="pg-profile-verification__know-more__icon-container">
@@ -416,7 +415,6 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                         </div>
                     );
                 }
-                
                 default: {
                 }
             }
@@ -432,7 +430,6 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                         </div>
                     );
                 }
-    
                 case 'denied' : {
                     return (
                         <div className="pg-profile-verification__know-more__icon-container">
@@ -441,7 +438,6 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                         </div>
                     );
                 }
-    
                 case 'verified' : {
                     return (
                         <div className="pg-profile-verification__know-more__icon-container">
@@ -450,7 +446,6 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                         </div>
                     );
                 }
-    
                 default: {
                     return null;
                 }

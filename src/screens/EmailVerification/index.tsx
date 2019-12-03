@@ -7,7 +7,6 @@ import {
 } from 'react-intl';
 import { connect, MapStateToProps } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import logo = require('../../assets/images/logo.svg');
 import { buildPath } from '../../custom/helpers';
 import { setDocumentTitle } from '../../helpers';
 import {
@@ -16,6 +15,8 @@ import {
     selectCurrentLanguage,
     selectSendEmailVerificationLoading,
 } from '../../modules';
+
+const logo = require('../../assets/images/logo.svg');
 
 interface OwnProps {
     history: History;

@@ -7,7 +7,6 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 //import { withRouter } from 'react-router-dom';
 import { captchaType, siteKey } from '../../../api';
-import logo = require('../../../assets/images/logo.svg');
 import { Modal, SignUpForm } from '../../../components';
 import {
     EMAIL_REGEX,
@@ -41,11 +40,11 @@ import {
     Video,
     Partners,
 } from '../../components/Referral';
-
 import {buildPath, saveParametersFromUrl} from '../../helpers';
-
 import { GeetestCaptcha } from '../../../containers';
 import { WinnersBanner } from '../../components/Referral/WinnersBanner/WinnerBanner';
+
+const logo = require('../../../assets/images/logo.svg');
 
 interface ReduxProps {
     requireVerification?: boolean;
@@ -212,23 +211,25 @@ class Referral extends React.Component<Props> {
         };
 
         const totalTickets = () => {
-            return null;
-            return (
-                <div className="total-tickets-wrapper">
-                    <div className="total-tickets">
-                        <div className="header">
-                            {this.props.intl.formatMessage({ id: 'referral.teaser.total' })} {this.getTotalTickets()}
-                        </div>
-                        <div className="content">
-                            {this.props.intl.formatMessage({ id: 'referral.teaser.goto' })}
-                            <br />{' '}
-                            <a href={buildPath('/referral-tickets', this.props.currentLanguage)}>
-                                {this.props.intl.formatMessage({ id: 'referral.teaser.balance' })}
-                            </a>
+            if (null) {
+                return (
+                    <div className="total-tickets-wrapper">
+                        <div className="total-tickets">
+                            <div className="header">
+                                {this.props.intl.formatMessage({ id: 'referral.teaser.total' })} {this.getTotalTickets()}
+                            </div>
+                            <div className="content">
+                                {this.props.intl.formatMessage({ id: 'referral.teaser.goto' })}
+                                <br />{' '}
+                                <a href={buildPath('/referral-tickets', this.props.currentLanguage)}>
+                                    {this.props.intl.formatMessage({ id: 'referral.teaser.balance' })}
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            );
+                );
+            }
+            return null;
         };
 
         const steps = [

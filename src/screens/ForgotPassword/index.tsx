@@ -10,7 +10,6 @@ import {
 } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
-import logo = require('../../assets/images/logo.svg');
 import { EmailForm } from '../../components';
 import {
     EMAIL_REGEX,
@@ -23,6 +22,8 @@ import {
     selectCurrentLanguage,
     selectForgotPasswordSuccess,
 } from '../../modules';
+
+const logo = require('../../assets/images/logo.svg');
 
 interface ReduxProps {
     success: boolean;

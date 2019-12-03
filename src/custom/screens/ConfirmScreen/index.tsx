@@ -4,8 +4,6 @@ import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import logo = require('../../../assets/images/logo.svg');
-import logoLight = require('../../../assets/images/logoLight.svg');
 import { setDocumentTitle } from '../../../helpers';
 import {
     alertPush,
@@ -27,8 +25,10 @@ import { ProfileAddress } from '../../containers/Confirm/ProfileAddress';
 import { ProfilePartial } from '../../containers/Confirm/ProfilePartial';
 import { Questionnaire } from '../../containers/Confirm/Questionnaire';
 import { buildPath } from '../../helpers/buildPath';
-
 import { getRedirectUrl, handleRedirectToConfirm, redirect, redirectIfSpecified } from '../../helpers';
+
+const logo = require('../../../assets/images/logo.svg');
+const logoLight = require('../../../assets/images/logoLight.svg');
 
 interface ReduxProps {
     colorTheme: string;
@@ -125,11 +125,10 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             case 1:
             case 2:
             case 3: handleRedirectToConfirm('profilePartialStep', history);break;
-            case 4: {
+            case 4:
                 if (userData.profile && userData.profile.address) {
                     const redirectUrl = getRedirectUrl();
                     if (redirectUrl && hasUrlForRedirect(redirectUrl)) {
-                        console.log('ConfirmComponent redirect');
                         redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
                         return;
                     }
@@ -138,7 +137,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                     handleRedirectToConfirm('addressStep', history);
                 }
                 // tslint:disable-next-line
-            } break;
+                break;
             case 5: handleRedirectToConfirm('questionnaireStep', history);break;
 
             default: handleRedirectToConfirm('', history);break;
@@ -281,8 +280,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                 </div>
                 <div className="pg-confirm">
                     <div className="pg-confirm-box">
-                        <a
-                            href="#"
+                        <div
                             onClick={this.goBack}
                             className="pg-confirm-box-close"
                         />

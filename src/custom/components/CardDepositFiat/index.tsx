@@ -75,7 +75,6 @@ const CardDepositFiat = (props) => {
             currency: currency,
             amount: amount
         };
-        // console.log(body);
         initPayin(body).then(data => {
             setInitURL(data.url);
             setIFrame(!iFrame);
@@ -94,13 +93,11 @@ const CardDepositFiat = (props) => {
         checkDepositLimit({
             amount, currency, uid: user.uid,
         }).then(() => getPaytoolsForm()).catch((error) => {
-            // console.log('error', error.response, typeof error);
             onError({message: error.response.data.errors, type: 'error'});
         });
     };
 
-    const rootStyles = {  
-        
+    const rootStyles = {
         root: {
             position: 'relative' as 'relative',
             maxWidth: '500px',
@@ -114,7 +111,7 @@ const CardDepositFiat = (props) => {
             color: colorTheme === 'basic' ? '#FFFFFF' : '#2E4C80',
         },
         rowWrapper: {
-           padding: '0 20px', 
+           padding: '0 20px',
         },
         row: {
             display: 'flex',
@@ -147,7 +144,6 @@ const CardDepositFiat = (props) => {
              padding: '15px',
              color: colorTheme === 'basic' ? '#FFFFFF' : '#2E4C80',
              fontSize: '16px',
-              
          },
          buttons: {
             display: 'flex',
@@ -188,7 +184,7 @@ const CardDepositFiat = (props) => {
             padding: '10px 20px',
             background: colorTheme === 'basic' ? '#11B382' : '#2E4C80',
             border: 'none',
-            borderRadius: '4px', 
+            borderRadius: '4px',
             fontSize: '16px',
             color: '#FFFFFF',
             cursor: 'pointer',
@@ -199,7 +195,7 @@ const CardDepositFiat = (props) => {
             padding: '10px 20px',
             background:'gray',
             border: 'none',
-            borderRadius: '4px', 
+            borderRadius: '4px',
             fontSize: '16px',
             color: '#FFFFFF',
             cursor: 'pointer',
@@ -215,8 +211,8 @@ const CardDepositFiat = (props) => {
                 <div style={rootStyles.info}>
                     <span>{translate('cardDepositFiat.mastercard.message1')}</span>
                     <span style={{color: '#E85E59', fontWeight: 'bold'}}>{translate('cardDepositFiat.mastercard.message2')}</span>
-                    <span>{translate('cardDepositFiat.mastercard.message3')}</span>                    
-                </div>                
+                    <span>{translate('cardDepositFiat.mastercard.message3')}</span>
+                </div>
                 <div style={rootStyles.rowWrapper}>
                 <div style={rootStyles.topRow}>
                 <h2 style={rootStyles.h2}>{translate('cardDepositFiat.detail')}</h2>
@@ -228,7 +224,7 @@ const CardDepositFiat = (props) => {
                         background: `url(${require('../../assets/images/mastercard.svg')}) center center `,
                         backgroundSize: '90% auto',
                         backgroundRepeat: 'no-repeat'
-                    }}                
+                    }}
                     />
                     </div>
                 <div style={rootStyles.row}>
@@ -239,24 +235,23 @@ const CardDepositFiat = (props) => {
                     <div style={{ position: 'relative', width: '150px' }}>
                             <label style={rootStyles.label} id="label_fee">{translate('cardDepositFiat.fee')}</label>
                             <input id="fee" onClick={handleClick} style={rootStyles.input2} type="text" value={`${fee} ${currency.toUpperCase()}`} />
-                    </div> 
+                    </div>
                 </div>
                 <div style={rootStyles.buttons}>
-                    <a  style={rootStyles.cancel} onClick={clearInput}>{translate('cardDepositFiat.button.cancel')}</a>
-                    <input 
-                    disabled={(currency.toLowerCase() === 'aed' && parseInt(amount) < 30) || amount === '' ? true : false} 
-                    onClick={tryToMakePayment} 
-                    type="submit" 
+                    <div style={rootStyles.cancel} onClick={clearInput}>{translate('cardDepositFiat.button.cancel')}</div>
+                    <input
+                    disabled={(currency.toLowerCase() === 'aed' && parseInt(amount) < 30) || amount === '' ? true : false}
+                    onClick={tryToMakePayment}
+                    type="submit"
                     style={(currency.toLowerCase() === 'aed' && parseInt(amount) < 30) || amount === '' ? rootStyles.buttonDisabled : rootStyles.button} 
                     value={translate('cardDepositFiat.button.payment')}
                     />
-                    
                 </div>
             </div>
             </div>
             <div style={{display: iFrame ? 'block' : 'none'}}>
                 {initURL ?
-                    <iframe  src={initURL} width="100%" height="500px" frameBorder="0"></iframe>
+                    <iframe title="newFrame" src={initURL} width="100%" height="500px" frameBorder="0"></iframe>
                     :
                     <h3>{translate(`cardDeposit.errorMessage.${errorMessage}`)}</h3>}
             </div>

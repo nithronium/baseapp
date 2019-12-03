@@ -5,6 +5,9 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import * as ReactGA from 'react-ga';
 import { addLocaleData } from 'react-intl';
+
+import en from 'react-intl/locale-data/en';
+
 import { Provider } from 'react-redux';
 
 import { gaTrackerKey } from './api';
@@ -31,12 +34,10 @@ if (gaKey) {
     });
 }
 
-// tslint:disable-next-line:no-submodule-imports
-import en = require('react-intl/locale-data/en');
-import chrome = require('./assets/images/browsers/chrome.svg');
-import mozilla = require('./assets/images/browsers/mozilla.svg');
-import safari = require('./assets/images/browsers/safari.svg');
-import background = require('./assets/images/ie.jpg');
+const chrome = require('./assets/images/browsers/chrome.svg');
+const mozilla = require('./assets/images/browsers/mozilla.svg');
+const safari = require('./assets/images/browsers/safari.svg');
+const background = require('./assets/images/ie.jpg');
 
 addLocaleData([...en, ...customLocaleData]);
 sagaMiddleware.run(rootSaga);

@@ -63,7 +63,7 @@ export const FiatFragment = injectIntl(props => {
                     </div> :
                     <div style={{padding: '10px 20px', color: '#648280', fontSize: '20px'}}>
                         <p>{levelMessage}</p>
-                        <p><a style={{color: '#FFD567', cursor: 'pointer', textDecoration: 'underline'}} onClick={checkBalace}>{levelLink}</a></p>
+                        <p><span style={{color: '#FFD567', cursor: 'pointer', textDecoration: 'underline'}} onClick={checkBalace}>{levelLink}</span></p>
                     </div>
                 )}
 

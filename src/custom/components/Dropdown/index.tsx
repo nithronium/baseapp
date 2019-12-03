@@ -1,12 +1,12 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import iconSearch = require('../../../containers/ToolBar/icons/search.svg');
-import iconDown = require('./chevron-down.svg');
-import iconUp = require('./chevron-up.svg');
+const iconSearch = require('../../../containers/ToolBar/icons/search.svg');
+const iconDown = require('./chevron-down.svg');
+const iconUp = require('./chevron-up.svg');
 
 type DropdownElem = number | string | React.ReactNode;
 
-interface DropdownProps {
+export interface DropdownProps {
     list: DropdownElem[];
     onSelect?: (index: number) => void;
     className?: string;
@@ -79,7 +79,7 @@ class Dropdown extends React.Component<DropdownProps & {}, DropdownState> {
                         {this.renderPlaceholder()}
                     </span>
                     <span className="cr-dropdown__input-icon">
-                        <img src={isOpen ? iconUp : iconDown} />
+                        <img src={isOpen ? iconUp : iconDown} alt="" />
                     </span>
                 </div>
                 {this.renderList(isOpen, this.props.list)}
@@ -330,7 +330,7 @@ class Dropdown extends React.Component<DropdownProps & {}, DropdownState> {
 
     private renderPlaceholder = () => {
         if (this.state.isFocused) {
-            return <span><span className="cr-dropdown__input-search-icon"><img src={iconSearch} /></span>Search</span>;
+            return <span><span className="cr-dropdown__input-search-icon"><img src={iconSearch} alt="" /></span>Search</span>;
         }
 
         return this.state.selected;
@@ -339,5 +339,4 @@ class Dropdown extends React.Component<DropdownProps & {}, DropdownState> {
 
 export {
     Dropdown,
-    DropdownProps,
 };

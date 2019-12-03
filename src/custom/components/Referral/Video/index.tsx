@@ -2,12 +2,11 @@ import * as React from 'react';
 import Button from '../Button';
 
 // tslint:disable
-import "node_modules/video-react/dist/video-react.css";
 import { Player } from 'video-react';
 
-import campaign = require('../../../assets/images/referral/campaign-bar.png');
-import campaignRus = require('../../../assets/images/referral/campaign-bar_ru.png');
-import campaignCn = require('./campaign-bar_cn.png');
+const campaign = require('../../../assets/images/referral/campaign-bar.png');
+const campaignRus = require('../../../assets/images/referral/campaign-bar_ru.png');
+const campaignCn = require('./campaign-bar_cn.png');
 
 // import video = require('../../../assets/images/referral/video.svg');
 

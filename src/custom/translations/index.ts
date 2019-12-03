@@ -3,11 +3,8 @@ import { ru } from './ru';
 
 import { zh } from './zh';
 
-// tslint:disable:no-submodule-imports
-import localeRu = require('react-intl/locale-data/ru');
-
-import localeCn = require('react-intl/locale-data/zh');
-// tslint:enable
+const localeRu = require('react-intl/locale-data/ru');
+const localeCn = require('react-intl/locale-data/zh');
 
 export const customLocaleData = ([...localeRu, ...localeCn]);
 

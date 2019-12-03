@@ -65,7 +65,7 @@ class ReferralProgramClass extends React.Component<Props> {
 
         try {
             const resp = await axios.get(url);
-            if (resp.status === 200 && !resp.data ) {  
+            if (resp.status === 200 && !resp.data ) {
                  const userRefUid = this.state.refId;
                 this.setState({ userRefUid });
                 localStorage.setItem('ref_id', userRefUid);
@@ -75,7 +75,7 @@ class ReferralProgramClass extends React.Component<Props> {
                 this.setState({ refId });
                 this.props.fetchSuccess({ message: [message], type: 'error' });
             }
-        } catch (error) {            
+        } catch (error) {
             const refId = '';
             this.setState({ refId });
             this.props.fetchSuccess({ message: ['server.internal_error'], type: 'error' });
@@ -91,7 +91,6 @@ class ReferralProgramClass extends React.Component<Props> {
         if (!userRefUid && ref_id) {
             userRefUid = ref_id
         }
-        // console.log(userRefUid);
         this.setState({ userRefUid });
     };
 

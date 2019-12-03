@@ -88,6 +88,7 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
                     id="iframe"
                     src={`https://ui.idenfy.com/?authToken=${kycAuthData ? kycAuthData.auth_token : ''}&lang=${lang}`}
                     allow="camera"
+                    title="IdenfyFrame"
                 />
                 <p id="display" />
             </div>

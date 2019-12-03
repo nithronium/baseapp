@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { RouterProps } from 'react-router';
 import {
     connect,
     MapDispatchToPropsFunction,
@@ -26,16 +27,16 @@ interface ReduxProps {
     error?: CommonError;
 }
 
-export interface RouterProps {
+export interface LocationProps {
     location: {
         search: string;
     };
 }
 
-type Props = DispatchProps & RouterProps & ReduxProps;
+type Props = DispatchProps & RouterProps & ReduxProps & LocationProps;
 
-export const extractToken = (props: RouterProps) => new URLSearchParams(props.location.search).get('confirmation_token');
-export const extractLang = (props: RouterProps) => new URLSearchParams(props.location.search).get('lang');
+export const extractToken = (props: LocationProps) => new URLSearchParams(props.location.search).get('confirmation_token');
+export const extractLang = (props: LocationProps) => new URLSearchParams(props.location.search).get('lang');
 
 class Verification extends React.Component<Props, InjectedIntlProps> {
     public componentDidMount() {
@@ -50,7 +51,7 @@ class Verification extends React.Component<Props, InjectedIntlProps> {
     }
 
     public render() {
-        const { currentLanguage } =this.props;
+        const { currentLanguage, history } =this.props;
 
         let url = '/signin';
         const redirectUrl = localStorage.getItem('redirect_url');
@@ -58,7 +59,7 @@ class Verification extends React.Component<Props, InjectedIntlProps> {
             url = `/signin?redirect_url=${redirectUrl}`;
         }
         localStorage.removeItem('redirect_url');
-        location.replace(buildPath(url, currentLanguage));
+        history.replace(buildPath(url, currentLanguage));
         return (
             null
         );

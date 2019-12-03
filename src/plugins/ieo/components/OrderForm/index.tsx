@@ -8,7 +8,7 @@ import { getAmount, getTotalPrice } from '../../../../helpers/getTotalPrice';
 type OnSubmitCallback = (order: OrderProps) => void;
 type FormType = 'buy' | 'sell';
 
-interface OrderFormProps {
+export interface OrderFormProps {
     /**
      * Price that is applied during total order amount calculation when type is Market
      */
@@ -95,7 +95,7 @@ interface OrderFormProps {
     listenInputPrice?: () => void;
 }
 
-interface OrderFormState {
+export interface OrderFormState {
     orderType: string | React.ReactNode;
     amount: string;
     priceMarket: number;
@@ -346,9 +346,6 @@ class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
     };
 }
 
-
 export {
     OrderForm,
-    OrderFormProps,
-    OrderFormState,
 };

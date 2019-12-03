@@ -11,7 +11,6 @@ import {
 } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
-import logo = require('../../assets/images/logo.svg');
 import { CustomInput } from '../../components';
 import { buildPath } from '../../custom/helpers';
 import { PASSWORD_REGEX, setDocumentTitle } from '../../helpers';
@@ -22,6 +21,8 @@ import {
     selectChangeForgotPasswordSuccess,
     selectCurrentLanguage,
 } from '../../modules';
+
+const logo = require('../../assets/images/logo.svg');
 
 interface ChangeForgottenPasswordState {
     error: boolean;

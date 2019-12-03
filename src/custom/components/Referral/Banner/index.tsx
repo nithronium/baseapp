@@ -15,7 +15,7 @@ const banners = {
 const banner = (lang) => {return  <img src={banners[lang]} className="grab" alt="baner" />;}
 
 
-const Banner = ({ children, lang }) => {                                      
+const Banner = ({ children, lang }) => {
 
     return (
         <section id="banner">

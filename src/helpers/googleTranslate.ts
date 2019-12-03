@@ -1,13 +1,15 @@
-declare var google;
 
 import { langNames } from './googleTranslateLangs';
+declare var google;
 
 export const isSameLocale = pageLanguage => {
+    if (null) {
+        return !!langNames.filter(item => {
+            return item.toLowerCase() === pageLanguage.toLowerCase();
+        }).length;
+    }
+
     return false;
-    const langs = navigator.languages;
-    return !!langs.filter(item => {
-        return item.toLowerCase() === pageLanguage.toLowerCase();
-    }).length;
 };
 
 export const googleTranslateElementInit = pageLanguage => {
@@ -30,8 +32,8 @@ export const googleTranslateElementInit = pageLanguage => {
                     e.setAttribute('google-init', 'true');
                 }
             } catch (e) {
-                console.log('translation fail', navigator.languages, pageLanguage);
-                console.log('translation fail error', e);
+                window.console.log('translation fail', navigator.languages, pageLanguage);
+                window.console.log('translation fail error', e);
             }
         };
 

@@ -181,6 +181,7 @@ class TradingDetailsComponent extends React.Component<Props, State>{
                     total += value2add;
                 }
             }
+            return record;
         });
 
         return total;

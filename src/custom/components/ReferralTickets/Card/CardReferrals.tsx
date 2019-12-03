@@ -3,12 +3,17 @@ import { ReferralOverallPayload } from '../../../modules/referralTickets';
 //tslint:disable
 // type CardContextProps = ReferralOverallPayload['referrals'];
 type Overall = ReferralOverallPayload['overall'];
+
+interface MessageInterface {
+    id: string;
+}
+
 interface CardProps {
     context: any;
     overall: Overall['referrals'];
     link: string;
     title: string;
-    message: ({})=>string;
+    message: (obj: MessageInterface)=>string;
 }
 
 class CardReferrals extends React.Component<CardProps>{
@@ -17,6 +22,7 @@ class CardReferrals extends React.Component<CardProps>{
         let total = 0;
         this.props.context.map(record => {
             total += record.subreferrals;
+            return record;
         });
         return total;
     }
@@ -25,6 +31,7 @@ class CardReferrals extends React.Component<CardProps>{
         let total = 0;
         this.props.context.map(record => {
             total += record.activeSubreferrals;
+            return record;
         });
         return total;
     }

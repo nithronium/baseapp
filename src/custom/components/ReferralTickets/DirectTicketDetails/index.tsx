@@ -4,17 +4,21 @@ import { ReferralOverallPayload } from '../../../modules/referralTickets';
 
 import { buildPath } from '../../../helpers';
 // import { Loader } from '../../Loader';
-interface DirectTicketInterface {
+export interface DirectTicketInterface {
     count: number;
     action: string;
 }
+interface MessageInterface {
+    id: string;
+}
+
 //tslint:disable
 interface Props {
     context: ReferralOverallPayload['direct'];
     overall: ReferralOverallPayload['overall']['direct'];
     // loading: boolean;
     user: User;
-    message: ({ }) => string;
+    message: (obj: MessageInterface) => string;
     lang: string;
 }
 
@@ -23,7 +27,6 @@ interface Props {
 // };
 
 class DirectTicketDetails extends React.Component<Props>{
-    
     public render(){
         const ctx = this.props.context;
         const reg = ctx.ticketsForRegistration;
@@ -110,4 +113,4 @@ class DirectTicketDetails extends React.Component<Props>{
     }
 }
 
-export {DirectTicketDetails, DirectTicketInterface};
+export { DirectTicketDetails };

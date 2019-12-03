@@ -91,8 +91,6 @@ const initialState: ReferralCommissionState = {
 
 // TODO match response
 export const referralCommissionReducer = (state = initialState, action: ReferralCommissionActions) => {
-
-    // console.log('action.type', action.type);
     switch (action.type) {
         case REFERRAL_COMMISSION_BALANCES_DATA: {
             const newState = {

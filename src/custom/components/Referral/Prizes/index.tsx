@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Button from '../Button';
 
-import bitcoin = require('../../../assets/images/referral/bitcoin.svg');
-import emrx = require('../../../assets/images/referral/emrx.svg');
+const bitcoin = require('../../../assets/images/referral/bitcoin.svg');
+const emrx = require('../../../assets/images/referral/emrx.svg');
 
 interface Prize {
     heading: string;

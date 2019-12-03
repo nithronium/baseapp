@@ -1,14 +1,10 @@
 
 import cr from 'classnames';
 import * as React from 'react';
-import {
-    CustomInput,
-} from '../';
-import {
-    EMAIL_REGEX,
-} from '../../helpers';
+import { CustomInput } from '../';
+import { EMAIL_REGEX } from '../../helpers';
 
-interface SignInProps {
+export interface SignInProps {
     labelSignIn?: string;
     labelSignUp?: string;
     emailLabel?: string;
@@ -38,7 +34,7 @@ interface SignInProps {
     changeEmail: (value: string) => void;
 }
 
-class SignInComponent extends React.Component<SignInProps> {
+export class SignInComponent extends React.Component<SignInProps> {
     public render() {
         const {
             email,
@@ -183,8 +179,3 @@ class SignInComponent extends React.Component<SignInProps> {
         }
     };
 }
-
-export {
-    SignInComponent,
-    SignInProps,
-};

@@ -2,9 +2,7 @@ import { Button } from '@openware/components';
 import cx from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
-
-import qs = require('qs');
-
+import * as qs from 'qs';
 import {
     InjectedIntlProps,
     injectIntl,
@@ -16,7 +14,6 @@ import {
 } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { captchaType, siteKey } from '../../api';
-import logo = require('../../assets/images/logo.svg');
 import { Modal, SignUpForm } from '../../components';
 import { buildPath } from '../../custom/helpers';
 import {
@@ -34,8 +31,10 @@ import {
     signUp,
 } from '../../modules';
 import { CommonError } from '../../modules/types';
-
 import { GeetestCaptcha } from '../../containers';
+
+const logo = require('../../assets/images/logo.svg');
+
 interface ReduxProps {
     requireVerification?: boolean;
     loading?: boolean;
@@ -106,7 +105,7 @@ class SignUp extends React.Component<Props> {
     }
 
     public componentWillReceiveProps(props: Props) {
-        const { i18n } = this.props;
+        const { i18n, location } = this.props;
 
         if (props.requireVerification) {
 
@@ -289,7 +288,7 @@ class SignUp extends React.Component<Props> {
 
     private handleSignIn = () => {
         let query = '';
-        const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        const parsed = qs.parse(this.props.location.search, { ignoreQueryPrefix: true });
         if (parsed.redirect_url) {
             query = `?redirect_url=${parsed.redirect_url}`;
         }

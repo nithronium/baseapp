@@ -12,7 +12,7 @@ class Summary extends React.Component<Props>{
 
     public getTotal(column, mode = 'default', condition?){
 
-        const legendArray = this.props.context && this.props.context.legend || [];
+        const legendArray = (this.props.context && this.props.context.legend) || [];
         let total = 0;
 
         legendArray.map(record => {

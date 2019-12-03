@@ -1,11 +1,10 @@
 import * as React from 'react';
-
 import Button from '../Button';
 
-import backFull = require('../../../assets/images/referral/back-full.svg');
-import backLeft = require('../../../assets/images/referral/back-left.svg');
-import backRight = require('../../../assets/images/referral/back-right.svg');
-import ticket = require('../../../assets/images/referral/ticket.svg');
+const backFull = require('../../../assets/images/referral/back-full.svg');
+const backLeft = require('../../../assets/images/referral/back-left.svg');
+const backRight = require('../../../assets/images/referral/back-right.svg');
+const ticket = require('../../../assets/images/referral/ticket.svg');
 
 const HowTo = props => {
     return (

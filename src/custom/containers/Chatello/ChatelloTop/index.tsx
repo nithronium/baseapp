@@ -79,18 +79,19 @@ export class ChatelloTopComponent extends React.Component<Props> {
                         <div className="pg-chatello__top-app-require">
                             {this.translate('chatello.overlay1.footer')}
                         </div>
-
                         <div className="pg-chatello__top-app-links">
                             <a
                                 href="https://apps.apple.com/us/app/chatello/id1369821031?ls=1"
                                 className="pg-chatello__top-app-link1"
                                 target="_blank"
-                            />
+                                rel="noopener noreferrer"
+                            >&nbsp;</a>
                             <a
                                 href="https://play.google.com/store/apps/details?id=com.chatello.app"
                                 className="pg-chatello__top-app-link2"
                                 target="_blank"
-                            />
+                                rel="noopener noreferrer"
+                            >&nbsp;</a>
                         </div>
                     </div>
                 </div>

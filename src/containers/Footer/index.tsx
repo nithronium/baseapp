@@ -1,15 +1,14 @@
 import * as React from 'react';
 import {FormattedMessage} from 'react-intl';
 
-//tslint:disable
-import facebook = require('../../assets/images/footer-icons/facebook.svg');
-import instagram = require('../../assets/images/footer-icons/instagram.svg');
-import linkedin = require('../../assets/images/footer-icons/linkedin.svg');
-import logo = require('../../assets/images/footer-icons/logo-emirex.svg');
-import medium = require('../../assets/images/footer-icons/Monogram.svg');
-import reddit = require('../../assets/images/footer-icons/reddit.svg');
-import telegram = require('../../assets/images/footer-icons/Telegram.svg');
-import twitter = require('../../assets/images/footer-icons/twitter.svg');
+const facebook = require('../../assets/images/footer-icons/facebook.svg');
+const instagram = require('../../assets/images/footer-icons/instagram.svg');
+const linkedin = require('../../assets/images/footer-icons/linkedin.svg');
+const logo = require('../../assets/images/footer-icons/logo-emirex.svg');
+const medium = require('../../assets/images/footer-icons/Monogram.svg');
+const reddit = require('../../assets/images/footer-icons/reddit.svg');
+const telegram = require('../../assets/images/footer-icons/Telegram.svg');
+const twitter = require('../../assets/images/footer-icons/twitter.svg');
 
 declare module 'react' {
     interface HTMLAttributes<T> {
@@ -87,7 +86,7 @@ const IconList = ({ links }) => {
         <ul className="social-links">
             {links.map(({ key, href, icon, alt }) => (
                 <li key={key} className="sl-item">
-                    <a href={href} target="_blank" rel="nofollow noopener">
+                    <a href={href} target="_blank" rel="noopener noreferrer">
                         <div className="icon">
                             <img className="icon-img" width="16" height="16" src={icon} alt={alt} />
                         </div>
@@ -177,7 +176,7 @@ const linkBlock = {
 };
 
 const getOriginLink = (intl, href, mainsite) => {
-    return `${mainsite ? location.origin : ''}${intl === 'en' ? '' : '/'+intl}${href}`
+    return `${mainsite ? window.location.origin : ''}${intl === 'en' ? '' : '/'+intl}${href}`
 };
 
 const LinksList = ({ links, intl }) => {
@@ -186,7 +185,7 @@ const LinksList = ({ links, intl }) => {
             {links.map(({ key, href, label, className, extLink, mainsite }) =>
                 extLink ? (
                     <li key={key}>
-                        <a className={className} href={`${href}`} target="_blank" rel="nofollow noopener">
+                        <a className={className} href={`${href}`} target="_blank" rel="noopener noreferrer">
                             <FormattedMessage id={label}/>
                         </a>
                     </li>

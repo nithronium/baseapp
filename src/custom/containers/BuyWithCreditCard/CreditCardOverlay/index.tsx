@@ -75,7 +75,7 @@ export class CreditCardOverlayComponent extends React.Component<Props> {
                 <p
                     className="buy-form__bottom-text--help"
                 >
-                    <a target="_blank" href="https://kb.emirex.com/kb-tickets/new">{this.translate('buyWithCard.form.help')}</a>
+                    <a target="_blank" href="https://kb.emirex.com/kb-tickets/new" rel="noopener noreferrer">{this.translate('buyWithCard.form.help')}</a>
                 </p>
             </div>
         );
@@ -102,7 +102,7 @@ export class CreditCardOverlayComponent extends React.Component<Props> {
                 </div>
 
                 <p className="buy-form__bottom-text--help">
-                    <a target="_blank" href="https://kb.emirex.com/kb-tickets/new">{this.translate('buyWithCard.form.help')}</a>
+                    <a target="_blank" href="https://kb.emirex.com/kb-tickets/new" rel="noopener noreferrer">{this.translate('buyWithCard.form.help')}</a>
                 </p>
             </div>
         );

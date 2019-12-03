@@ -10,15 +10,18 @@ import {styles} from './styles';
 
 // import { Loader } from '../../Loader';
 
+interface MessageInterface {
+    id: string;
+}
 interface Props {
     context: ReferralOverallPayload['bonuses'];
     // loading: boolean;
-    message: ({}) => string;
+    message: (obj: MessageInterface) => string;
 }
 
 interface BonusTicketsDetailRowProps {
     record: BonusPayload;
-    message: ({}) => string;
+    message: (obj: MessageInterface) => string;
 }
 
 const BonusTicketsDetailRow: React.FC<BonusTicketsDetailRowProps> = ({record, message}) => {
@@ -64,6 +67,7 @@ const BonusTicketDetails: React.FC<Props> = ({context = [], message}) => {
                     total += value2add;
                 }
             }
+            return record;
         });
 
         return total;

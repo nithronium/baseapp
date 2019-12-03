@@ -3,6 +3,10 @@ import { ReferralOverallPayload } from '../../../modules/referralTickets';
 
 // import { Loader } from '../../Loader';
 //tslint:disable
+interface MessageInterface {
+    id: string;
+}
+
 interface Props {
     context: any;
     overall: ReferralOverallPayload['overall']['referrals'];
@@ -14,7 +18,7 @@ interface Props {
     disabledPrev: boolean;
     count: number;
     L2count: number;
-    message: ({}) => string;
+    message: (obj: MessageInterface) => string;
     countActive: number;
     L2countActive: number;
 }

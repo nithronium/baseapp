@@ -26,11 +26,6 @@ interface PassedProps {
 type Props = InjectedIntlProps & PassedProps;
 
 class LevelCardComponent extends React.Component<Props>{
-
-    constructor(props){
-        super(props);
-    }
-
     public getStyle = (level, levels) => {
         if (levels < 3) {
             return {};

@@ -8,7 +8,7 @@ export const BottomBanner = injectIntl(({ intl }) => {
 
     return (
         <section id="bottom_banner" style={styles.mainWrapper}>
-            {/* <img style={styles.backgroundImg} src={require('./background-lines-white.svg')} /> */}
+            {/* <img style={styles.backgroundImg} src={require('./background-lines-white.svg')} alt=""/> */}
             <div style={styles.content}>
                 <div style={styles.headerWrapper}>
                     <h2 style={{ ...styles.headerMainText, textAlign: 'center' }}>
@@ -44,7 +44,7 @@ export const BottomBanner = injectIntl(({ intl }) => {
                         {format({ id: 'page.referal.bottombanner.2_weeks_after_IEO' })}
                     </ListItem>
                 </div>
-                <a href="https://connect.emirex.com/ieo" target="_blank" rel="nofollow noopener">
+                <a href="https://connect.emirex.com/ieo" target="_blank" rel="noopener noreferrer">
                     <button className="button-get" style={styles.btn}>
                         {format({ id: 'page.referal.bottombanner.learn_more' })}
                     </button>

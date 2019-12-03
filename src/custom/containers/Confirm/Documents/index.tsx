@@ -16,7 +16,6 @@ import {
   MapDispatchToPropsFunction,
 } from 'react-redux';
 import {withRouter} from 'react-router';
-import close = require('../../../../assets/images/close.svg');
 import { formatDate } from '../../../../helpers';
 import { isDateInFuture } from '../../../../helpers/checkDate';
 import {
@@ -34,6 +33,8 @@ import {
 import {changeUserLevel} from '../../../../modules/user/profile';
 import {handleRedirectToConfirm} from '../../../helpers';
 import {isValidDate} from '../../../helpers/checkDate';
+
+const close = require('../../../../assets/images/close.svg');
 
 interface ReduxProps {
     success?: string;
@@ -238,7 +239,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                 onClick={this.handleFileDelete(index)}
             >
                 {scan.name.slice(0, 27)}...&nbsp;
-                <img src={close}/>
+                <img src={close} alt="close" />
             </div>
         );
     }

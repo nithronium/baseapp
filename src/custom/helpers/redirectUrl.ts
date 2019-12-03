@@ -1,8 +1,8 @@
 
-import qs = require('qs');
+import * as qs from 'qs';
 
 export const getRedirectUrl = () => {
-    const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+    const parsed = qs.parse(window.location.search, { ignoreQueryPrefix: true });
     return parsed.redirect_url;
 };
 
@@ -24,7 +24,7 @@ export const redirectIfSpecified = url => {
 
 export const redirect = callback => {
     if (getRedirectUrl() === '/') {
-        location.replace('/');
+        window.location.replace('/');
         return;
     }
     callback();

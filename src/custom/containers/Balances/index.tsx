@@ -157,7 +157,6 @@ class BalancesComponent extends React.Component<Props, State> {
         });
         const rates = await getExchangeRates('USD', 1, currencies);
         this.setState({ rates });
-        console.log(rates);
     };
 
     private renderContent = () => {

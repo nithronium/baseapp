@@ -190,9 +190,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     });
 
 const OrderBook = injectIntl(connect(mapStateToProps, mapDispatchToProps)(OrderBookContainer));
-type OrderBookProps = ReduxProps;
 
 export {
     OrderBook,
-    OrderBookProps,
 };

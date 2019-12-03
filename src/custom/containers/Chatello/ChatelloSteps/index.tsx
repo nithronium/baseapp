@@ -103,8 +103,6 @@ export class ChatelloStepsComponent extends React.Component<Props> {
         const { paymentData } = this.props;
         const { amount } = paymentData;
 
-        console.log('amount', amount);
-
         return (
             <div className="credit-card-steps__item">
 
@@ -169,7 +167,7 @@ export class ChatelloStepsComponent extends React.Component<Props> {
                             </div>
                             <div className="pg-chatello-steps__bottom-help-feedback">
                                 {this.translate(`chatello.steps.step4.bottom.feedback`)}{' '}
-                                <a href="https://kb.emirex.com/kb-tickets/new" target="_blank">
+                                <a href="https://kb.emirex.com/kb-tickets/new" target="_blank" rel="noopener noreferrer">
                                     {this.translate(`chatello.steps.step4.bottom.help`)}
                                 </a>
                             </div>
@@ -180,6 +178,7 @@ export class ChatelloStepsComponent extends React.Component<Props> {
                             className="pg-chatello-steps__bottom-help-button"
                             target="_blank"
                             href="tg://resolve?domain=heywhy003"
+                            rel="noopener noreferrer"
                         >
                             {this.translate(`chatello.steps.step4.bottom.feedback.button`)}
                         </a>

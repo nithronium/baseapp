@@ -14,7 +14,7 @@ interface ListItemProps {
 const renderDesktop = ({ img, header, children, header2, children2 }) => {
     return (
         <div style={styles.mainWrapper}>
-            <img style={styles.img} src={img} />
+            <img style={styles.img} src={img} alt=""/>
             <div>
                 <div style={styles.header}>{header}</div>
                 <div style={styles.content}>
@@ -35,7 +35,7 @@ const renderDesktop = ({ img, header, children, header2, children2 }) => {
 const renderMobile = ({ img, header, children, header2, children2 }) => {
     return (
         <div style={styles.mainWrapperMobile}>
-        <img style={styles.imgMobile} src={img} />
+        <img style={styles.imgMobile} src={img} alt=""/>
         <div>
             <div style={styles.headerMobile}>{header}</div>
             <div style={styles.contentMobile}>

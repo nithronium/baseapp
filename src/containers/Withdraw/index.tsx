@@ -9,7 +9,7 @@ import {
 } from '../../components';
 import { Beneficiary } from '../../modules';
 
-interface WithdrawProps {
+export interface WithdrawProps {
     currency: string;
     fee: number;
     sepa: boolean;
@@ -54,9 +54,7 @@ interface WithdrawState {
     inputError: boolean;
 }
 
-type Props = WithdrawProps;
-
-class Withdraw extends React.Component<Props, WithdrawState> {
+export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
     public state = {
         amount: 0,
         beneficiary: defaultBeneficiary,
@@ -72,7 +70,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
     public componentWillReceiveProps(nextProps) {
         const { currency, withdrawDone } = this.props;
 
-        if (nextProps && (JSON.stringify(nextProps.currency) !== JSON.stringify(currency)) || (nextProps.withdrawDone && !withdrawDone)) {
+        if ((nextProps && (JSON.stringify(nextProps.currency) !== JSON.stringify(currency))) || (nextProps.withdrawDone && !withdrawDone)) {
             this.setState({
                 amount: 0,
                 otpCode: '',
@@ -360,9 +358,3 @@ class Withdraw extends React.Component<Props, WithdrawState> {
         this.setState({ otpCode });
     };
 }
-
-export {
-    Withdraw,
-    WithdrawProps,
-    WithdrawState,
-};

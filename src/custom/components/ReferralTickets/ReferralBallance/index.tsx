@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { RootState,selectCurrentLanguage, selectUserInfo, User } from '../../../../modules';
 import { buildPath } from '../../../helpers';
 
+interface MessageInterface {
+    id: string;
+}
 
 interface ReduxProps {
     user: User;
@@ -11,7 +14,7 @@ interface ReduxProps {
 //tslint:disable
 interface PassedProps {
     totalTickets: number;
-    message: ({})=>string;
+    message: (obj: MessageInterface)=>string;
 }
 
 type Props = ReduxProps & PassedProps;

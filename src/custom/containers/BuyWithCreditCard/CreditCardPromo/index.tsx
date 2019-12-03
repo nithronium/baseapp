@@ -1,7 +1,5 @@
 import * as React from 'react';
-
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-
 import { RouteComponentProps, withRouter } from 'react-router';
 
 type Props = InjectedIntlProps & RouteComponentProps & {
@@ -21,11 +19,11 @@ class CreditCardPromoComponent extends React.Component<Props> {
     };
 
     public goToCommissions = () => {
-        const { userLoggedIn } = this.props;
+        const { userLoggedIn, history } = this.props;
         if (userLoggedIn) {
-            location.assign('referral-commission');
+            history.location.assign('referral-commission');
         } else {
-            location.assign(`/signin?redirect_url=${encodeURIComponent('/referral-commission')}`);
+            history.location.assign(`/signin?redirect_url=${encodeURIComponent('/referral-commission')}`);
         }
     };
 

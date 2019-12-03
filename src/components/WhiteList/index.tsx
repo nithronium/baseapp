@@ -126,7 +126,7 @@ class WhiteListComponent extends React.Component<Props, State> {
         return (
             <div className="cr-white-list__add" onClick={this.handleClickToggleAddAddressModal()}>
                 <span className="cr-white-list__add__label">{this.translate('page.body.wallets.whitelist.addAddress')}</span>
-                <img src={require('../../assets/images/PlusIcon.svg')} className="cr-white-list__add__icon"/>
+                <img src={require('../../assets/images/PlusIcon.svg')} className="cr-white-list__add__icon" alt="" />
             </div>
         );
     }
@@ -173,7 +173,7 @@ class WhiteListComponent extends React.Component<Props, State> {
                 {whitelist && whitelist.map((item, index) => this.renderDropdownItem(item, index, type))}
                 <div className="cr-white-list__dropdown__body__add add" onClick={this.handleClickToggleAddAddressModal()}>
                     <span className="add__label">{this.translate('page.body.wallets.whitelist.addAddress')}</span>
-                    <img className="add__icon" src={require('../../assets/images/PlusIcon.svg')}/>
+                    <img className="add__icon" src={require('../../assets/images/PlusIcon.svg')} alt="" />
                 </div>
             </div>
         );
@@ -265,7 +265,7 @@ class WhiteListComponent extends React.Component<Props, State> {
                         <div className="select__right">
                         <span className="select__right__tip" onMouseOver={this.handleToggleTip} onMouseOut={this.handleToggleTip}><TipIcon/></span>
                         <span className="select__right__select">{this.translate('page.body.wallets.whitelist.dropdown.select')}</span>
-                        <span className="select__right__chevron"><img src={require('../../assets/images/ChevronIcon.svg')}/></span>
+                        <span className="select__right__chevron"><img src={require('../../assets/images/ChevronIcon.svg')} alt="" /></span>
                         </div>
                     </div>
                     {isOpenDropdown && this.renderDropdownBody(whitelist, type)}
@@ -284,7 +284,7 @@ class WhiteListComponent extends React.Component<Props, State> {
                     <div className="select__right">
                     <span className="select__right__tip" onMouseOver={this.handleToggleTip} onMouseOut={this.handleToggleTip}><TipIcon/></span>
                     <span className="select__right__select">{this.translate('page.body.wallets.whitelist.dropdown.select')}</span>
-                    <span className="select__right__chevron"><img src={require('../../assets/images/ChevronIcon.svg')}/></span>
+                    <span className="select__right__chevron"><img src={require('../../assets/images/ChevronIcon.svg')} alt ="" /></span>
                     </div>
                 </div>
                 {isOpenDropdown && this.renderDropdownBody(whitelist, type)}

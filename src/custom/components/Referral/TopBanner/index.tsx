@@ -8,7 +8,7 @@ import { styles } from './styles';
 export const TopBanner = injectIntl(({intl}) => {
     return (
         <div style={styles.mainWrapper}>
-            <img style={styles.backGroundImg} src={require('./background.png')}/>
+            <img style={styles.backGroundImg} src={require('./background.png')} alt=""/>
             <div style={styles.textWrapper}>
                 <span>
                     <span style={styles.highlightedText}>{intl.formatMessage({id: 'page.referal.topbanner.ieo_started'})} </span>

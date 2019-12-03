@@ -1,8 +1,6 @@
 import { Button } from '@openware/components';
 import cr from 'classnames';
-import {
-    CustomInput,
-} from '../';
+import { CustomInput } from '../';
 
 import * as React from 'react';
 
@@ -58,7 +56,7 @@ class TwoFactorAuthComponent extends React.Component<TwoFactorAuthProps> {
                                 <div className="cr-email-form__option-inner">
                                     {title || '2FA verification'}
                                     <div className="cr-email-form__cros-icon" onClick={this.handleCancel}>
-                                        <img src={require('../EmailForm/close.svg')}/>
+                                        <img alt="" src={require('../EmailForm/close.svg')}/>
                                     </div>
                                 </div>
                             </div>
@@ -83,8 +81,8 @@ class TwoFactorAuthComponent extends React.Component<TwoFactorAuthProps> {
                                 />
                                 <div className="link-block">
                                     <div className="text">{text}</div>
-                                    <a href="https://kb.emirex.com/lost-access-to-smartphone-with-google-authenticator-app" target="_blank" className="link">{link1}</a>
-                                    <a href="https://kb.emirex.com/my-2fa-codes-are-not-working" target="_blank" className="link">{link2}</a>
+                                    <a href="https://kb.emirex.com/lost-access-to-smartphone-with-google-authenticator-app" rel="noopener noreferrer" target="_blank" className="link">{link1}</a>
+                                    <a href="https://kb.emirex.com/my-2fa-codes-are-not-working" rel="noopener noreferrer" target="_blank" className="link">{link2}</a>
                                 </div>
                                 {errorMessage && <div className="cr-email-form__error">{errorMessage}</div>}
                             </div>

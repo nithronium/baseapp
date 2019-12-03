@@ -13,7 +13,7 @@ const tycoon69 = require('./tycoon69.svg');
 
 const Partner = ({src, summ, currency, tokens, href }) => {
     return (
-        <a className="partner" href={href} target="_blank" rel="nofollow noopener">
+        <a className="partner" href={href} target="_blank" rel="noopener noreferrer">
             <img src={src} alt="logo"/>
             <span className="partner__middle-line" />
             <div className="summ-row">

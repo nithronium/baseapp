@@ -1,12 +1,16 @@
 import axios, { AxiosResponse } from 'axios';
-import { JsonBody, makeRequest, RequestOptions } from './requestBuilder';
+import { JsonBody, makeRequest } from './requestBuilder';
 // import { currenciesData } from '../modules';
 
 // import { nodelogicUrl } from './config';
 
 export * from './types';
 export * from './config';
-export { RequestOptions } from './requestBuilder';
+
+export interface RequestOptions {
+    apiVersion: 'applogic' | 'nodelogic' | 'peatio' | 'barong' | 'referral' | 'referralCommission' | 'exchangeRates' | 'instexService';
+    withHeaders?: boolean;
+}
 
 export type RequestBody = JsonBody | FormData;
 
@@ -119,7 +123,6 @@ export const checkDepositLimit = async body => {
         await axios.post(`${applogicUrl}/public/limits/deposits/check`, body)
             .then(res => resolve(res.data))
             .catch(error => {
-                console.log('error', error);
                 reject(error);
             });
     });

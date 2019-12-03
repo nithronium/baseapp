@@ -3,12 +3,17 @@ import { ReferralOverallPayload } from '../../../modules/referralTickets';
 
 type CardContextProps = ReferralOverallPayload['direct'];
 type Overall = ReferralOverallPayload['overall'];
+
+interface MessageInterface {
+    id: string;
+}
+
 interface CardProps {
     context: CardContextProps;
     overall: Overall['direct'];
     link: string;
     title: string;
-    message: ({}) => string;
+    message:(obj: MessageInterface) => string;
 }
 
 class CardUser extends React.Component<CardProps>{

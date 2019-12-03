@@ -1,13 +1,10 @@
 import cx from 'classnames';
-
-import qs = require('qs');
-
+import * as qs from 'qs';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
-import logo = require('../../assets/images/logo.svg');
 import { SignInComponent, TwoFactorAuth } from '../../components';
 import { buildPath } from '../../custom/helpers';
 import { EMAIL_REGEX, ERROR_EMPTY_PASSWORD, ERROR_INVALID_EMAIL, setDocumentTitle } from '../../helpers';
@@ -24,6 +21,7 @@ import {
     signInRequire2FA,
     signUpRequireVerification,
 } from '../../modules';
+const logo = require('../../assets/images/logo.svg');
 
 interface ReduxProps {
     currentLanguage: string;
@@ -192,7 +190,7 @@ class SignIn extends React.Component<Props, SignInState> {
 
     private handleSignUp = () => {
         let query = '';
-        const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        const parsed = qs.parse(this.props.history.location.search, { ignoreQueryPrefix: true });
         if (parsed.redirect_url) {
             query = `?redirect_url=${parsed.redirect_url}`;
         }

@@ -264,7 +264,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                                 {this.translate('chatello.form.convertation')}
                             </p>
                             <p className="buy-form__bottom-text--help">
-                                <a target="_blank" href="https://kb.emirex.com/kb-tickets/new">{this.translate('buyWithCard.form.help')}</a>
+                                <a target="_blank" href="https://kb.emirex.com/kb-tickets/new" rel="noopener noreferrer">{this.translate('buyWithCard.form.help')}</a>
                             </p>
                         </div>
                         <button
@@ -277,7 +277,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
 
                         <div className="buy-form__bottom-text-mobile">
                             <p className="buy-form__bottom-text--help-mobile">
-                                <a target="_blank" href="https://kb.emirex.com/kb-tickets/new">{this.translate('buyWithCard.form.help')}</a>
+                                <a target="_blank" href="https://kb.emirex.com/kb-tickets/new" rel="noopener noreferrer">{this.translate('buyWithCard.form.help')}</a>
                             </p>
                         </div>
                     </div>
@@ -327,6 +327,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
         const { buyWithCreditCard } = this.props;
         return (
             <iframe
+                title="ChatelloFrame"
                 src={buyWithCreditCard.data.url}
                 className="credit-card__iframe"
             />

@@ -121,7 +121,7 @@ class WhiteListActivateModalComponent extends React.Component<Props, State> {
         return (
             <div className="cr-email-form__form-content">
                 <div className="confirmation-modal__content">
-                    <img className="confirmation-modal__content__icon" src={require('../../assets/images/LetterIcon.svg')}/>
+                    <img className="confirmation-modal__content__icon" src={require('../../assets/images/LetterIcon.svg')} alt="" />
                     <span className="confirmation-modal__content__text">{this.translate('page.body.wallets.whitelist.confirmationModal.body.text')}</span>
                 </div>
                 {this.renderConfirmationModalBodyItem('confirmationModalCode')}

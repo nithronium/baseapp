@@ -1,6 +1,6 @@
 //tslint:disable
 
-import qs = require('qs');
+import * as qs from 'qs';
 
 import { Loader } from '@openware/components';
 import classnames from 'classnames';
@@ -116,13 +116,13 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
 
     if (isLogged && !noReditect) {
         let url = '/profile';
-        const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        const parsed = qs.parse(window.location.search, { ignoreQueryPrefix: true });
         if (parsed.redirect_url) {
             url = parsed.redirect_url;
         }
-        console.log('signin', url, location.href);
+        console.log('signin', url, window.location.href);
         if (url === '/') {
-            location.replace('/');
+            window.location.replace('/');
             return null;
         }
         return (
@@ -230,7 +230,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
 
         const cx = classnames('pg-kyc-login', {
             'pg-kyc-login--visible':
-                this.state.diplayKYCLoginModal && !location.pathname.startsWith('/confirm') && user.level === 1,
+                this.state.diplayKYCLoginModal && !this.props.history.location.pathname.startsWith('/confirm') && user.level === 1,
         });
 
         return (

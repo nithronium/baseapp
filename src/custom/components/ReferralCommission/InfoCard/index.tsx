@@ -26,13 +26,7 @@ interface PassedProps {
 type Props = InjectedIntlProps & PassedProps;
 
 class InfoCardComponent extends React.Component<Props>{
-
-    constructor(props){
-        super(props);
-    }
-
     public render(){
-
         const { iconName, title, text, emrxConverted, usdConverted } = this.props;
 
         return(

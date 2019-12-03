@@ -1,7 +1,6 @@
 import { Checkbox } from '@openware/components';
 import cr from 'classnames';
 import { CustomInput } from '../';
-
 import * as React from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../helpers';
@@ -14,7 +13,7 @@ export interface PasswordValidationDetails {
     hasLowerCaseLetters: boolean;
 }
 
-interface SignUpFormProps {
+export interface SignUpFormProps {
     siteKey?: string;
     isLoading?: boolean;
     title?: string;
@@ -61,7 +60,7 @@ interface SignUpFormProps {
     geetestCaptchaSuccess: boolean;
 }
 
-class SignUpForm extends React.Component<SignUpFormProps> {
+export class SignUpForm extends React.Component<SignUpFormProps> {
     public render() {
         const {
             email,
@@ -212,7 +211,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
                             >
                                 {isLoading ? 'Loading...' : labelSignUp ? labelSignUp : 'Sign up'}
                             </button>
-                            <a className="cr-sign-up-form__corporate-link" key="ru" rel="alternate" href={'https://kb.emirex.com/corporate_account_verification'} hrefLang="ru" title={corporateTextLink} target="_blank">{corporateTextLink}</a>
+                            <a className="cr-sign-up-form__corporate-link" key="ru" rel="alternate noopener noreferrer" href={'https://kb.emirex.com/corporate_account_verification'} hrefLang="ru" title={corporateTextLink} target="_blank">{corporateTextLink}</a>
                         </div>
                     </div>
                 </div>
@@ -293,5 +292,3 @@ class SignUpForm extends React.Component<SignUpFormProps> {
         }
     };
 }
-
-export { SignUpForm, SignUpFormProps };

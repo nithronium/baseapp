@@ -6,7 +6,6 @@ import {Link, RouteProps, withRouter} from 'react-router-dom';
 // import { LogoutIcon } from '../../assets/images/LogoutIcon';
 // import { Moon } from '../../assets/images/Moon';
 // import { Sun } from '../../assets/images/Sun';
-import logo = require('../../assets/images/logo.svg');
 import {
     AEDIcon,
     CheckIcon,
@@ -38,9 +37,9 @@ import {
     User,
     walletsReset,
 } from '../../modules';
-
-
 import { GoogleTranslate } from '../../components/GoogleTranslate';
+
+const logo = require('../../assets/images/logo.svg');
 
 export interface ReduxProps {
     colorTheme: string;
@@ -471,7 +470,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                         <FormattedMessage id={option.description}/>
                                     </div>}
                                 </a>
-                            : <a>
+                            : <div>
                                 {option.label && <div className="label">
                                     <FormattedMessage id={option.label}/>
                                     <span className="soon">
@@ -481,7 +480,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                 {option.description && <div className="description">
                                     <FormattedMessage id={option.description}/>
                                 </div>}
-                            </a>
+                            </div>
                         :  <div className="label" onClick={() => this.handleLogOut()}>
                                 <FormattedMessage id={option.label}/>
                         </div>}

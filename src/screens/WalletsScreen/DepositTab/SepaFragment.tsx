@@ -15,10 +15,6 @@ interface Props {
 }
 
 class SepaComponent extends React.Component<Props> {
-    constructor(props: Props) {
-        super(props);
-    }
-
     render() {
         const { intl, wallets, selectedWalletIndex, currency, user, sepa } = this.props;
         const translate = (id) => intl.formatMessage({id});

@@ -130,10 +130,9 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
     public scrollToMyRef = () => {
         setTimeout(() => {
             if (this.myRef.current) {
-                console.log('ref offset', this.myRef.current.offsetTop + 60);
                 window.scrollTo(0, this.myRef.current.offsetTop + 60);
             } else {
-                console.log('no ref');
+                window.console.log('no ref');
             }
         }, 1500);
     };

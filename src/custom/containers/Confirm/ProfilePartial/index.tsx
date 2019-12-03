@@ -1,6 +1,6 @@
 import cr from 'classnames';
 import { History } from 'history';
-import countries = require('i18n-iso-countries');
+import * as countries from 'i18n-iso-countries';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import MaskInput from 'react-maskinput';
@@ -296,7 +296,6 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                       <div className="pg-confirm__content-profile-partial-col-row" />
                   </div>
                 </div>
-                 
                 <div className="pg-confirm__content-deep">
                     <button
                         className={`cr-button pg-confirm__content-phone-deep-button ${buttonDisabled ? 'cr-button--disabled' : ''}`}

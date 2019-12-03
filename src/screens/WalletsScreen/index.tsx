@@ -1,4 +1,3 @@
-//tslint:disable
 import { Button, Loader } from '@openware/components';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -10,7 +9,7 @@ import { Withdraw, WithdrawProps } from '../../containers';
 import { ModalWithdrawConfirmation } from '../../containers/ModalWithdrawConfirmation';
 import { ModalWithdrawSubmit } from '../../containers/ModalWithdrawSubmit';
 import { EstimatedValue } from '../../containers/Wallets/EstimatedValue';
-import { WalletHistory } from '../../containers/Wallets/History';;
+import { WalletHistory } from '../../containers/Wallets/History';
 import { BlurComponent } from '../../custom/components';
 import { buildPath } from '../../custom/helpers';
 import { setDocumentTitle } from '../../helpers';
@@ -48,7 +47,6 @@ import { CommonError } from '../../modules/types';
 import { DepositTab } from './DepositTab';
 import { TypeTabs } from './TypeTabs';
 import { getBalance } from '../../api';
-
 import { History } from 'history';
 
 interface HP {

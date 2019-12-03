@@ -260,7 +260,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                     <div className="cr-email-form__option-inner">
                         <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.modalHeader"/>
                         <div className="cr-email-form__cros-icon" onClick={this.closeModal}>
-                            <img src={require('./close.svg')}/>
+                            <img alt="close" src={require('./close.svg')}/>
                         </div>
                     </div>
                 </div>
@@ -321,7 +321,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                 <div className="cr-email-form__option-inner">
                     <FormattedMessage id="page.body.profile.header.account.content.password.change" />
                     <div className="cr-email-form__cros-icon" onClick={this.handleCancel}>
-                        <img src={require('./close.svg')} />
+                        <img src={require('./close.svg')} alt="close-icon" />
                     </div>
                 </div>
             </div>

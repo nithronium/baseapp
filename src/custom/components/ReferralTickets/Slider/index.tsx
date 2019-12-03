@@ -3,13 +3,16 @@ import * as React from 'react';
 import ItemsCarousel from 'react-items-carousel';
 import './styles.css';
 
+interface MessageInterface {
+    id: string;
+}
 interface SliderState {
     activeItemIndex: number;
 }
 
 interface SliderProps {
     tickets: number[];
-    message: ({}) => string;
+    message: (obj: MessageInterface) => string;
     sliderOff?: boolean;
 }
 

@@ -259,6 +259,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     };
 
     private renderConfirm2faBody = () => {
+        const { location } = this.props.history;
         const keys = new Array(15).fill(1).map((e, index) => index + 1).slice(1);
         const isMarked = (index: number) => [3, 5, 7, 9, 11, 13, 15].includes(index);
         const locale = location.pathname.includes('/ru') ? 'ru' : (location.pathname.includes('/zh') ? 'zh' : 'en');
@@ -370,7 +371,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
               <div className="cr-email-form__option-inner">
                   <FormattedMessage id="page.body.profile.header.account.content.password.change"/>
                   <div className="cr-email-form__cros-icon" onClick={this.handleCancel}>
-                      <img src={require('./close.svg')}/>
+                      <img src={require('./close.svg')} alt="close"/>
                   </div>
               </div>
             </div>

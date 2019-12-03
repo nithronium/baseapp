@@ -2,7 +2,7 @@ import { CellData, Table } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
 
-interface HistoryProps {
+export interface HistoryProps {
     /**
      * List of history data
      */
@@ -46,5 +46,4 @@ class History extends React.PureComponent<HistoryProps> {
 
 export {
     History,
-    HistoryProps,
 };

@@ -67,12 +67,14 @@ export class ChatelloTop2Component extends React.Component<Props> {
                                 className="pg-chatello__top2-app-store"
                                 href="https://apps.apple.com/us/app/chatello/id1369821031?ls=1"
                                 target="_blank"
-                            />
+                                rel="noopener noreferrer"
+                            >&nbsp;</a>
                             <a
                                 className="pg-chatello__top2-google-play"
                                 href="https://play.google.com/store/apps/details?id=com.chatello.app"
                                 target="_blank"
-                            />
+                                rel="noopener noreferrer"
+                            >&nbsp;</a>
                         </div>
                     </div>
                 </div>

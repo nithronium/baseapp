@@ -4,7 +4,7 @@ function replaceHLink() {
     $('.hlink').each(function(index) {
         $(this).removeClass('hlink').addClass('olink');
         var arr = $.map(this.attributes, function (attribute) {
-            if (attribute.name != 'data-href') {
+            if (attribute.name !== 'data-href') {
                 return attribute.name + '="' + attribute.value + '"';
             }
         });

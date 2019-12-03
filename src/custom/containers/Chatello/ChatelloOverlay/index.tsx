@@ -93,7 +93,7 @@ export class ChatelloOverlayComponent extends React.Component<Props> {
                 <p
                     className="buy-form__bottom-text--help"
                 >
-                    <a target="_blank" href="https://kb.emirex.com/kb-tickets/new">{this.translate('buyWithCard.form.help')}</a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://kb.emirex.com/kb-tickets/new">{this.translate('buyWithCard.form.help')}</a>
                 </p>
             </div>
         );
@@ -119,7 +119,7 @@ export class ChatelloOverlayComponent extends React.Component<Props> {
                 </div>
 
                 <p className="buy-form__bottom-text--help">
-                    <a target="_blank" href="https://kb.emirex.com/kb-tickets/new">{this.translate('buyWithCard.form.help')}</a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://kb.emirex.com/kb-tickets/new">{this.translate('buyWithCard.form.help')}</a>
                 </p>
             </div>
         );

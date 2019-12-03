@@ -1,20 +1,17 @@
 import * as React from 'react';
-
 import { GetCode } from '../GetCode';
-//tslint:disable
-
-import bitcoincom = require('../../../../assets/images/bitcoincom.png');
-import blockonomi = require('../../../../assets/images/blockonomi.png');
-import coinspeaker = require('../../../../assets/images/coinspeaker.png');
-import cointelegraph = require('../../../../assets/images/cointelegraph.png');
-import forbes = require('../../../../assets/images/forbes.png');
-import newsbtc = require('../../../../assets/images/newsbtc.png');
-import yahoo = require('../../../../assets/images/yahoo.png');
-import zerohedge = require('../../../../assets/images/zerohedge.png');
-import hitbtc = require('../../../../assets/images/hit-btc-logo.png');
 import { BottomBanner } from '../BottomBanner';
-
 import replaceHLink from '../../../helpers/scripts.js';
+
+const bitcoincom = require('../../../../assets/images/bitcoincom.png');
+const blockonomi = require('../../../../assets/images/blockonomi.png');
+const coinspeaker = require('../../../../assets/images/coinspeaker.png');
+const cointelegraph = require('../../../../assets/images/cointelegraph.png');
+const forbes = require('../../../../assets/images/forbes.png');
+const newsbtc = require('../../../../assets/images/newsbtc.png');
+const yahoo = require('../../../../assets/images/yahoo.png');
+const zerohedge = require('../../../../assets/images/zerohedge.png');
+const hitbtc = require('../../../../assets/images/hit-btc-logo.png');
 
 declare module 'react' {
     interface HTMLAttributes<T> {
@@ -66,7 +63,7 @@ const MediaLogo = props => {
                     className={'hlink'}
                     rel="nofollow"
                     data-href={btoa(
-                        'https://cointelegraph.com/news/us-fed-weighs-up-potential-cbdc-as-countermove-against-china'
+                        'https://cointelegraph.com/news/us-fed-weighs-up-potential-cbdc-as-countermove-against-china',
                     )}
                     target="_blank"
                 >
@@ -78,7 +75,7 @@ const MediaLogo = props => {
                     className={'hlink'}
                     rel="nofollow"
                     data-href={btoa(
-                        'https://forbesmiddleeast.com/what-impact-could-tokenized-commodities-have-on-the-middle-east'
+                        'https://forbesmiddleeast.com/what-impact-could-tokenized-commodities-have-on-the-middle-east',
                     )}
                     target="_blank"
                 >
@@ -90,7 +87,7 @@ const MediaLogo = props => {
                     className={'hlink'}
                     rel="nofollow"
                     data-href={btoa(
-                        'https://www.newsbtc.com/2019/11/26/emirex-doubles-down-with-ieo-announcement-building-a-comprehensive-crypto-ecosystem-in-the-middle-east/'
+                        'https://www.newsbtc.com/2019/11/26/emirex-doubles-down-with-ieo-announcement-building-a-comprehensive-crypto-ecosystem-in-the-middle-east/',
                     )}
                     target="_blank"
                 >
@@ -130,10 +127,10 @@ const MediaLogo = props => {
                 {/*</noindex>*/}
 
                 {/* <a href="https://news.bitcoin.com/cryptocurrency-exchanges-are-fighting-to-escape-binances-shadow/"><img src={bitcoincom} alt="logo" /></a>
-                <a href="https://blockonomi.com/emirex-review/"><img src={blockonomi} alt="logo" /></a>        
+                <a href="https://blockonomi.com/emirex-review/"><img src={blockonomi} alt="logo" /></a>
                 <a href="https://www.coinspeaker.com/blockchain-tokenization-commodities/"><img src={coinspeaker} alt="logo" /></a>
                 <a href="https://cointelegraph.com/news/us-fed-weighs-up-potential-cbdc-as-countermove-against-china"><img src={cointelegraph} alt="ogo" /></a>
-                <a href="https://forbesmiddleeast.com/what-impact-could-tokenized-commodities-have-on-the-middle-east"><img src={forbes} alt="logo" /> </a>       
+                <a href="https://forbesmiddleeast.com/what-impact-could-tokenized-commodities-have-on-the-middle-east"><img src={forbes} alt="logo" /> </a>
                 <a href="https://www.newsbtc.com/2019/11/26/emirex-doubles-down-with-ieo-announcement-building-a-comprehensive-crypto-ecosystem-in-the-middle-east/"><img src={newsbtc} alt="logo" /></a>
                 <a href="https://finance.yahoo.com/news/platforms-solutions-confirm-growing-interest-164407914.html"><img src={yahoo} alt="logo" /></a>
                 <a href="https://www.zerohedge.com/news/2019-11-26/blockchain-taking-over-middle-east"><img src={zerohedge} alt="logo" /> </a>        */}

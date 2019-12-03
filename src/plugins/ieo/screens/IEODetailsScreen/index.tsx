@@ -20,7 +20,6 @@ import {
 import { rangerConnectFetch, RangerConnectFetch } from '../../../../modules/public/ranger';
 import { RangerState } from '../../../../modules/public/ranger/reducer';
 import { selectRanger } from '../../../../modules/public/ranger/selectors';
-import backIcon = require('../../assets/images/back-icon.svg');
 import { IEODetails, IEOProjectIntroduction, OrderExecuteSuccessModal } from '../../components';
 import { IEOInfo } from '../../containers';
 import {
@@ -30,6 +29,8 @@ import {
     selectCurrentIEO,
     selectIEOLoading,
 } from '../../modules';
+
+const backIcon = require('../../assets/images/back-icon.svg');
 
 interface ReduxProps {
     currentIEO?: DataIEOInterface;
@@ -130,7 +131,7 @@ class IEODetailsContainer extends React.Component<Props, State> {
         return (
             <React.Fragment>
                 <div className="pg-currentIEO-page__back" onClick={this.handleClickBack}>
-                    <img src={backIcon} className="back-icon" />&nbsp;&nbsp;
+                    <img src={backIcon} className="back-icon" alt="" />&nbsp;&nbsp;
                     <span className="pg-currentIEO-page__back-text">
                         {this.translate('page.body.ieo.details.header.backToList')}
                     </span>
