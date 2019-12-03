@@ -48,4 +48,11 @@ export const ru = {
     'page.body.ieo.modal.orderSuccess.title': 'Congratulations!',
     'page.body.ieo.modal.orderSuccess.message': 'You successfully ordered',
     'page.body.ieo.modal.orderSuccess.button': 'Confirm',
+    'page.body.history.ieo': 'IEO',
+    'page.body.ieo.history.date': 'Date',
+    'page.body.ieo.history.name': 'Name',
+    'page.body.ieo.history.tokensOrdered': 'Token ordered',
+    'page.body.ieo.history.paidAmount': 'Paid amount',
+    'page.body.ieo.history.receivedAmount': 'Received amount',
+    'page.body.ieo.history.fees': 'Fees',
 };

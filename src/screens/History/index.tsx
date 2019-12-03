@@ -7,6 +7,7 @@ import {
     connect,
     MapDispatchToPropsFunction,
 } from 'react-redux';
+import { pluginsList } from '../../api';
 import { TabPanel } from '../../components';
 import { HistoryElement } from '../../containers/HistoryElement';
 import { setDocumentTitle } from '../../helpers';
@@ -16,6 +17,7 @@ import {
     resetHistory,
     walletsFetch,
 } from '../../modules';
+import { HistoryIEOElement } from '../../plugins/ieo';
 
 interface DispatchProps {
     resetHistory: typeof resetHistory;
@@ -37,7 +39,7 @@ class History extends React.Component<Props, State> {
         currentTabIndex: 0,
     };
 
-    public tabMapping = ['deposits', 'withdraws', 'trades'];
+    public tabMapping = ['deposits', 'withdraws', 'trades', pluginsList().find(item => item.name === 'ieo') && 'ieo'];
 
     public componentDidMount() {
         setDocumentTitle('History');
@@ -88,6 +90,10 @@ class History extends React.Component<Props, State> {
             {
                 content: tab === 'trades' ? <HistoryElement type="trades" /> : null,
                 label: this.props.intl.formatMessage({id: 'page.body.history.trade'}),
+            },
+            {
+                content: tab === 'ieo' ? <HistoryIEOElement /> : null,
+                label: this.props.intl.formatMessage({id: 'page.body.history.ieo'}),
             },
         ];
     };
