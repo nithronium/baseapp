@@ -48,12 +48,14 @@ class Head extends React.Component<any, HeaderState> {
         } = this.props;
         const { isActive } = this.state;
         const baseURL = window.document.location.origin;
+        // tslint:disable-next-line: no-console
+        console.log(buildPath(baseURL, currentLanguage));
         return (
             <React.Fragment>
                 {!['/confirm'].some(r => location.pathname.includes(r)) && (
                     <header className={`pg-header ${isActive ? 'pg-header--active' : ''}`}>
                         <div className="pg-container pg-header__content">
-                            <a href={buildPath(baseURL, currentLanguage)} className="pg-header__logo">
+                            <a href={currentLanguage === 'en' ? baseURL : `${baseURL}/${currentLanguage}`} className="pg-header__logo">
                                 <div className="pg-logo">
                                     {colorTheme === 'light' ? (
                                         <span>
