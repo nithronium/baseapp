@@ -6,9 +6,9 @@ const setTabStyle = (isActive) => ({
     padding: '10px 0',
     flex: '1 1 auto',
     cursor: 'pointer',
-    background: isActive ? '#11B382' : 'none',
+    background: isActive ? '#11B382' : '#222627',
     border: isActive?  'none' : '1px solid #FFFFFF33',
-    color: isActive ?  '#FFFFFF' : '#FFFFFF33',
+    color: isActive ?  '#FFFFFF' : '#FFFFFF88',
 })
 
 export const TypeTabs = injectIntl(({intl, currency, action, wire, sepa, card}) => {
@@ -30,7 +30,8 @@ export const TypeTabs = injectIntl(({intl, currency, action, wire, sepa, card}) 
             padding: '0 20px',
             fontSize: '18px',
             color: 'white',
-            marginBottom: '15px'
+            marginBottom: '15px',
+            
         }}>
             <div 
                 style={{borderRadius: '5px 0 0 5px', ...setTabStyle(wire)}}

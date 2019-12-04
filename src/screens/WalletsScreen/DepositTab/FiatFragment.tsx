@@ -34,9 +34,12 @@ export const FiatFragment = injectIntl((props) => {
     const levelLink = translate('page.body.wallets.tabs.deposit.fiat.levelLink');
 
     return (
-        <React.Fragment>
-            { <TypeTabs wire={wire} sepa={sepa} card={card} action={action} currency={currency.toLowerCase()}/>}
+        <React.Fragment >
+             
+                {<TypeTabs wire={wire} sepa={sepa} card={card} action={action} currency={currency.toLowerCase()} />}
+    
             {/* {card && <div style={styles.card}>{translate('comingsoon')}</div>}   */}
+             
             {card && (user.level > 1 ?
                 <div>
                     <CardDepositFiat currency={currency.toUpperCase()} translate={translate} />
@@ -49,9 +52,12 @@ export const FiatFragment = injectIntl((props) => {
                     <p>{levelMessage}</p>                            
                     <p><a href="/confirm">{levelLink}</a></p>
                 </div>
-            )}
+                )}
+
             {sepa && <SepaFragment {...props}/>}
             {wire && <WireFragment {...props} />}
+ 
+                
         </React.Fragment>
     );
 });
