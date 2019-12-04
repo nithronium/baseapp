@@ -171,6 +171,12 @@ export const en = {
   'tickets.tickets_B': 'Tickets',
   'tickets.posts': 'posts',
   'tickets.link': 'Link',
+  'prize.95prizes': '95 Prizes of',
+  'prize.1': '1st Prize',
+  'prize.2': '2nd Prize',
+  'prize.3': '3rd Prize',
+  'prize.4': '4&5th Prize',
+
 
   "btcusdt_title": "BTC to USDT. Bitcoin Exchange | Emirex.com",
     "btcusdt_description": "BTC to USDT Exchange and converter BTC/USDT. Real-time prices and charts. 24/7 global customer support. You can buy & sell using up to date Bitcoin exchange rates",
