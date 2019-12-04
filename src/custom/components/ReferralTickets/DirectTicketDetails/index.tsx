@@ -37,7 +37,7 @@ class DirectTicketDetails extends React.Component<Props>{
                                     <thead>
                                         <tr>
                                             <td>{this.props.message({id: 'tickets.active'})} {this.props.message({id: 'tickets.tickets'})}</td>
-                                            <td>I{this.props.message({id: 'tickets.inactive'})} {this.props.message({id: 'tickets.tickets'})}</td>
+                                            <td>{this.props.message({id: 'tickets.inactive'})} {this.props.message({id: 'tickets.tickets'})}</td>
                                             <td/>
                                             <td/>
                                         </tr>
