@@ -23,6 +23,7 @@ import { Documents } from '../../containers/Confirm/Documents';
 import { Idenfy } from '../../containers/Confirm/Idenfy';
 import { Phone } from '../../containers/Confirm/Phone';
 import { ProfilePartial } from '../../containers/Confirm/ProfilePartial';
+import { Questionnaire } from '../../containers/Confirm/Questionnaire';
 
 interface ReduxProps {
     colorTheme: string;
@@ -38,6 +39,8 @@ interface ConfirmState {
     title: string;
     level: number;
     toggleNationalityBlockedModalCheck: boolean;
+    kycAlert: boolean;
+    documentsAlert: boolean;
 }
 
 interface DispatchProps {
@@ -55,6 +58,8 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             title: '',
             level: 0,
             toggleNationalityBlockedModalCheck: false,
+            kycAlert: false,
+            documentsAlert: false,
         };
     }
 
@@ -74,13 +79,14 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
 
     // tslint:disable:jsx-no-multiline-js
     public render() {
+        window.console.log(this.props);
         const { colorTheme, userData } = this.props;
 
         const currentProfileLevel = userData.level;
         const cx = classnames('pg-confirm__progress-items', {
-            'pg-confirm__progress-first': currentProfileLevel === 0,
-            'pg-confirm__progress-second': currentProfileLevel === 1,
-            'pg-confirm__progress-third': currentProfileLevel === 2,
+            'pg-confirm__progress-first': currentProfileLevel === 0 || currentProfileLevel === 1,
+            'pg-confirm__progress-second': currentProfileLevel === 2 || currentProfileLevel === 3,
+            'pg-confirm__progress-third': currentProfileLevel === 4 || currentProfileLevel === 5,
         });
 
         const classNameModal = classnames('pg-denied', {
@@ -139,9 +145,9 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const { history, fetchAlert } = this.props;
         const labelsToCheck = [
             'email',
-            'profile_partial',
+            'profile',
             'phone',
-            'kyc',
+            'identity',
             'document',
             'questionnaire',
         ];
@@ -165,38 +171,51 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             history,
             labels,
             userData: { level },
+            fetchAlert,
         } = this.props;
 
         if (!labels.length) {
-            history.push('/profile');
+            return null;
         }
 
         this.handleCheckPendingLabels(labels);
 
-        const emailVerified = labels.find(l => l.key === 'email' && l.value === 'verified' && l.scope === 'private');
-
-        if (level === 0 && emailVerified) {
+        if (level === 1) {
             return <ProfilePartial toggleNationalityBlockedModal={this.handleChangeUS} />;
         }
 
-        if (level === 1) {
-            const phoneVerified = labels.find(l => l.key === 'phone' && l.value === 'verified' && l.scope === 'private');
+        if (level === 2) {
+            return <Phone />;
+        }
 
-            if (!phoneVerified) {
-                return <Phone />;
+        if (level === 3) {
+            const kycVerification = labels.find(label => label.key === 'document' && label.value === 'denied' && label.scope === 'private');
+
+            if (kycVerification && !this.state.kycAlert) {
+                fetchAlert({ message: ['resource.profile.kyc.denied'], type: 'error' });
+                this.setState({
+                    kycAlert: true,
+                });
             }
 
             return <Idenfy />;
         }
 
-        if (level === 2) {
-            const documentsVerified = labels.find(l => l.key === 'document' && l.value === 'verified' && l.scope === 'private');
+        if (level === 4) {
+            const documentsVerification = labels.find(label => label.key === 'document' && label.value === 'denied' && label.scope === 'private');
 
-            if (!documentsVerified) {
-                return <Documents />;
+            if (documentsVerification && !this.state.documentsAlert) {
+                fetchAlert({ message: ['resource.profile.document.denied'], type: 'error' });
+                this.setState({
+                    documentsAlert: true,
+                });
             }
 
-            return <div>Questionnaire</div>;
+            return <Documents />;
+        }
+
+        if (level === 5) {
+            return <Questionnaire />;
         }
 
         history.push('/profile');

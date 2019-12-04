@@ -1,3 +1,4 @@
+import classnames from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
 import CookieConsent from 'react-cookie-consent';
@@ -7,6 +8,7 @@ import { Router } from 'react-router';
 import { GuardModal } from './components';
 import { Alerts, ErrorWrapper, Header } from './containers';
 import { GuardWrapper } from './containers/Guard';
+import { LoginModal } from './custom/components/KYCLoginModal';
 import {
     closeGuardModal,
     licenseFetch,
@@ -17,7 +19,10 @@ import {
     selectTenkoPublicKey,
     selectToken,
     selectTokenFetching,
+    selectUserInfo,
+    selectUserLoggedIn,
     setLicenseExpiration,
+    User,
 } from './modules';
 import { Layout } from './routes';
 
@@ -38,6 +43,8 @@ interface ReduxProps {
     tenkoKey: string;
     token: string;
     tokenFetching: boolean;
+    userData: User;
+    isLoggedIn: boolean;
 }
 
 interface DispatchProps {
@@ -45,10 +52,23 @@ interface DispatchProps {
     licenseFetch: typeof licenseFetch;
     setLicenseExpiration: typeof setLicenseExpiration;
 }
+interface State {
+    diplayKYCLoginModal: boolean;
+}
 
 type Props = AppProps & ReduxProps & DispatchProps;
 
-class AppLayout extends React.Component<Props, {}, {}> {
+class AppLayout extends React.Component<Props, State, {}> {
+    public state = {
+        diplayKYCLoginModal: false,
+    };
+
+    public componentWillReceiveProps(nextProps) {
+        if (!this.props.isLoggedIn && nextProps.isLoggedIn) {
+            this.handleOpenLoginModal();
+        }
+    }
+
     public render() {
         const {
             locale,
@@ -59,8 +79,14 @@ class AppLayout extends React.Component<Props, {}, {}> {
             tenkoKey,
             token,
             tokenFetching,
+            userData,
         } = this.props;
         const { lang, messages } = locale;
+
+        const cx = classnames('pg-kyc-login',{
+            'pg-kyc-login--visible': this.state.diplayKYCLoginModal && userData.level % 2 !== 0,
+        });
+
         return (
             <IntlProvider locale={lang} messages={messages} key={lang}>
                 <GuardWrapper
@@ -87,9 +113,37 @@ class AppLayout extends React.Component<Props, {}, {}> {
                         </ErrorWrapper>
                     </Router>
                     {guardModal && <GuardModal onClose={this.props.closeGuardModal}/>}
+                    <LoginModal
+                        classname={cx}
+                        closeModal={this.handleDisplayModal}
+                        userLevel={userData.level}
+                        history={history}
+                    />
                 </GuardWrapper>
             </IntlProvider>
         );
+    }
+
+    private handleOpenLoginModal = () => {
+        this.setState({
+            diplayKYCLoginModal: true,
+        }, () => {
+            document.addEventListener('click', this.handleCloseLoginModal);
+        });
+    };
+
+    private handleCloseLoginModal = () => {
+        this.setState({
+            diplayKYCLoginModal: false,
+        }, () => {
+            document.removeEventListener('click', this.handleCloseLoginModal);
+        });
+    }
+
+    private handleDisplayModal = (value: boolean) => {
+        this.setState({
+            diplayKYCLoginModal: value,
+        });
     }
 }
 
@@ -102,6 +156,8 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> =
         tenkoKey: selectTenkoPublicKey(state),
         token: selectToken(state),
         tokenFetching: selectTokenFetching(state),
+        userData: selectUserInfo(state),
+        isLoggedIn: selectUserLoggedIn(state),
     });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =

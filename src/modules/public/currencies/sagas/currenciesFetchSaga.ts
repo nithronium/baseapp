@@ -9,7 +9,7 @@ import {
 import { CURRENCIES_FETCH } from '../constants';
 
 const currenciesOptions: RequestOptions = {
-    apiVersion: 'peatio',
+    apiVersion: 'applogic',
 };
 
 export function* rootCurrenciesSaga() {

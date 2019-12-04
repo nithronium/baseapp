@@ -334,7 +334,7 @@ describe('Wallets', () => {
         };
 
         const mockWalletsWithdrawCcyFetch = () => {
-            mockAxios.onPost('/account/withdraws').reply(201);
+            mockAxios.onPost('/private/withdraws').reply(201);
         };
 
         const expectedWalletsWithdrawCcyFetch = {

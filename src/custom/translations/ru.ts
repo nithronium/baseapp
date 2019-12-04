@@ -359,7 +359,7 @@ export const ru: LangType = {
     'page.body.kyc.identity.postcode': 'Почтовый индекс',
     'page.body.kyc.identity.nationality': 'Национальность',
     'page.body.kyc.identity.CoR': 'Страна проживания',
-    'page.body.kyc.documents.expiryDate': 'Действителен до DD/MM/YYYY',
+    'page.body.kyc.documents.expiryDate': 'Дата выдачи DD/MM/YYYY',
     'page.body.kyc.documents.drag': 'Перетащите или загрузите файлы',
     'page.body.kyc.documents.maxFile': 'Максимальный размер 10MB',
     'page.body.kyc.documents.maxNum': 'Максимальное число 5',
@@ -375,6 +375,77 @@ export const ru: LangType = {
     'page.body.kyc.documents.select.bankStatement': 'Bank statement',
     'page.body.kyc.documents.select.taxCertificate': 'Tax certificate',
     'page.body.kyc.documents.select.leaseOfRentalAgreement': 'Lease of rental agreement',
+    'page.body.kyc.documents.questionnaire.title.part1': 'Please fill the',
+    'page.body.kyc.documents.questionnaire.title.part2': 'to process to your level upgrade.',
+    'page.body.kyc.documents.questionnaire.subtitle': 'questionnaire',
+
+    'page.body.kyc.questionnaire.title': 'Please answer the questions',
+
+    'page.body.kyc.questionnaire.question1': 'Do you have an established relationship with any other cryptocurrency exchange?',
+    'page.body.kyc.questionnaire.question1.answer1': 'No',
+    'page.body.kyc.questionnaire.question1.answer2': 'Yes',
+
+    'page.body.kyc.questionnaire.question2': 'How much trading experience do you have?',
+    'page.body.kyc.questionnaire.question2.answer1': '0 - 5 years',
+    'page.body.kyc.questionnaire.question2.answer2': '5 - 10 years',
+    'page.body.kyc.questionnaire.question2.answer3': '> 10 years',
+
+    'page.body.kyc.questionnaire.question3': 'Expected monthly trade activity',
+    'page.body.kyc.questionnaire.question3.answer1': '0 - 250 trades per month',
+    'page.body.kyc.questionnaire.question3.answer2': '>250 and <1K per month',
+    'page.body.kyc.questionnaire.question3.answer3': '>1K trades per month',
+
+    'page.body.kyc.questionnaire.question4': 'Employer (If self-employed, please describe your self-employment)',
+    'page.body.kyc.questionnaire.question4.input1': 'Employer',
+    'page.body.kyc.questionnaire.question4.input2': 'Position',
+
+    'page.body.kyc.questionnaire.question5': 'Will you be withdrawing USD to a US bank?',
+    'page.body.kyc.questionnaire.question5.answer1': 'Yes',
+    'page.body.kyc.questionnaire.question5.answer2': 'No',
+
+    'page.body.kyc.questionnaire.question6': 'Please specify which currency will be represented in your answers to the  questions below',
+    'page.body.kyc.questionnaire.question6.answer1': 'EUR',
+    'page.body.kyc.questionnaire.question6.answer2': 'USD',
+    'page.body.kyc.questionnaire.question6.answer3': 'CAD',
+    'page.body.kyc.questionnaire.question6.answer4': 'JPY',
+    'page.body.kyc.questionnaire.question6.answer5': 'GBP',
+
+    'page.body.kyc.questionnaire.question7': 'Net worth',
+    'page.body.kyc.questionnaire.question7.answer1': '0 to 500,000',
+    'page.body.kyc.questionnaire.question7.answer2': '500,001-2,000,000',
+    'page.body.kyc.questionnaire.question7.answer3': '2,000,001-5,000,000',
+    'page.body.kyc.questionnaire.question7.answer4': '5,000,001-10,000,000',
+    'page.body.kyc.questionnaire.question7.answer5': '10,000,000+',
+
+    'page.body.kyc.questionnaire.question8': 'Expected sum of monthly deposits',
+    'page.body.kyc.questionnaire.question8.answer1': '0 to 500,000',
+    'page.body.kyc.questionnaire.question8.answer2': '500,001-10,000,000',
+    'page.body.kyc.questionnaire.question8.answer3': '10,000,000+',
+
+    'page.body.kyc.questionnaire.question9': 'Expected sum of monthly withdrawals',
+    'page.body.kyc.questionnaire.question9.answer1': '0 to 500,000',
+    'page.body.kyc.questionnaire.question9.answer2': '500,001-10,000,000',
+    'page.body.kyc.questionnaire.question9.answer3': '10,000,000+',
+
+    'page.body.kyc.questionnaire.question10': 'Primary source of wealth',
+    'page.body.kyc.questionnaire.question10.answer1': 'Investments',
+    'page.body.kyc.questionnaire.question10.answer2': 'Employment income',
+    'page.body.kyc.questionnaire.question10.answer3': 'Inheritance',
+    'page.body.kyc.questionnaire.question10.answer4': 'Other',
+
+    'page.body.kyc.questionnaire.question11': 'Are you or your relatives are politically exposed persons? ',
+    'page.body.kyc.questionnaire.question11.answer1': 'Yes',
+    'page.body.kyc.questionnaire.question11.answer2': 'No',
+
+    'page.body.kyc.questionnaire.question12': 'Have you ever been involved in any anti money laundering activity',
+    'page.body.kyc.questionnaire.question12.answer1': 'Yes',
+    'page.body.kyc.questionnaire.question12.answer2': 'No',
+
+    'page.body.kyc.questionnaire.question13': 'Any feedback or comments you would like to give us',
+    'page.body.kyc.questionnaire.question13.textarea': 'Your comment',
+    'page.body.kyc.questionnaire.dropDown.placeholder': 'Select an answer',
+
+    'page.body.kyc.confirm': 'Confirm',
 
     'page.body.kyc.next': 'Дальше',
     'page.body.kyc.submit': 'Отправить',
@@ -452,6 +523,7 @@ export const ru: LangType = {
     'success.phone.confirmation.message': 'Успех!',
     'success.message.sent': 'Письмо было успешно отправлено',
     'success.email.confirmed': 'Email был успешно подтвержден',
+    'success.dataStorage.pushed': 'Успех!',
 
     // error messages
     // barong
@@ -474,16 +546,16 @@ export const ru: LangType = {
     'resource.password.doesnt_match': 'Новые пароли не совпадают',
     'resource.password.prev_pass_not_correct': 'Предыдущий пароль неверен',
     'resource.password.no_change_provided': 'Новый пароль не может быть таким же, как старый',
-    'resource.document.empty_doc_expire': 'Срок действия недействителен',
+    'resource.document.empty_doc_expire': 'Дата выдачи недействителена',
     'password.requirements': 'Пароль не соответствует минимальным требованиям',
     'password.password.password_strength': 'Пароль слишком слабый',
     'resource.profile.email': 'Почта проверяется',
-    'resource.profile.profile_partial': 'Профиль проверяется',
+    'resource.profile.profile': 'Профиль проверяется',
     'resource.profile.phone': 'Телефон проверяется',
     'resource.profile.kyc': 'Личность проверяется',
     'resource.profile.document': 'Место жительства проверяется',
     'resource.profile.questionnaire': 'Анкета проверяется',
-    'resource.documents.expirationDate': 'Expiration date is invalid',
+    'resource.documents.expirationDate': 'Дата выдачи недействителена',
 
     'email.taken': 'Почта уже зарегистрирована',
 
@@ -580,6 +652,9 @@ export const ru: LangType = {
     'resource.profile.missing_postcode': 'Почтовый индекс отсутствует',
     'resource.profile.missing_city': 'Город отсутствует',
     'resource.profile.missing_country': 'Страна отсутствует',
+
+    'resource.profile.document.denied': 'Your last kyc was denied. Please, try again',
+    'resource.profile.kyc.denied': 'Your documents were denied. Please, try again',
 
     'resource.api_key.missing_algorithm': 'Алгоритм отсутствует',
     'resource.api_key.empty_algorithm': 'Алгоритм отсутствует',
@@ -693,6 +768,11 @@ export const ru: LangType = {
     'page.body.modal.denied': 'Доступ закрыт',
     'page.body.modal.appologies': 'Sorry, due to your local legislation we are not able to proceed your registration.',
     'page.body.modal.understand': 'I understand',
+
+    'page.body.modal.kyc.login.header': 'Finish your registration',
+    'page.body.modal.kyc.login.text': 'For all possibilities upgrade your KYC level',
+    'page.body.modal.kyc.login.go.kyc.level': 'Get level',
+    'page.body.modal.kyc.login.later': 'Later',
 
     ...nationalitiesNames,
     ...pluginsTranslations,

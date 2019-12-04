@@ -121,6 +121,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
         this.check();
     }
 
+
     public componentDidUpdate(next: LayoutProps) {
         const { isLoggedIn, history } = this.props;
 

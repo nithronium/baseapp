@@ -1,3 +1,4 @@
+import { Decimal } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
@@ -134,20 +135,26 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
     }
 
     public renderUserLevel(level: number) {
+        const zeroCircleClassName = classnames('pg-profile-verification__level__circle', {
+            'pg-profile-verification__level__circle--active': level === 0 || level === 1,
+        });
+
         const firstCircleClassName = classnames('pg-profile-verification__level__circle', {
-            'pg-profile-verification__level__circle--active': level === 1,
+            'pg-profile-verification__level__circle--active': level === 2 || level === 3,
         });
 
         const secondCircleClassName = classnames('pg-profile-verification__level__circle', {
-            'pg-profile-verification__level__circle--active': level === 2,
+            'pg-profile-verification__level__circle--active': level === 4 || level === 5,
         });
 
         const thirdCircleClassName = classnames('pg-profile-verification__level__circle', {
-            'pg-profile-verification__level__circle--active': level === 3,
+            'pg-profile-verification__level__circle--active': level === 6,
         });
 
         return (
             <div className="pg-profile-verification__level">
+                <div className={zeroCircleClassName}>0</div>
+                <div className="pg-profile-verification__level__line" />
                 <div className={firstCircleClassName}>1</div>
                 <div className="pg-profile-verification__level__line" />
                 <div className={secondCircleClassName}>2</div>
@@ -169,7 +176,8 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
         const withdrawalLimitCurrency = withdrawLimitData.currency.toLocaleLowerCase().includes('usd') ?
             '$' : ` ${withdrawLimitData.currency.toUpperCase()}`;
 
-        if (level === 1) {
+        // tslint:disable-next-line: prefer-switch
+        if (level === 2 || level === 3) {
             const firstAbility = this.props.intl.formatMessage(
                 { id: 'page.body.profile.header.account.profile.abilities.first.message1' },
                 { amount: withdrawLimitData.limit, currency: withdrawalLimitCurrency },
@@ -183,7 +191,8 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
             );
         }
 
-        if (level === 2) {
+        // tslint:disable-next-line: prefer-switch
+        if (level === 4 || level === 5) {
             const firstAbility = this.props.intl.formatMessage(
                 { id: 'page.body.profile.header.account.profile.abilities.second.message1' },
                 { amount: withdrawLimitData.limit, currency: withdrawalLimitCurrency },
@@ -202,7 +211,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
             );
         }
 
-        if (level === 3) {
+        if (level === 6) {
             return (
                 <div className="pg-profile-verification__abilities">
                     <FormattedMessage id="page.body.profile.header.account.profile.abilities.third" />
@@ -211,12 +220,12 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
         }
 
         return (
-            <div className="pg-profile-verification__abilities" />
+            <div className="pg-profile-verification__abilities pg-profile-verification__abilities--blank" />
         );
     }
 
     public renderWithdrawLimit(userLevel: number, withdrawLimitData: WithdrawLimit) {
-        if (!userLevel) {
+        if (!userLevel || userLevel === 1 || userLevel === 6) {
             return (
                 <div className="pg-profile-verification__withdraw-limit" />
             );
@@ -225,6 +234,8 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
         const percentage = Math.round(+withdrawLimitData.withdrawal_amount / +withdrawLimitData.limit * 100);
         const withdrawalLimitCurrency = withdrawLimitData.currency.toLocaleLowerCase().includes('usd') ?
             '$' : ` ${withdrawLimitData.currency.toUpperCase()}`;
+        const currentCurrency = this.props.currencies.find(currecy => currecy.id.toLowerCase() === withdrawLimitData.currency.toLowerCase() ? currecy : '');
+        const currencyPrecision = currentCurrency && currentCurrency.precision;
 
         return (
             <div className="pg-profile-verification__withdraw-limit">
@@ -237,7 +248,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                     </div>
                     <span className="pg-profile-verification__withdraw-limit__wrap__text">
                         <FormattedMessage id="page.body.profile.header.account.profile.withdraw" />
-                        &nbsp;{withdrawLimitData.withdrawal_amount} / {withdrawLimitData.limit}{withdrawalLimitCurrency}
+                        &nbsp;{Decimal.format(withdrawLimitData.withdrawal_amount, currencyPrecision)} / {Decimal.format(withdrawLimitData.limit, currencyPrecision)}{withdrawalLimitCurrency}
                     </span>
                 </div>
                 <div className="pg-profile-verification__withdraw-limit__know-more" />
@@ -248,7 +259,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
     public renderDepositLimit(userLevel: number, withdrawLimitData: WithdrawLimit) {
         const { evaluatedDepositsTotal } = this.state;
 
-        if (!userLevel) {
+        if (!userLevel || userLevel === 1 || userLevel === 6) {
             return (
                 <div className="pg-profile-verification__deposit-limit">
                     <div className="pg-profile-verification__deposit-limit__wrap" />
@@ -260,10 +271,11 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                 </div>
             );
         }
-
         const percentage = Math.round(+evaluatedDepositsTotal / +withdrawLimitData.limit * 100);
-        const withdrawalLimitCurrency = withdrawLimitData.currency.toLocaleLowerCase().includes('usd') ?
+        const withdrawalLimitCurrency = withdrawLimitData.currency.toLowerCase().includes('usd') ?
             '$' : ` ${withdrawLimitData.currency.toUpperCase()}`;
+        const currentCurrency = this.props.currencies.find(currecy => currecy.id.toLowerCase() === withdrawLimitData.currency.toLowerCase() ? currecy : '');
+        const currencyPrecision = currentCurrency && currentCurrency.precision;
 
         return (
             <div className="pg-profile-verification__deposit-limit">
@@ -276,7 +288,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                     </div>
                     <span className="pg-profile-verification__deposit-limit__wrap__text">
                         <FormattedMessage id="page.body.profile.header.account.profile.deposit" />
-                        &nbsp;{evaluatedDepositsTotal} / {withdrawLimitData.limit}{withdrawalLimitCurrency}
+                        &nbsp;{Decimal.format(evaluatedDepositsTotal, currencyPrecision)} / {Decimal.format(withdrawLimitData.limit, currencyPrecision)}{withdrawalLimitCurrency}
                     </span>
                 </div>
                 <div className="pg-profile-verification__deposit-limit__know-more">
@@ -299,7 +311,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                     <FormattedMessage id="page.body.profile.header.account.profile"/>
                 </div>
                 {this.renderUserLevel(userLevel)}
-                {userLevel < 3 && this.renderUpgradeLevelLink()}
+                {userLevel < 6 && this.renderUpgradeLevelLink()}
                 {withdrawLimitData && this.renderUserAbilities(userLevel, withdrawLimitData)}
                 {withdrawLimitData && this.renderWithdrawLimit(userLevel, withdrawLimitData)}
                 {withdrawLimitData && this.renderDepositLimit(userLevel, withdrawLimitData)}

@@ -12,7 +12,12 @@ import {
   MapDispatchToPropsFunction,
 } from 'react-redux';
 import { formatDate, isDateInFuture } from '../../../../helpers';
-import { RootState, selectCurrentLanguage } from '../../../../modules';
+import {
+    RootState,
+    selectCurrentLanguage,
+    selectUserInfo,
+    User,
+} from '../../../../modules';
 import {
     selectSendIdentitySuccess,
     sendIdentity,
@@ -24,6 +29,7 @@ import { nationalities } from '../../../../translations/nationalities';
 interface ReduxProps {
     success?: string;
     lang: string;
+    user: User;
 }
 
 interface DispatchProps {
@@ -76,8 +82,10 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     };
 
     public componentDidUpdate(prev: Props) {
+        const { user } = this.props;
+
         if (!prev.success && this.props.success) {
-            this.props.changeUserLevel({ level: 1 });
+            this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
         }
     }
@@ -336,6 +344,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
 const mapStateToProps = (state: RootState): ReduxProps => ({
     success: selectSendIdentitySuccess(state),
     lang: selectCurrentLanguage(state),
+    user: selectUserInfo(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =

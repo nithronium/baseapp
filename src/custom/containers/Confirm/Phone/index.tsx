@@ -8,16 +8,23 @@ import {
     connect,
     MapDispatchToPropsFunction,
 } from 'react-redux';
-import { labelFetch, RootState } from '../../../../modules';
+import {
+    labelFetch,
+    RootState,
+    selectUserInfo,
+    User,
+} from '../../../../modules';
 import {
     resendCode,
     selectVerifyPhoneSuccess,
     sendCode,
     verifyPhone,
 } from '../../../../modules/user/kyc/phone';
+import { changeUserLevel } from '../../../../modules/user/profile';
 
 interface ReduxProps {
     verifyPhoneSuccess?: string;
+    user: User;
 }
 
 interface OnChangeEvent {
@@ -35,6 +42,7 @@ interface PhoneState {
 }
 
 interface DispatchProps {
+    changeUserLevel: typeof changeUserLevel;
     labelFetch: typeof labelFetch;
     resendCode: typeof resendCode;
     sendCode: typeof sendCode;
@@ -61,7 +69,10 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
     };
 
     public componentDidUpdate(prev: Props) {
+        const { user } = this.props;
+
         if (!prev.verifyPhoneSuccess && this.props.verifyPhoneSuccess) {
+            this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
         }
     }
@@ -241,10 +252,12 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
     verifyPhoneSuccess: selectVerifyPhoneSuccess(state),
+    user: selectUserInfo(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     dispatch => ({
+        changeUserLevel: payload => dispatch(changeUserLevel(payload)),
         labelFetch: () => dispatch(labelFetch()),
         resendCode: phone => dispatch(resendCode(phone)),
         sendCode: phone => dispatch(sendCode(phone)),

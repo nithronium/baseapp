@@ -1,6 +1,7 @@
 export * from './Confirm/Documents';
 export * from './Confirm/Phone';
 export * from './Confirm/ProfilePartial';
+export * from './Confirm/Questionnaire';
 export * from './OrderBook';
 export * from './OpenOrders';
 export * from './OpenOrdersPanel';

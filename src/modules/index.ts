@@ -36,7 +36,9 @@ import { rootWithdrawLimitSaga, WithdrawLimitState } from './user/withdrawLimit'
 
 import {
     customUserReducer,
+    DataStorageState,
     KycAuthState,
+    rootDataStorageSaga,
     rootKycAuthSaga,
 } from '../custom/modules';
 
@@ -103,6 +105,7 @@ export interface RootState {
         ieo: OrderIEOState,
     };
     customUser: {
+        dataStorage: DataStorageState;
         kycAuth: KycAuthState;
     };
 }
@@ -140,6 +143,7 @@ export function* rootSaga() {
         call(rootKlineFetchSaga),
         call(rootWithdrawLimitSaga),
         call(rootGuardSaga),
+        call(rootDataStorageSaga),
         call(rootKycAuthSaga),
         call(rootIEOOrderSaga),
         call(rootPublicIEOSaga),

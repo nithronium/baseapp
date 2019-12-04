@@ -19,20 +19,29 @@ import { withRouter } from 'react-router-dom';
 import close = require('../../../../assets/images/close.svg');
 import { formatDate } from '../../../../helpers';
 import { isDateInFuture } from '../../../../helpers/checkDate';
-import { alertPush, RootState } from '../../../../modules';
+import {
+    alertPush,
+    labelFetch,
+    RootState,
+    selectUserInfo,
+    User,
+} from '../../../../modules';
 import {
     selectSendDocumentsLoading,
     selectSendDocumentsSuccess,
     sendDocuments,
 } from '../../../../modules/user/kyc/documents';
+import { changeUserLevel } from '../../../../modules/user/profile';
 import { isValidDate } from '../../../helpers/checkDate';
 
 interface ReduxProps {
     success?: string;
     loading: boolean;
+    user: User;
 }
 
 interface DispatchProps {
+    changeUserLevel: typeof changeUserLevel;
     sendDocuments: typeof sendDocuments;
     fetchAlert: typeof alertPush;
 }
@@ -75,8 +84,11 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
     };
 
     public componentWillReceiveProps(next: Props) {
-        if (next.success){
-            this.props.history.push('/profile');
+        const { user } = this.props;
+
+        if (next.success) {
+            this.props.changeUserLevel({ level: +user.level + 1 });
+            this.props.labelFetch();
         }
     }
 
@@ -178,10 +190,15 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                         </div>
                     </div>
                 </div>
+                <div className="pg-confirm__content__questionnaire-label">
+                    {this.translate('page.body.kyc.documents.questionnaire.title.part1')}
+                    <span>&nbsp;{this.translate('page.body.kyc.documents.questionnaire.subtitle')}&nbsp;</span>
+                    {this.translate('page.body.kyc.documents.questionnaire.title.part2')}
+                </div>
                 <div className="pg-confirm__content-deep">
                     <Button
                         className="pg-confirm__content-phone-deep-button"
-                        label={this.translate('page.body.kyc.submit')}
+                        label={this.translate('page.body.kyc.next')}
                         onClick={this.sendDocuments}
                         disabled={this.handleCheckButtonDisabled()}
                     />
@@ -306,6 +323,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
             request.append('upload[]', scan);
         }
         request.append('doc_expire', expiration);
+        request.append('doc_number', '0000');
         request.append('doc_type', typeOfDocuments);
 
         this.props.sendDocuments(request);
@@ -325,12 +343,15 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
 const mapStateToProps = (state: RootState): ReduxProps => ({
     success: selectSendDocumentsSuccess(state),
     loading: selectSendDocumentsLoading(state),
+    user: selectUserInfo(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     dispatch => ({
+        changeUserLevel: payload => dispatch(changeUserLevel(payload)),
         fetchAlert: payload => dispatch(alertPush(payload)),
         sendDocuments: payload => dispatch(sendDocuments(payload)),
+        labelFetch: () => dispatch(labelFetch()),
     });
 
 // tslint:disable-next-line:no-any
