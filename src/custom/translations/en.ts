@@ -165,6 +165,13 @@ export const en = {
   'tickets.overall': 'overall',
   'tickets.next': 'NEXT',
   'tickets.prev': 'PREV',
+  'tickets.bonus_detail': 'Bonus tickets detail',
+  'tickets.sub': 'Subscription',
+  'tickets.post': 'Network Post',
+  'tickets.tickets_B': 'Tickets',
+  'tickets.posts': 'posts',
+  'tickets.link': 'Link',
+
   "btcusdt_title": "BTC to USDT. Bitcoin Exchange | Emirex.com",
     "btcusdt_description": "BTC to USDT Exchange and converter BTC/USDT. Real-time prices and charts. 24/7 global customer support. You can buy & sell using up to date Bitcoin exchange rates",
     "ethusdt_title": "ETH to USDT. Ethereum Exchange | Emirex.com",
