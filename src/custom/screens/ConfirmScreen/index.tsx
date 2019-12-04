@@ -74,12 +74,11 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
 
     public goBack = event => {
       event.preventDefault();
-      this.props.history.goBack();
+      this.props.history.push('/profile');
     };
 
     // tslint:disable:jsx-no-multiline-js
     public render() {
-        window.console.log(this.props);
         const { colorTheme, userData } = this.props;
 
         const currentProfileLevel = userData.level;
