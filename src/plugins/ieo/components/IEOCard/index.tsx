@@ -21,6 +21,8 @@ interface State {
 const limitDescription = 80;
 
 type Props = CardIEOProps & InjectedIntlProps;
+
+// tslint:disable jsx-no-multiline-js
 class IEOCardComponent extends React.Component<Props, State> {
     public countdownInterval;
 
@@ -41,12 +43,12 @@ class IEOCardComponent extends React.Component<Props, State> {
         if (ieo) {
             let countdownDate = ieo.starts_at;
 
-            if (ieo.state === 'ongoing') {
+            if (ieo.state === 'ongoing' && ieo.finishes_at) {
                 countdownDate = ieo.finishes_at;
             }
 
             this.countdownInterval = setInterval(() => {
-                if (ieo.state === 'distributing' && ieo.type === 'proportional') {
+                if (ieo.state === 'distributing' && ieo.type === 'proportional' && ieo.finishes_at) {
                     countdownDate = ieo.finishes_at;
                     this.setState({ countdownValue: getCountdownDate(countdownDate, '5m') });
                 } else {
@@ -62,12 +64,12 @@ class IEOCardComponent extends React.Component<Props, State> {
         if (!ieo && nextProps.ieo) {
             let countdownDate = nextProps.ieo.starts_at;
 
-            if (nextProps.ieo.state === 'ongoing') {
+            if (nextProps.ieo.state === 'ongoing' && nextProps.ieo.finishes_at) {
                 countdownDate = nextProps.ieo.finishes_at;
             }
 
             this.countdownInterval = setInterval(() => {
-                if (nextProps.ieo.state === 'distributing' && ieo.type === 'proportional') {
+                if (nextProps.ieo.state === 'distributing' && ieo.type === 'proportional' && nextProps.ieo.finishes_at) {
                     countdownDate = nextProps.ieo.finishes_at;
                     this.setState({ countdownValue: getCountdownDate(countdownDate, '5m') });
                 } else {
@@ -84,14 +86,14 @@ class IEOCardComponent extends React.Component<Props, State> {
             clearInterval(this.countdownInterval);
             let countdownDate = ieo.starts_at;
 
-            if (ieo.state === 'ongoing') {
+            if (ieo.state === 'ongoing' && ieo.finishes_at) {
                 countdownDate = ieo.finishes_at;
             }
 
             this.countdownInterval = setInterval(() => {
                 this.setState({ countdownValue: getCountdownDate(countdownDate) });
 
-                if (ieo.state === 'distributing' && ieo.type === 'proportional') {
+                if (ieo.state === 'distributing' && ieo.type === 'proportional' && ieo.finishes_at) {
                     countdownDate = ieo.finishes_at;
                     this.setState({ countdownValue: getCountdownDate(countdownDate, '5m') });
                 } else {
@@ -166,10 +168,12 @@ class IEOCardComponent extends React.Component<Props, State> {
                     <span className="pg-ieo__card-content-block__text">{this.translate('page.body.ieo.card.start.date')}</span>
                     <span className="pg-ieo__card-content-block__text text-bold">{localeDate(starts_at, 'fullDate')}</span>
                 </div>
-                <div className="pg-ieo__card-content-block__row">
-                    <span className="pg-ieo__card-content-block__text">{this.translate('page.body.ieo.card.end.date')}</span>
-                    <span className="pg-ieo__card-content-block__text text-bold">{localeDate(finishes_at, 'fullDate')}</span>
-                </div>
+                {finishes_at ? (
+                    <div className="pg-ieo__card-content-block__row">
+                        <span className="pg-ieo__card-content-block__text">{this.translate('page.body.ieo.card.end.date')}</span>
+                        <span className="pg-ieo__card-content-block__text text-bold">{localeDate(finishes_at, 'fullDate')}</span>
+                    </div>
+                ) : null}
             </div>
         );
     };

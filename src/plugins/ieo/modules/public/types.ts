@@ -22,7 +22,7 @@ export interface DataIEOInterface {
     collected_amount: string;
     ratio: string;
     starts_at: string;
-    finishes_at: string;
+    finishes_at?: string;
     created_at: string;
     updated_at: string;
     pairs: PairIEOInterface[];

@@ -47,6 +47,7 @@ interface OwnProps {
 
 type Props = ReduxProps & DispatchProps & OwnProps & InjectedIntlProps;
 
+// tslint:disable jsx-no-multiline-js
 class OrderIEOContainer extends React.PureComponent<Props> {
     public componentDidMount() {
         this.props.fetchCurrencies();
@@ -85,12 +86,14 @@ class OrderIEOContainer extends React.PureComponent<Props> {
                                     </span>
                                     <span className="pg-order-ieo__info-row-text">{currentIEO && localeDate(currentIEO.starts_at, 'fullDate')}</span>
                                 </div>
-                                <div className="pg-order-ieo__info-row">
-                                    <span className="pg-order-ieo__info-row-text">
-                                        {this.props.intl.formatMessage({ id: 'page.body.ieo.card.end.date' })}
-                                    </span>
-                                    <span className="pg-order-ieo__info-row-text">{currentIEO && localeDate(currentIEO.finishes_at, 'fullDate')}</span>
-                                </div>
+                                {currentIEO && currentIEO.finishes_at ? (
+                                    <div className="pg-order-ieo__info-row">
+                                        <span className="pg-order-ieo__info-row-text">
+                                            {this.props.intl.formatMessage({ id: 'page.body.ieo.card.end.date' })}
+                                        </span>
+                                        <span className="pg-order-ieo__info-row-text">{currentIEO && localeDate(currentIEO.finishes_at, 'fullDate')}</span>
+                                    </div>
+                                ) : null }
                             </div>
                             {this.getOrder()}
                         </div>

@@ -17,7 +17,7 @@ class IEODetailsComponent extends React.Component<Props> {
         return this.props.intl.formatMessage({ id: e });
     };
 
-    // tslint:disable-next-line: cyclomatic-complexity
+    // tslint:disable cyclomatic-complexity jsx-no-multiline-js
     public render() {
         const { currentIEO, currencies } = this.props;
         const quoteCurrency = currencies.length && currencies.find(currency => currency.id && currency.id.toLowerCase() === currentIEO.pairs[0].quote_currency_id && currentIEO.pairs[0].quote_currency_id.toLowerCase());
@@ -88,14 +88,16 @@ class IEODetailsComponent extends React.Component<Props> {
                                 {localeDate(currentIEO.starts_at, 'fullDate') || '-'}
                             </div>
                         </div>
-                        <div className="ieo-profile-details__body__left__row">
-                            <div className="ieo-profile-details__body__left__row__first-column">
-                                {this.translate('page.body.ieo.profile.details.ieo.end')}
+                        {currentIEO.finishes_at ? (
+                            <div className="ieo-profile-details__body__left__row">
+                                <div className="ieo-profile-details__body__left__row__first-column">
+                                    {this.translate('page.body.ieo.profile.details.ieo.end')}
+                                </div>
+                                <div className="ieo-profile-details__body__left__row__second-column">
+                                    {localeDate(currentIEO.finishes_at, 'fullDate') || '-'}
+                                </div>
                             </div>
-                            <div className="ieo-profile-details__body__left__row__second-column">
-                                {localeDate(currentIEO.finishes_at, 'fullDate') || '-'}
-                            </div>
-                        </div>
+                        ) : null}
                     </div>
                     <div className="ieo-profile-details__body__right">
                         <div className="ieo-profile-details__body__right__row">

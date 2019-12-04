@@ -24,6 +24,7 @@ interface State {
 
 type Props = OwnProps & InjectedIntlProps & RouterProps;
 
+// tslint:disable jsx-no-multiline-js
 class IEOInfoComponent extends React.Component<Props, State> {
     public countdownInterval;
 
@@ -40,12 +41,12 @@ class IEOInfoComponent extends React.Component<Props, State> {
         if (ieo) {
             let countdownDate = ieo.starts_at;
 
-            if (ieo.state === 'ongoing') {
+            if (ieo.state === 'ongoing' && ieo.finishes_at) {
                 countdownDate = ieo.finishes_at;
             }
 
             this.countdownInterval = setInterval(() => {
-                if (ieo.state === 'distributing' && ieo.type === 'proportional') {
+                if (ieo.state === 'distributing' && ieo.type === 'proportional' && ieo.finishes_at) {
                     countdownDate = ieo.finishes_at;
                     this.setState({ countdownValue: getCountdownDate(countdownDate, '5m')});
                 } else {
@@ -61,12 +62,12 @@ class IEOInfoComponent extends React.Component<Props, State> {
         if (!ieo && nextProps.ieo) {
             let countdownDate = nextProps.ieo.starts_at;
 
-            if (nextProps.ieo.state === 'ongoing') {
+            if (nextProps.ieo.state === 'ongoing' && nextProps.ieo.finishes_at) {
                 countdownDate = nextProps.ieo.finishes_at;
             }
 
             this.countdownInterval = setInterval(() => {
-                if (nextProps.ieo.state === 'distributing' && ieo.type === 'proportional') {
+                if (nextProps.ieo.state === 'distributing' && ieo.type === 'proportional' && nextProps.ieo.finishes_at) {
                     countdownDate = nextProps.ieo.finishes_at;
                     this.setState({ countdownValue: getCountdownDate(countdownDate, '5m')});
                 } else {
@@ -83,12 +84,12 @@ class IEOInfoComponent extends React.Component<Props, State> {
             clearInterval(this.countdownInterval);
             let countdownDate = ieo.starts_at;
 
-            if (ieo.state === 'ongoing') {
+            if (ieo.state === 'ongoing' && ieo.finishes_at) {
                 countdownDate = ieo.finishes_at;
             }
 
             this.countdownInterval = setInterval(() => {
-                if (ieo.state === 'distributing' && ieo.type === 'proportional') {
+                if (ieo.state === 'distributing' && ieo.type === 'proportional' && ieo.finishes_at) {
                     countdownDate = ieo.finishes_at;
                     this.setState({ countdownValue: getCountdownDate(countdownDate, '5m')});
                 } else {
@@ -196,14 +197,16 @@ class IEOInfoComponent extends React.Component<Props, State> {
                         {localeDate(ieo.starts_at, 'fullDate')}
                     </div>
                 </div>
-                <div className="expiration-time">
-                    <div className="expiration-time__label">
-                        {this.translate('page.body.ieo.details.info.finishesAt')}
+                {ieo.finishes_at ? (
+                    <div className="expiration-time">
+                        <div className="expiration-time__label">
+                            {this.translate('page.body.ieo.details.info.finishesAt')}
+                        </div>
+                        <div className="expiration-time__value">
+                            {localeDate(ieo.finishes_at, 'fullDate')}
+                        </div>
                     </div>
-                    <div className="expiration-time__value">
-                        {localeDate(ieo.finishes_at, 'fullDate')}
-                    </div>
-                </div>
+                ) : null}
                 <div className="ieo-price">
                     <div className="ieo-price__label">
                         {this.translate('page.body.ieo.profile.info.price')}
@@ -261,6 +264,7 @@ class IEOInfoComponent extends React.Component<Props, State> {
 
         return (
             <div className="ieo-profile-info__main__info__value">
+                {ieo.finishes_at ? (
                 <div className="expiration-time">
                     <div className="expiration-time__label">
                         {this.translate('page.body.ieo.details.info.finishedAt')}
@@ -269,6 +273,7 @@ class IEOInfoComponent extends React.Component<Props, State> {
                         {localeDate(ieo.finishes_at, 'fullDate')}
                     </div>
                 </div>
+                ) : null}
                 <div className="ieo-price">
                     <div className="ieo-price__label">
                         {this.translate('page.body.ieo.card.raised')}
