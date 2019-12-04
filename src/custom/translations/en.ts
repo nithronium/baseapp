@@ -135,6 +135,8 @@ export const en = {
     'page.body.modal.appologies': 'Sorry, due to your local legislation we are not able to proceed your registration.',
     'page.body.modal.understand': 'I understand',
 
+    'resource.profile.dateOfBirth': 'User must be over 21 years old',
+
     'resource.documents.expirationDate': 'Date of emission is invalid',
     'resource.document.empty_doc_expire': 'Date of emission is invalid',
     'resource.documents.empty_doc_expire': 'Documents date of emission is missing or empty',
