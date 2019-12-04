@@ -104,19 +104,6 @@ steps:
     commands:
       - BUNDLE_GEMFILE=/sdk/Gemfile bundle exec rake --rakefile=/sdk/Rakefile ci:prebuild
 
-
-  - name: "Publish to Gitolite"
-    image: alpine/git
-    environment:
-      GITOLITE_KEY:
-        from_secret: gitolite_rsa_key_b64
-    commands:
-      - mkdir -p ~/.ssh
-      - echo $GITOLITE_KEY | base64 -d > ~/.ssh/id_rsa
-      - chmod 0600 ~/.ssh/id_rsa
-      - git remote add gitolite git@git.openware.com:baseapp
-      - GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git push -f --no-verify gitolite HEAD:master
-
   - name: "Build image"
     image: plugins/gcr
     environment:
