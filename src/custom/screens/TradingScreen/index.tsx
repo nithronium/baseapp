@@ -32,6 +32,8 @@ import { selectWallets, Wallet, walletsFetch } from '../../../modules/user/walle
 // import { OpenOrdersPanel, OrderBook, OrderComponent } from '../../containers';
 import { buildPath } from '../../helpers';
 
+import { InjectedIntlProps, injectIntl } from 'react-intl';
+
 const breakpoints = {
     lg: 1200,
     md: 996,
@@ -76,7 +78,7 @@ interface StateProps {
     orderComponentResized: number;
 }
 
-type Props = DispatchProps & ReduxProps & RouteComponentProps;
+type Props = DispatchProps & ReduxProps & RouteComponentProps & InjectedIntlProps;
 
 // tslint:disable:jsx-no-lambda
 class Trading extends React.Component<Props, StateProps> {
@@ -105,12 +107,12 @@ class Trading extends React.Component<Props, StateProps> {
     ];
 
     private pageTitles = {
-         'BTC/USDT': { title: 'BTC to USDT. Bitcoin Exchange | Emirex.com', description: 'BTC to USDT Exchange and converter BTC/USDT. Real-time prices and charts. 24/7 global customer support. You can buy & sell using up to date Bitcoin exchange rates' } ,
-         'ETH/USDT': { title: 'ETH to USDT. Ethereum Exchange | Emirex.com', description: 'ETH to USDT Exchange and converter ETH/USDT. Real-time prices and charts. 24/7 global customer support. You can buy & sell using up to date exchange rates' } ,
-         'ETH/BTC': { title: 'ETH to BTC. Price Ethereum Bitcoin | Emirex.com', description: 'ETH to BTC Exchange and converter BTC/ETH. Real-time prices and charts. 24/7 global customer support. You can buy & sell using up to date exchange rates' } ,
-         'EMRX/BTC': { title: 'EMRX to BTC. EMRX Exchange | Emirex.com', description: 'EMRX to BTC Exchange and converter Emirex Token (EMRX) in Bitcoin. Real-time prices and charts. 24/7 support. You can buy & sell using up to date exchange rates' } ,
-         'LTC/BTC': { title: 'LTC to BTC Converter | Price | Emirex.com', description: 'LTC to BTC Exchange. Real-time prices and charts. Converter Litecoin (LTC) in Bitcoin (BTC). 24/7 support. You can buy & sell using up to date exchange rates' } ,
-         'BCH/BTC': { title: 'BCH to BTC. Bitcoin Cash Exchange | Emirex.com', description: 'BCH to BTC Exchange. Real-time prices and charts. Converter Bitcoin Cash in Bitcoin (BTC). 24/7 support. You can buy & sell using up to date exchange rates' } ,
+         'BTC/USDT': { title: 'btcusdt_title', description: 'btcusdt_description' } ,
+         'ETH/USDT': { title: 'ethusdt_title', description: 'ethusdt_description' } ,
+         'ETH/BTC': { title: 'ethbtc_title', description: 'ethbtc_description' } ,
+         'EMRX/BTC': { title: 'emrxbtc_title', description: 'emrxbtc_description' } ,
+         'LTC/BTC': { title: 'ltcbtc_title', description: 'ltcbtc_description' } ,
+         'BCH/BTC': { title: 'bchbtc_title', description: 'bchbtc_description' } ,
     };
 
     public componentDidMount() {
@@ -146,6 +148,7 @@ class Trading extends React.Component<Props, StateProps> {
     }
 
     public componentWillReceiveProps(nextProps) {
+        document.getElementsByTagName('html')[0].lang = this.props.currentLanguage;
         const {
             currentLanguage,
             currentMarket,
@@ -212,20 +215,27 @@ class Trading extends React.Component<Props, StateProps> {
     };
 
     private setPageTitle = (market?: Market) => {
+        const { currentLanguage } = this.props;
         let marketName = 'ETH/USDT';
         if (market) {
             marketName = market.name;
         }
         if (this.pageTitles[marketName]) {
-            const title = this.pageTitles[`${marketName}`].title;
+            const title = this.props.intl.formatMessage({ id: this.pageTitles[`${marketName}`].title });
 
-            const description = this.pageTitles[marketName].description;
-            const link = `https://emirex.com/trading/${marketName.replace('/','').toLowerCase()}`;
+            const description = this.props.intl.formatMessage({ id: this.pageTitles[marketName].description });
+
+            // tslint:disable
+            const link = `https://emirex.com${currentLanguage === 'en' ? '/' : '/' + currentLanguage + '/'}trading/${marketName.replace('/', '').toLowerCase()}`;
+            const linkEn = `https://emirex.com/trading/${marketName.replace('/', '').toLowerCase()}`;
+            const linkRu = `https://emirex.com/ru/trading/${marketName.replace('/', '').toLowerCase()}`;
             return (
                 <Helmet>
                     <link rel="canonical" href={link}/>
                     <title>{title}</title>
                     <meta name="description" content={description} />
+                    <link key="ru" rel="alternate" href={linkRu} hrefLang="ru" title="Русский" />
+                    <link key="en" rel="alternate" href={linkEn} hrefLang="en" title="English"/>
                 </Helmet>
             );
         } else {
@@ -278,10 +288,10 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
     saveLayouts: payload => dispatch(saveLayouts(payload)),
 });
 
-const TradingScreen = withRouter(connect(
+const TradingScreen = injectIntl(withRouter(connect(
     mapStateToProps,
     mapDispatchToProps,
     // tslint:disable-next-line: no-any
-)(Trading) as any);
+)(Trading) as any));
 
 export { TradingScreen };
