@@ -235,10 +235,12 @@ class IEOInfoComponent extends React.Component<Props, State> {
 
         return (
             <div className="ieo-profile-info__main__info__value">
-                <div className="expiration-time">
-                    <div className="expiration-time__label">{this.translate('page.body.ieo.profile.info.price.close.in')}</div>
-                    <div className="expiration-time__value">{countdownValue === '00:00:00' ? 'End' : countdownValue}</div>
-                </div>
+                {ieo.finishes_at ? (
+                    <div className="expiration-time">
+                        <div className="expiration-time__label">{this.translate('page.body.ieo.profile.info.price.close.in')}</div>
+                        <div className="expiration-time__value">{countdownValue === '00:00:00' ? this.translate('page.body.ieo.card.end') : countdownValue}</div>
+                    </div>
+                ) : null}
                 <div className="ieo-price">
                     <div className="ieo-price__label">{this.translate('page.body.ieo.profile.info.price')}</div>
                     <div className="ieo-price__value">

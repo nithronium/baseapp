@@ -216,7 +216,7 @@ class IEOCardComponent extends React.Component<Props, State> {
 
     private renderProgressBar = () => {
         const { countdownValue } = this.state;
-        const { supply, tokens_ordered, state } = this.props.ieo;
+        const { finishes_at, supply, tokens_ordered, state } = this.props.ieo;
 
         const percentage = +supply ? +Decimal.format((+tokens_ordered * 100) / +supply, 2) : 0;
 
@@ -236,10 +236,12 @@ class IEOCardComponent extends React.Component<Props, State> {
 
         return (
             <React.Fragment>
-                <div className="pg-ieo__card-content-block__row">
-                    <span className="pg-ieo__card-content-block__text">{this.translate('page.body.ieo.card.countdown')}</span>
-                    <div className={countDownColorClass}>{countdownValue === '00:00:00' ? this.translate('page.body.ieo.card.end') : countdownValue}</div>
-                </div>
+                {finishes_at ? (
+                    <div className="pg-ieo__card-content-block__row">
+                        <span className="pg-ieo__card-content-block__text">{this.translate('page.body.ieo.card.countdown')}</span>
+                        <div className={countDownColorClass}>{countdownValue === '00:00:00' ? this.translate('page.body.ieo.card.end') : countdownValue}</div>
+                    </div>
+                ) : null}
                 <div className="progress-bar">
                     <div className={percentageClass} style={{ width: `${percentage}%` }} />
                     <div className="progress-bar__value">
