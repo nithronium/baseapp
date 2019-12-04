@@ -119,32 +119,32 @@ class HistoryComponent extends React.Component<Props> {
 
     private renderHeaders = (type: string) => {
         switch (type) {
-          case 'deposits':
-              return [
-                  this.props.intl.formatMessage({id: 'page.body.history.deposit.header.txid'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.deposit.header.date'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.deposit.header.currency'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.deposit.header.amount'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.deposit.header.status'}),
-              ];
-          case 'withdraws':
-              return [
-                  this.props.intl.formatMessage({id: 'page.body.history.withdraw.header.address'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.withdraw.header.date'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.withdraw.header.currency'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.withdraw.header.amount'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.withdraw.header.fee'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.withdraw.header.status'}),
-              ];
-          case 'trades':
-              return [
-                  this.props.intl.formatMessage({id: 'page.body.history.trade.header.date'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.trade.header.side'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.trade.header.market'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.trade.header.price'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.trade.header.amount'}),
-                  this.props.intl.formatMessage({id: 'page.body.history.trade.header.total'}),
-              ];
+            case 'deposits':
+                return [
+                    this.props.intl.formatMessage({id: 'page.body.history.deposit.header.txid'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.deposit.header.date'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.deposit.header.currency'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.deposit.header.amount'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.deposit.header.status'}),
+                ];
+            case 'withdraws':
+                return [
+                    this.props.intl.formatMessage({id: 'page.body.history.withdraw.header.address'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.withdraw.header.date'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.withdraw.header.currency'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.withdraw.header.amount'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.withdraw.header.fee'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.withdraw.header.status'}),
+                ];
+            case 'trades':
+                return [
+                    this.props.intl.formatMessage({id: 'page.body.history.trade.header.date'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.trade.header.side'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.trade.header.market'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.trade.header.price'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.trade.header.amount'}),
+                    this.props.intl.formatMessage({id: 'page.body.history.trade.header.total'}),
+                ];
           default:
               return [];
         }
