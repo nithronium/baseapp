@@ -1,4 +1,5 @@
 import { en as customTranslations } from '../custom/translations/en';
+import { en as pluginsTranslations } from '../plugins/translations/en';
 import { nationalitiesNames } from './nationalities';
 
 export const en = {
@@ -7,6 +8,7 @@ export const en = {
     'page.header.navbar.wallets': 'Wallets',
     'page.header.navbar.openOrders': 'Orders',
     'page.header.navbar.history': 'History',
+    'page.header.navbar.ieo': 'IEO',
 
     'page.header.navbar.profile': 'Profile',
     'page.header.navbar.logout': 'Logout',
@@ -627,4 +629,5 @@ export const en = {
 
     ...nationalitiesNames,
     ...customTranslations,
+    ...pluginsTranslations,
 };

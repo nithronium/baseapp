@@ -1,3 +1,4 @@
+import { ru as pluginsTranslations } from '../../plugins/translations/ru';
 import { LangType } from '../../translations';
 import { nationalitiesNames } from '../../translations/nationalities';
 
@@ -7,6 +8,7 @@ export const ru: LangType = {
     'page.header.navbar.wallets': 'Кошельки',
     'page.header.navbar.openOrders': 'Ордера',
     'page.header.navbar.history': 'История',
+    'page.header.navbar.ieo': 'IEO',
 
     'page.header.navbar.profile': 'Профиль',
     'page.header.navbar.logout': 'Выйти',
@@ -25,6 +27,10 @@ export const ru: LangType = {
     'page.body.trade.header.funds.content.total': 'Total balance',
     'page.body.trade.header.funds.content.value': 'Value in ',
     'page.body.trade.header.funds.content.name': 'Name',
+
+    'page.body.trade.header.upcoming': 'Upcoming',
+    'page.body.trade.header.inProgress': 'In progress',
+    'page.body.trade.header.past': 'Past',
 
     'page.body.trade.header.markets': 'Рынки',
     'page.body.trade.header.markets.content.pair': 'Пара',
@@ -689,4 +695,5 @@ export const ru: LangType = {
     'page.body.modal.understand': 'I understand',
 
     ...nationalitiesNames,
+    ...pluginsTranslations,
 };

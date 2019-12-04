@@ -9,7 +9,7 @@ import {
 } from '../actions';
 
 const walletsWithdrawCcyOptions: RequestOptions = {
-    apiVersion: 'peatio',
+    apiVersion: 'applogic',
 };
 
 export function* walletsWithdrawCcySaga(action: WalletsWithdrawCcyFetch) {

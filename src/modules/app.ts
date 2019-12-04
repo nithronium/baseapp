@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { ieoOrderReducer, publicIEOReducer } from '../plugins/ieo/modules';
 import { alertReducer  } from './public/alert';
 import { changeColorThemeReducer  } from './public/colorTheme';
 import { currenciesReducer } from './public/currencies';
@@ -43,6 +44,7 @@ export const publicReducer = combineReducers({
     kline: klineReducer,
     alerts: alertReducer,
     rgl: gridLayoutReducer,
+    ieo: publicIEOReducer,
 });
 
 export const userReducer = combineReducers({
@@ -65,4 +67,5 @@ export const userReducer = combineReducers({
     sendEmailVerification: sendEmailVerificationReducer,
     withdrawLimit: withdrawLimitReducer,
     guard: guardReducer,
+    ieo: ieoOrderReducer,
 });

@@ -27,6 +27,10 @@ export const en = {
     'page.body.kyc.head.level.second': 'Level 2',
     'page.body.kyc.head.level.third': 'Level 3',
 
+    'page.body.trade.header.upcoming': 'Up coming',
+    'page.body.trade.header.inProgress': 'In progress',
+    'page.body.trade.header.past': 'Past',
+
     'page.body.kyc.documents.upload': 'Upload your proof of residence',
     'page.body.kyc.documents.expiration': 'Document must be 3 months old maximum',
     'page.body.kyc.documents.select.bankStatement': 'Bank statement',

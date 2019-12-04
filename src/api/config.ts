@@ -19,6 +19,8 @@ export const defaultConfig: Config = {
     storage: {},
     msAlertDisplayTime: '5000',
     licenseKey: '',
+    incrementalOrderBook: false,
+    plugins: [],
 };
 
 export const Cryptobase = {
@@ -48,3 +50,5 @@ export const siteKey = () => Cryptobase.config.captcha.siteKey;
 export const captchaType = () => Cryptobase.config.captcha.captchaType;
 export const msAlertDisplayTime = (): string => Cryptobase.config.msAlertDisplayTime || '5000';
 export const rangerReconnectPeriod = (): number => Cryptobase.config.rangerReconnectPeriod ? Number(Cryptobase.config.rangerReconnectPeriod) : 1;
+export const incrementalOrderBook = (): boolean => Cryptobase.config.incrementalOrderBook || false;
+export const pluginsList = () => Cryptobase.config.plugins || [];

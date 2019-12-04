@@ -1,4 +1,6 @@
+import { pluginsConstants } from '../plugins/constants';
 export const PG_TITLE_PREFIX = 'Emirex';
+
 
 export const pgRoutes = (isLoggedIn: boolean): string[][] => {
     const routes = [
@@ -6,10 +8,12 @@ export const pgRoutes = (isLoggedIn: boolean): string[][] => {
         ['page.header.navbar.wallets', '/wallets'],
         ['page.header.navbar.openOrders', '/orders'],
         ['page.header.navbar.history', '/history'],
+        ...pluginsConstants(false),
     ];
     const routesUnloggedIn = [
         ['page.header.navbar.signIn', '/signin'],
         ['page.header.navbar.trade', '/trading/'],
+        ...pluginsConstants(false),
     ];
     return isLoggedIn ? routes : routesUnloggedIn;
 };

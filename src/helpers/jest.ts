@@ -22,6 +22,8 @@ const mockConfig: Config = {
         siteKey: '',
     },
     licenseKey: '',
+    incrementalOrderBook: false,
+    plugins: [],
 };
 
 // tslint:disable no-any no-console
