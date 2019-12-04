@@ -51,7 +51,7 @@ export const selectIEOHistoryPageCount = (state: RootState, limit): number =>
     Math.ceil(state.user.ieo.history.total / limit);
 
 export const selectIEOHistoryFirstElemIndex = (state: RootState, limit): number =>
-    state.user.ieo.history.page * limit;
+    (state.user.ieo.history.page * limit) + 1;
 
 export const selectIEOHistoryLastElemIndex = (state: RootState, limit: number): number => {
     if ((state.user.ieo.history.page * limit) + limit > selectIEOHistoryTotal(state)) {
@@ -62,5 +62,5 @@ export const selectIEOHistoryLastElemIndex = (state: RootState, limit: number): 
 };
 
 export const selectIEOHistoryNextPageExists = (state: RootState, limit: number): boolean =>
-    state.user.ieo.history.page < selectIEOHistoryPageCount(state, limit);
+    (state.user.ieo.history.page + 1) < selectIEOHistoryPageCount(state, limit);
 

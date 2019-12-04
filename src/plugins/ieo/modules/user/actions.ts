@@ -88,7 +88,7 @@ export interface OrdersIEOPush {
 export interface HistoryIEOFetch {
     type: typeof IEO_HISTORY_FETCH;
     payload: {
-        state?: string;
+        state?: string[];
         page: number;
         limit: number;
     };
