@@ -1,5 +1,6 @@
 import * as qs from 'qs';
 import { Input } from '@openware/components';
+import { Button } from 'react-bootstrap';
 import { History } from 'history';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -179,12 +180,15 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
                 </div>
                 <div className="row p-5">
                     <div className="col-12 m-0">
-                        <button
-                            className="cr-button p-3 m-0"
+                        <Button
                             onClick={submitHandler}
+                            size="lg"
+                            variant="primary"
+                            type="submit"
+                            block={true}
                         >
                             {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.enable')}
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </div>
