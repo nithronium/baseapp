@@ -18,7 +18,6 @@ import {
     selectUserInfo,
     User,
 } from '../../../modules';
-import { BlockNationalityModal } from '../../components/BlockedNationalityModal';
 import { Documents } from '../../containers/Confirm/Documents';
 import { Idenfy } from '../../containers/Confirm/Idenfy';
 import { Phone } from '../../containers/Confirm/Phone';
@@ -38,7 +37,6 @@ interface HistoryProps {
 interface ConfirmState {
     title: string;
     level: number;
-    toggleNationalityBlockedModalCheck: boolean;
     kycAlert: boolean;
     documentsAlert: boolean;
 }
@@ -57,7 +55,6 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         this.state = {
             title: '',
             level: 0,
-            toggleNationalityBlockedModalCheck: false,
             kycAlert: false,
             documentsAlert: false,
         };
@@ -86,10 +83,6 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             'pg-confirm__progress-first': currentProfileLevel === 0 || currentProfileLevel === 1,
             'pg-confirm__progress-second': currentProfileLevel === 2 || currentProfileLevel === 3,
             'pg-confirm__progress-third': currentProfileLevel === 4 || currentProfileLevel === 5,
-        });
-
-        const classNameModal = classnames('pg-denied', {
-            'd-flex': this.state.toggleNationalityBlockedModalCheck,
         });
 
         return (
@@ -134,7 +127,6 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                         </div>
                     </div>
                 </div>
-                <BlockNationalityModal classname={classNameModal} toggleNationalityBlockedModal={this.handleChangeUS} />
             </div>
         );
     }
@@ -159,12 +151,6 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         }
     }
 
-    private handleChangeUS = () => {
-        this.setState({
-            toggleNationalityBlockedModalCheck: !this.state.toggleNationalityBlockedModalCheck,
-        });
-    }
-
     private renderContent = () => {
         const {
             history,
@@ -180,7 +166,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         this.handleCheckPendingLabels(labels);
 
         if (level === 1) {
-            return <ProfilePartial toggleNationalityBlockedModal={this.handleChangeUS} />;
+            return <ProfilePartial />;
         }
 
         if (level === 2) {
