@@ -155,5 +155,20 @@ export const en = {
   'tickets.balance': 'balance',
   'tickets.emrx': '	EMRX tokens worth',
   'tickets.getmore': 'Get more',
+  "btcusdt_title": "BTC to USDT. Bitcoin Exchange | Emirex.com",
+    "btcucdt_descriptions": "BTC to USDT Exchange and converter BTC/USDT. Real-time prices and charts. 24/7 global customer support. You can buy & sell using up to date Bitcoin exchange rates",
+    "ethusdt_title": "ETH to USDT. Ethereum Exchange | Emirex.com",
+    "ethusdt_description": "ETH to USDT Exchange and converter ETH/USDT. Real-time prices and charts. 24/7 global customer support. You can buy & sell using up to date exchange rates",
+    "ethbtc_title": "ETH to BTC. Price Ethereum Bitcoin | Emirex.com",
+    "ethbtc_descrption": "ETH to BTC Exchange and converter BTC/ETH. Real-time prices and charts. 24/7 global customer support. You can buy & sell using up to date exchange rates",
+    "emrxbtc_title": "EMRX to BTC. EMRX Exchange | Emirex.com",
+    "emrxbtc_descriptions": "EMRX to BTC Exchange and converter Emirex Token (EMRX) in Bitcoin. Real-time prices and charts. 24/7 support. You can buy & sell using up to date exchange rates",
+    "ltcbtc_title": "LTC to BTC Converter | Price | Emirex.com",
+    "ltcbtc_descriptions": "LTC to BTC Exchange. Real-time prices and charts. Converter Litecoin (LTC) in Bitcoin (BTC). 24/7 support. You can buy & sell using up to date exchange rates",
+    "bchbtc_title": "BCH to BTC. Bitcoin Cash Exchange | Emirex.com",
+  "bchbtc_descriptions": "BCH to BTC Exchange. Real-time prices and charts. Converter Bitcoin Cash in Bitcoin (BTC). 24/7 support. You can buy & sell using up to date exchange rates",
+  "referral_title": "Get Bitcoin. Crypto Referral Program | Emirex.com",
+  "referral_description": "Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex",
+    
 
 };

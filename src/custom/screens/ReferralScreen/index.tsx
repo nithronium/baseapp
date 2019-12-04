@@ -36,6 +36,7 @@ interface ReduxProps {
     loading?: boolean;
     user: User;
     overall: ReferralOverallPayload['overall'];
+    currentLanguage: string;
 }
 
 interface DispatchProps {
@@ -85,10 +86,13 @@ class Referral extends React.Component<Props> {
 
     }
 
+ 
+
     public componentWillReceiveProps(props: Props) {
         if (props.requireVerification) {
             props.history.push('/email-verification', { email: this.state.email });
         }
+        document.getElementsByTagName('html')![0].lang = this.props.currentLanguage;
     }
 
     public render() {
@@ -108,7 +112,7 @@ class Referral extends React.Component<Props> {
             confirmPasswordFocused,
             refIdFocused,
         } = this.state;
-        const { loading } = this.props;
+        const { loading, currentLanguage } = this.props;
 
         const className = cx('pg-referral-screen__container', { loading });
 
@@ -211,16 +215,16 @@ class Referral extends React.Component<Props> {
         return (
             <div>
                 <Helmet>
-                    <title>Get Bitcoin. Crypto Referral Program | Emirex.com</title>
+                    <title>{this.props.intl.formatMessage({ id: 'referral_title' })}</title>
                     <meta
                         name="description"
-                        content="Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex"
+                        content={this.props.intl.formatMessage({ id: 'referral_description' })}
                     />
-                    <link rel="canonical" href="https://emirex.com/referral" />
+                    <link rel="canonical" href={`https://emirex.com${currentLanguage === 'en' ? '/' : '/' + currentLanguage + '/'}referral`} />
 
-                    {/* <link key="ru" rel="alternate" href="https://emirex.com/ru/referral" hrefLang="ru" /> */}
+                    <link key="ru" rel="alternate" href="https://emirex.com/ru/referral" hrefLang="ru" title="Русский"/>
                     {/* <link key="ar" rel="alternate" href="https://emirex.com/ar/referral" hrefLang="ar" /> */}
-                    {/* <link key="en" rel="alternate" href="https://emirex.com/en/referral" hrefLang="en" /> */}
+                    <link key="en" rel="alternate" href="https://emirex.com/referral" hrefLang="en" title="English"/>
 
                     <meta name="og:title" content="Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex" />
                     <meta
@@ -480,6 +484,7 @@ class Referral extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
+    currentLanguage: selectCurrentLanguage(state),
     requireVerification: selectSignUpRequireVerification(state),
     i18n: selectCurrentLanguage(state),
     user: selectUserInfo(state),
