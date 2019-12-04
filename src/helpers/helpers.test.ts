@@ -386,17 +386,20 @@ describe('Helpers', () => {
     });
 
     it('buildQueryString', () => {
-        expect(helpers.buildQueryString({ page: 0, limit: 25 })).toBe('page=0&limit=25');
-        expect(helpers.buildQueryString({ page: 1, limit: 10 })).toBe('page=1&limit=10');
-        expect(helpers.buildQueryString({ page: 2, limit: 5 })).toBe('page=2&limit=5');
-        expect(helpers.buildQueryString({ page: 2, limit: 5, uid: 'ID873B710D88' })).toBe('page=2&limit=5&uid=ID873B710D88');
-        expect(helpers.buildQueryString({ page: 2, limit: 5, uid: 'ID873B710D88' })).toBe('page=2&limit=5&uid=ID873B710D88');
+        expect(helpers.buildQueryString({ page: 0, limit: 25 })).toBe('page=1&limit=25');
+        expect(helpers.buildQueryString({ page: 1, limit: 10 })).toBe('page=2&limit=10');
+        expect(helpers.buildQueryString({ page: 2, limit: 5, uid: 'ID873B710D88' })).toBe('page=3&limit=5&uid=ID873B710D88');
         expect(helpers.buildQueryString({
-            page: 1,
+            page: 0,
             limit: 50,
             uid: 'ID873B710D88',
             role: 'admin',
         })).toBe('page=1&limit=50&uid=ID873B710D88&role=admin');
+        expect(helpers.buildQueryString({
+            page: 0,
+            limit: 25,
+            state: ['completed', 'cancelled'],
+        })).toBe('page=1&limit=25&state[]=completed&state[]=cancelled');
     });
 
     it('buildQueryStringArray', () => {
