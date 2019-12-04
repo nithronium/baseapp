@@ -798,6 +798,7 @@ export const ru: LangType = {
   'tickets.balance': 'баланс',
   'tickets.emrx': 'стоимость токенов EMRX',
     'tickets.getmore': 'Получить больше',
+
     "btcusdt_title": "BTC в USDT. Конвертация Биткоин. Курс 2020 | Emirex.com",
     "btcusdt_description": "BTC в USDT ✅ Конвертер Биткоин в Tether ➤ Выгодные курсы и цены в режиме реального времени ➤ Большие объемы торгов ➤ Полная поддержка 24/7",
     "ethusdt_title": "ETH в USDT. Конвертация Эфириума. Курс на сейчас | Emirex.com",

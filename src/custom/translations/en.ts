@@ -155,6 +155,7 @@ export const en = {
   'tickets.balance': 'balance',
   'tickets.emrx': '	EMRX tokens worth',
   'tickets.getmore': 'Get more',
+
   "btcusdt_title": "BTC to USDT. Bitcoin Exchange | Emirex.com",
     "btcusdt_description": "BTC to USDT Exchange and converter BTC/USDT. Real-time prices and charts. 24/7 global customer support. You can buy & sell using up to date Bitcoin exchange rates",
     "ethusdt_title": "ETH to USDT. Ethereum Exchange | Emirex.com",
