@@ -29,12 +29,12 @@ export class Blur extends React.Component<Props, State> {
         if (ieo) {
             let countdownDate = ieo.starts_at;
 
-            if (ieo.state === 'ongoing') {
+            if (ieo.state === 'ongoing' && ieo.finishes_at) {
                 countdownDate = ieo.finishes_at;
             }
 
             this.countdownInterval = setInterval(() => {
-                if (ieo.state === 'distributing' && ieo.type === 'proportional') {
+                if (ieo.state === 'distributing' && ieo.type === 'proportional' && ieo.finishes_at) {
                     countdownDate = ieo.finishes_at;
                     this.setState({ countdownValue: getCountdownDate(countdownDate, '5m')});
                 } else {
@@ -51,12 +51,12 @@ export class Blur extends React.Component<Props, State> {
             clearInterval(this.countdownInterval);
             let countdownDate = next.ieo.starts_at;
 
-            if (next.ieo.state === 'ongoing') {
+            if (next.ieo.state === 'ongoing' && next.ieo.finishes_at) {
                 countdownDate = next.ieo.finishes_at;
             }
 
             this.countdownInterval = setInterval(() => {
-                if (next.ieo.state === 'distributing' && ieo.type === 'proportional') {
+                if (next.ieo.state === 'distributing' && ieo.type === 'proportional' && next.ieo.finishes_at) {
                     countdownDate = next.ieo.finishes_at;
                     this.setState({ countdownValue: getCountdownDate(countdownDate, '5m')});
                 } else {
