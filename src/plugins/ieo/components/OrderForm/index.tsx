@@ -39,6 +39,10 @@ interface OrderFormProps {
      */
     currentMarketBidPrecision: number;
     /**
+     * Fee amount
+     */
+    fee: number;
+    /**
      * Whether order is disabled to execute
      */
     disabled?: boolean;
@@ -162,6 +166,7 @@ class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
             submitButtonText,
             proposals,
             feeText,
+            fee,
         } = this.props;
         const {
             amount,
@@ -172,7 +177,7 @@ class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
         } = this.state;
         const safeAmount = Number(amount) || 0;
         const totalPrice = getTotalPrice(amount, proposals);
-        const fee = +Decimal.format(+amount * 0.1, currentMarketAskPrecision);
+        const commission = +Decimal.format(+amount * fee, currentMarketAskPrecision);
 
         const amountPercentageArray = [0.25, 0.5, 0.75, 1];
 
@@ -266,7 +271,7 @@ class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
                         </label>
                         <div className="cr-order-item__fee__content">
                             <span className="cr-order-item__fee__content__amount">
-                                {Decimal.format(fee || 0, currentMarketAskPrecision, ',')}
+                                {Decimal.format(commission || 0, currentMarketAskPrecision, ',')}
                             </span>
                             <span className="cr-order-item__fee__content__currency">
                                 {to.toUpperCase()}
