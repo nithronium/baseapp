@@ -23,9 +23,9 @@ export const en = {
     'page.body.trade.header.funds.content.value': 'Value in ',
     'page.body.trade.header.funds.content.name': 'Name',
 
-    'page.body.kyc.head.level.first': 'Level 1',
-    'page.body.kyc.head.level.second': 'Level 2',
-    'page.body.kyc.head.level.third': 'Level 3',
+    'page.body.kyc.head.level.first': 'Step 1',
+    'page.body.kyc.head.level.second': 'Step 2',
+    'page.body.kyc.head.level.third': 'Step 3',
 
     'page.body.trade.header.upcoming': 'Up coming',
     'page.body.trade.header.inProgress': 'In progress',
@@ -134,6 +134,8 @@ export const en = {
     'page.body.modal.denied': 'Access denied',
     'page.body.modal.appologies': 'Sorry, due to your local legislation we are not able to proceed your registration.',
     'page.body.modal.understand': 'I understand',
+
+    'resource.profile.dateOfBirth': 'User must be over 21 years old',
 
     'resource.documents.expirationDate': 'Date of emission is invalid',
     'resource.document.empty_doc_expire': 'Date of emission is invalid',

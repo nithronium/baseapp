@@ -263,11 +263,6 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
             return (
                 <div className="pg-profile-verification__deposit-limit">
                     <div className="pg-profile-verification__deposit-limit__wrap" />
-                    <div className="pg-profile-verification__deposit-limit__know-more">
-                        <Link to="#">
-                            <FormattedMessage id="page.body.profile.header.account.profile.knowMore" />
-                        </Link>
-                    </div>
                 </div>
             );
         }
@@ -291,11 +286,6 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                         &nbsp;{Decimal.format(evaluatedDepositsTotal, currencyPrecision)} / {Decimal.format(withdrawLimitData.limit, currencyPrecision)}{withdrawalLimitCurrency}
                     </span>
                 </div>
-                <div className="pg-profile-verification__deposit-limit__know-more">
-                    <Link to="#">
-                        <FormattedMessage id="page.body.profile.header.account.profile.knowMore" />
-                    </Link>
-                </div>
             </div>
         );
     }
@@ -310,8 +300,15 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                 <div className="pg-profile-verification__title">
                     <FormattedMessage id="page.body.profile.header.account.profile"/>
                 </div>
-                {this.renderUserLevel(userLevel)}
-                {userLevel < 6 && this.renderUpgradeLevelLink()}
+                <div className="pg-profile-verification__user-level">
+                    {this.renderUserLevel(userLevel)}
+                    {userLevel < 6 && this.renderUpgradeLevelLink()}
+                </div>
+                <div className="pg-profile-verification__know-more">
+                    <Link to="#">
+                        <FormattedMessage id="page.body.profile.header.account.profile.knowMore" />
+                    </Link>
+                </div>
                 {withdrawLimitData && this.renderUserAbilities(userLevel, withdrawLimitData)}
                 {withdrawLimitData && this.renderWithdrawLimit(userLevel, withdrawLimitData)}
                 {withdrawLimitData && this.renderDepositLimit(userLevel, withdrawLimitData)}

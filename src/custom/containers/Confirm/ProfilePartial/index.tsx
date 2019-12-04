@@ -13,6 +13,7 @@ import {
 } from 'react-redux';
 import { formatDate, isDateInFuture } from '../../../../helpers';
 import {
+    alertPush,
     RootState,
     selectCurrentLanguage,
     selectUserInfo,
@@ -25,6 +26,8 @@ import {
 import { labelFetch } from '../../../../modules/user/kyc/label';
 import { changeUserLevel } from '../../../../modules/user/profile';
 import { nationalities } from '../../../../translations/nationalities';
+import { DISALLOWED_COUNTRIES } from '../../../constants';
+import { isValidDate } from '../../../helpers/checkDate';
 
 interface ReduxProps {
     success?: string;
@@ -34,12 +37,9 @@ interface ReduxProps {
 
 interface DispatchProps {
     changeUserLevel: typeof changeUserLevel;
+    fetchAlert: typeof alertPush;
     sendIdentity: typeof sendIdentity;
     labelFetch: typeof labelFetch;
-}
-
-interface ProfilePartialProps {
-    toggleNationalityBlockedModal: () => void;
 }
 
 interface OnChangeEvent {
@@ -59,9 +59,18 @@ interface State {
     dateOfBirthFocused: boolean;
     firstNameFocused: boolean;
     lastNameFocused: boolean;
+    dateOfBirthValid: boolean;
 }
 
-type Props = ReduxProps & DispatchProps & InjectedIntlProps & ProfilePartialProps;
+const filterObject = (obj, filter) =>
+   Object.keys(obj).reduce((acc, val) =>
+   (filter.includes(val.toUpperCase()) ? acc : {
+       ...acc,
+       [val]: obj[val],
+   }
+), {});
+
+type Props = ReduxProps & DispatchProps & InjectedIntlProps;
 
 class ProfilePartialComponent extends React.Component<Props, State> {
     public state = {
@@ -75,6 +84,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         dateOfBirthFocused: false,
         firstNameFocused: false,
         lastNameFocused: false,
+        dateOfBirthValid: false,
     };
 
     public translate = (e: string) => {
@@ -120,6 +130,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         const dataNationalities = nationalities.map(value => {
             return this.translate(value);
         });
+
         const onSelectNationality = value => {
             this.selectNationality(dataNationalities[value]);
         };
@@ -130,7 +141,9 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         countries.registerLocale(require("i18n-iso-countries/langs/zh.json"));
         /* tslint:enable */
 
-        const dataCountries = Object.values(countries.getNames(lang));
+        const listOfCountries = countries.getNames(lang);
+        const filteredCountries: countries.LocalizedCountryNames = filterObject(listOfCountries, DISALLOWED_COUNTRIES);
+        const dataCountries = Object.values(filteredCountries);
         const onSelectCountry = value => this.selectCountry(dataCountries[value]);
 
         return (
@@ -269,25 +282,33 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         this.setState({
             dateOfBirth: formatDate(e.target.value),
         });
+
+        const fieldMaxLength = 10;
+
+        if (e.target.value.length === fieldMaxLength) {
+            const currentDate = new Date();
+            const dateToCompare = currentDate.setFullYear(currentDate.getFullYear() - 21);
+
+            if (!isValidDate(formatDate(e.target.value), dateToCompare) && !isDateInFuture(formatDate(e.target.value))) {
+                this.setState({
+                    dateOfBirthValid: true,
+                });
+            } else {
+                this.props.fetchAlert({ message: ['resource.profile.dateOfBirth'], type: 'error'});
+                this.setState({
+                    dateOfBirthValid: false,
+                });
+            }
+        }
     }
 
     private selectNationality = (value: string) => {
-        if (value === 'American') {
-            this.props.toggleNationalityBlockedModal();
-            return;
-        }
-
         this.setState({
             metadata: { nationality: value },
         });
     };
 
     private selectCountry = (value: string) => {
-        if (value === 'United States of America') {
-            this.props.toggleNationalityBlockedModal();
-            return;
-        }
-
         this.setState({
             countryOfBirth: countries.getAlpha2Code(value, this.props.lang),
         });
@@ -309,6 +330,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     private handleCheckButtonDisabled = () => {
         const {
             dateOfBirth,
+            dateOfBirthValid,
             firstName,
             lastName,
             countryOfBirth,
@@ -322,6 +344,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             !firstNameValid
             || !lastNameValid
             || !dateOfBirth
+            || !dateOfBirthValid
             || !metadata.nationality
             || !countryOfBirth
         );
@@ -350,6 +373,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     dispatch => ({
         changeUserLevel: payload => dispatch(changeUserLevel(payload)),
+        fetchAlert: payload => dispatch(alertPush(payload)),
         sendIdentity: payload => dispatch(sendIdentity(payload)),
         labelFetch: () => dispatch(labelFetch()),
     });

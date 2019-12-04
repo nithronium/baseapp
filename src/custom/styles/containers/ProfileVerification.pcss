@@ -16,6 +16,14 @@
     opacity: 0.9;
   }
 
+  &__user-level {
+    align-items: baseline;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
   &__level {
     display: flex;
     flex-direction: row;
@@ -59,16 +67,36 @@
     font-style: normal;
     font-weight: normal;
     height: 28px;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+    margin-left: 5%;
     text-decoration: none;
     width: fit-content;
+  }
+
+  &__know-more {
+    display: flex;
+    justify-content: flex-end;
+    width: max-content;
+    margin-bottom: 40px;
+
+    a {
+      align-items: center;
+      color: var(--accent);
+      cursor: pointer;
+      font-family: "Noto Sans SC";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 12px;
+      text-decoration: none;
+    }
   }
 
   &__abilities {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-bottom: 77px;
+    margin-bottom: 50px;
 
     &--blank {
       margin-bottom: 10px;
@@ -122,25 +150,6 @@
         font-style: normal;
         font-weight: normal;
         line-height: 12px;
-      }
-    }
-
-    &__know-more {
-      display: flex;
-      justify-content: flex-end;
-      padding-left: 17%;
-      width: 40%;
-
-      a {
-        align-items: center;
-        color: var(--accent);
-        cursor: pointer;
-        font-family: "Noto Sans SC";
-        font-size: 12px;
-        font-style: normal;
-        font-weight: normal;
-        line-height: 12px;
-        text-decoration: none;
       }
     }
   }
