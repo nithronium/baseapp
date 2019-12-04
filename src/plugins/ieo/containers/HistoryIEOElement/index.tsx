@@ -51,7 +51,7 @@ type Props = ReduxProps & DispatchProps & InjectedIntlProps;
 class HistoryComponent extends React.Component<Props> {
     public componentDidMount() {
         const { currencies } = this.props;
-        this.props.ieoHistoryFetch({ page: 1, limit: 25, state: 'completed' });
+        this.props.ieoHistoryFetch({ page: 0, limit: 25, state: ['completed', 'cancelled'] });
 
         if (!currencies.length) {
             this.props.fetchCurrencies();
@@ -87,7 +87,7 @@ class HistoryComponent extends React.Component<Props> {
                     firstElemIndex={firstElemIndex}
                     lastElemIndex={lastElemIndex}
                     total={fullHistory}
-                    page={page - 1}
+                    page={page}
                     nextPageExists={nextPageExists}
                     onClickPrevPage={this.onClickPrevPage}
                     onClickNextPage={this.onClickNextPage}
@@ -98,12 +98,12 @@ class HistoryComponent extends React.Component<Props> {
 
     private onClickPrevPage = () => {
         const { page } = this.props;
-        this.props.ieoHistoryFetch({ page: +page - 1, limit: 25, state: 'completed' });
+        this.props.ieoHistoryFetch({ page: +page - 1, limit: 25, state: ['completed', 'cancelled'] });
     };
 
     private onClickNextPage = () => {
         const { page } = this.props;
-        this.props.ieoHistoryFetch({ page: +page + 1, limit: 25, state: 'completed' });
+        this.props.ieoHistoryFetch({ page: +page + 1, limit: 25,state: ['completed', 'cancelled'] });
     };
 
     private renderHeaders = () => ([
@@ -131,14 +131,14 @@ class HistoryComponent extends React.Component<Props> {
             commission_rate,
             quote_currency,
         } = item;
-        const quotePrecision = quote_currency && this.getPrecision(quote_currency);
+        const preciseContribution = quote_currency && this.getPrecision(quote_currency) ? Decimal.format(contribution, this.getPrecision(quote_currency)) : contribution;
         const fee = this.convertComissionAmount(tokens_received, commission_rate);
 
         return [
             localeDate(created_at, 'fullDate'),
             sale_name,
             base_currency && base_currency.toUpperCase(),
-            `${Decimal.format(contribution, quotePrecision)} ${quote_currency && quote_currency.toUpperCase()}`,
+            `${preciseContribution} ${quote_currency && quote_currency.toUpperCase()}`,
             `${tokens_received} ${base_currency && base_currency.toUpperCase()}`,
             `${fee} ${base_currency && base_currency.toUpperCase()}`,
         ];
@@ -146,9 +146,9 @@ class HistoryComponent extends React.Component<Props> {
 
     private getPrecision = name => {
         const { currencies } = this.props;
+        const currency = currencies.length && currencies.find(item => item.id && item.id.toLowerCase() === name.toLowerCase());
 
-        return currencies.length &&
-            +currencies.filter(item => item.id && item.id.toLowerCase() === name.toLowerCase())[0].precision;
+        return currency && +currency.precision;
     };
 
     private convertComissionAmount = (tokensReceived, commissionRate) =>
@@ -163,7 +163,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     fetching: selectIEOHistoryLoading(state),
     page: selectIEOHistoryCurrentPage(state),
     pageCount: selectIEOHistoryPageCount(state, 25),
-    firstElemIndex: selectIEOHistoryFirstElemIndex(state, 1),
+    firstElemIndex: selectIEOHistoryFirstElemIndex(state, 25),
     lastElemIndex: selectIEOHistoryLastElemIndex(state, 25),
     nextPageExists: selectIEOHistoryNextPageExists(state, 25),
     total: selectIEOHistoryTotal(state),
