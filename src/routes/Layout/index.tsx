@@ -194,7 +194,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/profile', currentLanguage)} component={ProfileScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/wallets', currentLanguage)} component={WalletsScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/security/2fa', currentLanguage)} component={ProfileTwoFactorAuthScreen} currentLanguage={currentLanguage} />
-                    <Route loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral-tickets', currentLanguage)} component={ReferralTicketsScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral-tickets', currentLanguage)} component={ReferralTicketsScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral-commission', currentLanguage)} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
                     <Route path="**"><Redirect to={buildPath('/trading/', currentLanguage)} /></Route>
                 </Switch>
