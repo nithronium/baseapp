@@ -237,6 +237,8 @@ export const ru: LangType = {
 
     'page.body.profile.header.account': 'Профиль',
 
+    'page.body.profile.mfa.button.text': 'КОПИРОВАТЬ',
+
     'page.body.profile.header.account.content.password': 'Пароль',
     'page.body.profile.header.account.content.password.button.change': 'Изменить',
     'page.body.profile.header.account.content.password.old': 'Старый пароль',

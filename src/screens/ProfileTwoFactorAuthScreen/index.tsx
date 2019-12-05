@@ -203,7 +203,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
                 <legend>
                     {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.message.mfa')}
                 </legend>
-                {secret && <CopyableTextField value={secret} fieldId="secret-2fa" />}
+                {secret && <CopyableTextField value={secret} fieldId="secret-2fa" copyButtonText={this.translate('page.body.profile.mfa.button.text')}/>}
             </fieldset>
         );
     }

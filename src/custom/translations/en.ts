@@ -42,6 +42,7 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'PHPYMTM1XXX',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text': 'Minimal deposit amount is ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': 'EUR 50',
+    'page.body.profile.mfa.button.text': 'COPY',
     'refcode.code_owner_not_found': 'Code Owner not found',
     'refcode.inactive_code': 'Code is inactive',
     'refcode.user_not_found': 'User not found',
