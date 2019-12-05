@@ -186,12 +186,12 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/accounts/password_reset', currentLanguage)} component={ChangeForgottenPasswordScreen} currentLanguage={currentLanguage} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/email-verification', currentLanguage)} component={EmailVerificationScreen} currentLanguage={currentLanguage} />
                     <Route loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral', currentLanguage)} component={ReferralScreen} />
-                    <Route loading={userLoading} isLogged={isLoggedIn} path={buildPath('/ru/referral', currentLanguage)} component={ReferralScreen} />
                     <Route exact={true} path={buildPath('/trading/:market?', currentLanguage)} component={TradingScreen} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/orders', currentLanguage)} component={OrdersTabScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/history', currentLanguage)} component={HistoryScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/confirm', currentLanguage)} component={ConfirmScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/profile', currentLanguage)} component={ProfileScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/profile'} component={ProfileScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/wallets', currentLanguage)} component={WalletsScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/security/2fa', currentLanguage)} component={ProfileTwoFactorAuthScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral-tickets', currentLanguage)} component={ReferralTicketsScreen} currentLanguage={currentLanguage} />

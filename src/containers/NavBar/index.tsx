@@ -34,6 +34,7 @@ export interface ReduxProps {
     success?: boolean;
     user: User;
     version: string;
+    currentLanguage: string;
 }
 
 interface DispatchProps {
@@ -392,8 +393,14 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     };
 
     private handleChangeLanguage = (language: string) => {
+        const lang = this.props.currentLanguage;
         this.props.changeLanguage(language);
-        const location = this.props.history.location.pathname.slice(language.length + 1);
+        let location = '';
+        if (lang=== 'en') {
+            location = this.props.history.location.pathname;
+        } else {
+            location = this.props.history.location.pathname.slice(language.length + 1);
+        }
         this.props.history.push(buildPath(location, language));
     };
 }
@@ -406,6 +413,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (state: Root
     user: selectUserInfo(state),
     isLoggedIn: selectUserLoggedIn(state),
     version: selectAppVersion(state),
+    currentLanguage: selectCurrentLanguage(state)
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
