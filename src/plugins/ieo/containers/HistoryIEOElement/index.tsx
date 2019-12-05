@@ -9,6 +9,7 @@ import { History } from '../../../../components';
 import {
     localeDate,
     preciseData,
+    setIEOStatusColor,
 } from '../../../../helpers';
 import {
     currenciesFetch,
@@ -51,7 +52,7 @@ type Props = ReduxProps & DispatchProps & InjectedIntlProps;
 class HistoryComponent extends React.Component<Props> {
     public componentDidMount() {
         const { currencies } = this.props;
-        this.props.ieoHistoryFetch({ page: 0, limit: 25, state: ['completed', 'cancelled'] });
+        this.props.ieoHistoryFetch({ page: 0, limit: 25, state: ['completed', 'cancelled', 'purchased', 'closed'] });
 
         if (!currencies.length) {
             this.props.fetchCurrencies();
@@ -112,7 +113,9 @@ class HistoryComponent extends React.Component<Props> {
         this.props.intl.formatMessage({id: 'page.body.ieo.history.tokensOrdered'}),
         this.props.intl.formatMessage({id: 'page.body.ieo.history.paidAmount'}),
         this.props.intl.formatMessage({id: 'page.body.ieo.history.receivedAmount'}),
+        this.props.intl.formatMessage({id: 'page.body.ieo.history.tokensLocked'}),
         this.props.intl.formatMessage({id: 'page.body.ieo.history.fees'}),
+        this.props.intl.formatMessage({id: 'page.body.ieo.history.state'}),
     ]);
 
     private retrieveData = () => {
@@ -130,6 +133,10 @@ class HistoryComponent extends React.Component<Props> {
             tokens_received,
             commission_rate,
             quote_currency,
+            tokens_ordered,
+            tokens_locked,
+            state,
+            id,
         } = item;
         const preciseContribution = quote_currency && this.getPrecision(quote_currency) ? Decimal.format(contribution, this.getPrecision(quote_currency)) : contribution;
         const fee = this.convertComissionAmount(tokens_received, commission_rate);
@@ -137,10 +144,12 @@ class HistoryComponent extends React.Component<Props> {
         return [
             localeDate(created_at, 'fullDate'),
             sale_name,
-            base_currency && base_currency.toUpperCase(),
+            `${tokens_ordered} ${base_currency && base_currency.toUpperCase()}`,
             `${preciseContribution} ${quote_currency && quote_currency.toUpperCase()}`,
             `${tokens_received} ${base_currency && base_currency.toUpperCase()}`,
+            `${tokens_locked} ${base_currency && base_currency.toUpperCase()}`,
             `${fee} ${base_currency && base_currency.toUpperCase()}`,
+            <span style={{ color: setIEOStatusColor(state)}} key={id}>{state}</span>,
         ];
     }
 

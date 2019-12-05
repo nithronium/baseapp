@@ -54,6 +54,7 @@ describe('IEO Order Execute', () => {
             ratio: '0.2',
             base_currency: 'eth',
             quote_currency: 'btc',
+            tokens_locked: '0.0',
         };
 
         const fakeError = {

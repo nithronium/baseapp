@@ -16,4 +16,5 @@ export interface OrderIEOData {
     ratio: string;
     base_currency: string;
     quote_currency: string;
+    tokens_locked: string;
 }

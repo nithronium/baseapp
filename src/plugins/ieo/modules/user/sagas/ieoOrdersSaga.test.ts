@@ -48,6 +48,7 @@ describe('IEO Orders Fetch', () => {
                 ratio: '0.31',
                 base_currency: 'eth',
                 quote_currency: 'btc',
+                tokens_locked: '0.0',
             },
             {
                 id: 2,
@@ -67,6 +68,7 @@ describe('IEO Orders Fetch', () => {
                 ratio: '0.31',
                 base_currency: 'eth',
                 quote_currency: 'btc',
+                tokens_locked: '0.0',
             },
         ];
 

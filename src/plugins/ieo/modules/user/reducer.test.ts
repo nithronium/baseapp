@@ -25,6 +25,7 @@ describe('IEO order cancel reducer', () => {
         ratio: '0.31',
         base_currency: 'eth',
         quote_currency: 'btc',
+        tokens_locked: '0.0',
     };
 
     const error = {
@@ -94,6 +95,7 @@ describe('IEO order execute reducer', () => {
         ratio: '0.3',
         base_currency: 'eth',
         quote_currency: 'btc',
+        tokens_locked: '0.0',
     };
 
     const error = {
@@ -159,6 +161,7 @@ describe('IEO orders fetch reducer', () => {
             ratio: '0.31',
             base_currency: 'eth',
             quote_currency: 'btc',
+            tokens_locked: '0.0',
         },
         {
             id: 2,
@@ -178,6 +181,7 @@ describe('IEO orders fetch reducer', () => {
             ratio: '0.31',
             base_currency: 'eth',
             quote_currency: 'btc',
+            tokens_locked: '0.0',
         },
     ];
 

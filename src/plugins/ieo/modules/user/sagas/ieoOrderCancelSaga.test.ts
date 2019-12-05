@@ -50,6 +50,7 @@ describe('IEO Order Cancel', () => {
             ratio: '0.31',
             base_currency: 'eth',
             quote_currency: 'btc',
+            tokens_locked: '0.0',
         };
 
         const fakeError = {
