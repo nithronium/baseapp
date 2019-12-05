@@ -8,6 +8,7 @@ export const en = {
     'page.body.profile.header.account.profile.withdraw': 'Your WITHDRAW limit: ',
     'page.body.profile.header.account.profile.deposit': 'Your DEPOSIT limit: ',
     'page.body.profile.header.account.profile.knowMore': 'Know more about verification levels',
+    'page.body.profile.header.account.content.profile.edit': 'Edit profile',
 
     'page.body.trade.header.orderHistory': 'Order History',
     'page.body.trade.header.balances': 'Balances',

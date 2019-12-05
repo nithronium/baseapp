@@ -192,7 +192,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
 
         this.handleCheckPendingLabels(labels);
 
-        if (level === 1) {
+        if (level === 1 || (history.location && history.location.state && history.location.state.profileEdit)) {
             return <ProfilePartial toggleBlockNationalityModal={this.handleToggleBlockNationalityModal} />;
         }
 

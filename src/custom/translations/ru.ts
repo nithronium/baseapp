@@ -262,6 +262,7 @@ export const ru: LangType = {
     'page.body.profile.header.account.content.twoFactorAuthentication.disable': 'ОТКЛЮЧИТЬ 2FA',
     'page.body.profile.header.account.content.twoFactorAuthentication.modalBody': 'Пожалуйста, обратитесь с администратором, чтобы отключить 2FA',
     'page.body.profile.header.account.content.twoFactorAuthentication.modalHeader': 'Двухфакторная аутентификация включена',
+    'page.body.profile.header.account.content.profile.edit': 'Редактировать профиль',
 
     'page.body.profile.header.account.profile': 'Верификация Вашего профиля',
     'page.body.profile.header.account.profile.email.title': 'Почта - подтверждено',

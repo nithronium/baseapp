@@ -17,8 +17,11 @@ import { withRouter } from 'react-router-dom';
 import { formatDate, isDateInFuture } from '../../../../helpers';
 import {
     alertPush,
+    editIdentity,
+    labelFetch,
     RootState,
     selectCurrentLanguage,
+    selectEditIdentitySuccess,
     selectUserInfo,
     User,
 } from '../../../../modules';
@@ -26,23 +29,24 @@ import {
     selectSendIdentitySuccess,
     sendIdentity,
 } from '../../../../modules/user/kyc/identity';
-import { labelFetch } from '../../../../modules/user/kyc/label';
 import { changeUserLevel } from '../../../../modules/user/profile';
 import { nationalities } from '../../../../translations/nationalities';
 import { DISALLOWED_COUNTRIES, DISALLOWED_NATIONALITIES } from '../../../constants';
 import { isValidDate } from '../../../helpers/checkDate';
 
 interface ReduxProps {
-    success?: string;
+    editSuccess?: string;
     lang: string;
+    sendSuccess?: string;
     user: User;
 }
 
 interface DispatchProps {
     changeUserLevel: typeof changeUserLevel;
+    editIdentity: typeof editIdentity;
     fetchAlert: typeof alertPush;
-    sendIdentity: typeof sendIdentity;
     labelFetch: typeof labelFetch;
+    sendIdentity: typeof sendIdentity;
 }
 
 interface OwnProps {
@@ -96,9 +100,9 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     };
 
     public componentDidUpdate(prev: Props) {
-        const { user } = this.props;
+        const { editSuccess, sendSuccess, user } = this.props;
 
-        if (!prev.success && this.props.success) {
+        if ((!prev.editSuccess && editSuccess) || (!prev.sendSuccess && sendSuccess)) {
             this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
             this.props.history.push('/profile');
@@ -106,6 +110,11 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     }
 
     public render() {
+        const {
+            editSuccess,
+            sendSuccess,
+            lang,
+        } = this.props;
         const {
             dateOfBirth,
             firstName,
@@ -116,7 +125,6 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             countryOfBirth,
             metadata,
         } = this.state;
-        const { success, lang } = this.props;
 
         const dateOfBirthGroupClass = cr('pg-confirm__content-profile-partial-col-row-content', {
             'pg-confirm__content-identity-col-row-content--focused': dateOfBirthFocused,
@@ -220,7 +228,8 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                       <div className="pg-confirm__content-profile-partial-col-row" />
                   </div>
                 </div>
-                {success && <p className="pg-confirm__success">{this.translate(success)}</p>}
+                {sendSuccess && !editSuccess && <p className="pg-confirm__success">{this.translate(sendSuccess)}</p>}
+                {editSuccess && !sendSuccess && <p className="pg-confirm__success">{this.translate(editSuccess)}</p>}
                 <div className="pg-confirm__content-deep">
                     <Button
                         className="pg-confirm__content-phone-deep-button"
@@ -360,31 +369,46 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     }
 
     private sendData = () => {
-        const dob = !isDateInFuture(this.state.dateOfBirth) ? this.state.dateOfBirth : '';
+        const { user } = this.props;
+        const {
+            countryOfBirth,
+            dateOfBirth,
+            firstName,
+            lastName,
+            metadata,
+        } = this.state;
+        const dob = !isDateInFuture(dateOfBirth) ? dateOfBirth : '';
         const profileInfo = {
-            first_name: this.state.firstName,
-            last_name: this.state.lastName,
+            first_name: firstName,
+            last_name: lastName,
             dob,
-            country: this.state.countryOfBirth,
-            metadata: JSON.stringify(this.state.metadata),
+            country: countryOfBirth,
+            metadata: JSON.stringify(metadata),
         };
 
-        this.props.sendIdentity(profileInfo);
+        // tslint:disable-next-line: prefer-switch
+        if (user.level === 2 || user.level === 3) {
+            this.props.editIdentity(profileInfo);
+        } else {
+            this.props.sendIdentity(profileInfo);
+        }
     }
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
-    success: selectSendIdentitySuccess(state),
+    editSuccess: selectEditIdentitySuccess(state),
     lang: selectCurrentLanguage(state),
+    sendSuccess: selectSendIdentitySuccess(state),
     user: selectUserInfo(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     dispatch => ({
         changeUserLevel: payload => dispatch(changeUserLevel(payload)),
+        editIdentity: payload => dispatch(editIdentity(payload)),
         fetchAlert: payload => dispatch(alertPush(payload)),
-        sendIdentity: payload => dispatch(sendIdentity(payload)),
         labelFetch: () => dispatch(labelFetch()),
+        sendIdentity: payload => dispatch(sendIdentity(payload)),
     });
 
 // tslint:disable-next-line

@@ -1,4 +1,42 @@
 .pg-profile-page {
+  &__left-col__basic__info-row__block {
+    width: 100%;
+  }
+
+  &__details-user {
+    align-items: baseline;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 100%;
+
+    &__edit {
+      align-items: center;
+      color: var(--accent);
+      cursor: pointer;
+      display: flex;
+      font-family: "Noto Sans SC";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: normal;
+      height: 18px;
+      user-select: none;
+
+      svg {
+        height: 13px;
+        opacity: 1;
+        padding-left: calc(var(--gap) * 0.5);
+        vertical-align: middle;
+        width: 13px;
+
+        path {
+          fill: var(--accent);
+        }
+      }
+    }
+  }
+
   &__details-user > p,
   &__verification-header > span {
     font-family: var(--font-family);
