@@ -176,6 +176,11 @@ export const en = {
   'prize.2': '2nd Prize',
   'prize.3': '3rd Prize',
   'prize.4': '4&5th Prize',
+  'tickets.toActive': 'To Activate a Ticket:',
+  'tickets.enterCode': '- Enter an existing referral code',
+  'tickets.topUp': '- Top up your balance',
+  'tickets.button_enterCode': 'Enter Code',
+  'tickets.button_topUp': 'Top Up',
 
 
   "btcusdt_title": "BTC to USDT. Bitcoin Exchange | Emirex.com",

@@ -48,7 +48,8 @@ class DirectTicketDetails extends React.Component<Props>{
                                         <td><span className="count">{reg.inactive}</span><span className="explanation"> {this.props.message({id: 'tickets.tick'})}</span></td>
                                         <td colSpan={2}><span className="count">{this.props.message({id: 'tickets.reg'})}</span></td>
                                     </tr>
-                                    {reg.inactive ? this.ticketActivation() : null}
+                                        {reg.inactive ? this.ticketActivation() : null}
+                                        {/* {this.ticketActivation()} */}
                                     <tr>
                                         <td><span className="count">{ctx.usd.active} </span><span className="explanation">{this.props.message({id: 'tickets.tick'})}</span></td>
                                         <td><span className="count">{ctx.usd.inactive} </span><span className="explanation">{this.props.message({id: 'tickets.tick'})}</span></td>
@@ -81,23 +82,23 @@ class DirectTicketDetails extends React.Component<Props>{
         const topup = (
             <tr>
                 <td/>
-                <td colSpan={2}><span className="explanation"> - Top up your balance</span></td>
-                <td><span className="count"><a href="/wallets"><button className="button">Top Up</button></a></span></td>
-               
+                <td colSpan={2}><span className="explanation">{this.props.message({id: 'tickets.topUp'})}</span></td>
+                <td><span className="count"><a href="/wallets"><button className="button">{this.props.message({id: 'tickets.button_topUp'})}</button></a></span></td>
+
             </tr>
         );
 
         const refcode = (
             <tr>
                 <td/>
-                <td colSpan={2}><span className="explanation"> - Enter an existing referral code</span></td>
-                <td><span className="count"><a href="/profile"><button className="button">Enter Code</button></a></span></td>
+                <td colSpan={2}><span className="explanation">{this.props.message({id: 'tickets.enterCode'})}</span></td>
+                <td><span className="count"><a href="/profile"><button className="button">{this.props.message({id: 'tickets.button_enterCode'})}</button></a></span></td>
             </tr>
         )
         return (
             <>
             <tr>
-                <td colSpan={4}>To Activate a Ticket:</td>
+                <td colSpan={4}>{this.props.message({id: 'tickets.toActive'})}</td>
             </tr>
             {isNeededRefcode ? refcode : null}
             {isNeededTopup ? topup : null}

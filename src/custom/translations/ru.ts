@@ -818,7 +818,12 @@ export const ru: LangType = {
   'prize.1': '1-й Приз',
   'prize.2': '2-й Приз',
   'prize.3': '3-й Приз',
-  'prize.4': '4-й и 5-й Призы',
+    'prize.4': '4-й и 5-й Призы',
+    'tickets.toActive': 'Чтобы активировать билет:',
+    'tickets.enterCode': '- Введите существующий реферальный код',
+    'tickets.topUp': '- Пополните баланс',
+    'tickets.button_enterCode': 'Ввести код',
+    'tickets.button_topUp': 'Пополнить баланс',
 
     "btcusdt_title": "BTC в USDT. Конвертация Биткоин. Курс 2020 | Emirex.com",
     "btcusdt_description": "BTC в USDT ✅ Конвертер Биткоин в Tether ➤ Выгодные курсы и цены в режиме реального времени ➤ Большие объемы торгов ➤ Полная поддержка 24/7",
