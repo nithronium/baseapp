@@ -191,7 +191,6 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/history', currentLanguage)} component={HistoryScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/confirm', currentLanguage)} component={ConfirmScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/profile', currentLanguage)} component={ProfileScreen} currentLanguage={currentLanguage} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/profile'} component={ProfileScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/wallets', currentLanguage)} component={WalletsScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/security/2fa', currentLanguage)} component={ProfileTwoFactorAuthScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral-tickets', currentLanguage)} component={ReferralTicketsScreen} currentLanguage={currentLanguage} />
