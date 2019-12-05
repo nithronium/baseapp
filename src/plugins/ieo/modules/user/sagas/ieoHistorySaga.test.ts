@@ -48,6 +48,7 @@ describe('IEO History Fetch', () => {
                 ratio: '0.31',
                 base_currency: 'eth',
                 quote_currency: 'btc',
+                tokens_locked: '0.0',
             },
             {
                 id: 2,
@@ -67,13 +68,14 @@ describe('IEO History Fetch', () => {
                 ratio: '0.31',
                 base_currency: 'eth',
                 quote_currency: 'btc',
+                tokens_locked: '0.0',
             },
         ];
         const fakeHeaders = { total: 2 };
-        const fakeFetchPayloadFirstPage = { page: 1, limit: 25 };
+        const fakeFetchPayloadFirstPage = { page: 0, limit: 25 };
         const fakeSuccessPayloadFirstPage = {
             list: fakePayload,
-            page: 1,
+            page: 0,
             total: fakeHeaders.total,
         };
 

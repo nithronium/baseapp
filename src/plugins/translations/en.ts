@@ -55,4 +55,6 @@ export const en = {
     'page.body.ieo.history.paidAmount': 'Paid amount',
     'page.body.ieo.history.receivedAmount': 'Received amount',
     'page.body.ieo.history.fees': 'Fees',
+    'page.body.ieo.history.tokensLocked': 'Tokens locked',
+    'page.body.ieo.history.state': 'State',
 };

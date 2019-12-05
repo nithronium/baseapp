@@ -40,6 +40,7 @@ describe('IEO order execute actions', () => {
         ratio: '0.2',
         base_currency: 'eth',
         quote_currency: 'btc',
+        tokens_locked: '0.0',
     };
 
     it('should check ieoOrderExecuteFetch action creator', () => {
@@ -79,7 +80,7 @@ describe('IEO orders fetch actions', () => {
             ratio: '0.31',
             base_currency: 'eth',
             quote_currency: 'btc',
-
+            tokens_locked: '0.0',
         },
         {
             id: 2,
@@ -99,7 +100,7 @@ describe('IEO orders fetch actions', () => {
             ratio: '0.31',
             base_currency: 'eth',
             quote_currency: 'btc',
-
+            tokens_locked: '0.0',
         },
     ];
 
@@ -153,6 +154,7 @@ describe('IEO orders fetch actions', () => {
         ratio: '0.31',
         base_currency: 'eth',
         quote_currency: 'btc',
+        tokens_locked: '0.0',
     };
 
     it('should check ieoOrderCancel action creator', () => {
