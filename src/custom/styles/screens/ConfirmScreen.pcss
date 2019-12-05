@@ -6,8 +6,11 @@
       &-1,
       &-2,
       &-3 {
+        align-items: center;
         background: var(--kyc-circle-color);
+        display: flex;
         height: 24px;
+        justify-content: center;    
         margin-top: 15px;
         width: 24px;
 
@@ -23,6 +26,12 @@
           justify-content: center;
         }
       }
+
+      &-1:after,
+      &-2:after,
+      &-3:after {
+        top: -1px;
+      }
     }
 
     &-line {
@@ -30,6 +39,10 @@
       &-2 {
         margin: 15px 0 0 0;
       }
+    }
+
+    &-items {
+      max-width: 190px;
     }
 
     &-first {
@@ -71,7 +84,8 @@
     font-weight: normal;
     font-size: 12px;
     top: 33px;
-    width: 72px;
+    left: auto;
+    width: max-content;
   }
 }
 

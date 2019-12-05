@@ -84,10 +84,11 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
 
         const currentProfileLevel = userData.level;
         const cx = classnames('pg-confirm__progress-items', {
-            'pg-confirm__progress-first': currentProfileLevel === 0 || currentProfileLevel === 1,
-            'pg-confirm__progress-second': currentProfileLevel === 2 || currentProfileLevel === 3,
-            'pg-confirm__progress-third': currentProfileLevel === 4 || currentProfileLevel === 5,
+            'pg-confirm__progress-first': currentProfileLevel === 0 || currentProfileLevel === 2 || currentProfileLevel === 4,
+            'pg-confirm__progress-second': currentProfileLevel === 1 || currentProfileLevel === 3 || currentProfileLevel === 5,
         });
+
+        const stepLabels = this.handleGetStepLabels(currentProfileLevel);
 
         return (
             <div className="pg-wrapper">
@@ -109,19 +110,13 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                             <div className={cx}>
                                 <div className="pg-confirm__progress-circle-1">
                                     <span className="pg-confirm__title-text pg-confirm__active-1">
-                                    <FormattedMessage id="page.body.kyc.head.level.first"/>
+                                    <FormattedMessage id={stepLabels[0]}/>
                                     </span>
                                 </div>
                                 <div className="pg-confirm__progress-line-1" />
                                 <div className="pg-confirm__progress-circle-2">
                                     <span className="pg-confirm__title-text pg-confirm__active-2">
-                                    <FormattedMessage id="page.body.kyc.head.level.second"/>
-                                    </span>
-                                </div>
-                                <div className="pg-confirm__progress-line-2" />
-                                <div className="pg-confirm__progress-circle-3">
-                                    <span className="pg-confirm__title-text pg-confirm__active-3">
-                                    <FormattedMessage id="page.body.kyc.head.level.third"/>
+                                    <FormattedMessage id={stepLabels[1]}/>
                                     </span>
                                 </div>
                             </div>
@@ -146,6 +141,22 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         this.setState(prevState => ({
             showNationalityBlockModal: !prevState.showNationalityBlockModal,
         }));
+    }
+
+    private handleGetStepLabels = (currentProfileLevel: number): string[] => {
+        switch (currentProfileLevel) {
+            case 0:
+            case 1:
+                return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
+            case 2:
+            case 3:
+                return ['page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
+            case 4:
+            case 5:
+                return ['page.body.kyc.head.level.fifth', 'page.body.kyc.head.level.sixth'];
+            default:
+                return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
+        }
     }
 
     private handleCheckPendingLabels = (labels: Label[]) => {

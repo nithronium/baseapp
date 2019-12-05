@@ -4,6 +4,7 @@ import { History } from 'history';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import {
     labelFetch,
@@ -31,7 +32,7 @@ interface DispatchProps {
     pushDataStorage: typeof dataStoragePush;
 }
 
-type Props = ReduxProps & HistoryProps & DispatchProps & InjectedIntlProps;
+type Props = ReduxProps & HistoryProps & DispatchProps & InjectedIntlProps & RouterProps;
 
 const answersForQuestion1 = translate => [
     translate('page.body.kyc.questionnaire.question1.answer1'),
@@ -131,6 +132,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
         if (nextProps.dataStoragePushSuccess && !dataStoragePushSuccess) {
             this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
+            this.props.history.push('/profile');
         }
     }
 

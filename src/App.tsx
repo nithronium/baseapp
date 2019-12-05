@@ -84,7 +84,9 @@ class AppLayout extends React.Component<Props, State, {}> {
         const { lang, messages } = locale;
 
         const cx = classnames('pg-kyc-login',{
-            'pg-kyc-login--visible': this.state.diplayKYCLoginModal && userData.level % 2 !== 0,
+            'pg-kyc-login--visible': this.state.diplayKYCLoginModal &&
+                !location.pathname.startsWith('/confirm') &&
+                userData.level % 2 !== 0,
         });
 
         return (

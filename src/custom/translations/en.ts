@@ -23,9 +23,12 @@ export const en = {
     'page.body.trade.header.funds.content.value': 'Value in ',
     'page.body.trade.header.funds.content.name': 'Name',
 
-    'page.body.kyc.head.level.first': 'Step 1',
-    'page.body.kyc.head.level.second': 'Step 2',
-    'page.body.kyc.head.level.third': 'Step 3',
+    'page.body.kyc.head.level.first': 'Email',
+    'page.body.kyc.head.level.second': 'Profile',
+    'page.body.kyc.head.level.third': 'Phone',
+    'page.body.kyc.head.level.fourth': 'Idenfy',
+    'page.body.kyc.head.level.fifth': 'Residential address',
+    'page.body.kyc.head.level.sixth': 'Questionnaire',
 
     'page.body.trade.header.upcoming': 'Up coming',
     'page.body.trade.header.inProgress': 'In progress',

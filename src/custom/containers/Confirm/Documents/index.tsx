@@ -14,8 +14,6 @@ import {
   connect,
   MapDispatchToPropsFunction,
 } from 'react-redux';
-import { RouterProps } from 'react-router';
-import { withRouter } from 'react-router-dom';
 import close = require('../../../../assets/images/close.svg');
 import { formatDate } from '../../../../helpers';
 import { isDateInFuture } from '../../../../helpers/checkDate';
@@ -60,7 +58,7 @@ interface DocumentsState {
     scans: File[];
 }
 
-type Props = ReduxProps & DispatchProps & RouterProps & InjectedIntlProps;
+type Props = ReduxProps & DispatchProps & InjectedIntlProps;
 
 // tslint:disable:member-ordering
 class DocumentsComponent extends React.Component<Props, DocumentsState> {
@@ -355,4 +353,4 @@ const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     });
 
 // tslint:disable-next-line:no-any
-export const Documents = injectIntl(withRouter(connect(mapStateToProps, mapDispatchProps)(DocumentsComponent) as any));
+export const Documents = injectIntl(connect(mapStateToProps, mapDispatchProps)(DocumentsComponent) as any);

@@ -1,6 +1,9 @@
+import { History } from 'history';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { RouterProps } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import {
     labelFetch,
     RootState,
@@ -22,7 +25,11 @@ interface DispatchProps {
     kycAuthFetch: typeof kycAuthFetch;
 }
 
-type Props = ReduxProps & DispatchProps & InjectedIntlProps;
+interface HistoryProps {
+    history: History;
+}
+
+type Props = ReduxProps & DispatchProps & InjectedIntlProps & RouterProps & HistoryProps;
 
 class IdenfyContainer extends React.Component<Props> {
     public componentDidMount() {
@@ -59,6 +66,7 @@ class IdenfyContainer extends React.Component<Props> {
         if (event.data.status && event.data.status !== 'failed') {
             this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
+            this.props.history.push('/profile');
         }
     }
 }
@@ -76,4 +84,4 @@ const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     });
 
 // tslint:disable-next-line
-export const Idenfy = injectIntl(connect(mapStateToProps, mapDispatchProps)(IdenfyContainer) as any);
+export const Idenfy = injectIntl(withRouter(connect(mapStateToProps, mapDispatchProps)(IdenfyContainer) as any));

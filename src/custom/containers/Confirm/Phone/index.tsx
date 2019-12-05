@@ -1,6 +1,4 @@
-import {
-    Button,
-} from '@openware/components';
+import { Button } from '@openware/components';
 import cr from 'classnames';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';

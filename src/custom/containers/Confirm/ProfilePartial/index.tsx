@@ -3,6 +3,7 @@ import {
     Dropdown,
 } from '@openware/components';
 import cr from 'classnames';
+import { History } from 'history';
 import countries = require('i18n-iso-countries');
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -11,6 +12,8 @@ import {
   connect,
   MapDispatchToPropsFunction,
 } from 'react-redux';
+import { RouterProps } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { formatDate, isDateInFuture } from '../../../../helpers';
 import {
     alertPush,
@@ -46,6 +49,10 @@ interface OwnProps {
     toggleBlockNationalityModal: () => void;
 }
 
+interface HistoryProps {
+    history: History;
+}
+
 interface OnChangeEvent {
     target: {
         value: string;
@@ -66,7 +73,7 @@ interface State {
     dateOfBirthValid: boolean;
 }
 
-type Props = ReduxProps & DispatchProps & InjectedIntlProps & OwnProps;
+type Props = ReduxProps & DispatchProps & InjectedIntlProps & RouterProps & HistoryProps & OwnProps;
 
 // tslint:disable jsx-no-lambda no-submodule-imports
 class ProfilePartialComponent extends React.Component<Props, State> {
@@ -94,6 +101,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         if (!prev.success && this.props.success) {
             this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
+            this.props.history.push('/profile');
         }
     }
 
@@ -380,4 +388,4 @@ const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     });
 
 // tslint:disable-next-line
-export const ProfilePartial = injectIntl(connect(mapStateToProps, mapDispatchProps)(ProfilePartialComponent) as any);
+export const ProfilePartial = injectIntl(withRouter(connect(mapStateToProps, mapDispatchProps)(ProfilePartialComponent) as any));
