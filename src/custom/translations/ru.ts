@@ -824,6 +824,7 @@ export const ru: LangType = {
     'tickets.topUp': '- Пополните баланс',
     'tickets.button_enterCode': 'Ввести код',
     'tickets.button_topUp': 'Пополнить баланс',
+    'medialogo.title': 'Emirex is featured in ',
 
     "btcusdt_title": "BTC в USDT. Конвертация Биткоин. Курс 2020 | Emirex.com",
     "btcusdt_description": "BTC в USDT ✅ Конвертер Биткоин в Tether ➤ Выгодные курсы и цены в режиме реального времени ➤ Большие объемы торгов ➤ Полная поддержка 24/7",

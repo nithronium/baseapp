@@ -9,6 +9,10 @@ import telegram = require('../../../assets/images/referral/icons/Telegram.svg');
 import twitter = require('../../../assets/images/referral/icons/twitter.svg');
 import logo = require('../../../assets/images/referral/logo-emirex.svg');
 
+import logo1 = require('../../../../assets/images/logo1.svg');
+import logo2 = require('../../../../assets/images/logo2.svg');
+import logo3 = require('../../../../assets/images/logo3.svg');
+
 const Header = () => {
     return (
         <div className="logo">
@@ -211,17 +215,34 @@ const FooterBody = props => {
     );
 };
 
+const MediaLogo = props => {
+    return (
+        <div className="medialogo">
+            <h2>{props.intl.formatMessage({ id: 'medialogo.title' })}</h2>
+            <div className="logo-wrapper">
+                <img src={logo1} alt="new btc logo" />
+                <img src={logo2} alt="yahoo logo" />        
+                <img src={logo3} alt="coinspeaker logo" />
+            </div>
+        </div>
+    )
+}
+
 const Footer = props => {
     return (
-        <section id="footer">
+        <div>
+            <MediaLogo intl={props.intl}/>
+            <section id="footer">
+            
             <div>
-                {/* <MobileStartTrading /> */}
+                {/* <MobileStartTrading /> */}                
                 <Header />
                 <FooterBody intl={props.intl}/>
                 <Licenses intl={props.intl}/>
                 <Copyright intl={props.intl}/>
             </div>
-        </section>
+            </section>
+        </div>
     );
 };
 

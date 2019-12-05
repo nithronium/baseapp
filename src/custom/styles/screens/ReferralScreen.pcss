@@ -829,10 +829,12 @@
             font-size: 36px;
         }
     }
+    
 
     #footer {
         padding: 0 20px;
         background: black;
+
         & > div {
             box-sizing: border-box;
             width: 100%;
@@ -982,4 +984,33 @@
             }
         }
     }
+
+   
 }
+ .medialogo {
+    background-color: #FFFFFF;
+    h2 {
+        max-width: 1040px;
+        margin: 0 auto;
+        font-family: Roboto;
+        text-align: center;
+        color: #000000;
+        padding: 50px 0;
+        border-top: 1px solid #00000033;
+    }
+    .logo-wrapper {
+        padding: 50px 0;
+        display: flex;
+        max-width: 600px;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        @media only screen and (max-width: 600px) {
+            flex-direction: column;
+            img {
+                margin-bottom: 20px;
+                width: 200px;
+            }
+        }
+    }
+ }

@@ -181,6 +181,7 @@ export const en = {
   'tickets.topUp': '- Top up your balance',
   'tickets.button_enterCode': 'Enter Code',
   'tickets.button_topUp': 'Top Up',
+  'medialogo.title': 'Emirex is featured in ',
 
 
   "btcusdt_title": "BTC to USDT. Bitcoin Exchange | Emirex.com",
