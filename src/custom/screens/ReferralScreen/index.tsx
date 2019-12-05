@@ -234,8 +234,7 @@ class Referral extends React.Component<Props> {
                     <meta name="og:image" content="https://emirex.com/public/img/logo-emirex.svg" />
                 </Helmet>
                 <div className="pg-referral-screen">
-                    <Banner>{this.props.user.state === 'active' ? totalTickets() : signupForm()}</Banner>
-                    <HIW
+                    <Banner lang={currentLanguage} children={this.props.user.state === 'active' ? totalTickets() : signupForm()} />                  <HIW
                         hiw={this.props.intl.formatMessage({ id: 'page.referral.hiw' })}
                         subtitle={this.props.intl.formatMessage({id: 'page.referral.hiw.subtitle'})}
                         steps={steps}
