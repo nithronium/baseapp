@@ -26,7 +26,7 @@ import {
 import { labelFetch } from '../../../../modules/user/kyc/label';
 import { changeUserLevel } from '../../../../modules/user/profile';
 import { nationalities } from '../../../../translations/nationalities';
-import { DISALLOWED_COUNTRIES } from '../../../constants';
+import { DISALLOWED_COUNTRIES, DISALLOWED_NATIONALITIES } from '../../../constants';
 import { isValidDate } from '../../../helpers/checkDate';
 
 interface ReduxProps {
@@ -40,6 +40,10 @@ interface DispatchProps {
     fetchAlert: typeof alertPush;
     sendIdentity: typeof sendIdentity;
     labelFetch: typeof labelFetch;
+}
+
+interface OwnProps {
+    toggleBlockNationalityModal: () => void;
 }
 
 interface OnChangeEvent {
@@ -62,16 +66,9 @@ interface State {
     dateOfBirthValid: boolean;
 }
 
-const filterObject = (obj, filter) =>
-   Object.keys(obj).reduce((acc, val) =>
-   (filter.includes(val.toUpperCase()) ? acc : {
-       ...acc,
-       [val]: obj[val],
-   }
-), {});
+type Props = ReduxProps & DispatchProps & InjectedIntlProps & OwnProps;
 
-type Props = ReduxProps & DispatchProps & InjectedIntlProps;
-
+// tslint:disable jsx-no-lambda no-submodule-imports
 class ProfilePartialComponent extends React.Component<Props, State> {
     public state = {
         countryOfBirth: '',
@@ -131,20 +128,12 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             return this.translate(value);
         });
 
-        const onSelectNationality = value => {
-            this.selectNationality(dataNationalities[value]);
-        };
-
-        /* tslint:disable */
-        countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
-        countries.registerLocale(require("i18n-iso-countries/langs/ru.json"));
-        countries.registerLocale(require("i18n-iso-countries/langs/zh.json"));
-        /* tslint:enable */
+        countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
+        countries.registerLocale(require('i18n-iso-countries/langs/ru.json'));
+        countries.registerLocale(require('i18n-iso-countries/langs/zh.json'));
 
         const listOfCountries = countries.getNames(lang);
-        const filteredCountries: countries.LocalizedCountryNames = filterObject(listOfCountries, DISALLOWED_COUNTRIES);
-        const dataCountries = Object.values(filteredCountries);
-        const onSelectCountry = value => this.selectCountry(dataCountries[value]);
+        const dataCountries = Object.values(listOfCountries);
 
         return (
             <div className="pg-confirm__content-profile-partial">
@@ -187,7 +176,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                               <Dropdown
                                   className="pg-confirm__content-documents-col-row-content-number"
                                   list={dataCountries}
-                                  onSelect={onSelectCountry}
+                                  onSelect={value => this.selectCountry(listOfCountries, value)}
                                   placeholder={this.translate('page.body.kyc.identity.CoR')}
                               />
                           </div>
@@ -200,7 +189,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                               <Dropdown
                                   className="pg-confirm__content-documents-col-row-content-number"
                                   list={dataNationalities}
-                                  onSelect={onSelectNationality}
+                                  onSelect={this.selectNationality}
                                   placeholder={this.translate('page.body.kyc.identity.nationality')}
                               />
                           </div>
@@ -302,15 +291,27 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         }
     }
 
-    private selectNationality = (value: string) => {
+    private selectNationality = (value: number) => {
+        const dataNationalities = nationalities.map(nationality => this.translate(nationality));
+
+        if (DISALLOWED_NATIONALITIES.includes(dataNationalities[value].toLowerCase())) {
+            this.props.toggleBlockNationalityModal();
+            return;
+        }
+
         this.setState({
-            metadata: { nationality: value },
+            metadata: { nationality: dataNationalities[value] },
         });
     };
 
-    private selectCountry = (value: string) => {
+    private selectCountry = (listOfCountries: countries.LocalizedCountryNames, value: number) => {
+        if (DISALLOWED_COUNTRIES.includes(Object.keys(listOfCountries)[value])) {
+            this.props.toggleBlockNationalityModal();
+            return;
+        }
+
         this.setState({
-            countryOfBirth: countries.getAlpha2Code(value, this.props.lang),
+            countryOfBirth: countries.getAlpha2Code(Object.values(listOfCountries)[value], this.props.lang),
         });
     };
 

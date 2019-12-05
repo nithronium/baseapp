@@ -18,6 +18,7 @@ import {
     selectUserInfo,
     User,
 } from '../../../modules';
+import { BlockNationalityModal } from '../../components';
 import { Documents } from '../../containers/Confirm/Documents';
 import { Idenfy } from '../../containers/Confirm/Idenfy';
 import { Phone } from '../../containers/Confirm/Phone';
@@ -34,16 +35,17 @@ interface HistoryProps {
     history: History;
 }
 
+interface DispatchProps {
+    fetchAlert: typeof alertPush;
+    labelFetch: typeof labelFetch;
+}
+
 interface ConfirmState {
     title: string;
     level: number;
     kycAlert: boolean;
     documentsAlert: boolean;
-}
-
-interface DispatchProps {
-    fetchAlert: typeof alertPush;
-    labelFetch: typeof labelFetch;
+    showNationalityBlockModal: boolean;
 }
 
 type Props = ReduxProps & HistoryProps & DispatchProps;
@@ -57,6 +59,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             level: 0,
             kycAlert: false,
             documentsAlert: false,
+            showNationalityBlockModal: false,
         };
     }
 
@@ -77,6 +80,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     // tslint:disable:jsx-no-multiline-js
     public render() {
         const { colorTheme, userData } = this.props;
+        const { showNationalityBlockModal } = this.state;
 
         const currentProfileLevel = userData.level;
         const cx = classnames('pg-confirm__progress-items', {
@@ -127,10 +131,22 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                         </div>
                     </div>
                 </div>
+                {showNationalityBlockModal ? (
+                    <BlockNationalityModal
+                        className="pg-block-nationality-modal"
+                        toggleModal={this.handleToggleBlockNationalityModal}
+                    />
+                ) : null}
             </div>
         );
     }
     //tslint:enable:jsx-no-multiline-js
+
+    private handleToggleBlockNationalityModal = () => {
+        this.setState(prevState => ({
+            showNationalityBlockModal: !prevState.showNationalityBlockModal,
+        }));
+    }
 
     private handleCheckPendingLabels = (labels: Label[]) => {
         const { history, fetchAlert } = this.props;
@@ -166,7 +182,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         this.handleCheckPendingLabels(labels);
 
         if (level === 1) {
-            return <ProfilePartial />;
+            return <ProfilePartial toggleBlockNationalityModal={this.handleToggleBlockNationalityModal} />;
         }
 
         if (level === 2) {

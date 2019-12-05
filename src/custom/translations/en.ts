@@ -131,9 +131,9 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': 'Garhoud Branch, Dubai, UAE',
     'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'AJMNAEAJ',
 
-    'page.body.modal.denied': 'Access denied',
-    'page.body.modal.appologies': 'Sorry, due to your local legislation we are not able to proceed your registration.',
-    'page.body.modal.understand': 'I understand',
+    'page.body.modal.blockNationality.header': 'Access denied',
+    'page.body.modal.blockNationality.message': 'Sorry, due to your local legislation we are not able to proceed your registration.',
+    'page.body.modal.blockNationality.button': 'I understand',
 
     'resource.profile.dateOfBirth': 'User must be over 21 years old',
 
