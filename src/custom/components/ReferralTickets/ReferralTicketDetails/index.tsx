@@ -137,7 +137,7 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                                 <tr >
                                     <td><span className="count">{this.getTotal('tickets') + this.getTotal('subreferrals')}</span> <span className="explanation">{this.props.message({id: 'tickets.tick'})}</span></td>
                                     <td>{this.getTotal('email', 'count')} {this.props.message({id: 'tickets.referrals'})}</td>
-                                    <td>{this.props.message({id: 'tickets.yes'})}{this.getTotal('isActive', 'count', 1)} / {this.props.message({id: 'tickets.no'})}{this.getTotal('isActive', 'count', 0)} </td>
+                                    <td>{this.props.message({id: 'tickets.yes'})} {this.getTotal('isActive', 'count', 1)} / {this.props.message({id: 'tickets.no'})} {this.getTotal('isActive', 'count', 0)} </td>
                                     <td>{this.getTotal('subreferrals')} <span className="explanation">{this.props.message({id: 'tickets.referrals'})}</span></td>
                                     <td>{this.getTotal('activeSubreferrals')} <span className="explanation">{this.props.message({id: 'tickets.referrals'})}</span></td>
                                 </tr>
@@ -146,7 +146,7 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                                 <tr>
                                     <td><span className="count">{this.getOverall('active') + this.getOverall('inactive') }</span> <span className="explanation">{this.props.message({id: 'tickets.tick'})}</span></td>
                                     <td>{this.props.count} {this.props.message({id: 'tickets.referrals'})}</td>
-                                    <td>{this.props.message({id: 'tickets.yes'})} {this.getOverall('active')} /{this.props.message({id: 'tickets.no'})}{this.getOverall('inactive')} </td>
+                                    <td>{this.props.message({id: 'tickets.yes'})} {this.getOverall('active')} /{this.props.message({id: 'tickets.no'})} {this.getOverall('inactive')} </td>
                                     <td>{this.props.L2count} <span className="explanation"> {this.props.message({id: 'tickets.referrals'})}</span></td>
                                     <td>{this.getTotal('activeSubreferrals')} <span className="explanation">{this.props.message({id: 'tickets.referrals'})}</span></td>
                                 </tr>
