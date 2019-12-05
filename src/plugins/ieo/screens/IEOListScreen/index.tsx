@@ -101,7 +101,7 @@ class IEOListContainer extends React.Component<Props> {
     private renderContent = () =>  {
         const listPreparing = this.handleFilterIEO(['preparing']);
         const listInProgress = this.handleFilterIEO(['ongoing', 'distributing']);
-        const listPast = this.handleFilterIEO(['finished']);
+        const listPast = this.handleFilterIEO(['finished', 'released']);
 
         return (
             <React.Fragment>
@@ -145,7 +145,7 @@ class IEOListContainer extends React.Component<Props> {
             <React.Fragment>
                 <span className="pg-ieo-page__header">{this.translate('page.body.trade.header.past')}</span>
                 <IEOListElement
-                    state={[ 'finished' ]}
+                    state={[ 'finished', 'released' ]}
                     ieo={listPast}
                     handleFetchIEO={this.handleFetchIEO}
                     currencies={this.props.currencies}
@@ -163,7 +163,7 @@ class IEOListContainer extends React.Component<Props> {
     };
 
     private handleFetchIEO = () => {
-        this.props.ieoFetch([ 'preparing', 'ongoing', 'distributing', 'finished' ]);
+        this.props.ieoFetch([ 'preparing', 'ongoing', 'distributing', 'finished', 'released' ]);
     };
 }
 

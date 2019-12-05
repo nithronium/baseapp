@@ -140,6 +140,7 @@ class IEOCardComponent extends React.Component<Props, State> {
             case 'distributing':
                 return this.renderInProgress();
             case 'finished':
+            case 'released':
                 return this.renderFinished();
             default:
                 return;
@@ -222,16 +223,16 @@ class IEOCardComponent extends React.Component<Props, State> {
 
         const countDownColorClass = classnames('content__ieo-countdown', {
             'content__ieo-countdown--red': countdownValue && Number(countdownValue.split(':').pop()) % 2 === 0,
-            'font-yellow': state === 'finished',
+            'font-yellow': state === 'finished' || state === 'released',
         });
 
         const percentageClass = classnames('filler', {
             'filler--zero': percentage < 5,
-            'back-yellow': state === 'finished',
+            'back-yellow': state === 'finished' || state === 'released',
         });
 
         const currentProgressClass = classnames('progress-bar__value__current', {
-            'font-yellow': state === 'finished',
+            'font-yellow': state === 'finished' || state === 'released',
         });
 
         return (

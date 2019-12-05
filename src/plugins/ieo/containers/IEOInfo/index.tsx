@@ -158,6 +158,7 @@ class IEOInfoComponent extends React.Component<Props, State> {
                         />
                     );
                 case 'finished':
+                case 'released':
                     return (
                         <Blur
                             title={this.props.intl.formatMessage({ id: 'page.body.ieo.details.order.content.blur.titleFinished' })}
@@ -178,6 +179,7 @@ class IEOInfoComponent extends React.Component<Props, State> {
             case 'distributing':
                 return this.renderInProgress();
             case 'finished':
+            case 'released':
                 return this.renderFinished();
             default:
                 return;
@@ -295,11 +297,11 @@ class IEOInfoComponent extends React.Component<Props, State> {
 
         const percentageClass = classnames('filler', {
             'filler--zero': percentage < 5,
-            'back-yellow': ieo.state === 'finished',
+            'back-yellow': ieo.state === 'finished' || ieo.state === 'released',
         });
 
         const currentProgressClass = classnames('progress-bar__value__current', {
-            'font-yellow': ieo.state === 'finished',
+            'font-yellow': ieo.state === 'finished' || ieo.state === 'released',
         });
 
         return (
