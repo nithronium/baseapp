@@ -102,19 +102,20 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     public componentDidUpdate(prev: Props) {
         const { editSuccess, sendSuccess, user } = this.props;
 
-        if ((!prev.editSuccess && editSuccess) || (!prev.sendSuccess && sendSuccess)) {
+        if (!prev.sendSuccess && sendSuccess) {
             this.props.changeUserLevel({ level: +user.level + 1 });
+            this.props.labelFetch();
+            this.props.history.push('/profile');
+        }
+
+        if (!prev.editSuccess && editSuccess) {
             this.props.labelFetch();
             this.props.history.push('/profile');
         }
     }
 
     public render() {
-        const {
-            editSuccess,
-            sendSuccess,
-            lang,
-        } = this.props;
+        const { lang } = this.props;
         const {
             dateOfBirth,
             firstName,
@@ -228,8 +229,6 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                       <div className="pg-confirm__content-profile-partial-col-row" />
                   </div>
                 </div>
-                {sendSuccess && !editSuccess && <p className="pg-confirm__success">{this.translate(sendSuccess)}</p>}
-                {editSuccess && !sendSuccess && <p className="pg-confirm__success">{this.translate(editSuccess)}</p>}
                 <div className="pg-confirm__content-deep">
                     <Button
                         className="pg-confirm__content-phone-deep-button"

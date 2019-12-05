@@ -63,7 +63,7 @@ class IdenfyContainer extends React.Component<Props> {
     public handleReceiveMessage = event => {
         const { user } = this.props;
 
-        if (event.data.status && event.data.status !== 'failed') {
+        if (event.data.status && event.data.status.toLowerCase() === 'approved') {
             this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
             this.props.history.push('/profile');
