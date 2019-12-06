@@ -2,9 +2,18 @@ import cn from 'classnames';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { Label, labelFetch, selectLabelData, selectUserInfo, User } from '../../modules';
+import { buildPath } from '../../custom/helpers';
+import {
+    Label,
+    labelFetch,
+    selectCurrentLanguage,
+    selectLabelData,
+    selectUserInfo,
+    User,
+} from '../../modules';
 
 interface ReduxProps {
+    currentLanguage: string;
     label: Label[];
 }
 
@@ -102,9 +111,11 @@ class ProfileVerificationComponent extends React.Component<Props> {
     }
 
     private renderVerificationLevel(text: string, userLevel, targetLevel) {
+        const { currentLanguage } = this.props;
+
         if (userLevel === (targetLevel - 1)) {
             return (
-                <a href="/confirm" className="pg-profile-page__level-verification__url">
+                <a href={buildPath('/confirm', currentLanguage)} className="pg-profile-page__level-verification__url">
                     <FormattedMessage id={`${text}.unverified.title`}/>
                 </a>
             );
@@ -126,7 +137,8 @@ class ProfileVerificationComponent extends React.Component<Props> {
     }
 
     private renderIdentityVerification(text: string, userLevel, targetLevel, documentLabel) {
-      const isLabelExist = this.props.label;
+      const { currentLanguage, label } = this.props;
+      const isLabelExist = label;
 
       if (isLabelExist.length > 0) {
         switch (userLevel) {
@@ -139,7 +151,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
               );
             } else {
               return (
-                <a href="/confirm" className="pg-profile-page__level-verification__url">
+                <a href={buildPath('/confirm', currentLanguage)} className="pg-profile-page__level-verification__url">
                   <FormattedMessage id={`${text}.unverified.title`}/>
                 </a>
               );
@@ -180,6 +192,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
 }
 
 const mapStateToProps = state => ({
+    currentLanguage: selectCurrentLanguage(state),
     user: selectUserInfo(state),
     label: selectLabelData(state),
 });

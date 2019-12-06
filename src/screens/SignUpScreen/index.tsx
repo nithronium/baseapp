@@ -15,6 +15,7 @@ import { withRouter } from 'react-router-dom';
 import { captchaType, siteKey } from '../../api';
 import logo = require('../../assets/images/logo.svg');
 import { Modal, SignUpForm } from '../../components';
+import { buildPath } from '../../custom/helpers';
 import {
     EMAIL_REGEX,
     ERROR_INVALID_EMAIL,
@@ -78,8 +79,10 @@ class SignUp extends React.Component<Props> {
     }
 
     public componentWillReceiveProps(props: Props) {
+        const { i18n } = this.props;
+
         if (props.requireVerification) {
-            props.history.push('/email-verification', {email: this.state.email});
+            props.history.push(buildPath('/email-verification', i18n), {email: this.state.email});
         }
     }
 
@@ -221,7 +224,7 @@ class SignUp extends React.Component<Props> {
     };
 
     private handleSignIn = () => {
-        this.props.history.push('/signin');
+        this.props.history.push(buildPath('/signin', this.props.i18n));
     };
 
     private handleSignUp = () => {
@@ -310,8 +313,9 @@ class SignUp extends React.Component<Props> {
     };
 
     private closeModal = () => {
+        const { history, i18n } = this.props;
         this.setState({showModal: false});
-        this.props.history.push('/signin');
+        history.push(buildPath('/signin', i18n));
     };
 
     private extractRefID = (url: string) => new URLSearchParams(url).get('refid');

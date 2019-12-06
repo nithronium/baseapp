@@ -13,8 +13,13 @@ import {
 } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { CopyableTextField } from '../../components';
+import { buildPath } from '../../custom/helpers';
 import { setDocumentTitle } from '../../helpers';
-import { alertPush, RootState } from '../../modules';
+import {
+    alertPush,
+    RootState,
+    selectCurrentLanguage,
+} from '../../modules';
 import {
     enableUser2fa,
     generate2faQRFetch,
@@ -30,6 +35,7 @@ interface RouterProps {
 
 interface ReduxProps {
     barcode: string;
+    currentLanguage: string;
     qrUrl: string;
     success?: boolean;
 }
@@ -197,7 +203,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
                 <legend>
                     {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.message.mfa')}
                 </legend>
-                {secret && <CopyableTextField value={secret} fieldId="secret-2fa" />}
+                {secret && <CopyableTextField value={secret} fieldId="secret-2fa" copyButtonText={this.translate('page.body.profile.mfa.button.text')}/>}
             </fieldset>
         );
     }
@@ -232,7 +238,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
     }
 
     private handleNavigateToProfile = () => {
-        this.props.history.push('/profile');
+        this.props.history.push(buildPath('/profile', this.props.currentLanguage));
     }
 
     private get2faAction = () => {
@@ -246,6 +252,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, Props, RootState> = state => ({
+    currentLanguage: selectCurrentLanguage(state),
     qrUrl: selectTwoFactorAuthQR(state),
     barcode: selectTwoFactorAuthBarcode(state),
     success: selectTwoFactorAuthSuccess(state),

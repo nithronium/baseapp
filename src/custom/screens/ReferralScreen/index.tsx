@@ -31,11 +31,14 @@ import {
 } from '../../../modules';
 import { Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, Video } from '../../components/Referral';
 
+import { buildPath } from '../../helpers';
+
 interface ReduxProps {
     requireVerification?: boolean;
     loading?: boolean;
     user: User;
     overall: ReferralOverallPayload['overall'];
+    currentLanguage: string;
 }
 
 interface DispatchProps {
@@ -85,10 +88,13 @@ class Referral extends React.Component<Props> {
 
     }
 
+ 
+
     public componentWillReceiveProps(props: Props) {
         if (props.requireVerification) {
             props.history.push('/email-verification', { email: this.state.email });
         }
+        document.getElementsByTagName('html')![0].lang = this.props.currentLanguage;
     }
 
     public render() {
@@ -108,7 +114,7 @@ class Referral extends React.Component<Props> {
             confirmPasswordFocused,
             refIdFocused,
         } = this.state;
-        const { loading } = this.props;
+        const { loading, currentLanguage } = this.props;
 
         const className = cx('pg-referral-screen__container', { loading });
 
@@ -120,7 +126,7 @@ class Referral extends React.Component<Props> {
                     </div>
                     <SignUpForm
                         labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn' })}
-                        labelSignUp="Sign up to WIN!"
+                        labelSignUp={this.props.intl.formatMessage({ id: 'page.referral.signup' })}
                         emailLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.email' })}
                         passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.password' })}
                         confirmPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.confirmPassword' })}
@@ -171,45 +177,92 @@ class Referral extends React.Component<Props> {
             return (
                 <div className="total-tickets-wrapper">
                     <div className="total-tickets">
-                        <div className="header">My total tickets: {this.getTotalTickets()}</div>
+                        <div className="header">{this.props.intl.formatMessage({ id: 'referral.teaser.total' })} {this.getTotalTickets()}</div>
                         <div className="content">
-                            Go to <a href="/referral-tickets">Ticket balance</a>
+                        {this.props.intl.formatMessage({ id: 'referral.teaser.goto' })}<br/> <a href={buildPath('/referral-tickets', this.props.currentLanguage)}>{this.props.intl.formatMessage({ id: 'referral.teaser.balance' })}</a>
                         </div>
                     </div>
                 </div>
             );
         };
 
+        const steps = [
+            {
+                h3: `${this.props.intl.formatMessage({ id: 'page.referral.hiw.step' })} 1`,
+                h4Green: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4green1' }),
+                h4Rest: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4_1' }),
+                text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text1' }),
+            },
+            {
+                h3: `${this.props.intl.formatMessage({ id: 'page.referral.hiw.step' })} 2`,
+                h4Green: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4green2' }),
+                h4Rest: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4_2' }),
+                soon: this.props.intl.formatMessage({ id: 'page.referral.soon' }),
+                text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text2' }),
+            },
+            {
+                h3: `${this.props.intl.formatMessage({ id: 'page.referral.hiw.step' })} 3`,
+                h4Green: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4green3' }),
+                h4Rest: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4_3' }),
+                text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text3' }),
+            },
+            {
+                h3: `${this.props.intl.formatMessage({ id: 'page.referral.hiw.step' })} 4`,
+                h4Green: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4green4' }),
+                h4Rest: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4_4' }),
+                text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text4' }),
+            },
+        ];
+
         return (
             <div>
                 <Helmet>
-                    <title>Get Bitcoin. Crypto Referral Program | Emirex.com</title>
+                    <title>{this.props.intl.formatMessage({ id: 'referral_title' })}</title>
                     <meta
                         name="description"
-                        content="Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex"
+                        content={this.props.intl.formatMessage({ id: 'referral_description' })}
                     />
-                    <link rel="canonical" href="https://emirex.com/referral" />
+                    <link rel="canonical" href={`https://emirex.com${currentLanguage === 'en' ? '/' : '/' + currentLanguage + '/'}referral`} />
 
-                    {/* <link key="ru" rel="alternate" href="https://emirex.com/ru/referral" hrefLang="ru" /> */}
+                    <link key="ru" rel="alternate" href="https://emirex.com/ru/referral" hrefLang="ru" title="Русский"/>
                     {/* <link key="ar" rel="alternate" href="https://emirex.com/ar/referral" hrefLang="ar" /> */}
-                    {/* <link key="en" rel="alternate" href="https://emirex.com/en/referral" hrefLang="en" /> */}
+                    <link key="en" rel="alternate" href="https://emirex.com/referral" hrefLang="en" title="English"/>
 
-                    <meta name="og:title" content="Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex" />
+                    <meta name="og:title" content={this.props.intl.formatMessage({ id: 'referral_title' })} />
                     <meta
                         name="og:description"
-                        content="Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex"
+                        content={this.props.intl.formatMessage({ id: 'referral_description' })}
                     />
                     <meta name="og:image" content="https://emirex.com/public/img/logo-emirex.svg" />
                 </Helmet>
                 <div className="pg-referral-screen">
-                    <Banner>{this.props.user.state === 'active' ? totalTickets() : signupForm()}</Banner>
-                    <HIW />
-                    <Video />
-                    <Timelines />
-                    <HowTo />
-                    <Prizes />
-                    <GetCode />
-                    <Footer />
+                    <Banner lang={currentLanguage} children={this.props.user.state === 'active' ? totalTickets() : signupForm()} />                  <HIW
+                        hiw={this.props.intl.formatMessage({ id: 'page.referral.hiw' })}
+                        subtitle={this.props.intl.formatMessage({id: 'page.referral.hiw.subtitle'})}
+                        steps={steps}
+                    />
+                    <Video text={this.props.intl.formatMessage({id: 'page.referral.video.text'})} lang={this.props.currentLanguage}/>
+                    <Timelines
+                        title={this.props.intl.formatMessage({ id: 'timeline.title' })}
+                        text1={this.props.intl.formatMessage({ id: 'timeline.start.text' })}
+                        date1={this.props.intl.formatMessage({ id: 'timeline.start.date' })}
+                        time1={this.props.intl.formatMessage({ id: 'timeline.start.time' })}
+                        text2={this.props.intl.formatMessage({ id: 'timeline.end.text' })}
+                        date2={this.props.intl.formatMessage({ id: 'timeline.end.date' })}
+                        time2={this.props.intl.formatMessage({ id: 'timeline.end.time' })}
+                    />
+                    <HowTo
+                        h2={this.props.intl.formatMessage({ id: 'howto.h2' })}
+                        h4={this.props.intl.formatMessage({ id: 'howto.h4' })}
+                        soon={this.props.intl.formatMessage({id: 'page.referral.soon'})}
+                        text1={this.props.intl.formatMessage({id: 'howto.text1'})}
+                        text2={this.props.intl.formatMessage({id: 'howto.text2'})}
+                        text3={this.props.intl.formatMessage({id: 'howto.text3'})}
+                        text4={this.props.intl.formatMessage({id: 'howto.text4'})}
+                    />
+                    <Prizes intl={this.props.intl}/>
+                    <GetCode intl={this.props.intl}/>
+                    <Footer intl={this.props.intl}/>
                 </div>
             </div>
         );
@@ -432,6 +485,7 @@ class Referral extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
+    currentLanguage: selectCurrentLanguage(state),
     requireVerification: selectSignUpRequireVerification(state),
     i18n: selectCurrentLanguage(state),
     user: selectUserInfo(state),

@@ -235,21 +235,21 @@ class ReferralTickets extends React.Component<Props> {
                 <div className="pg-referral-tickets">
                     <div className="top-holder">
                         <section id="top">
-                            <ReferralBallance totalTickets={this.getTotalTickets(this.state.overall)}>
-                                <CardUser title="Direct" context={this.state.direct} activeInactive={true} overall={this.state.overall.direct} link="#direct"/>
-                                <CardReferrals title="Referral" context={this.state.referrals} activeInactive={true} overall={this.state.overall.referrals} link="#referral"/>
-                                <CardBonuses title="Bonus" context={this.state.bonuses} activeInactive={false} overall={this.state.overall.bonuses} link="#bonus"/>
+                            <ReferralBallance message={this.props.intl.formatMessage} totalTickets={this.getTotalTickets(this.state.overall)}>
+                                <CardUser message={this.props.intl.formatMessage} title="Direct" context={this.state.direct} activeInactive={true} overall={this.state.overall.direct} link="#direct"/>
+                                <CardReferrals message={this.props.intl.formatMessage} title="Referral" context={this.state.referrals} activeInactive={true} overall={this.state.overall.referrals} link="#referral"/>
+                                <CardBonuses message={this.props.intl.formatMessage} title="Bonus" context={this.state.bonuses} activeInactive={false} overall={this.state.overall.bonuses} link="#bonus"/>
                             </ReferralBallance>
                         </section>
                         <section id="direct">
-                            <DirectTicketDetails context={this.state.direct} overall={this.state.overall.direct} user={this.props.user} />
+                            <DirectTicketDetails message={this.props.intl.formatMessage} context={this.state.direct} overall={this.state.overall.direct} user={this.props.user} />
                         </section>
                     </div>
                     <section id="referral">
-                        <ReferralTicketDetails L2count={this.state.L2count} count={this.state.count} disabledPrev={this.state.disabledPrev} disabledNext={this.state.disabledNext} page={this.state.page}  turnLeft={this.turnLeft} turnRight={this.turnRight} context={this.state.referrals} overall={this.state.overall.referrals} />
+                        <ReferralTicketDetails message={this.props.intl.formatMessage} L2count={this.state.L2count} count={this.state.count} disabledPrev={this.state.disabledPrev} disabledNext={this.state.disabledNext} page={this.state.page}  turnLeft={this.turnLeft} turnRight={this.turnRight} context={this.state.referrals} overall={this.state.overall.referrals} />
                     </section>
                     <section id="bonus">
-                        <BonusTicketDetails context={this.state.bonuses} overall={this.state.overall.bonuses} />
+                        <BonusTicketDetails message={this.props.intl.formatMessage} context={this.state.bonuses} overall={this.state.overall.bonuses} />
                     </section>
                 </div>
             );

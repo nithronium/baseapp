@@ -6,6 +6,7 @@ interface Props {
     context: ReferralOverallPayload['bonuses'];
     overall: ReferralOverallPayload['overall']['bonuses'];
     // loading: boolean;
+    message: ({}) => string;
 }
 
 const tableRows = (legendArray: ReferralOverallPayload['bonuses']): React.ReactNode => {return legendArray.map((record, index) => {
@@ -89,17 +90,17 @@ class BonusTicketDetails extends React.Component<Props>{
             <div className="bonus-ticket-details">
                 <div className="container column">
                     <div className="container wrap">
-                        <div className="left"><h2>Bonus ticket details</h2></div>
+                        <div className="left"><h2>{this.props.message({id: 'tickets.bonus_detail'})}</h2></div>
                     </div>
                     <div className="table-wrap">
                         {/* <Loader display={this.props.loading} /> */}
                         <table>
                             <thead>
                                 <tr>
-                                    <td>Tickets</td>
-                                    <td>Subscription</td>
-                                    <td>Network Post</td>
-                                    <td>Link</td>
+                                    <td>{this.props.message({ id: 'tickets.tickets_B' })}</td>
+                                    <td>{this.props.message({ id: 'tickets.sub' })}</td>
+                                    <td>{this.props.message({ id: 'tickets.post' })}</td>
+                                    <td>{this.props.message({ id: 'tickets.link' })}</td>
                                 </tr>
                             </thead>
                             <tbody>
@@ -107,11 +108,11 @@ class BonusTicketDetails extends React.Component<Props>{
                             </tbody>
                             <tfoot>
                                 {/*<tr><td colSpan={3}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td></tr>*/}
-                                <tr><td style={{paddingBottom: 0}} colSpan={3}><span className="table-summary-header">total</span></td></tr>
+                                <tr><td style={{paddingBottom: 0}} colSpan={3}><span className="table-summary-header">{this.props.message({ id: 'tickets.total' })}</span></td></tr>
                                 <tr>
-                                    <td><span className="count">{this.getTotal('count')}</span> tickets</td>
+                                    <td><span className="count">{this.getTotal('count')}</span> {this.props.message({ id: 'tickets.tick' })}</td>
                                     <td/>
-                                    <td>{this.getTotal('posts', 'count')} posts</td>
+                                    <td>{this.getTotal('posts', 'count')} {this.props.message({ id: 'tickets.posts' })}</td>
                                     <td>&nbsp;</td>
                                 </tr>
                             </tfoot>

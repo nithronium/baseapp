@@ -5,9 +5,11 @@ import {
     MapStateToProps,
 } from 'react-redux';
 import { Redirect } from 'react-router';
+import { buildPath } from '../custom/helpers';
 import {
     changeLanguage,
     RootState,
+    selectCurrentLanguage,
     selectEmailVerified,
     verificationFetch,
 } from '../modules';
@@ -19,6 +21,7 @@ interface DispatchProps {
 }
 
 interface ReduxProps {
+    currentLanguage: string;
     isEmailVerified?: boolean;
     error?: CommonError;
 }
@@ -47,13 +50,16 @@ class Verification extends React.Component<Props> {
     }
 
     public render() {
+        const { currentLanguage } =this.props;
+
         return (
-            <Redirect to={'/signin'} />
+            <Redirect to={buildPath('/signin', currentLanguage)} />
         );
     }
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
+    currentLanguage: selectCurrentLanguage(state),
     isEmailVerified: selectEmailVerified(state),
 });
 

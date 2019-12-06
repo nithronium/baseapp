@@ -1,21 +1,23 @@
 import * as React from 'react';
-import { Button } from '../Button';
+import Button from '../Button';
 
 // tslint:disable
 import "node_modules/video-react/dist/video-react.css";
 import { Player } from 'video-react';
 
 import campaign = require('../../../assets/images/referral/campaign-bar.png');
+import campaignRus = require('../../../assets/images/referral/campaign-bar_ru.png');
+
 // import video = require('../../../assets/images/referral/video.svg');
 
-const Video: React.FC = () => {
+const Video = (props) => {
     return (
         <section id="video">
             <div className="container_">
                 <div className="header">
-                    <h4>Watch the video to see how you can</h4>
+                    <h4>{props.text}</h4>
                     <div className="win-with-emirex">#WinWithEmirex</div>
-                    <img src={campaign} className="campaign" alt="" />
+                    <img src={props.lang === 'en' ? campaign : campaignRus} className="campaign" alt="campaign logo" />
                 </div>
                 <div className="video-wrap">
                 <Player
