@@ -762,7 +762,7 @@ export const ru: LangType = {
   "footer_links_careers": "Трудоустройство",
   "footer_links_emrx": "Токен EMRX",
   "footer_links_faq": "ЧаВо",
-  "footer_links_fees": "Комиссия",
+  "footer_links_fees": "Комиссии",
   "footer_links_kyc": "ЗСК/Борьба С Отмыванием Денег",
   "footer_links_listing": "Заявка на Листинг",
   "footer_links_team": "Команда",

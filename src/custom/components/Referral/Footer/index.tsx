@@ -164,7 +164,7 @@ const title4 = 'footer_headers_support';
 const links4 = [
     { key: '', href: 'https://knowledge-base.emirex.com/', label: 'footer_links_kb' },
     { key: '', href: 'https://knowledge-base.emirex.com/kb-tickets/new', label: 'footer_links_submitRequest' },
-    { key: '', href: '/fees', label: 'Fees' },
+    { key: '', href: '/fees', label: 'footer_links_fees' },
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
     return link;
