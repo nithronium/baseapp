@@ -840,8 +840,8 @@ export const ru: LangType = {
     "ltcbtc_description": "LTC в BTC ✅ Конвертер Лайткоин. Большие объемы торгов ➤ Выгодные рыночные цены в режиме реального времени ➤ Быстро, надежно, проверено ➤ Поддержка 24/7",
     "bchbtc_title": "BCH в BTC. Конвертация Биткоин Кэш | Emirex.com",
     "bchbtc_description": "BCH в BTC ✅ Конвертер Биткоин Кэш ➤ Обмен онлайн ➤ Большие объемы торгов ➤ Выгодные рыночные цены в режиме реального времени ➤ Быстро, надежно, проверено",
-    "referral_title": "Get Bitcoin. Crypto Referral Program | Emirex.com",
-  "referral_description": "Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex",
+    "referral_title": "Получите биткоин. Реферальная крипто-программа | Emirex.com",
+  "referral_description": "Получите биткоины бесплатно. Лучшая реферальная программа. Присоединяйтесь к реферальной программе ✅ WinWithEmirex",
   
     ...nationalitiesNames,
 };

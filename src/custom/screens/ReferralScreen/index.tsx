@@ -228,10 +228,10 @@ class Referral extends React.Component<Props> {
                     {/* <link key="ar" rel="alternate" href="https://emirex.com/ar/referral" hrefLang="ar" /> */}
                     <link key="en" rel="alternate" href="https://emirex.com/referral" hrefLang="en" title="English"/>
 
-                    <meta name="og:title" content="Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex" />
+                    <meta name="og:title" content={this.props.intl.formatMessage({ id: 'referral_title' })} />
                     <meta
                         name="og:description"
-                        content="Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex"
+                        content={this.props.intl.formatMessage({ id: 'referral_description' })}
                     />
                     <meta name="og:image" content="https://emirex.com/public/img/logo-emirex.svg" />
                 </Helmet>
