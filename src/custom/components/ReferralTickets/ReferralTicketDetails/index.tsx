@@ -22,19 +22,7 @@ interface State {
 
 }
 
-const tableRow = (legendArray: any): React.ReactNode => {
-    return legendArray.map((record, index) => {
-        return(
-            <tr key={index}>
-                <td><span className="count">{record.tickets}</span> <span className="explanation">tickets</span></td>
-                <td>{record.email}</td>
-                <td>{record.isActive ? 'YES' : 'NO'}</td>
-                <td>{record.subreferrals} <span className="explanation">referrals</span></td>
-                <td>{record.activeSubreferrals} <span className="explanation">referrals</span></td>
-            </tr>
-        );
-    });
-};
+
 
 class ReferralTicketDetails extends React.Component<Props, State>{
 
@@ -49,6 +37,20 @@ class ReferralTicketDetails extends React.Component<Props, State>{
         this.filterLegend = this.filterLegend.bind(this);
 
     }
+
+    public tableRow = (legendArray: any): React.ReactNode => {
+        return legendArray.map((record, index) => {
+            return(
+                <tr key={index}>
+                    <td><span className="count">{record.tickets}</span> <span className="explanation">{this.props.message({id: 'tickets.tick'})}</span></td>
+                    <td>{record.email}</td>
+                    <td>{record.isActive ? `${this.props.message({id: 'tickets.yes'})}` : `${this.props.message({id: 'tickets.no'})}`}</td>
+                    <td>{record.subreferrals} <span className="explanation">{this.props.message({id: 'tickets.referrals'})}</span></td>
+                    <td>{record.activeSubreferrals} <span className="explanation">{this.props.message({id: 'tickets.referrals'})}</span></td>
+                </tr>
+            );
+        });
+    };
 
 
     public filtered(): any {
@@ -130,7 +132,7 @@ class ReferralTicketDetails extends React.Component<Props, State>{
                                 </tr>
                             </thead>
                             <tbody>
-                            {tableRow(legendArray)}
+                            {this.tableRow(legendArray)}
                             </tbody>
                             <tfoot>
                                 <tr><td style={{paddingBottom: 0}} colSpan={5}><span className="table-summary-header">{this.props.message({id: 'tickets.total'})}</span></td></tr>
