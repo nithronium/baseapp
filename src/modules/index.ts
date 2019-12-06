@@ -17,6 +17,7 @@ import { ApiKeysState } from './user/apiKeys';
 import { rootApiKeysSaga } from './user/apiKeys/sagas';
 import { AuthState, rootAuthSaga } from './user/auth';
 import { BeneficiariesState, rootBeneficiariesSaga } from './user/beneficiaries';
+import { GeetestCaptchaState, rootGeetestCaptchaSaga } from './user/captcha';
 import { EmailVerificationState, rootEmailVerificationSaga } from './user/emailVerification';
 import { GuardState, rootGuardSaga } from './user/guard';
 import { HistoryState, rootHistorySaga } from './user/history';
@@ -53,6 +54,7 @@ export * from './public/alert';
 export * from './user/apiKeys';
 export * from './user/auth';
 export * from './user/beneficiaries';
+export * from './user/captcha';
 export * from './user/wallets';
 export * from './user/profile';
 export * from './user/openOrders';
@@ -100,6 +102,7 @@ export interface RootState {
         ordersHistory: OrdersHistoryState;
         openOrders: OpenOrdersState;
         sendEmailVerification: EmailVerificationState;
+        captchaKeys: GeetestCaptchaState;
         withdrawLimit: WithdrawLimitState;
         guard: GuardState;
         ieo: OrderIEOState,
@@ -147,5 +150,6 @@ export function* rootSaga() {
         call(rootKycAuthSaga),
         call(rootIEOOrderSaga),
         call(rootPublicIEOSaga),
+        call(rootGeetestCaptchaSaga),
     ]);
 }

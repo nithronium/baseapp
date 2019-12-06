@@ -27,3 +27,4 @@ export * from './uppercase';
 export * from './buildQueryStringArray';
 export * from './buildQueryString';
 export * from './getCountdownDate';
+export * from './geetest';

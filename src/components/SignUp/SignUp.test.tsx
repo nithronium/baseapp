@@ -31,6 +31,8 @@ const defaults: SignUpFormProps = {
     refIdFocused: false,
     emailFocused: false,
     passwordFocused: false,
+    geetestCaptcha: undefined,
+    geetestCaptchaSuccess: false,
 };
 
 const setup = (props: Partial<SignUpFormProps> = {}) =>

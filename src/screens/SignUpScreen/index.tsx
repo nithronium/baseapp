@@ -15,6 +15,7 @@ import { withRouter } from 'react-router-dom';
 import { captchaType, siteKey } from '../../api';
 import logo = require('../../assets/images/logo.svg');
 import { Modal, SignUpForm } from '../../components';
+import { GeetestCaptcha } from '../../containers';
 import {
     EMAIL_REGEX,
     ERROR_INVALID_EMAIL,
@@ -67,7 +68,15 @@ class SignUp extends React.Component<Props> {
         passwordFocused: false,
         confirmPasswordFocused: false,
         refIdFocused: false,
+        geetestCaptchaSuccess: false,
     };
+
+    public constructor(props) {
+        super(props);
+        this.captchaRef = React.createRef();
+    }
+
+    private captchaRef;
 
     public componentDidMount() {
         setDocumentTitle('Sign Up');
@@ -99,8 +108,10 @@ class SignUp extends React.Component<Props> {
             passwordFocused,
             confirmPasswordFocused,
             refIdFocused,
+            geetestCaptchaSuccess,
         } = this.state;
         const { loading } = this.props;
+        const test = !geetestCaptchaSuccess ? <GeetestCaptcha ref={this.captchaRef} onSuccess={this.handleGeetestCaptchaSuccess}/> : undefined;
 
         const className = cx('pg-sign-up-screen__container', { loading });
         return (
@@ -147,6 +158,8 @@ class SignUp extends React.Component<Props> {
                         handleFocusPassword={this.handleFocusPassword}
                         handleFocusConfirmPassword={this.handleFocusConfirmPassword}
                         handleFocusRefId={this.handleFocusRefId}
+                        geetestCaptcha={test}
+                        geetestCaptchaSuccess={geetestCaptchaSuccess}
                     />
                     <Modal
                         show={this.state.showModal}
@@ -224,6 +237,12 @@ class SignUp extends React.Component<Props> {
         this.props.history.push('/signin');
     };
 
+    private handleGeetestCaptchaSuccess = () => {
+        this.setState({
+            geetestCaptchaSuccess: true,
+        });
+    }
+
     private handleSignUp = () => {
         const {
             email,
@@ -243,9 +262,18 @@ class SignUp extends React.Component<Props> {
                         refid: refId,
                         lang: i18n.toUpperCase(),
                     });
+                    this.clearFields();
                     break;
                 case 'recaptcha':
                 case 'geetest':
+                    this.props.signUp({
+                        email,
+                        password,
+                        recaptcha_response,
+                        refid: refId,
+                    });
+                    this.clearFields();
+                    break;
                 default:
                     this.props.signUp({
                         email,
@@ -254,6 +282,7 @@ class SignUp extends React.Component<Props> {
                         refid: refId,
                         lang: i18n.toUpperCase(),
                     });
+                    this.clearFields();
                     break;
             }
         } else {
@@ -274,10 +303,22 @@ class SignUp extends React.Component<Props> {
                         recaptcha_response,
                         lang: i18n.toUpperCase(),
                     });
+                    this.clearFields();
                     break;
             }
         }
     };
+
+    private clearFields = () => {
+        this.setState({
+            email: '',
+            password: '',
+            confirmPassword: '',
+            hasConfirmed: false,
+            geetestCaptchaSuccess: false,
+            refId: '',
+        });
+    }
 
     private renderModalHeader = () => {
         return (
