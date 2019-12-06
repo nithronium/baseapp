@@ -84,15 +84,26 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
         ) : (
             <div className="pg-attemps-idenfy">
                 <div className="pg-attemps-idenfy__content">
-                    <p className="title">{this.translate('page.idenfy.dear-customer')}</p>
-                    <p>{this.translate('page.idenfy.your-identity')}</p>
-                    <p>{this.translate('page.idenfy.process')}</p>
-                    <p>{this.translate('page.idenfy.please')}</p>
-                    <p>{this.translate('page.idenfy.thanks')}</p>
+                    <div>
+                        <p className="title">{this.translate('page.idenfy.dear-customer')}</p>
+                        <p>{this.translate('page.idenfy.your-identity')}</p>
+                        <p>{this.translate('page.idenfy.process')}</p>
+                        <p>{this.translate('page.idenfy.please')}</p>
+                        <p>{this.translate('page.idenfy.thanks')}</p>
+                    </div>
+                    <span className="back-button" onClick={this.onBackButtonClick}>
+                        {this.translate('page.idenfu.understand')}
+                    </span>
                 </div>
             </div>
         );
     };
+
+    private onBackButtonClick = () => {
+        const { history } = this.props;
+
+        history.push('/profile');
+    }
 }
 
 
