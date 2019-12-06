@@ -294,6 +294,10 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
         const { user, withdrawLimitData } = this.props;
         const userLevel = user.level;
 
+        const withdrawLimitDataExists = withdrawLimitData &&
+            withdrawLimitData.withdraw &&
+            withdrawLimitData.deposit;
+
         return (
             <div className="pg-profile-verification">
                 <div className="pg-profile-verification__title">
@@ -308,9 +312,9 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                         <FormattedMessage id="page.body.profile.header.account.profile.knowMore" />
                     </Link>
                 </div>
-                {withdrawLimitData && this.renderUserAbilities(userLevel, withdrawLimitData)}
-                {withdrawLimitData && this.renderWithdrawLimit(userLevel, withdrawLimitData)}
-                {withdrawLimitData && this.renderDepositLimit(userLevel, withdrawLimitData)}
+                {withdrawLimitDataExists && this.renderUserAbilities(userLevel, withdrawLimitData)}
+                {withdrawLimitDataExists && this.renderWithdrawLimit(userLevel, withdrawLimitData)}
+                {withdrawLimitDataExists && this.renderDepositLimit(userLevel, withdrawLimitData)}
             </div>
         );
     }
