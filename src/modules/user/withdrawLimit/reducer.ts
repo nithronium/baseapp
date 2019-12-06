@@ -16,11 +16,19 @@ export interface WithdrawLimitState {
 
 export const initialWithdrawLimitState: WithdrawLimitState = {
     data: {
-        limit: '0.0',
-        period: 0,
-        withdrawal_amount: '0.0',
-        currency: '',
-    },
+    withdraw:
+        {
+            limit: '10.0',
+            period: 24,
+            withdrawal_amount: '0.0',
+            currency: 'btc',
+        },
+    deposit:
+        {
+            limit: '10',
+            period: 24,
+        },
+},
     loading: false,
     success: false,
 };
