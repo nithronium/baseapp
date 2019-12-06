@@ -993,13 +993,17 @@
         max-width: 1040px;
         margin: 0 auto;
         font-family: Roboto;
+        font-weight: 900;
         text-align: center;
         color: #000000;
-        padding: 50px 0;
+        padding: 50px 0 0;
         border-top: 1px solid #00000033;
+       @media only screen and (max-width: 600px) {
+           font-size: 22px;
+       } 
     }
     .logo-wrapper {
-        padding: 50px 0;
+        padding: 20px 0;
         display: flex;
         max-width: 600px;
         justify-content: space-between;
