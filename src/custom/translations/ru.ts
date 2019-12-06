@@ -237,7 +237,7 @@ export const ru: LangType = {
 
     'page.body.profile.header.account': 'Профиль',
 
-    'page.body.profile.mfa.button.text': 'КОПИРОВАТЬ',
+    'page.body.profile.mfa.button.text': 'КОПИР.',
 
     'page.body.profile.header.account.content.password': 'Пароль',
     'page.body.profile.header.account.content.password.button.change': 'Изменить',
@@ -284,7 +284,7 @@ export const ru: LangType = {
     'page.body.profile.header.account.profile.identity.message': 'Вывод средств разрешен',
 
     'page.body.profile.header.referralProgram': 'Реферальная программа',
-    'page.body.profile.content.copyLink': 'Скопировать',
+    'page.body.profile.content.copyLink': 'Копир.',
 
     'page.body.profile.apiKeys.header': 'Мои API ключи',
     'page.body.profile.apiKeys.header.create': 'Создать',
