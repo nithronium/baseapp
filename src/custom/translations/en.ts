@@ -160,4 +160,10 @@ export const en = {
     'page.body.modal.kyc.login.text': 'For all possibilities upgrade your KYC level',
     'page.body.modal.kyc.login.go.kyc.level': 'Get level',
     'page.body.modal.kyc.login.later': 'Later',
+
+    'page.idenfy.dear-customer': 'Dear Customer, ',
+    'page.idenfy.your-identity': 'Your identity is now being verified by our team. ',
+    'page.idenfy.process': 'This process usually takes up to 15 minutes. ',
+    'page.idenfy.please': 'Please, do not make any attempts to verify your account, as they will fail. ',
+    'page.idenfy.thanks': 'Thank you for your patience.',
 };

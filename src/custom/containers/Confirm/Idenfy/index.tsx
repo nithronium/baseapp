@@ -29,9 +29,17 @@ interface HistoryProps {
     history: History;
 }
 
+interface IdenfyState {
+    statusGet: boolean;
+}
+
 type Props = ReduxProps & DispatchProps & InjectedIntlProps & RouterProps & HistoryProps;
 
-class IdenfyContainer extends React.Component<Props> {
+class IdenfyContainer extends React.Component<Props, IdenfyState> {
+    public state = {
+        statusGet: false,
+    };
+
     public componentDidMount() {
         window.addEventListener('message', this.handleReceiveMessage, false);
         this.props.kycAuthFetch();
@@ -42,16 +50,9 @@ class IdenfyContainer extends React.Component<Props> {
     }
 
     public render() {
-        const { kycAuthData } = this.props;
-
         return (
-            <div className="pg-idenfy">
-                <iframe
-                    id="iframe"
-                    src={`https://ui.idenfy.com/?authToken=${kycAuthData ? kycAuthData.auth_token : ''}`}
-                    allow="camera"
-                />
-                <p id="display" />
+            <div className="pg-idenfy-block">
+                {this.renderContent()}
             </div>
         );
     }
@@ -61,15 +62,39 @@ class IdenfyContainer extends React.Component<Props> {
     };
 
     public handleReceiveMessage = event => {
-        const { user } = this.props;
 
-        if (event.data.status && event.data.status.toLowerCase() === 'approved') {
-            this.props.changeUserLevel({ level: +user.level + 1 });
-            this.props.labelFetch();
-            this.props.history.push('/profile');
+        if (event.data.status) {
+            this.setState({
+                statusGet: true,
+            });
         }
     }
+
+    private renderContent = () => {
+        const { kycAuthData } = this.props;
+        return !this.state.statusGet ? (
+            <div className="pg-idenfy">
+                <iframe
+                    id="iframe"
+                    src={`https://ui.idenfy.com/?authToken=${kycAuthData ? kycAuthData.auth_token : ''}`}
+                    allow="camera"
+                />
+                <p id="display" />
+            </div>
+        ) : (
+            <div className="pg-attemps-idenfy">
+                <div className="pg-attemps-idenfy__content">
+                    <p className="title">{this.translate('page.idenfy.dear-customer')}</p>
+                    <p>{this.translate('page.idenfy.your-identity')}</p>
+                    <p>{this.translate('page.idenfy.process')}</p>
+                    <p>{this.translate('page.idenfy.please')}</p>
+                    <p>{this.translate('page.idenfy.thanks')}</p>
+                </div>
+            </div>
+        );
+    };
 }
+
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
     kycAuthData: selectKycAuthData(state),
