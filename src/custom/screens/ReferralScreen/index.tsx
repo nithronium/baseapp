@@ -31,6 +31,8 @@ import {
 } from '../../../modules';
 import { Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, Video } from '../../components/Referral';
 
+import { buildPath } from '../../helpers';
+
 interface ReduxProps {
     requireVerification?: boolean;
     loading?: boolean;
@@ -177,7 +179,7 @@ class Referral extends React.Component<Props> {
                     <div className="total-tickets">
                         <div className="header">{this.props.intl.formatMessage({ id: 'referral.teaser.total' })} {this.getTotalTickets()}</div>
                         <div className="content">
-                        {this.props.intl.formatMessage({ id: 'referral.teaser.goto' })} <a href="/referral-tickets">{this.props.intl.formatMessage({ id: 'referral.teaser.balance' })}</a>
+                        {this.props.intl.formatMessage({ id: 'referral.teaser.goto' })}<br/> <a href={buildPath('/referral-tickets', this.props.currentLanguage)}>{this.props.intl.formatMessage({ id: 'referral.teaser.balance' })}</a>
                         </div>
                     </div>
                 </div>
