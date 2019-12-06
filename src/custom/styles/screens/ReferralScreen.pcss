@@ -1005,10 +1005,15 @@
     .logo-wrapper {
         padding: 20px 0;
         display: flex;
-        max-width: 600px;
-        justify-content: space-between;
+        max-width: 800px;
+        justify-content: space-around;
+        flex-wrap: wrap;
         align-items: center;
         margin: 0 auto;
+        img {
+            width: 250px;
+            padding: 10px;
+        }
         @media only screen and (max-width: 600px) {
             flex-direction: column;
             img {

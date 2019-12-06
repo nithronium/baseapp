@@ -9,9 +9,15 @@ import telegram = require('../../../assets/images/referral/icons/Telegram.svg');
 import twitter = require('../../../assets/images/referral/icons/twitter.svg');
 import logo = require('../../../assets/images/referral/logo-emirex.svg');
 
-import logo1 = require('../../../../assets/images/logo1.svg');
-import logo2 = require('../../../../assets/images/logo2.svg');
-import logo3 = require('../../../../assets/images/logo3.svg');
+
+import bitcoincom = require('../../../../assets/images/bitcoincom.png');
+import blockonomi = require('../../../../assets/images/blockonomi.png');
+import coinspeaker = require('../../../../assets/images/coinspeaker.png');
+import cointelegraph = require('../../../../assets/images/cointelegraph.png');
+import forbes = require('../../../../assets/images/forbes.png');
+import newsbtc = require('../../../../assets/images/newsbtc.png');
+import yahoo = require('../../../../assets/images/yahoo.png');
+import zerohedge = require('../../../../assets/images/zerohedge.png');
 
 const Header = () => {
     return (
@@ -219,11 +225,16 @@ const MediaLogo = props => {
     return (
         <div className="medialogo">
             <h2>{props.intl.formatMessage({ id: 'medialogo.title' })}</h2>
-            <div className="logo-wrapper">
-                <img src={logo1} alt="new btc logo" />
-                <img src={logo2} alt="yahoo logo" />        
-                <img src={logo3} alt="coinspeaker logo" />
-            </div>
+             <div className="logo-wrapper">
+                <a href="https://news.bitcoin.com/cryptocurrency-exchanges-are-fighting-to-escape-binances-shadow/"><img src={bitcoincom} alt="logo" /></a>
+                <a href="https://blockonomi.com/emirex-review/"><img src={blockonomi} alt="logo" /></a>        
+                <a href="https://www.coinspeaker.com/blockchain-tokenization-commodities/"><img src={coinspeaker} alt="logo" /></a>
+                <a href="https://cointelegraph.com/news/us-fed-weighs-up-potential-cbdc-as-countermove-against-china"><img src={cointelegraph} alt="ogo" /></a>
+                <a href="https://forbesmiddleeast.com/what-impact-could-tokenized-commodities-have-on-the-middle-east"><img src={forbes} alt="logo" /> </a>       
+                <a href="https://www.newsbtc.com/2019/11/26/emirex-doubles-down-with-ieo-announcement-building-a-comprehensive-crypto-ecosystem-in-the-middle-east/"><img src={newsbtc} alt="logo" /></a>
+                <a href="https://finance.yahoo.com/news/platforms-solutions-confirm-growing-interest-164407914.html"><img src={yahoo} alt="logo" /></a>
+                <a href="https://www.zerohedge.com/news/2019-11-26/blockchain-taking-over-middle-east"><img src={zerohedge} alt="logo" /> </a>       
+      </div>
         </div>
     )
 }
