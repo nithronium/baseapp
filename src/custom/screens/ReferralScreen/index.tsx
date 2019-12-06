@@ -241,7 +241,7 @@ class Referral extends React.Component<Props> {
                         subtitle={this.props.intl.formatMessage({id: 'page.referral.hiw.subtitle'})}
                         steps={steps}
                     />
-                    <Video text={this.props.intl.formatMessage({id: 'page.referral.video.text'})}/>
+                    <Video text={this.props.intl.formatMessage({id: 'page.referral.video.text'})} lang={this.props.currentLanguage}/>
                     <Timelines
                         title={this.props.intl.formatMessage({ id: 'timeline.title' })}
                         text1={this.props.intl.formatMessage({ id: 'timeline.start.text' })}
