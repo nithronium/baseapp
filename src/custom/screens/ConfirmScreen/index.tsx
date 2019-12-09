@@ -144,6 +144,11 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     }
 
     private handleGetStepLabels = (currentProfileLevel: number): string[] => {
+        const { history } = this.props;
+        if (history.location && history.location.state && history.location.state.profileEdit) {
+            return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
+        }
+
         switch (currentProfileLevel) {
             case 0:
             case 1:

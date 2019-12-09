@@ -456,7 +456,7 @@ export const ru: LangType = {
     'page.body.kyc.head.level.first': 'Почта',
     'page.body.kyc.head.level.second': 'Профиль',
     'page.body.kyc.head.level.third': 'Телефон',
-    'page.body.kyc.head.level.fourth': 'Idenfy',
+    'page.body.kyc.head.level.fourth': 'Identity',
     'page.body.kyc.head.level.fifth': 'Адрес',
     'page.body.kyc.head.level.sixth': 'Анкета',
 

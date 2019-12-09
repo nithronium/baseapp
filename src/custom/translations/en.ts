@@ -27,7 +27,7 @@ export const en = {
     'page.body.kyc.head.level.first': 'Email',
     'page.body.kyc.head.level.second': 'Profile',
     'page.body.kyc.head.level.third': 'Phone',
-    'page.body.kyc.head.level.fourth': 'Idenfy',
+    'page.body.kyc.head.level.fourth': 'Identity',
     'page.body.kyc.head.level.fifth': 'Residential address',
     'page.body.kyc.head.level.sixth': 'Questionnaire',
 
