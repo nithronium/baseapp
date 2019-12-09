@@ -106,36 +106,9 @@ class IEODetailsComponent extends React.Component<Props> {
                             </div>
                             <div className="ieo-profile-details__body__right__row__second-column">{currentIEO.metadata && currentIEO.metadata.technological_foundation || '-'}</div>
                         </div>
-                        <div className="ieo-profile-details__body__right__row">
-                            <div className="ieo-profile-details__body__right__row__first-column">
-                                {this.translate('page.body.ieo.profile.details.website')}
-                            </div>
-                            {this.getLinkIfExist(currentIEO.metadata && currentIEO.metadata.website)}
-                        </div>
-                        <div className="ieo-profile-details__body__right__row">
-                            <div className="ieo-profile-details__body__right__row__first-column">
-                                {this.translate('page.body.ieo.profile.details.whitepaper')}
-                            </div>
-                            {this.getLinkIfExist(currentIEO.metadata && currentIEO.metadata.whitepaper)}
-                        </div>
-                        <div className="ieo-profile-details__body__right__row">
-                            <div className="ieo-profile-details__body__right__row__first-column">
-                                {this.translate('page.body.ieo.profile.details.telegram')}
-                            </div>
-                            {this.getLinkIfExist(currentIEO.metadata && currentIEO.metadata.telegram)}
-                         </div>
-                        <div className="ieo-profile-details__body__right__row">
-                            <div className="ieo-profile-details__body__right__row__first-column">
-                                {this.translate('page.body.ieo.profile.details.twitter')}
-                            </div>
-                            {this.getLinkIfExist(currentIEO.metadata && currentIEO.metadata.twitter)}
-                         </div>
-                        <div className="ieo-profile-details__body__right__row">
-                            <div className="ieo-profile-details__body__right__row__first-column">
-                                {this.translate('page.body.ieo.profile.details.bicointalk')}
-                            </div>
-                            {this.getLinkIfExist(currentIEO.metadata && currentIEO.metadata.bitcointalk)}
-                        </div>
+
+                        {this.renderLinks(currentIEO.metadata)}
+
                     </div>
                 </div>
             </div>
@@ -146,6 +119,28 @@ class IEODetailsComponent extends React.Component<Props> {
         link ? <a className="ieo-profile-details__body__right__row__second-column-link" href={link}>{link}</a> :
             <div className="ieo-profile-details__body__right__row__second-column">-</div>
     );
+
+    private renderLinks = metadata => {
+        const drop = [
+            'introduction',
+            'technological_foundation',
+            'total_supply',
+            'icon_url',
+            'precision',
+            'full_name',
+        ];
+
+        const links = Object.keys(metadata).filter(key => !drop.includes(key));
+
+        return links.map(link => (
+            <div className="ieo-profile-details__body__right__row">
+                <div className="ieo-profile-details__body__right__row__first-column">
+                    {link.replace(/^\w/, c => c.toUpperCase())}
+                </div>
+                {this.getLinkIfExist(metadata[link])}
+            </div>
+        ));
+    };
 }
 
 export const IEODetails = injectIntl(IEODetailsComponent);
