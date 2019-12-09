@@ -1,6 +1,4 @@
-import {
-    Button,
-} from '@openware/components';
+import { Button } from '@openware/components';
 import cr from 'classnames';
 import { History } from 'history';
 import countries = require('i18n-iso-countries');
@@ -29,9 +27,8 @@ import {
     sendIdentity,
 } from '../../../../modules/user/kyc/identity';
 import { changeUserLevel } from '../../../../modules/user/profile';
-import { nationalities } from '../../../../translations/nationalities';
-import { CustomDropdown } from '../../../components/CustomDropdown';
-import { DISALLOWED_COUNTRIES, DISALLOWED_NATIONALITIES } from '../../../constants';
+import { Dropdown } from '../../../components';
+import { DISALLOWED_COUNTRIES } from '../../../constants';
 import { isValidDate } from '../../../helpers/checkDate';
 
 interface ReduxProps {
@@ -115,7 +112,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     }
 //tslint:disable
     public componentDidMount() {
-        const { lang, user, history } = this.props;
+        const { user, history } = this.props;
         if (history.location && history.location.state && history.location.state.profileEdit && user.profile) {
             if (user.profile.first_name) {
                 this.setState({
@@ -139,31 +136,16 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             }
 
             if (user.profile.country) {
-                const listOfCountries = countries.getNames(lang);
-
-                const arrayOfCountries = Object.keys(listOfCountries).map(item => listOfCountries[item]);
-
-                const currentCountry = arrayOfCountries.find(country => {
-                    return user.profile.country === countries.getAlpha2Code(country, lang);
-                });
-
                 this.setState({
-                    countryOfBirth: currentCountry ? currentCountry.toString() : '',
+                    countryOfBirth: user.profile.country,
                 });
             }
 
-            if (user.profile.metadata && user.profile.metadata.nationality) {
-                const dataNationalities = nationalities.map(value => {
-                    return this.translate(value);
-                });
-
-                const currentNationalities = dataNationalities.find(nationality => {
-                    return nationality === user.profile.metadata.nationality;
-                });
-
+            const currentNationality = user.profile.metadata && JSON.parse(user.profile.metadata).nationality;
+            if (currentNationality) {
                 this.setState({
                     metadata: {
-                        nationality: currentNationalities ? currentNationalities.toString() : '',
+                        nationality: currentNationality,
                     }
                 });
             }
@@ -198,16 +180,14 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             'pg-confirm__content-profile-partial-col-row-content--wrong': lastName && !this.handleValidateInput('lastName', lastName),
         });
 
-        const dataNationalities = nationalities.map(value => {
-            return this.translate(value);
-        });
-
         countries.registerLocale(require('i18n-iso-countries/langs/en.json'));
         countries.registerLocale(require('i18n-iso-countries/langs/ru.json'));
         countries.registerLocale(require('i18n-iso-countries/langs/zh.json'));
 
         const listOfCountries = countries.getNames(lang);
         const dataCountries = Object.values(listOfCountries);
+        const chosenCountry = countries.getName(countryOfBirth, lang);
+        const chosenNationality = countries.getName(metadata.nationality, lang);
 
         return (
             <div className="pg-confirm__content-profile-partial">
@@ -247,12 +227,11 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                               <div className="pg-confirm__content-profile-partial-col-row-content-label">
                                   {countryOfBirth && this.translate('page.body.kyc.identity.CoR')}
                               </div>
-                              <CustomDropdown
+                              <Dropdown
                                   className="pg-confirm__content-documents-col-row-content-number"
                                   list={dataCountries}
                                   onSelect={value => this.selectCountry(listOfCountries, value)}
-                                  placeholder={countryOfBirth || this.translate('page.body.kyc.identity.CoR')}
-                                  searched={countryOfBirth}
+                                  placeholder={chosenCountry || countryOfBirth || this.translate('page.body.kyc.identity.CoR')}
                               />
                           </div>
                       </div>
@@ -261,12 +240,11 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                               <div className="pg-confirm__content-profile-partial-col-row-content-label">
                                   {metadata.nationality && this.translate('page.body.kyc.identity.nationality')}
                               </div>
-                              <CustomDropdown
+                              <Dropdown
                                   className="pg-confirm__content-documents-col-row-content-number"
-                                  list={dataNationalities}
-                                  onSelect={this.selectNationality}
-                                  placeholder={metadata.nationality || this.translate('page.body.kyc.identity.nationality')}
-                                  searched={metadata.nationality}
+                                  list={dataCountries}
+                                  onSelect={value => this.selectNationality(listOfCountries, value)}
+                                  placeholder={chosenNationality || metadata.nationality || this.translate('page.body.kyc.identity.nationality')}
                               />
                           </div>
                       </div>
@@ -370,16 +348,14 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         }
     }
 
-    private selectNationality = (value: number) => {
-        const dataNationalities = nationalities.map(nationality => this.translate(nationality));
-
-        if (DISALLOWED_NATIONALITIES.includes(dataNationalities[value].toLowerCase())) {
+    private selectNationality = (listOfCountries: countries.LocalizedCountryNames, value: number) => {
+        if (DISALLOWED_COUNTRIES.includes(Object.keys(listOfCountries)[value])) {
             this.props.toggleBlockNationalityModal();
             return;
         }
 
         this.setState({
-            metadata: { nationality: dataNationalities[value] },
+            metadata: { nationality: countries.getAlpha2Code(Object.values(listOfCountries)[value], this.props.lang) },
         });
     };
 

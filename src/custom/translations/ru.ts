@@ -560,6 +560,7 @@ export const ru: LangType = {
     'resource.profile.kyc': 'Личность проверяется',
     'resource.profile.document': 'Место жительства проверяется',
     'resource.profile.questionnaire': 'Анкета проверяется',
+    'resource.profile.identity': 'Личность проверяется',
     'resource.documents.expirationDate': 'Дата выдачи недействителена',
 
     'email.taken': 'Почта уже зарегистрирована',

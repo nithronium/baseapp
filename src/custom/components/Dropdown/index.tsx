@@ -3,40 +3,16 @@ import * as React from 'react';
 import iconDown = require('./chevron-down.svg');
 import iconUp = require('./chevron-up.svg');
 
-type CustomDropdownElem = number | string | React.ReactNode;
+type DropdownElem = number | string | React.ReactNode;
 
-interface CustomDropdownProps {
-    /**
-     * List of options
-     */
-    list: CustomDropdownElem[];
-    /**
-     * Selection callback function
-     * @default empty
-     */
+interface DropdownProps {
+    list: DropdownElem[];
     onSelect?: (index: number) => void;
-    /**
-     *  By default class name 'cr-dropwdown'
-     *  This property gives an additional class name
-     *  @default empty
-     */
     className?: string;
-    /**
-     * Value for placeholder of Dropdown components
-     * @default empty
-     */
     placeholder?: string;
-    /**
-     * Value for height of Dropdown list elements
-     * @default 30px
-     */
     elemHeight?: number;
-    /**
-     * Value for height of Dropdown list
-     * @default 90px
-     */
     listHeight?: number;
-    searched: string;
+    disableContentEditable?: boolean;
 }
 
 const defaultElemHeight = 30;
@@ -54,49 +30,38 @@ interface DropdownState {
 /**
  *  Cryptobase Dropdown that overrides default dropdown with list of options.
  */
-class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownState> {
-    constructor(props: CustomDropdownProps) {
+class Dropdown extends React.Component<DropdownProps & {}, DropdownState> {
+
+    constructor(props: DropdownProps) {
         super(props);
+        const selectedValue = this.props.placeholder || this.convertToString(this.props.list[0]);
         this.state = {
             isOpen: false,
-            selected: '',
-            searchValue: '',
+            selected: selectedValue,
+            searchValue:  '',
             isTimerRunning: false,
             topElem: 0,
             isFocused: false,
         };
     }
-    private scrollAnchorRef = React.createRef<HTMLLIElement>();
-    private mainAnchorRef;
-    private wrapperRef = React.createRef<HTMLDivElement>();
+
     private myRef = React.createRef<HTMLInputElement>();
+    private scrollAnchorRef = React.createRef<HTMLLIElement>();
 
-    public componentDidMount() {
-        document.addEventListener('click', this.handleOutsideClick, false);
-    }
-
-    public componentWillReceiveProps(next) {
-        if (this.props.searched !== next.searched) {
-            this.setState({ searchValue: next.searched, selected: next.searched });
+    public componentWillReceiveProps(nextProps: DropdownProps) {
+        const { placeholder } = this.props;
+        if (nextProps.placeholder !== placeholder) {
+            this.setState({ selected: nextProps.placeholder || this.convertToString(this.props.list[0]) });
         }
-    }
-
-    public componentDidUpdate(prev) {
-        if (this.state.isOpen) {
-            this.scrollToAfterOpening(this.state.selected);
-        }
-    }
-
-    public componentWillUnmount() {
-        document.removeEventListener('click', this.handleOutsideClick, false);
     }
 
     public render() {
         const { isOpen, isFocused } = this.state;
+        const { disableContentEditable } = this.props;
         const cx = classnames('cr-dropdown', this.props.className);
 
         return (
-            <div className={cx} ref={this.wrapperRef}>
+            <div className={cx}>
                 <div
                     className={`cr-dropdown__input${isFocused ? '--open' : ''}`}
                     onClick={this.handleClick}
@@ -107,7 +72,7 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
                         ref={this.myRef}
                         className="cr-dropdown__input-label"
                         onKeyDown={this.handleKeyPress}
-                        contentEditable={true}
+                        contentEditable={disableContentEditable ? false : true}
                         suppressContentEditableWarning={true}
                     >
                         {this.state.selected}
@@ -121,14 +86,6 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
         );
     }
 
-    public scrollToAfterOpening = (searched: string) => {
-        const index = this.props.list.findIndex(item => item === searched);
-        const elemList = document.querySelectorAll('.cr-dropdown__list-item');
-        this.mainAnchorRef = elemList[index];
-        this.mainAnchorRef.classList.add('cr-dropdown__list-item-selected');
-        this.mainAnchorRef.scrollIntoView({ block: 'center', behavior: 'auto' });
-    };
-
     /**
      * function that handles input value
      * @param e - KeyDown event
@@ -138,9 +95,7 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
         if (e.type === 'keydown') {
             e.persist();
         }
-        this.mainAnchorRef.classList.remove('cr-dropdown__list-item-selected');
-        const searched = this.state.selected === this.props.placeholder ? this.props.searched : this.state.selected;
-        const selectedElementIndex = this.props.list.indexOf(searched);
+        const selectedElementIndex = this.props.list.indexOf(this.state.selected);
         const time = 2000;
         const arrowUpButton = 38;
         const arrowDownButton = 40;
@@ -150,27 +105,22 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
         switch (e.keyCode) {
             case arrowDownButton:
                 if (selectedElementIndex < this.props.list.length - 1) {
-                    this.setState(
-                        {
-                            selected: this.convertToString(this.props.list[selectedElementIndex + 1]),
-                        },
-                        () => this.calculateListShift('down'),
-                    );
+                    this.setState({
+                        selected: this.convertToString(this.props.list[selectedElementIndex + 1]),
+                    }, () => this.calculateListShift('down'));
                 }
                 break;
             case arrowUpButton:
                 if (selectedElementIndex > 0) {
-                    this.setState(
-                        {
-                            selected: this.convertToString(this.props.list[selectedElementIndex - 1]),
-                        },
-                        () => this.calculateListShift('up'),
-                    );
+                    this.setState({
+                        selected: this.convertToString(this.props.list[selectedElementIndex - 1]),
+                    }, () => this.calculateListShift('up'));
                 }
                 break;
             case enterButton:
                 if (this.state.isOpen) {
                     this.handleSelect(selectedElementIndex);
+                    document.removeEventListener('click', this.handleOutsideClick, false);
                     const element = this.myRef.current;
                     element && element.blur();
                     this.setState({
@@ -178,6 +128,7 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
                         isFocused: false,
                     });
                 } else {
+                    document.addEventListener('click', this.handleOutsideClick, false);
                     this.setState({
                         isOpen: true,
                     });
@@ -185,13 +136,10 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
                 break;
             default:
                 const selectedElem = this.convertToString(this.props.list[this.findOption(newValue, this.props.list)]);
-                this.setState(
-                    {
-                        searchValue: newValue,
-                        selected: selectedElem,
-                    },
-                    () => this.calculateListShift(),
-                );
+                this.setState({
+                    searchValue: newValue,
+                    selected: selectedElem,
+                }, () => this.calculateListShift());
         }
         this.startTimer(time);
         if (e.type === 'keydown') {
@@ -209,41 +157,45 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
         }
         this.setState({
             selected: this.convertToString(this.props.list[index]),
-            isOpen: false,
         });
     };
 
     private handleFocus = () => {
         this.setState(prevState => ({
             isFocused: true,
-            isOpen: true,
         }));
-    };
+    }
 
     private handleBlur = () => {
-        this.setState(prevState => ({
-            isFocused: false,
-        }));
-    };
+      this.setState(prevState => ({
+          isFocused: false,
+      }));
+    }
 
     /**
      * function that toggles dropdown list
      */
     private handleClick = () => {
         if (!this.state.isOpen) {
+            document.addEventListener('click', this.handleOutsideClick, false);
             this.setState(prevState => ({
                 isFocused: true,
             }));
         } else {
+            document.removeEventListener('click', this.handleOutsideClick, false);
             const element = this.myRef.current;
             element && element.blur();
+            this.setState(prevState => ({
+                isFocused: false,
+            }));
         }
+        this.setState(prevState => ({
+            isOpen: !prevState.isOpen,
+        }));
     };
 
-    private handleOutsideClick = event => {
-        if (this.wrapperRef.current && !this.wrapperRef.current.contains(event.target)) {
-            this.setState({ isOpen: false });
-        }
+    private handleOutsideClick = () => {
+        this.handleClick();
     };
 
     /**
@@ -251,18 +203,17 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
      * @param option - element
      * @param index - number of element
      */
-    private renderOptions = (option: CustomDropdownElem, index: number) => {
+    private renderOptions = (option: DropdownElem, index: number) => {
         const minOptions = 2;
         const elemHeight = this.props.elemHeight || defaultElemHeight;
         const fullListHeight = elemHeight * this.props.list.length;
-        const displayedListHeight =
-            this.props.listHeight || (fullListHeight < defaultListHeight ? fullListHeight : defaultListHeight);
-        const shift = this.state.topElem === 0 ? 0 : (displayedListHeight % elemHeight) - this.state.topElem * elemHeight;
+        const displayedListHeight = this.props.listHeight || (fullListHeight < defaultListHeight ? fullListHeight : defaultListHeight);
+        const shift = this.state.topElem === 0 ? 0 : displayedListHeight % elemHeight - this.state.topElem * elemHeight;
         const style = { top: shift, height: elemHeight };
         const cx = classnames('cr-dropdown__list-item', {
-            'cr-dropdown__list-item-selected':
-                this.convertToString(option) === this.state.selected && this.props.list.length > minOptions,
+            'cr-dropdown__list-item-selected': this.convertToString(option) === this.state.selected && this.props.list.length > minOptions,
         });
+
         return (
             <li
                 ref={cx.includes('selected') ? this.scrollAnchorRef : null}
@@ -271,7 +222,9 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
                 onClick={this.handleSelect.bind(this, index)}
                 style={style}
             >
-                <span className="cr-dropdown__list-item-label">{option}</span>
+                <span className="cr-dropdown__list-item-label">
+                    {option}
+                </span>
             </li>
         );
     };
@@ -281,20 +234,19 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
      * @param listIsOpen - true, if dropdown list is open
      * @param list - list of elements
      */
-    private renderList = (listIsOpen: boolean, list: CustomDropdownElem[]) => {
+    private renderList = (listIsOpen: boolean, list: DropdownElem[]) => {
         const elemHeight = this.props.elemHeight || defaultElemHeight;
         const fullListHeight = elemHeight * this.props.list.length;
-        const height = {
-            height: this.props.listHeight || (fullListHeight < defaultListHeight ? fullListHeight : defaultListHeight),
-        };
+        const height = { height: this.props.listHeight || (fullListHeight < defaultListHeight ? fullListHeight : defaultListHeight) };
 
         return listIsOpen ? (
-            <ul className="cr-dropdown__list" style={height}>
+            <ul
+                className="cr-dropdown__list"
+                style={height}
+            >
                 {list.map(this.renderOptions)}
             </ul>
-        ) : (
-            ''
-        );
+        ) : '';
     };
 
     /**
@@ -302,13 +254,9 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
      * @param value - value for search in list
      * @param list - list of elements
      */
-    private findOption = (value: string, list: CustomDropdownElem[]) => {
+    private findOption = (value: string, list: DropdownElem[]) => {
         for (let i = 0; i < list.length; i++) {
-            if (
-                this.convertToString(list[i])
-                    .toLowerCase()
-                    .indexOf(value.toLowerCase()) === 0
-            ) {
+            if (this.convertToString(list[i]).toLowerCase().indexOf(value.toLowerCase()) === 0) {
                 return i;
             }
         }
@@ -323,7 +271,7 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
      * function that convert element of dropdown list to string
      * @param elem - element
      */
-    private convertToString = (elem: CustomDropdownElem) => {
+    private convertToString = (elem: DropdownElem) => {
         if (elem !== undefined && elem !== null) {
             return elem.toString();
         }
@@ -352,28 +300,24 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
     private calculateListShift = (action?: string) => {
         const elemHeight = this.props.elemHeight || defaultElemHeight;
         const fullListHeight = elemHeight * this.props.list.length;
-        const displayedListHeight =
-            this.props.listHeight || (fullListHeight < defaultListHeight ? fullListHeight : defaultListHeight);
+        const displayedListHeight = this.props.listHeight || (fullListHeight < defaultListHeight ? fullListHeight : defaultListHeight);
         const elementsInDisplayedList = Math.floor(displayedListHeight / elemHeight);
         const selectedElem = this.props.list.indexOf(this.state.selected);
         const topElem = this.state.topElem;
 
         switch (action) {
             case 'down':
-                if (
-                    selectedElem - topElem >= elementsInDisplayedList &&
-                    topElem < this.props.list.length - elementsInDisplayedList
-                ) {
-                    if (this.scrollAnchorRef.current) {
-                        this.scrollAnchorRef.current.scrollIntoView({ block: 'center', behavior: 'auto' });
-                    }
+                if (selectedElem - topElem >= elementsInDisplayedList && topElem < this.props.list.length - elementsInDisplayedList) {
+                    this.setState({
+                        topElem: selectedElem - (elementsInDisplayedList - 1),
+                    });
                 }
                 break;
             case 'up':
-                if (selectedElem >= 0) {
-                    if (this.scrollAnchorRef.current) {
-                        this.scrollAnchorRef.current.scrollIntoView({ block: 'center', behavior: 'auto' });
-                    }
+                if (selectedElem < topElem && selectedElem >= 0) {
+                    this.setState({
+                        topElem: selectedElem,
+                    });
                 }
                 break;
             default:
@@ -381,7 +325,10 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
                     this.scrollAnchorRef.current.scrollIntoView({ block: 'center', behavior: 'auto' });
                 }
         }
-    };
+    }
 }
 
-export { CustomDropdown, CustomDropdownProps };
+export {
+    Dropdown,
+    DropdownProps,
+};

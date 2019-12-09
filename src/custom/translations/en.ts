@@ -151,6 +151,7 @@ export const en = {
     'resource.profile.kyc': 'KYC is under verifying',
     'resource.profile.document': 'Proof of residence is under verifying',
     'resource.profile.questionnaire': 'Questionnaire is under verifying',
+    'resource.profile.identity': 'Identity is under verifying',
 
     'resource.profile.kyc.denied': 'Your last kyc was denied. Please, try again',
     'resource.profile.document.denied': 'Your documents were denied. Please, try again',
