@@ -775,7 +775,7 @@ export const ru: LangType = {
     'page.body.modal.blockNationality.button': 'I understand',
 
     'page.body.modal.kyc.login.header': 'Finish your registration',
-    'page.body.modal.kyc.login.text': 'For all possibilities upgrade your KYC level',
+    'page.body.modal.kyc.login.text': 'To proceed with the next step in your account setup, please follow the instructions on the next page.',
     'page.body.modal.kyc.login.go.kyc.level': 'Get level',
     'page.body.modal.kyc.login.later': 'Later',
 
