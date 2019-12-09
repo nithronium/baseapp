@@ -235,8 +235,8 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
         const percentage = Math.round(+withdrawLimitData.withdraw.withdrawal_amount / +withdrawLimitData.withdraw.limit * 100);
         const withdrawalLimitCurrency = withdrawLimitData.withdraw.currency.toLocaleLowerCase().includes('usd') ?
             '$' : ` ${withdrawLimitData.withdraw.currency.toUpperCase()}`;
-        const currentCurrency = this.props.currencies.find(currecy => currecy.id.toLowerCase() === withdrawLimitData.withdraw.currency.toLowerCase() ? currecy : '');
-        const currencyPrecision = currentCurrency && currentCurrency.precision;
+        const currentCurrency = this.props.currencies.find(currecy => currecy.id.toLowerCase() === withdrawLimitData.withdraw.currency.toLowerCase() ? currecy : 'USD');
+        const currencyPrecision = currentCurrency && currentCurrency.precision || 2;
 
         return (
             <div className="pg-profile-verification__withdraw-limit">
@@ -267,7 +267,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                 </div>
             );
         }
-        const percentage = Math.round(+evaluatedDepositsTotal / +withdrawLimitData.withdraw.limit * 100);
+        const percentage = Math.round(+evaluatedDepositsTotal / +withdrawLimitData.deposit.limit * 100);
         const currentCurrency = 'USD';
         const currencyPrecision = 2;
 
