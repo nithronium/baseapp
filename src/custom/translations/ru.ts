@@ -663,6 +663,15 @@ export const ru: LangType = {
 
     'server.internal_error': 'Внутренняя ошибка сервера',
 
+    'page.body.wallets.tabs.deposit.fiat.button.wire': "Банковский перевод",
+    'page.body.wallets.tabs.deposit.fiat.button.card': "Банковская карта",
+    'page.body.wallets.tabs.deposit.fiat.button.sepa': 'SEPA перевод',
+    'cardDepositFiat.detail': 'Детали платежа',
+    'cardDepositFiat.amount': 'Количество',
+    'cardDepositFiat.currency': 'Валюта',
+    'cardDepositFiat.button.payment': 'ОПЛАТИТЬ',
+    'cardDepositFiat.button.cancel': 'Отмена',
+
     'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Валюта депозита :',
     'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN :',
     'page.body.wallets.tabs.deposit.fiat.usd.iban': 'IBAN :',

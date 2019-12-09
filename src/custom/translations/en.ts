@@ -26,6 +26,15 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.message3': 'Please, ALWAYS mention the reference code during the wire transfer, otherwise it will take longer to deposit your funds.',
 
     'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
+    
+  'page.body.wallets.tabs.deposit.fiat.button.wire': "Wire transfer",
+  'page.body.wallets.tabs.deposit.fiat.button.card': "Credit/Debet card",
+  'page.body.wallets.tabs.deposit.fiat.button.sepa': 'SEPA transfer',
+  'cardDepositFiat.detail': 'Payment details',
+  'cardDepositFiat.amount': 'Amount',
+  'cardDepositFiat.currency': 'Currency',
+  'cardDepositFiat.button.payment': 'PROCESS PAYMENT',
+  'cardDepositFiat.button.cancel': 'Cancel',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.usd.value': 'USD',
     'page.body.wallets.tabs.deposit.fiat.iban.usd.value': 'AE 240570000011101251020',
