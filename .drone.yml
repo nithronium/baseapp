@@ -10,10 +10,7 @@ steps:
     image: node:10.11
     environment:
       REACT_APP_BUILD_VERSION: Enterprise
-      NPM_AUTH_TOKEN:
-        from_secret: drone_npm_auth_token
     commands:
-      - echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > .npmrc
       - export REACT_APP_GIT_SHA=$(git rev-parse --short HEAD)
       - echo $REACT_APP_GIT_SHA > .tags
       - export BUILD_DOMAIN=$(cat .domains)
@@ -25,21 +22,20 @@ steps:
       - yarn test:ci --collectCoverage=true
       - yarn build
 
-  - name: "Build enterprise image"
-    image: plugins/gcr
+  - name: "Build Docker image"
+    image: plugins/docker
     environment:
-      BUILD_EXPIRE: "3 month"
-      NPM_AUTH_TOKEN:
-        from_secret: drone_npm_auth_token
       REACT_APP_BUILD_VERSION: Enterprise
     settings:
-      repo: gcr.io/openware-production/baseapp
       build_args_from_env:
-        - BUILD_EXPIRE
         - REACT_APP_BUILD_VERSION
-        - NPM_AUTH_TOKEN
-      json_key:
-        from_secret: openware_gcp_creds_base64
+      username:
+        from_secret: quay_username
+      password:
+        from_secret: quay_password
+      repo:
+        from_secret: quay_repo
+      registry: quay.io
     when:
       branch:
         - rc/**
@@ -87,6 +83,7 @@ trigger:
   branch:
     exclude:
     - master
+    - 2-3-stable
 
 ---
 kind: pipeline
@@ -98,11 +95,7 @@ concurrency:
 steps:
   - name: "Test"
     image: node:10.11
-    environment:
-      NPM_AUTH_TOKEN:
-        from_secret: drone_npm_auth_token
     commands:
-      - echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > .npmrc
       - npm -g install yarn
       - yarn install
       - yarn lint
@@ -118,52 +111,21 @@ steps:
     commands:
       - BUNDLE_GEMFILE=/sdk/Gemfile bundle exec rake --rakefile=/sdk/Rakefile release:push
 
-
-  - name: "Publish to Gitolite"
-    image: alpine/git
-    environment:
-      GITOLITE_KEY:
-        from_secret: gitolite_rsa_key_b64
-    commands:
-      - echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > .npmrc
-      - npm -g install yarn
-      - yarn build
-
-  - name: "Build container"
+  - name: "Build Docker image"
     image: plugins/docker
     environment:
-      NPM_AUTH_TOKEN:
-        from_secret: drone_npm_auth_token
-      BUILD_EXPIRE: "3 month"
       REACT_APP_BUILD_VERSION: Enterprise
     settings:
       registry: reg.openware.work
       repo: reg.openware.work/emirex/baseapp
       build_args_from_env:
-        - BUILD_EXPIRE
         - REACT_APP_BUILD_VERSION
-        - NPM_AUTH_TOKEN
-      json_key:
-        from_secret: openware_gcp_creds_base64
-
-  - name: "Build lite image"
-    image: plugins/docker
-    environment:
-      NPM_AUTH_TOKEN:
-        from_secret: drone_npm_auth_token
-      REACT_APP_BUILD_VERSION: Lite
-      REACT_APP_TENKO_PUBLIC_KEY:
-        from_secret: tenko_public_key
-    settings:
       username:
         from_secret: ow_registry_username
       password:
         from_secret: quay_password
-      repo: quay.io/openware/baseapp-lite
-      build_args_from_env:
-        - REACT_APP_BUILD_VERSION
-        - REACT_APP_TENKO_PUBLIC_KEY
-        - NPM_AUTH_TOKEN
+      repo:
+        from_secret: quay_repo
       registry: quay.io
 
   - name: "Redeploy on stage"
@@ -176,13 +138,6 @@ steps:
       - cd /home/app
       - bundle exec rake payload:send[frontend,$latest_image,http://www.devkube.com:1337]
 
-  # - name: "Run integration testing"
-  #   image: cypress/browsers:chrome69
-  #   commands:
-  #     - npm install --save-dev cypress
-  #     - export CYPRESS_baseUrl=http://www.devkube.com
-  #     - $(npm bin)/cypress run --browser chrome
-
   - name: "Notify about redeployment on devkube"
     image: plugins/slack
     settings:
@@ -192,11 +147,11 @@ steps:
         from_secret: cryptobase_slack_channel
       template: >
         {{#success build.status}}
-          [SUCCESS] (Base Application) Master branch build by {{ build.author }} has succeeded!
+          [SUCCESS] (Base Application) 2-3-stable branch build by {{ build.author }} has succeeded!
           Version is {{ build.tag }}
           Visit http://www.devkube.com to check it out!
         {{else}}
-          [FAILURE] Master branch build by {{ build.author }} has failed!
+          [FAILURE] 2-3-stable branch build by {{ build.author }} has failed!
         {{/success}}
         Check the build info here: {{ build.link }}
     when:
@@ -204,7 +159,7 @@ steps:
 
 trigger:
   branch:
-  - master
+  - 2-3-stable
   event:
   - push
 
