@@ -45,7 +45,9 @@ interface WithdrawState {
     total: number;
 }
 
-class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
+type Props = WithdrawProps;
+
+class Withdraw extends React.Component<Props, WithdrawState> {
     public state = {
         amount: '',
         beneficiary: defaultBeneficiary,

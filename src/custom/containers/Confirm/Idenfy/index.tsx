@@ -92,7 +92,7 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
                         <p>{this.translate('page.idenfy.thanks')}</p>
                     </div>
                     <span className="back-button" onClick={this.onBackButtonClick}>
-                        {this.translate('page.idenfu.understand')}
+                        {this.translate('page.idenfy.understand')}
                     </span>
                 </div>
             </div>

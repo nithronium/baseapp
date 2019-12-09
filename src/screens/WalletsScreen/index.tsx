@@ -339,6 +339,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                         details={this.details}
                         uid={user ? user.uid : ''}
                     />
+                    <div className="fiat-alert">
+                        {this.translate('page.wallets.withdraw.fiat')}
+                    </div>
                     {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
                 </React.Fragment>
             );
