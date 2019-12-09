@@ -134,6 +134,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
 
                 this.setState({
                     dateOfBirth: tmp,
+                    dateOfBirthValid: true,
                 });
             }
 
@@ -273,7 +274,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                           <fieldset className={dateOfBirthGroupClass}>
                               {dateOfBirth && <legend>{this.translate('page.body.kyc.identity.dateOfBirth')}</legend>}
                               <MaskInput
-                                  className="pg-confirm__content-profile-partial-col-row-content-number"
+                                  className="pg-confirm__content-profile-partial-col-row-content-number dob-field"
                                   maskString="00/00/0000"
                                   mask="00/00/0000"
                                   onChange={this.handleChangeDate}
@@ -362,6 +363,10 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                     dateOfBirthValid: false,
                 });
             }
+        } else {
+            this.setState({
+                dateOfBirthValid: false,
+            })
         }
     }
 

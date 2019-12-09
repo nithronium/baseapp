@@ -81,6 +81,12 @@ class CustomDropdown extends React.Component<CustomDropdownProps & {}, DropdownS
         }
     }
 
+    public componentDidUpdate(prev) {
+        if (this.state.isOpen) {
+            this.scrollToAfterOpening(this.state.selected);
+        }
+    }
+
     public componentWillUnmount() {
         document.removeEventListener('click', this.handleOutsideClick, false);
     }
