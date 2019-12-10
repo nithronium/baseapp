@@ -36,7 +36,7 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.minimal.usd.value': 'USD 50',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.eur.value': 'EUR',
-    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'MT45PHPY270070PHOENIX0000000013',
+    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'MT24PHPY270070PHOENIX0000884546',
     'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'PHOENIX PAYMENTS LTD',
     'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': 'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
     'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'PHPYMTM1XXX',
