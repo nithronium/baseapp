@@ -1,10 +1,12 @@
 import { Loader } from '@openware/components';
+import classnames from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { minutesUntilAutoLogout } from '../../api';
+import { LoginModal } from '../../custom/components/KYCLoginModal';
 import { ConfirmScreen, TradingScreen } from '../../custom/screens';
 import { toggleColorTheme } from '../../helpers';
 import {
@@ -53,6 +55,10 @@ interface OwnProps {
     history: History;
 }
 
+interface State {
+    diplayKYCLoginModal: boolean;
+    prevRouteCheck: boolean;
+}
 export type LayoutProps = ReduxProps & DispatchProps & OwnProps;
 
 const renderLoader = () => (
@@ -96,7 +102,7 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
     return <Route {...rest} render={renderCustomerComponent} />;
 };
 
-class LayoutComponent extends React.Component<LayoutProps> {
+class LayoutComponent extends React.Component<LayoutProps, State> {
     public static eventsListen = [
         'click',
         'keydown',
@@ -106,6 +112,11 @@ class LayoutComponent extends React.Component<LayoutProps> {
         'TabSelect',
         'TabHide',
     ];
+
+    public state = {
+        diplayKYCLoginModal: false,
+        prevRouteCheck: false,
+    };
 
     public timer;
     public walletsFetchInterval;
@@ -121,6 +132,19 @@ class LayoutComponent extends React.Component<LayoutProps> {
         this.check();
     }
 
+    public componentWillReceiveProps(next: LayoutProps) {
+        const { history, isLoggedIn } = this.props;
+
+        if (history.location.state && history.location.state.fromSignIn) {
+            this.setState({
+                prevRouteCheck: true,
+            });
+        }
+
+        if (!isLoggedIn && next.isLoggedIn && this.state.prevRouteCheck) {
+            this.handleOpenLoginModal();
+        }
+    }
 
     public componentDidUpdate(next: LayoutProps) {
         const { isLoggedIn, history } = this.props;
@@ -145,9 +169,16 @@ class LayoutComponent extends React.Component<LayoutProps> {
             colorTheme,
             isLoggedIn,
             userLoading,
+            user,
         } = this.props;
 
         toggleColorTheme(colorTheme);
+
+        const cx = classnames('pg-kyc-login', {
+            'pg-kyc-login--visible': this.state.diplayKYCLoginModal &&
+                !location.pathname.startsWith('/confirm') &&
+                user.level === 1,
+        });
 
         return (
             <div className="container-fluid pg-layout">
@@ -168,8 +199,37 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     {renderPluginsRoutes()}
                     <Route path="**"><Redirect to="/trading/" /></Route>
                 </Switch>
+                <LoginModal
+                    classname={cx}
+                    closeModal={this.handleDisplayModal}
+                    userLevel={user.level}
+                    history={this.props.history}
+                />
             </div>
         );
+    }
+
+    private handleOpenLoginModal = () => {
+        this.setState({
+            diplayKYCLoginModal: true,
+        }, () => {
+            document.addEventListener('click', this.handleCloseLoginModal);
+        });
+    };
+
+    private handleCloseLoginModal = () => {
+        this.setState({
+            diplayKYCLoginModal: false,
+            prevRouteCheck: false,
+        }, () => {
+            document.removeEventListener('click', this.handleCloseLoginModal);
+        });
+    }
+
+    private handleDisplayModal = (value: boolean) => {
+        this.setState({
+            diplayKYCLoginModal: value,
+        });
     }
 
     private getLastAction = () => {
