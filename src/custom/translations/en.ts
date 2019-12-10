@@ -36,7 +36,7 @@ export const en = {
     'page.body.trade.header.past': 'Past',
 
     'page.body.kyc.documents.upload': 'Upload your proof of residence',
-    'page.body.kyc.documents.expiration': 'Document must be 3 months old maximum',
+    'page.body.kyc.documents.expiration': 'The documents provided may not be older than 3 months',
     'page.body.kyc.documents.expiryDate': 'Date of emission DD/MM/YYYY',
     'page.body.kyc.documents.select.bankStatement': 'Bank statement',
     'page.body.kyc.documents.select.taxCertificate': 'Tax certificate',
@@ -103,7 +103,7 @@ export const en = {
     'page.body.kyc.questionnaire.question11.answer1': 'Yes',
     'page.body.kyc.questionnaire.question11.answer2': 'No',
 
-    'page.body.kyc.questionnaire.question12': 'Have you ever been involved in any anti money laundering activity',
+    'page.body.kyc.questionnaire.question12': 'Have you ever been involved in any money laundering activity',
     'page.body.kyc.questionnaire.question12.answer1': 'Yes',
     'page.body.kyc.questionnaire.question12.answer2': 'No',
 
