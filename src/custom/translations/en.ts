@@ -136,7 +136,7 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'AJMNAEAJ',
 
     'page.body.modal.blockNationality.header': 'Access denied',
-    'page.body.modal.blockNationality.message': 'Sorry, due to your local legislation we are not able to proceed your registration.',
+    'page.body.modal.blockNationality.message': 'Due to international and local financial/cryptocurrency regulations we do not currently provide services to citizens of the selected country. Thank you for understanding.',
     'page.body.modal.blockNationality.button': 'I understand',
 
     'resource.profile.dateOfBirth': 'User must be over 21 years old',
