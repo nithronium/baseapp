@@ -18,6 +18,7 @@ import {
     labelFetch,
     RootState,
     selectCurrentLanguage,
+    selectEditIdentityData,
     selectEditIdentitySuccess,
     selectUserInfo,
     User,
@@ -26,12 +27,14 @@ import {
     selectSendIdentitySuccess,
     sendIdentity,
 } from '../../../../modules/user/kyc/identity';
-import { changeUserLevel } from '../../../../modules/user/profile';
+import { IdentityData } from '../../../../modules/user/kyc/identity/types';
+import { changeUserLevel, changeUserProfileData } from '../../../../modules/user/profile';
 import { Dropdown } from '../../../components';
 import { DISALLOWED_COUNTRIES } from '../../../constants';
 import { isValidDate } from '../../../helpers/checkDate';
 
 interface ReduxProps {
+    editData?: IdentityData;
     editSuccess?: string;
     lang: string;
     sendSuccess?: string;
@@ -97,7 +100,12 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     };
 
     public componentDidUpdate(prev: Props) {
-        const { editSuccess, sendSuccess, user} = this.props;
+        const {
+            editData,
+            editSuccess,
+            sendSuccess,
+            user,
+        } = this.props;
 
         if (!prev.sendSuccess && sendSuccess) {
             this.props.changeUserLevel({ level: +user.level + 1 });
@@ -107,6 +115,9 @@ class ProfilePartialComponent extends React.Component<Props, State> {
 
         if (!prev.editSuccess && editSuccess) {
             this.props.labelFetch();
+            if (editData) {
+                this.props.changeUserProfileData(editData);
+            }
             this.props.history.push('/profile');
         }
     }
@@ -434,6 +445,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
+    editData: selectEditIdentityData(state),
     editSuccess: selectEditIdentitySuccess(state),
     lang: selectCurrentLanguage(state),
     sendSuccess: selectSendIdentitySuccess(state),
@@ -442,6 +454,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     dispatch => ({
+        changeUserProfileData: payload => dispatch(changeUserProfileData(payload)),
         changeUserLevel: payload => dispatch(changeUserLevel(payload)),
         editIdentity: payload => dispatch(editIdentity(payload)),
         fetchAlert: payload => dispatch(alertPush(payload)),

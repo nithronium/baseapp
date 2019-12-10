@@ -20,6 +20,11 @@ describe('Identity reducer', () => {
         metadata: `{'nationality': 'nationality', 'state': 'some_state'}`,
     };
 
+    const editIdentityResponse = {
+        data: confirmIdentityPayload,
+        message: 'Confirmed',
+    };
+
     const error = {
         code: 500,
         message: ['Server error'],
@@ -72,10 +77,11 @@ describe('Identity reducer', () => {
             ...initialIdentityState,
             edit: {
                 ...initialIdentityState.edit,
-                success: confirmIdentityResponse.message,
+                data: editIdentityResponse.data,
+                success: editIdentityResponse.message,
             },
         };
-        expect(identityReducer(initialIdentityState, actions.editIdentityData(confirmIdentityResponse))).toEqual(expectedState);
+        expect(identityReducer(initialIdentityState, actions.editIdentityData(editIdentityResponse))).toEqual(expectedState);
     });
 
     it('should handle EDIT_IDENTITY_ERROR', () => {

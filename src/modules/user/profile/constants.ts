@@ -24,6 +24,7 @@ export const PROFILE_RESET_USER = 'profile/RESET_USER';
 export const PROFILE_TEST_STATE = 'profile/TEST_PROFILE_STATE';
 
 export const PROFILE_CHANGE_USER_LEVEL = 'profile/CHANGE_USER_LEVEL';
+export const PROFILE_CHANGE_USER_PROFILE_DATA = 'profile/CHANGE_USER_PROFILE_DATA';
 
 export const PROFILE_ENABLE_USER_2FA = 'profile/ENABLE_USER_2FA';
 

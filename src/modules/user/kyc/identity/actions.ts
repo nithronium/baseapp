@@ -34,6 +34,7 @@ export interface EditIdentityFetch {
 export interface EditIdentityData {
     type: typeof EDIT_IDENTITY_DATA;
     payload: {
+        data: IdentityData;
         message: string;
     };
 }

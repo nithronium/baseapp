@@ -43,14 +43,19 @@ describe('Edit Identity Saga', () => {
     };
 
     const confirmIdentityResponse = {
-        message: 'successfull upload',
+        data: confirmIdentityPayload,
+        message: 'success.identity.accepted',
     };
 
     const mockEditIdentity = () => {
-        mockAxios.onPut(`/resource/profiles`).reply(200, confirmIdentityResponse);
+        mockAxios.onPut(`/resource/profiles`).reply(200, confirmIdentityPayload);
     };
 
-    const expectedActionsFetch = [editIdentity(confirmIdentityPayload), editIdentityData(confirmIdentityResponse)];
+    const expectedActionsFetch = [
+        editIdentity(confirmIdentityPayload),
+        editIdentityData(confirmIdentityResponse),
+    ];
+
     const expectedActionsError = [editIdentity(confirmIdentityPayload), editIdentityError(fakeError)];
 
     it('should edit identity data in success flow', async () => {

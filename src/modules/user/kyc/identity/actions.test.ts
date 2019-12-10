@@ -39,6 +39,11 @@ describe('KYC - Identity', () => {
             metadata: `{'nationality': 'nationality', 'state': 'some_state'}`,
         };
 
+        const editIdentityResponse = {
+            data: confirmIdentityPayload,
+            message: 'success.identity.accepted',
+        };
+
         const expectedConfirmIdentityFetch = {
             type: 'identity/SEND_IDENTITY_FETCH',
             payload: confirmIdentityPayload,
@@ -104,7 +109,7 @@ describe('KYC - Identity', () => {
         });
 
         const mockEditIdentityFetch = () => {
-            mockAxios.onPut(`/resource/profiles`).reply(200, confirmIdentityResponse);
+            mockAxios.onPut(`/resource/profiles`).reply(200, confirmIdentityPayload);
         };
 
         const expectedEditIdentityFetch = {
@@ -114,7 +119,7 @@ describe('KYC - Identity', () => {
 
         const expectedEditIdentityData = {
             type: 'identity/EDIT_IDENTITY_DATA',
-            payload: confirmIdentityResponse,
+            payload: editIdentityResponse,
         };
 
         const expectedEditIdentityError = {

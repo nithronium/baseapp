@@ -47,6 +47,25 @@ describe('Profile actions', () => {
             };
             expect(actions.changeUserLevel({ level: 1 })).toEqual(expectedAction);
         });
+
+        it('should change user profile data', () => {
+            const profileIdentityToUpdate = {
+                first_name: 'John',
+                last_name: 'Smith',
+                dob: '11/12/1980',
+                address: 'Black street 1',
+                postcode: '000777',
+                city: 'London',
+                country: 'GB',
+                number: '123',
+            };
+
+            const expectedAction = {
+                type: 'profile/CHANGE_USER_PROFILE_DATA',
+                payload: profileIdentityToUpdate,
+            };
+            expect(actions.changeUserProfileData(profileIdentityToUpdate)).toEqual(expectedAction);
+        });
     });
 
     describe('profileIdentity actions', () => {

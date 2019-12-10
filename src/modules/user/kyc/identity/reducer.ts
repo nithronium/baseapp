@@ -8,6 +8,7 @@ import {
     SEND_IDENTITY_ERROR,
     SEND_IDENTITY_FETCH,
 } from './constants';
+import { IdentityData } from './types';
 
 export interface IdentityState {
     send: {
@@ -16,6 +17,7 @@ export interface IdentityState {
     };
     edit: {
         success?: string;
+        data?: IdentityData;
         error?: CommonError;
     };
 }
@@ -55,17 +57,20 @@ export const identityEditReducer = (state: IdentityState['edit'], action: Identi
             return {
                 ...state,
                 success: undefined,
+                data: undefined,
                 error: undefined,
             };
         case EDIT_IDENTITY_DATA:
             return {
                 ...state,
                 success: action.payload.message,
+                data: action.payload.data,
                 error: undefined,
             };
         case EDIT_IDENTITY_ERROR:
             return {
                 success: undefined,
+                data: undefined,
                 error: action.payload,
             };
         default:
