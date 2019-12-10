@@ -90,6 +90,21 @@
       line-height: 12px;
       text-decoration: none;
     }
+
+    &__document-pending {
+      align-items: center;
+      color: var(--red);
+      cursor: pointer;
+      font-family: "Noto Sans SC";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 12px;
+      margin-left: 8.25%;
+      margin-right: -8.25%;
+      text-decoration: none;
+      white-space: nowrap;
+    }
   }
 
   &__abilities {
@@ -177,12 +192,22 @@
         min-width: 266px;
         width: 100%;
       }
-  
-      &__know-more {
-        padding-left: 0;
-        width: 25%;
+    }
+
+    &__know-more {
+      flex-direction: column;
+      padding-left: 0;
+      width: max-content;
+
+      a, &__document-pending {
+        line-height: 30px;
+        margin-left: 0;
       }
-    }  
+    }
+
+    &__upgrade-level {
+      margin-left: 0;
+    }
   }
 }
 
@@ -197,10 +222,10 @@
 
     &__withdraw-limit, &__deposit-limit {
       padding-right: 0;
-  
-      &__know-more {
-        width: 40%;
-      }
+    }
+
+    &__upgrade-level {
+      margin-left: 5%;
     }
   }
 }

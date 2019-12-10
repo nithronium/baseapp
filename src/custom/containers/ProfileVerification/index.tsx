@@ -168,8 +168,17 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
     public renderUpgradeLevelLink() {
         return (
             <Link to="/confirm" className="pg-profile-verification__upgrade-level">
-            <FormattedMessage id="page.body.profile.header.account.profile.upgrade"/>
-        </Link>
+                <FormattedMessage id="page.body.profile.header.account.profile.upgrade"/>
+            </Link>
+        );
+    }
+
+
+    public renderDocumentPending() {
+        return (
+            <span className="pg-profile-verification__know-more__document-pending">
+                <FormattedMessage id="resource.profile.document"/>
+            </span>
         );
     }
 
@@ -291,12 +300,18 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
 
 
     public render() {
-        const { user, withdrawLimitData } = this.props;
+        const {
+            label,
+            user,
+            withdrawLimitData,
+        } = this.props;
         const userLevel = user.level;
 
         const withdrawLimitDataExists = withdrawLimitData &&
             withdrawLimitData.withdraw &&
             withdrawLimitData.deposit;
+
+        const pendingDocumentLabel = label.find(l => l.key === 'document' && l.value === 'pending' && l.scope === 'private');
 
         return (
             <div className="pg-profile-verification">
@@ -311,6 +326,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                     <Link to="#">
                         <FormattedMessage id="page.body.profile.header.account.profile.knowMore" />
                     </Link>
+                    {pendingDocumentLabel && this.renderDocumentPending()}
                 </div>
                 {withdrawLimitDataExists && this.renderUserAbilities(userLevel, withdrawLimitData)}
                 {withdrawLimitDataExists && this.renderWithdrawLimit(userLevel, withdrawLimitData)}
