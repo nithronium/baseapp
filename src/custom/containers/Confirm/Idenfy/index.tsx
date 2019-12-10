@@ -64,7 +64,7 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
 
     public handleReceiveMessage = event => {
 
-        if (event.data.status) {
+        if (event.data.status && event.data.status.toLowerCase() !== 'failed') {
             this.setState({
                 statusGet: true,
             });
