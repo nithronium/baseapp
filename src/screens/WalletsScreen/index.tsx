@@ -383,6 +383,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                         description={this.description}
                         details={this.details}
                         uid={user.uid}
+                        sepa={sepa}            
                     />
                     {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
                             </div> :

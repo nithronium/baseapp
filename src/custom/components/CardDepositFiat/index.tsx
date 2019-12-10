@@ -1,9 +1,11 @@
 import * as React from 'react';
+
+import { initPayin } from '../../../api';
+
+// import Iframe from 'react-iframe';
 //tslint:disable
 const rootStyles = {
-    wrapper: {
-        maxWidth: '500px',
-    },
+
     h2: {
         padding: '15px',
         color: 'white',
@@ -42,7 +44,10 @@ const CardDepositFiat = (props: CardDepositFiatProps) => {
         translate,
     } = props;
 
-    const [amount, setAmount] = React.useState('');
+    const [amount, setAmount] = React.useState('50');
+    const [initForm, setInitForm] = React.useState(true);
+    const [iFrame, setIFrame] = React.useState(false);
+    const [initURL, setInitURL] = React.useState('');
 
     const handleChange = (e) => {
         const oldAmount = amount;
@@ -60,7 +65,7 @@ const CardDepositFiat = (props: CardDepositFiatProps) => {
     const handleClick = (e) => {
         const labels = document.querySelectorAll('label');
         labels.forEach(label => {
-            if (label.id.includes(e.target.id)) {
+            if (e.target.id && label.id.includes(e.target.id)) {
                 label.style.color = '#FFD567';
             } else {
                 label.style.color = '#7D9794';
@@ -71,11 +76,31 @@ const CardDepositFiat = (props: CardDepositFiatProps) => {
 
     const clearInput = (e) => {
         e.preventDefault();
-        setAmount('');
+        setAmount('50');
+    }
+
+    const getPaytoolsForm = () => {
+        // setInitURL('http://127.0.0.1:5500/ptform.html');
+        const body = {
+            currency: currency,
+            amount: amount
+        };
+        console.log(body);
+        initPayin(body).then(data => {
+            setInitURL(data.url);
+            setIFrame(!iFrame);
+            setInitForm(!initForm);
+        }).catch(err => {
+            setInitURL('');
+            setIFrame(!iFrame);
+            setInitForm(!initForm);
+        });
+        
     }
 
     return (
-        <div style={rootStyles.wrapper} className="depositCard">
+        <React.Fragment>
+        <div onClick={handleClick} style={{maxWidth: '500px', display: initForm ? 'block' : 'none' }} className="depositCard">
             <h2 style={rootStyles.h2}>{translate('cardDepositFiat.detail')}</h2>
             <div style={rootStyles.rowWrapper}>
                 <div style={rootStyles.row}>
@@ -83,12 +108,27 @@ const CardDepositFiat = (props: CardDepositFiatProps) => {
                     <div style={{ position: 'relative', width: '150px', marginLeft: '15px' }}><label style={rootStyles.label} id="label_currency">{translate('cardDepositFiat.currency')}</label> <input id="currency" onClick={handleClick} className="depositCard__input depositCard__input2" type="text" value={currency} /></div>
                 </div>
                 <div className="depositCard__buttons">
-                    <a href="" onClick={clearInput}>{translate('cardDepositFiat.button.cancel')}</a>
-                    <input type="submit" className="button" value={translate('cardDepositFiat.button.payment')}/>
+                    <a  onClick={clearInput}>{translate('cardDepositFiat.button.cancel')}</a>
+                    <input disabled={parseInt(amount) < 50 ? true : false} onClick={getPaytoolsForm} type="submit" className="button" value={translate('cardDepositFiat.button.payment')}/>
                     
                 </div>
             </div>
-        </div>
+            </div>
+            <div style={{display: iFrame ? 'block' : 'none'}}>
+                {initURL ?
+                //     <Iframe
+                //     url={initURL}
+                //     position='relative'
+                //     width='100%'
+                //     height='500px'
+                //     styles={{ frameBorder: 'no' }}
+             
+                // />
+                    <iframe  src={initURL} width="100%" height="500px" frameBorder="0"></iframe>
+                    :
+                    <h3>Server error</h3>}
+            </div>
+        </React.Fragment>
     );
 };
 
