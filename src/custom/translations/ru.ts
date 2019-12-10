@@ -368,7 +368,7 @@ export const ru: LangType = {
     'page.body.kyc.documentsType': 'Тип документа',
 
     'page.body.kyc.documents.upload': 'Upload your proof of residence',
-    'page.body.kyc.documents.expiration': 'Document must be 3 months old maximum',
+    'page.body.kyc.documents.expiration': 'The documents provided may not be older than 3 months',
     'page.body.kyc.documents.select.passport': 'Паспорт',
     'page.body.kyc.documents.select.identityCard': 'Удостоверение личности',
     'page.body.kyc.documents.select.driverLicense': 'Водительское удостоверение',
