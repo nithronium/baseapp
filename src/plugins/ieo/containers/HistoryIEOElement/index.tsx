@@ -79,7 +79,7 @@ class HistoryComponent extends React.Component<Props> {
     }
 
     public renderContent = () => {
-        const { firstElemIndex, lastElemIndex, fullHistory, page, nextPageExists } = this.props;
+        const { firstElemIndex, lastElemIndex, total, page, nextPageExists } = this.props;
 
         return (
             <React.Fragment>
@@ -87,7 +87,7 @@ class HistoryComponent extends React.Component<Props> {
                 <Pagination
                     firstElemIndex={firstElemIndex}
                     lastElemIndex={lastElemIndex}
-                    total={fullHistory}
+                    total={total}
                     page={page}
                     nextPageExists={nextPageExists}
                     onClickPrevPage={this.onClickPrevPage}
@@ -99,12 +99,12 @@ class HistoryComponent extends React.Component<Props> {
 
     private onClickPrevPage = () => {
         const { page } = this.props;
-        this.props.ieoHistoryFetch({ page: +page - 1, limit: 25, state: ['completed', 'cancelled'] });
+        this.props.ieoHistoryFetch({ page: +page - 1, limit: 25, state: ['completed', 'cancelled', 'purchased', 'closed'] });
     };
 
     private onClickNextPage = () => {
         const { page } = this.props;
-        this.props.ieoHistoryFetch({ page: +page + 1, limit: 25,state: ['completed', 'cancelled'] });
+        this.props.ieoHistoryFetch({ page: +page + 1, limit: 25, state: ['completed', 'cancelled', 'purchased', 'closed'] });
     };
 
     private renderHeaders = () => ([
