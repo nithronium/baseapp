@@ -103,7 +103,7 @@ export const en = {
     'page.body.kyc.questionnaire.question11.answer1': 'Yes',
     'page.body.kyc.questionnaire.question11.answer2': 'No',
 
-    'page.body.kyc.questionnaire.question12': 'Have you ever been involved in any anti money laundering activity',
+    'page.body.kyc.questionnaire.question12': 'Have you ever been involved in any money laundering activity',
     'page.body.kyc.questionnaire.question12.answer1': 'Yes',
     'page.body.kyc.questionnaire.question12.answer2': 'No',
 
