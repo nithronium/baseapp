@@ -79,7 +79,16 @@ class Referral extends React.Component<Props> {
     public componentDidMount() {
 
         setDocumentTitle('Referral');
-        const referralCode = this.extractRefID(this.props.location.search) || '';
+        let referralCode = this.extractRefID(this.props.location.search) || '';
+        if (localStorage.getItem('refCode')) {
+            referralCode = localStorage.getItem('refCode') || '';
+        }
+        localStorage.setItem('refCode', referralCode);
+        if (localStorage.getItem('refCode')) {
+            this.setState({
+                refId: localStorage.getItem('refCode'),
+            })
+        }
         this.setState({
             refId: referralCode,
         });
@@ -94,6 +103,7 @@ class Referral extends React.Component<Props> {
         if (props.requireVerification) {
             props.history.push('/email-verification', { email: this.state.email });
         }
+        
         document.getElementsByTagName('html')![0].lang = this.props.currentLanguage;
     }
 
