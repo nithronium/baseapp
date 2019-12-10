@@ -1,3 +1,4 @@
+import { Button } from '@openware/components';
 import { History } from 'history';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -91,9 +92,11 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
                         <p>{this.translate('page.idenfy.please')}</p>
                         <p>{this.translate('page.idenfy.thanks')}</p>
                     </div>
-                    <span className="back-button" onClick={this.onBackButtonClick}>
-                        {this.translate('page.idenfy.understand')}
-                    </span>
+                    <Button
+                        className="back-button"
+                        onClick={this.onBackButtonClick}
+                        label={this.props.intl.formatMessage({ id: 'page.idenfy.understand' })}
+                    />
                 </div>
             </div>
         );
