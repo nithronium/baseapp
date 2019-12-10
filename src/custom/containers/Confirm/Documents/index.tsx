@@ -188,11 +188,6 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                         </div>
                     </div>
                 </div>
-                <div className="pg-confirm__content__questionnaire-label">
-                    {this.translate('page.body.kyc.documents.questionnaire.title.part1')}
-                    <span>&nbsp;{this.translate('page.body.kyc.documents.questionnaire.subtitle')}&nbsp;</span>
-                    {this.translate('page.body.kyc.documents.questionnaire.title.part2')}
-                </div>
                 <div className="pg-confirm__content-deep">
                     <Button
                         className="pg-confirm__content-phone-deep-button"
