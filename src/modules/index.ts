@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
 // tslint:disable-next-line no-submodule-imports
 import { all, call } from 'redux-saga/effects';
+import { OrderIEOState, PublicIEOState, rootIEOOrderSaga, rootPublicIEOSaga } from '../plugins/ieo/modules';
 import { publicReducer, userReducer } from './app';
 import { AlertState, rootHandleAlertSaga } from './public/alert';
 import { ColorThemeState } from './public/colorTheme';
@@ -16,6 +17,7 @@ import { ApiKeysState } from './user/apiKeys';
 import { rootApiKeysSaga } from './user/apiKeys/sagas';
 import { AuthState, rootAuthSaga } from './user/auth';
 import { BeneficiariesState, rootBeneficiariesSaga } from './user/beneficiaries';
+import { GeetestCaptchaState, rootGeetestCaptchaSaga } from './user/captcha';
 import { EmailVerificationState, rootEmailVerificationSaga } from './user/emailVerification';
 import { GuardState, rootGuardSaga } from './user/guard';
 import { HistoryState, rootHistorySaga } from './user/history';
@@ -36,8 +38,17 @@ import { rootWithdrawLimitSaga, WithdrawLimitState } from './user/withdrawLimit'
 import { ReferralCommissionState, rootReferralCommissionSaga } from '../custom/modules/referralCommission';
 import { ReferralOverallState, rootReferralTicketsSaga } from '../custom/modules/referralTickets';
 
-import { FeesState, rootFeesSaga } from '../custom/modules/fees';
+// import { FeesState, rootFeesSaga } from '../custom/modules/fees';
 
+import {
+    customUserReducer,
+    DataStorageState,
+    KycAuthState,
+    rootDataStorageSaga,
+    rootKycAuthSaga,
+} from '../custom/modules';
+
+export * from '../custom/modules';
 export * from './public/markets';
 export * from './public/orderBook';
 export * from './public/colorTheme';
@@ -48,6 +59,7 @@ export * from './public/alert';
 export * from './user/apiKeys';
 export * from './user/auth';
 export * from './user/beneficiaries';
+export * from './user/captcha';
 export * from './user/wallets';
 export * from './user/profile';
 export * from './user/openOrders';
@@ -78,7 +90,7 @@ export interface RootState {
         alerts: AlertState;
         kline: KlineState;
         rgl: GridLayoutState;
-        fees: FeesState;
+        ieo: PublicIEOState,
     };
     user: {
         auth: AuthState;
@@ -98,16 +110,23 @@ export interface RootState {
         ordersHistory: OrdersHistoryState;
         openOrders: OpenOrdersState;
         sendEmailVerification: EmailVerificationState;
+        captchaKeys: GeetestCaptchaState;
         withdrawLimit: WithdrawLimitState;
         guard: GuardState;
         referralTickets: ReferralOverallState;
         referralCommission: ReferralCommissionState;
+        ieo: OrderIEOState,
+    };
+    customUser: {
+        dataStorage: DataStorageState;
+        kycAuth: KycAuthState;
     };
 }
 
 export const rootReducer = combineReducers({
     public: publicReducer,
     user: userReducer,
+    customUser: customUserReducer,
 });
 
 export function* rootSaga() {
@@ -139,6 +158,11 @@ export function* rootSaga() {
         call(rootGuardSaga),
         call(rootReferralTicketsSaga),
         call(rootReferralCommissionSaga),
-        call(rootFeesSaga),
+        // call(rootFeesSaga),
+        call(rootDataStorageSaga),
+        call(rootKycAuthSaga),
+        call(rootIEOOrderSaga),
+        call(rootPublicIEOSaga),
+        call(rootGeetestCaptchaSaga),
     ]);
 }

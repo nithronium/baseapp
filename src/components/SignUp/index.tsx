@@ -47,6 +47,8 @@ interface SignUpFormProps {
     refIdFocused: boolean;
     emailFocused: boolean;
     passwordFocused: boolean;
+    geetestCaptcha?: JSX.Element;
+    geetestCaptchaSuccess: boolean;
 }
 
 class SignUpForm extends React.Component<SignUpFormProps> {
@@ -59,8 +61,6 @@ class SignUpForm extends React.Component<SignUpFormProps> {
             onSignIn,
             image,
             isLoading,
-            siteKey,
-            captchaType,
             labelSignIn,
             labelSignUp,
             emailLabel,
@@ -97,17 +97,6 @@ class SignUpForm extends React.Component<SignUpFormProps> {
                 <img className="cr-sign-up-form__image" src={image} alt="logo" />
             </h1>
         ) : null;
-        const termsLink = termsMessage ? (
-            <div className="cr-sign-up-form__terms-link">
-                {termsMessage.split(':')[0]} <a href="/terms">{termsMessage.split(':')[1]}</a>
-            </div>
-        ) : null;
-        const captcha =
-            hasConfirmed && captchaType !== 'none' ? (
-                <div className="cr-sign-up-form__recaptcha">
-                    <ReCAPTCHA sitekey={siteKey} onChange={this.props.recaptchaOnChange} />
-                </div>
-            ) : null;
 
         return (
             <form>
@@ -192,8 +181,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
                             label={''}
                             // label={termsMessage ? termsMessage : 'I  agree all statements in '}
                         />
-                        {termsLink}
-                        {captcha}
+                        {this.renderCaptcha()}
                         <div className="cr-sign-up-form__button-wrapper">
                             <Button
                                 type="submit"
@@ -209,13 +197,50 @@ class SignUpForm extends React.Component<SignUpFormProps> {
         );
     }
 
+    private renderCaptcha = () => {
+        const {
+            geetestCaptcha,
+            siteKey,
+            captchaType,
+            recaptchaOnChange,
+        } = this.props;
+        switch (captchaType) {
+            case 'recaptcha':
+                return (
+                    <div className="cr-sign-up-form__recaptcha">
+                        <ReCAPTCHA
+                            sitekey={siteKey}
+                            onChange={recaptchaOnChange}
+                        />
+                    </div>
+                );
+            case 'geetest':
+                return geetestCaptcha;
+            default:
+                return null;
+
+        }
+    }
+
     private disableButton = (): boolean => {
-        const { email, password, confirmPassword, hasConfirmed, recaptchaConfirmed, isLoading, captchaType } = this.props;
+        const {
+            email,
+            password,
+            confirmPassword,
+            hasConfirmed,
+            recaptchaConfirmed,
+            isLoading,
+            captchaType,
+            geetestCaptchaSuccess,
+        } = this.props;
 
         if (!hasConfirmed || isLoading || !email.match(EMAIL_REGEX) || !password || !confirmPassword) {
             return true;
         }
-        if (captchaType !== 'none' && !recaptchaConfirmed) {
+        if (captchaType === 'recaptcha' && !recaptchaConfirmed) {
+            return true;
+        }
+        if (captchaType === 'geetest' && !geetestCaptchaSuccess) {
             return true;
         }
         return false;

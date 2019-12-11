@@ -9,12 +9,12 @@ import {
 } from '../actions';
 
 const walletsWithdrawCcyOptions: RequestOptions = {
-    apiVersion: 'peatio',
+    apiVersion: 'applogic',
 };
 
 export function* walletsWithdrawCcySaga(action: WalletsWithdrawCcyFetch) {
     try {
-        yield call(API.post(walletsWithdrawCcyOptions), '/account/withdraws', action.payload);
+        yield call(API.post(walletsWithdrawCcyOptions), '/private/withdraws', action.payload);
         yield put(walletsWithdrawCcyData());
         yield put(alertPush({message: ['success.withdraw.action'], type: 'success'}));
     } catch (error) {

@@ -19,4 +19,7 @@ export interface Config {
     };
     msAlertDisplayTime?: string;
     licenseKey?: string;
+    incrementalOrderBook: boolean;
+    // tslint:disable-next-line: no-any
+    plugins: any[];
 }

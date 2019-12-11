@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import { alertReducer } from './public/alert';
-import { changeColorThemeReducer } from './public/colorTheme';
+import { ieoOrderReducer, publicIEOReducer } from '../plugins/ieo/modules';
+import { alertReducer  } from './public/alert';
+import { changeColorThemeReducer  } from './public/colorTheme';
 import { currenciesReducer } from './public/currencies';
 import { gridLayoutReducer } from './public/gridLayout/reducer';
 import { changeLanguageReducer } from './public/i18n';
@@ -10,8 +11,9 @@ import { depthReducer, orderBookReducer } from './public/orderBook';
 import { rangerReducer } from './public/ranger/reducer';
 import { recentTradesReducer } from './public/recentTrades';
 import { apiKeysReducer } from './user/apiKeys';
-import { authReducer } from './user/auth';
+import { authReducer  } from './user/auth';
 import { beneficiariesReducer } from './user/beneficiaries';
+import { getGeetestCaptchaReducer } from './user/captcha';
 import { sendEmailVerificationReducer } from './user/emailVerification';
 import { guardReducer } from './user/guard';
 import { historyReducer } from './user/history';
@@ -43,7 +45,7 @@ export const publicReducer = combineReducers({
     kline: klineReducer,
     alerts: alertReducer,
     rgl: gridLayoutReducer,
-    fees: feesReducer,
+    ieo: publicIEOReducer,
 });
 
 export const userReducer = combineReducers({
@@ -64,8 +66,10 @@ export const userReducer = combineReducers({
     ordersHistory: ordersHistoryReducer,
     openOrders: openOrdersReducer,
     sendEmailVerification: sendEmailVerificationReducer,
+    captchaKeys: getGeetestCaptchaReducer,
     withdrawLimit: withdrawLimitReducer,
     guard: guardReducer,
     referralTickets: referralTicketsReducer,
     referralCommission: referralCommissionReducer,
+    ieo: ieoOrderReducer,
 });

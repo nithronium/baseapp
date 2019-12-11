@@ -5,6 +5,7 @@ import {
     PROFILE_CHANGE_PASSWORD_ERROR,
     PROFILE_CHANGE_PASSWORD_FETCH,
     PROFILE_CHANGE_USER_LEVEL,
+    PROFILE_CHANGE_USER_PROFILE_DATA,
     PROFILE_ENABLE_USER_2FA,
     PROFILE_GENERATE_2FA_QRCODE_DATA,
     PROFILE_GENERATE_2FA_QRCODE_ERROR,
@@ -238,6 +239,14 @@ export const userReducer = (state: ProfileState['userData'], action: ProfileActi
                     level: action.payload.level,
                 },
             };
+        case PROFILE_CHANGE_USER_PROFILE_DATA:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    profile: action.payload,
+                },
+            };
         case PROFILE_ENABLE_USER_2FA:
             return {
                 ...state,
@@ -313,6 +322,7 @@ export const profileReducer = (state = initialStateProfile, action: ProfileActio
         case PROFILE_RESET_USER:
         case PROFILE_USER_ERROR:
         case PROFILE_CHANGE_USER_LEVEL:
+        case PROFILE_CHANGE_USER_PROFILE_DATA:
         case PROFILE_ENABLE_USER_2FA:
             const userState = { ...state.userData };
             return {

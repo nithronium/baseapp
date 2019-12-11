@@ -334,14 +334,17 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         } else {
             return (
                 <React.Fragment>
-                    <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
+                    <CurrencyInfo wallet={wallets[selectedWalletIndex]}/>
                     <DepositFiat
                         currency={currency.toLowerCase()}
                         title={this.title}
                         description={this.description}
                         details={this.details}
-                        uid={user.uid}
+                        uid={user ? user.uid : ''}
                     />
+                    <div className="fiat-alert">
+                        {this.translate('page.wallets.withdraw.fiat')}
+                    </div>
                     {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
                 </React.Fragment>
             );

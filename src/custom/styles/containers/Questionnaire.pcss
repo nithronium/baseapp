@@ -1,0 +1,258 @@
+.pg-questionnaire {
+  background-color: var(--base-bright);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-height: 100%;
+  margin-bottom: 50px;
+  width: 100%;
+
+  &__title {
+    align-items: center;
+    color: var(--color-white);
+    display: flex;
+    font-family: "Noto Sans SC";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: bold;
+    justify-content: center;
+    margin-top: 22px;
+    text-align: center;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    &__dropdown-item,
+    &__double-input-item,
+    &__textarea-item {
+      border-bottom: 1px solid var(--header-border);
+      padding: 22px 25px 21px 25px;
+
+      &__title {
+        color: var(--color-white);
+        font-family: "Noto Sans SC";
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        opacity: 0.5;
+      }
+    }
+
+    &__dropdown-item {
+      &__dropdown {
+        margin-top: 12px;
+
+        .cr-dropdown {
+          &__input, &__input--open {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--base-bright);
+            border: 1px solid var(--orders-border-color);
+            border-radius: calc(var(--gap) * 0.6);
+            color: var(--kyc-grey);
+            height: 49px;
+            margin-top: calc(var(--gap) * 1.3);
+            margin-right: 0;
+            width: 100%;
+
+            &:active {
+              background-color: var(--base-bright);
+            }
+          }
+
+          &__input {
+            &-label {
+              cursor: pointer;
+              text-shadow: 0 0 0 var(--kyc-grey);
+              font-size: 12px;
+              font-weight: var(--font-weight);
+              line-height: 49px;
+              margin-left: 13px;
+            }
+
+            &-icon {
+              cursor: pointer;
+              position: absolute;
+              line-height: 0;
+              margin-right: calc(var(--gap) * 3);
+            }
+          }
+
+          &__input--open {
+            color: var(--backhround-dropdown-text);
+            border-color: var(--color-blue);
+          }
+
+          &__list {
+            background-color: var(--background-dropdown);
+            border: 0px;
+            border-radius: 4px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.24), 0px 2px 8px rgba(0, 0, 0, 0.12);
+            color: var(--kyc-grey);
+            max-height: calc(var(--big-gap) * 1.6);
+            overflow-y: auto;
+            width: 100%;
+
+            &-item {
+              color: var(--kyc-grey);
+              cursor: pointer;
+
+              &-label {
+                font-size: 12px;
+                margin-left: 13px;
+              }
+
+              &:hover {
+                background-color: var(--background-dropdown-hover);
+                color: var(--background-dropdown-hover-text);
+              }
+            }
+
+            &::-webkit-scrollbar {
+              width: 3px;
+            }
+
+            &::-webkit-scrollbar-track {
+              background-color: transparent;
+              border-top-left-radius: 50%;
+              border-bottom-left-radius: 50%;
+            }
+
+            &::-webkit-scrollbar-thumb {
+              background-color: var(--color-white);
+            }
+          }
+        }
+      }
+    }
+
+    &__double-input-item {
+      &__fieldset {
+        color: var(--kyc-grey);
+        border-radius: 4px;
+        border: 1px solid var(--orders-border-color);
+        box-sizing: border-box;
+        height: 49px;
+        padding-left: 13px;
+        margin-top: 22px;
+        width: 100%;
+
+        legend {
+          background-color: var(--base-bright);
+          margin-top: -14px;
+          position: absolute;
+        }
+
+        &__input {
+          color: var(--color-white);
+          background: var(--transparent);
+          border: unset;
+          bottom: 0;
+          font-size: 12px;
+          margin-top: 11px;
+          width: 100%;
+
+          &::placeholder {
+            color: var(--text-muted);
+          }
+        }
+
+        &--focused {
+          border: 1px solid var(--accent) !important;
+
+          legend {
+            color: var(--accent) !important;
+          }
+        }
+
+        &--wrong {
+          border: 1px solid var(--red) !important;
+
+          legend {
+            color: var(--red) !important;
+          }
+        }
+      }
+    }
+
+    &__textarea-item {
+      border-bottom: none;
+      display: flex;
+      flex-direction: column;
+      width: 100;
+
+
+      legend {
+        background-color: var(--base-bright);
+        color: var(--kyc-grey);
+        font-family: "Noto Sans SC";
+        font-size: 12px;
+        font-style: normal;
+        font-weight: normal;
+        margin-left: 13px;
+        margin-top: 26px;
+        position: absolute;
+      }
+
+      &__textarea {
+        background: var(--transparent);
+        border-radius: 4px;
+        border: 1px solid var(--orders-border-color);
+        box-sizing: border-box;
+        color: var(--color-white);
+        font-family: "Noto Sans SC";
+        font-size: 12px;
+        font-style: normal;
+        font-weight: normal;
+        height: 112px;
+        margin-top: 22px;
+        outline: none;
+        padding-left: 13px;
+        padding-top: 11px;
+        width: 100%;
+
+        &::placeholder {
+          color: var(--text-muted);
+        }
+      }
+
+      &--focused {
+        legend {
+          color: var(--accent) !important;
+        }
+  
+        textarea {
+          border: 1px solid var(--accent) !important;
+        }
+      }
+
+      &--wrong {
+        legend {
+          color: var(--red) !important;
+        }
+  
+        textarea {
+          border: 1px solid var(--red) !important;
+        }
+      }
+    }
+  }
+
+  &__button {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    padding: 22px 25px 21px 25px;
+    width: 100%;
+
+    &__item {
+      color: var(--color-white);
+      margin: 0;
+    }
+  }
+}

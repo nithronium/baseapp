@@ -1,4 +1,5 @@
 import { en as customTranslations } from '../custom/translations/en';
+import { en as pluginsTranslations } from '../plugins/translations/en';
 import { nationalitiesNames } from './nationalities';
 
 export const en = {
@@ -7,6 +8,7 @@ export const en = {
     'page.header.navbar.wallets': 'Wallets',
     'page.header.navbar.openOrders': 'Orders',
     'page.header.navbar.history': 'History',
+    'page.header.navbar.ieo': 'IEO',
 
     'page.header.navbar.profile': 'Profile',
     'page.header.navbar.refprogram': 'Referral program',
@@ -110,9 +112,9 @@ export const en = {
     'page.body.wallets.tabs.withdraw.content.enable2fa': 'To withdraw you have to enable 2FA',
     'page.body.wallets.tabs.withdraw.content.enable2faButton': 'Enable 2FA',
 
-    'success.beneficiaries.created': 'Beneficiaries: successfully created',
-    'success.beneficiaries.activated': 'Beneficiaries: successfully activated',
-    'success.beneficiaries.deleted': 'Beneficiaries: successfully deleted',
+    'success.beneficiaries.created': 'Beficiaries: successfully created',
+    'success.beneficiaries.activated': 'Beficiaries: successfully activated',
+    'success.beneficiaries.deleted': 'Beficiaries: successfully deleted',
 
     'page.body.wallets.whitelist.title': 'Withdraw address',
     'page.body.wallets.whitelist.fiat.title': 'Withdrawal details',
@@ -141,11 +143,11 @@ export const en = {
     'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankName': 'Intermediary Bank Name (optional)',
     'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankSwiftCode': 'Intermediary Bank Swift Code (optional)',
 
+
     'page.body.wallets.whitelist.addAddressModal.body.button': 'submit for confirmation',
 
     'page.body.wallets.whitelist.confirmationModal.header': 'Confirm new address',
-    'page.body.wallets.whitelist.confirmationModal.body.text':
-        'We have sent you an email containing a confirmation code pin, please enter it below to save the new address:',
+    'page.body.wallets.whitelist.confirmationModal.body.text': 'We have sent you an email containing a confirmation code pin, please enter it below to save the new address:',
     'page.body.wallets.whitelist.confirmationModal.body.confirmationModalCode': 'Pin code',
     'page.body.wallets.whitelist.confirmationModal.body.button': 'confirm',
 
@@ -639,4 +641,5 @@ export const en = {
 
     ...nationalitiesNames,
     ...customTranslations,
+    ...pluginsTranslations,
 };

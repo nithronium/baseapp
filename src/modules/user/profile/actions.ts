@@ -4,6 +4,7 @@ import {
     PROFILE_CHANGE_PASSWORD_ERROR,
     PROFILE_CHANGE_PASSWORD_FETCH,
     PROFILE_CHANGE_USER_LEVEL,
+    PROFILE_CHANGE_USER_PROFILE_DATA,
     PROFILE_ENABLE_USER_2FA,
     PROFILE_GENERATE_2FA_QRCODE_DATA,
     PROFILE_GENERATE_2FA_QRCODE_ERROR,
@@ -158,6 +159,11 @@ export interface ChangeUserLevel {
     };
 }
 
+export interface ChangeUserProfileData {
+    type: typeof PROFILE_CHANGE_USER_PROFILE_DATA;
+    payload: ProfileIdentity;
+}
+
 export interface ProfileIdentityFetch {
     type: typeof PROFILE_IDENTITY_FETCH;
 }
@@ -196,6 +202,7 @@ export type ProfileAction =
     | UserReset
     | TestProfileState
     | ChangeUserLevel
+    | ChangeUserProfileData
     | EnableUser2fa
     | ProfileIdentityFetch
     | ProfileIdentityInfo
@@ -283,6 +290,12 @@ export const userReset = (): UserReset => ({
 export const changeUserLevel =
     (payload: ChangeUserLevel['payload']): ChangeUserLevel => ({
         type: PROFILE_CHANGE_USER_LEVEL,
+        payload,
+    });
+
+export const changeUserProfileData =
+    (payload: ChangeUserProfileData['payload']): ChangeUserProfileData => ({
+        type: PROFILE_CHANGE_USER_PROFILE_DATA,
         payload,
     });
 
