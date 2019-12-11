@@ -31,7 +31,7 @@ import { withdrawLimitReducer } from './user/withdrawLimit';
 import { referralCommissionReducer } from '../custom/modules/referralCommission';
 import { referralTicketsReducer } from '../custom/modules/referralTickets';
 
-import { feesReducer } from '../custom/modules/fees';
+// import { feesReducer } from '../custom/modules/fees';
 
 export const publicReducer = combineReducers({
     colorTheme: changeColorThemeReducer,

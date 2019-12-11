@@ -1,3 +1,4 @@
+//tslint:disable
 import { Loader } from '@openware/components';
 import classnames from 'classnames';
 import { History } from 'history';
@@ -30,7 +31,7 @@ import {
     userFetch,
     walletsReset,
 } from '../../modules';
-import { renderPluginsRoutes } from '../../plugins/routes';
+// import { renderPluginsRoutes } from '../../plugins/routes';
 import {
     ChangeForgottenPasswordScreen,
     EmailVerificationScreen,
@@ -64,10 +65,10 @@ interface OwnProps {
     history: History;
 }
 
-interface State {
-    diplayKYCLoginModal: boolean;
-    prevRouteCheck: boolean;
-}
+// interface State {
+//     diplayKYCLoginModal: boolean;
+//     prevRouteCheck: boolean;
+// }
 export type LayoutProps = ReduxProps & DispatchProps & OwnProps;
 
 const renderLoader = () => (

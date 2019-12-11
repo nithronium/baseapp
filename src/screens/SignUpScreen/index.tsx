@@ -31,6 +31,7 @@ import {
     signUp,
 } from '../../modules';
 
+import { GeetestCaptcha } from '../../containers';
 interface ReduxProps {
     requireVerification?: boolean;
     loading?: boolean;

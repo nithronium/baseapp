@@ -74,6 +74,7 @@ class Referral extends React.Component<Props> {
         passwordFocused: false,
         confirmPasswordFocused: false,
         refIdFocused: false,
+        geetestCaptchaSuccess: false,
     };
 
     public componentDidMount() {
@@ -123,6 +124,7 @@ class Referral extends React.Component<Props> {
             passwordFocused,
             confirmPasswordFocused,
             refIdFocused,
+            geetestCaptchaSuccess,
         } = this.state;
         const { loading, currentLanguage } = this.props;
 
@@ -172,6 +174,7 @@ class Referral extends React.Component<Props> {
                         handleFocusPassword={this.handleFocusPassword}
                         handleFocusConfirmPassword={this.handleFocusConfirmPassword}
                         handleFocusRefId={this.handleFocusRefId}
+                        geetestCaptchaSuccess={geetestCaptchaSuccess}
                     />
                     <Modal
                         show={this.state.showModal}

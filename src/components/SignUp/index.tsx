@@ -67,7 +67,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
             passwordLabel,
             confirmPasswordLabel,
             referalCodeLabel,
-            termsMessage,
+            // termsMessage,
             hasConfirmed,
             emailError,
             passwordError,
