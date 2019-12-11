@@ -20,6 +20,7 @@ const defaults: LayoutProps = {
     userFetch: jest.fn(),
     walletsReset: jest.fn(),
     history: createBrowserHistory(),
+    changeLanguage: jest.fn(),
 };
 
 const setup = (props: Partial<LayoutProps> = {}) =>
