@@ -158,7 +158,7 @@ class ChangeForgottenPasswordComponent extends React.Component<Props, ChangeForg
                                         onClick={this.handleSendNewPassword}
                                         size="lg"
                                         variant="primary"
-                                        type="submit"
+                                        type="button"
                                     />
                                 </div>
                             </div>
