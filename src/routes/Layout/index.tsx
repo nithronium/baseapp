@@ -14,6 +14,7 @@ import {
 } from '../../custom/screens';
 import { toggleColorTheme } from '../../helpers';
 import {
+    changeLanguage,
     logoutFetch,
     Market,
     RootState,
@@ -55,6 +56,7 @@ interface DispatchProps {
     logout: typeof logoutFetch;
     userFetch: typeof userFetch;
     walletsReset: typeof walletsReset;
+    changeLanguage: typeof changeLanguage;
 }
 
 interface OwnProps {
@@ -118,11 +120,19 @@ class LayoutComponent extends React.Component<LayoutProps> {
         super(props);
         this.initListener();
     }
-
+//tslint:disable
     public componentDidMount() {
         this.props.userFetch();
         this.initInterval();
         this.check();
+        if (this.props.history.location.pathname.includes('/ru/') && this.props.currentLanguage.toLowerCase() === 'en') {
+            this.props.changeLanguage('ru');  
+            this.props.history.replace(this.props.history.location.pathname);
+        } else if ( !this.props.history.location.pathname.includes('/ru/') && this.props.currentLanguage.toLowerCase() === 'ru') {
+            this.props.changeLanguage('en');
+            this.props.history.replace(this.props.history.location.pathname);
+        } 
+
     }
 
     public componentDidUpdate(next: LayoutProps) {
@@ -131,6 +141,8 @@ class LayoutComponent extends React.Component<LayoutProps> {
             isLoggedIn,
             history,
         } = this.props;
+                  
+     
         const siteState = localStorage.getItem('uil');
 
         if (isLoggedIn && !siteState) {
@@ -179,39 +191,40 @@ class LayoutComponent extends React.Component<LayoutProps> {
         return (
             <div className="container-fluid pg-layout">
                 <Switch>
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/signin', currentLanguage)} component={SignInScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/signin'} component={SignInScreen} currentLanguage={currentLanguage} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/signin'} component={SignInScreen} currentLanguage={currentLanguage} />
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/accounts/confirmation', currentLanguage)} component={VerificationScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/accounts/confirmation'} component={VerificationScreen} currentLanguage={currentLanguage} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/accounts/confirmation'} component={VerificationScreen} currentLanguage={currentLanguage} />
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/signup', currentLanguage)} component={SignUpScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/signup'} component={SignUpScreen} currentLanguage={currentLanguage} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/signup'} component={SignUpScreen} currentLanguage={currentLanguage} />
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/forgot_password', currentLanguage)} component={ForgotPasswordScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/forgot_password'} component={ForgotPasswordScreen} currentLanguage={currentLanguage} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/forgot_password'} component={ForgotPasswordScreen} currentLanguage={currentLanguage} />
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/accounts/password_reset', currentLanguage)} component={ChangeForgottenPasswordScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/accounts/password_reset'} component={ChangeForgottenPasswordScreen} currentLanguage={currentLanguage} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/accounts/password_reset'} component={ChangeForgottenPasswordScreen} currentLanguage={currentLanguage} />
-                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/email-verification', currentLanguage)} component={EmailVerificationScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/email-verification'} component={EmailVerificationScreen} currentLanguage={currentLanguage} />
                     <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/email-verification'} component={EmailVerificationScreen} currentLanguage={currentLanguage} />
-                    <Route loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral', currentLanguage)} component={ReferralScreen} />
+                    {/* <Route loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral', currentLanguage)} component={ReferralScreen} /> */}
                     <Route loading={userLoading} isLogged={isLoggedIn} path={'/ru/referral'} component={ReferralScreen} />
-                    <Route exact={true} path={buildPath('/trading/:market?', currentLanguage)} component={TradingScreen} />
-                    <Route exact={true} path={buildPath('/ru/trading/:market?', currentLanguage)} component={TradingScreen} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/orders', currentLanguage)} component={OrdersTabScreen} currentLanguage={currentLanguage} />
+                    <Route loading={userLoading} isLogged={isLoggedIn} path={'/referral'} component={ReferralScreen} />
+                    <Route exact={true} path={'/trading/:market?'} component={TradingScreen} />
+                    <Route exact={true} path={'/ru/trading/:market?'} component={TradingScreen} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/orders'} component={OrdersTabScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/orders'} component={OrdersTabScreen} currentLanguage={currentLanguage} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/history', currentLanguage)} component={HistoryScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/history'} component={HistoryScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/history'} component={HistoryScreen} currentLanguage={currentLanguage} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/confirm', currentLanguage)} component={ConfirmScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/confirm'} component={ConfirmScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/confirm'} component={ConfirmScreen} currentLanguage={currentLanguage} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/profile', currentLanguage)} component={ProfileScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/profile'} component={ProfileScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/profile'} component={ProfileScreen} currentLanguage={currentLanguage} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/wallets', currentLanguage)} component={WalletsScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/wallets'} component={WalletsScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/wallets'} component={WalletsScreen} currentLanguage={currentLanguage} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/security/2fa', currentLanguage)} component={ProfileTwoFactorAuthScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/security/2fa'} component={ProfileTwoFactorAuthScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/security/2fa'} component={ProfileTwoFactorAuthScreen} currentLanguage={currentLanguage} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral-tickets', currentLanguage)} component={ReferralTicketsScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/referral-tickets'} component={ReferralTicketsScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/referral-tickets'} component={ReferralTicketsScreen} currentLanguage={currentLanguage} />
-                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral-commission', currentLanguage)} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/referral-commission'} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/referral-commission'} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
-                    <Route path="**"><Redirect to={buildPath('/trading/', currentLanguage)} /></Route>
+                    <Route path="**"><Redirect to={'/trading/'} /></Route>
                     <Route path="**"><Redirect to={'/ru/trading/'} /></Route>
                 </Switch>
             </div>
@@ -273,6 +286,7 @@ const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
     logout: () => dispatch(logoutFetch()),
     userFetch: () => dispatch(userFetch()),
     walletsReset: () => dispatch(walletsReset()),
+    changeLanguage: payload => dispatch(changeLanguage(payload)),
 });
 
 // tslint:disable no-any

@@ -5,7 +5,6 @@ import { injectIntl } from 'react-intl';
 
 const Button = props => {
     const animateButton = e => {
-        console.log(e.target);
         const el = e.target;
         el!.classList.remove('animate');
         el!.classList.add('animate');

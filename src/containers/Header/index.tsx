@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import logo = require('../../assets/images/logo.svg');
 
 import logoLight = require('../../assets/images/logoLight.svg');
-import { buildPath } from '../../custom/helpers';
+// import { buildPath } from '../../custom/helpers';
 import {
   RootState,
   selectCurrentColorTheme,
@@ -49,7 +49,7 @@ class Head extends React.Component<any, HeaderState> {
         const { isActive } = this.state;
         const baseURL = window.document.location.origin;
         // tslint:disable-next-line: no-console
-        console.log(buildPath(baseURL, currentLanguage));
+        // console.log(buildPath(baseURL, currentLanguage));
         return (
             <React.Fragment>
                 {!['/confirm'].some(r => location.pathname.includes(r)) && (
