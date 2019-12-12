@@ -1,6 +1,6 @@
 import { History } from 'history';
 import * as React from 'react';
-import CookieConsent from 'react-cookie-consent';
+// import CookieConsent from 'react-cookie-consent';
 import { IntlProvider } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { Router } from 'react-router';
@@ -81,13 +81,13 @@ class AppLayout extends React.Component<Props, {}, {}> {
                 >
                     <Router history={history}>
                         <ErrorWrapper>
-                            <CookieConsent
-                                buttonText="Got it!"
-                                contentClasses="cookie-consent__content"
-                                buttonClasses="cookie-consent__button"
-                            >
-                                <span>The exchange is in alpha testing mode. Exchange operation is limited.</span>
-                            </CookieConsent>
+                            {/* <CookieConsent */}
+                                {/* buttonText="Got it!" */}
+                                {/* contentClasses="cookie-consent__content" */}
+                                {/* buttonClasses="cookie-consent__button" */}
+                            {/* > */}
+                                {/* <span>The exchange is in alpha testing mode. Exchange operation is limited.</span> */}
+                            {/* </CookieConsent> */}
                             <Header/>
                             <Alerts/>
                             <Layout/>
