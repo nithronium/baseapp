@@ -31,7 +31,7 @@ import {
     userFetch,
     walletsReset,
 } from '../../modules';
-// import { renderPluginsRoutes } from '../../plugins/routes';
+import { renderPluginsRoutes } from '../../plugins/routes';
 import {
     ChangeForgottenPasswordScreen,
     EmailVerificationScreen,
@@ -245,6 +245,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/referral-tickets'} component={ReferralTicketsScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral-commission', currentLanguage)} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/referral-commission'} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
+                    {renderPluginsRoutes()}
                     <Route path="**"><Redirect to={buildPath('/trading/', currentLanguage)} /></Route>
                     <Route path="**"><Redirect to={'/ru/trading/'} /></Route>
                 </Switch>
