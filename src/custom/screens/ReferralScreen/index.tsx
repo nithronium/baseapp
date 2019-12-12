@@ -16,7 +16,7 @@ import {
     ERROR_INVALID_PASSWORD,
     ERROR_PASSWORD_CONFIRMATION,
     PASSWORD_REGEX,
-    setDocumentTitle,
+    // setDocumentTitle,
 } from '../../../helpers';
 import {
     referralTicketsFetch,
@@ -79,7 +79,8 @@ class Referral extends React.Component<Props> {
 
     public componentDidMount() {
 
-        setDocumentTitle('Referral');
+        const lang = this.props.location.pathname.includes('/ru/') ? 'ru' : 'en';
+        localStorage.setItem('lang_code', lang);
         let referralCode = this.extractRefID(this.props.location.search) || '';
         if (localStorage.getItem('refCode')) {
             referralCode = localStorage.getItem('refCode') || '';
