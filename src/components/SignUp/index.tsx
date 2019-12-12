@@ -261,6 +261,7 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
         if (e) {
             e.preventDefault();
         }
+
         if (!this.isValidForm()) {
             this.props.validateForm();
         } else {

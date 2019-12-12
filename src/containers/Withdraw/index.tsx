@@ -1,5 +1,4 @@
 // tslint:disable:jsx-no-lambda
-import { Input } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
@@ -158,17 +157,14 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
                     </div>
                     <div className="cr-withdraw__divider cr-withdraw__divider-one" />
                     <div className={withdrawAmountClass}>
-                        <label className="cr-withdraw__label">
-                            {(amount || Number(amount) >=0) && withdrawAmountLabel}
-                        </label>
-                        <Input
-                            type="text"
-                            value={amount}
-                            placeholder={withdrawAmountLabel}
-                            className="cr-withdraw__input"
-                            onFocus={() => this.handleFieldFocus('amount')}
-                            onBlur={() => this.handleFieldFocus('amount')}
-                            onChangeValue={type === 'fiat' ? this.handleChangeInputAmountFiat : this.handleChangeInputAmountCoin}
+                        <CustomInput
+                            type="number"
+                            label={withdrawAmountLabel || 'Withdrawal Amount'}
+                            defaultLabel="Withdrawal Amount"
+                            inputValue={amount.toString()}
+                            placeholder={withdrawAmountLabel || 'Amount'}
+                            classNameInput="cr-withdraw__input"
+                            handleChangeInput={this.handleChangeInputAmountFiat}
                         />
                         {inputError && <div className={"fiat-alert"}>{inputErrorText}</div>}
                     </div>
@@ -179,29 +175,14 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
                             <label className="cr-withdraw__label">
                                 {withdrawReceiveLabel}
                             </label>
-                            <Input
-                                type="text"
-                                value={(+amount - fee) > 0 ? this.trueFixed((+amount - fee).toFixed(fixed)) : 0}
-                                placeholder={withdrawReceiveLabel}
-                                className="cr-withdraw__input"
-                                onFocus={() => {}}
-                                onBlur={() => {}}
-                                onChangeValue={() => {}}
-                            />
+                            &nbsp;<span className="cr-withdraw__input">{(+amount - fee) > 0 ? this.trueFixed((+amount - fee).toFixed(fixed)) : 0}</span>
                             <div className="cr-withdraw__group__close" />
                         </div>
                         <div className={withdrawTransactionClass}>
                             <label className="cr-withdraw__label">
                                 {withdrawTransactionLabel}
                             </label>
-                            <Input
-                                type="text"
-                                value={fee}
-                                className="cr-withdraw__input"
-                                onFocus={() => {}}
-                                onBlur={() => {}}
-                                onChangeValue={() => {}}
-                            />
+                            &nbsp;<span className="cr-withdraw__input">{fee}</span>
                             <div className="cr-withdraw__group__close" />
                         </div>
                     </React.Fragment> }
@@ -316,23 +297,23 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
         }
     };
 
-    private handleChangeInputAmountCoin = (text: string) => {
-        const { fixed, fee } = this.props;
-        const reg = /^-?\d*[.]?\d*$/;
-        const _text = text.split(',').join('.');
-        if (reg.test(_text)) {
-            const value = (text !== '') ? Number(parseFloat(_text[_text.length - 1] === ',' ? _text.slice(0, -1) : _text).toFixed(fixed)) : 0;
-            const total = (value - fee) || 0;
-            if (total <= fee && (value < (fee * 2))) {
-                this.setTotal(fee);
-                this.setState({inputError: true});
-            } else {
-                this.setTotal(total);
-                this.setState({inputError: false});
-            }
-            this.setState({ amount: _text});
-        }
-    };
+    // private handleChangeInputAmountCoin = (text: string) => {
+    //     const { fixed, fee } = this.props;
+    //     const reg = /^-?\d*[.]?\d*$/;
+    //     const _text = text.split(',').join('.');
+    //     if (reg.test(_text)) {
+    //         const value = (text !== '') ? Number(parseFloat(_text[_text.length - 1] === ',' ? _text.slice(0, -1) : _text).toFixed(fixed)) : 0;
+    //         const total = (value - fee) || 0;
+    //         if (total <= fee && (value < (fee * 2))) {
+    //             this.setTotal(fee);
+    //             this.setState({inputError: true});
+    //         } else {
+    //             this.setTotal(total);
+    //             this.setState({inputError: false});
+    //         }
+    //         this.setState({ amount: _text});
+    //     }
+    // };
 
     private handleChangeInputAmountFiat = (text: string) => {
         const { fixed } = this.props;
@@ -346,9 +327,9 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
         this.setState({ amount: value });
     };
 
-    private setTotal = (value: number) => {
-        this.setState({ total: value });
-    };
+    // private setTotal = (value: number) => {
+    //     this.setState({ total: value });
+    // };
 
     private handleChangeBeneficiary = (value: Beneficiary) => {
         this.setState({
