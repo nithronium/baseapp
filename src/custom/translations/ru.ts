@@ -774,14 +774,31 @@ export const ru: LangType = {
 
     'server.internal_error': 'Внутренняя ошибка сервера',
 
+    'page.body.wallets.tabs.deposit.fiat.button.wire': "Банковский перевод",
+    'page.body.wallets.tabs.deposit.fiat.button.card': "Банковская карта",
+    'page.body.wallets.tabs.deposit.fiat.button.sepa': 'SEPA перевод',
+    'page.body.wallets.tabs.deposit.fiat.button.swift': 'EUR SWIFT',
+    'cardDepositFiat.detail': 'Детали платежа',
+    'cardDepositFiat.amount': 'Количество',
+    'cardDepositFiat.currency': 'Валюта',
+    'cardDepositFiat.button.payment': 'ОПЛАТИТЬ',
+    'cardDepositFiat.button.cancel': 'Отмена',
+
     'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Валюта депозита :',
     'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN :',
     'page.body.wallets.tabs.deposit.fiat.usd.iban': 'IBAN :',
-    'page.body.wallets.tabs.deposit.fiat.eur.iban': 'SEPA IBAN :',
+    'page.body.wallets.tabs.deposit.fiat.eur.iban': 'IBAN :',
     'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Адрес банка :',
     'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Банковский SWIFT :',
     'page.body.wallets.tabs.deposit.fiat.message3':
         'Пожалуйста, ВСЕГДА указывайте ссылочный код во время банковского перевода, в противном случае внесение средств займет больше времени.',
+    
+        'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepa.value': 'EUR',
+        'page.body.wallets.tabs.deposit.fiat.sepa.value': 'MT45PHPY270070PHOENIX0000000013',
+        'page.body.wallets.tabs.deposit.fiat.bankName.sepa.value': 'PHOENIX PAYMENTS LTD',
+        'page.body.wallets.tabs.deposit.fiat.bankAddress.sepa.value': 'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepa.value': 'PHPYMTM1XXX',
+    'page.body.wallets.tabs.deposit.fiat.eur.sepa': 'SEPA',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.usd.value': 'USD',
     'page.body.wallets.tabs.deposit.fiat.iban.usd.value': 'AE 240570000011101251020',
@@ -792,10 +809,10 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.minimal.usd.value': '50 USD',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.eur.value': 'EUR',
-    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'MT24PHPY270070PHOENIX0000884546',
-    'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'PHOENIX PAYMENTS LTD',
-    'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': 'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
-    'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'PHPYMTM1XXX',
+    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'LU076131712217214160',
+    'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'ONPEX S.A.',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': '59 Boulevard Royal, 2449 Luxembourg',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'ONPXLULM',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text': 'Минимальный депозит ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': '50 EUR',
     'refcode.code_owner_not_found': 'Владелец кода не найден',

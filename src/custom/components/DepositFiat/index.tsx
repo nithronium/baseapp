@@ -8,10 +8,11 @@ interface DepositFiatProps {
     details: string;
     title: string;
     uid: string;
+    sepa?: boolean;
 }
 
 
-const bankData = (uid, currency) => [
+const bankDataIBAN = (uid, currency) => [
     {
         key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.depositCurrency" />,
         value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.depositCurrency.${currency && `${currency}.`}value`} />,
@@ -38,6 +39,33 @@ const bankData = (uid, currency) => [
     },
 ];
 
+const bankDataSEPA = uid => [
+    {
+        key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.depositCurrency" />,
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.depositCurrency.sepa.value`} />,
+    },
+    {
+        key: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.eur.sepa`} />,
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.sepa.value`} />,
+    },
+    {
+        key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.bankName" />,
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.bankName.sepa.value`} />,
+    },
+    {
+        key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.bankAddress" />,
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.bankAddress.sepa.value`} />,
+    },
+    {
+        key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.bankSwift" />,
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.bankSwift.sepa.value`} />,
+    },
+    {
+        key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.referenceCode"/>,
+        value: uid,
+    },
+];
+
 
 const minimal1 = currency => <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.minimal.${currency && `${currency}.`}text`} />;
 
@@ -54,7 +82,9 @@ const DepositFiat: React.FunctionComponent<DepositFiatProps> = (props: DepositFi
         details,
         title,
         uid,
+        sepa,
     } = props;
+    const bankData = sepa ? bankDataSEPA : bankDataIBAN;
 
     const renderDetails = (detail, index: number) => {
         return (
