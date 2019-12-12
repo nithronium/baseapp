@@ -136,6 +136,9 @@ export const en = {
   'cardDepositFiat.button.payment': 'PROCESS PAYMENT',
   'cardDepositFiat.button.cancel': 'Cancel',
 
+  'page.body.wallets.tabs.deposit.fiat.levelMessage': 'Verification level 2 is required in order to access the option of balance top up via credit or debit card.',
+  'page.body.wallets.tabs.deposit.fiat.levelLink': 'Please upgrade your verification level',
+
   'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepa.value': 'EUR',
   'page.body.wallets.tabs.deposit.fiat.sepa.value': 'MT45PHPY270070PHOENIX0000000013',
   'page.body.wallets.tabs.deposit.fiat.bankName.sepa.value': 'PHOENIX PAYMENTS LTD',

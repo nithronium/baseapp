@@ -85,7 +85,7 @@ const CardDepositFiat = (props: CardDepositFiatProps) => {
             currency: currency,
             amount: amount
         };
-        console.log(body);
+        // console.log(body);
         initPayin(body).then(data => {
             setInitURL(data.url);
             setIFrame(!iFrame);

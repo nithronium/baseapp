@@ -784,6 +784,9 @@ export const ru: LangType = {
     'cardDepositFiat.button.payment': 'ОПЛАТИТЬ',
     'cardDepositFiat.button.cancel': 'Отмена',
 
+    'page.body.wallets.tabs.deposit.fiat.levelMessage': 'Verification level 2 is required in order to access the option of balance top up via credit or debit card.',
+  'page.body.wallets.tabs.deposit.fiat.levelLink': 'Please upgrade your verification level',
+
     'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Валюта депозита :',
     'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN :',
     'page.body.wallets.tabs.deposit.fiat.usd.iban': 'IBAN :',

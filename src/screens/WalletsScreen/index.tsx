@@ -121,17 +121,20 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         };
     }
 
-    //tslint:disable member-ordering
+    //tslint:disable
     public translate = (id: string) => this.props.intl.formatMessage({ id });
 
     private title = this.translate('page.body.wallets.tabs.deposit.fiat.message1');
     private description = this.translate('page.body.wallets.tabs.deposit.fiat.message2');
     private details = this.translate('page.body.wallets.tabs.deposit.fiat.message3');
+    
 
     public componentDidMount() {
         setDocumentTitle('Wallets');
         const { wallets, fetchAddress } = this.props;
         const { selectedWalletIndex } = this.state;
+
+        
 
         if (this.props.wallets.length === 0) {
             this.props.fetchWallets();
@@ -312,6 +315,8 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     };
 
     private renderDeposit = () => {
+        const levelMessage = this.translate('page.body.wallets.tabs.deposit.fiat.levelMessage');
+        const levelLink = this.translate('page.body.wallets.tabs.deposit.fiat.levelLink');
         const { addressDepositError, wallets, user, selectedWalletAddress } = this.props;
         const { selectedWalletIndex, cardDeposit, sepa } = this.state;
         const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
@@ -372,7 +377,12 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                             color: this.state.cardDeposit ?  '#FFFFFF' :'#FFFFFF33'
                         }} onClick={() => this.setState({ cardDeposit: true, sepa: false, wire: false })}>{this.translate('page.body.wallets.tabs.deposit.fiat.button.card')}</div>
                     </div>
-                    {cardDeposit ? <CardDepositFiat currency={currency.toUpperCase()} translate={this.translate} /> : 
+                    {cardDeposit ?
+                        (this.props.user.level > 1 ? <CardDepositFiat currency={currency.toUpperCase()} translate={this.translate} /> : 
+                            <div style={{padding: '10px 20px', color: 'red', fontSize: '20px'}}> 
+                                <p>{levelMessage}</p>
+                                <p><a href="/confirm">{levelLink}</a></p>
+                        </div> ) : 
                         sepa ? 
                         <div>
                         <CurrencyInfo wallet={wallets[selectedWalletIndex]} />

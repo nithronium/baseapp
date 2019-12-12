@@ -105,11 +105,11 @@ export const getOverall = async() => {
     return res.data;
 }
 
-// const paytoolsAPI = `${window.document.location.origin}/api/v2/paytools_api/private/initPayin`;
+const paytoolsAPI = `${window.document.location.origin}/api/v2/paytools_api/private/initPayin`;
 
 export const initPayin = async(body) => {
-    // const res = await axios.post(paytoolsAPI, body);
-    console.log(body);
-    const res = { data: { url: 'http://127.0.0.1:5500/ptform.html' } };
+    const res = await axios.post(paytoolsAPI, body);
+    // console.log(body);
+    // const res = { data: { url: 'http://127.0.0.1:5500/ptform.html' } };
     return res.data;
 }
