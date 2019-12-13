@@ -301,6 +301,7 @@ export const ru: LangType = {
     'page.body.profile.header.account.profile.knowMore': 'Know more about verification levels',
 
     'page.body.profile.header.referralProgram': 'Реферальная программа',
+    'page.body.profile.header.referralProgramIEO': 'Программа IEO',
     'page.body.profile.content.copyLink': 'Копир.',
 
     'page.body.profile.apiKeys.header': 'Мои API ключи',

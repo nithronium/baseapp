@@ -28,6 +28,7 @@ const copy = (id: string) => {
     }
 };
 
+
 type Props = ReduxProps & DispatchProps & InjectedIntlProps;
 //tslint:disable
 class ReferralProgramClass extends React.Component<Props> {
@@ -45,6 +46,11 @@ class ReferralProgramClass extends React.Component<Props> {
 
     public doCopy = () => {
         copy('referral-id');
+        this.props.fetchSuccess({ message: ['page.body.wallets.tabs.deposit.ccy.message.success'], type: 'success' });
+    };
+
+    public doCopyIEO = () => {
+        copy('referral-IEO-id');
         this.props.fetchSuccess({ message: ['page.body.wallets.tabs.deposit.ccy.message.success'], type: 'success' });
     };
 
@@ -90,20 +96,35 @@ class ReferralProgramClass extends React.Component<Props> {
         const { refId, userRefUid } = this.state;
         // tslint:disable
         const referralLink = `${window.document.location.origin}/referral?refid=${user.uid}`;
+        const referralLinkIEO = `https://connect.emirex.com/ieo?emirex_referral_code=${user.uid}`;
         return (
             <div className="pg-profile-page__referral mb-3">
                 {userRefUid ? (
-                    <fieldset className="pg-copyable-text__section" onClick={this.doCopy}>
+                    <React.Fragment>
+                    <fieldset className="pg-copyable-text__section" onClick={this.doCopyIEO}>
                         <legend className="cr-deposit-crypto__copyable-title">
-                            <FormattedMessage id="page.body.profile.header.referralProgram" />
+                            <FormattedMessage id="page.body.profile.header.referralProgramIEO"/>
                         </legend>
                         <CopyableTextField
                             className="pg-copyable-text-field__input"
-                            value={referralLink}
-                            fieldId="referral-id"
+                            value={referralLinkIEO}
+                            fieldId="referral-IEO-id"
                             copyButtonText={this.translate('page.body.profile.content.copyLink')}
                         />
-                    </fieldset>
+                        </fieldset>
+                        <div style={{ padding: '5px 0' }} />
+                        <fieldset className="pg-copyable-text__section" onClick={this.doCopy}>
+                    <legend className="cr-deposit-crypto__copyable-title">
+                        <FormattedMessage id="page.body.profile.header.referralProgram" />
+                    </legend>
+                    <CopyableTextField
+                        className="pg-copyable-text-field__input"
+                        value={referralLink}
+                        fieldId="referral-id"
+                        copyButtonText={this.translate('page.body.profile.content.copyLink')}
+                    />
+                        </fieldset>
+                        </React.Fragment>
                 ) : (
                     <div className="ref-code-input-field">
                             <div className="ref-code-input-field-link">

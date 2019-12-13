@@ -261,6 +261,7 @@ export const en = {
     'page.body.profile.header.account.profile.identity.message': 'Withdrawal allowed',
 
     'page.body.profile.header.referralProgram': 'Referral Link',
+    'page.body.profile.header.referralProgramIEO': 'IEO programm',
     'page.body.profile.content.copyLink': 'Copy',
     'page.body.profile.refcode.input.placeholder': 'Enter an Existing Referral Code',
     'page.body.profile.refcode.how': 'How to find an Existing Referral Code? ',
