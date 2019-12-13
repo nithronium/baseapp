@@ -9471,6 +9471,13 @@ react-hot-loader@^4.3.4:
     shallowequal "^1.0.2"
     source-map "^0.7.3"
 
+react-iframe@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/react-iframe/-/react-iframe-1.8.0.tgz#8c78f2c59b894ca5605fa7e45e61e27e57e96091"
+  integrity sha512-NYi89+rEqREwQxW9sDf+akh6/dtwWd3bOjByoVEIQ7SicOxVawRMer3pLdWjFaHXpuxTB9NqobPf/Ohj2iAKkg==
+  dependencies:
+    object-assign "^4.1.1"
+
 react-intl@^2.8.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/react-intl/-/react-intl-2.8.0.tgz#20b0c1f01d1292427768aa8ec9e51ab7e36503ba"
