@@ -777,6 +777,7 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Валюта депозита :',
     'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN :',
     'page.body.wallets.tabs.deposit.fiat.usd.iban': 'IBAN :',
+    'page.body.wallets.tabs.deposit.fiat.aed.iban': 'IBAN :',
     'page.body.wallets.tabs.deposit.fiat.eur.iban': 'SEPA IBAN :',
     'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Адрес банка :',
     'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Банковский SWIFT :',
@@ -790,6 +791,14 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.bankSwift.usd.value': 'AJMNAEAJ',
     'page.body.wallets.tabs.deposit.fiat.minimal.usd.text': 'Минимальный депозит ',
     'page.body.wallets.tabs.deposit.fiat.minimal.usd.value': '50 USD',
+
+    'page.body.wallets.tabs.deposit.fiat.depositCurrency.aed.value': 'AED',
+    'page.body.wallets.tabs.deposit.fiat.iban.aed.value': 'AE780570000011101251018',
+    'page.body.wallets.tabs.deposit.fiat.bankName.aed.value': 'Ajman Bank PJSC',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress.aed.value': 'Garhoud Branch, Dubai, UAE',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.aed.value': 'AJMNAEAJ',
+    'page.body.wallets.tabs.deposit.fiat.minimal.aed.text': 'Минимальный депозит  ',
+    'page.body.wallets.tabs.deposit.fiat.minimal.aed.value': 'AED 50',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.eur.value': 'EUR',
     'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'MT24PHPY270070PHOENIX0000884546',
