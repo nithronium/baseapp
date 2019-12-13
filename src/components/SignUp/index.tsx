@@ -67,7 +67,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
             passwordLabel,
             confirmPasswordLabel,
             referalCodeLabel,
-            // termsMessage,
+            termsMessage,
             hasConfirmed,
             emailError,
             passwordError,
@@ -92,6 +92,11 @@ class SignUpForm extends React.Component<SignUpFormProps> {
         const refIdGroupClass = cr('cr-sign-up-form__group', {
             'cr-sign-up-form__group--focused': refIdFocused,
         });
+        const termsLink = termsMessage ? (
+            <div className="cr-sign-up-form__terms-link">
+                {termsMessage.split(':')[0]} <a href="/terms">{termsMessage.split(':')[1]}</a>
+            </div>
+        ) : null;
         const logo = image ? (
             <h1 className="cr-sign-up-form__title">
                 <img className="cr-sign-up-form__image" src={image} alt="logo" />
@@ -181,6 +186,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
                             label={''}
                             // label={termsMessage ? termsMessage : 'I  agree all statements in '}
                         />
+                        {termsLink}
                         {this.renderCaptcha()}
                         <div className="cr-sign-up-form__button-wrapper">
                             <Button
