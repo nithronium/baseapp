@@ -346,7 +346,8 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         } else {
             return (
                 <React.Fragment>
-                    <div style={{
+                    
+                    <div style={{                       //Tabs pannel (Wire/ Sepa/ Card)
                         display: 'flex',
                         textAlign: 'center',
                         padding: '0 20px',
@@ -354,65 +355,72 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                         color: 'white',
                         marginBottom: '15px'
                     }}>
-                        <div style={{
+                        <div style={{                   //Wire
                             borderRadius: '5px 0 0 5px',
                             padding: '10px 0', flex: '1 1 auto',
                             cursor: 'pointer',
                             background: this.state.wire ? '#11B382' : 'none',
                             border: this.state.wire?  'none' : '1px solid #FFFFFF33',
                             color: this.state.wire ?  '#FFFFFF' : '#FFFFFF33',
-                        }} onClick={() => this.setState({ cardDeposit: false, sepa: false, wire: true })}>{this.translate('page.body.wallets.tabs.deposit.fiat.button.wire')}</div>
-                        { currency=== 'eur' && <div style={{
+                        }}
+                            onClick={() => this.setState({ cardDeposit: false, sepa: false, wire: true })}>
+                            {this.translate('page.body.wallets.tabs.deposit.fiat.button.wire')}
+                        </div>
+                        { currency=== 'eur' && <div style={{    //Sepa
                             padding: '10px 0', flex: '1 1 auto',
                             cursor: 'pointer', background: this.state.sepa ? '#11B382' : 'none',
                             border: this.state.sepa ? 'none' : '1px solid #FFFFFF33',
                             color: this.state.sepa ?  '#FFFFFF' :'#FFFFFF33'
-                        }} onClick={() => this.setState({ cardDeposit: false, sepa: true, wire: false })}>{this.translate('page.body.wallets.tabs.deposit.fiat.button.sepa')}</div>
-                    }
-                        <div style={{
+                        }} onClick={() => this.setState({ cardDeposit: false, sepa: true, wire: false })}>
+                            {this.translate('page.body.wallets.tabs.deposit.fiat.button.sepa')}
+                        </div>
+                        }
+                        <div style={{                       //Card
                             borderRadius: '0 5px 5px 0',
                             padding: '10px 0', flex: '1 1 auto',
                             cursor: 'pointer', background: this.state.cardDeposit ? '#11B382' : 'none',
                             border: this.state.cardDeposit ? 'none' : '1px solid #FFFFFF33',
                             color: this.state.cardDeposit ?  '#FFFFFF' :'#FFFFFF33'
-                        }} onClick={() => this.setState({ cardDeposit: true, sepa: false, wire: false })}>{this.translate('page.body.wallets.tabs.deposit.fiat.button.card')}</div>
+                        }} onClick={() => this.setState({ cardDeposit: true, sepa: false, wire: false })}>
+                            {this.translate('page.body.wallets.tabs.deposit.fiat.button.card')}
+                        </div>
                     </div>
                     {cardDeposit ?
-                        (this.props.user.level > 1 ? <CardDepositFiat currency={currency.toUpperCase()} translate={this.translate} /> : 
-                            <div style={{padding: '10px 20px', color: 'red', fontSize: '20px'}}> 
-                                <p>{levelMessage}</p>
+                        (this.props.user.level > 1 ?   //Check user level if > 1 show CardDepositFiat component else show mesage
+                            <CardDepositFiat
+                                currency={currency.toUpperCase()}
+                                translate={this.translate} /> : 
+                            <div style={{padding: '10px 20px', color: 'red', fontSize: '20px'}}>  
+                                <p>{levelMessage}</p>                            
                                 <p><a href="/confirm">{levelLink}</a></p>
-                        </div> ) : 
+                            </div> ) : 
                         sepa ? 
                         <div>
-                        <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
-                    
-                    <DepositFiat
-                        currency={currency.toLowerCase()}
-                        title={this.title}
-                        description={this.description}
-                        details={this.details}
-                        uid={user ? user.uid : ''}
-                        sepa={sepa}            
-                    />
-                    <div className="fiat-alert">
-                        {this.translate('page.wallets.withdraw.fiat')}
-                    </div>
-                    {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
-                            </div> :
-                            <div>
-                            <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
-                        
+                        <CurrencyInfo wallet={wallets[selectedWalletIndex]} />                    
                         <DepositFiat
                             currency={currency.toLowerCase()}
                             title={this.title}
                             description={this.description}
                             details={this.details}
-                            uid={user.uid}
+                            uid={user ? user.uid : ''}
+                            sepa={sepa}            
                         />
-                        {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
-                                </div>
-                       
+                        <div className="fiat-alert">
+                            {this.translate('page.wallets.withdraw.fiat')}
+                        </div>
+                        {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />} 
+                            </div> :
+                            <div>
+                                <CurrencyInfo wallet={wallets[selectedWalletIndex]} />                        
+                                <DepositFiat
+                                    currency={currency.toLowerCase()}
+                                    title={this.title}
+                                    description={this.description}
+                                    details={this.details}
+                                    uid={user.uid}
+                                />
+                                {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
+                            </div>                       
                     }        
                     
                 </React.Fragment>
