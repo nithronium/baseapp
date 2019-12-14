@@ -13,6 +13,9 @@ interface WithdrawProps {
     borderItem?: string;
     currency: string;
     fee: number;
+    sepa: boolean;
+    wire: boolean;
+    card: boolean;
     onClick: (amount: number, total: number, beneficiary: Beneficiary, otpCode: string) => void;
     fixed: number;
     className?: string;
@@ -85,6 +88,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
             // withdrawFeeLabel,
             // withdrawTotalLabel,
             withdrawButtonLabel,
+            card,
         } = this.props;
 
         const cx = classnames('cr-withdraw', className);
@@ -98,6 +102,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
         });
 // tslint:disable
         return (
+            card ? <div style={{fontSize: '18px', margin: '20px auto', maxWidth: '200px'}}>COMING SOON</div> :
             <div className={cx}>
                 <div className="cr-withdraw-column">
                     <div className="cr-withdraw__group__address">

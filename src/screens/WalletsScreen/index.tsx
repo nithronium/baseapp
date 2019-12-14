@@ -1,3 +1,4 @@
+//tslint:disable
 import { Button, Loader } from '@openware/components';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -92,7 +93,7 @@ interface WalletsState {
     withdrawDone: boolean;
     total: number;
     currentTabIndex: number;
-    cardDeposit: boolean;
+    card: boolean;
     sepa: boolean;
     wire: boolean;
 }
@@ -115,7 +116,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             withdrawDone: false,
             total: 0,
             currentTabIndex: 0,
-            cardDeposit: false,
+            card: false,
             sepa: false,
             wire: true,
         };
@@ -318,7 +319,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         const levelMessage = this.translate('page.body.wallets.tabs.deposit.fiat.levelMessage');
         const levelLink = this.translate('page.body.wallets.tabs.deposit.fiat.levelLink');
         const { addressDepositError, wallets, user, selectedWalletAddress } = this.props;
-        const { selectedWalletIndex, cardDeposit, sepa } = this.state;
+        const { selectedWalletIndex, card, sepa } = this.state;
         const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
         const text = this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' });
         const error = addressDepositError
@@ -346,50 +347,16 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         } else {
             return (
                 <React.Fragment>
-                    
-                    <div style={{                       //Tabs pannel (Wire/ Sepa/ Card)
-                        display: 'flex',
-                        textAlign: 'center',
-                        padding: '0 20px',
-                        fontSize: '18px',
-                        color: 'white',
-                        marginBottom: '15px'
-                    }}>
-                        <div style={{                   //Wire
-                            borderRadius: '5px 0 0 5px',
-                            padding: '10px 0', flex: '1 1 auto',
-                            cursor: 'pointer',
-                            background: this.state.wire ? '#11B382' : 'none',
-                            border: this.state.wire?  'none' : '1px solid #FFFFFF33',
-                            color: this.state.wire ?  '#FFFFFF' : '#FFFFFF33',
-                        }}
-                            onClick={() => this.setState({ cardDeposit: false, sepa: false, wire: true })}>
-                            {this.translate('page.body.wallets.tabs.deposit.fiat.button.wire')}
-                        </div>
-                        { currency=== 'eur' && <div style={{    //Sepa
-                            padding: '10px 0', flex: '1 1 auto',
-                            cursor: 'pointer', background: this.state.sepa ? '#11B382' : 'none',
-                            border: this.state.sepa ? 'none' : '1px solid #FFFFFF33',
-                            color: this.state.sepa ?  '#FFFFFF' :'#FFFFFF33'
-                        }} onClick={() => this.setState({ cardDeposit: false, sepa: true, wire: false })}>
-                            {this.translate('page.body.wallets.tabs.deposit.fiat.button.sepa')}
-                        </div>
-                        }
-                        <div style={{                       //Card
-                            borderRadius: '0 5px 5px 0',
-                            padding: '10px 0', flex: '1 1 auto',
-                            cursor: 'pointer', background: this.state.cardDeposit ? '#11B382' : 'none',
-                            border: this.state.cardDeposit ? 'none' : '1px solid #FFFFFF33',
-                            color: this.state.cardDeposit ?  '#FFFFFF' :'#FFFFFF33'
-                        }} onClick={() => this.setState({ cardDeposit: true, sepa: false, wire: false })}>
-                            {this.translate('page.body.wallets.tabs.deposit.fiat.button.card')}
-                        </div>
-                    </div>
-                    {cardDeposit ?
+                    {this.renderTypeTabs(currency.toLowerCase())}
+                    {card ?
                         (this.props.user.level > 1 ?   //Check user level if > 1 show CardDepositFiat component else show mesage
-                            <CardDepositFiat
-                                currency={currency.toUpperCase()}
-                                translate={this.translate} /> : 
+                            <div>
+                                <CardDepositFiat
+                                    currency={currency.toUpperCase()}
+                                    translate={this.translate} />
+                                {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />} 
+                            </div>
+                            : 
                             <div style={{padding: '10px 20px', color: 'red', fontSize: '20px'}}>  
                                 <p>{levelMessage}</p>                            
                                 <p><a href="/confirm">{levelLink}</a></p>
@@ -435,8 +402,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 
         return (
             <React.Fragment>
+                {wallets[selectedWalletIndex].type === 'fiat' ? this.renderTypeTabs(currency.toLowerCase()) : ''}
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
-                {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}
+                {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}                
                 {this.renderWithdrawBlock()}
                 {user.otp && currency && <WalletHistory label="withdraw" type="withdraws" currency={currency} />}
             </React.Fragment>
@@ -448,7 +416,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     private renderLiteContent = () => <WithdrawLite openModal={this.props.openGuardModal} />;
 
     private renderEnterpriseContent = () => {
-        const { withdrawDone, selectedWalletIndex } = this.state;
+        const { withdrawDone, selectedWalletIndex, sepa, wire, card } = this.state;
 
         if (selectedWalletIndex === -1) {
             return [{ content: null, label: '' }];
@@ -465,6 +433,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             withdrawDone,
             currency,
             fee,
+            sepa,
+            wire,
+            card,
             onClick: this.toggleConfirmModal,
             borderItem: 'empty-circle',
             twoFactorAuthRequired: this.isTwoFactorAuthRequired(level, otp),
@@ -478,7 +449,52 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         };
 
         return otp ? <Withdraw {...withdrawProps} /> : this.isOtpDisabled();
+        // return otp ? this.renderTypeTabs(currency.toLowerCase()) : this.isOtpDisabled();
     };
+
+
+    private renderTypeTabs = (currency) => {
+
+        return  (
+                    <div style={{                       //Tabs pannel (Wire/ Sepa/ Card)
+                        display: 'flex',
+                        textAlign: 'center',
+                        padding: '0 20px',
+                        fontSize: '18px',
+                        color: 'white',
+                        marginBottom: '15px'
+                    }}>
+                        <div style={{                   //Wire
+                            borderRadius: '5px 0 0 5px',
+                            padding: '10px 0', flex: '1 1 auto',
+                            cursor: 'pointer',
+                            background: this.state.wire ? '#11B382' : 'none',
+                            border: this.state.wire?  'none' : '1px solid #FFFFFF33',
+                            color: this.state.wire ?  '#FFFFFF' : '#FFFFFF33',
+                        }}
+                            onClick={() => this.setState({ card: false, sepa: false, wire: true })}>
+                            {this.translate('page.body.wallets.tabs.deposit.fiat.button.wire')}
+                        </div>
+                        { currency=== 'eur' && <div style={{    //Sepa
+                            padding: '10px 0', flex: '1 1 auto',
+                            cursor: 'pointer', background: this.state.sepa ? '#11B382' : 'none',
+                            border: this.state.sepa ? 'none' : '1px solid #FFFFFF33',
+                            color: this.state.sepa ?  '#FFFFFF' :'#FFFFFF33'
+                        }} onClick={() => this.setState({ card: false, sepa: true, wire: false })}>
+                            {this.translate('page.body.wallets.tabs.deposit.fiat.button.sepa')}
+                        </div>
+                        }
+                        <div style={{                       //Card
+                            borderRadius: '0 5px 5px 0',
+                            padding: '10px 0', flex: '1 1 auto',
+                            cursor: 'pointer', background: this.state.card ? '#11B382' : 'none',
+                            border: this.state.card ? 'none' : '1px solid #FFFFFF33',
+                            color: this.state.card ?  '#FFFFFF' :'#FFFFFF33'
+                        }} onClick={() => this.setState({ card: true, sepa: false, wire: false })}>
+                            {this.translate('page.body.wallets.tabs.deposit.fiat.button.card')}
+                        </div>
+                    </div>)
+    }
 
     private isOtpDisabled = () => {
         return (
