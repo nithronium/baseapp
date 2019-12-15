@@ -350,7 +350,7 @@ export const en = {
     'resource.profile.document.denied': 'Your documents were denied. Please, try again',
     'success.dataStorage.pushed': 'Success!',
 
-    'page.body.modal.kyc.login.header': 'Finish your registration',
+    'page.body.modal.kyc.login.header': 'Finalize your registration',
     'page.body.modal.kyc.login.text': 'To proceed with the next step in your account setup, please follow the instructions on the next page.',
     'page.body.modal.kyc.login.go.kyc.level': 'Get level',
     'page.body.modal.kyc.login.later': 'Later',
