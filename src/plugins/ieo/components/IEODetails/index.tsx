@@ -49,12 +49,12 @@ class IEODetailsComponent extends React.Component<Props> {
                                 {currentIEO.metadata ? `${Decimal.format(currentIEO.metadata.total_supply, +currentIEO.metadata.precision)} ${currentIEO.currency_id && currentIEO.currency_id.toUpperCase()}` : '-'}
                             </div>
                         </div>
-                        <div className="ieo-profile-details__body__left__row">
+                        {/* <div className="ieo-profile-details__body__left__row">
                             <div className="ieo-profile-details__body__left__row__first-column">
                                 {this.translate('page.body.ieo.profile.details..ieo.ratio')}
                             </div>
                             <div className="ieo-profile-details__body__left__row__second-column">{currentIEO.ratio || '-'}</div>
-                        </div>
+                        </div> */}
                         <div className="ieo-profile-details__body__left__row">
                             <div className="ieo-profile-details__body__left__row__first-column">
                                 {this.translate('page.body.ieo.profile.details.pre.sale.price')}

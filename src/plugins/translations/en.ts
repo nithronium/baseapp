@@ -8,7 +8,7 @@ export const en = {
     'page.body.ieo.profile.details.header': 'Details',
     'page.body.ieo.profile.details.name': 'Name',
     'page.body.ieo.profile.details.full.name': 'Full name',
-    'page.body.ieo.profile.details.session.supply': 'Session supply',
+    'page.body.ieo.profile.details.session.supply': 'Volume of tokens for sale',
     'page.body.ieo.profile.details.total.supply': 'Total supply',
     'page.body.ieo.profile.details..ieo.ratio': 'IEO Ratio',
     'page.body.ieo.profile.details.pre.sale.price': 'Token price',
