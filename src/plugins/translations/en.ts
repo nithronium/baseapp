@@ -11,9 +11,9 @@ export const en = {
     'page.body.ieo.profile.details.session.supply': 'Session supply',
     'page.body.ieo.profile.details.total.supply': 'Total supply',
     'page.body.ieo.profile.details..ieo.ratio': 'IEO Ratio',
-    'page.body.ieo.profile.details.pre.sale.price': 'Pre-sale price',
-    'page.body.ieo.profile.details.minimum.contribution': 'Minimum tokens ordered',
-    'page.body.ieo.profile.details.maximum.contribution': 'Maximum tokens ordered',
+    'page.body.ieo.profile.details.pre.sale.price': 'Token price',
+    'page.body.ieo.profile.details.minimum.contribution': 'Minimum purchase amoun',
+    'page.body.ieo.profile.details.maximum.contribution': 'Maximum purchase amoun',
     'page.body.ieo.profile.details.ieo.start': 'IEO Start Time',
     'page.body.ieo.profile.details.ieo.end': 'IEO End Time',
 
