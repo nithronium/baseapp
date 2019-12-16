@@ -36,7 +36,7 @@ export const ru = {
     'page.body.ieo.details.order.youWillGet': 'Цена за один токен',
     'page.body.ieo.details.order.youWillPay': 'Ордер',
     'page.body.ieo.details.order.content.blur.title': 'Sales will be start after',
-    'page.body.ieo.details.order.content.blur.titleFinished': 'Sales have been finished',
+    'page.body.ieo.details.order.content.blur.titleFinished': 'Продажа токенов завершена',
     'page.body.ieo.details.info.startsAt': 'Starts at',
     'page.body.ieo.details.info.finishesAt': 'Finishes at',
     'page.body.ieo.details.info.finishedAt': 'Finished at',
