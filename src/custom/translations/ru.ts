@@ -369,7 +369,7 @@ export const ru: LangType = {
     'page.body.kyc.phone.enterCode': 'Введите код, который Вы получили',
     'page.body.kyc.phone.code': 'СМС',
     'page.body.kyc.phone.send': 'ОТПРАВИТЬ КОД',
-    'page.body.kyc.phone.resend': 'ПЕРЕСЛАТЬ КОД',
+    'page.body.kyc.phone.resend': 'ОТПРАВИТЬ ПОВТОРНО',
     'page.body.kyc.identity.firstName': 'Имя (Латинскими буквами)',
     'page.body.kyc.identity.lastName': 'Фамилия (Латинскими буквами)',
     'page.body.kyc.identity.dateOfBirth': 'Дата рождения ДД/ММ/ГГГГ',
@@ -1001,7 +1001,7 @@ export const ru: LangType = {
     'page.idenfy.thanks': 'Thank you for your patience.',
     'page.idenfy.understand': 'I understand',
 
-    'page.wallets.withdraw.fiat': 'Attention: Should you send a larger amount than your limitation, funds shall be returned and fees will be charged.',
+    'page.wallets.withdraw.fiat': 'Внимание: при внесении на счет сумм, превышающих установленные лимиты, Ваши средства будут возвращены, после вычета комиссий.',
 
 
     ...nationalitiesNames,
