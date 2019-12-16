@@ -195,7 +195,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
 
             return (
                 <div className="pg-profile-verification__abilities">
-                    <span>{firstAbility}</span>
+                    <p >{firstAbility}</p>
                     <FormattedMessage id="page.body.profile.header.account.profile.abilities.first.message2" />
                 </div>
             );
@@ -215,8 +215,8 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
 
             return (
                 <div className="pg-profile-verification__abilities">
-                    <span>{firstAbility}</span>
-                    <span>{secondAbility}</span>
+                    <p>{firstAbility}</p>
+                    <p>{secondAbility}</p>
                 </div>
             );
         }
