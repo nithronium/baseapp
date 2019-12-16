@@ -409,7 +409,7 @@ export const ru: LangType = {
     'page.body.kyc.questionnaire.question2.answer2': '5 - 10 лет',
     'page.body.kyc.questionnaire.question2.answer3': '> 10 лет',
 
-    'page.body.kyc.questionnaire.question3': 'Ожидание торговых операций за месяц',
+    'page.body.kyc.questionnaire.question3': 'Ожидаемое количество торговых операций за месяц',
     'page.body.kyc.questionnaire.question3.answer1': '0 - 250 торговых операций за месяц',
     'page.body.kyc.questionnaire.question3.answer2': '250 - 1K торговых операций за месяц',
     'page.body.kyc.questionnaire.question3.answer3': 'больше 1K торговых операций за месяц',
@@ -462,7 +462,7 @@ export const ru: LangType = {
 
     'page.body.kyc.questionnaire.question13': 'Хотели бы Вы оставить нам отзыв или предложение?',
     'page.body.kyc.questionnaire.question13.textarea': 'Ваш комментарий',
-    'page.body.kyc.questionnaire.dropDown.placeholder': 'Выберете ответ',
+    'page.body.kyc.questionnaire.dropDown.placeholder': 'Выберите ответ',
 
     'page.body.kyc.confirm': 'Отправить',
 

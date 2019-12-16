@@ -195,8 +195,8 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
 
             return (
                 <div className="pg-profile-verification__abilities">
-                    <p >{firstAbility}</p>
-                    <FormattedMessage id="page.body.profile.header.account.profile.abilities.first.message2" />
+                    <p style={{ fontSize: '12px'}} >{firstAbility}</p>
+                    <p style={{ fontSize: '12px'}}>{this.props.intl.formatMessage({id: 'page.body.profile.header.account.profile.abilities.first.message2'})}</p>
                 </div>
             );
         }
@@ -210,7 +210,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
 
             const secondAbility = this.props.intl.formatMessage(
                 { id: 'page.body.profile.header.account.profile.abilities.second.message2' },
-                { amount: withdrawLimitData.withdraw.limit, currency: withdrawalLimitCurrency },
+                // { amount: withdrawLimitData.withdraw.limit, currency: withdrawalLimitCurrency },
             );
 
             return (
