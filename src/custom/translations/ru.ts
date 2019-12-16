@@ -989,7 +989,7 @@ export const ru: LangType = {
     'page.body.modal.blockNationality.button': 'I understand',
 
     'page.body.modal.kyc.login.header': 'Завершите Вашу регистрацию',
-    'page.body.modal.kyc.login.text': 'Для того, чтобы перейти на следующую ступень регистрацию Вашего аккаунта, пожалуйста следуйте инструкциям на следующей странице.',
+    'page.body.modal.kyc.login.text': 'Для того, чтобы перейти на следующую ступень регистрации Вашего аккаунта, пожалуйста следуйте инструкциям на следующей странице',
     'page.body.modal.kyc.login.go.kyc.level': 'Получить уровень ',
     'page.body.modal.kyc.login.later': 'Позже',
 
