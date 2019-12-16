@@ -1000,6 +1000,7 @@ export const ru: LangType = {
     'page.idenfy.please': 'Please, do not make any attempts to verify your account, as they will fail. ',
     'page.idenfy.thanks': 'Thank you for your patience.',
     'page.idenfy.understand': 'I understand',
+    'comingsoon': 'СКОРО',
 
     'page.wallets.withdraw.fiat': 'Внимание: при внесении на счет сумм, превышающих установленные лимиты, Ваши средства будут возвращены, после вычета комиссий.',
 

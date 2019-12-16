@@ -361,7 +361,9 @@ export const en = {
     'page.idenfy.process': 'This process usually takes up to 15 minutes. ',
     'page.idenfy.please': 'Please, do not make any attempts to verify your account, as they will fail. ',
     'page.idenfy.thanks': 'Thank you for your patience.',
-    'page.idenfy.understand': 'I understand',
+  'page.idenfy.understand': 'I understand',
+    
+  'comingsoon': 'COMING SOON',
 
     'page.wallets.withdraw.fiat': 'Attention: Should you send a larger amount than your limitation, funds shall be returned and fees will be charged.',
 
