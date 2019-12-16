@@ -8,6 +8,7 @@ import { withRouter } from 'react-router-dom';
 import {
     labelFetch,
     RootState,
+    selectCurrentLanguage,
     selectUserInfo,
     User,
 } from '../../../../modules';
@@ -18,6 +19,7 @@ import { KycAuthDataInterface } from '../../../modules/user/kycAuth/types';
 interface ReduxProps {
     kycAuthData?: KycAuthDataInterface;
     user: User;
+    currentLanguage: string;
 }
 
 interface DispatchProps {
@@ -72,12 +74,12 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
     }
 
     private renderContent = () => {
-        const { kycAuthData } = this.props;
+        const { kycAuthData, currentLanguage } = this.props;
         return !this.state.statusGet ? (
             <div className="pg-idenfy">
                 <iframe
                     id="iframe"
-                    src={`https://ui.idenfy.com/?authToken=${kycAuthData ? kycAuthData.auth_token : ''}`}
+                    src={`https://ui.idenfy.com/?authToken=${kycAuthData ? kycAuthData.auth_token : ''}&lang=${currentLanguage.toLowerCase()}`}
                     allow="camera"
                 />
                 <p id="display" />
@@ -113,6 +115,7 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
 const mapStateToProps = (state: RootState): ReduxProps => ({
     kycAuthData: selectKycAuthData(state),
     user: selectUserInfo(state),
+    currentLanguage: selectCurrentLanguage(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
