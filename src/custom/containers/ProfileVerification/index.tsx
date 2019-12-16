@@ -324,9 +324,9 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                     {userLevel < 6 && this.renderUpgradeLevelLink()}
                 </div>
                 <div className="pg-profile-verification__know-more">
-                    <Link to="#">
+                    <a href="https://knowledge-base.emirex.com/emirex">
                         <FormattedMessage id="page.body.profile.header.account.profile.knowMore" />
-                    </Link>
+                    </a>
                     {pendingDocumentLabel && this.renderDocumentPending()}
                 </div>
                 {withdrawLimitDataExists && this.renderUserAbilities(userLevel, withdrawLimitData)}
