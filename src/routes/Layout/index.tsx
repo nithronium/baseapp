@@ -1,4 +1,6 @@
+//tslint:disable
 import { Loader } from '@openware/components';
+import classnames from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
@@ -12,6 +14,8 @@ import {
     ReferralTicketsScreen,
     TradingScreen,
 } from '../../custom/screens';
+import { LoginModal } from '../../custom/components/KYCLoginModal';
+import { ConfirmScreen } from '../../custom/screens';
 import { toggleColorTheme } from '../../helpers';
 import {
     changeLanguage,
@@ -28,9 +32,9 @@ import {
     userFetch,
     walletsReset,
 } from '../../modules';
+import { renderPluginsRoutes } from '../../plugins/routes';
 import {
     ChangeForgottenPasswordScreen,
-    ConfirmScreen,
     EmailVerificationScreen,
     ForgotPasswordScreen,
     HistoryScreen,
@@ -63,6 +67,10 @@ interface OwnProps {
     history: History;
 }
 
+// interface State {
+//     diplayKYCLoginModal: boolean;
+//     prevRouteCheck: boolean;
+// }
 export type LayoutProps = ReduxProps & DispatchProps & OwnProps;
 
 const renderLoader = () => (
@@ -113,6 +121,11 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
 class LayoutComponent extends React.Component<LayoutProps> {
     public static eventsListen = ['click', 'keydown', 'scroll', 'resize', 'mousemove', 'TabSelect', 'TabHide'];
 
+    public state = {
+        diplayKYCLoginModal: false,
+        prevRouteCheck: false,
+    };
+
     public timer;
     public walletsFetchInterval;
 
@@ -133,6 +146,20 @@ class LayoutComponent extends React.Component<LayoutProps> {
             this.props.history.replace(this.props.history.location.pathname);
         } 
 
+    }
+
+    public componentWillReceiveProps(next: LayoutProps) {
+        const { history, isLoggedIn } = this.props;
+
+        if (history.location.state && history.location.state.fromSignIn) {
+            this.setState({
+                prevRouteCheck: true,
+            });
+        }
+
+        if (!isLoggedIn && next.isLoggedIn && this.state.prevRouteCheck) {
+            this.handleOpenLoginModal();
+        }
     }
 
     public componentDidUpdate(next: LayoutProps) {
@@ -184,9 +211,16 @@ class LayoutComponent extends React.Component<LayoutProps> {
             currentLanguage,
             isLoggedIn,
             userLoading,
+            user,
         } = this.props;
 
         toggleColorTheme(colorTheme);
+
+        const cx = classnames('pg-kyc-login', {
+            'pg-kyc-login--visible': this.state.diplayKYCLoginModal &&
+                !location.pathname.startsWith('/confirm') &&
+                user.level === 1,
+        });
 
         return (
             <div className="container-fluid pg-layout">
@@ -224,13 +258,42 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/referral-tickets'} component={ReferralTicketsScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/referral-commission'} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/referral-commission'} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
+                    {renderPluginsRoutes()}
                     <Route path="**"><Redirect to={'/trading/'} /></Route>
                     <Route path="**"><Redirect to={'/ru/trading/'} /></Route>
                 </Switch>
+                <LoginModal
+                    classname={cx}
+                    closeModal={this.handleDisplayModal}
+                    userLevel={user.level}
+                    history={this.props.history}
+                />
             </div>
         );
     }
 
+    private handleOpenLoginModal = () => {
+        this.setState({
+            diplayKYCLoginModal: true,
+        }, () => {
+            document.addEventListener('click', this.handleCloseLoginModal);
+        });
+    };
+
+    private handleCloseLoginModal = () => {
+        this.setState({
+            diplayKYCLoginModal: false,
+            prevRouteCheck: false,
+        }, () => {
+            document.removeEventListener('click', this.handleCloseLoginModal);
+        });
+    }
+
+    private handleDisplayModal = (value: boolean) => {
+        this.setState({
+            diplayKYCLoginModal: value,
+        });
+    }
 
     private getLastAction = () => {
         if (localStorage.getItem(STORE_KEY) !== null) {

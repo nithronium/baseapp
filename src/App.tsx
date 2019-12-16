@@ -1,5 +1,6 @@
 import { History } from 'history';
 import * as React from 'react';
+// import CookieConsent from 'react-cookie-consent';
 import { IntlProvider } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { Router } from 'react-router';
@@ -16,7 +17,10 @@ import {
     selectTenkoPublicKey,
     selectToken,
     selectTokenFetching,
+    selectUserInfo,
+    selectUserLoggedIn,
     setLicenseExpiration,
+    User,
 } from './modules';
 import { Layout } from './routes';
 
@@ -37,6 +41,8 @@ interface ReduxProps {
     tenkoKey: string;
     token: string;
     tokenFetching: boolean;
+    userData: User;
+    isLoggedIn: boolean;
 }
 
 interface DispatchProps {
@@ -48,6 +54,7 @@ interface DispatchProps {
 type Props = AppProps & ReduxProps & DispatchProps;
 
 class AppLayout extends React.Component<Props, {}, {}> {
+
     public render() {
         const {
             locale,
@@ -60,6 +67,7 @@ class AppLayout extends React.Component<Props, {}, {}> {
             tokenFetching,
         } = this.props;
         const { lang, messages } = locale;
+
         return (
             <IntlProvider locale={lang} messages={messages} key={lang}>
                 <GuardWrapper
@@ -73,6 +81,13 @@ class AppLayout extends React.Component<Props, {}, {}> {
                 >
                     <Router history={history}>
                         <ErrorWrapper>
+                            {/* <CookieConsent */}
+                                {/* buttonText="Got it!" */}
+                                {/* contentClasses="cookie-consent__content" */}
+                                {/* buttonClasses="cookie-consent__button" */}
+                            {/* > */}
+                                {/* <span>The exchange is in alpha testing mode. Exchange operation is limited.</span> */}
+                            {/* </CookieConsent> */}
                             <Header/>
                             <Alerts/>
                             <Layout/>
@@ -94,6 +109,8 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> =
         tenkoKey: selectTenkoPublicKey(state),
         token: selectToken(state),
         tokenFetching: selectTokenFetching(state),
+        userData: selectUserInfo(state),
+        isLoggedIn: selectUserLoggedIn(state),
     });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =

@@ -1,0 +1,231 @@
+.pg-profile-verification {
+  display: flex;
+  flex-direction: column;
+  margin: 16px auto;
+
+  &__title {
+    align-items: center;
+    color: var(--color-white);
+    display: flex;
+    font-family: "Noto Sans SC";
+    font-size: 20px;
+    font-style: normal;
+    font-weight: bold;
+    height: 29px;
+    margin-bottom: 12px;
+    opacity: 0.9;
+  }
+
+  &__user-level {
+    align-items: baseline;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  &__level {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+
+    &__circle {
+      align-items: center;
+      background: var(--button-normal);
+      border-radius: 50%;
+      color: var(--white);
+      display: flex;
+      font-family: Roboto;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      height: 24px;
+      justify-content: center;
+      letter-spacing: 0.1px;
+      width: 24px;
+
+      &--active {
+        color: var(--back-bg);
+        background: var(--accent);
+      }
+    }
+
+    &__line {
+      border-bottom: 1px solid var(--placeholder-text);
+      height: 13px;
+      width: 55px;
+    }
+  }
+
+  &__upgrade-level {
+    align-items: center;
+    color: var(--accent);
+    cursor: pointer;
+    display: flex;
+    font-family: "Noto Sans SC";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: normal;
+    height: 28px;
+    margin-bottom: 30px;
+    margin-left: 5%;
+    text-decoration: none;
+    width: fit-content;
+  }
+
+  &__know-more {
+    display: flex;
+    justify-content: flex-end;
+    width: max-content;
+    margin-bottom: 40px;
+
+    a {
+      align-items: center;
+      color: var(--accent);
+      cursor: pointer;
+      font-family: "Noto Sans SC";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 12px;
+      text-decoration: none;
+    }
+
+    &__document-pending {
+      align-items: center;
+      color: var(--red);
+      cursor: pointer;
+      font-family: "Noto Sans SC";
+      font-size: 12px;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 12px;
+      margin-left: 8.25%;
+      margin-right: -8.25%;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+  }
+
+  &__abilities {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 50px;
+
+    &--blank {
+      margin-bottom: 10px;
+    }
+
+    span {
+      align-items: center;
+      color: var(--placeholder-text);
+      font-family: "Noto Sans SC";
+      font-size: 14px;
+      font-style: normal;
+      font-weight: normal;
+      height: 19px;
+      margin-bottom: 3px;
+    }
+  }
+
+  &__withdraw-limit, &__deposit-limit {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 23px;
+    width: 100%;
+
+    &__wrap {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+      min-width: 266px;
+      width: 60%;
+
+      &__progress-bar {
+        background: rgba(#648280, 0.5);
+        border-radius: 3px;
+        height: 10px;
+        margin-bottom: 10px;
+
+        &--filled {
+          background: var(--accent);
+          border-radius: 3px;
+          height: 10px;
+        }
+      }
+
+      &__text {
+        align-items: center;
+        color: var(--color-white);
+        display: flex;
+        font-family: "Noto Sans SC";
+        font-size: 12px;
+        font-style: normal;
+        font-weight: normal;
+        line-height: 12px;
+      }
+    }
+  }
+
+  &__deposit-limit {
+    &__wrap__progress-bar--filled {
+      background: var(--button-normal);
+    }
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .pg-profile-verification {
+    &__withdraw-limit, &__deposit-limit {
+      align-items: flex-end;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-right: 25px;
+      width: 100%;
+  
+      &__wrap {
+        display: flex;
+        flex-direction: column;
+        min-width: 266px;
+        width: 100%;
+      }
+    }
+
+    &__know-more {
+      flex-direction: column;
+      padding-left: 0;
+      width: max-content;
+
+      a, &__document-pending {
+        line-height: 30px;
+        margin-left: 0;
+      }
+    }
+
+    &__upgrade-level {
+      margin-left: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .pg-profile-verification {
+    margin: 38px;
+
+    &__abilities > span {
+      height: auto;
+      line-height: 19px;
+    }
+
+    &__withdraw-limit, &__deposit-limit {
+      padding-right: 0;
+    }
+
+    &__upgrade-level {
+      margin-left: 5%;
+    }
+  }
+}

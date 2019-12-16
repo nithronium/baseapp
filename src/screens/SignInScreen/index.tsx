@@ -171,6 +171,7 @@ class SignIn extends React.Component<Props, SignInState> {
             email,
             password,
         });
+        this.props.history.push({ state: { fromSignIn: true } });
     };
 
     private handle2FASignIn = () => {

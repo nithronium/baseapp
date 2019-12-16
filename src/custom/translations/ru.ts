@@ -1,3 +1,4 @@
+import { ru as pluginsTranslations } from '../../plugins/translations/ru';
 import { LangType } from '../../translations';
 import { nationalitiesNames } from '../../translations/nationalities';
 //tslint:disable
@@ -7,6 +8,7 @@ export const ru: LangType = {
     'page.header.navbar.wallets': 'Кошельки',
     'page.header.navbar.openOrders': 'Ордера',
     'page.header.navbar.history': 'История',
+    'page.header.navbar.ieo': 'IEO',
 
     'page.header.navbar.profile': 'Профиль',
     'page.header.navbar.refprogram': 'Реферальная программа',
@@ -23,11 +25,15 @@ export const ru: LangType = {
     'page.body.trade.header.tradeHistory.content.funds': 'Funds',
 
     'page.body.trade.header.funds.content.coin': 'Currency',
-    'page.body.trade.header.funds.content.available': 'Available',
+    'page.body.trade.header.funds.content.available': 'Доступный баланс',
     'page.body.trade.header.funds.content.locked': 'Locked',
     'page.body.trade.header.funds.content.total': 'Total balance',
     'page.body.trade.header.funds.content.value': 'Value in ',
     'page.body.trade.header.funds.content.name': 'Name',
+
+    'page.body.trade.header.upcoming': 'Предстоящие',
+    'page.body.trade.header.inProgress': 'Текущие',
+    'page.body.trade.header.past': 'Прошедшие',
 
     'page.body.trade.header.markets': 'Рынки',
     'page.body.trade.header.markets.content.pair': 'Пара',
@@ -153,7 +159,7 @@ export const ru: LangType = {
     'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': 'Full Name',
     'page.body.wallets.whitelist.addAddressModal.body.fiatAccountNumber': 'Account Number',
     'page.body.wallets.whitelist.addAddressModal.body.fiatBankName': 'Bank Name',
-    'page.body.wallets.whitelist.addAddressModal.body.fiatBankSwiftCode': 'Bank Swift Code (optional)',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatBankSwiftCode': 'Bank Swift Code',
     'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankName': 'Intermediary Bank Name (optional)',
     'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankSwiftCode': 'Intermediary Bank Swift Code (optional)',
 
@@ -272,6 +278,7 @@ export const ru: LangType = {
     'page.body.profile.header.account.content.twoFactorAuthentication.modalBody':
         'Пожалуйста, обратитесь с администратором, чтобы отключить 2FA',
     'page.body.profile.header.account.content.twoFactorAuthentication.modalHeader': 'Двухфакторная аутентификация включена',
+    'page.body.profile.header.account.content.profile.edit': 'Редактировать профиль',
 
     'page.body.profile.header.account.profile': 'Верификация Вашего профиля',
     'page.body.profile.header.account.profile.email.title': 'Почта - подтверждено',
@@ -283,7 +290,18 @@ export const ru: LangType = {
     'page.body.profile.header.account.profile.identity.title': 'Личность - подтверждено',
     'page.body.profile.header.account.profile.identity.message': 'Вывод средств разрешен',
 
+    'page.body.profile.header.account.profile.upgrade': 'Повысить свой уровень верификации',
+    'page.body.profile.header.account.profile.abilities.first.message1': '- Возможность пополнять / выводить до {amount}{currency} или эквивалент этой суммы в любой (крипто) валюте',
+    'page.body.profile.header.account.profile.abilities.first.message2': '- Возможность покупать / продавать фиат и криптовалюты',
+    'page.body.profile.header.account.profile.abilities.second.message1': '- Возможность пополнять / выводить до {amount}{currency} или эквивалент этой суммы в любой (крипто) валюте',
+    'page.body.profile.header.account.profile.abilities.second.message2': '- Возможность пополнять / выводить фиат используя кредитную / дебетовую карту',
+    'page.body.profile.header.account.profile.abilities.third': '- No limit of deposit / withdrawals',
+    'page.body.profile.header.account.profile.withdraw': 'Лимит вывода: ',
+    'page.body.profile.header.account.profile.deposit': 'Лимит пополнения: ',
+    'page.body.profile.header.account.profile.knowMore': 'Узнать больше об уровнях верификации',
+
     'page.body.profile.header.referralProgram': 'Реферальная программа',
+    'page.body.profile.header.referralProgramIEO': 'Программа IEO',
     'page.body.profile.content.copyLink': 'Копир.',
 
     'page.body.profile.apiKeys.header': 'Мои API ключи',
@@ -345,39 +363,120 @@ export const ru: LangType = {
     'page.body.profile.content.result.failed': 'Ошибка',
     'page.body.profile.content.result.denied': 'Отказано',
 
-    'page.body.kyc.phone.head': 'Подтверждение телефона',
+    'page.body.kyc.phone.head': 'Подтверждение номера телефона',
     'page.body.kyc.phone.enterPhone': 'Введите свой номер телефона',
     'page.body.kyc.phone.phoneNumber': 'Номер Телефона',
     'page.body.kyc.phone.enterCode': 'Введите код, который Вы получили',
     'page.body.kyc.phone.code': 'СМС',
     'page.body.kyc.phone.send': 'ОТПРАВИТЬ КОД',
-    'page.body.kyc.phone.resend': 'ПЕРЕСЛАТЬ КОД',
-    'page.body.kyc.identity.firstName': 'Имя',
-    'page.body.kyc.identity.lastName': 'Фамилия',
+    'page.body.kyc.phone.resend': 'ОТПРАВИТЬ ПОВТОРНО',
+    'page.body.kyc.identity.firstName': 'Имя (Латинскими буквами)',
+    'page.body.kyc.identity.lastName': 'Фамилия (Латинскими буквами)',
     'page.body.kyc.identity.dateOfBirth': 'Дата рождения ДД/ММ/ГГГГ',
     'page.body.kyc.identity.residentialAddress': 'Место проживания',
     'page.body.kyc.identity.city': 'Город',
     'page.body.kyc.identity.postcode': 'Почтовый индекс',
-    'page.body.kyc.identity.nationality': 'Национальность',
+    'page.body.kyc.identity.nationality': 'Гражданство',
     'page.body.kyc.identity.CoR': 'Страна проживания',
-    'page.body.kyc.documents.expiryDate': 'Действителен до DD/MM/YYYY',
+    'page.body.kyc.documents.expiryDate': 'Дата выдачи ДД/ММ/ГГГГ',
     'page.body.kyc.documents.drag': 'Перетащите или загрузите файлы',
     'page.body.kyc.documents.maxFile': 'Максимальный размер 10MB',
     'page.body.kyc.documents.maxNum': 'Максимальное число 5',
-    'page.body.kyc.documents.upload': 'Загрузите свое удостоверение личности с фотографией',
     'page.body.kyc.documents.number': ': Номер документа',
     'page.body.kyc.documentsType': 'Тип документа',
 
+    'page.body.kyc.documents.upload': 'Подтверждение места жительства',
+    'page.body.kyc.documents.expiration': 'Предоставляемые документы не должны быть старше 3-х месяцев',
     'page.body.kyc.documents.select.passport': 'Паспорт',
     'page.body.kyc.documents.select.identityCard': 'Удостоверение личности',
     'page.body.kyc.documents.select.driverLicense': 'Водительское удостоверение',
     'page.body.kyc.documents.select.utilityBill': 'Коммунальная квитанция',
+    'page.body.kyc.documents.select.bankStatement': 'Выписка по банковскому счету',
+    'page.body.kyc.documents.select.taxCertificate': 'Справка об отсутствии задолженности по уплате налогов',
+    'page.body.kyc.documents.select.leaseOfRentalAgreement': 'Договор аренды',
+    'page.body.kyc.documents.questionnaire.title.part1': 'Please fill the',
+    'page.body.kyc.documents.questionnaire.title.part2': 'to process to your level upgrade.',
+    'page.body.kyc.documents.questionnaire.subtitle': 'questionnaire',
+
+    'page.body.kyc.questionnaire.title': 'Пожалуйста, ответьте на вопросы',
+
+    'page.body.kyc.questionnaire.question1': 'Пользуетесь ли Вы услугами другой криптовалютной биржи?',
+    'page.body.kyc.questionnaire.question1.answer1': 'Нет',
+    'page.body.kyc.questionnaire.question1.answer2': 'Да',
+
+    'page.body.kyc.questionnaire.question2': 'Какой Ваш опыт торговли криптовалютами?',
+    'page.body.kyc.questionnaire.question2.answer1': '0 - 5 лет',
+    'page.body.kyc.questionnaire.question2.answer2': '5 - 10 лет',
+    'page.body.kyc.questionnaire.question2.answer3': '> 10 лет',
+
+    'page.body.kyc.questionnaire.question3': 'Ожидаемое количество торговых операций за месяц',
+    'page.body.kyc.questionnaire.question3.answer1': '0 - 250 торговых операций за месяц',
+    'page.body.kyc.questionnaire.question3.answer2': '250 - 1K торговых операций за месяц',
+    'page.body.kyc.questionnaire.question3.answer3': 'больше 1K торговых операций за месяц',
+
+    'page.body.kyc.questionnaire.question4': 'Работодатель(если Вы самозанятый, опишите род вашей деятельности )',
+    'page.body.kyc.questionnaire.question4.input1': 'Работодатель',
+    'page.body.kyc.questionnaire.question4.input2': 'Должность',
+
+    'page.body.kyc.questionnaire.question5': 'Будете ли Вы выводить средства на счета банков расположенных в США?',
+    'page.body.kyc.questionnaire.question5.answer1': 'Да',
+    'page.body.kyc.questionnaire.question5.answer2': 'Нет',
+
+    'page.body.kyc.questionnaire.question6': 'Укажите, какая валюта будет использоваться в Ваших последующих ответах',
+    'page.body.kyc.questionnaire.question6.answer1': 'EUR',
+    'page.body.kyc.questionnaire.question6.answer2': 'USD',
+    'page.body.kyc.questionnaire.question6.answer3': 'CAD',
+    'page.body.kyc.questionnaire.question6.answer4': 'JPY',
+    'page.body.kyc.questionnaire.question6.answer5': 'GBP',
+
+    'page.body.kyc.questionnaire.question7': 'Стоимость чистых активов',
+    'page.body.kyc.questionnaire.question7.answer1': '0 to 500,000',
+    'page.body.kyc.questionnaire.question7.answer2': '500,001-2,000,000',
+    'page.body.kyc.questionnaire.question7.answer3': '2,000,001-5,000,000',
+    'page.body.kyc.questionnaire.question7.answer4': '5,000,001-10,000,000',
+    'page.body.kyc.questionnaire.question7.answer5': '10,000,000+',
+
+    'page.body.kyc.questionnaire.question8': 'Ожидаемая сумма пополнения за месяц',
+    'page.body.kyc.questionnaire.question8.answer1': '0 to 500,000',
+    'page.body.kyc.questionnaire.question8.answer2': '500,001-10,000,000',
+    'page.body.kyc.questionnaire.question8.answer3': '10,000,000+',
+
+    'page.body.kyc.questionnaire.question9': 'Ожидаемая сумма вывода средств за месяц',
+    'page.body.kyc.questionnaire.question9.answer1': '0 to 500,000',
+    'page.body.kyc.questionnaire.question9.answer2': '500,001-10,000,000',
+    'page.body.kyc.questionnaire.question9.answer3': '10,000,000+',
+
+    'page.body.kyc.questionnaire.question10': 'Основной источник дохода',
+    'page.body.kyc.questionnaire.question10.answer1': 'Инвестиции',
+    'page.body.kyc.questionnaire.question10.answer2': 'Заработная плата',
+    'page.body.kyc.questionnaire.question10.answer3': 'Наследство',
+    'page.body.kyc.questionnaire.question10.answer4': 'Другое',
+
+    'page.body.kyc.questionnaire.question11': 'Являетесь ли Вы или Ваши родственники политическими деятелями? ',
+    'page.body.kyc.questionnaire.question11.answer1': 'Да',
+    'page.body.kyc.questionnaire.question11.answer2': 'Нет',
+
+    'page.body.kyc.questionnaire.question12': 'Были ли Вы когда-либо замешаны в отмывании денег или других финансовых преступлениях?',
+    'page.body.kyc.questionnaire.question12.answer1': 'Да',
+    'page.body.kyc.questionnaire.question12.answer2': 'Нет',
+
+    'page.body.kyc.questionnaire.question13': 'Хотели бы Вы оставить нам отзыв или предложение?',
+    'page.body.kyc.questionnaire.question13.textarea': 'Ваш комментарий',
+    'page.body.kyc.questionnaire.dropDown.placeholder': 'Выберите ответ',
+
+    'page.body.kyc.confirm': 'Отправить',
 
     'page.body.kyc.next': 'Дальше',
     'page.body.kyc.submit': 'Отправить',
     'page.body.kyc.head.phone': 'Верификация телефона',
     'page.body.kyc.head.identity': 'Верификация личности',
     'page.body.kyc.head.document': 'Верификация документов',
+    'page.body.kyc.head.level.first': 'Электронная почта',
+    'page.body.kyc.head.level.second': 'Профиль',
+    'page.body.kyc.head.level.third': 'Номер телефона',
+    'page.body.kyc.head.level.fourth': 'Личность',
+    'page.body.kyc.head.level.fifth': 'Адрес',
+    'page.body.kyc.head.level.sixth': 'Анкета',
 
     'page.body.lock.oops': 'Ой!',
     'page.body.lock.expired': 'Похоже, что ваш пробный период истек',
@@ -408,7 +507,7 @@ export const ru: LangType = {
     'page.header.signUp.confirmPassword': 'Подтвердить пароль',
     'page.header.signUp.confirmPassword.message.error': 'Пароли не совпадают',
     'page.header.signUp.referalCode': 'Промо-код',
-    'page.header.signUp.terms': 'Я согласен со всеми заявлениями с точки зрения: Правила использования',
+    'page.header.signUp.terms': 'Я согласен с: Правилами использования',
     'page.header.signUp.modal.header': 'ПРОВЕРЬТЕ СВОЙ АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ',
     'page.header.signUp.modal.body':
         'Чтобы завершить регистрацию, найдите в своем' +
@@ -449,6 +548,7 @@ export const ru: LangType = {
     'success.phone.confirmation.message': 'Успех!',
     'success.message.sent': 'Письмо было успешно отправлено',
     'success.email.confirmed': 'Email был успешно подтвержден',
+    'success.dataStorage.pushed': 'Успех!',
 
     // error messages
     // barong
@@ -456,6 +556,7 @@ export const ru: LangType = {
     'resource.user.no_activity': 'Активность не записана или неправильная тема',
     'resource.profile.not_exist': 'У пользователя нет профиля',
     'resource.profile.exist': 'Профиль уже существует',
+    'resource.profile.dateOfBirth': 'Пользователь должен быть старше 21 года',
     'resource.api_key.2fa_disabled': 'Разрешены только аккаунты с включенным 2FA',
     'resource.api_key.missing_otp': 'Отсутствует код 2FA',
     'resource.api_key.invalid_otp': 'Код 2FA недействителен',
@@ -471,9 +572,17 @@ export const ru: LangType = {
     'resource.password.doesnt_match': 'Новые пароли не совпадают',
     'resource.password.prev_pass_not_correct': 'Предыдущий пароль неверен',
     'resource.password.no_change_provided': 'Новый пароль не может быть таким же, как старый',
-    'resource.document.empty_doc_expire': 'Срок действия недействителен',
+    'resource.document.empty_doc_expire': 'Дата выдачи недействителена',
     'password.requirements': 'Пароль не соответствует минимальным требованиям',
     'password.password.password_strength': 'Пароль слишком слабый',
+    'resource.profile.email': 'Почта проверяется',
+    'resource.profile.profile': 'Профиль проверяется',
+    'resource.profile.phone': 'Телефон проверяется',
+    'resource.profile.kyc': 'Личность проверяется',
+    'resource.profile.document': 'Место жительства проверяется',
+    'resource.profile.questionnaire': 'Анкета проверяется',
+    'resource.profile.identity': 'Личность проверяется',
+    'resource.documents.expirationDate': 'Дата выдачи недействителена',
 
     'email.taken': 'Почта уже зарегистрирована',
 
@@ -570,6 +679,9 @@ export const ru: LangType = {
     'resource.profile.missing_city': 'Город отсутствует',
     'resource.profile.missing_country': 'Страна отсутствует',
 
+    'resource.profile.document.denied': 'Your last kyc was denied. Please, try again',
+    'resource.profile.kyc.denied': 'Your documents were denied. Please, try again',
+
     'resource.api_key.missing_algorithm': 'Алгоритм отсутствует',
     'resource.api_key.empty_algorithm': 'Алгоритм отсутствует',
     'resource.api_key.empty_kid': 'KID отсутствует',
@@ -663,15 +775,35 @@ export const ru: LangType = {
 
     'server.internal_error': 'Внутренняя ошибка сервера',
 
+    'page.body.wallets.tabs.deposit.fiat.button.wire': "Банковский перевод",
+    'page.body.wallets.tabs.deposit.fiat.button.card': "Банковская карта",
+    'page.body.wallets.tabs.deposit.fiat.button.sepa': 'SEPA перевод',
+    'page.body.wallets.tabs.deposit.fiat.button.swift': 'EUR SWIFT',
+    'cardDepositFiat.detail': 'Детали платежа',
+    'cardDepositFiat.amount': 'Количество',
+    'cardDepositFiat.currency': 'Валюта',
+    'cardDepositFiat.button.payment': 'ОПЛАТИТЬ',
+    'cardDepositFiat.button.cancel': 'Отмена',
+
+    'page.body.wallets.tabs.deposit.fiat.levelMessage': 'Verification level 2 is required in order to access the option of balance top up via credit or debit card.',
+  'page.body.wallets.tabs.deposit.fiat.levelLink': 'Please upgrade your verification level',
+
     'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Валюта депозита :',
     'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN :',
     'page.body.wallets.tabs.deposit.fiat.usd.iban': 'IBAN :',
     'page.body.wallets.tabs.deposit.fiat.aed.iban': 'IBAN :',
-    'page.body.wallets.tabs.deposit.fiat.eur.iban': 'SEPA IBAN :',
+    'page.body.wallets.tabs.deposit.fiat.eur.iban': 'IBAN :',
     'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Адрес банка :',
     'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Банковский SWIFT :',
     'page.body.wallets.tabs.deposit.fiat.message3':
         'Пожалуйста, ВСЕГДА указывайте ссылочный код во время банковского перевода, в противном случае внесение средств займет больше времени.',
+    
+        'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepa.value': 'EUR',
+        'page.body.wallets.tabs.deposit.fiat.sepa.value': 'MT45PHPY270070PHOENIX0000000013',
+        'page.body.wallets.tabs.deposit.fiat.bankName.sepa.value': 'PHOENIX PAYMENTS LTD',
+        'page.body.wallets.tabs.deposit.fiat.bankAddress.sepa.value': 'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepa.value': 'PHPYMTM1XXX',
+    'page.body.wallets.tabs.deposit.fiat.eur.sepa': 'SEPA',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.usd.value': 'USD',
     'page.body.wallets.tabs.deposit.fiat.iban.usd.value': 'AE 240570000011101251020',
@@ -690,10 +822,10 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.minimal.aed.value': 'AED 50',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.eur.value': 'EUR',
-    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'MT24PHPY270070PHOENIX0000884546',
-    'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'PHOENIX PAYMENTS LTD',
-    'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': 'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
-    'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'PHPYMTM1XXX',
+    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'LU076131712217214160',
+    'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'ONPEX S.A.',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': '59 Boulevard Royal, 2449 Luxembourg',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'ONPXLULM',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text': 'Минимальный депозит ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': '50 EUR',
     'refcode.code_owner_not_found': 'Владелец кода не найден',
@@ -851,6 +983,27 @@ export const ru: LangType = {
     "bchbtc_description": "BCH в BTC ✅ Конвертер Биткоин Кэш ➤ Обмен онлайн ➤ Большие объемы торгов ➤ Выгодные рыночные цены в режиме реального времени ➤ Быстро, надежно, проверено",
     "referral_title": "Получите биткоин. Реферальная крипто-программа | Emirex.com",
   "referral_description": "Получите биткоины бесплатно. Лучшая реферальная программа. Присоединяйтесь к реферальной программе ✅ WinWithEmirex",
-  
+ 
+    'page.body.modal.blockNationality.header': 'Access denied',
+    'page.body.modal.blockNationality.message': 'Due to international and local financial/cryptocurrency regulations we do not currently provide services to citizens of the selected country. Thank you for understanding.',
+    'page.body.modal.blockNationality.button': 'I understand',
+
+    'page.body.modal.kyc.login.header': 'Завершите Вашу регистрацию',
+    'page.body.modal.kyc.login.text': 'Для того, чтобы перейти на следующую ступень регистрации Вашего аккаунта, пожалуйста следуйте инструкциям на следующей странице',
+    'page.body.modal.kyc.login.go.kyc.level': 'Получить уровень ',
+    'page.body.modal.kyc.login.later': 'Позже',
+
+
+    'page.idenfy.dear-customer': 'Dear Customer, ',
+    'page.idenfy.your-identity': 'Your identity is now being verified by our team. ',
+    'page.idenfy.process': 'This process usually takes up to 15 minutes. ',
+    'page.idenfy.please': 'Please, do not make any attempts to verify your account, as they will fail. ',
+    'page.idenfy.thanks': 'Thank you for your patience.',
+    'page.idenfy.understand': 'I understand',
+
+    'page.wallets.withdraw.fiat': 'Внимание: при внесении на счет сумм, превышающих установленные лимиты, Ваши средства будут возвращены, после вычета комиссий.',
+
+
     ...nationalitiesNames,
+    ...pluginsTranslations,
 };

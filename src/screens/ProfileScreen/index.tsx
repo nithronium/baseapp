@@ -5,9 +5,9 @@ import { withRouter } from 'react-router-dom';
 import { ProfileAccountActivity } from '../../containers/ProfileAccountActivity';
 import { ProfileApiKeys } from '../../containers/ProfileApiKeys';
 import { ProfileApiKeysLite } from '../../containers/ProfileApiKeysLite';
-import { ProfileAuthDetails } from '../../containers/ProfileAuthDetails';
-import { ProfileVerification } from '../../containers/ProfileVerification';
 import { ReferralProgram } from '../../containers/ReferralProgram';
+import { ProfileAuthDetails } from '../../custom/containers';
+import { ProfileVerification } from '../../custom/containers/ProfileVerification';
 import { VersionGuardWrapper } from '../../decorators';
 import { setDocumentTitle } from '../../helpers';
 
@@ -37,7 +37,7 @@ class ProfileComponent extends React.Component<RouterProps> {
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
-                            {VersionGuardWrapper(ProfileVerification, ProfileVerification)}
+                            <ProfileVerification />
                         </div>
                     </div>
                     <div className="row px-4">

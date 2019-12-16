@@ -19,6 +19,7 @@ export * from './ModalWithdrawConfirmation';
 export * from './LegalDocuments';
 export * from './RecentTrades';
 export * from './Alerts';
+export * from './GeetestCaptcha';
 export * from './ToolBar';
 export * from './Confirm/Documents';
 export * from './Confirm/Identity';

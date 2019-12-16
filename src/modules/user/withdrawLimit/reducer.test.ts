@@ -7,10 +7,18 @@ import { WithdrawLimit } from './types';
 
 describe('withdrawLimitList reducer', () => {
     const withdrawLimit: WithdrawLimit = {
-            limit: 3,
-            period: 48,
-            withdrawal_amount: 0.3,
-            currency: 'btc',
+            withdraw:
+            {
+                limit: '10.0',
+                period: 24,
+                withdrawal_amount: '0.0',
+                currency: 'btc',
+            },
+            deposit:
+            {
+                limit: '10',
+                period: 24,
+            },
         };
 
     const error = {
@@ -21,10 +29,18 @@ describe('withdrawLimitList reducer', () => {
     it('should handle WITHDRAW_LIMIT_FETCH', () => {
         const expectedState = {
             data: {
-                limit: '0.0',
-                period: 0,
-                withdrawal_amount: '0.0',
-                currency: '',
+                withdraw:
+                {
+                    limit: '10.0',
+                    period: 24,
+                    withdrawal_amount: '0.0',
+                    currency: 'btc',
+                },
+                deposit:
+                {
+                    limit: '10',
+                    period: 24,
+                },
             },
             loading: true,
             success: false,
@@ -44,10 +60,18 @@ describe('withdrawLimitList reducer', () => {
     it('should handle WITHDRAW_LIMIT_ERROR', () => {
         const expectedState = {
             data: {
-                limit: '0.0',
-                period: 0,
-                withdrawal_amount: '0.0',
-                currency: '',
+                withdraw:
+                {
+                    limit: '10.0',
+                    period: 24,
+                    withdrawal_amount: '0.0',
+                    currency: 'btc',
+                },
+                deposit:
+                {
+                    limit: '10',
+                    period: 24,
+                },
             },
             loading: false,
             success: false,

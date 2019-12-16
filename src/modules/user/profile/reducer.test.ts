@@ -128,6 +128,35 @@ describe('Profile reducer', () => {
         expect(profileReducer(actualState, actions.changeUserLevel({ level: 2 }))).toEqual(expectedState);
     });
 
+    it('should handle CHANGE_USER_PROFILE_DATA', () => {
+        const profileIdentityToUpdate = {
+            first_name: 'John',
+            last_name: 'Smith',
+            dob: '11/12/1980',
+            address: 'Black street 1',
+            postcode: '000777',
+            city: 'London',
+            country: 'GB',
+            number: '123',
+        };
+
+        const actualState = {
+            ...initialStateProfile,
+            userData: { ...initialStateProfile.userData, user: userData.user },
+        };
+        const expectedState = {
+            ...initialStateProfile,
+            userData: {
+                ...initialStateProfile.userData,
+                user: {
+                    ...userData.user,
+                    profile: profileIdentityToUpdate,
+                },
+            },
+        };
+        expect(profileReducer(actualState, actions.changeUserProfileData(profileIdentityToUpdate))).toEqual(expectedState);
+    });
+
     it('should handle CHANGE_PASSWORD_FETCH', () => {
         const payload = {
             old_password: '123123',

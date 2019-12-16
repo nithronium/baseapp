@@ -1,5 +1,15 @@
 //tslint:disable
 export const en = {
+    'page.body.profile.header.account.profile.upgrade': 'Upgrade your level now',
+    'page.body.profile.header.account.profile.abilities.first.message1': '- Ability to deposit / withdraw up to {amount}{currency} equivalent per year',
+    'page.body.profile.header.account.profile.abilities.first.message2': '- Ability to trade',
+    'page.body.profile.header.account.profile.abilities.second.message1': '- Ability to deposit / withdraw up to {amount}{currency} equivalent per year',
+    'page.body.profile.header.account.profile.abilities.second.message2': '- Ability to deposit / withdraw using a Credit / Debit card {amount}{currency}',
+    'page.body.profile.header.account.profile.abilities.third': '- No limit of deposit / withdrawals',
+    'page.body.profile.header.account.profile.withdraw': 'Your WITHDRAW limit: ',
+    'page.body.profile.header.account.profile.deposit': 'Your DEPOSIT limit: ',
+    'page.body.profile.header.account.profile.knowMore': 'Know more about verification levels',
+    'page.body.profile.header.account.content.profile.edit': 'Edit profile',
 
     'page.body.trade.header.orderHistory': 'Order History',
     'page.body.trade.header.balances': 'Balances',
@@ -15,18 +25,127 @@ export const en = {
     'page.body.trade.header.funds.content.value': 'Value in ',
     'page.body.trade.header.funds.content.name': 'Name',
 
+    'page.body.kyc.head.level.first': 'Email',
+    'page.body.kyc.head.level.second': 'Profile',
+    'page.body.kyc.head.level.third': 'Phone',
+    'page.body.kyc.head.level.fourth': 'Identity',
+    'page.body.kyc.head.level.fifth': 'Residential address',
+    'page.body.kyc.head.level.sixth': 'Questionnaire',
+
+    'page.body.trade.header.upcoming': 'Up coming',
+    'page.body.trade.header.inProgress': 'In progress',
+    'page.body.trade.header.past': 'Past',
+
+    'page.body.kyc.documents.upload': 'Upload your proof of residence',
+    'page.body.kyc.documents.expiration': 'The documents provided may not be older than 3 months',
+    'page.body.kyc.documents.expiryDate': 'Date of emission DD/MM/YYYY',
+    'page.body.kyc.documents.select.bankStatement': 'Bank statement',
+    'page.body.kyc.documents.select.taxCertificate': 'Tax certificate',
+    'page.body.kyc.documents.select.leaseOfRentalAgreement': 'Lease of rental agreement',
+    'page.body.kyc.documents.questionnaire.title.part1': 'Please fill the',
+    'page.body.kyc.documents.questionnaire.title.part2': 'to process to your level upgrade.',
+    'page.body.kyc.documents.questionnaire.subtitle': 'questionnaire',
+
+    'page.body.kyc.questionnaire.title': 'Please answer the questions',
+
+    'page.body.kyc.questionnaire.question1': 'Do you have an established relationship with any other cryptocurrency exchange?',
+    'page.body.kyc.questionnaire.question1.answer1': 'No',
+    'page.body.kyc.questionnaire.question1.answer2': 'Yes',
+
+    'page.body.kyc.questionnaire.question2': 'How much trading experience do you have?',
+    'page.body.kyc.questionnaire.question2.answer1': '0 - 5 years',
+    'page.body.kyc.questionnaire.question2.answer2': '5 - 10 years',
+    'page.body.kyc.questionnaire.question2.answer3': '> 10 years',
+
+    'page.body.kyc.questionnaire.question3': 'Expected monthly trade activity',
+    'page.body.kyc.questionnaire.question3.answer1': '0 - 250 trades per month',
+    'page.body.kyc.questionnaire.question3.answer2': '>250 and <1K per month',
+    'page.body.kyc.questionnaire.question3.answer3': '>1K trades per month',
+
+    'page.body.kyc.questionnaire.question4': 'Employer (If self-employed, please describe your self-employment)',
+    'page.body.kyc.questionnaire.question4.input1': 'Employer',
+    'page.body.kyc.questionnaire.question4.input2': 'Position',
+
+    'page.body.kyc.questionnaire.question5': 'Will you be withdrawing USD to a US bank?',
+    'page.body.kyc.questionnaire.question5.answer1': 'Yes',
+    'page.body.kyc.questionnaire.question5.answer2': 'No',
+
+    'page.body.kyc.questionnaire.question6': 'Please specify which currency will be represented in your answers to the  questions below',
+    'page.body.kyc.questionnaire.question6.answer1': 'EUR',
+    'page.body.kyc.questionnaire.question6.answer2': 'USD',
+    'page.body.kyc.questionnaire.question6.answer3': 'CAD',
+    'page.body.kyc.questionnaire.question6.answer4': 'JPY',
+    'page.body.kyc.questionnaire.question6.answer5': 'GBP',
+
+    'page.body.kyc.questionnaire.question7': 'Net worth',
+    'page.body.kyc.questionnaire.question7.answer1': '0 to 500,000',
+    'page.body.kyc.questionnaire.question7.answer2': '500,001-2,000,000',
+    'page.body.kyc.questionnaire.question7.answer3': '2,000,001-5,000,000',
+    'page.body.kyc.questionnaire.question7.answer4': '5,000,001-10,000,000',
+    'page.body.kyc.questionnaire.question7.answer5': '10,000,000+',
+
+    'page.body.kyc.questionnaire.question8': 'Expected sum of monthly deposits',
+    'page.body.kyc.questionnaire.question8.answer1': '0 to 500,000',
+    'page.body.kyc.questionnaire.question8.answer2': '500,001-10,000,000',
+    'page.body.kyc.questionnaire.question8.answer3': '10,000,000+',
+
+    'page.body.kyc.questionnaire.question9': 'Expected sum of monthly withdrawals',
+    'page.body.kyc.questionnaire.question9.answer1': '0 to 500,000',
+    'page.body.kyc.questionnaire.question9.answer2': '500,001-10,000,000',
+    'page.body.kyc.questionnaire.question9.answer3': '10,000,000+',
+
+    'page.body.kyc.questionnaire.question10': 'Primary source of wealth',
+    'page.body.kyc.questionnaire.question10.answer1': 'Investments',
+    'page.body.kyc.questionnaire.question10.answer2': 'Employment income',
+    'page.body.kyc.questionnaire.question10.answer3': 'Inheritance',
+    'page.body.kyc.questionnaire.question10.answer4': 'Other',
+
+    'page.body.kyc.questionnaire.question11': 'Are you or your relatives are politically exposed persons? ',
+    'page.body.kyc.questionnaire.question11.answer1': 'Yes',
+    'page.body.kyc.questionnaire.question11.answer2': 'No',
+
+    'page.body.kyc.questionnaire.question12': 'Have you ever been involved in any money laundering activity',
+    'page.body.kyc.questionnaire.question12.answer1': 'Yes',
+    'page.body.kyc.questionnaire.question12.answer2': 'No',
+
+    'page.body.kyc.questionnaire.question13': 'Any feedback or comments you would like to give us',
+    'page.body.kyc.questionnaire.question13.textarea': 'Your comment',
+    'page.body.kyc.questionnaire.dropDown.placeholder': 'Select an answer',
+
+    'page.body.kyc.confirm': 'Confirm',
+
     'page.body.trade.header.openOrders.content.date': 'Time',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Deposit currency :',
     'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN :',
   'page.body.wallets.tabs.deposit.fiat.usd.iban': 'IBAN :',
   'page.body.wallets.tabs.deposit.fiat.aed.iban': 'IBAN :',
-    'page.body.wallets.tabs.deposit.fiat.eur.iban': 'SEPA IBAN :',
+    'page.body.wallets.tabs.deposit.fiat.eur.iban': 'IBAN :',
     'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Bank address :',
     'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Bank SWIFT :',
     'page.body.wallets.tabs.deposit.fiat.message3': 'Please, ALWAYS mention the reference code during the wire transfer, otherwise it will take longer to deposit your funds.',
 
     'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
+    
+  'page.body.wallets.tabs.deposit.fiat.button.wire': "Wire transfer",
+  'page.body.wallets.tabs.deposit.fiat.button.card': "Credit/Debet card",
+  'page.body.wallets.tabs.deposit.fiat.button.sepa': 'SEPA transfer',
+  'page.body.wallets.tabs.deposit.fiat.button.swift': 'EUR SWIFT',
+  'cardDepositFiat.detail': 'Payment details',
+  'cardDepositFiat.amount': 'Amount',
+  'cardDepositFiat.currency': 'Currency',
+  'cardDepositFiat.button.payment': 'PROCESS PAYMENT',
+  'cardDepositFiat.button.cancel': 'Cancel',
+
+  'page.body.wallets.tabs.deposit.fiat.levelMessage': 'Verification level 2 is required in order to access the option of balance top up via credit or debit card.',
+  'page.body.wallets.tabs.deposit.fiat.levelLink': 'Please upgrade your verification level',
+
+  'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepa.value': 'EUR',
+  'page.body.wallets.tabs.deposit.fiat.sepa.value': 'MT45PHPY270070PHOENIX0000000013',
+  'page.body.wallets.tabs.deposit.fiat.bankName.sepa.value': 'PHOENIX PAYMENTS LTD',
+  'page.body.wallets.tabs.deposit.fiat.bankAddress.sepa.value': 'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
+  'page.body.wallets.tabs.deposit.fiat.bankSwift.sepa.value': 'PHPYMTM1XXX',
+  'page.body.wallets.tabs.deposit.fiat.eur.sepa': 'SEPA',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.usd.value': 'USD',
     'page.body.wallets.tabs.deposit.fiat.iban.usd.value': 'AE 240570000011101251020',
@@ -45,10 +164,10 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.minimal.aed.value': 'AED 50',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.eur.value': 'EUR',
-    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'MT24PHPY270070PHOENIX0000884546',
-    'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'PHOENIX PAYMENTS LTD',
-    'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': 'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
-    'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'PHPYMTM1XXX',
+    'page.body.wallets.tabs.deposit.fiat.iban.eur.value': 'LU076131712217214160',
+    'page.body.wallets.tabs.deposit.fiat.bankName.eur.value': 'ONPEX S.A.',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': '59 Boulevard Royal, 2449 Luxembourg',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'ONPXLULM',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text': 'Minimal deposit amount is ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': 'EUR 50',
     'page.body.profile.mfa.button.text': 'COPY',
@@ -208,6 +327,42 @@ export const en = {
   "bchbtc_description": "BCH to BTC Exchange. Real-time prices and charts. Converter Bitcoin Cash in Bitcoin (BTC). 24/7 support. You can buy & sell using up to date exchange rates",
   "referral_title": "Get Bitcoin. Crypto Referral Program | Emirex.com",
   "referral_description": "Get Bitcoins for free. The best referral program. Join the affiliate program of ✅ WinWithEmirex",
-    
+
+    'page.body.modal.blockNationality.header': 'Access denied',
+    'page.body.modal.blockNationality.message': 'Due to international and local financial/cryptocurrency regulations we do not currently provide services to citizens of the selected country. Thank you for understanding.',
+    'page.body.modal.blockNationality.button': 'I understand',
+
+    'resource.profile.dateOfBirth': 'User must be over 21 years old',
+
+    'resource.documents.expirationDate': 'Date of emission is invalid',
+    'resource.document.empty_doc_expire': 'Date of emission is invalid',
+    'resource.documents.empty_doc_expire': 'Documents date of emission is missing or empty',
+
+    'resource.profile.email': 'Email is under review',
+    'resource.profile.profile': 'Profile is under review',
+    'resource.profile.phone': 'Phone is under review',
+    'resource.profile.kyc': 'KYC is under review',
+    'resource.profile.document': 'Proof of residence is under review',
+    'resource.profile.questionnaire': 'Questionnaire is under review',
+    'resource.profile.identity': 'Identity is under review',
+
+    'resource.profile.kyc.denied': 'Your last kyc was denied. Please, try again',
+    'resource.profile.document.denied': 'Your documents were denied. Please, try again',
+    'success.dataStorage.pushed': 'Success!',
+
+    'page.body.modal.kyc.login.header': 'Finalize your registration',
+    'page.body.modal.kyc.login.text': 'To proceed with the next step in your account setup, please follow the instructions on the next page.',
+    'page.body.modal.kyc.login.go.kyc.level': 'Get level',
+    'page.body.modal.kyc.login.later': 'Later',
+
+
+    'page.idenfy.dear-customer': 'Dear Customer, ',
+    'page.idenfy.your-identity': 'Your identity is now being verified by our team. ',
+    'page.idenfy.process': 'This process usually takes up to 15 minutes. ',
+    'page.idenfy.please': 'Please, do not make any attempts to verify your account, as they will fail. ',
+    'page.idenfy.thanks': 'Thank you for your patience.',
+    'page.idenfy.understand': 'I understand',
+
+    'page.wallets.withdraw.fiat': 'Attention: Should you send a larger amount than your limitation, funds shall be returned and fees will be charged.',
 
 };

@@ -10,9 +10,9 @@ import { PrivateTradeEvent, WalletHistoryList } from './types';
 
 export interface HistoryFetchPayload {
     currency?: string;
-    page: number;
+    page?: number;
     type: string;
-    limit: number;
+    limit?: number;
     market?: string;
     time_from?: string;
     time_to?: string;

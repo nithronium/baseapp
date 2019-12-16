@@ -31,10 +31,18 @@ describe('Module: WithdrawLimit', () => {
     };
 
     const fakeData = {
-        limit: 3,
-        period: 48,
-        withdrawal_amount: 0.3,
-        currency: 'btc',
+        withdraw:
+        {
+            limit: '10.0',
+            period: 24,
+            withdrawal_amount: '0.0',
+            currency: 'btc',
+        },
+        deposit:
+        {
+            limit: '10',
+            period: 24,
+        },
     };
 
     const mockWithdrawLimit = () => {

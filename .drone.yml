@@ -1,12 +1,12 @@
 ---
 kind: pipeline
-name: "Push"
+name: "Stage"
 
 concurrency:
   limit: 2
 
 steps:
-  - name: "Test & Build"
+  - name: "Test"
     image: node:10.11
     environment:
       REACT_APP_BUILD_VERSION: Enterprise
@@ -22,61 +22,8 @@ steps:
       - yarn install
       - yarn lint
       - yarn test:ci --collectCoverage=true
-      - yarn build
 
-  - name: "Stage with mock server"
-    image: alpine/git
-    environment:
-      PRIVATE_KEY:
-        from_secret: deploy_key
-    commands:
-      - echo "$PRIVATE_KEY" | base64 -d > id_rsa
-      - chmod 0600 id_rsa
-      - cd build/config/
-      - echo "window.env={api:{authUrl:'http://api-v2.mock.openware.work/api/v2/barong',tradeUrl:'http://api-v2.mock.openware.work/api/v2/peatio',applogicUrl:'http://api-v2.mock.openware.work/api/v2/applogic',rangerUrl:'ws://ranger.mock.openware.work/api/v2/ranger'},captcha:{captchaType:'none',siteKey:''}};" > env.js
-      - cat env.js
-      - cd /drone/src/
-      - scp -r -i id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null build mock@mock.openware.work:/home/mock/builds/${DRONE_COMMIT_SHA:0:7}
-      - scp -r -i id_rsa -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null coverage/lcov-report mock@mock.openware.work:/home/mock/builds/${DRONE_COMMIT_SHA:0:7}-coverage
-      - echo "http://${DRONE_COMMIT_SHA:0:7}.mock.openware.work"
-      - echo "http://${DRONE_COMMIT_SHA:0:7}-coverage.mock.openware.work"
-
-  - name: "Notify staging"
-    image: plugins/slack
-    settings:
-      webhook:
-        from_secret: baseapp_slack_webhook
-      channel:
-        from_secret: baseapp_slack_channel
-      template: >
-        {{#success build.status}}
-          [SUCCESS] (Base Application) Branch {{ build.branch }} by {{ build.author }} staging has succeeded!
-
-          Visit http://{{ truncate build.commit 7 }}.mock.openware.work to check it out!
-          Coverage report: http://{{ truncate build.commit 7 }}-coverage.mock.openware.work
-        {{else}}
-          [FAILURE] Branch {{ build.branch }} by {{ build.author }} staging has failed!
-        {{/success}}
-        Check the build info here: {{ build.link }}
-    when:
-      status: [success, failure]
-
-trigger:
-  event:
-    - push
-  branch:
-    exclude:
-    - master
-
----
-kind: pipeline
-name: "New version"
-
-concurrency:
-  limit: 2
-
-steps:
-  - name: "Test"
+  - name: "Build"
     image: node:10.11
     environment:
       NPM_AUTH_TOKEN:
@@ -84,82 +31,32 @@ steps:
     commands:
       - echo "//registry.npmjs.org/:_authToken=$NPM_AUTH_TOKEN" > .npmrc
       - npm -g install yarn
-      - yarn install
-      - yarn lint
-      - yarn test:ci --collectCoverage=true
+      - yarn build
 
-  - name: "Bump & Tag"
-    image: node:10.11
-    environment:
-      GITHUB_API_KEY:
-        from_secret: kite_bot_key
-    commands:
-      - set -x
-      - git config --global user.name "Kite Bot"
-      - git config --global user.email "kite-bot@heliostech.fr"
-      - git remote add authenticated-origin https://kite-bot:$GITHUB_API_KEY@github.com/${DRONE_REPO}
-      - git fetch authenticated-origin
-      - yarn config set version-git-message "[ci Skip] Bump %s"
-      - yarn config set version-tag-prefix ""
-      - git_msg=$(git log -n1 --pretty=oneline)
-      - patch_level=$( (echo $git_msg | grep -q MAJOR-BUMP && echo major) || (echo $git_msg | grep -q MINOR-BUMP && echo minor) || echo patch)
-      - yarn version --"$patch_level" -y
-      - git push authenticated-origin HEAD:master
-      - git push authenticated-origin --tags
-      - git describe --tags $(git rev-list --tags --max-count=1) > .tags
-
-  - name: "Publish to Gitolite"
-    image: alpine/git
-    environment:
-      GITOLITE_KEY:
-        from_secret: gitolite_rsa_key_b64
-    commands:
-      - mkdir -p ~/.ssh
-      - echo $GITOLITE_KEY | base64 -d > ~/.ssh/id_rsa
-      - chmod 0600 ~/.ssh/id_rsa
-      - git remote add gitolite git@git.openware.com:baseapp
-      - GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" git push -f --no-verify gitolite HEAD:master
-
-  - name: "Build enterprise image"
-    image: plugins/gcr
-    environment:
-      BUILD_EXPIRE: $(date -d "+1 month" +%s000)
-      BUILD_DOMAIN: $(cat .domains)
-      REACT_APP_BUILD_VERSION: Enterprise
-    settings:
-      repo: gcr.io/openware-production/baseapp
-      build_args_from_env:
-        - BUILD_DOMAIN
-        - BUILD_EXPIRE
-      json_key:
-        from_secret: openware_gcp_creds_base64
-
-  - name: "Build lite image"
+  - name: "Build container"
     image: plugins/docker
     environment:
-      BUILD_EXPIRE: $(date -d "+1 month" +%s000)
-      REACT_APP_BUILD_VERSION: Lite
-      REACT_APP_TENKO_PUBLIC_KEY:
-        from_secret: tenko_public_key
+      NPM_AUTH_TOKEN:
+        from_secret: drone_npm_auth_token
+      REACT_APP_BUILD_VERSION: Enterprise
     settings:
-      username:
-        from_secret: quay_username
-      password:
-        from_secret: quay_password
-      repo: quay.io/openware/baseapp-lite
+      registry: reg.openware.work
+      repo: reg.openware.work/emirex/baseapp
       build_args_from_env:
         - REACT_APP_BUILD_VERSION
-        - REACT_APP_TENKO_PUBLIC_KEY
-        - BUILD_EXPIRE
-      registry: quay.io
+        - NPM_AUTH_TOKEN
+      username:
+        from_secret: ow_registry_username
+      password:
+        from_secret: ow_registry_password
 
-  - name: "Redeploy on devkube"
+  - name: "Redeploy on stage"
     image: rubykube/microkube:0.2.0
     environment:
-        WEBHOOK_JWT_SECRET:
-            from_secret: devkube_webhook_secret
+      WEBHOOK_JWT_SECRET:
+        from_secret: emirex_webhook_secret
     commands:
-      - export latest_image=gcr.io/openware-production/baseapp:$(cat .tags)
+      - export latest_image=reg.openware.work/emirex/baseapp:$(cat .tags)
       - cd /home/app
       - bundle exec rake payload:send[frontend,$latest_image,http://www.devkube.com:1337]
 

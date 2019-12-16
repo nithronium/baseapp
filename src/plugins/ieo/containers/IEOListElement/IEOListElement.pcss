@@ -1,0 +1,16 @@
+.pg-ieo-page{
+  &__list {
+    display: grid;
+    grid-template-columns: calc(var(--gap) * 36.33) calc(var(--gap) * 36.33) calc(var(--gap) * 36.33) calc(var(--gap) * 36.33);
+    grid-column-gap: calc(var(--gap) * 3.83);
+
+    @media(max-width: 576px) {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__header {
+    color: var(--header-text);
+  }
+}
