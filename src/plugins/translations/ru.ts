@@ -11,7 +11,7 @@ export const ru = {
     'page.body.ieo.profile.details.session.supply': 'Объем токенов на продажу',
     'page.body.ieo.profile.details.total.supply': 'Общее предложение токенов',
     'page.body.ieo.profile.details..ieo.ratio': 'IEO Ratio',
-    'page.body.ieo.profile.details.pre.sale.price': 'Цена за одиг токен',
+    'page.body.ieo.profile.details.pre.sale.price': 'Цена за один токен',
     'page.body.ieo.profile.details.minimum.contribution': 'Минимальное количество покупки',
     'page.body.ieo.profile.details.maximum.contribution': 'Максимальное количество покупки',
     'page.body.ieo.profile.details.ieo.start': 'Дата и время начала IEO',
