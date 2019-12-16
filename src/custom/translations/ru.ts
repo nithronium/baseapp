@@ -414,7 +414,7 @@ export const ru: LangType = {
     'page.body.kyc.questionnaire.question3.answer2': '250 - 1K торговых операций за месяц',
     'page.body.kyc.questionnaire.question3.answer3': 'больше 1K торговых операций за месяц',
 
-    'page.body.kyc.questionnaire.question4': 'Работодатель(если Вы самозанятый, опишите род вашей деятельности )',
+    'page.body.kyc.questionnaire.question4': 'Работодатель (если Вы самозанятый, опишите род Вашей деятельности)',
     'page.body.kyc.questionnaire.question4.input1': 'Работодатель',
     'page.body.kyc.questionnaire.question4.input2': 'Должность',
 
