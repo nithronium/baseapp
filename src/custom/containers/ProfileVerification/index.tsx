@@ -279,6 +279,8 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
         }
         const percentage = Math.round(+evaluatedDepositsTotal / +withdrawLimitData.deposit.limit * 100);
         const currentCurrency = 'USD';
+        const withdrawalLimitCurrency = currentCurrency.toLocaleLowerCase().includes('usd') ?
+            '$' : ` ${currentCurrency.toUpperCase()}`;
         const currencyPrecision = 2;
 
         return (
@@ -292,7 +294,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                     </div>
                     <span className="pg-profile-verification__deposit-limit__wrap__text">
                         <FormattedMessage id="page.body.profile.header.account.profile.deposit" />
-                        &nbsp;{Decimal.format(evaluatedDepositsTotal, currencyPrecision)} / {Decimal.format(withdrawLimitData.deposit.limit, currencyPrecision)}{currentCurrency}
+                        &nbsp;{Decimal.format(evaluatedDepositsTotal, currencyPrecision)} / {Decimal.format(withdrawLimitData.deposit.limit, currencyPrecision)}{withdrawalLimitCurrency}
                     </span>
                 </div>
             </div>
