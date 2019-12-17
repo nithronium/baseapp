@@ -18,6 +18,7 @@ import {
     selectUserInfo,
     User,
 } from '../../../modules';
+import { changeUserLevel } from '../../../modules/user/profile';
 import { BlockNationalityModal } from '../../components';
 import { Documents } from '../../containers/Confirm/Documents';
 import { Idenfy } from '../../containers/Confirm/Idenfy';
@@ -36,6 +37,7 @@ interface HistoryProps {
 }
 
 interface DispatchProps {
+    changeUserLevel: typeof changeUserLevel;
     fetchAlert: typeof alertPush;
     labelFetch: typeof labelFetch;
 }
@@ -206,20 +208,26 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         }
 
         if (level === 3) {
-            const kycVerification = labels.find(label => label.key === 'document' && label.value === 'denied' && label.scope === 'private');
+            const kycDenied = labels.find(label => label.key === 'identity' && label.value === 'denied' && label.scope === 'private');
+            const kycApproved = labels.find(label => label.key === 'identity' && label.value === 'approved' && label.scope === 'private');
 
-            if (kycVerification && !this.state.kycAlert) {
+            if (kycDenied && !this.state.kycAlert) {
                 fetchAlert({ message: ['resource.profile.kyc.denied'], type: 'error' });
                 this.setState({
                     kycAlert: true,
                 });
             }
 
+            if (kycApproved) {
+                this.props.changeUserLevel({ level: 4 });
+                return <Documents />;
+            }
+
             return <Idenfy />;
         }
 
         if (level === 4) {
-            const documentsVerification = labels.find(label => label.key === 'document' && label.value === 'denied' && label.scope === 'private');
+            const documentsVerification = labels.find(label => label.key === 'document' && label.value === 'rejected' && label.scope === 'private');
 
             if (documentsVerification && !this.state.documentsAlert) {
                 fetchAlert({ message: ['resource.profile.document.denied'], type: 'error' });
@@ -248,6 +256,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    changeUserLevel: payload => dispatch(changeUserLevel(payload)),
     fetchAlert: payload => dispatch(alertPush(payload)),
     labelFetch: () => dispatch(labelFetch()),
 });
