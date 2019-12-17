@@ -1001,6 +1001,7 @@ export const ru: LangType = {
     'page.idenfy.thanks': 'Thank you for your patience.',
     'page.idenfy.understand': 'I understand',
     'comingsoon': 'СКОРО',
+    'page.body.trade.header.newOrder.content.tabs.fee': 'Комиссия',
 
     'page.wallets.withdraw.fiat': 'Внимание: при внесении на счет сумм, превышающих установленные лимиты, Ваши средства будут возвращены, после вычета комиссий.',
 

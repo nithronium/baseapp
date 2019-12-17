@@ -136,6 +136,7 @@ class OrderIEOContainer extends React.PureComponent<Props> {
                 priceText={this.props.intl.formatMessage({ id: 'page.body.ieo.details.order.youWillGet' })}
                 totalText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.total' })}
                 submitButtonText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.buy' })}
+                feeText={this.props.intl.formatMessage({ id: 'page.body.trade.header.newOrder.content.tabs.fee' })}
             />
         );
     };
