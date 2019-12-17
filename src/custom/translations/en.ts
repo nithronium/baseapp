@@ -128,7 +128,7 @@ export const en = {
     'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
     
   'page.body.wallets.tabs.deposit.fiat.button.wire': "Wire transfer",
-  'page.body.wallets.tabs.deposit.fiat.button.card': "Credit/Debet card",
+  'page.body.wallets.tabs.deposit.fiat.button.card': "Credit/Debit card",
   'page.body.wallets.tabs.deposit.fiat.button.sepa': 'SEPA transfer',
   'page.body.wallets.tabs.deposit.fiat.button.swift': 'EUR SWIFT',
   'cardDepositFiat.detail': 'Payment details',
@@ -141,7 +141,7 @@ export const en = {
   'page.body.wallets.tabs.deposit.fiat.levelLink': 'Please upgrade your verification level',
 
   'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepa.value': 'EUR',
-  'page.body.wallets.tabs.deposit.fiat.sepa.value': 'MT45PHPY270070PHOENIX0000000013',
+  'page.body.wallets.tabs.deposit.fiat.sepa.value': 'MT24PHPY270070PHOENIX0000884546',
   'page.body.wallets.tabs.deposit.fiat.bankName.sepa.value': 'PHOENIX PAYMENTS LTD',
   'page.body.wallets.tabs.deposit.fiat.bankAddress.sepa.value': 'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
   'page.body.wallets.tabs.deposit.fiat.bankSwift.sepa.value': 'PHPYMTM1XXX',
