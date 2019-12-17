@@ -4,7 +4,7 @@ export const en = {
     'page.body.profile.header.account.profile.abilities.first.message1': '- Ability to deposit / withdraw up to {amount}{currency} equivalent per year',
     'page.body.profile.header.account.profile.abilities.first.message2': '- Ability to trade',
     'page.body.profile.header.account.profile.abilities.second.message1': '- Ability to deposit / withdraw up to {amount}{currency} equivalent per year',
-    'page.body.profile.header.account.profile.abilities.second.message2': '- Ability to deposit / withdraw using a Credit / Debit card {amount}{currency}',
+    'page.body.profile.header.account.profile.abilities.second.message2': '- Ability to deposit / withdraw using a Credit / Debit card ',
     'page.body.profile.header.account.profile.abilities.third': '- No limit of deposit / withdrawals',
     'page.body.profile.header.account.profile.withdraw': 'Your WITHDRAW limit: ',
     'page.body.profile.header.account.profile.deposit': 'Your DEPOSIT limit: ',
