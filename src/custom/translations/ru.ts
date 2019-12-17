@@ -803,7 +803,7 @@ export const ru: LangType = {
         'page.body.wallets.tabs.deposit.fiat.bankName.sepa.value': 'PHOENIX PAYMENTS LTD',
         'page.body.wallets.tabs.deposit.fiat.bankAddress.sepa.value': 'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
     'page.body.wallets.tabs.deposit.fiat.bankSwift.sepa.value': 'PHPYMTM1XXX',
-    'page.body.wallets.tabs.deposit.fiat.eur.sepa': 'SEPA',
+    'page.body.wallets.tabs.deposit.fiat.eur.sepa': 'SEPA IBAN',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.usd.value': 'USD',
     'page.body.wallets.tabs.deposit.fiat.iban.usd.value': 'AE 240570000011101251020',

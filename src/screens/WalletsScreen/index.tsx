@@ -377,7 +377,8 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                             {this.translate('page.wallets.withdraw.fiat')}
                         </div>
                         {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />} 
-                            </div> :
+                            </div> : 
+                            currency.toLowerCase() !== 'eur' ?
                             <div>
                                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />                        
                                 <DepositFiat
@@ -388,7 +389,8 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                                     uid={user.uid}
                                 />
                                 {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
-                            </div>                       
+                                </div> :
+                                <div style={{ fontSize: '18px', paddingTop: '20px', textAlign: 'center' }}>{this.translate('comingsoon')}</div>                    
                     }        
                     
                 </React.Fragment>
