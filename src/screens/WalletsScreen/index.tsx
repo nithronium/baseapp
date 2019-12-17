@@ -378,7 +378,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                         </div>
                         {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />} 
                             </div> : 
-                            currency.toLowerCase() !== 'eur' ?
+                            currency.toLowerCase() !== 'eur' && currency.toLowerCase() !== 'usd' ?
                             <div>
                                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />                        
                                 <DepositFiat
