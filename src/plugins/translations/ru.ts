@@ -40,9 +40,9 @@ export const ru = {
     'page.body.ieo.details.info.startsAt': 'Starts at',
     'page.body.ieo.details.info.finishesAt': 'Finishes at',
     'page.body.ieo.details.info.finishedAt': 'Finished at',
-    'page.body.ieo.details.order.blur.login': 'Login or create an account',
-    'page.body.ieo.details.order.blur.btnLogin': 'Login',
-    'page.body.ieo.details.order.blur.createAccount': 'Create account',
+    'page.body.ieo.details.order.blur.login': 'Войдите или создайте свой аккаунт',
+    'page.body.ieo.details.order.blur.btnLogin': 'Войти',
+    'page.body.ieo.details.order.blur.createAccount': 'Создать аккаунт',
     'page.body.ieo.details.header.backToList': 'Назад к списку IEO',
 
     'page.body.ieo.modal.orderSuccess.title': 'Congratulations!',
