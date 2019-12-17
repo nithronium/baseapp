@@ -5,6 +5,7 @@ import { setDocumentTitle } from '../../../helpers';
 //tslint:disable
 import {
     RootState,
+    selectCurrentLanguage,
     selectUserInfo,
     User,
 } from '../../../modules';
@@ -24,6 +25,7 @@ import { getReferralTickets, getOverall } from '../../../api';
 
 interface ReduxProps {
     user: User;
+    currentLanguage: string;
 }
 //tslint:disable
 interface State {
@@ -242,7 +244,7 @@ class ReferralTickets extends React.Component<Props> {
                             </ReferralBallance>
                         </section>
                         <section id="direct">
-                            <DirectTicketDetails message={this.props.intl.formatMessage} context={this.state.direct} overall={this.state.overall.direct} user={this.props.user} />
+                            <DirectTicketDetails lang={this.props.currentLanguage} message={this.props.intl.formatMessage} context={this.state.direct} overall={this.state.overall.direct} user={this.props.user} />
                         </section>
                     </div>
                     <section id="referral">
@@ -262,6 +264,7 @@ class ReferralTickets extends React.Component<Props> {
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     user: selectUserInfo(state),
+    currentLanguage: selectCurrentLanguage(state),
 });
 
 

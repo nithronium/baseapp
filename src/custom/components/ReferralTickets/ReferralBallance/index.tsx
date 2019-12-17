@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RootState, selectUserInfo, User } from '../../../../modules';
+import { RootState,selectCurrentLanguage, selectUserInfo, User } from '../../../../modules';
+import { buildPath } from '../../../helpers';
+
 
 interface ReduxProps {
     user: User;
+    currentLanguage: string;
 }
 //tslint:disable
 interface PassedProps {
@@ -27,7 +30,7 @@ class ReferralBallanceContainer extends React.Component<Props> {
                             <b> {this.props.message({id: 'tickets.total_tickets'})}</b>: {this.props.totalTickets}
                         </div>
                         <div className="referral-container">
-                            <a href="/profile">{this.props.message({id: 'tickets.get_code'})}</a>
+                            <a href={buildPath("/profile", this.props.currentLanguage)}>{this.props.message({id: 'tickets.get_code'})}</a>
                         </div>
                     </div>
                 </div>
@@ -38,6 +41,7 @@ class ReferralBallanceContainer extends React.Component<Props> {
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
     user: selectUserInfo(state),
+    currentLanguage: selectCurrentLanguage(state),
 });
 
 export const ReferralBallance = connect(mapStateToProps)(ReferralBallanceContainer);
