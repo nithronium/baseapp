@@ -1,5 +1,5 @@
 // tslint:disable:jsx-no-lambda
-import { /*Decimal,*/ Input } from '@openware/components';
+import { Input } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
