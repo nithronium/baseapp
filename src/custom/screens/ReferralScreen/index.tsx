@@ -79,7 +79,14 @@ class Referral extends React.Component<Props> {
 
     public componentDidMount() {
 
-        const lang = this.props.location.pathname.includes('/ru/') ? 'ru' : 'en';
+        const lang = localStorage.getItem('lang_code') || 'en';
+        if (this.props.location.pathname.includes('/ru/') && lang === 'en') {
+            const location = this.props.location.pathname.slice(3);
+            this.props.history.replace(location);
+        } else if (!this.props.location.pathname.includes('/ru/') && lang === 'ru') {
+            const location = `/ru${this.props.location.pathname}`;
+            this.props.history.replace(location);
+        }
         localStorage.setItem('lang_code', lang);
         let referralCode = this.extractRefID(this.props.location.search) || '';
         if (localStorage.getItem('refCode')) {

@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { User } from '../../../../modules';
 import { ReferralOverallPayload } from '../../../modules/referralTickets';
+
+import { buildPath } from '../../../helpers';
 // import { Loader } from '../../Loader';
 interface DirectTicketInterface {
     count: number;
@@ -12,7 +14,8 @@ interface Props {
     overall: ReferralOverallPayload['overall']['direct'];
     // loading: boolean;
     user: User;
-    message: ({})=>string;
+    message: ({ }) => string;
+    lang: string;
 }
 
 // const tickets = (n: number): string => {
@@ -20,7 +23,7 @@ interface Props {
 // };
 
 class DirectTicketDetails extends React.Component<Props>{
-
+    
     public render(){
         const ctx = this.props.context;
         const reg = ctx.ticketsForRegistration;
@@ -54,13 +57,13 @@ class DirectTicketDetails extends React.Component<Props>{
                                         <td><span className="count">{ctx.usd.active} </span><span className="explanation">{this.props.message({id: 'tickets.tick'})}</span></td>
                                         <td><span className="count">{ctx.usd.inactive} </span><span className="explanation">{this.props.message({id: 'tickets.tick'})}</span></td>
                                         <td><span className="count">{`${this.props.message({id: 'tickets.balance'})} ${ctx.usd.balance.toFixed(2)} USD`}</span></td>
-                                        <td><span className="count"><a href="/wallets"><button className="button">{this.props.message({id: 'tickets.getmore'})}</button></a></span></td>
+                                        <td><span className="count"><a href={buildPath("/wallets", this.props.lang)}><button className="button">{this.props.message({id: 'tickets.getmore'})}</button></a></span></td>
                                     </tr>
                                     <tr>
                                         <td><span className="count">{ctx.emrx.active} </span><span className="explanation">{this.props.message({id: 'tickets.tick'})}</span></td>
                                         <td><span className="count">{ctx.emrx.inactive} </span><span className="explanation">{this.props.message({id: 'tickets.tick'})}</span></td>
                                         <td><span className="count">{`${this.props.message({id: 'tickets.emrx'})} ${ctx.emrx.balance.toFixed(2)} USD`}</span></td>
-                                        <td><span className="count"><a href="/wallets"><button className="button">{this.props.message({id: 'tickets.getmore'})}</button></a></span></td>
+                                        <td><span className="count"><a href={buildPath("/wallets", this.props.lang)}><button className="button">{this.props.message({id: 'tickets.getmore'})}</button></a></span></td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -83,7 +86,7 @@ class DirectTicketDetails extends React.Component<Props>{
             <tr>
                 <td/>
                 <td colSpan={2}><span className="explanation">{this.props.message({id: 'tickets.topUp'})}</span></td>
-                <td><span className="count"><a href="/wallets"><button className="button">{this.props.message({id: 'tickets.button_topUp'})}</button></a></span></td>
+                <td><span className="count"><a href={buildPath("/wallets", this.props.lang)}><button className="button">{this.props.message({id: 'tickets.button_topUp'})}</button></a></span></td>
 
             </tr>
         );
@@ -92,7 +95,7 @@ class DirectTicketDetails extends React.Component<Props>{
             <tr>
                 <td/>
                 <td colSpan={2}><span className="explanation">{this.props.message({id: 'tickets.enterCode'})}</span></td>
-                <td><span className="count"><a href="/profile"><button className="button">{this.props.message({id: 'tickets.button_enterCode'})}</button></a></span></td>
+                <td><span className="count"><a href={buildPath("/profile", this.props.lang)}><button className="button">{this.props.message({id: 'tickets.button_enterCode'})}</button></a></span></td>
             </tr>
         )
         return (

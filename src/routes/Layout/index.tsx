@@ -164,12 +164,12 @@ class LayoutComponent extends React.Component<LayoutProps> {
 
     public componentDidUpdate(next: LayoutProps) {
         const {
-            currentLanguage,
+            // currentLanguage,
             isLoggedIn,
-            history,
+            // history,
         } = this.props;
                   
-     
+        // const base = currentLanguage === 'en' ? '' : `/${currentLanguage}`
         const siteState = localStorage.getItem('uil');
 
         if (isLoggedIn && !siteState) {
@@ -180,12 +180,12 @@ class LayoutComponent extends React.Component<LayoutProps> {
             localStorage.removeItem('uil');
         }
 
-        if (!isLoggedIn && next.isLoggedIn) {
-            this.props.walletsReset();
-            if ((!history.location.pathname.includes('/trading')) && (!history.location.pathname.includes('/referral'))) {
-                history.push(buildPath('/trading/', currentLanguage));
-            }
-        }
+        // if (!isLoggedIn && next.isLoggedIn) {
+        //     this.props.walletsReset();
+        //     if ((!history.location.pathname.includes(`${base}/trading`)) && (!history.location.pathname.includes(`${base}/referral`))) {
+        //         history.push(buildPath('/trading/', currentLanguage));
+        //     }
+        // }
     }
     public componentWillUnmount() {
         for (const type of LayoutComponent.eventsListen) {
@@ -259,8 +259,8 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/referral-commission'} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/referral-commission'} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
                     {renderPluginsRoutes()}
-                    <Route path="**"><Redirect to={'/trading/'} /></Route>
-                    <Route path="**"><Redirect to={'/ru/trading/'} /></Route>
+                    {/* <Route path="**"><Redirect to={'/trading/'} /></Route> */}
+                    {/* <Route path="**"><Redirect to={'/ru/trading/'} /></Route> */}
                 </Switch>
                 <LoginModal
                     classname={cx}
