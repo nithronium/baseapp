@@ -20,3 +20,4 @@ export * from './Grid';
 export * from './WhiteList';
 export * from './Beneficiaries';
 export * from './GridItem';
+export * from './Pagination';
