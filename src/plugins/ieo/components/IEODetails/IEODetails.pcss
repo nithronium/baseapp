@@ -63,6 +63,7 @@
           &-link {
             color: var(--button-primary);
             text-decoration: none;
+            text-align: end;
 
             &:hover {
               text-decoration: underline;
@@ -80,6 +81,22 @@
     @media (max-width: 991.99px) {
       flex-direction: column;
       justify-content: center;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .ieo-profile-details__body__right__row {
+    color: var(--button-primary);
+    display: block;
+    flex-direction: column;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%;
+
+    &__first-column {
+      color: var(--color-white);
     }
   }
 }
