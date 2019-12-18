@@ -13,6 +13,7 @@ import { IdentityData } from './types';
 export interface IdentityState {
     send: {
         success?: string;
+        data?: IdentityData;
         error?: CommonError;
     };
     edit: {
@@ -33,17 +34,20 @@ export const identitySendReducer = (state: IdentityState['send'], action: Identi
             return {
                 ...state,
                 success: undefined,
+                data: undefined,
                 error: undefined,
             };
         case SEND_IDENTITY_DATA:
             return {
                 ...state,
                 success: action.payload.message,
+                data: action.payload.data,
                 error: undefined,
             };
         case SEND_IDENTITY_ERROR:
             return {
                 success: undefined,
+                data: undefined,
                 error: action.payload,
             };
         default:

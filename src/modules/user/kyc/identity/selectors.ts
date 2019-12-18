@@ -13,5 +13,8 @@ export const selectEditIdentityError = (state: RootState): IdentityState['edit']
 export const selectSendIdentitySuccess = (state: RootState): IdentityState['send']['success'] =>
     state.user.identity.send.success;
 
+export const selectSendIdentityData = (state: RootState): IdentityState['send']['data'] =>
+    state.user.identity.send.data;
+
 export const selectSendIdentityError = (state: RootState): IdentityState['send']['error'] =>
     state.user.identity.send.error;
