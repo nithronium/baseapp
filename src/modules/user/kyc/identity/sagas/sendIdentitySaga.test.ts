@@ -43,11 +43,12 @@ describe('Send Identity Saga', () => {
     };
 
     const confirmIdentityResponse = {
-        message: 'successfull upload',
+        data: confirmIdentityPayload,
+        message: 'success.identity.accepted',
     };
 
     const mockSendIdentity = () => {
-        mockAxios.onPost(`/resource/profiles`).reply(200, confirmIdentityResponse);
+        mockAxios.onPost(`/resource/profiles`).reply(200, confirmIdentityPayload);
     };
 
     const expectedActionsFetch = [sendIdentity(confirmIdentityPayload), sendIdentityData(confirmIdentityResponse)];

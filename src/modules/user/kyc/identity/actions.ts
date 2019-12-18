@@ -17,6 +17,7 @@ export interface SendIdentityFetch {
 export interface SendIdentityData {
     type: typeof SEND_IDENTITY_DATA;
     payload: {
+        data: IdentityData;
         message: string;
     };
 }

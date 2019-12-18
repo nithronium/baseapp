@@ -20,6 +20,7 @@ import {
     selectCurrentLanguage,
     selectEditIdentityData,
     selectEditIdentitySuccess,
+    selectSendIdentityData,
     selectUserInfo,
     User,
 } from '../../../../modules';
@@ -37,6 +38,7 @@ interface ReduxProps {
     editData?: IdentityData;
     editSuccess?: string;
     lang: string;
+    sendData?: IdentityData;
     sendSuccess?: string;
     user: User;
 }
@@ -103,6 +105,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         const {
             editData,
             editSuccess,
+            sendData,
             sendSuccess,
             user,
         } = this.props;
@@ -110,6 +113,9 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         if (!prev.sendSuccess && sendSuccess) {
             this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
+            if (sendData) {
+                this.props.changeUserProfileData(sendData);
+            }
             this.props.history.push('/profile');
         }
 
@@ -445,6 +451,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
+    sendData: selectSendIdentityData(state),
     editData: selectEditIdentityData(state),
     editSuccess: selectEditIdentitySuccess(state),
     lang: selectCurrentLanguage(state),
