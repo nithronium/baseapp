@@ -5,10 +5,6 @@ import {
 } from './reducer';
 
 describe('Identity reducer', () => {
-    const confirmIdentityResponse = {
-        message: 'Confirmed',
-    };
-
     const confirmIdentityPayload = {
         first_name: 'first_name',
         last_name: 'last_name',
@@ -18,6 +14,11 @@ describe('Identity reducer', () => {
         city: 'city',
         country: 'country',
         metadata: `{'nationality': 'nationality', 'state': 'some_state'}`,
+    };
+
+    const confirmIdentityResponse = {
+        data: confirmIdentityPayload,
+        message: 'Confirmed',
     };
 
     const editIdentityResponse = {
@@ -45,6 +46,7 @@ describe('Identity reducer', () => {
             ...initialIdentityState,
             send: {
                 ...initialIdentityState.send,
+                data: editIdentityResponse.data,
                 success: confirmIdentityResponse.message,
             },
         };

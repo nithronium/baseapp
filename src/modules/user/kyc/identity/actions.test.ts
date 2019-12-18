@@ -24,10 +24,6 @@ describe('KYC - Identity', () => {
     });
 
     describe('Send indentity information', () => {
-        const confirmIdentityResponse = {
-            message: 'Confirmed',
-        };
-
         const confirmIdentityPayload = {
             first_name: 'first_name',
             last_name: 'last_name',
@@ -37,6 +33,11 @@ describe('KYC - Identity', () => {
             city: 'city',
             country: 'country',
             metadata: `{'nationality': 'nationality', 'state': 'some_state'}`,
+        };
+
+        const confirmIdentityResponse = {
+            data: confirmIdentityPayload,
+            message: 'success.identity.accepted',
         };
 
         const editIdentityResponse = {
@@ -72,7 +73,7 @@ describe('KYC - Identity', () => {
         };
 
         const mockConfirmIdentityFetch = () => {
-            mockAxios.onPost(`/resource/profiles`).reply(200, confirmIdentityResponse);
+            mockAxios.onPost(`/resource/profiles`).reply(200, confirmIdentityPayload);
         };
 
         it('should fetch confirm identity data', async () => {
