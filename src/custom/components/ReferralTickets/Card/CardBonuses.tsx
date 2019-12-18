@@ -14,19 +14,6 @@ interface CardProps {
 
 class CardBonuses extends React.Component<CardProps>{
 
-    public getTotal(): number{
-        let total = 0;
-        if (!(this.props.context)) {
-            return total;
-        }
-
-        this.props.context.map(record => {
-            total += record.tickets;
-            return true;
-        });
-        return total;
-    }
-
     public activeInactive(){
         if (this.props.activeInactive){
             return(

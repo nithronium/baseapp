@@ -21,9 +21,12 @@ export interface ReferralPayload {
 }
 
 export interface BonusPayload {
-    tickets: number;  // кол-во тикетов, полученных за бонус
+    count: number;  // кол-во тикетов для одной записи (0/1)
     action: string; // тип бонуса (e. g. facebook post)
     link: string; // ссылка на пост
+    subscription: string; // действие, за которое был дан тикет
+    type: number; // тип тикета
+    state: number; // активный/неактивный
 }
 
 export interface ReferralOverallPayload {

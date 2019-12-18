@@ -299,6 +299,7 @@ export const en = {
   'tickets.post': 'Network Post',
   'tickets.tickets_B': 'Tickets',
   'tickets.posts': 'posts',
+  'tickets.subscriptions': 'subscriptions',
   'tickets.link': 'Link',
   'prize.95prizes': '95 Prizes of',
   'prize.1': '1st Prize',
