@@ -30,7 +30,9 @@ class ReferralBallanceContainer extends React.Component<Props> {
                             <b> {this.props.message({id: 'tickets.total_tickets'})}</b>: {this.props.totalTickets}
                         </div>
                         <div className="referral-container">
-                            <a href={buildPath("/profile", this.props.currentLanguage)}>{this.props.message({id: 'tickets.get_code'})}</a>
+                            <a href={buildPath("/profile", this.props.currentLanguage)}>
+                                <button className="button">{this.props.message({id: 'tickets.get_code'})}</button>
+                            </a>
                         </div>
                     </div>
                 </div>
