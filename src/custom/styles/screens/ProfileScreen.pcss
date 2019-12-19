@@ -13,15 +13,21 @@
 
     &__edit {
       align-items: center;
+      align-items: flex-end;
       color: var(--accent);
       cursor: pointer;
       display: flex;
+      flex-direction: column;
       font-family: "Noto Sans SC";
       font-size: 12px;
       font-style: normal;
       font-weight: normal;
       height: 18px;
       user-select: none;
+
+      span {
+        line-height: 35px;
+      }
 
       svg {
         height: 13px;

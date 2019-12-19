@@ -67,6 +67,7 @@ interface State {
 
 type Props = ReduxProps & DispatchProps & RouterProps & ProfileProps & InjectedIntlProps & OnChangeEvent;
 
+// tslint:disable:jsx-no-lambda
 class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
@@ -192,7 +193,10 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                     <div className="pg-profile-page__left-col__basic__info-row__block">
                         <div className="pg-profile-page__row pg-profile-page__details-user">
                             <p>{user.email}</p>
-                            {user.level === 2 || user.level === 3 ? this.renderEditProfileLink() : null}
+                            <div className="pg-profile-page__details-user__edit">
+                                {user.level === 2 || user.level === 3 ? this.renderEditProfileLink() : null}
+                                {(user.level === 2 && user.profile && user.profile.address) || user.level === 3 ? this.renderEditAddressLink() : null}
+                            </div>
                         </div>
                         <div className="pg-profile-page__row">
                             <h2>UID: {user.uid}</h2>
@@ -228,8 +232,17 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
 
     private renderEditProfileLink() {
         return (
-            <span className="pg-profile-page__details-user__edit" onClick={this.handleRedirectToConfirm}>
+            <span onClick={() => this.handleRedirectToConfirm('profile')}>
                 {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.profile.edit'})}
+                <PencilIcon />
+            </span>
+        );
+    }
+
+    private renderEditAddressLink() {
+        return (
+            <span onClick={() => this.handleRedirectToConfirm('address')}>
+                {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.address.edit'})}
                 <PencilIcon />
             </span>
         );
@@ -309,8 +322,17 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
         });
     }
 
-    private handleRedirectToConfirm = () => {
-        this.props.history.push('/confirm', { profileEdit: true });
+    private handleRedirectToConfirm = (editParam: string) => {
+        switch (editParam) {
+            case 'profile':
+                this.props.history.push('/confirm', { profileEdit: true });
+                break;
+            case 'address':
+                this.props.history.push('/confirm', { addressEdit: true });
+                break;
+            default:
+                break;
+        }
     }
 
     private handleNavigateTo2fa = (enable2fa: boolean) => {

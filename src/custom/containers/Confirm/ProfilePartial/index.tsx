@@ -433,13 +433,34 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             metadata,
         } = this.state;
         const dob = !isDateInFuture(dateOfBirth) ? dateOfBirth : '';
-        const profileInfo = {
-            first_name: firstName,
-            last_name: lastName,
-            dob,
-            country: countryOfBirth,
-            metadata: JSON.stringify(metadata),
-        };
+
+        let profileInfo = {};
+
+        if (user.profile && user.profile.address) {
+            const currentUserState = user.profile.metadata && JSON.parse(user.profile.metadata).state;
+
+            profileInfo = {
+                first_name: firstName,
+                last_name: lastName,
+                dob,
+                country: countryOfBirth,
+                address: user.profile.address,
+                postcode: user.profile.postcode,
+                city: user.profile.city,
+                metadata: JSON.stringify({
+                    nationality: metadata.nationality,
+                    state: currentUserState,
+                }),
+            }
+        } else {
+            profileInfo = {
+                first_name: firstName,
+                last_name: lastName,
+                dob,
+                country: countryOfBirth,
+                metadata: JSON.stringify(metadata),
+            };   
+        }
 
         // tslint:disable-next-line: prefer-switch
         if (user.level === 2 || user.level === 3) {

@@ -341,6 +341,7 @@ export const en = {
     'page.body.kyc.identity.postcode': 'Postcode',
     'page.body.kyc.identity.nationality': 'Citizenship',
     'page.body.kyc.identity.CoR': 'Country of Residence',
+    'page.body.kyc.identity.state': 'State',
     'page.body.kyc.documents.expiryDate': 'Expiration Date DD/MM/YYYY',
     'page.body.kyc.documents.drag': 'Drag and drop or browse files',
     'page.body.kyc.documents.maxFile': 'Maximum file size is 10MB',

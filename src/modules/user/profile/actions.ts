@@ -41,6 +41,7 @@ export interface User {
     state: string;
     uid: string;
     referral_uid?: string;
+    profile?: ProfileIdentity;
 }
 
 export interface ProfileIdentity {

@@ -279,6 +279,7 @@ export const ru: LangType = {
         'Пожалуйста, обратитесь с администратором, чтобы отключить 2FA',
     'page.body.profile.header.account.content.twoFactorAuthentication.modalHeader': 'Двухфакторная аутентификация включена',
     'page.body.profile.header.account.content.profile.edit': 'Редактировать профиль',
+    'page.body.profile.header.account.content.address.edit': 'Редактировать адрес',
 
     'page.body.profile.header.account.profile': 'Верификация Вашего профиля',
     'page.body.profile.header.account.profile.email.title': 'Почта - подтверждено',
@@ -379,6 +380,7 @@ export const ru: LangType = {
     'page.body.kyc.identity.nationality': 'Гражданство',
     'page.body.kyc.identity.CoR': 'Страна проживания',
     'page.body.kyc.documents.expiryDate': 'Дата выдачи ДД/ММ/ГГГГ',
+    'page.body.kyc.identity.state': 'Область',
     'page.body.kyc.documents.drag': 'Перетащите или загрузите файлы',
     'page.body.kyc.documents.maxFile': 'Максимальный размер 10MB',
     'page.body.kyc.documents.maxNum': 'Максимальное число 5',
@@ -474,6 +476,7 @@ export const ru: LangType = {
     'page.body.kyc.head.level.first': 'Электронная почта',
     'page.body.kyc.head.level.second': 'Профиль',
     'page.body.kyc.head.level.third': 'Номер телефона',
+    'page.body.kyc.head.level.third.address': 'Адрес',
     'page.body.kyc.head.level.fourth': 'Личность',
     'page.body.kyc.head.level.fifth': 'Адрес',
     'page.body.kyc.head.level.sixth': 'Анкета',
