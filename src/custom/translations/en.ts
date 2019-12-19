@@ -10,6 +10,7 @@ export const en = {
     'page.body.profile.header.account.profile.deposit': 'Your DEPOSIT limit: ',
     'page.body.profile.header.account.profile.knowMore': 'Know more about verification levels',
     'page.body.profile.header.account.content.profile.edit': 'Edit profile',
+    'page.body.profile.header.account.content.address.edit': 'Edit address',
 
     'page.body.trade.header.orderHistory': 'Order History',
     'page.body.trade.header.balances': 'Balances',
@@ -28,6 +29,7 @@ export const en = {
     'page.body.kyc.head.level.first': 'Email',
     'page.body.kyc.head.level.second': 'Profile',
     'page.body.kyc.head.level.third': 'Phone number',
+    'page.body.kyc.head.level.third.address': 'Address',
     'page.body.kyc.head.level.fourth': 'Identity',
     'page.body.kyc.head.level.fifth': 'Residential address',
     'page.body.kyc.head.level.sixth': 'Questionnaire',

@@ -23,6 +23,7 @@ import { BlockNationalityModal } from '../../components';
 import { Documents } from '../../containers/Confirm/Documents';
 import { Idenfy } from '../../containers/Confirm/Idenfy';
 import { Phone } from '../../containers/Confirm/Phone';
+import { ProfileAddress } from '../../containers/Confirm/ProfileAddress';
 import { ProfilePartial } from '../../containers/Confirm/ProfilePartial';
 import { Questionnaire } from '../../containers/Confirm/Questionnaire';
 
@@ -79,18 +80,81 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
       this.props.history.push('/profile');
     };
 
+    public renderDoubleProgressBar() {
+        const { userData } = this.props;
+        const currentProfileLevel = userData.level;
+        const stepLabels = this.handleGetStepLabels(currentProfileLevel);
+
+        const cx = classnames('pg-confirm__progress-items', {
+            'pg-confirm__progress-first': currentProfileLevel === 0 || currentProfileLevel === 4,
+            'pg-confirm__progress-second': [1,2,3,5].includes(currentProfileLevel),
+        });
+
+        return (
+            <div className="pg-confirm__progress">
+            <div className={cx}>
+                <div className="pg-confirm__progress-circle-1">
+                    <span className="pg-confirm__title-text pg-confirm__active-1">
+                    <FormattedMessage id={stepLabels[0]}/>
+                    </span>
+                </div>
+                <div className="pg-confirm__progress-line-1" />
+                <div className="pg-confirm__progress-circle-2">
+                    <span className="pg-confirm__title-text pg-confirm__active-2">
+                    <FormattedMessage id={stepLabels[1]}/>
+                    </span>
+                </div>
+            </div>
+        </div>
+        );
+    }
+
+    public renderTripleProgressBar() {
+        const { history, userData } = this.props;
+        const currentProfileLevel = userData.level;
+        const stepLabels = this.handleGetStepLabels(currentProfileLevel);
+        const isAddressEdit = history.location && history.location.state && history.location.state.addressEdit;
+
+        const cx = classnames('pg-confirm__progress-items pg-confirm__progress-items--long', {
+            'pg-confirm__progress-first': currentProfileLevel === 2 && (userData.profile && !userData.profile.address) || isAddressEdit,
+            'pg-confirm__progress-second': currentProfileLevel === 2 && (userData.profile && userData.profile.address) && !isAddressEdit,
+            'pg-confirm__progress-third': currentProfileLevel === 3 && !isAddressEdit,
+        });
+
+        return (
+            <div className="pg-confirm__progress">
+            <div className={cx}>
+                <div className="pg-confirm__progress-circle-1">
+                    <span className="pg-confirm__title-text pg-confirm__active-1">
+                    <FormattedMessage id={stepLabels[0]}/>
+                    </span>
+                </div>
+                <div className="pg-confirm__progress-line-1" />
+                <div className="pg-confirm__progress-circle-2">
+                    <span className="pg-confirm__title-text pg-confirm__active-2">
+                    <FormattedMessage id={stepLabels[1]}/>
+                    </span>
+                </div>
+                <div className="pg-confirm__progress-line-2" />
+                <div className="pg-confirm__progress-circle-3">
+                    <span className="pg-confirm__title-text pg-confirm__active-3">
+                    <FormattedMessage id={stepLabels[2]}/>
+                    </span>
+                </div>
+            </div>
+        </div>
+        );
+    }
+
     // tslint:disable:jsx-no-multiline-js
     public render() {
-        const { colorTheme, userData } = this.props;
+        const { colorTheme, history, userData } = this.props;
         const { showNationalityBlockModal } = this.state;
 
         const currentProfileLevel = userData.level;
-        const cx = classnames('pg-confirm__progress-items', {
-            'pg-confirm__progress-first': currentProfileLevel === 0 || currentProfileLevel === 2 || currentProfileLevel === 4,
-            'pg-confirm__progress-second': currentProfileLevel === 1 || currentProfileLevel === 3 || currentProfileLevel === 5,
-        });
-
-        const stepLabels = this.handleGetStepLabels(currentProfileLevel);
+        const isProfileEdit = history.location && history.location.state && history.location.state.profileEdit;
+        const isTripleProgressBar = (!isProfileEdit && currentProfileLevel === 2) ||
+            (!isProfileEdit && currentProfileLevel === 3);
 
         return (
             <div className="pg-wrapper">
@@ -108,21 +172,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                             onClick={this.goBack}
                             className="pg-confirm-box-close"
                         />
-                        <div className="pg-confirm__progress">
-                            <div className={cx}>
-                                <div className="pg-confirm__progress-circle-1">
-                                    <span className="pg-confirm__title-text pg-confirm__active-1">
-                                    <FormattedMessage id={stepLabels[0]}/>
-                                    </span>
-                                </div>
-                                <div className="pg-confirm__progress-line-1" />
-                                <div className="pg-confirm__progress-circle-2">
-                                    <span className="pg-confirm__title-text pg-confirm__active-2">
-                                    <FormattedMessage id={stepLabels[1]}/>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
+                        {isTripleProgressBar ? this.renderTripleProgressBar() : this.renderDoubleProgressBar()}
                         <div className="pg-confirm__content">
                             {VersionGuardWrapper(this.renderContent, Phone)}
                         </div>
@@ -151,13 +201,17 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
         }
 
+        if (history.location && history.location.state && history.location.state.addressEdit) {
+            return ['page.body.kyc.head.level.third.address', 'page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
+        }
+
         switch (currentProfileLevel) {
             case 0:
             case 1:
                 return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
             case 2:
             case 3:
-                return ['page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
+                return ['page.body.kyc.head.level.third.address', 'page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
             case 4:
             case 5:
                 return ['page.body.kyc.head.level.fifth', 'page.body.kyc.head.level.sixth'];
@@ -185,12 +239,53 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         }
     }
 
+    private renderThirdLevel() {
+        const {
+            labels,
+            fetchAlert,
+        } = this.props;
+        const kycDenied = labels.find(label => label.key === 'identity' && label.value === 'denied' && label.scope === 'private');
+        const kycApproved = labels.find(label => label.key === 'identity' && label.value === 'approved' && label.scope === 'private');
+
+        if (kycDenied && !this.state.kycAlert) {
+            fetchAlert({ message: ['resource.profile.kyc.denied'], type: 'error' });
+            this.setState({
+                kycAlert: true,
+            });
+        }
+
+        if (kycApproved) {
+            this.props.changeUserLevel({ level: 4 });
+            return <Documents />;
+        }
+
+        return <Idenfy />;
+    }
+
+    private renderFourthLevel() {
+        const {
+            labels,
+            fetchAlert,
+        } = this.props;
+
+
+        const documentsVerification = labels.find(label => label.key === 'document' && label.value === 'rejected' && label.scope === 'private');
+
+        if (documentsVerification && !this.state.documentsAlert) {
+            fetchAlert({ message: ['resource.profile.document.denied'], type: 'error' });
+            this.setState({
+                documentsAlert: true,
+            });
+        }
+
+        return <Documents />;
+    }
+
     private renderContent = () => {
         const {
             history,
             labels,
-            userData: { level },
-            fetchAlert,
+            userData: { level, profile },
         } = this.props;
 
         if (!labels.length) {
@@ -203,40 +298,24 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             return <ProfilePartial toggleBlockNationalityModal={this.handleToggleBlockNationalityModal} />;
         }
 
+        if (history.location && history.location.state && history.location.state.addressEdit) {
+            return <ProfileAddress />;
+        }
+
         if (level === 2) {
-            return <Phone />;
+            if ((profile && profile.address)) {
+                return <Phone />;
+            } else {
+                return <ProfileAddress />;
+            }
         }
 
         if (level === 3) {
-            const kycDenied = labels.find(label => label.key === 'identity' && label.value === 'denied' && label.scope === 'private');
-            const kycApproved = labels.find(label => label.key === 'identity' && label.value === 'approved' && label.scope === 'private');
-
-            if (kycDenied && !this.state.kycAlert) {
-                fetchAlert({ message: ['resource.profile.kyc.denied'], type: 'error' });
-                this.setState({
-                    kycAlert: true,
-                });
-            }
-
-            if (kycApproved) {
-                this.props.changeUserLevel({ level: 4 });
-                return <Documents />;
-            }
-
-            return <Idenfy />;
+            return this.renderThirdLevel();
         }
 
         if (level === 4) {
-            const documentsVerification = labels.find(label => label.key === 'document' && label.value === 'rejected' && label.scope === 'private');
-
-            if (documentsVerification && !this.state.documentsAlert) {
-                fetchAlert({ message: ['resource.profile.document.denied'], type: 'error' });
-                this.setState({
-                    documentsAlert: true,
-                });
-            }
-
-            return <Documents />;
+            return this.renderFourthLevel();
         }
 
         if (level === 5) {
