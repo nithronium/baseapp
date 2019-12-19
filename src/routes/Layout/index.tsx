@@ -1,9 +1,7 @@
 //tslint:disable
-
 import * as qs from 'qs';
-
-import { Loader } from '@openware/components';
 import classnames from 'classnames';
+import { Spinner } from 'react-bootstrap';
 import { History } from 'history';
 import * as React from 'react';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
@@ -81,7 +79,7 @@ export type LayoutProps = ReduxProps & DispatchProps & OwnProps;
 
 const renderLoader = () => (
     <div className="pg-loader-container">
-        <Loader />
+        <Spinner animation="border" variant="primary" />
     </div>
 );
 

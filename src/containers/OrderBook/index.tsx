@@ -1,9 +1,9 @@
-import { CombinedOrderBook, Loader } from '@openware/components';
+import { Spinner } from 'react-bootstrap';
 import classNames from 'classnames';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { Decimal } from '../../components/Decimal';
+import { Decimal, CombinedOrderBook } from '../../components';
 import { accumulateVolume, calcMaxVolume, sortAsks, sortBids } from '../../helpers';
 import {
     Market,
@@ -65,16 +65,20 @@ class OrderBookContainer extends React.Component<Props, State> {
             bids,
             orderBookLoading,
         } = this.props;
+
         const isLarge = this.state.width > breakpoint;
         const cn = classNames('pg-combined-order-book ', {
-            'cr-combined-order-book--loading': orderBookLoading,
+            'cr-combined-order-book--data-loading': orderBookLoading,
             'pg-combined-order-book--no-data-first': (!asks.length && !isLarge) || (!bids.length && isLarge),
             'pg-combined-order-book--no-data-second': (!bids.length && !isLarge) || (!asks.length && isLarge),
         });
 
         return (
             <div className={cn} ref={this.orderRef}>
-                {orderBookLoading ? <div><Loader /></div> : this.orderBook(sortBids(bids), sortAsks(asks))}
+                <div className={'cr-table-header__content'}>
+                    {this.props.intl.formatMessage({id: 'page.body.trade.orderbook'})}
+                </div>
+                {orderBookLoading ? <div className="pg-combined-order-book-loading"><Spinner animation="border" variant="primary" /></div> : this.orderBook(sortBids(bids), sortAsks(asks))}
             </div>
         );
     }
@@ -91,8 +95,8 @@ class OrderBookContainer extends React.Component<Props, State> {
                     maxVolume={calcMaxVolume(bids, asks)}
                     orderBookEntryAsks={accumulateVolume(asks)}
                     orderBookEntryBids={accumulateVolume(bids)}
-                    rowBackgroundColorAsks={'rgba(189, 48, 57, 0.5)'}
-                    rowBackgroundColorBids={'rgba(84, 180, 137, 0.5)'}
+                    rowBackgroundColorAsks={'rgba(232, 94, 89, 0.4)'}
+                    rowBackgroundColorBids={'rgba(84, 180, 137, 0.4)'}
                     dataAsks={this.renderOrderBook(asksData, 'asks', this.props.intl.formatMessage({id: 'page.noDataToShow'}), this.props.currentMarket)}
                     dataBids={this.renderOrderBook(bids, 'bids', this.props.intl.formatMessage({id: 'page.noDataToShow'}), this.props.currentMarket)}
                     headers={this.renderHeaders()}

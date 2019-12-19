@@ -1,4 +1,4 @@
-import { Loader } from '@openware/components';
+import { Spinner } from 'react-bootstrap';
 import { History } from 'history';
 import * as React from 'react';
 import {
@@ -60,17 +60,15 @@ class EmailVerificationComponent extends React.Component<Props> {
         const button = this.props.intl.formatMessage({ id: 'page.resendConfirmation' });
         return (
             <div className="pg-emailverification-container">
-                <div className="pg-emailverification-container__wrapper">
-                    <div className="cr-logo">
-                        <img src={logo} className="cr-logo__img" alt="Logo" />
-                    </div>
-                    <div className="pg-emailverification">
-                        <div className="pg-emailverification-title">{title}</div>
-                        <div className="pg-emailverification-body">
-                            <div className="pg-emailverification-body-text">{text}</div>
-                            <div className="pg-emailverification-body-container">
-                                {emailVerificationLoading ? <Loader /> : <button className="cr-button" onClick={this.handleClick}>{button}</button>}
-                            </div>
+                <div className="cr-logo">
+                    <img src={logo} className="cr-logo__img" alt="Logo" />
+                </div>
+                <div className="pg-emailverification">
+                    <div className="pg-emailverification-title">{title}</div>
+                    <div className="pg-emailverification-body">
+                        <div className="pg-emailverification-body-text">{text}</div>
+                        <div className="pg-emailverification-body-container">
+                            {emailVerificationLoading ? <Spinner animation="border" variant="primary" /> : <button className="pg-emailverification-body-container-button" onClick={this.handleClick}>{button}</button>}
                         </div>
                     </div>
                 </div>
