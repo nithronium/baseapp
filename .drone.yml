@@ -6,8 +6,8 @@ concurrency:
   limit: 2
 
 steps:
-  - name: "Test"
-    image: node:10.11
+  - name: "Test & Build"
+    image: node:12.13.1
     commands:
       - export REACT_APP_GIT_SHA=$(git rev-parse --short HEAD)
       - echo $REACT_APP_GIT_SHA > .tags
@@ -87,7 +87,7 @@ concurrency:
 
 steps:
   - name: "Test"
-    image: node:10.11
+    image: node:12.13.1
     commands:
       - npm -g install yarn
       - yarn install
