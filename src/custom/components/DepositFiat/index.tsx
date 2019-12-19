@@ -39,6 +39,37 @@ const bankDataIBAN = (uid, currency) => [
     },
 ];
 
+const bankDataAED = (uid, currency) => [
+    {
+        key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.depositCurrency" />,
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.depositCurrency.${currency && `${currency}.`}value`} />,
+    },
+    {
+        key: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.${currency}.iban`} />,
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.iban.${currency && `${currency}.`}value`} />,
+    },
+    {
+        key: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.beneficiary`} />,
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.beneficiary.aed.value`} />,
+    },
+    {
+        key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.bankName" />,
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.bankName.${currency && `${currency}.`}value`} />,
+    },
+    {
+        key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.bankAddress" />,
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.bankAddress.${currency && `${currency}.`}value`} />,
+    },
+    {
+        key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.bankSwift" />,
+        value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.bankSwift.${currency && `${currency}.`}value`} />,
+    },
+    {
+        key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.referenceCode"/>,
+        value: uid,
+    },
+];
+
 const bankDataSEPA = uid => [
     {
         key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.depositCurrency" />,
@@ -84,7 +115,7 @@ const DepositFiat: React.FunctionComponent<DepositFiatProps> = (props: DepositFi
         uid,
         sepa,
     } = props;
-    const bankData = sepa ? bankDataSEPA : bankDataIBAN;
+    const bankData = sepa ? bankDataSEPA : currency.toLowerCase() === 'aed' ? bankDataAED : bankDataIBAN;
 
     const renderDetails = (detail, index: number) => {
         return (
