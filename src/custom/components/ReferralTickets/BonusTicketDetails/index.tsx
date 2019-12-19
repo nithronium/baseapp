@@ -1,8 +1,12 @@
 import * as React from 'react';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {
     BonusPayload,
     ReferralOverallPayload,
 } from '../../../modules/referralTickets';
+import {IconClipBoard} from './icon-clipboard';
+import {styles} from './styles';
+
 // import { Loader } from '../../Loader';
 
 interface Props {
@@ -22,7 +26,12 @@ const BonusTicketsDetailRow: React.FC<BonusTicketsDetailRowProps> = ({record, me
             <td><span className="count">{record.count} <span className="explanation">tickets</span></span></td>
             <td>{message({ id: record.state ? 'tickets.yes' : 'tickets.no' })}</td>
             <td>{record.subscription}</td>
-            <td>{record.action}</td>
+            <td>
+                <span style={styles.actionCode} title={record.action}>{record.action}</span>
+                <CopyToClipboard text={record.action}>
+                    <IconClipBoard style={styles.icon} />
+                </CopyToClipboard>
+            </td>
             <td><a href={record.link}>Follow link</a></td>
         </tr>
     );
@@ -65,7 +74,7 @@ const BonusTicketDetails: React.FC<Props> = ({context = [], message}) => {
                 </div>
                 <div className="table-wrap">
                     {/* <Loader display={this.props.loading} /> */}
-                    <table>
+                    <table style={styles.grid}>
                         <thead>
                             <tr>
                                 <td>{message({ id: 'tickets.tickets_B' })}</td>

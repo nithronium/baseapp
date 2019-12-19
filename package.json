@@ -17,6 +17,7 @@
     "moment-timezone": "^0.5.23",
     "react": "^16.4.2",
     "react-cookie-consent": "^2.5.0",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-date-picker": "^7.0.0",
     "react-dom": "^16.4.2",
     "react-fade-in": "^0.1.6",
