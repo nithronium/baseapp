@@ -957,6 +957,7 @@ export const ru: LangType = {
     'tickets.tickets_B': 'Билеты',
     'tickets.posts': 'пост.',
     'tickets.subscriptions': 'подп.',
+    'tickets.state': 'акт.',
     'tickets.link': 'Ссылка',
     'prize.95prizes': '95 призов ',
   'prize.1': '1-й Приз',

@@ -84,7 +84,9 @@ const BonusTicketDetails: React.FC<Props> = ({context = [], message}) => {
                                 <td>
                                     <span className="count">{getTotal('count')}</span> {message({ id: 'tickets.tick' })}
                                 </td>
-                                <td>&nbsp;</td>
+                                <td>
+                                    <span className="count">{getTotal('state')}</span> {message({ id: 'tickets.state' })}
+                                </td>
                                 <td>
                                     <span className="count">{getTotal('subscription', 'count')}</span> {message({ id: 'tickets.subscriptions' })}
                                 </td>
