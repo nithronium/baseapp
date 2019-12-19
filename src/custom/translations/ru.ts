@@ -795,6 +795,7 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.eur.iban': 'IBAN :',
     'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Адрес банка :',
     'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Банковский SWIFT :',
+    'page.body.wallets.tabs.deposit.fiat.beneficiary': 'Beneficiary :',
     'page.body.wallets.tabs.deposit.fiat.message3':
         'Пожалуйста, ВСЕГДА указывайте ссылочный код во время банковского перевода, в противном случае внесение средств займет больше времени.',
     
@@ -815,6 +816,7 @@ export const ru: LangType = {
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.aed.value': 'AED',
     'page.body.wallets.tabs.deposit.fiat.iban.aed.value': 'AE780570000011101251018',
+    'page.body.wallets.tabs.deposit.fiat.beneficiary.aed.value': 'BITMEEX FZE',
     'page.body.wallets.tabs.deposit.fiat.bankName.aed.value': 'Ajman Bank PJSC',
     'page.body.wallets.tabs.deposit.fiat.bankAddress.aed.value': 'Garhoud Branch, Dubai, UAE',
     'page.body.wallets.tabs.deposit.fiat.bankSwift.aed.value': 'AJMNAEAJ',
