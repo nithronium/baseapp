@@ -195,7 +195,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                             <p>{user.email}</p>
                             <div className="pg-profile-page__details-user__edit">
                                 {user.level === 2 || user.level === 3 ? this.renderEditProfileLink() : null}
-                                {(user.level === 2 && user.profile && user.profile.address) || user.level === 3 ? this.renderEditAddressLink() : null}
+                                {(user.level === 2 && user.profile && user.profile.address) || user.level === 3 || user.level === 4 ? this.renderEditAddressLink() : null}
                             </div>
                         </div>
                         <div className="pg-profile-page__row">
