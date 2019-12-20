@@ -38,6 +38,7 @@ import { ProfileState, rootProfileSaga } from './user/profile';
 import { rootUserActivitySaga, UserActivityState } from './user/userActivity';
 import { rootWalletsSaga, WalletsState } from './user/wallets';
 import { rootWithdrawLimitSaga, WithdrawLimitState } from './user/withdrawLimit';
+import { MemberLevelsState, rootMemberLevelsSaga } from './public/memberLevels';
 
 import { CreaditCardState, rootCreditCardSaga } from '../custom/modules/buyWithCreditCard';
 import { ReferralCommissionState, rootReferralCommissionSaga } from '../custom/modules/referralCommission';
@@ -81,6 +82,7 @@ export * from '../custom/modules/referralTickets';
 export * from '../custom/modules/referralCommission';
 export * from '../custom/modules/fees';
 export * from '../custom/modules/buyWithCreditCard';
+export * from './public/memberLevels';
 
 export interface RootState {
     public: {
@@ -97,6 +99,7 @@ export interface RootState {
         kline: KlineState;
         rgl: GridLayoutState;
         ieo: PublicIEOState,
+        memberLevels: MemberLevelsState;
     };
     user: {
         auth: AuthState;
@@ -171,5 +174,6 @@ export function* rootSaga() {
         call(rootIEOOrderSaga),
         call(rootPublicIEOSaga),
         call(rootGeetestCaptchaSaga),
+        call(rootMemberLevelsSaga),
     ]);
 }
