@@ -936,6 +936,7 @@ export const ru: LangType = {
   'tickets.active': 'Активные',
   'tickets.inactive': 'Неактивные',
   'tickets.total_tickets': 'Общее количество билетов',
+  'tickets.activate_tickets': 'Активировать билеты',
   'tickets.get_code': 'Получить свой реферальный код',
   'tickets.direct_detail': 'Детали прямых билетов',
   'tickets.a': 'активных билетов',
