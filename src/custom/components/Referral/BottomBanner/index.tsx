@@ -51,7 +51,7 @@ export const BottomBanner = injectIntl(({intl}) => {
                         img={require('./icons/stock-price.svg')}
                         header={format({id: 'page.referal.bottombanner.token_distrib_date'})}
                     >
-                        {format({id: 'page.referal.bottombanner.2_weeks_after_IEO'})}<sup>**</sup>
+                        {format({id: 'page.referal.bottombanner.2_weeks_after_IEO'})}
                     </ListItem>
                 </div>
                 <a href="connext.emirex.com/ieo">
