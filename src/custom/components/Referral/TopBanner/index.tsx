@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { injectIntl } from 'react-intl';
+import { Link } from 'react-scroll';
 import { styles } from './styles';
 
 export const TopBanner = injectIntl(({intl}) => {
@@ -11,11 +12,11 @@ export const TopBanner = injectIntl(({intl}) => {
                     <span style={styles.highlightedText}>{intl.formatMessage({id: 'page.referal.topbanner.ieo_started'})} </span>
                     {intl.formatMessage({id: 'page.referal.topbanner.dont_miss_chance'})}
                 </span>
-                <a href="https://connect.emirex.com/ieo">
+                <Link to="bottom_banner" smooth={true} duration={500} delay={500}>
                     <button className="button-get" style={styles.btn}>
                         {intl.formatMessage({id: 'page.referal.learn_more'})}
                     </button>
-                </a>
+                </Link>
             </div>
         </div>
     );
