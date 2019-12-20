@@ -463,7 +463,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         }
 
         // tslint:disable-next-line: prefer-switch
-        if (user.level === 2 || user.level === 3) {
+        if (user.level === 2 || user.level === 3 || user.level === 4) {
             this.props.editIdentity(profileInfo);
         } else {
             this.props.sendIdentity(profileInfo);
