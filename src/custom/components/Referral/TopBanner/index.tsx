@@ -11,7 +11,7 @@ export const TopBanner = injectIntl(({intl}) => {
                     <span style={styles.highlightedText}>{intl.formatMessage({id: 'page.referal.topbanner.ieo_started'})} </span>
                     {intl.formatMessage({id: 'page.referal.topbanner.dont_miss_chance'})}
                 </span>
-                <a href="connect.emirex.com/ieo">
+                <a href="https://connect.emirex.com/ieo">
                     <button className="button-get" style={styles.btn}>
                         {intl.formatMessage({id: 'page.referal.learn_more'})}
                     </button>

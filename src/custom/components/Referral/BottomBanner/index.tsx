@@ -54,7 +54,7 @@ export const BottomBanner = injectIntl(({intl}) => {
                         {format({id: 'page.referal.bottombanner.2_weeks_after_IEO'})}
                     </ListItem>
                 </div>
-                <a href="connext.emirex.com/ieo">
+                <a href="https://connect.emirex.com/ieo">
                     <button className="button-get" style={styles.btn}>
                         {format({id: 'page.referal.learn_more'})}
                     </button>
