@@ -32,6 +32,7 @@ import {
 import { Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, Video } from '../../components/Referral';
 
 import { buildPath } from '../../helpers';
+import { TopBanner } from './TopBanner';
 
 interface ReduxProps {
     requireVerification?: boolean;
@@ -257,6 +258,7 @@ class Referral extends React.Component<Props> {
                     <meta name="og:image" content="https://emirex.com/public/img/logo-emirex.svg" />
                 </Helmet>
                 <div className="pg-referral-screen">
+                    <TopBanner />
                     <Banner lang={currentLanguage} children={this.props.user.state === 'active' ? totalTickets() : signupForm()} />                  <HIW
                         hiw={this.props.intl.formatMessage({ id: 'page.referral.hiw' })}
                         subtitle={this.props.intl.formatMessage({id: 'page.referral.hiw.subtitle'})}
