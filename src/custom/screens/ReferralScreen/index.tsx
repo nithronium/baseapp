@@ -29,10 +29,9 @@ import {
     signUp,
     User,
 } from '../../../modules';
-import { Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, Video } from '../../components/Referral';
+import { Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, TopBanner, Video } from '../../components/Referral';
 
 import { buildPath } from '../../helpers';
-import { TopBanner } from './TopBanner';
 
 interface ReduxProps {
     requireVerification?: boolean;

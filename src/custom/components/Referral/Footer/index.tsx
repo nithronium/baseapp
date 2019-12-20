@@ -18,6 +18,7 @@ import forbes = require('../../../../assets/images/forbes.png');
 import newsbtc = require('../../../../assets/images/newsbtc.png');
 import yahoo = require('../../../../assets/images/yahoo.png');
 import zerohedge = require('../../../../assets/images/zerohedge.png');
+import { BottomBanner } from '../BottomBanner';
 
 const Header = () => {
     return (
@@ -243,6 +244,7 @@ const Footer = props => {
     return (
         <div>
             <MediaLogo intl={props.intl}/>
+            <BottomBanner/>
             <section id="footer">
             
             <div>
