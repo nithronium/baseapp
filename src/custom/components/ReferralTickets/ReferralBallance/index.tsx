@@ -16,6 +16,23 @@ interface PassedProps {
 
 type Props = ReduxProps & PassedProps;
 
+const filledBtnStyle: React.CSSProperties = {
+    fontSize: '16px',
+    borderRadius: '12px',
+    fontWeight: 'bold',
+    background: '#7ac600',
+    border: '1px solid #7ac600',
+    width: '250px',
+};
+
+const emptyBtnStyle: React.CSSProperties = {
+    ...filledBtnStyle,
+    color: '#7ac600',
+    border: '1px solid #7ac600',
+    background: 'white',
+    marginRight: '20px',
+};
+
 class ReferralBallanceContainer extends React.Component<Props> {
     public render() {
         return (
@@ -27,11 +44,18 @@ class ReferralBallanceContainer extends React.Component<Props> {
                     <div className="cards-wrapper">{this.props.children}</div>
                     <div className="referral-summary">
                         <div className="total-container">
-                            <b> {this.props.message({id: 'tickets.total_tickets'})}</b>: {this.props.totalTickets}
+                            <b>{this.props.message({id: 'tickets.total_tickets'})}</b>: {this.props.totalTickets}
                         </div>
                         <div className="referral-container">
+                            <a
+                                href="https://knowledge-base.emirex.com/how-can-i-activate-my-tickets"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                <button style={emptyBtnStyle} className="button">{this.props.message({id: 'tickets.activate_tickets'})}</button>
+                            </a>
                             <a href={buildPath("/profile", this.props.currentLanguage)}>
-                                <button className="button">{this.props.message({id: 'tickets.get_code'})}</button>
+                                <button style={filledBtnStyle} className="button">{this.props.message({id: 'tickets.get_code'})}</button>
                             </a>
                         </div>
                     </div>
