@@ -1,7 +1,6 @@
-import { Checkbox } from '@openware/components';
 import cr from 'classnames';
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { CustomInput } from '../';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../helpers';
 import { PasswordValidationPopup } from './PasswordValidationPopup';
@@ -190,14 +189,16 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
                             />
                         </div>
                         <div style={{display: 'flex', alignItems: 'center'}}>
-                        <Checkbox
-                            checked={hasConfirmed}
-                            className="cr-sign-up-form__checkbox"
-                            onChange={this.props.clickCheckBox}
-                            label={''}
-                            // label={termsMessage ? termsMessage : 'I  agree all statements in '}
-                        />
-                            {termsLink}
+                            <Form>
+                                <Form.Check
+                                    type="checkbox"
+                                    custom
+                                    id="agreeWithTerms"
+                                    label={termsLink}
+                                    checked={hasConfirmed}
+                                    onChange={this.props.clickCheckBox}
+                                />
+                            </Form>
                         </div>
                         {this.props.renderCaptcha}
                         <div className="cr-sign-up-form__button-wrapper">
