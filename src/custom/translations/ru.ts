@@ -706,6 +706,9 @@ export const ru: LangType = {
     'page.modal.withdraw.success.message.content': 'Ваш вывод был успешно подтвержден. Пожалуйста, подождите, чтобы получить несколько обязательных подтверждений для завершения этой транзакции.',
     'page.modal.withdraw.success.button': 'OK',
 
+    'page.modal.expired.title': 'Ваша сессия истекла',
+    'page.modal.expired.submit': 'Обновить сессию',
+
     // success messages
     'success.documents.accepted': 'Ваши документы успешно приняты',
     'success.identity.accepted': 'Данные профиля успешно приняты',

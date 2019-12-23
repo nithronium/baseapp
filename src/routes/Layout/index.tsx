@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { Loader } from '@openware/components';
 import { History } from 'history';
 import * as React from 'react';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
@@ -50,6 +51,7 @@ import {
     WalletsScreen,
     PricePackagesScreen
 } from '../../screens';
+import { ExpiredSessionModal } from '../../components';
 
 interface ReduxProps {
     currentLanguage: string;
@@ -71,11 +73,13 @@ interface OwnProps {
     history: History<{ fromSignIn }>;
 }
 
-// interface State {
-//     diplayKYCLoginModal: boolean;
-//     prevRouteCheck: boolean;
-// }
-export type LayoutProps = ReduxProps & DispatchProps & OwnProps;
+interface LayoutState {
+    isShownExpSessionModal: boolean;
+    diplayKYCLoginModal: boolean;
+    prevRouteCheck: boolean;
+}
+
+export type LayoutProps = ReduxProps & DispatchProps & OwnProps & InjectedIntlProps;
 
 const renderLoader = () => (
     <div className="pg-loader-container">
@@ -134,21 +138,31 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
     return <Route {...rest} render={renderCustomerComponent} />;
 };
 
-class LayoutComponent extends React.Component<LayoutProps> {
-    public static eventsListen = ['click', 'keydown', 'scroll', 'resize', 'mousemove', 'TabSelect', 'TabHide'];
+class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
+    constructor(props: LayoutProps) {
+        super(props);
+        this.initListener();
 
-    public state = {
-        diplayKYCLoginModal: false,
-        prevRouteCheck: false,
-    };
+        this.state = {
+            isShownExpSessionModal: false,
+            diplayKYCLoginModal: false,
+            prevRouteCheck: false,
+        };
+    }
+    public static eventsListen = [
+        'click',
+        'keydown',
+        'scroll',
+        'resize',
+        'mousemove',
+        'TabSelect',
+        'TabHide',
+    ];
 
     public timer;
     public walletsFetchInterval;
 
-    constructor(props: LayoutProps) {
-        super(props);
-        this.initListener();
-    }
+    
     //tslint:disable
     public componentDidMount() {
         this.props.userFetch();
@@ -210,18 +224,17 @@ class LayoutComponent extends React.Component<LayoutProps> {
         clearInterval(this.walletsFetchInterval);
     }
 
-    // public removeSlash = (path: string): string => {
-    //     const { history } = this.props;
-    //     if (path.slice(-1) === '/') {
-    //         history.replace(path.slice(0, -1));
-    //         return path.slice(0, -1);
-    //     } else {
-    //         return path;
-    //     }
-    // }
+    public translate = (key: string) => this.props.intl.formatMessage({id: key});
 
     public render() {
-        const { colorTheme, currentLanguage, isLoggedIn, userLoading, user } = this.props;
+        const {
+            colorTheme,
+            isLoggedIn,
+            userLoading,
+            currentLanguage,
+            user,
+        } = this.props;
+        const { isShownExpSessionModal } = this.state;
 
         const tradingCls = window.location.pathname.includes('/trading') ? 'trading-layout' : '';
         toggleColorTheme(colorTheme);
@@ -664,6 +677,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     userLevel={user.level}
                     history={this.props.history}
                 />
+                {isShownExpSessionModal && this.handleRenderExpiredSessionModal()}
             </div>
         );
     }
@@ -732,12 +746,32 @@ class LayoutComponent extends React.Component<LayoutProps> {
         const diff = timeleft - now;
         const isTimeout = diff < 0;
         if (isTimeout && user.email) {
-            localStorage.removeItem('uil');
-            localStorage.removeItem('refCode');
-            localStorage.removeItem('usedCoins');
+            this.handleChangeExpSessionModalState();
             this.props.logout();
         }
     };
+
+    private handleSubmitExpSessionModal = () => {
+        const { history } = this.props;
+        this.handleChangeExpSessionModalState();
+        history.push('/signin');
+    };
+
+    private handleRenderExpiredSessionModal = () => (
+        <ExpiredSessionModal
+            title={this.translate('page.modal.expired.title')}
+            buttonLabel={this.translate('page.modal.expired.submit')}
+            handleChangeExpSessionModalState={this.handleChangeExpSessionModalState}
+            handleSubmitExpSessionModal={this.handleSubmitExpSessionModal}
+        />
+    );
+
+    private handleChangeExpSessionModalState = () => {
+        this.setState({
+            isShownExpSessionModal: !this.state.isShownExpSessionModal,
+        });
+    };
+
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
@@ -756,7 +790,7 @@ const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
     changeLanguage: payload => dispatch(changeLanguage(payload)),
 });
 
-// tslint:disable no-any
-const Layout = withRouter(connect(mapStateToProps, mapDispatchToProps)(LayoutComponent) as any) as any;
+// tslint:disable-next-line no-any
+const Layout = injectIntl(withRouter(connect(mapStateToProps, mapDispatchToProps)(LayoutComponent) as any) as any);
 
 export { Layout };
