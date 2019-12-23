@@ -19,7 +19,7 @@ import {
     ReferralTicketDetails,
 } from '../../components/ReferralTickets';
 
-import { getReferralTickets, getOverall } from '../../../api';
+import { getReferralTickets, getOverall, getBonusTickets } from '../../../api';
 
 // import { Loader } from '../../components/Loader';
 
@@ -62,35 +62,35 @@ class ReferralTickets extends React.Component<Props> {
         maxPages: 0,
         overall: {
             direct: {
-              active: 0,
-              inactive: 0
+                active: 0,
+                inactive: 0
             },
             referrals: {
-              active: 0,
-              inactive: 0
+                active: 0,
+                inactive: 0
             },
             bonuses: {
-              active: 0,
-              inactive: 0
+                active: 0,
+                inactive: 0
             }
-          },
-          direct: {
+        },
+        direct: {
             ticketsForRegistration: {
-              active: 0,
-              inactive: 0
+                active: 0,
+                inactive: 0
             },
             usd: {
-              balance: 0,
-              active: 0,
-              inactive: 0
+                balance: 0,
+                active: 0,
+                inactive: 0
             },
             emrx: {
-              balance: 0,
-              active: 0,
-              inactive: 0
+                balance: 0,
+                active: 0,
+                inactive: 0
             }
-          },
-          bonuses: [],
+        },
+        bonuses: [],
         loaded: false,
         disabledNext: false,
         disabledPrev: true,
@@ -103,15 +103,16 @@ class ReferralTickets extends React.Component<Props> {
         setDocumentTitle('Referral Tickets');
         let  { skip, limit, disabledNext } = this.state;
         const query = `/tickets/referral?limit=${limit}&skip=${skip}`;
-        Promise.all([getReferralTickets(query), getOverall()]).then(values => {            
-            const { bonuses, direct, overall } = values[1];
+        Promise.all([getReferralTickets(query), getOverall(), getBonusTickets()]).then(values => {
+            const { direct, overall } = values[1];
+            const bonuses = values[2];
             const referrals = values[0].list;
             const count = values[0].overall.count;
             const L2count = values[0].overall.L2count;
             const maxPages = Math.ceil(count / limit);
             if (maxPages <= 1) {
-                        disabledNext = true;
-                    }
+                disabledNext = true;
+            }
             this.setState({
                 bonuses,
                 direct, 
@@ -225,9 +226,6 @@ class ReferralTickets extends React.Component<Props> {
             });
         });        
     }
-
- 
-
     
     public render() {
         // if (!this.state.loaded) {
@@ -248,10 +246,24 @@ class ReferralTickets extends React.Component<Props> {
                         </section>
                     </div>
                     <section id="referral">
-                        <ReferralTicketDetails message={this.props.intl.formatMessage} L2count={this.state.L2count} count={this.state.count} disabledPrev={this.state.disabledPrev} disabledNext={this.state.disabledNext} page={this.state.page}  turnLeft={this.turnLeft} turnRight={this.turnRight} context={this.state.referrals} overall={this.state.overall.referrals} />
+                        <ReferralTicketDetails 
+                            message={this.props.intl.formatMessage}
+                            L2count={this.state.L2count}
+                            count={this.state.count}
+                            disabledPrev={this.state.disabledPrev}
+                            disabledNext={this.state.disabledNext}
+                            page={this.state.page}
+                            turnLeft={this.turnLeft}
+                            turnRight={this.turnRight}
+                            context={this.state.referrals}
+                            overall={this.state.overall.referrals}
+                        />
                     </section>
                     <section id="bonus">
-                        <BonusTicketDetails message={this.props.intl.formatMessage} context={this.state.bonuses} overall={this.state.overall.bonuses} />
+                        <BonusTicketDetails 
+                            message={this.props.intl.formatMessage}
+                            context={this.state.bonuses}
+                        />
                     </section>
                 </div>
             );
