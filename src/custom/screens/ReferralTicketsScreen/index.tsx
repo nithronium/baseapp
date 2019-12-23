@@ -17,11 +17,14 @@ import {
     DirectTicketDetails,
     ReferralBallance,
     ReferralTicketDetails,
+    Slider,
 } from '../../components/ReferralTickets';
 
 import { getReferralTickets, getOverall, getBonusTickets } from '../../../api';
 
 // import { Loader } from '../../components/Loader';
+
+const activeTicketsTestData = [1, 2, 3, 4, 6, 55, 77, 99999, 777777, 44444, 55555, 77777, 33333, 22222];
 
 interface ReduxProps {
     user: User;
@@ -240,6 +243,9 @@ class ReferralTickets extends React.Component<Props> {
                                 <CardReferrals message={this.props.intl.formatMessage} title="Referral" context={this.state.referrals} activeInactive={true} overall={this.state.overall.referrals} link="#referral"/>
                                 <CardBonuses message={this.props.intl.formatMessage} title="Bonus" context={this.state.bonuses} activeInactive={false} overall={this.state.overall.bonuses} link="#bonus"/>
                             </ReferralBallance>
+                        </section>
+                        <section id="slider">
+                            <Slider tickets={activeTicketsTestData}/>
                         </section>
                         <section id="direct">
                             <DirectTicketDetails lang={this.props.currentLanguage} message={this.props.intl.formatMessage} context={this.state.direct} overall={this.state.overall.direct} user={this.props.user} />
