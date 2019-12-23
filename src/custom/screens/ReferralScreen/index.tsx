@@ -264,15 +264,7 @@ class Referral extends React.Component<Props> {
                         steps={steps}
                     />
                     <Video text={this.props.intl.formatMessage({id: 'page.referral.video.text'})} lang={this.props.currentLanguage}/>
-                    <Timelines
-                        title={this.props.intl.formatMessage({ id: 'timeline.title' })}
-                        text1={this.props.intl.formatMessage({ id: 'timeline.start.text' })}
-                        date1={this.props.intl.formatMessage({ id: 'timeline.start.date' })}
-                        time1={this.props.intl.formatMessage({ id: 'timeline.start.time' })}
-                        text2={this.props.intl.formatMessage({ id: 'timeline.end.text' })}
-                        date2={this.props.intl.formatMessage({ id: 'timeline.end.date' })}
-                        time2={this.props.intl.formatMessage({ id: 'timeline.end.time' })}
-                    />
+                    <Timelines />
                     <HowTo
                         h2={this.props.intl.formatMessage({ id: 'howto.h2' })}
                         h4={this.props.intl.formatMessage({ id: 'howto.h4' })}
