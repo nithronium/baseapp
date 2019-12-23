@@ -1,7 +1,6 @@
 import { CSSProperties } from 'react';
 
 const mainWrapper: CSSProperties = {
-    height: '683px',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -31,10 +30,11 @@ const currency: CSSProperties = {
 };
 
 const list: CSSProperties = {
-    width: '998px',
+    maxWidth: '998px',
     display: 'flex',
     flexDirection: 'row',
     flexWrap: 'wrap',
+    justifyContent: 'center',
 };
 
 const headerWrapper = {
