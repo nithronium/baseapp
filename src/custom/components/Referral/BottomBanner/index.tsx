@@ -56,7 +56,7 @@ export const BottomBanner = injectIntl(({intl}) => {
                 </div>
                 <a href="https://connect.emirex.com/ieo">
                     <button className="button-get" style={styles.btn}>
-                        {format({id: 'page.referal.learn_more'})}
+                        {format({id: 'page.referal.bottombanner.learn_more'})}
                     </button>
                 </a>
             </div>

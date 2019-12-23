@@ -14,7 +14,7 @@ export const TopBanner = injectIntl(({intl}) => {
                 </span>
                 <Link to="bottom_banner" smooth={true} duration={500} delay={500}>
                     <button className="button-get" style={styles.btn}>
-                        {intl.formatMessage({id: 'page.referal.learn_more'})}
+                        {intl.formatMessage({id: 'page.referal.topBanner.learn_more'})}
                     </button>
                 </Link>
             </div>
