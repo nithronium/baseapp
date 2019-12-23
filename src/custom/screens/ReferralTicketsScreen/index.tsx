@@ -245,7 +245,7 @@ class ReferralTickets extends React.Component<Props> {
                             </ReferralBallance>
                         </section>
                         <section id="slider">
-                            <Slider tickets={activeTicketsTestData}/>
+                            <Slider tickets={activeTicketsTestData} message={this.props.intl.formatMessage}/>
                         </section>
                         <section id="direct">
                             <DirectTicketDetails lang={this.props.currentLanguage} message={this.props.intl.formatMessage} context={this.state.direct} overall={this.state.overall.direct} user={this.props.user} />

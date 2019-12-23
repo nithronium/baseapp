@@ -7,13 +7,17 @@ interface SliderState {
 
 interface SliderProps {
     tickets: number[];
+    message: ({}) => string;
 }
 
 const ticketCSS: React.CSSProperties = {
-    padding: '20px',
+    padding: '20px 0',
     borderRadius: '5px',
     fontSize: '1.5em',
     backgroundColor: 'white',
+    maxWidth: '150px',
+    textAlign: 'center',
+    overflow: 'hidden',
 };
 
 class Slider extends React.PureComponent<SliderProps, SliderState> {
@@ -27,11 +31,12 @@ class Slider extends React.PureComponent<SliderProps, SliderState> {
 
     public render() {
         const chevronWidth = 40;
-        const {tickets} = this.props;
+        const {tickets, message} = this.props;
         const {activeItemIndex} = this.state;
 
         return (
-            <div style={{ padding: `0 ${chevronWidth}px` }}>
+            <div style={{ maxWidth: '1000px', margin: '0 auto', padding: ` 0 ${chevronWidth + 20}px` }}>
+                <h2>{message({ id: 'activeTickets' })}</h2>
                 <ItemsCarousel
                     requestToChangeActive={this.setIndex}
                     activeItemIndex={activeItemIndex}
