@@ -1029,6 +1029,7 @@ export const ru: LangType = {
     'page.body.trade.header.newOrder.content.tabs.fee': 'Комиссия',
 
     'page.wallets.withdraw.fiat': 'Внимание: при внесении на счет сумм, превышающих установленные лимиты, Ваши средства будут возвращены, после вычета комиссий.',
+    'activeTickets': 'Ваши активные билеты',
 
 
     ...nationalitiesNames,

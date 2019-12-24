@@ -3,3 +3,4 @@ export * from './Card';
 export * from './DirectTicketDetails';
 export * from './ReferralBallance';
 export * from './ReferralTicketDetails';
+export * from './Slider';

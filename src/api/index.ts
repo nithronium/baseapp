@@ -110,6 +110,11 @@ export const getBonusTickets = async () => {
     return res.data;
 }
 
+export const getActiveTicketsList = async () => {
+    const res = await axios.get(`${nodelogicUrl}/tickets/active`);
+    return res.data;
+}
+
 const paytoolsAPI = `${window.document.location.origin}/api/v2/paytools_api/private/initPayin`;
 
 export const initPayin = async (body) => {

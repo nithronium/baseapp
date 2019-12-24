@@ -1,0 +1,26 @@
+#slider .slider-items {
+    padding: 10px;
+}
+
+#slider .slider-item {
+    padding: 20px 0;
+    border-radius: 5px;
+    font-size: 1.5em;
+    background: white;
+    max-width: 150px;
+    text-align: center;
+    overflow: hidden;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .06);
+    margin: 5px 0;
+}
+
+#slider .slider-btn {
+    width: 40px;
+    color: black;
+    padding: 20px 0;
+    border-radius: 5px;
+    font-size: 1.5em;
+    background: white;
+    text-align: center;
+    box-shadow: 0 0 12px rgba(0, 0, 0, .06);
+}
