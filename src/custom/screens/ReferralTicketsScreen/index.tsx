@@ -20,11 +20,9 @@ import {
     Slider,
 } from '../../components/ReferralTickets';
 
-import { getReferralTickets, getOverall, getBonusTickets } from '../../../api';
+import { getActiveTicketsList, getReferralTickets, getOverall, getBonusTickets } from '../../../api';
 
 // import { Loader } from '../../components/Loader';
-
-const activeTicketsTestData = [1, 2, 3, 4, 6, 55, 77, 99999, 777777, 44444, 55555, 77777, 33333, 22222];
 
 interface ReduxProps {
     user: User;
@@ -45,6 +43,7 @@ interface State {
     disabledPrev: boolean;
     L2count: number;
     count: number;
+    activeTickets: number[];
 };
 
 type Props =  InjectedIntlProps & ReduxProps;
@@ -100,15 +99,17 @@ class ReferralTickets extends React.Component<Props> {
         referrals: [],
         L2count: 0,
         count: 0,
+        activeTickets: [],
     };
 
     public componentDidMount() {
         setDocumentTitle('Referral Tickets');
         let  { skip, limit, disabledNext } = this.state;
         const query = `/tickets/referral?limit=${limit}&skip=${skip}`;
-        Promise.all([getReferralTickets(query), getOverall(), getBonusTickets()]).then(values => {
+        Promise.all([getReferralTickets(query), getOverall(), getBonusTickets(), getActiveTicketsList()]).then(values => {
             const { direct, overall } = values[1];
             const bonuses = values[2];
+            const activeTickets = values[3]
             const referrals = values[0].list;
             const count = values[0].overall.count;
             const L2count = values[0].overall.L2count;
@@ -125,6 +126,7 @@ class ReferralTickets extends React.Component<Props> {
                 referrals,
                 disabledNext,
                 count,
+                activeTickets,
             })
         }).catch(()=>{
             this.setState({
@@ -244,9 +246,6 @@ class ReferralTickets extends React.Component<Props> {
                                 <CardBonuses message={this.props.intl.formatMessage} title="Bonus" context={this.state.bonuses} activeInactive={false} overall={this.state.overall.bonuses} link="#bonus"/>
                             </ReferralBallance>
                         </section>
-                        <section id="slider">
-                            <Slider tickets={activeTicketsTestData} message={this.props.intl.formatMessage}/>
-                        </section>
                         <section id="direct">
                             <DirectTicketDetails lang={this.props.currentLanguage} message={this.props.intl.formatMessage} context={this.state.direct} overall={this.state.overall.direct} user={this.props.user} />
                         </section>
@@ -270,6 +269,9 @@ class ReferralTickets extends React.Component<Props> {
                             message={this.props.intl.formatMessage}
                             context={this.state.bonuses}
                         />
+                    </section>
+                    <section id="slider">
+                        <Slider tickets={this.state.activeTickets} message={this.props.intl.formatMessage}/>
                     </section>
                 </div>
             );
