@@ -688,13 +688,13 @@
     #timelines {
         margin-top: 73px;
         position: relative;
-        height: 225px;
+        min-height: 225px;
     }
 
     #timelines .timeline {
         background: url('./custom/assets/images/referral/timeline.svg') center center no-repeat;
         width: 992px;
-        height: 180px;
+        min-height: 180px;
         margin: -60px auto 0;
     }
 
@@ -705,11 +705,27 @@
         left: calc(50% - 456px);
     }
 
+    #timelines .round1 {
+        position: absolute;
+        text-align: center;
+        top: 105px;
+        left: calc(50% - 214px);
+    }
+
+    #timelines .round2 {
+        position: absolute;
+        text-align: center;
+        top: 95px;
+        left: calc(50% + 116px);
+    }
+
     #timelines .end {
+        width: 200px;
         position: absolute;
         text-align: center;
         top: 135px;
-        right: calc(50% - 456px);
+        font-weight: bold;
+        right: calc(50% - 480px);
     }
 
     @media (max-width: 950px) {
@@ -724,6 +740,8 @@
         }
 
         #timelines .begin,
+        #timelines .round1,
+        #timelines .round2,
         #timelines .end {
             text-align: left;
             top: unset;
@@ -737,6 +755,8 @@
         }
 
         #timelines .begin:before,
+        #timelines .round1:before,
+        #timelines .round2:before,
         #timelines .end:before {
             position: absolute;
             left: 0px;
