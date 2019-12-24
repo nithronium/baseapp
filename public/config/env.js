@@ -10,8 +10,8 @@ window.env = {
     minutesUntilAutoLogout: '60',
     withCredentials: false,
     captcha: {
-        captchaType: 'none',
-        siteKey: '',
+        captchaType: 'geetest',
+        siteKey: '6Le4gLQUAAAAAGRqFa2ErLeQwLR1XDdBOQF7dJ-z',
         // captchaType: 'recaptcha',
         // siteKey: '6Le4gLQUAAAAAGRqFa2ErLeQwLR1XDdBOQF7dJ-z',
     },

@@ -33,6 +33,8 @@ import { Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, TopBanner, Vide
 
 import { buildPath } from '../../helpers';
 
+import { GeetestCaptcha } from '../../../containers';
+
 interface ReduxProps {
     requireVerification?: boolean;
     loading?: boolean;
@@ -135,6 +137,7 @@ class Referral extends React.Component<Props> {
             geetestCaptchaSuccess,
         } = this.state;
         const { loading, currentLanguage } = this.props;
+        const test = !geetestCaptchaSuccess ? <GeetestCaptcha ref={this.captchaRef} onSuccess={this.handleGeetestCaptchaSuccess}/> : undefined;
 
         const className = cx('pg-referral-screen__container', { loading });
 
@@ -182,6 +185,7 @@ class Referral extends React.Component<Props> {
                         handleFocusPassword={this.handleFocusPassword}
                         handleFocusConfirmPassword={this.handleFocusConfirmPassword}
                         handleFocusRefId={this.handleFocusRefId}
+                        geetestCaptcha={test}
                         geetestCaptchaSuccess={geetestCaptchaSuccess}
                     />
                     <Modal
@@ -258,7 +262,8 @@ class Referral extends React.Component<Props> {
                 </Helmet>
                 <div className="pg-referral-screen">
                     <TopBanner />
-                    <Banner lang={currentLanguage} children={this.props.user.state === 'active' ? totalTickets() : signupForm()} />                  <HIW
+                    <Banner lang={currentLanguage} children={this.props.user.state === 'active' ? totalTickets() : signupForm()} />
+                    <HIW
                         hiw={this.props.intl.formatMessage({ id: 'page.referral.hiw' })}
                         subtitle={this.props.intl.formatMessage({id: 'page.referral.hiw.subtitle'})}
                         steps={steps}
@@ -308,6 +313,14 @@ class Referral extends React.Component<Props> {
             email: value,
         });
     };
+
+    private captchaRef;
+
+    private handleGeetestCaptchaSuccess = () => {
+        this.setState({
+            geetestCaptchaSuccess: true,
+        });
+    }
 
     private handleChangePassword = (value: string) => {
         this.setState({
