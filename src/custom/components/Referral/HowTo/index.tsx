@@ -27,9 +27,9 @@ const HowTo = props => {
                     </div>
                     <div className="text" dangerouslySetInnerHTML={{__html:props.text2}}/>
 
-                    <div className="text golden">
-                        <b>({props.soon})</b>
-                    </div>
+                    {/* <div className="text golden"> */}
+                        {/* <b>({props.soon})</b> */}
+                    {/* </div> */}
                 </div>
                 <div className="how-to">
                     <div className="number-wrap">
@@ -37,9 +37,9 @@ const HowTo = props => {
                     </div>
                     <div className="text" dangerouslySetInnerHTML={{__html:props.text3}}/>
 
-                    <div className="text golden">
-                        <b>({props.soon})</b>
-                    </div>
+                    {/* <div className="text golden"> */}
+                        {/* <b>({props.soon})</b> */}
+                    {/* </div> */}
                 </div>
                 <div className="how-to">
                     <div className="number-wrap">
