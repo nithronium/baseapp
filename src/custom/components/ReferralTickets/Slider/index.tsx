@@ -28,8 +28,10 @@ class Slider extends React.PureComponent<SliderProps, SliderState> {
         const {activeItemIndex} = this.state;
 
         return (
-            <div style={{ maxWidth: '1000px', margin: '0 auto', padding: ` 0 ${chevronWidth + 20}px` }}>
-                <h2>{message({ id: 'activeTickets' })}</h2>
+            <div className="container column">
+                <div className="container wrap">
+                    <h2>{message({ id: 'activeTickets' })}</h2>
+                </div>
                 {!sliderOff ?
                 <ItemsCarousel
                     classes={{wrapper: 'slider-items'}}
