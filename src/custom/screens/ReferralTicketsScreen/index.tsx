@@ -236,9 +236,9 @@ class ReferralTickets extends React.Component<Props> {
                     <div className="top-holder">
                         <section id="top">
                             <ReferralBallance message={this.props.intl.formatMessage} totalTickets={this.getTotalTickets(this.state.overall)}>
-                                <CardUser message={this.props.intl.formatMessage} title="Direct" context={this.state.direct} activeInactive={true} overall={this.state.overall.direct} link="#direct"/>
-                                <CardReferrals message={this.props.intl.formatMessage} title="Referral" context={this.state.referrals} activeInactive={true} overall={this.state.overall.referrals} link="#referral"/>
-                                <CardBonuses message={this.props.intl.formatMessage} title="Bonus" context={this.state.bonuses} activeInactive={false} overall={this.state.overall.bonuses} link="#bonus"/>
+                                <CardUser message={this.props.intl.formatMessage} title="Direct" context={this.state.direct} overall={this.state.overall.direct} link="#direct"/>
+                                <CardReferrals message={this.props.intl.formatMessage} title="Referral" context={this.state.referrals} overall={this.state.overall.referrals} link="#referral"/>
+                                <CardBonuses message={this.props.intl.formatMessage} title="Bonus" context={this.state.bonuses} overall={this.state.overall.bonuses} link="#bonus"/>
                             </ReferralBallance>
                         </section>
                         <section id="direct">
