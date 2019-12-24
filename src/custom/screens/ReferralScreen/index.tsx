@@ -222,7 +222,7 @@ class Referral extends React.Component<Props> {
                 h3: `${this.props.intl.formatMessage({ id: 'page.referral.hiw.step' })} 2`,
                 h4Green: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4green2' }),
                 h4Rest: this.props.intl.formatMessage({ id: 'page.referral.hiw.h4_2' }),
-                soon: this.props.intl.formatMessage({ id: 'page.referral.soon' }),
+                // soon: this.props.intl.formatMessage({ id: 'page.referral.soon' }),
                 text: this.props.intl.formatMessage({ id: 'page.referral.hiw.text2' }),
             },
             {
