@@ -1,3 +1,4 @@
+/* tslint:disable */
 import * as React from 'react';
 import ItemsCarousel from 'react-items-carousel';
 import './styles.css';
@@ -9,6 +10,7 @@ interface SliderState {
 interface SliderProps {
     tickets: number[];
     message: ({}) => string;
+    sliderOff?: boolean;
 }
 
 class Slider extends React.PureComponent<SliderProps, SliderState> {
@@ -22,12 +24,13 @@ class Slider extends React.PureComponent<SliderProps, SliderState> {
 
     public render() {
         const chevronWidth = 40;
-        const {tickets, message} = this.props;
+        const {tickets, message, sliderOff} = this.props;
         const {activeItemIndex} = this.state;
 
         return (
             <div style={{ maxWidth: '1000px', margin: '0 auto', padding: ` 0 ${chevronWidth + 20}px` }}>
                 <h2>{message({ id: 'activeTickets' })}</h2>
+                {!sliderOff ?
                 <ItemsCarousel
                     classes={{wrapper: 'slider-items'}}
                     requestToChangeActive={this.setIndex}
@@ -41,6 +44,8 @@ class Slider extends React.PureComponent<SliderProps, SliderState> {
                 >
                     {tickets.map(ticket => (<div key={ticket} className="slider-item">{ticket}</div>))}
                 </ItemsCarousel>
+                :
+                <div className='slider-items-off'>{tickets.map(ticket => (<div key={ticket} className="slider-item">{ticket}</div>))}</div>}
             </div>
         );
     }

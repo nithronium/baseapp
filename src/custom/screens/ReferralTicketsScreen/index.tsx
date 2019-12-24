@@ -106,10 +106,9 @@ class ReferralTickets extends React.Component<Props> {
         setDocumentTitle('Referral Tickets');
         let  { skip, limit, disabledNext } = this.state;
         const query = `/tickets/referral?limit=${limit}&skip=${skip}`;
-        Promise.all([getReferralTickets(query), getOverall(), getBonusTickets(), getActiveTicketsList()]).then(values => {
+        Promise.all([getReferralTickets(query), getOverall(), getBonusTickets()]).then(values => {
             const { direct, overall } = values[1];
             const bonuses = values[2];
-            const activeTickets = values[3]
             const referrals = values[0].list;
             const count = values[0].overall.count;
             const L2count = values[0].overall.L2count;
@@ -126,38 +125,14 @@ class ReferralTickets extends React.Component<Props> {
                 referrals,
                 disabledNext,
                 count,
-                activeTickets,
             })
         }).catch(()=>{
             this.setState({
                 disabledNext: true
             })
         })
-
-        // getReferralTickets(query).then(([overallD, data]) => {
-        //     const { bonuses, direct, overall } = overallD;
-        //     const { list, overall  } = data;
-        //     let disabledNext = false;
-        //     const maxPages = Math.ceil(overall.referrals.count / limit);
-        //     if (maxPages <= 1) {
-        //         disabledNext = true;
-        //     }
-        //     this.setState({
-        //         bonuses,
-        //         direct,
-        //         overall,
-        //         referrals,
-        //         loaded: true,
-        //         disabledNext,
-        //         maxPages,
-        //     });
-        // }).catch(() => {
-        //     this.setState({
-        //         disabledNext: true
-        //     })
-        // })
           
-        
+        this.getActiveTickets(); 
     }
    
     private getTotalTickets(_overall) {
@@ -271,7 +246,7 @@ class ReferralTickets extends React.Component<Props> {
                         />
                     </section>
                     <section id="slider">
-                        <Slider tickets={this.state.activeTickets} message={this.props.intl.formatMessage}/>
+                        <Slider tickets={this.state.activeTickets} sliderOff={true} message={this.props.intl.formatMessage}/>
                     </section>
                 </div>
             );
@@ -280,6 +255,11 @@ class ReferralTickets extends React.Component<Props> {
         
         
     }
+
+    private getActiveTickets() {
+        getActiveTicketsList().then(list => this.setState({activeTickets: list}));
+    }
+
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
