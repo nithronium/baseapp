@@ -82,10 +82,13 @@ class ReferralProgramClass extends React.Component<Props> {
     };
 
     public componentDidMount = () => {
-        const userRefUid = this.props.user.referral_uid;
+        let userRefUid = this.props.user.referral_uid;
         const ref_id = localStorage.getItem('ref_id') || '';
         if (userRefUid && ref_id) {
             localStorage.removeItem('ref_id');
+        }
+        if (!userRefUid && ref_id) {
+            userRefUid = ref_id
         }
         // console.log(userRefUid);
         this.setState({ userRefUid });
