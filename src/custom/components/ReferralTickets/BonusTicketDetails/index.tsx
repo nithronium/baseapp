@@ -1,3 +1,4 @@
+/* tslint:disable */
 import * as React from 'react';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {
@@ -28,9 +29,11 @@ const BonusTicketsDetailRow: React.FC<BonusTicketsDetailRowProps> = ({record, me
             <td>{record.subscription}</td>
             <td>
                 <span style={styles.actionCode} title={record.action}>{record.action}</span>
+                {record.action &&
                 <CopyToClipboard text={record.action}>
                     <IconClipBoard style={styles.icon} />
                 </CopyToClipboard>
+                }
             </td>
             <td><a href={record.link}>Follow link</a></td>
         </tr>
