@@ -1010,6 +1010,7 @@ export const ru: LangType = {
     'page.body.trade.header.newOrder.content.tabs.fee': 'Комиссия',
 
     'page.wallets.withdraw.fiat': 'Внимание: при внесении на счет сумм, превышающих установленные лимиты, Ваши средства будут возвращены, после вычета комиссий.',
+    'page.profile.update.balance' : 'To get verification level 2, please top up your balance with $100 or more.',
 
 
     ...nationalitiesNames,
