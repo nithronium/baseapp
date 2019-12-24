@@ -1,4 +1,4 @@
-import { Button } from '@openware/components';
+import { Button } from 'react-bootstrap';
 import * as React from 'react';
 import { History } from 'history';
 import { RouteProps, withRouter } from 'react-router-dom';
@@ -47,18 +47,19 @@ class BeneficiariesFailAddModalComponent extends React.Component<Props> {
                     {this.translate('page.body.wallets.beneficiaries.failAddModal.content')}
                 </span>
                 <div className="cr-email-form__button-wrapper">
-                    <Button
-                        onClick={this.handleRedirectToKYC}
-                        label={this.translate('page.body.wallets.beneficiaries.failAddModal.button')}
-                    >
-                        {this.translate('page.body.wallets.beneficiaries.failAddModal.button')}
-                    </Button>
+                    <a href="/confirm">
+                        <Button
+                            size="lg"
+                            variant="primary"
+                            className="cr-email-form__button-wrapper__btn"
+                        >
+                            {this.translate('page.body.wallets.beneficiaries.failAddModal.button')}
+                        </Button>
+                    </a>
                 </div>
             </div>
         );
     };
-
-    private handleRedirectToKYC = () => this.props.history.push('/confirm');
 
     private translate = (id: string) => this.props.intl.formatMessage({ id });
 }
