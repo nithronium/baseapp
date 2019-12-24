@@ -1,5 +1,6 @@
 import * as React from 'react';
 import ItemsCarousel from 'react-items-carousel';
+import './styles.css';
 
 interface SliderState {
     activeItemIndex: number;
@@ -9,16 +10,6 @@ interface SliderProps {
     tickets: number[];
     message: ({}) => string;
 }
-
-const ticketCSS: React.CSSProperties = {
-    padding: '20px 0',
-    borderRadius: '5px',
-    fontSize: '1.5em',
-    backgroundColor: 'white',
-    maxWidth: '150px',
-    textAlign: 'center',
-    overflow: 'hidden',
-};
 
 class Slider extends React.PureComponent<SliderProps, SliderState> {
     constructor(props) {
@@ -38,16 +29,17 @@ class Slider extends React.PureComponent<SliderProps, SliderState> {
             <div style={{ maxWidth: '1000px', margin: '0 auto', padding: ` 0 ${chevronWidth + 20}px` }}>
                 <h2>{message({ id: 'activeTickets' })}</h2>
                 <ItemsCarousel
+                    classes={{wrapper: 'slider-items'}}
                     requestToChangeActive={this.setIndex}
                     activeItemIndex={activeItemIndex}
-                    numberOfCards={5}
+                    numberOfCards={7}
                     gutter={20}
-                    leftChevron={<button>{'<'}</button>}
-                    rightChevron={<button>{'>'}</button>}
+                    leftChevron={<button className="slider-btn">{'<'}</button>}
+                    rightChevron={<button className="slider-btn">{'>'}</button>}
                     outsideChevron={true}
                     chevronWidth={chevronWidth}
                 >
-                    {tickets.map(ticket => (<div style={ticketCSS}>{ticket}</div>))}
+                    {tickets.map(ticket => (<div key={ticket} className="slider-item">{ticket}</div>))}
                 </ItemsCarousel>
             </div>
         );
