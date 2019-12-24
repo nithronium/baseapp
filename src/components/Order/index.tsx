@@ -1,6 +1,5 @@
-import { TabPanel } from '../../components';
 import * as React from 'react';
-import { OrderForm } from '../';
+import { TabPanel, OrderForm } from '../';
 // import { Fees } from '../../modules';
 
 export type FormType = 'buy' | 'sell';
@@ -135,13 +134,21 @@ export interface OrderComponentProps {
      */
     // currentFees?: Fees[];
 }
+interface State {
+    index: number;
+}
 
 const defaultOrderTypes: DropdownElem[] = ['Limit', 'Market'];
 
 const splitBorder = 449;
 const defaultWidth = 635;
 
-class Order extends React.PureComponent<OrderComponentProps> {
+
+class Order extends React.PureComponent<OrderComponentProps, State> {
+    public state = {
+        index: 0,
+    };
+
     public render() {
         const { width = defaultWidth } = this.props;
 
@@ -153,6 +160,7 @@ class Order extends React.PureComponent<OrderComponentProps> {
                         panels={this.getPanels()}
                         onTabChange={this.handleChangeTab}
                         tabIndex={this.props.tabIndex}
+                        currentTabIndex={this.state.index}
                     />
                 </div>
             );
@@ -379,7 +387,11 @@ class Order extends React.PureComponent<OrderComponentProps> {
         if (this.props.handleSendType && label) {
             this.props.handleSendType(index, label);
         }
-    };
+
+        this.setState({
+            index: index,
+        });
+    }
 }
 
 export { Order };
