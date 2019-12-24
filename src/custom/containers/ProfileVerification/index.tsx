@@ -3,11 +3,12 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { WalletItemProps } from '../../../components/WalletItem';
 import { VALUATION_PRIMARY_CURRENCY } from '../../../constants';
 import { estimateValue } from '../../../helpers/estimateValue';
 import {
+    alertPush,
     currenciesFetch,
     Currency,
     Deposit,
@@ -34,6 +35,7 @@ import { RangerState } from '../../../modules/public/ranger/reducer';
 import { selectRanger } from '../../../modules/public/ranger/selectors';
 import { WithdrawLimit } from '../../../modules/user/withdrawLimit';
 
+
 interface ReduxProps {
     currencies: Currency[];
     depositHistory: WalletHistoryList;
@@ -46,6 +48,7 @@ interface ReduxProps {
     withdrawLimitData: WithdrawLimit;
     user: User;
     userLoggedIn: boolean;
+    history: History;
 }
 
 interface DispatchProps {
@@ -164,12 +167,23 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
             </div>
         );
     }
-
+//tslint:disable
     public renderUpgradeLevelLink() {
+        const balance = 0;
+        const { history } = this.props;
+        const gotoConfirm = (event) => {
+            event.preventDefault();
+            console.log('click');
+            if (balance < 100) {
+                alertPush({ message: ['page.profile.update.balance'], type: 'error' });
+            } else {
+                history.push('/confirm');
+            }
+        };
         return (
-            <Link to="/confirm" className="pg-profile-verification__upgrade-level">
+            <span onClick={gotoConfirm} className="pg-profile-verification__upgrade-level">
                 <FormattedMessage id="page.body.profile.header.account.profile.upgrade"/>
-            </Link>
+            </span>
         );
     }
 
