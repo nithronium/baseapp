@@ -4,7 +4,6 @@ import { ReferralOverallPayload } from '../../../modules/referralTickets';
 // type CardContextProps = ReferralOverallPayload['referrals'];
 type Overall = ReferralOverallPayload['overall'];
 interface CardProps {
-    activeInactive?: boolean;
     context: any;
     overall: Overall['referrals'];
     link: string;
@@ -68,26 +67,19 @@ class CardReferrals extends React.Component<CardProps>{
 
 
     public activeInactive(){
-        if (this.props.activeInactive){
-            return(
-                <div className="card-middle">
-                    <div className="card-details-row">
-                        <div className="card-details-row__left">{this.props.message({id: 'tickets.ref'}).toLowerCase()} {this.props.message({id: 'tickets.active'})}</div>
-                        <div className="card-details-row__right">{this.props.overall.active}</div>
-                    </div>
-                    <div className="card-details-row">
-                        <div className="card-details-row__left">{this.props.message({id: 'tickets.ref'}).toLowerCase()} {this.props.message({id: 'tickets.inactive'})}</div>
-                        <div className="card-details-row__right">{this.props.overall.inactive}</div>
-                    </div>
+        return(
+            <div className="card-middle">
+                <div className="card-details-row">
+                    <div className="card-details-row__left">{this.props.message({id: 'tickets.ref'}).toLowerCase()} {this.props.message({id: 'tickets.active'})}</div>
+                    <div className="card-details-row__right">{this.props.overall.active}</div>
                 </div>
-            );
-        }else{
-            return(
-                <div className="card-middle"/>
-            );
-        }
+                <div className="card-details-row">
+                    <div className="card-details-row__left">{this.props.message({id: 'tickets.ref'}).toLowerCase()} {this.props.message({id: 'tickets.inactive'})}</div>
+                    <div className="card-details-row__right">{this.props.overall.inactive}</div>
+                </div>
+            </div>
+        );
     }
-
 
     public render(){
 
