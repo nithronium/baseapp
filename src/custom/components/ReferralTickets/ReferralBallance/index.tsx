@@ -31,6 +31,7 @@ const emptyBtnStyle: React.CSSProperties = {
     border: '1px solid #7ac600',
     background: 'white',
     marginRight: '20px',
+    marginBottom: '10px',
 };
 
 class ReferralBallanceContainer extends React.Component<Props> {
