@@ -21,7 +21,8 @@ export const WinnerItem: React.FC<WinnerItemProps> = injectIntl(({data, intl}) =
             <span className="winner-item-cur">{data.currency}</span>
             {data.currency === 'EMRX' &&
             <div>
-                <span className="winner-item-value"> + {`$${data.value} in`} </span>
+                <div className="winner-item-value">+</div>
+                <span className="winner-item-value">{`$${data.value} in`} </span>
                 <span className="winner-item-cur">BTC</span>
             </div>
             }
