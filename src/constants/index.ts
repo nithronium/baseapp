@@ -1,6 +1,7 @@
 import { pluginsConstants } from '../plugins/constants';
 export const PG_TITLE_PREFIX = 'Emirex';
 
+export const MINIMAL_BALANCE = 100;
 
 export const pgRoutes = (isLoggedIn: boolean): string[][] => {
     const routes = [

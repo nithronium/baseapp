@@ -3,11 +3,12 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { WalletItemProps } from '../../../components/WalletItem';
-import { VALUATION_PRIMARY_CURRENCY } from '../../../constants';
+import { MINIMAL_BALANCE, VALUATION_PRIMARY_CURRENCY } from '../../../constants';
 import { estimateValue } from '../../../helpers/estimateValue';
 import {
+    alertPush,
     currenciesFetch,
     Currency,
     Deposit,
@@ -33,6 +34,7 @@ import { rangerConnectFetch, RangerConnectFetch } from '../../../modules/public/
 import { RangerState } from '../../../modules/public/ranger/reducer';
 import { selectRanger } from '../../../modules/public/ranger/selectors';
 import { WithdrawLimit } from '../../../modules/user/withdrawLimit';
+// import { buildPath } from '../../helpers';
 
 interface ReduxProps {
     currencies: Currency[];
@@ -56,19 +58,17 @@ interface DispatchProps {
     fetchTickers: typeof marketsTickersFetch;
     fetchWithdrawLimit: typeof withdrawLimitFetch;
     rangerConnect: typeof rangerConnectFetch;
+    fetchSuccess: typeof alertPush;
 }
-
 interface State {
     formattedDepositHistory: WalletItemProps[];
     evaluatedDepositsTotal: string;
 }
-
-type Props = ReduxProps & DispatchProps & InjectedIntlProps;
-
-class ProfileVerificationComponent extends React.Component<Props, State> {
-    constructor(props: Props) {
+//tslint:disable
+export type ProfileProps = ReduxProps & DispatchProps & InjectedIntlProps;
+class ProfileVerificationComponent extends React.Component<ProfileProps, State> {
+    constructor(props: ProfileProps) {
         super(props);
-
         this.state = {
             formattedDepositHistory: [],
             evaluatedDepositsTotal: '',
@@ -87,7 +87,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
             rangerState: {connected},
             userLoggedIn,
         } = this.props;
-
+        // tslint:disable-next-line: no-console
         fetchLabels();
         fetchWithdrawLimit();
 
@@ -107,7 +107,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
         }
     }
 
-    public componentWillReceiveProps(nextProps: Props) {
+    public componentWillReceiveProps(nextProps: ProfileProps) {
         const { currencies, depositHistory } = this.props;
         const { formattedDepositHistory } = this.state;
 
@@ -120,7 +120,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
         }
     }
 
-    public componentDidUpdate(prevProps: Props, prevState: State) {
+    public componentDidUpdate(prevProps: ProfileProps, prevState: State) {
         const {
             currencies,
             markets,
@@ -164,12 +164,20 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
             </div>
         );
     }
-
-    public renderUpgradeLevelLink() {
+//tslint:disable
+    public renderUpgradeLevelLink(balance?) {
+        const _balance = balance ? balance : 0;
+        const gotoConfirm = () => {
+            if (_balance < MINIMAL_BALANCE) {
+                this.props.fetchSuccess({ message: ['page.profile.update.balance'], type: 'error' });
+            } else {
+                this.props.history.push('/confirm');
+            }
+        };
         return (
-            <Link to="/confirm" className="pg-profile-verification__upgrade-level">
+            <span onClick={gotoConfirm} className="pg-profile-verification__upgrade-level">
                 <FormattedMessage id="page.body.profile.header.account.profile.upgrade"/>
-            </Link>
+            </span>
         );
     }
 
@@ -323,7 +331,7 @@ class ProfileVerificationComponent extends React.Component<Props, State> {
                 </div>
                 <div className="pg-profile-verification__user-level">
                     {this.renderUserLevel(userLevel)}
-                    {userLevel < 6 && this.renderUpgradeLevelLink()}
+                    {userLevel < 6 && this.renderUpgradeLevelLink(this.props.balance)}
                 </div>
                 <div className="pg-profile-verification__know-more">
                     <a href="https://knowledge-base.emirex.com/emirex">
@@ -393,6 +401,7 @@ const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
         fetchTickers: () => dispatch(marketsTickersFetch()),
         fetchWithdrawLimit: () => dispatch(withdrawLimitFetch()),
         rangerConnect: (payload: RangerConnectFetch['payload']) => dispatch(rangerConnectFetch(payload)),
+        fetchSuccess: payload => dispatch(alertPush(payload)),
     });
 
 const ProfileVerification = injectIntl(connect(mapStateToProps, mapDispatchProps)(ProfileVerificationComponent));

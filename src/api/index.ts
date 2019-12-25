@@ -123,3 +123,7 @@ export const initPayin = async (body) => {
     // const res = { data: { url: 'http://127.0.0.1:5500/ptform.html' } };
     return res.data;
 }
+export const getBalance = async () => {
+    const res = await axios.get(`${nodelogicUrl}/getBalance`);
+    return res.data;
+}

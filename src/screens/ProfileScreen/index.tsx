@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
+
+import { History } from 'history';
+
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import { getBalance } from '../../api';
 import { ProfileAccountActivity } from '../../containers/ProfileAccountActivity';
 import { ProfileApiKeys } from '../../containers/ProfileApiKeys';
 import { ProfileApiKeysLite } from '../../containers/ProfileApiKeysLite';
@@ -11,16 +15,32 @@ import { ProfileVerification } from '../../custom/containers/ProfileVerification
 import { VersionGuardWrapper } from '../../decorators';
 import { setDocumentTitle } from '../../helpers';
 
-class ProfileComponent extends React.Component<RouterProps> {
+interface HistoryProps {
+    history: History;
+}
+
+type Props = RouterProps & HistoryProps;
+
+class ProfileComponent extends React.Component<Props> {
+
+    public state = {
+        balance: 0,
+    };
 
     public componentDidMount() {
         setDocumentTitle('Profile');
+        // tslint:disable-next-line: no-floating-promises
+        getBalance().then(data => {
+            this.setState({
+                balance: data.balance,
+            });
+        });
     }
 
     public goBack = () => {
         this.props.history.goBack();
     };
-
+//tslint:disable
     public render() {
         return (
             <div className="container pg-profile-page">
@@ -37,7 +57,7 @@ class ProfileComponent extends React.Component<RouterProps> {
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
-                            <ProfileVerification />
+                            <ProfileVerification history={this.props.history} balance={this.state.balance}/>
                         </div>
                     </div>
                     <div className="row px-4">

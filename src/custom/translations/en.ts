@@ -396,5 +396,6 @@ export const en = {
 
   'page.wallets.withdraw.fiat': 'Attention: Should you send a larger amount than your limitation, funds shall be returned and fees will be charged.',
     'activeTickets': 'Your active tickets',
+  'page.profile.update.balance' : 'To get verification level 2, please top up your balance with $100 or more.',
 
 };
