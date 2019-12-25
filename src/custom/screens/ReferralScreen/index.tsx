@@ -34,6 +34,7 @@ import { Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, TopBanner, Vide
 import { buildPath } from '../../helpers';
 
 import { GeetestCaptcha } from '../../../containers';
+import { WinnersBanner } from '../../components/Referral/WinnersBanner/WinnerBanner';
 
 interface ReduxProps {
     requireVerification?: boolean;
@@ -263,6 +264,7 @@ class Referral extends React.Component<Props> {
                 <div className="pg-referral-screen">
                     <TopBanner />
                     <Banner lang={currentLanguage} children={this.props.user.state === 'active' ? totalTickets() : signupForm()} />
+                    <WinnersBanner/>
                     <HIW
                         hiw={this.props.intl.formatMessage({ id: 'page.referral.hiw' })}
                         subtitle={this.props.intl.formatMessage({id: 'page.referral.hiw.subtitle'})}
