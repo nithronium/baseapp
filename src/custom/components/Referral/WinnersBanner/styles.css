@@ -47,6 +47,7 @@
 #winners-banner .winner-list-item {
     width: 122px;
     margin-left: 10px;
+    text-align: center;
 }
 
 #winners-banner .winners-slider-label {
