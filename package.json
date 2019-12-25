@@ -26,6 +26,7 @@
     "react-helmet": "^5.2.1",
     "react-iframe": "^1.8.0",
     "react-intl": "^2.8.0",
+    "react-items-carousel": "^2.8.0",
     "react-maskinput": "^1.0.1",
     "react-redux": "^5.0.7",
     "react-router": "^4.3.1",

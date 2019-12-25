@@ -1,0 +1,164 @@
+#winners-banner.winners-wrapper.grab-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #F2F2F2;
+    padding-top: 70px;
+}
+
+#winners-banner .winners-graz {
+    position: relative;
+    background-color: #FFD542;
+    width: 288px;
+    height: 100px;
+    border-radius: -5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 25px;
+}
+#winners-banner .winners-graz > h4 {
+    font-family: IBM Plex Sans;
+    font-weight: bold;
+    font-size: 17px;
+    line-height: 22px;
+    margin: 0;
+}
+
+#winners-banner .winners-graz > h6 {
+    font-family: IBM Plex Sans;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 19px;
+    margin: 0;
+}
+
+#winners-banner .winners-content {
+    flex-grow: 0;
+    flex-shrink: 0;
+    max-width: 756px;
+    height: 100px;
+    background-color: black;
+    position: relative;
+}
+
+#winners-banner .winner-list-item {
+    width: 122px;
+    margin-left: 10px;
+}
+
+#winners-banner .winners-slider-label {
+    font-family: IBM Plex Sans;
+    font-size: 10px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    transform: translateY(100px) rotate(270deg);
+    transform-origin: 0 0;
+    width: 100px;
+    height: 39px;
+    border-bottom: 1px dotted white;
+    background-color: #3A3A3A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    justify-content: center;
+}
+
+#winners-banner .winner-item-number {
+    font-family: IBM Plex Sans;
+    font-size: 12px;
+    line-height: 16px;
+    color: white;
+}
+
+#winners-banner .winner-item-value {
+    font-family: IBM Plex Sans;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 21px;
+    color: #FFD542;
+}
+
+#winners-banner .winner-item-cur {
+    font-family: IBM Plex Sans;
+    font-size: 16px;
+    line-height: 21px;
+    color: white;
+}
+
+#winners-banner .winner-slider-btn {
+    background-color: black;
+    color: white;
+    font-size: 24px;
+}
+
+
+#winners-banner .winners-carousel-inner-wrapper {
+    margin-left: 40px;
+    margin-top: -20px;
+}
+
+#winners-banner .corner {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    background-color: #F2F2F2;
+}
+
+#winners-banner .top-left {
+    top: -10px;
+    left: -10px;
+}
+#winners-banner .top-right {
+    top: -10px;
+    right: -10px;
+}
+#winners-banner .bottom-left {
+    bottom: -10px;
+    left: -10px;
+}
+#winners-banner .bottom-right {
+    bottom: -10px;
+    right: -10px;
+}
+#winners-banner .top-label {
+    top: -10px;
+    left: 280px;
+}
+#winners-banner .bottom-label {
+    bottom: -10px;
+    left: 280px;
+}
+
+#winners-banner .winnes-content-mobile {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+@media(max-width: 758px) {
+    .winners-content{
+        display: none;
+    }
+    #winners-banner.winners-wrapper.grab-container {
+        flex-direction: column;
+    }
+    #winners-banner .winner-list-item {
+        background-color: black;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 5px;
+        width: 140px;
+    }
+}
+
+@media(min-width: 758px) {
+    #winners-banner .winnes-content-mobile {
+        display: none;
+    }
+}
