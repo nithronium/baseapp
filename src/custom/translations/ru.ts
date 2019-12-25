@@ -1034,7 +1034,7 @@ export const ru: LangType = {
 
     'page.wallets.withdraw.fiat': 'Внимание: при внесении на счет сумм, превышающих установленные лимиты, Ваши средства будут возвращены, после вычета комиссий.',
     'activeTickets': 'Ваши активные билеты',
-    'page.profile.update.balance' : 'To get verification level 2, please top up your balance with $100 or more.',
+    'page.profile.update.balance' : 'Чтобы получить Уровень Верификации 2, пожалуйста пополните свой баланс  минимум на $100',
 
 
     ...nationalitiesNames,
