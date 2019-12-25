@@ -57,7 +57,6 @@ export interface OrderComponentProps {
     /**
      * Index of tab to switch on
      */
-    tabIndex?: number;
     /**
      * Precision of amount, total, available, fee value
      */
@@ -159,7 +158,6 @@ class Order extends React.PureComponent<OrderComponentProps, State> {
                         fixed={true}
                         panels={this.getPanels()}
                         onTabChange={this.handleChangeTab}
-                        tabIndex={this.props.tabIndex}
                         currentTabIndex={this.state.index}
                     />
                 </div>
@@ -173,7 +171,6 @@ class Order extends React.PureComponent<OrderComponentProps, State> {
                         fixed={true}
                         panels={this.getPanelsBuy()}
                         onTabChange={this.handleChangeTab}
-                        tabIndex={this.props.tabIndex}
                         currentTabIndex={this.state.index}
                     />
                 </div>
@@ -182,7 +179,6 @@ class Order extends React.PureComponent<OrderComponentProps, State> {
                         fixed={true}
                         panels={this.getPanelsSell()}
                         onTabChange={this.handleChangeTab}
-                        tabIndex={this.props.tabIndex}
                         currentTabIndex={this.state.index}
                     />
                 </div>
