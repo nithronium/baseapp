@@ -174,6 +174,7 @@ class Order extends React.PureComponent<OrderComponentProps, State> {
                         panels={this.getPanelsBuy()}
                         onTabChange={this.handleChangeTab}
                         tabIndex={this.props.tabIndex}
+                        currentTabIndex={this.state.index}
                     />
                 </div>
                 <div className="cr-order--extended__sell">
@@ -182,6 +183,7 @@ class Order extends React.PureComponent<OrderComponentProps, State> {
                         panels={this.getPanelsSell()}
                         onTabChange={this.handleChangeTab}
                         tabIndex={this.props.tabIndex}
+                        currentTabIndex={this.state.index}
                     />
                 </div>
             </div>
