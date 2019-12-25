@@ -300,7 +300,7 @@ export const en = {
   'tickets.inactive': 'Inactive',
   'tickets.total_tickets': 'Total tickets',
   'tickets.activate_tickets': 'Activate Tickets',
-  'tickets.get_code': 'Get Your Referral Code',
+  'tickets.get_code': 'Copy Referral Link',
   'tickets.direct_detail': 'Direct ticket details',
   'tickets.a': 'active tickets',
   'tickets.i': 'inactive tickets',
