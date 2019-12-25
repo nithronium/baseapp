@@ -5,6 +5,7 @@ import { History } from 'history';
 
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import { getBalance } from '../../api';
 import { ProfileAccountActivity } from '../../containers/ProfileAccountActivity';
 import { ProfileApiKeys } from '../../containers/ProfileApiKeys';
 import { ProfileApiKeysLite } from '../../containers/ProfileApiKeysLite';
@@ -22,8 +23,18 @@ type Props = RouterProps & HistoryProps;
 
 class ProfileComponent extends React.Component<Props> {
 
+    public state = {
+        balance: 0,
+    };
+
     public componentDidMount() {
         setDocumentTitle('Profile');
+        // tslint:disable-next-line: no-floating-promises
+        getBalance().then(data => {
+            this.setState({
+                balance: data.balance,
+            });
+        });
     }
 
     public goBack = () => {
@@ -46,7 +57,7 @@ class ProfileComponent extends React.Component<Props> {
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
-                            <ProfileVerification history={this.props.history}/>
+                            <ProfileVerification history={this.props.history} balance={this.state.balance}/>
                         </div>
                     </div>
                     <div className="row px-4">

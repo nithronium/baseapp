@@ -166,9 +166,9 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
     }
 //tslint:disable
     public renderUpgradeLevelLink(balance?) {
-        balance = balance ? balance : 50;
+        const _balance = balance ? balance : 0;
         const gotoConfirm = () => {
-            if (balance < MINIMAL_BALANCE) {
+            if (_balance < MINIMAL_BALANCE) {
                 this.props.fetchSuccess({ message: ['page.profile.update.balance'], type: 'error' });
             } else {
                 this.props.history.push('/confirm');
@@ -331,7 +331,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                 </div>
                 <div className="pg-profile-verification__user-level">
                     {this.renderUserLevel(userLevel)}
-                    {userLevel < 6 && this.renderUpgradeLevelLink(100)} {/* get & put here users minimal balance*/}
+                    {userLevel < 6 && this.renderUpgradeLevelLink(this.props.balance)}
                 </div>
                 <div className="pg-profile-verification__know-more">
                     <a href="https://knowledge-base.emirex.com/emirex">
