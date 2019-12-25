@@ -99,7 +99,7 @@ class ReferralProgramClass extends React.Component<Props> {
         const { refId, userRefUid } = this.state;
         // tslint:disable
         const referralLink = `${window.document.location.origin}/referral?refid=${user.uid}`;
-        const referralLinkIEO = `https://connect.emirex.com/ieo?emirex_referral_code=${user.uid}`;
+        const referralLinkIEO = `https://ieo.emirex.com?emirex_referral_code=${user.uid}`;
         return (
             <div className="pg-profile-page__referral mb-3">
                 {userRefUid ? (
