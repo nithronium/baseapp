@@ -92,9 +92,13 @@
     &-item {
       margin-right: calc(var(--gap) * 1.66);
       color: var(--navbar-text-color);
+      &[href*=ieo] {
+        color: #FFD567;
+      }
 
       &--active {
         color: var(--bright-1);
+        /* color: #FFD567; */
         border-bottom: 2px solid var(--active-tab-color);
       }
     }
@@ -544,3 +548,4 @@
     }
   }
 }
+
