@@ -5,17 +5,16 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
-import { CurrencyInfo, DepositCrypto, TabPanel, WalletItemProps, WalletList } from '../../components';
+import { CurrencyInfo, TabPanel, WalletItemProps, WalletList } from '../../components';
 import { ModalWithdrawConfirmation } from '../../containers/ModalWithdrawConfirmation';
 import { ModalWithdrawSubmit } from '../../containers/ModalWithdrawSubmit';
 import { EstimatedValue } from '../../containers/Wallets/EstimatedValue';
 import { WalletHistory } from '../../containers/Wallets/History';
 import { Withdraw, WithdrawProps } from '../../containers/Wallets/Withdraw';
 import { WithdrawLite } from '../../containers/Wallets/WithdrawLite';
-import { /*CardDepositFiat,*/ DepositFiat } from '../../custom/components';
 import { buildPath } from '../../custom/helpers';
 import { VersionGuardWrapper } from '../../decorators';
-import { formatCCYAddress, setDocumentTitle } from '../../helpers';
+import { setDocumentTitle } from '../../helpers';
 import {
     alertPush,
     beneficiariesFetch,
@@ -42,6 +41,8 @@ import {
     walletsWithdrawCcyFetch,
 } from '../../modules';
 import { CommonError } from '../../modules/types';
+import { DepositTab } from './DepositTab';
+import { TypeTabs } from './TypeTabs';
 
 
 interface ReduxProps {
@@ -87,8 +88,6 @@ interface WalletsState {
     selectedWalletIndex: number;
     withdrawSubmitModal: boolean;
     withdrawConfirmModal: boolean;
-    bchAddress?: string;
-    filteredWallets?: WalletItemProps[] | null;
     tab: string;
     withdrawDone: boolean;
     total: number;
@@ -124,18 +123,11 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 
     //tslint:disable
     public translate = (id: string) => this.props.intl.formatMessage({ id });
-
-    private title = this.translate('page.body.wallets.tabs.deposit.fiat.message1');
-    private description = this.translate('page.body.wallets.tabs.deposit.fiat.message2');
-    private details = this.translate('page.body.wallets.tabs.deposit.fiat.message3');
-    
-
+ 
     public componentDidMount() {
         setDocumentTitle('Wallets');
-        const { wallets, fetchAddress } = this.props;
-        const { selectedWalletIndex } = this.state;
-
-        
+        const { wallets, fetchAddress } = this.props; 
+        const { selectedWalletIndex } = this.state;       
 
         if (this.props.wallets.length === 0) {
             this.props.fetchWallets();
@@ -159,8 +151,12 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         const { wallets, whitelistActivateSuccess, whitelistDeleteSuccess, withdrawSuccess } = this.props;
 
         if (wallets.length === 0 && next.wallets.length > 0) {
+            const isEurFirst = next.wallets[0].currency.toLowerCase() === 'eur';
             this.setState({
                 selectedWalletIndex: 0,
+                sepa: isEurFirst,
+                wire: !isEurFirst,
+                card: false
             });
             this.props.fetchWhitelist();
             next.wallets[0].type === 'coin' && this.props.fetchAddress({ currency: next.wallets[0].currency });
@@ -184,11 +180,11 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             beneficiary,
             total,
             selectedWalletIndex,
-            filteredWallets,
             withdrawSubmitModal,
             withdrawConfirmModal,
             currentTabIndex,
         } = this.state;
+
         const formattedWallets = wallets.map((wallet: WalletItemProps) => ({
             ...wallet,
             currency: wallet.currency.toUpperCase(),
@@ -218,7 +214,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                         <div className={`col-md-5 col-sm-12 col-12 ${mobileWalletChosen && 'd-none d-md-block'}`}>
                             <WalletList
                                 onWalletSelectionChange={this.onWalletSelectionChange}
-                                walletItems={filteredWallets || formattedWallets}
+                                walletItems={formattedWallets}
                                 activeIndex={this.state.activeIndex}
                                 onActiveIndexChange={this.onActiveIndexChange}
                             />
@@ -295,12 +291,13 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     }
 
     private handleWithdraw = () => {
+        const {wallets} = this.props;
         const { selectedWalletIndex, otpCode, amount, beneficiary } = this.state;
         if (selectedWalletIndex === -1) {
             return;
         }
 
-        const { currency } = this.props.wallets[selectedWalletIndex];
+        const { currency } = wallets[selectedWalletIndex];
         const withdrawRequest = {
             amount,
             currency: currency.toLowerCase(),
@@ -316,96 +313,41 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     };
 
     private renderDeposit = () => {
-        // const levelMessage = this.translate('page.body.wallets.tabs.deposit.fiat.levelMessage');
-        // const levelLink = this.translate('page.body.wallets.tabs.deposit.fiat.levelLink');
         const { addressDepositError, wallets, user, selectedWalletAddress } = this.props;
-        const { selectedWalletIndex, card, sepa } = this.state;
-        const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
-        const text = this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' });
-        const error = addressDepositError
-            ? this.props.intl.formatMessage({ id: addressDepositError.message })
-            : this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.message.error' });
-
-        const walletAddress = formatCCYAddress(currency, selectedWalletAddress);
-
-        if (wallets[selectedWalletIndex].type === 'coin') {
-            return (
-                <React.Fragment>
-                    <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
-                    <DepositCrypto
-                        data={walletAddress}
-                        handleOnCopy={this.handleOnCopy}
-                        error={error}
-                        text={text}
-                        disabled={walletAddress === ''}
-                        copiableTextFieldText={this.translate('page.body.wallets.tabs.deposit.ccy.message.address')}
-                        copyButtonText={this.translate('page.body.wallets.tabs.deposit.ccy.message.button')}
-                    />
-                    {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
-                </React.Fragment>
-            );
-        } else {
-            return (
-                <React.Fragment>
-                    {this.renderTypeTabs(currency.toLowerCase())}
-                    {card ?
-                        <div style={{fontSize: '18px', paddingTop: '20px', textAlign: 'center'}}>{this.translate('comingsoon')}</div> :
-                        // (this.props.user.level > 1 ?   //Check user level if > 1 show CardDepositFiat component else show mesage
-                        //     <div>
-                        //         <CardDepositFiat
-                        //             currency={currency.toUpperCase()}
-                        //             translate={this.translate} />
-                        //         {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />} 
-                        //     </div>
-                        //     : 
-                        //     <div style={{padding: '10px 20px', color: 'red', fontSize: '20px'}}>  
-                        //         <p>{levelMessage}</p>                            
-                        //         <p><a href="/confirm">{levelLink}</a></p>
-                        //     </div> ) : 
-                        sepa ? 
-                        <div>
-                        <CurrencyInfo wallet={wallets[selectedWalletIndex]} />                    
-                        <DepositFiat
-                            currency={currency.toLowerCase()}
-                            title={this.title}
-                            description={this.description}
-                            details={this.details}
-                            uid={user ? user.uid : ''}
-                            sepa={sepa}            
-                        />
-                        <div className="fiat-alert">
-                            {this.translate('page.wallets.withdraw.fiat')}
-                        </div>
-                        {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />} 
-                            </div> : 
-                            currency.toLowerCase() !== 'eur' && currency.toLowerCase() !== 'usd' ?
-                            <div>
-                                <CurrencyInfo wallet={wallets[selectedWalletIndex]} />                        
-                                <DepositFiat
-                                    currency={currency.toLowerCase()}
-                                    title={this.title}
-                                    description={this.description}
-                                    details={this.details}
-                                    uid={user.uid}
-                                />
-                                {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
-                                </div> :
-                                <div style={{ fontSize: '18px', paddingTop: '20px', textAlign: 'center' }}>{this.translate('comingsoon')}</div>                    
-                    }        
-                    
-                </React.Fragment>
-            );
-        }
-    };
+        const { selectedWalletIndex, card, sepa, wire } = this.state;
+        return (
+            <DepositTab
+                addressDepositError={addressDepositError}
+                wallets={wallets}
+                user={user}
+                selectedWalletAddress={selectedWalletAddress}
+                selectedWalletIndex={selectedWalletIndex}
+                card={card}
+                sepa={sepa}
+                wire={wire}
+                handleOnCopy={this.handleOnCopy}
+                action={this.setState.bind(this)}
+            /> 
+        );
+    }
 
     private renderWithdraw = () => {
         const { walletsError, user, wallets } = this.props;
-        const { selectedWalletIndex } = this.state;
+        const { selectedWalletIndex, sepa, card, wire } = this.state;
         const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
 
         return (
             <React.Fragment>
-                {wallets[selectedWalletIndex].type === 'fiat' ? this.renderTypeTabs(currency.toLowerCase()) : ''}
+                {
+                    wallets[selectedWalletIndex].type === 'fiat' &&
+                    <TypeTabs 
+                        action={this.setState.bind(this)}
+                        currency={currency.toLowerCase()}
+                        sepa={sepa}
+                        card={card}
+                        wire={wire}
+                    />
+                }
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
                 {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}                
                 {this.renderWithdrawBlock()}
@@ -452,52 +394,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         };
 
         return otp ? <Withdraw {...withdrawProps} /> : this.isOtpDisabled();
-        // return otp ? this.renderTypeTabs(currency.toLowerCase()) : this.isOtpDisabled();
     };
-
-
-    private renderTypeTabs = (currency) => {
-
-        return  (
-                    <div style={{                       //Tabs pannel (Wire/ Sepa/ Card)
-                        display: 'flex',
-                        textAlign: 'center',
-                        padding: '0 20px',
-                        fontSize: '18px',
-                        color: 'white',
-                        marginBottom: '15px'
-                    }}>
-                        <div style={{                   //Wire
-                            borderRadius: '5px 0 0 5px',
-                            padding: '10px 0', flex: '1 1 auto',
-                            cursor: 'pointer',
-                            background: this.state.wire ? '#11B382' : 'none',
-                            border: this.state.wire?  'none' : '1px solid #FFFFFF33',
-                            color: this.state.wire ?  '#FFFFFF' : '#FFFFFF33',
-                        }}
-                            onClick={() => this.setState({ card: false, sepa: false, wire: true })}>
-                            {this.translate('page.body.wallets.tabs.deposit.fiat.button.wire')}
-                        </div>
-                        { currency=== 'eur' && <div style={{    //Sepa
-                            padding: '10px 0', flex: '1 1 auto',
-                            cursor: 'pointer', background: this.state.sepa ? '#11B382' : 'none',
-                            border: this.state.sepa ? 'none' : '1px solid #FFFFFF33',
-                            color: this.state.sepa ?  '#FFFFFF' :'#FFFFFF33'
-                        }} onClick={() => this.setState({ card: false, sepa: true, wire: false })}>
-                            {this.translate('page.body.wallets.tabs.deposit.fiat.button.sepa')}
-                        </div>
-                        }
-                        <div style={{                       //Card
-                            borderRadius: '0 5px 5px 0',
-                            padding: '10px 0', flex: '1 1 auto',
-                            cursor: 'pointer', background: this.state.card ? '#11B382' : 'none',
-                            border: this.state.card ? 'none' : '1px solid #FFFFFF33',
-                            color: this.state.card ?  '#FFFFFF' :'#FFFFFF33'
-                        }} onClick={() => this.setState({ card: true, sepa: false, wire: false })}>
-                            {this.translate('page.body.wallets.tabs.deposit.fiat.button.card')}
-                        </div>
-                    </div>)
-    }
 
     private isOtpDisabled = () => {
         return (
@@ -529,7 +426,12 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         const nextWalletIndex = this.props.wallets.findIndex(
             wallet => wallet.currency.toLowerCase() === value.currency.toLowerCase()
         );
-        this.setState({ selectedWalletIndex: nextWalletIndex, withdrawDone: false });
+        const isEur = value.currency.toLowerCase() === 'eur';
+        const tabs = ({
+            sepa: isEur,
+            wire: !isEur,
+            card: false});
+        this.setState({ selectedWalletIndex: nextWalletIndex, withdrawDone: false, ...tabs });
         this.props.setMobileWalletUi(wallets[nextWalletIndex].name);
     };
 }
