@@ -39,6 +39,7 @@ interface DispatchProps {
 interface OwnProps {
     search: string;
     currencyQuote: string;
+    onRowSelect?(): void;
 }
 
 interface State {
@@ -101,6 +102,7 @@ class MarketsListComponent extends React.Component<Props, State> {
             this.props.depthFetch(marketToSet);
             this.props.orderBookFetch(marketToSet);
         }
+        this.props.onRowSelect(marketToSet);
     };
 
     private getHeaders = () => [
