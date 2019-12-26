@@ -159,7 +159,9 @@ class ChangeForgottenPasswordComponent extends React.Component<Props, ChangeForg
                                         size="lg"
                                         variant="primary"
                                         type="button"
-                                    />
+                                    >
+                                        {this.props.intl.formatMessage({ id: 'page.header.signIn.resetPassword.button'})}
+                                    </Button>
                                 </div>
                             </div>
                         </div>
