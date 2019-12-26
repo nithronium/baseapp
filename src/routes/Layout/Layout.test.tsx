@@ -29,7 +29,7 @@ const defaults: LayoutProps = {
     changeLanguage: jest.fn(),
 };
 
-// tslint:disable: no-shadowed-variable
+// tslint:disable-next-line: no-shadowed-variable
 const nodeWithIntlProp = ((node, { intl }) => {
     return React.cloneElement(node, { intl });
 });
