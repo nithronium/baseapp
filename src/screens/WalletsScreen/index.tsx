@@ -12,7 +12,7 @@ import { EstimatedValue } from '../../containers/Wallets/EstimatedValue';
 import { WalletHistory } from '../../containers/Wallets/History';
 import { Withdraw, WithdrawProps } from '../../containers/Wallets/Withdraw';
 import { WithdrawLite } from '../../containers/Wallets/WithdrawLite';
-import { /*CardDepositFiat,*/ DepositFiat } from '../../custom/components';
+import { CardDepositFiat, DepositFiat } from '../../custom/components';
 import { buildPath } from '../../custom/helpers';
 import { VersionGuardWrapper } from '../../decorators';
 import { formatCCYAddress, setDocumentTitle } from '../../helpers';
@@ -316,8 +316,8 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     };
 
     private renderDeposit = () => {
-        // const levelMessage = this.translate('page.body.wallets.tabs.deposit.fiat.levelMessage');
-        // const levelLink = this.translate('page.body.wallets.tabs.deposit.fiat.levelLink');
+        const levelMessage = this.translate('page.body.wallets.tabs.deposit.fiat.levelMessage');
+        const levelLink = this.translate('page.body.wallets.tabs.deposit.fiat.levelLink');
         const { addressDepositError, wallets, user, selectedWalletAddress } = this.props;
         const { selectedWalletIndex, card, sepa } = this.state;
         const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
@@ -349,19 +349,19 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 <React.Fragment>
                     {this.renderTypeTabs(currency.toLowerCase())}
                     {card ?
-                        <div style={{fontSize: '18px', paddingTop: '20px', textAlign: 'center'}}>{this.translate('comingsoon')}</div> :
-                        // (this.props.user.level > 1 ?   //Check user level if > 1 show CardDepositFiat component else show mesage
-                        //     <div>
-                        //         <CardDepositFiat
-                        //             currency={currency.toUpperCase()}
-                        //             translate={this.translate} />
-                        //         {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />} 
-                        //     </div>
-                        //     : 
-                        //     <div style={{padding: '10px 20px', color: 'red', fontSize: '20px'}}>  
-                        //         <p>{levelMessage}</p>                            
-                        //         <p><a href="/confirm">{levelLink}</a></p>
-                        //     </div> ) : 
+                        // <div style={{fontSize: '18px', paddingTop: '20px', textAlign: 'center'}}>{this.translate('comingsoon')}</div> :
+                        (this.props.user.level > 1 ?   //Check user level if > 1 show CardDepositFiat component else show mesage
+                            <div>
+                                <CardDepositFiat
+                                    currency={currency.toUpperCase()}
+                                    translate={this.translate} />
+                                {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />} 
+                            </div>
+                            : 
+                            <div style={{padding: '10px 20px', color: 'red', fontSize: '20px'}}>  
+                                <p>{levelMessage}</p>                            
+                                <p><a href="/confirm">{levelLink}</a></p>
+                            </div> ) : 
                         sepa ? 
                         <div>
                         <CurrencyInfo wallet={wallets[selectedWalletIndex]} />                    
