@@ -7,6 +7,7 @@ import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { buildPath } from '../../../custom/helpers';
+import { CustomInput } from '../../../components';
 import { DropdownComponent } from '../../../components/Dropdown';
 import { formatDate } from '../../../helpers';
 import { isDateInFuture } from '../../../helpers/checkDate';
@@ -121,15 +122,13 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                                     />
                                 </div>
                                 <fieldset className={idNumberFocusedClass}>
-                                    {idNumber && <legend>{documentsType}</legend>}
-                                    <input
-                                      className="pg-confirm__content-documents-col-row-content-number"
-                                      type="string"
-                                      placeholder={numberType}
-                                      value={idNumber}
-                                      onChange={this.handleChangeIdNumber}
-                                      onFocus={this.handleFieldFocus('idNumber')}
-                                      onBlur={this.handleFieldFocus('idNumber')}
+                                    <CustomInput
+                                        type="string"
+                                        label={idNumber ? documentsType : ''}
+                                        defaultLabel={idNumber ? documentsType : ''}
+                                        placeholder={numberType}
+                                        inputValue={idNumber}
+                                        handleChangeInput={this.handleChangeIdNumber}
                                     />
                                 </fieldset>
                                 <fieldset className={expirationFocusedClass}>
@@ -235,9 +234,9 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         );
     }
 
-    private handleChangeIdNumber = (e: OnChangeEvent) => {
+    private handleChangeIdNumber = (value: string) => {
         this.setState({
-            idNumber: e.target.value,
+            idNumber: value,
         });
     };
 

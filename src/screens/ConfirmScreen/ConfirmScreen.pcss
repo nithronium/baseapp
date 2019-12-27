@@ -246,20 +246,50 @@
   .pg-confirm__progress-circle-1,
   .pg-confirm__progress-circle-2,
   .pg-confirm__progress-circle-3,
-    .pg-confirm__progress-circle-4 {
-      &.active-circle {
-        background: #FFD567;
-        &:after {
-          color: black;
-        }
-
-        .pg-confirm__title-text {
-          color: #FFFFFF;
-        }
+  .pg-confirm__progress-circle-4 {
+    &.active-circle {
+      background: #FFD567;
+      &:after {
+        color: black;
       }
 
+      .pg-confirm__title-text {
+        color: #FFFFFF;
+      }
+    }
+  }
+
+  .custom-input {
+    width: 100%;
+    height: 39px;
+    position: relative;
+
+    label {
+      left: 0;
+      margin-top: -13px;
     }
 
+    .input-group {
+      height: 100%;
+
+      input {
+        margin-top: 0;
+        padding: 0;
+        height: 100%;
+        border: none;
+
+        &:focus {
+          box-shadow: none;
+        }
+      }
+    }
+  }
+
+  .input-group {
+    .custom-input {
+      width: 73%;
+    }
+  }
   &__content {
     width: 100%;
     margin: 0 auto;
