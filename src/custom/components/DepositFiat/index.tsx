@@ -118,10 +118,16 @@ const DepositFiat: React.FunctionComponent<DepositFiatProps> = (props: DepositFi
     const bankData = sepa ? bankDataSEPA : currency.toLowerCase() === 'aed' ? bankDataAED : bankDataIBAN;
 
     const renderDetails = (detail, index: number) => {
+        const isRefCodDetail = detail.value === uid;
         return (
             <div className="cr-deposit-fiat-detail" key={index}>
                 <p className="cr-deposit-fiat-detail__label">{detail.key}</p>
-                <p className="cr-deposit-fiat-detail__value">{detail.value}</p>
+                <p
+                    style={{color: isRefCodDetail ? '#E85E59' : ''}}
+                    className="cr-deposit-fiat-detail__value"
+                >
+                    {detail.value}
+                </p>
             </div>
         );
     };

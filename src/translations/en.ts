@@ -88,6 +88,8 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.message1': 'Deposit using bank transfer',
     'page.body.wallets.tabs.deposit.fiat.message2':
         'Please use the following credentials to initiate your bank transfer. Your deposit will be reflected in your account within 5 business days.',
+    'page.body.wallets.tabs.deposit.fiat.message2.sepa':
+        'Please use the following credentials to initiate your bank transfer. Your deposit will be reflected in your account within 24hours.',
     'page.body.wallets.tabs.deposit.fiat.bankName': 'Bank Name',
     'page.body.wallets.tabs.deposit.fiat.accountNumber': 'Account number',
     'page.body.wallets.tabs.deposit.fiat.accountName': 'Account name',
