@@ -33,12 +33,12 @@ const rootStyles = {
 };
 
 
-interface CardDepositFiatProps {
-    currency: string;
-    translate: (data: string) => string;
-}
+// interface CardDepositFiatProps {
+//     currency: string;
+//     translate: (data: string) => string;
+// }
 
-const CardDepositFiat = (props: CardDepositFiatProps) => {
+const CardDepositFiat = (props) => {
     const {
         currency,
         translate,
@@ -134,5 +134,4 @@ const CardDepositFiat = (props: CardDepositFiatProps) => {
 
 export {
     CardDepositFiat,
-    CardDepositFiatProps,
 };
