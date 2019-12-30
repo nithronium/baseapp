@@ -289,8 +289,9 @@ class ProfileAddressComponent extends React.Component<Props, State> {
                 const postcodeRegex = new RegExp(`^[0-9\-]{1,12}$`);
                 return postcodeRegex.test(value);
             case 'state':
-                const stateRegex = new RegExp(`^[a-zA-Z]{1,100}$`);
-                return stateRegex.test(value);
+                // const stateRegex = new RegExp(`^[a-zA-Z]{1,100}$`);
+                // return stateRegex.test(value);
+                return true;
             default:
                 return true;
         }
