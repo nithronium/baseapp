@@ -17,6 +17,11 @@ const rootStyles = {
         display: 'flex',
         alignItems: 'center',
         paddingBottom: '40px',
+    },
+    bottomRow: {
+        display: 'flex',
+        justifyContent: 'flex-start',
+        paddingBottom: '40px',
         borderBottom: '1px solid #64828022',
     },
      label :{
@@ -49,17 +54,29 @@ const CardDepositFiat = (props) => {
     const [iFrame, setIFrame] = React.useState(false);
     const [initURL, setInitURL] = React.useState('');
 
+    const getFee = (amount) => {
+        const fee = +amount * 4.5 / 100;
+
+        return fee ? fee + 0.1 : 0;
+    }
+
+    const [fee, setFee] = React.useState(getFee(amount));
+
     const handleChange = (e) => {
         const oldAmount = amount;
         const newAmount = e.target.value;
         // console.log(newAmount);
         if (newAmount.match(/^[1-9]\d*$/)) {
             setAmount(newAmount);
+            setFee(getFee(newAmount));
         } else if(newAmount.length !== 0){
             setAmount(oldAmount);
+            setFee(getFee(oldAmount));
         } else {
             setAmount('');
+            setFee(getFee(0));
         }
+       
     }
     
     const handleClick = (e) => {
@@ -106,6 +123,12 @@ const CardDepositFiat = (props) => {
                 <div style={rootStyles.row}>
                     <div style={{position: 'relative', flex: '2 1 auto'}}><label style={rootStyles.label} id="label_amount">{translate('cardDepositFiat.amount')}</label> <input id="amount" onClick={handleClick} className="depositCard__input"  onInput={handleChange} type="text" value={amount} placeholder="0"/></div>
                     <div style={{ position: 'relative', width: '150px', marginLeft: '15px' }}><label style={rootStyles.label} id="label_currency">{translate('cardDepositFiat.currency')}</label> <input id="currency" onClick={handleClick} className="depositCard__input depositCard__input2" type="text" value={currency} /></div>
+                </div>
+                <div style={rootStyles.bottomRow}>
+                    <div style={{ position: 'relative', width: '150px' }}>
+                            <label style={rootStyles.label} id="label_fee">{translate('cardDepositFiat.fee')}</label>
+                            <input id="fee" onClick={handleClick} className="depositCard__input depositCard__input2" type="text" value={`${fee} ${currency.toUpperCase()}`} />
+                    </div> 
                 </div>
                 <div className="depositCard__buttons">
                     <a  onClick={clearInput}>{translate('cardDepositFiat.button.cancel')}</a>

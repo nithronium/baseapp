@@ -789,6 +789,7 @@ export const ru: LangType = {
     'cardDepositFiat.currency': 'Валюта',
     'cardDepositFiat.button.payment': 'ОПЛАТИТЬ',
     'cardDepositFiat.button.cancel': 'Отмена',
+    'cardDepositFiat.fee': 'Комиссия',
 
     'page.body.wallets.tabs.deposit.fiat.levelMessage': 'Verification level 2 is required in order to access the option of balance top up via credit or debit card.',
   'page.body.wallets.tabs.deposit.fiat.levelLink': 'Please upgrade your verification level',
