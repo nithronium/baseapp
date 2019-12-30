@@ -32,9 +32,12 @@ class ProfileComponent extends React.Component<Props> {
         // tslint:disable-next-line: no-floating-promises
         getBalance().then(data => {
             this.setState({
-                balance: data.balance,
+                balance: data.balance || 0,
             });
-        });
+        })
+            .catch(() => {
+                this.setState({ balance: 0 });
+            });
     }
 
     public goBack = () => {

@@ -166,7 +166,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
     }
 //tslint:disable
     public renderUpgradeLevelLink(balance?) {
-        const _balance = balance ? balance : 100;
+        const _balance = balance ? balance : 0;
         const gotoConfirm = () => {
             if (_balance < MINIMAL_BALANCE) {
                 this.props.fetchSuccess({ message: ['page.profile.update.balance'], type: 'error' });
