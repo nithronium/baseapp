@@ -55,7 +55,9 @@ const CardDepositFiat = (props) => {
     const [initURL, setInitURL] = React.useState('');
 
     const getFee = (amount) => {
-        return +amount * 4.5 / 100;
+        const fee = +amount * 4.5 / 100;
+
+        return fee ? fee + 0.1 : 0;
     }
 
     const [fee, setFee] = React.useState(getFee(amount));
@@ -125,7 +127,7 @@ const CardDepositFiat = (props) => {
                 <div style={rootStyles.bottomRow}>
                     <div style={{ position: 'relative', width: '150px' }}>
                             <label style={rootStyles.label} id="label_fee">{translate('cardDepositFiat.fee')}</label>
-                            <input id="fee" onClick={handleClick} className="depositCard__input depositCard__input2" type="text" value={fee} />
+                            <input id="fee" onClick={handleClick} className="depositCard__input depositCard__input2" type="text" value={`${fee} ${currency.toUpperCase()}`} />
                     </div> 
                 </div>
                 <div className="depositCard__buttons">
