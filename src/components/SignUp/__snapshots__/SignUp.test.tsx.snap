@@ -94,12 +94,21 @@ exports[`SignUp component should render 1`] = `
           type="text"
         />
       </div>
-      <Component
-        checked={false}
-        className="cr-sign-up-form__checkbox"
-        label=""
-        onChange={[MockFunction]}
-      />
+      <div
+        style={
+          Object {
+            "alignItems": "center",
+            "display": "flex",
+          }
+        }
+      >
+        <Component
+          checked={false}
+          className="cr-sign-up-form__checkbox"
+          label=""
+          onChange={[MockFunction]}
+        />
+      </div>
       <div
         className="cr-sign-up-form__button-wrapper"
       >
