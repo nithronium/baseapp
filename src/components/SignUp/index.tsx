@@ -60,13 +60,6 @@ interface SignUpFormProps {
     geetestCaptchaSuccess: boolean;
 }
 
-const defaultPwdValidationDetails = {
-    isLengthAcceptable: false,
-    hasDigits: false,
-    hasCapitalLetters: false,
-    hasLowerCaseLetters: false
-};
-
 class SignUpForm extends React.Component<SignUpFormProps> {
     public render() {
         const {
@@ -87,7 +80,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
             hasConfirmed,
             emailError,
             passwordError,
-            passwordValidationDetails=defaultPwdValidationDetails,
+            passwordValidationDetails,
             confirmationError,
             emailFocused,
             passwordFocused,

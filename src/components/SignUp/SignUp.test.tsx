@@ -33,12 +33,6 @@ const defaults: SignUpFormProps = {
     passwordFocused: false,
     geetestCaptcha: undefined,
     geetestCaptchaSuccess: false,
-    passwordValidationDetails: {
-        isLengthAcceptable: false,
-        hasDigits: false,
-        hasCapitalLetters: false,
-        hasLowerCaseLetters: false
-    }
 };
 
 const setup = (props: Partial<SignUpFormProps> = {}) =>
