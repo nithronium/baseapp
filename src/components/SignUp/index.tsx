@@ -179,6 +179,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
                                 autoFocus={false}
                             />
                         </div>
+                        <div style={{display: 'flex', alignItems: 'center'}}>
                         <Checkbox
                             checked={hasConfirmed}
                             className="cr-sign-up-form__checkbox"
@@ -186,7 +187,8 @@ class SignUpForm extends React.Component<SignUpFormProps> {
                             label={''}
                             // label={termsMessage ? termsMessage : 'I  agree all statements in '}
                         />
-                        {termsLink}
+                            {termsLink}
+                        </div>
                         {this.renderCaptcha()}
                         <div className="cr-sign-up-form__button-wrapper">
                             <Button
