@@ -139,6 +139,7 @@ export const en = {
   'cardDepositFiat.currency': 'Currency',
   'cardDepositFiat.button.payment': 'PROCESS PAYMENT',
   'cardDepositFiat.button.cancel': 'Cancel',
+  'cardDepositFiat.fee': 'Fee',
 
   'page.body.wallets.tabs.deposit.fiat.levelMessage': 'Verification level 2 is required in order to access the option of balance top up via credit or debit card.',
   'page.body.wallets.tabs.deposit.fiat.levelLink': 'Please upgrade your verification level',
