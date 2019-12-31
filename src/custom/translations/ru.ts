@@ -104,11 +104,11 @@ export const ru: LangType = {
 
     'page.body.wallets.tabs.deposit.ccy.message.error': 'Генерация адреса',
 
-    'page.body.wallets.tabs.deposit.fiat.message1': 'Вы можете внести депозит в банке, используя следующие реквизиты',
+    'page.body.wallets.tabs.deposit.fiat.message1': 'Вы можете внести депозит, используя следующие реквизиты',
     'page.body.wallets.tabs.deposit.fiat.message2':
-        'Пожалуйста, используйте предоставленную информацию для завершения банковского платежа. Ваш депозит станет доступным на протяжении 5-и рабочих дней.',
+        'Пожалуйста, используйте предоставленную информацию для успешного завершения банковского платежа. Ваш депозит станет доступным в течение 5-и рабочих дней.',
     'page.body.wallets.tabs.deposit.fiat.message2.sepa':
-        'Пожалуйста, используйте предоставленную информацию для завершения банковского платежа. Ваш депозит станет доступным на протяжении 24-х часов.',
+        'Пожалуйста, используйте предоставленную информацию для успешного завершения банковского платежа. Ваш депозит станет доступным в течение 24-х часов.',
     'page.body.wallets.tabs.deposit.fiat.bankName': 'Название банка',
     'page.body.wallets.tabs.deposit.fiat.accountNumber': 'Номер счета',
     'page.body.wallets.tabs.deposit.fiat.accountName': 'Имя счета',
@@ -138,40 +138,40 @@ export const ru: LangType = {
     'success.beneficiaries.activated': 'Beneficiaries: successfully activated',
     'success.beneficiaries.deleted': 'Beneficiaries: successfully deleted',
 
-    'page.body.wallets.whitelist.title': 'Withdraw address',
-    'page.body.wallets.whitelist.fiat.title': 'Withdrawal details',
+    'page.body.wallets.whitelist.title': 'Адрес для вывода',
+    'page.body.wallets.whitelist.fiat.title': 'Детали вывода',
     'page.body.wallets.whitelist.dropdown.address': 'Address',
     'page.body.wallets.whitelist.dropdown.select': 'Select',
 
     'page.body.wallets.whitelist.dropdown.fiat.account': 'Account',
     'page.body.wallets.whitelist.dropdown.fiat.bankOfBeneficiary': 'Bank of Beneficiary',
-    'page.body.wallets.whitelist.dropdown.fiat.beneficiary': 'Beneficiary',
+    'page.body.wallets.whitelist.dropdown.fiat.beneficiary': 'Бенефициар',
     'page.body.wallets.whitelist.dropdown.fiat.description': 'Description',
     'page.body.wallets.whitelist.dropdown.fiat.name': 'Name',
     'page.body.wallets.whitelist.dropdown.fiat.fullName': 'Full Name',
 
-    'page.body.wallets.whitelist.addAddress': 'Add Address',
-    'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
+    'page.body.wallets.whitelist.addAddress': 'Добавить адрес',
+    'page.body.wallets.whitelist.addAddressModal.header': 'Добавьте новый адрес для вывода',
 
-    'page.body.wallets.whitelist.addAddressModal.body.coinAddress': 'Blockchain Address',
-    'page.body.wallets.whitelist.addAddressModal.body.coinBeneficiaryName': 'Beneficiary Name',
-    'page.body.wallets.whitelist.addAddressModal.body.coinDescription': 'Description (optional)',
+    'page.body.wallets.whitelist.addAddressModal.body.coinAddress': 'Адрес кошелька',
+    'page.body.wallets.whitelist.addAddressModal.body.coinBeneficiaryName': 'Иимя получателя',
+    'page.body.wallets.whitelist.addAddressModal.body.coinDescription': 'Описание (необязательно)',
 
-    'page.body.wallets.whitelist.addAddressModal.body.fiatName': 'Description',
-    'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': 'Full Name',
-    'page.body.wallets.whitelist.addAddressModal.body.fiatAccountNumber': 'Account Number',
-    'page.body.wallets.whitelist.addAddressModal.body.fiatBankName': 'Bank Name',
-    'page.body.wallets.whitelist.addAddressModal.body.fiatBankSwiftCode': 'Bank Swift Code',
-    'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankName': 'Intermediary Bank Name (optional)',
-    'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankSwiftCode': 'Intermediary Bank Swift Code (optional)',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatName': 'Описание',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': 'Имя и фамилия получателя ',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatAccountNumber': 'Номер счета',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatBankName': 'Название банка',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatBankSwiftCode': 'SWIFT-код',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankName': 'Название банка-корреспондента (необязательно)',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankSwiftCode': 'SWIFT-код банка-корреспондента (необязательно)',
 
-    'page.body.wallets.whitelist.addAddressModal.body.button': 'submit for confirmation',
+    'page.body.wallets.whitelist.addAddressModal.body.button': 'Подтвердить',
 
-    'page.body.wallets.whitelist.confirmationModal.header': 'Confirm new address',
+    'page.body.wallets.whitelist.confirmationModal.header': 'Подтвердите новый адрес',
     'page.body.wallets.whitelist.confirmationModal.body.text':
-        'We have sent you an email containing a confirmation code pin, please enter it below to save the new address:',
-    'page.body.wallets.whitelist.confirmationModal.body.confirmationModalCode': 'Pin code',
-    'page.body.wallets.whitelist.confirmationModal.body.button': 'confirm',
+        'Мы отправили Вам письмо, в котором содержится код для подтверждения. для того, чтобы сохранить новый адрес, пожалуйста, вставьте этот код в поле ниже.',
+    'page.body.wallets.whitelist.confirmationModal.body.confirmationModalCode': 'Код из письма',
+    'page.body.wallets.whitelist.confirmationModal.body.button': 'Подтвердить',
 
     'page.body.wallets.whitelist.tipAddress': 'Address',
     'page.body.wallets.whitelist.tipName': 'Name',
@@ -197,7 +197,7 @@ export const ru: LangType = {
     'page.body.openOrders.header.button.cancelAll': 'Отменить все',
 
     'page.body.history.deposit': 'История депозитов',
-    'page.body.history.deposit.header.txid': 'txID',
+    'page.body.history.deposit.header.txid': 'ID транзакции',
     'page.body.history.deposit.header.date': 'Дата',
     'page.body.history.deposit.header.currency': 'Валюта',
     'page.body.history.deposit.header.amount': 'Количество',
@@ -263,8 +263,8 @@ export const ru: LangType = {
     'page.body.profile.refcode.link': ' Click Here',
 
     'page.body.profile.header.account.content.twoFactorAuthentication': 'Двухфакторная аутентификация',
-    'page.body.profile.header.account.content.twoFactorAuthentication.message.enable': 'Включен',
-    'page.body.profile.header.account.content.twoFactorAuthentication.message.disable': 'Отключен',
+    'page.body.profile.header.account.content.twoFactorAuthentication.message.enable': 'Включена',
+    'page.body.profile.header.account.content.twoFactorAuthentication.message.disable': 'Выключена',
     'page.body.profile.header.account.content.twoFactorAuthentication.header': 'Google Authenticator',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.1':
         'Скачайте и установите приложение Google Authenticator с ',
@@ -800,10 +800,10 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.aed.iban': 'IBAN :',
     'page.body.wallets.tabs.deposit.fiat.eur.iban': 'IBAN :',
     'page.body.wallets.tabs.deposit.fiat.bankAddress': 'Адрес банка :',
-    'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Банковский SWIFT :',
-    'page.body.wallets.tabs.deposit.fiat.beneficiary': 'Beneficiary :',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift': 'SWIFT-код :',
+    'page.body.wallets.tabs.deposit.fiat.beneficiary': 'Бенефициар :',
     'page.body.wallets.tabs.deposit.fiat.message3':
-        'Пожалуйста, ВСЕГДА указывайте ссылочный код во время банковского перевода, в противном случае внесение средств займет больше времени.',
+        'Пожалуйста, ВСЕГДА указывайте Ваш уникальный код во время банковского перевода, в противном случае внесение средств займет больше времени.',
     
         'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepa.value': 'EUR',
         'page.body.wallets.tabs.deposit.fiat.sepa.value': 'MT24PHPY270070PHOENIX0000884546',
