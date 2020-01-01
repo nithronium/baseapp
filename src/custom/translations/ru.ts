@@ -154,7 +154,7 @@ export const ru: LangType = {
     'page.body.wallets.whitelist.addAddressModal.header': 'Добавьте новый адрес для вывода',
 
     'page.body.wallets.whitelist.addAddressModal.body.coinAddress': 'Адрес кошелька',
-    'page.body.wallets.whitelist.addAddressModal.body.coinBeneficiaryName': 'Иимя получателя',
+    'page.body.wallets.whitelist.addAddressModal.body.coinBeneficiaryName': 'Имя получателя',
     'page.body.wallets.whitelist.addAddressModal.body.coinDescription': 'Описание (необязательно)',
 
     'page.body.wallets.whitelist.addAddressModal.body.fiatName': 'Описание',
@@ -169,7 +169,7 @@ export const ru: LangType = {
 
     'page.body.wallets.whitelist.confirmationModal.header': 'Подтвердите новый адрес',
     'page.body.wallets.whitelist.confirmationModal.body.text':
-        'Мы отправили Вам письмо, в котором содержится код для подтверждения. для того, чтобы сохранить новый адрес, пожалуйста, вставьте этот код в поле ниже.',
+        'Мы отправили Вам письмо, в котором содержится код для подтверждения. Для того, чтобы сохранить новый адрес, пожалуйста, вставьте этот код в поле ниже.',
     'page.body.wallets.whitelist.confirmationModal.body.confirmationModalCode': 'Код из письма',
     'page.body.wallets.whitelist.confirmationModal.body.button': 'Подтвердить',
 
@@ -1037,7 +1037,10 @@ export const ru: LangType = {
 
     'page.wallets.withdraw.fiat': 'Внимание: при внесении на счет сумм, превышающих установленные лимиты, Ваши средства будут возвращены, после вычета комиссий.',
     'activeTickets': 'Ваши активные билеты',
-    'page.profile.update.balance' : 'Чтобы повысить свой уровень, пожалуйста, пополните свой баланс минимум на $100',
+    'page.profile.update.balance': 'Чтобы повысить свой уровень, пожалуйста, пополните свой баланс минимум на $100',
+    'cardDepositFiat.mastercard.message1': 'Внимание: на данный момент оплату можно осуществить только кредитными и дебитными картами',
+  'cardDepositFiat.mastercard.message2': ' Mastercard',
+  'cardDepositFiat.mastercard.message3': '.',
 
 
     ...nationalitiesNames,
