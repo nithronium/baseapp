@@ -26,7 +26,7 @@ interface SignUpFormProps {
     password: string;
     email: string;
     confirmPassword: string;
-    recaptcha_response: string;
+    captcha_response: string;
     recaptchaConfirmed: boolean;
     recaptchaOnChange: (value: string) => void;
     handleChangeEmail: (value: string) => void;
