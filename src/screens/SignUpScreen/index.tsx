@@ -372,19 +372,16 @@ class SignUp extends React.Component<Props> {
         const {email, password, confirmPassword} = this.state;
         const isEmailValid = email.match(EMAIL_REGEX);
         const isConfirmPasswordValid = password === confirmPassword;
-        
         const passwordValidationDetails = {
             isLengthAcceptable: password.length >= 8,
             hasDigits: !!password.match(/\d/),
             hasCapitalLetters: !!password.match(/[A-Z]/),
             hasLowerCaseLetters: !!password.match(/[a-z]/),
         };
-        
         const isPasswordValid = passwordValidationDetails.isLengthAcceptable &&
             passwordValidationDetails.hasDigits &&
             passwordValidationDetails.hasCapitalLetters &&
-            passwordValidationDetails.hasLowerCaseLetters
-        ;
+            passwordValidationDetails.hasLowerCaseLetters;
 
         if (!isEmailValid && !isPasswordValid) {
             this.setState({
