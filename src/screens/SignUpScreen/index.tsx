@@ -240,9 +240,10 @@ class SignUp extends React.Component<Props> {
         this.props.history.push(buildPath('/signin', this.props.i18n));
     };
 
-    private handleGeetestCaptchaSuccess = () => {
+    private handleGeetestCaptchaSuccess = value => {
         this.setState({
             geetestCaptchaSuccess: true,
+            captcha_response: value,
         });
     }
 

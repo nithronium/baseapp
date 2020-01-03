@@ -19,6 +19,7 @@ import {
     // setDocumentTitle,
 } from '../../../helpers';
 import {
+    GeetestCaptchaResponse,
     referralTicketsFetch,
     ReferralOverallPayload,
     RootState,
@@ -310,9 +311,10 @@ class Referral extends React.Component<Props> {
 
     private captchaRef;
 
-    private handleGeetestCaptchaSuccess = () => {
+    private handleGeetestCaptchaSuccess = (value?: GeetestCaptchaResponse) => {
         this.setState({
             geetestCaptchaSuccess: true,
+            captcha_response: value || '',
         });
     }
 
