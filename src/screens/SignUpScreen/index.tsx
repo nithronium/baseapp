@@ -203,14 +203,27 @@ class SignUp extends React.Component<Props> {
     };
 
     private handleChangePassword = (value: string) => {
+        const {password} = this.state;
+
+        const passwordValidationDetails = {
+            isLengthAcceptable: password.length >= 8,
+            hasDigits: !!password.match(/\d/),
+            hasCapitalLetters: !!password.match(/[A-Z]/),
+            hasLowerCaseLetters: !!password.match(/[a-z]/),
+        };
+
         this.setState({
             password: value,
+            passwordValidationDetails,
         });
     };
 
     private handleChangeConfirmPassword = (value: string) => {
+        const {password, confirmPassword} = this.state;
+        const isConfirmPasswordValid = password === confirmPassword;
         this.setState({
             confirmPassword: value,
+            confirmationError: !isConfirmPasswordValid ? this.props.intl.formatMessage({ id: ERROR_PASSWORD_CONFIRMATION }) : null,
         });
     };
 

@@ -159,7 +159,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
                                 autoFocus={false}
                             />
                             {!passwordValidationDetails && passwordError && <div className={'cr-sign-up-form__error'}>{passwordError}</div>}
-                            {passwordValidationDetails && <PasswordValidationPopup visible={!!passwordError} passwordError={passwordError} passwordValidationDetails={passwordValidationDetails} />}
+                            {passwordValidationDetails && <PasswordValidationPopup visible={!!password} passwordError={passwordError} passwordValidationDetails={passwordValidationDetails} />}
                         </div>
                         <div className={confirmPasswordGroupClass}>
                             <CustomInput
