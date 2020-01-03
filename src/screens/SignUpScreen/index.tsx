@@ -65,10 +65,10 @@ class SignUp extends React.Component<Props> {
         emailError: '',
         passwordError: '',
         passwordValidationDetails: {
-            isLengthAcceptable: true,
-            hasDigits: true,
-            hasCapitalLetters: true,
-            hasLowerCaseLetters: true,
+            isLengthAcceptable: false,
+            hasDigits: false,
+            hasCapitalLetters: false,
+            hasLowerCaseLetters: false,
         },
         confirmationError: '',
         emailFocused: false,
@@ -203,7 +203,7 @@ class SignUp extends React.Component<Props> {
     };
 
     private handleChangePassword = (value: string) => {
-        const {password} = this.state;
+        const password = value;
 
         const passwordValidationDetails = {
             isLengthAcceptable: password.length >= 8,
@@ -219,7 +219,8 @@ class SignUp extends React.Component<Props> {
     };
 
     private handleChangeConfirmPassword = (value: string) => {
-        const {password, confirmPassword} = this.state;
+        const {password} = this.state;
+        const confirmPassword = value;
         const isConfirmPasswordValid = password === confirmPassword;
         this.setState({
             confirmPassword: value,
@@ -371,15 +372,20 @@ class SignUp extends React.Component<Props> {
     private handleValidateForm = () => {
         const {email, password, confirmPassword} = this.state;
         const isEmailValid = email.match(EMAIL_REGEX);
-        const isPasswordValid = password.match(PASSWORD_REGEX);
         const isConfirmPasswordValid = password === confirmPassword;
-
+        
         const passwordValidationDetails = {
             isLengthAcceptable: password.length >= 8,
             hasDigits: !!password.match(/\d/),
             hasCapitalLetters: !!password.match(/[A-Z]/),
             hasLowerCaseLetters: !!password.match(/[a-z]/),
         };
+        
+        const isPasswordValid = passwordValidationDetails.isLengthAcceptable &&
+            passwordValidationDetails.hasDigits &&
+            passwordValidationDetails.hasCapitalLetters &&
+            passwordValidationDetails.hasLowerCaseLetters
+        ;
 
         if (!isEmailValid && !isPasswordValid) {
             this.setState({
