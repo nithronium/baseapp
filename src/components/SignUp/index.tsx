@@ -5,6 +5,14 @@ import { CustomInput } from '../';
 import * as React from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../helpers';
+import { PasswordValidationPopup } from './PasswordValidationPopup';
+
+export interface PasswordValidationDetails {
+    isLengthAcceptable: boolean;
+    hasDigits: boolean;
+    hasCapitalLetters: boolean;
+    hasLowerCaseLetters: boolean;
+}
 
 interface SignUpFormProps {
     siteKey?: string;
@@ -38,6 +46,7 @@ interface SignUpFormProps {
     validateForm: () => void;
     emailError: string;
     passwordError: string;
+    passwordValidationDetails?: PasswordValidationDetails;
     confirmationError: string;
     handleFocusEmail: () => void;
     handleFocusPassword: () => void;
@@ -71,6 +80,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
             hasConfirmed,
             emailError,
             passwordError,
+            passwordValidationDetails,
             confirmationError,
             emailFocused,
             passwordFocused,
@@ -148,7 +158,8 @@ class SignUpForm extends React.Component<SignUpFormProps> {
                                 classNameInput="cr-sign-up-form__input"
                                 autoFocus={false}
                             />
-                            {passwordError && <div className={'cr-sign-up-form__error'}>{passwordError}</div>}
+                            {!passwordValidationDetails && passwordError && <div className={'cr-sign-up-form__error'}>{passwordError}</div>}
+                            {passwordValidationDetails && <PasswordValidationPopup visible={!!passwordError} passwordError={passwordError} passwordValidationDetails={passwordValidationDetails} />}
                         </div>
                         <div className={confirmPasswordGroupClass}>
                             <CustomInput

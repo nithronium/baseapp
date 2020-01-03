@@ -64,6 +64,12 @@ class SignUp extends React.Component<Props> {
         hasConfirmed: false,
         emailError: '',
         passwordError: '',
+        passwordValidationDetails: {
+            isLengthAcceptable: true,
+            hasDigits: true,
+            hasCapitalLetters: true,
+            hasLowerCaseLetters: true,
+        },
         confirmationError: '',
         emailFocused: false,
         passwordFocused: false,
@@ -106,6 +112,7 @@ class SignUp extends React.Component<Props> {
             hasConfirmed,
             emailError,
             passwordError,
+            passwordValidationDetails,
             confirmationError,
             emailFocused,
             passwordFocused,
@@ -152,6 +159,7 @@ class SignUp extends React.Component<Props> {
                         validateForm={this.handleValidateForm}
                         emailError={emailError}
                         passwordError={passwordError}
+                        passwordValidationDetails={passwordValidationDetails}
                         confirmationError={confirmationError}
                         confirmPasswordFocused={confirmPasswordFocused}
                         refIdFocused={refIdFocused}
@@ -352,12 +360,20 @@ class SignUp extends React.Component<Props> {
         const isPasswordValid = password.match(PASSWORD_REGEX);
         const isConfirmPasswordValid = password === confirmPassword;
 
+        const passwordValidationDetails = {
+            isLengthAcceptable: password.length >= 8,
+            hasDigits: !!password.match(/\d/),
+            hasCapitalLetters: !!password.match(/[A-Z]/),
+            hasLowerCaseLetters: !!password.match(/[a-z]/),
+        };
+
         if (!isEmailValid && !isPasswordValid) {
             this.setState({
                 confirmationError: '',
                 emailError: this.props.intl.formatMessage({ id: ERROR_INVALID_EMAIL }),
                 passwordError: this.props.intl.formatMessage({ id: ERROR_INVALID_PASSWORD }),
                 hasConfirmed: false,
+                passwordValidationDetails,
             });
             return;
         }
@@ -378,6 +394,7 @@ class SignUp extends React.Component<Props> {
                 emailError: '',
                 passwordError: this.props.intl.formatMessage({ id: ERROR_INVALID_PASSWORD }),
                 hasConfirmed: false,
+                passwordValidationDetails,
             });
             return;
         }

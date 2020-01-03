@@ -519,7 +519,11 @@ export const ru: LangType = {
         ' почтовом ящике электронное письмо с дальнейшими инструкциями. ' +
         'Если вы не можете найти адрес электронной почты, проверьте свою' +
         ' электронную почту со спамом.',
-
+    'page.signup.pwdvalidation.header': 'Ваш пароль должен содержать:',
+    'page.signup.pwdvalidation.length': '8 или более знаков',
+    'page.signup.pwdvalidation.letters': 'Знаки малого и Большого регистра',
+    'page.signup.pwdvalidation.number': 'Хотя бы одну цифру',
+    'page.signup.pwdvalidation.strength': 'Надёжность пароля',
     'page.resendConfirmation': 'Отправить подтверждение снова',
     'page.forgotPassword': 'Забыли пароль',
     'page.forgotPassword.message': 'Введите адрес электронной почты, чтобы сбросить пароль',
