@@ -19,6 +19,7 @@ import {
     // setDocumentTitle,
 } from '../../../helpers';
 import {
+    GeetestCaptchaResponse,
     referralTicketsFetch,
     ReferralOverallPayload,
     RootState,
@@ -78,6 +79,12 @@ class Referral extends React.Component<Props> {
         confirmPasswordFocused: false,
         refIdFocused: false,
         geetestCaptchaSuccess: false,
+        passwordValidationDetails: {
+            isLengthAcceptable: true,
+            hasDigits: true,
+            hasCapitalLetters: true,
+            hasLowerCaseLetters: true,
+        },
     };
 
     public componentDidMount() {
@@ -136,6 +143,7 @@ class Referral extends React.Component<Props> {
             confirmPasswordFocused,
             refIdFocused,
             geetestCaptchaSuccess,
+            passwordValidationDetails,
         } = this.state;
         const { loading, currentLanguage } = this.props;
         const test = !geetestCaptchaSuccess ? <GeetestCaptcha ref={this.captchaRef} onSuccess={this.handleGeetestCaptchaSuccess}/> : undefined;
@@ -177,6 +185,7 @@ class Referral extends React.Component<Props> {
                         validateForm={this.handleValidateForm}
                         emailError={emailError}
                         passwordError={passwordError}
+                        passwordValidationDetails={passwordValidationDetails}
                         confirmationError={confirmationError}
                         confirmPasswordFocused={confirmPasswordFocused}
                         refIdFocused={refIdFocused}
@@ -310,9 +319,10 @@ class Referral extends React.Component<Props> {
 
     private captchaRef;
 
-    private handleGeetestCaptchaSuccess = () => {
+    private handleGeetestCaptchaSuccess = (value?: GeetestCaptchaResponse) => {
         this.setState({
             geetestCaptchaSuccess: true,
+            captcha_response: value || '',
         });
     }
 
@@ -454,6 +464,12 @@ class Referral extends React.Component<Props> {
         const isEmailValid = email.match(EMAIL_REGEX);
         const isPasswordValid = password.match(PASSWORD_REGEX);
         const isConfirmPasswordValid = password === confirmPassword;
+        const passwordValidationDetails = {
+            isLengthAcceptable: password.length >= 8,
+            hasDigits: !!password.match(/\d/),
+            hasCapitalLetters: !!password.match(/[A-Z]/),
+            hasLowerCaseLetters: !!password.match(/[a-z]/),
+        };
 
         if (!isEmailValid && !isPasswordValid) {
             this.setState({
@@ -461,6 +477,8 @@ class Referral extends React.Component<Props> {
                 emailError: this.props.intl.formatMessage({ id: ERROR_INVALID_EMAIL }),
                 passwordError: this.props.intl.formatMessage({ id: ERROR_INVALID_PASSWORD }),
                 hasConfirmed: false,
+                passwordValidationDetails,
+                geetestCaptchaSuccess: false,
             });
             return;
         }
@@ -471,6 +489,7 @@ class Referral extends React.Component<Props> {
                 emailError: this.props.intl.formatMessage({ id: ERROR_INVALID_EMAIL }),
                 passwordError: '',
                 hasConfirmed: false,
+                geetestCaptchaSuccess: false,
             });
             return;
         }
@@ -481,6 +500,8 @@ class Referral extends React.Component<Props> {
                 emailError: '',
                 passwordError: this.props.intl.formatMessage({ id: ERROR_INVALID_PASSWORD }),
                 hasConfirmed: false,
+                passwordValidationDetails,
+                geetestCaptchaSuccess: false,
             });
             return;
         }
@@ -491,6 +512,7 @@ class Referral extends React.Component<Props> {
                 emailError: '',
                 passwordError: '',
                 hasConfirmed: false,
+                geetestCaptchaSuccess: false,
             });
             return;
         }
