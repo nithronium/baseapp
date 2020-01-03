@@ -15,7 +15,6 @@ import {
     ERROR_INVALID_EMAIL,
     ERROR_INVALID_PASSWORD,
     ERROR_PASSWORD_CONFIRMATION,
-    PASSWORD_REGEX,
     // setDocumentTitle,
 } from '../../../helpers';
 import {
@@ -80,10 +79,10 @@ class Referral extends React.Component<Props> {
         refIdFocused: false,
         geetestCaptchaSuccess: false,
         passwordValidationDetails: {
-            isLengthAcceptable: true,
-            hasDigits: true,
-            hasCapitalLetters: true,
-            hasLowerCaseLetters: true,
+            isLengthAcceptable: false,
+            hasDigits: false,
+            hasCapitalLetters: false,
+            hasLowerCaseLetters: false,
         },
     };
 
@@ -327,14 +326,28 @@ class Referral extends React.Component<Props> {
     }
 
     private handleChangePassword = (value: string) => {
+        const password = value;
+
+        const passwordValidationDetails = {
+            isLengthAcceptable: password.length >= 8,
+            hasDigits: !!password.match(/\d/),
+            hasCapitalLetters: !!password.match(/[A-Z]/),
+            hasLowerCaseLetters: !!password.match(/[a-z]/),
+        };
+
         this.setState({
             password: value,
+            passwordValidationDetails,
         });
     };
 
     private handleChangeConfirmPassword = (value: string) => {
+        const {password} = this.state;
+        const confirmPassword = value;
+        const isConfirmPasswordValid = password === confirmPassword;
         this.setState({
             confirmPassword: value,
+            confirmationError: !isConfirmPasswordValid ? this.props.intl.formatMessage({ id: ERROR_PASSWORD_CONFIRMATION }) : null,
         });
     };
 
@@ -462,7 +475,6 @@ class Referral extends React.Component<Props> {
     private handleValidateForm = () => {
         const { email, password, confirmPassword } = this.state;
         const isEmailValid = email.match(EMAIL_REGEX);
-        const isPasswordValid = password.match(PASSWORD_REGEX);
         const isConfirmPasswordValid = password === confirmPassword;
         const passwordValidationDetails = {
             isLengthAcceptable: password.length >= 8,
@@ -470,6 +482,10 @@ class Referral extends React.Component<Props> {
             hasCapitalLetters: !!password.match(/[A-Z]/),
             hasLowerCaseLetters: !!password.match(/[a-z]/),
         };
+        const isPasswordValid = passwordValidationDetails.isLengthAcceptable &&
+            passwordValidationDetails.hasDigits &&
+            passwordValidationDetails.hasCapitalLetters &&
+            passwordValidationDetails.hasLowerCaseLetters;
 
         if (!isEmailValid && !isPasswordValid) {
             this.setState({
