@@ -476,6 +476,7 @@ class Referral extends React.Component<Props> {
                 passwordError: this.props.intl.formatMessage({ id: ERROR_INVALID_PASSWORD }),
                 hasConfirmed: false,
                 passwordValidationDetails,
+                geetestCaptchaSuccess: false,
             });
             return;
         }
@@ -486,6 +487,7 @@ class Referral extends React.Component<Props> {
                 emailError: this.props.intl.formatMessage({ id: ERROR_INVALID_EMAIL }),
                 passwordError: '',
                 hasConfirmed: false,
+                geetestCaptchaSuccess: false,
             });
             return;
         }
@@ -497,6 +499,7 @@ class Referral extends React.Component<Props> {
                 passwordError: this.props.intl.formatMessage({ id: ERROR_INVALID_PASSWORD }),
                 hasConfirmed: false,
                 passwordValidationDetails,
+                geetestCaptchaSuccess: false,
             });
             return;
         }
@@ -507,6 +510,7 @@ class Referral extends React.Component<Props> {
                 emailError: '',
                 passwordError: '',
                 hasConfirmed: false,
+                geetestCaptchaSuccess: false,
             });
             return;
         }
