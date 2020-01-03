@@ -21,7 +21,6 @@ import {
     ERROR_INVALID_EMAIL,
     ERROR_INVALID_PASSWORD,
     ERROR_PASSWORD_CONFIRMATION,
-    // PASSWORD_REGEX,
     setDocumentTitle,
 } from '../../helpers';
 import {
