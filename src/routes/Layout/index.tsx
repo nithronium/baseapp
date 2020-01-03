@@ -1,8 +1,8 @@
 //tslint:disable
 import * as qs from 'qs';
 import classnames from 'classnames';
-import { Loader } from '@openware/components';
 import { History } from 'history';
+import { Spinner } from 'react-bootstrap';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
@@ -83,7 +83,7 @@ export type LayoutProps = ReduxProps & DispatchProps & OwnProps & InjectedIntlPr
 
 const renderLoader = () => (
     <div className="pg-loader-container">
-        <Loader />
+        <Spinner animation="border" variant="primary" />
     </div>
 );
 
@@ -162,7 +162,6 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
     public timer;
     public walletsFetchInterval;
 
-    
     //tslint:disable
     public componentDidMount() {
         this.props.userFetch();
