@@ -25,15 +25,18 @@ import {
 } from '../../helpers';
 import {
     RootState,
+    selectAuthError,
     selectCurrentLanguage,
     selectSignUpRequireVerification,
     signUp,
 } from '../../modules';
+import { CommonError } from '../../modules/types';
 
 import { GeetestCaptcha } from '../../containers';
 interface ReduxProps {
     requireVerification?: boolean;
     loading?: boolean;
+    error?: CommonError;
 }
 
 interface DispatchProps {
@@ -97,6 +100,14 @@ class SignUp extends React.Component<Props> {
 
         if (props.requireVerification) {
             props.history.push(buildPath('/email-verification', i18n), {email: this.state.email});
+        }
+
+        if (props.error) {
+            this.setState({
+                captcha_response: '',
+                recaptchaConfirmed: false,
+                geetestCaptchaSuccess: false,
+            });
         }
     }
 
@@ -434,6 +445,7 @@ class SignUp extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     requireVerification: selectSignUpRequireVerification(state),
     i18n: selectCurrentLanguage(state),
+    error: selectAuthError(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
