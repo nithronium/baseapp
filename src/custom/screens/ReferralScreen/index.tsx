@@ -26,9 +26,11 @@ import {
     selectReferralTicketsOverall,
     selectSignUpRequireVerification,
     selectUserInfo,
+    selectAuthError,
     signUp,
     User,
 } from '../../../modules';
+import { CommonError } from '../../../modules/types';
 import { Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, TopBanner, Video } from '../../components/Referral';
 
 import { buildPath } from '../../helpers';
@@ -42,6 +44,7 @@ interface ReduxProps {
     user: User;
     overall: ReferralOverallPayload['overall'];
     currentLanguage: string;
+    error?: CommonError;
 }
 
 interface DispatchProps {
@@ -123,6 +126,14 @@ class Referral extends React.Component<Props> {
         }
         
         document.getElementsByTagName('html')![0].lang = this.props.currentLanguage;
+
+        if (props.error && !this.props.error) {
+            this.setState({
+                captcha_response: '',
+                recaptchaConfirmed: false,
+                geetestCaptchaSuccess: false,
+            });
+        }
     }
 
     public render() {
@@ -557,6 +568,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     i18n: selectCurrentLanguage(state),
     user: selectUserInfo(state),
     overall: selectReferralTicketsOverall(state),
+    error: selectAuthError(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
