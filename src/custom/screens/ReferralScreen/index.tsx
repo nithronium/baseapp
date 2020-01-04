@@ -127,7 +127,7 @@ class Referral extends React.Component<Props> {
         
         document.getElementsByTagName('html')![0].lang = this.props.currentLanguage;
 
-        if (props.error && !this.props.error) {
+        if (props.error) {
             this.setState({
                 captcha_response: '',
                 recaptchaConfirmed: false,

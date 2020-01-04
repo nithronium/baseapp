@@ -102,7 +102,7 @@ class SignUp extends React.Component<Props> {
             props.history.push(buildPath('/email-verification', i18n), {email: this.state.email});
         }
 
-        if (props.error && !this.props.error) {
+        if (props.error) {
             this.setState({
                 captcha_response: '',
                 recaptchaConfirmed: false,
