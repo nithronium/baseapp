@@ -1045,6 +1045,8 @@ export const ru: LangType = {
     'cardDepositFiat.mastercard.message1': 'Внимание: на данный момент оплату можно осуществить только кредитными и дебитными картами',
   'cardDepositFiat.mastercard.message2': ' Mastercard',
   'cardDepositFiat.mastercard.message3': '.',
+    'activate.banner.message': 'Активируйте билеты, чтобы принять участие в розыгрыше',
+    'activate.banner.buttontext': 'Узнать как',
 
 
     ...nationalitiesNames,

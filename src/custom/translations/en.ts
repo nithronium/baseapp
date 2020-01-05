@@ -406,5 +406,7 @@ export const en = {
   'cardDepositFiat.mastercard.message1': 'Kindly note that, currently we accept only',
   'cardDepositFiat.mastercard.message2': ' Mastercard',
   'cardDepositFiat.mastercard.message3': ' Debit & Credit card payments.',
+  'activate.banner.message': 'Activate your tickets to take part in the raffle!',
+  'activate.banner.buttontext': 'Learn How',
 
 };
