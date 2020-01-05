@@ -27,7 +27,10 @@ export const WireFragment = injectIntl(({
                 description={description}
                 details={details}
                 uid={uid}
-            />
+                />
+            <div className="fiat-alert">
+                {translate('page.wallets.withdraw.fiat')}
+            </div>
             {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
         </div> :
         <div style={{ fontSize: '18px', paddingTop: '20px', textAlign: 'center' }}>{translate('comingsoon')}</div> 

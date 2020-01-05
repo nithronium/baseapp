@@ -2,9 +2,11 @@ import * as React from 'react';
 
 import { initPayin } from '../../../api';
 
+
 // import Iframe from 'react-iframe';
 //tslint:disable
 const rootStyles = {
+    
 
     h2: {
         padding: '15px',
@@ -17,6 +19,11 @@ const rootStyles = {
         display: 'flex',
         alignItems: 'center',
         paddingBottom: '40px',
+    },
+    topRow: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
     },
     bottomRow: {
         display: 'flex',
@@ -34,7 +41,13 @@ const rootStyles = {
         color:'#7D9794',
         padding: '0 4px',
         zIndex: 1,
-      },
+    },
+     info: {
+         padding: '15px',
+         color: 'white',
+         fontSize: '16px',
+          
+     },
 };
 
 
@@ -115,11 +128,30 @@ const CardDepositFiat = (props) => {
         
     }
 
+
     return (
         <React.Fragment>
-        <div onClick={handleClick} style={{maxWidth: '500px', display: initForm ? 'block' : 'none' }} className="depositCard">
-            <h2 style={rootStyles.h2}>{translate('cardDepositFiat.detail')}</h2>
-            <div style={rootStyles.rowWrapper}>
+            <div onClick={handleClick} style={{position: 'relative', maxWidth: '500px', display: initForm ? 'block' : 'none' }} className="depositCard">
+                <div style={rootStyles.info}>
+                    <span>{translate('cardDepositFiat.mastercard.message1')}</span>
+                    <span style={{color: 'rgb(214, 57, 57)', fontWeight: 'bold'}}>{translate('cardDepositFiat.mastercard.message2')}</span>
+                    <span>{translate('cardDepositFiat.mastercard.message3')}</span>                    
+                </div>                
+                <div style={rootStyles.rowWrapper}>
+                <div style={rootStyles.topRow}>
+                <h2 style={rootStyles.h2}>{translate('cardDepositFiat.detail')}</h2>
+                <div
+                    style={{
+                        width: '100px',
+                        height: '65px',
+                        border: '2px solid rgb(214, 57, 57)',
+                        borderRadius: '5px',
+                        background: `url(${require('../../assets/images/mastercard.svg')}) center center `,
+                        backgroundSize: '90% auto',
+                        backgroundRepeat: 'no-repeat'
+                    }}                
+                    />
+                    </div>
                 <div style={rootStyles.row}>
                     <div style={{position: 'relative', flex: '2 1 auto'}}><label style={rootStyles.label} id="label_amount">{translate('cardDepositFiat.amount')}</label> <input id="amount" onClick={handleClick} className="depositCard__input"  onInput={handleChange} type="text" value={amount} placeholder="0"/></div>
                     <div style={{ position: 'relative', width: '150px', marginLeft: '15px' }}><label style={rootStyles.label} id="label_currency">{translate('cardDepositFiat.currency')}</label> <input id="currency" onClick={handleClick} className="depositCard__input depositCard__input2" type="text" value={currency} /></div>
