@@ -9,7 +9,7 @@ const mainWrapper: CSSProperties = {
     borderRadius: '8px',
     boxShadow: '0px 1px 3px rgba(165, 133, 23, 0.5)',
     width: '473px',
-    height: '98px',
+    height: '110px',
     flexShrink: 0,
     flexGrow: 0,
 };
