@@ -8,7 +8,7 @@ export const BottomBanner = injectIntl(({intl}) => {
 
     return (
         <section id="bottom_banner" style={styles.mainWrapper}>
-            <img style={styles.backgroundImg} src={require('./background-lines-white.svg')} />
+            {/* <img style={styles.backgroundImg} src={require('./background-lines-white.svg')} /> */}
             <div style={styles.content}>
                 <div style={styles.headerWrapper}>
                     <h2 style={styles.headerMainText}>{format({id: 'page.referal.bottombanner.ieo'})}</h2>

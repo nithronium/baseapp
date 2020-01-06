@@ -4,7 +4,7 @@ const mainWrapper: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: '#FFD542',
+    background: ` url(${require('./background-lines-white.svg')}) center center no-repeat, #FFD542`,
 };
 const backgroundImg: CSSProperties = {
     position: 'absolute',
