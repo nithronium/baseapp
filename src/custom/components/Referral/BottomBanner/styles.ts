@@ -26,7 +26,8 @@ const btn: CSSProperties = {
 
 const currency: CSSProperties = {
     fontWeight: 'normal',
-    fontSize: '18px',
+    fontSize: '13px',
+    lineHeight: '1.25',
 };
 
 const list: CSSProperties = {

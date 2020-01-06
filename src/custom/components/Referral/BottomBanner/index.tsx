@@ -12,16 +12,16 @@ export const BottomBanner = injectIntl(({intl}) => {
             <div style={styles.content}>
                 <div style={styles.headerWrapper}>
                     <h2 style={styles.headerMainText}>{format({id: 'page.referal.bottombanner.ieo'})}</h2>
-                    <h4>{format({id: 'page.referal.bottombanner.dont_miss_chance'})}</h4>
+                    {/* <h4>{format({id: 'page.referal.bottombanner.dont_miss_chance'})}</h4> */}
                 </div>
                 <div style={styles.list}>
                     <ListItem
                         img={require('./icons/wallet.svg')}
                         header={format({id: 'page.referal.bottombanner.accepted_cur'})}
                     >
-                        <span style={styles.currency}>
-                            BTC, ETH, EUR, USD, USDT, Euro
-                        </span>
+                        <p style={styles.currency}>
+                        {format({id: 'page.referal.bottombanner.accepted_cur_value'})}
+                        </p>
                     </ListItem>
                     <ListItem
                         img={require('./icons/hand.svg')}
@@ -33,13 +33,13 @@ export const BottomBanner = injectIntl(({intl}) => {
                         img={require('./icons/index.svg')}
                         header={format({id: 'page.referal.bottombanner.IEO_max_supply'})}
                     >
-                        30 000 000 <span style={styles.currency}>EMRX*</span>
+                        25 000 000 <span style={styles.currency}>EMRX*</span>
                     </ListItem>
                     <ListItem
                         img={require('./icons/money.svg')}
                         header={format({id: 'page.referal.bottombanner.IEO_start_date'})}
                     >
-                        December 11, 2019
+                        {format({id: 'page.referal.bottombanner.IEO_start_date_value'})}
                     </ListItem>
                     <ListItem
                         img={require('./icons/investment.svg')}
