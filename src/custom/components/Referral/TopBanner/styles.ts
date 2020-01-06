@@ -6,10 +6,12 @@ const mainWrapper: CSSProperties = {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    maxWidth: '100%',
 };
 
 const backGroundImg: CSSProperties = {
     position: 'absolute',
+    width: '100%',
 };
 
 const textWrapper: CSSProperties = {

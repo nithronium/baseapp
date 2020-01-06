@@ -3,6 +3,8 @@ import { injectIntl } from 'react-intl';
 import { Link } from 'react-scroll';
 import { styles } from './styles';
 
+// import Media  from 'react-media';
+
 export const TopBanner = injectIntl(({intl}) => {
     return (
         <div style={styles.mainWrapper}>
