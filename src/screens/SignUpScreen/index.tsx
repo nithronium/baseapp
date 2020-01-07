@@ -21,20 +21,22 @@ import {
     ERROR_INVALID_EMAIL,
     ERROR_INVALID_PASSWORD,
     ERROR_PASSWORD_CONFIRMATION,
-    PASSWORD_REGEX,
     setDocumentTitle,
 } from '../../helpers';
 import {
     RootState,
+    selectAuthError,
     selectCurrentLanguage,
     selectSignUpRequireVerification,
     signUp,
 } from '../../modules';
+import { CommonError } from '../../modules/types';
 
 import { GeetestCaptcha } from '../../containers';
 interface ReduxProps {
     requireVerification?: boolean;
     loading?: boolean;
+    error?: CommonError;
 }
 
 interface DispatchProps {
@@ -64,6 +66,12 @@ class SignUp extends React.Component<Props> {
         hasConfirmed: false,
         emailError: '',
         passwordError: '',
+        passwordValidationDetails: {
+            isLengthAcceptable: false,
+            hasDigits: false,
+            hasCapitalLetters: false,
+            hasLowerCaseLetters: false,
+        },
         confirmationError: '',
         emailFocused: false,
         passwordFocused: false,
@@ -93,6 +101,14 @@ class SignUp extends React.Component<Props> {
         if (props.requireVerification) {
             props.history.push(buildPath('/email-verification', i18n), {email: this.state.email});
         }
+
+        if (props.error) {
+            this.setState({
+                captcha_response: '',
+                recaptchaConfirmed: false,
+                geetestCaptchaSuccess: false,
+            });
+        }
     }
 
     public render() {
@@ -106,6 +122,7 @@ class SignUp extends React.Component<Props> {
             hasConfirmed,
             emailError,
             passwordError,
+            passwordValidationDetails,
             confirmationError,
             emailFocused,
             passwordFocused,
@@ -152,6 +169,7 @@ class SignUp extends React.Component<Props> {
                         validateForm={this.handleValidateForm}
                         emailError={emailError}
                         passwordError={passwordError}
+                        passwordValidationDetails={passwordValidationDetails}
                         confirmationError={confirmationError}
                         confirmPasswordFocused={confirmPasswordFocused}
                         refIdFocused={refIdFocused}
@@ -195,14 +213,28 @@ class SignUp extends React.Component<Props> {
     };
 
     private handleChangePassword = (value: string) => {
+        const password = value;
+
+        const passwordValidationDetails = {
+            isLengthAcceptable: password.length >= 8,
+            hasDigits: !!password.match(/\d/),
+            hasCapitalLetters: !!password.match(/[A-Z]/),
+            hasLowerCaseLetters: !!password.match(/[a-z]/),
+        };
+
         this.setState({
             password: value,
+            passwordValidationDetails,
         });
     };
 
     private handleChangeConfirmPassword = (value: string) => {
+        const {password} = this.state;
+        const confirmPassword = value;
+        const isConfirmPasswordValid = password === confirmPassword;
         this.setState({
             confirmPassword: value,
+            confirmationError: !isConfirmPasswordValid ? this.props.intl.formatMessage({ id: ERROR_PASSWORD_CONFIRMATION }) : null,
         });
     };
 
@@ -240,9 +272,10 @@ class SignUp extends React.Component<Props> {
         this.props.history.push(buildPath('/signin', this.props.i18n));
     };
 
-    private handleGeetestCaptchaSuccess = () => {
+    private handleGeetestCaptchaSuccess = value => {
         this.setState({
             geetestCaptchaSuccess: true,
+            captcha_response: value,
         });
     }
 
@@ -349,8 +382,17 @@ class SignUp extends React.Component<Props> {
     private handleValidateForm = () => {
         const {email, password, confirmPassword} = this.state;
         const isEmailValid = email.match(EMAIL_REGEX);
-        const isPasswordValid = password.match(PASSWORD_REGEX);
         const isConfirmPasswordValid = password === confirmPassword;
+        const passwordValidationDetails = {
+            isLengthAcceptable: password.length >= 8,
+            hasDigits: !!password.match(/\d/),
+            hasCapitalLetters: !!password.match(/[A-Z]/),
+            hasLowerCaseLetters: !!password.match(/[a-z]/),
+        };
+        const isPasswordValid = passwordValidationDetails.isLengthAcceptable &&
+            passwordValidationDetails.hasDigits &&
+            passwordValidationDetails.hasCapitalLetters &&
+            passwordValidationDetails.hasLowerCaseLetters;
 
         if (!isEmailValid && !isPasswordValid) {
             this.setState({
@@ -358,6 +400,8 @@ class SignUp extends React.Component<Props> {
                 emailError: this.props.intl.formatMessage({ id: ERROR_INVALID_EMAIL }),
                 passwordError: this.props.intl.formatMessage({ id: ERROR_INVALID_PASSWORD }),
                 hasConfirmed: false,
+                passwordValidationDetails,
+                geetestCaptchaSuccess: false,
             });
             return;
         }
@@ -368,6 +412,7 @@ class SignUp extends React.Component<Props> {
                 emailError: this.props.intl.formatMessage({ id: ERROR_INVALID_EMAIL }),
                 passwordError: '',
                 hasConfirmed: false,
+                geetestCaptchaSuccess: false,
             });
             return;
         }
@@ -378,6 +423,8 @@ class SignUp extends React.Component<Props> {
                 emailError: '',
                 passwordError: this.props.intl.formatMessage({ id: ERROR_INVALID_PASSWORD }),
                 hasConfirmed: false,
+                passwordValidationDetails,
+                geetestCaptchaSuccess: false,
             });
             return;
         }
@@ -388,6 +435,7 @@ class SignUp extends React.Component<Props> {
                 emailError: '',
                 passwordError: '',
                 hasConfirmed: false,
+                geetestCaptchaSuccess: false,
             });
             return;
         }
@@ -397,6 +445,7 @@ class SignUp extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     requireVerification: selectSignUpRequireVerification(state),
     i18n: selectCurrentLanguage(state),
+    error: selectAuthError(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =

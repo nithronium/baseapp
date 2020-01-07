@@ -9,3 +9,6 @@ export const selectSignUpRequireVerification = (state: RootState): AuthState['re
 
 export const selectEmailVerified = (state: RootState): AuthState['emailVerified'] =>
     state.user.auth.emailVerified;
+
+export const selectAuthError = (state: RootState): AuthState['authError'] =>
+    state.user.auth.authError;
