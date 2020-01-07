@@ -6,6 +6,7 @@ window.env = {
         rangerUrl: 'ws://0.0.0.0:9011/api/v2/ranger',
         tenkoUrl: 'http://0.0.0.0:9002/api/v2/tenko',
         nodelogicUrl: 'https://www.app.local/api/v2/nodelogic',
+        
     },
     minutesUntilAutoLogout: '60',
     withCredentials: false,
