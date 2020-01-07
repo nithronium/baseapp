@@ -1,9 +1,9 @@
 window.env = {
     api: {
-        authUrl: 'http://www.app.local/api/v2/barong',
-        tradeUrl: 'http://www.app.local/api/v2/peatio',
-        applogicUrl: 'http://www.app.local/api/v2/applogic',
-        rangerUrl: 'ws://www.app.local/api/v2/ranger',
+        authUrl: 'http://0.0.0.0:9002/api/v2/barong',
+        tradeUrl: 'http://0.0.0.0:9002/api/v2/peatio',
+        applogicUrl: 'http://0.0.0.0:9002/api/v2/applogic',
+        rangerUrl: 'ws://0.0.0.0:9011/api/v2/ranger',
         tenkoUrl: 'http://www.app.local/api/v2/tenko',
         nodelogicUrl: 'https://www.app.local/api/v2/nodelogic',
     },
