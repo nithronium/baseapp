@@ -61,8 +61,8 @@ const CardDepositFiat = (props) => {
         currency,
         translate,
     } = props;
-
-    const [amount, setAmount] = React.useState('50');
+    const defaultAmount = currency.toLowerCase() === 'aed' ? '30' : '1';
+    const [amount, setAmount] = React.useState(defaultAmount);
     const [initForm, setInitForm] = React.useState(true);
     const [iFrame, setIFrame] = React.useState(false);
     const [initURL, setInitURL] = React.useState('');
@@ -76,17 +76,18 @@ const CardDepositFiat = (props) => {
     const [fee, setFee] = React.useState(getFee(amount));
 
     const handleChange = (e) => {
-        const oldAmount = amount;
+        const oldAmount = currency.toLowerCase() === 'aed' ? '30' : '1';
         const newAmount = e.target.value;
-        // console.log(newAmount);
-        if (newAmount.match(/^[1-9]\d*$/)) {
+        const reg = currency.toLowerCase() === 'aed' ? /^[3-9]\d*$/ : /^[1-9]\d*$/;
+        console.log(newAmount);
+        if (newAmount.match(reg)) {
             setAmount(newAmount);
             setFee(getFee(newAmount));
         } else if(newAmount.length !== 0){
             setAmount(oldAmount);
             setFee(getFee(oldAmount));
-        } else {
-            setAmount('');
+        } else if(newAmount.length !== 0){
+            setAmount(oldAmount);
             setFee(getFee(0));
         }
        
@@ -164,21 +165,19 @@ const CardDepositFiat = (props) => {
                 </div>
                 <div className="depositCard__buttons">
                     <a  onClick={clearInput}>{translate('cardDepositFiat.button.cancel')}</a>
-                    <input disabled={parseInt(amount) < 50 ? true : false} onClick={getPaytoolsForm} type="submit" className="button" value={translate('cardDepositFiat.button.payment')}/>
+                    <input 
+                    disabled={(currency.toLowerCase() === 'aed' && parseInt(amount) < 30) || amount === '' ? true : false} 
+                    onClick={getPaytoolsForm} 
+                    type="submit" 
+                    className={(currency.toLowerCase() === 'aed' && parseInt(amount) < 30) || amount === '' ? 'button button-disabled' : 'button'} 
+                    value={translate('cardDepositFiat.button.payment')}
+                    />
                     
                 </div>
             </div>
             </div>
             <div style={{display: iFrame ? 'block' : 'none'}}>
                 {initURL ?
-                //     <Iframe
-                //     url={initURL}
-                //     position='relative'
-                //     width='100%'
-                //     height='500px'
-                //     styles={{ frameBorder: 'no' }}
-             
-                // />
                     <iframe  src={initURL} width="100%" height="500px" frameBorder="0"></iframe>
                     :
                     <h3>Server error</h3>}
