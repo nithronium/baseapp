@@ -21,7 +21,6 @@ const Banner = injectIntl(({intl}) => {
           >
             <button className="activate-banner__button">{buttonText}</button>
             </a>
-
         </div>
       </div>
     </div>
