@@ -61,7 +61,7 @@ const CardDepositFiat = (props) => {
         currency,
         translate,
     } = props;
-    const defaultAmount = currency.toLowerCase() === 'aed' ? '30' : '1';
+    const defaultAmount = currency.toLowerCase() === 'aed' ? '30' : '';
     const [amount, setAmount] = React.useState(defaultAmount);
     const [initForm, setInitForm] = React.useState(true);
     const [iFrame, setIFrame] = React.useState(false);
@@ -76,9 +76,9 @@ const CardDepositFiat = (props) => {
     const [fee, setFee] = React.useState(getFee(amount));
 
     const handleChange = (e) => {
-        const oldAmount = currency.toLowerCase() === 'aed' ? '30' : '1';
+        const oldAmount = currency.toLowerCase() === 'aed' ? '30' : '';
         const newAmount = e.target.value;
-        const reg = currency.toLowerCase() === 'aed' ? /^[3-9]\d*$/ : /^[1-9]\d*$/;
+        const reg = currency.toLowerCase() === 'aed' ? /^[3-9]\d*$/ : /^\d*$/;
         console.log(newAmount);
         if (newAmount.match(reg)) {
             setAmount(newAmount);
