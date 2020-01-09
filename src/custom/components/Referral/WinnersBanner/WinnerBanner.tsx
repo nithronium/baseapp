@@ -6,47 +6,57 @@ import { Winner, WinnerItem } from './WinnerItem';
 
 const testData: Winner[] = [
     {
-        number: 549950,
+        number: 871074,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 548358,
+        number: 549469,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 555049,
+        number: 548396,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 567944,
+        number: 909247,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 548229,
+        number: 549164,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 548462,
+        number: 841896,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 549815,
+        number: 869669,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 548166,
-        value: 3500,
-        currency: 'TFT',
+        number: 549133,
+        value: 750,
+        currency: 'EMRX',
     },
     {
-        number: 549839,
+        number: 841365,
+        value: 750,
+        currency: 'EMRX',
+    },
+    {
+        number: 550064,
+        value: 750,
+        currency: 'EMRX',
+    },
+    {
+        number: 549641,
         value: 3500,
         currency: 'TFT',
     },
