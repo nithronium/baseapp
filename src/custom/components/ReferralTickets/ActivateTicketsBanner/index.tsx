@@ -4,8 +4,6 @@ import { injectIntl } from 'react-intl';
 //tslint:disable
 import './style.css';
 
-import { Link } from 'react-scroll';
-
 const Banner = injectIntl(({intl}) => {
   const translate = (id) => intl.formatMessage({ id }); 
   const message = translate('activate.banner.message');
@@ -15,9 +13,13 @@ const Banner = injectIntl(({intl}) => {
       <div className="activate-banner__wrapper">
         <p className="activate-banner__message">{message}</p>
         <div className="activate-banner__button-wrapper">
-          <Link to="#" style={{textDecoration: 'none'}}>
-            <span className="activate-banner__button">{buttonText}</span>
-          </Link>
+        <a
+            href="https://knowledge-base.emirex.com/how-can-i-activate-my-tickets"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="activate-banner__button">{buttonText}</button>
+            </a>
         </div>
       </div>
     </div>
