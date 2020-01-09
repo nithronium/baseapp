@@ -70,7 +70,7 @@ const CardDepositFiat = (props) => {
     const getFee = (amount) => {
         const fee = +amount * 4.5 / 100;
 
-        return fee ? fee + 0.1 : 0;
+        return fee ? (fee + 0.1).toFixed(3) : '0';
     }
 
     const [fee, setFee] = React.useState(getFee(amount));
@@ -78,11 +78,10 @@ const CardDepositFiat = (props) => {
     const handleChange = (e) => {
         // const oldAmount = currency.toLowerCase() === 'aed' ? '30' : '';
         const newAmount = e.target.value;
-        console.log(newAmount)
         const reg =  currency.toLowerCase() === 'aed' ? /^[3-9]\d*$/ : /^[1-9]\d*$/;
         if (newAmount.match(reg)) {
             setAmount(newAmount);
-            const fee = currency.toLowerCase() === 'aed' && newAmount.length === 1 ? 0 : getFee(newAmount);
+            const fee = currency.toLowerCase() === 'aed' && newAmount.length === 1 ? '0' : getFee(newAmount);
             setFee(fee);
         }  else if(newAmount.length === 0 ){
             setAmount('');
