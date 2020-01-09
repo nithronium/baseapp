@@ -78,7 +78,7 @@ const CardDepositFiat = (props) => {
     const handleChange = (e) => {
         // const oldAmount = currency.toLowerCase() === 'aed' ? '30' : '';
         const newAmount = e.target.value;
-        const reg =  currency.toLowerCase() === 'aed' ? /^[3-9]\d*$/ : /^[1-9]\d*$/;
+        const reg =   /^[1-9]\d*$/;
         if (newAmount.match(reg)) {
             setAmount(newAmount);
             const fee = currency.toLowerCase() === 'aed' && newAmount.length === 1 ? '0' : getFee(newAmount);
