@@ -81,7 +81,7 @@ const CardDepositFiat = (props) => {
         const reg =   /^[1-9]\d*$/;
         if (newAmount.match(reg)) {
             setAmount(newAmount);
-            const fee = currency.toLowerCase() === 'aed' && newAmount.length === 1 ? '0' : getFee(newAmount);
+            const fee = currency.toLowerCase() === 'aed' && parseInt(newAmount) < 30 ? '0' : getFee(newAmount);
             setFee(fee);
         }  else if(newAmount.length === 0 ){
             setAmount('');
