@@ -1,0 +1,56 @@
+.activate-banner {
+  position: relative;
+  max-width: 100%;
+  margin: 20px 0;
+  background: url('./left-cub.svg') 10% 90% no-repeat, url('./left-cub.svg') 20% 85% no-repeat, url('./left-cub.svg') 30% 80% no-repeat, url('./top-cub.png') 50% 10% no-repeat, url('./right-cub.png') 90% 50% no-repeat, white;
+  background-size: 100px auto, 80px auto, 50px auto, 50px auto, 150px auto;
+}
+
+.activate-banner__button {
+  text-align: center;
+  background: green;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px 40px;
+  border-radius: 25px;
+}
+
+.activate-banner__wrapper {
+  max-width: 1140px;
+  padding: 50px;
+  margin: 0 auto;
+}
+
+.activate-banner__message {
+  max-width: 340px;
+  padding-left: 30px;
+  font-size: 20px;
+  font-weight: bold;
+  border-left: 2px solid orange;
+}
+
+.activate-banner::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -10px;
+  left: 20vw;
+  transform: rotate(45deg);
+  background: white;
+}
+
+.activate-banner__button-wrapper {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (max-width: 700px) {
+  .activate-banner {
+    background: white;
+  }
+}

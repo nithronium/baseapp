@@ -20,6 +20,8 @@ import {
     Slider,
 } from '../../components/ReferralTickets';
 
+import { Banner } from '../../components/ReferralTickets/ActivateTicketsBanner';
+
 import { getActiveTicketsList, getReferralTickets, getOverall, getBonusTickets } from '../../../api';
 
 // import { Loader } from '../../components/Loader';
@@ -220,6 +222,9 @@ class ReferralTickets extends React.Component<Props> {
                                 <CardReferrals message={this.props.intl.formatMessage} title="Referral" context={this.state.referrals} overall={this.state.overall.referrals} link="#referral"/>
                                 <CardBonuses message={this.props.intl.formatMessage} title="Bonus" context={this.state.bonuses} overall={this.state.overall.bonuses} link="#bonus"/>
                             </ReferralBallance>
+                        </section>
+                        <section id="activate-banner">
+                            <Banner/>
                         </section>
                         <section id="direct">
                             <DirectTicketDetails lang={this.props.currentLanguage} message={this.props.intl.formatMessage} context={this.state.direct} overall={this.state.overall.direct} user={this.props.user} />
