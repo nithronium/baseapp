@@ -23,6 +23,7 @@ import { ConfirmScreen } from '../../custom/screens';
 import { toggleColorTheme } from '../../helpers';
 import {
     changeLanguage,
+    configsFetch,
     logoutFetch,
     Market,
     RootState,
@@ -63,6 +64,7 @@ interface ReduxProps {
 }
 
 interface DispatchProps {
+    fetchConfigs: typeof configsFetch;
     logout: typeof logoutFetch;
     userFetch: typeof userFetch;
     walletsReset: typeof walletsReset;
@@ -164,6 +166,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
 
     //tslint:disable
     public componentDidMount() {
+        this.props.fetchConfigs();
         this.props.userFetch();
         this.initInterval();
         this.check();
@@ -785,6 +788,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
 });
 
 const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
+    fetchConfigs: () => dispatch(configsFetch()),
     logout: () => dispatch(logoutFetch()),
     userFetch: () => dispatch(userFetch()),
     walletsReset: () => dispatch(walletsReset()),

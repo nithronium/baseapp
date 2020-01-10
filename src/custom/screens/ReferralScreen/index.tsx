@@ -6,7 +6,6 @@ import { Helmet } from 'react-helmet';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 //import { withRouter } from 'react-router-dom';
-import { captchaType, siteKey } from '../../../api';
 import { Modal, SignUpForm } from '../../../components';
 import ReCAPTCHA from 'react-google-recaptcha';
 import {
@@ -17,10 +16,12 @@ import {
     // setDocumentTitle,
 } from '../../../helpers';
 import {
+    Configs,
     GeetestCaptchaResponse,
     referralTicketsFetch,
     ReferralOverallPayload,
     RootState,
+    selectConfigs,
     selectCurrentLanguage,
     selectReferralTicketsOverall,
     selectSignUpRequireVerification,
@@ -54,6 +55,7 @@ interface ReduxProps {
     overall: ReferralOverallPayload['overall'];
     currentLanguage: string;
     error?: CommonError;
+    configs: Configs;
 }
 
 interface DispatchProps {
@@ -154,7 +156,7 @@ class Referral extends React.Component<Props> {
             geetestCaptchaSuccess,
             passwordValidationDetails,
         } = this.state;
-        const { loading, currentLanguage } = this.props;
+        const { loading, currentLanguage, configs } = this.props;
         const className = cx('pg-referral-screen__container', { loading });
 
         const signupForm = () => {
@@ -198,7 +200,7 @@ class Referral extends React.Component<Props> {
                         handleFocusPassword={this.handleFocusPassword}
                         handleFocusConfirmPassword={this.handleFocusConfirmPassword}
                         handleFocusRefId={this.handleFocusRefId}
-                        captchaType={captchaType()}
+                        captchaType={configs.captcha_type}
                         renderCaptcha={this.renderCaptcha()}
                         reCaptchaSuccess={reCaptchaSuccess}
                         geetestCaptchaSuccess={geetestCaptchaSuccess}
@@ -321,13 +323,13 @@ class Referral extends React.Component<Props> {
     private renderCaptcha = () => {
         const { shouldGeetestReset } = this.state;
 
-        switch (captchaType()) {
+        switch (this.props.configs.captcha_type) {
             case 'recaptcha':
                 return (
                     <div className="cr-sign-up-form__recaptcha">
                         <ReCAPTCHA
                             ref={this.reCaptchaRef}
-                            sitekey={siteKey()}
+                            sitekey={this.props.configs.captcha_id}
                             onChange={this.handleReCaptchaSuccess}
                         />
                     </div>
@@ -440,7 +442,7 @@ class Referral extends React.Component<Props> {
         const { i18n } = this.props;
 
         if (refId) {
-            switch (captchaType()) {
+            switch (this.props.configs.captcha_type) {
                 case 'none':
                     this.props.signUp({
                         email,
@@ -462,7 +464,7 @@ class Referral extends React.Component<Props> {
                     break;
             }
         } else {
-            switch (captchaType()) {
+            switch (this.props.configs.captcha_type) {
                 case 'none':
                     this.props.signUp({
                         email,
@@ -605,6 +607,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     user: selectUserInfo(state),
     overall: selectReferralTicketsOverall(state),
     error: selectAuthError(state),
+    configs: selectConfigs(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({

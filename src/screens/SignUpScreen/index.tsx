@@ -14,7 +14,6 @@ import {
     MapStateToProps,
 } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { captchaType, siteKey } from '../../api';
 import { Modal, SignUpForm } from '../../components';
 import { buildPath } from '../../custom/helpers';
 import { GeetestCaptcha } from '../../containers';
@@ -26,7 +25,9 @@ import {
     setDocumentTitle,
 } from '../../helpers';
 import {
+    Configs,
     RootState,
+    selectConfigs,
     selectCurrentLanguage,
     selectSignUpError,
     selectSignUpRequireVerification,
@@ -37,6 +38,7 @@ import { CommonError } from '../../modules/types';
 const logo = require('../../assets/images/logo.svg');
 
 interface ReduxProps {
+    configs: Configs;
     requireVerification?: boolean;
     loading?: boolean;
     error?: CommonError;
@@ -143,7 +145,7 @@ class SignUp extends React.Component<Props> {
     }
 
     public render() {
-        const { loading } = this.props;
+        const { configs, loading } = this.props;
         const {
             email,
             password,
@@ -205,7 +207,7 @@ class SignUp extends React.Component<Props> {
                         handleFocusPassword={this.handleFocusPassword}
                         handleFocusConfirmPassword={this.handleFocusConfirmPassword}
                         handleFocusRefId={this.handleFocusRefId}
-                        captchaType={captchaType()}
+                        captchaType={configs.captcha_type}
                         renderCaptcha={this.renderCaptcha()}
                         reCaptchaSuccess={reCaptchaSuccess}
                         geetestCaptchaSuccess={geetestCaptchaSuccess}
@@ -223,15 +225,16 @@ class SignUp extends React.Component<Props> {
     }
 
     private renderCaptcha = () => {
+        const { configs } = this.props;
         const { shouldGeetestReset } = this.state;
 
-        switch (captchaType()) {
+        switch (configs.captcha_type) {
             case 'recaptcha':
                 return (
                     <div className="cr-sign-up-form__recaptcha">
                         <ReCAPTCHA
                             ref={this.reCaptchaRef}
-                            sitekey={siteKey()}
+                            sitekey={configs.captcha_id}
                             onChange={this.handleReCaptchaSuccess}
                         />
                     </div>
@@ -344,6 +347,7 @@ class SignUp extends React.Component<Props> {
     }
 
     private handleSignUp = () => {
+        const { configs, i18n } = this.props;
         const {
             email,
             password,
@@ -351,10 +355,8 @@ class SignUp extends React.Component<Props> {
             refId,
         } = this.state;
 
-        const { i18n } = this.props;
-
         if (refId) {
-            switch (captchaType()) {
+            switch (configs.captcha_type) {
                 case 'none':
                     this.props.signUp({
                         email,
@@ -383,7 +385,7 @@ class SignUp extends React.Component<Props> {
                     break;
             }
         } else {
-            switch (captchaType()) {
+            switch (configs.captcha_type) {
                 case 'none':
                     this.props.signUp({
                         email,
@@ -516,6 +518,7 @@ class SignUp extends React.Component<Props> {
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
+    configs: selectConfigs(state),
     i18n: selectCurrentLanguage(state),
     requireVerification: selectSignUpRequireVerification(state),
     signUpError: selectSignUpError(state),

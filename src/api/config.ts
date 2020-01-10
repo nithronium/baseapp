@@ -14,10 +14,6 @@ export const defaultConfig: Config = {
     minutesUntilAutoLogout: '5',
     rangerReconnectPeriod: '1',
     withCredentials: true,
-    captcha: {
-        captchaType: 'none',
-        siteKey: '',
-    },
     storage: {},
     gaTrackerKey: '',
     msAlertDisplayTime: '5000',
@@ -40,7 +36,6 @@ declare global {
 window.env = window.env || defaultConfig;
 Cryptobase.config = { ...window.env };
 Cryptobase.config.storage = Cryptobase.config.storage || {};
-Cryptobase.config.captcha = Cryptobase.config.captcha || defaultConfig.captcha;
 
 export const referralUrl = () => `${window.document.location.origin}/api/v1/referral-code`;
 export const referralCommissionUrl = () => `${window.document.location.origin}/api/v2/referral`;
@@ -58,8 +53,6 @@ export const rangerUrl = () => Cryptobase.config.api.rangerUrl;
 export const minutesUntilAutoLogout = (): string => Cryptobase.config.minutesUntilAutoLogout || '5';
 export const withCredentials = () => Cryptobase.config.withCredentials;
 export const defaultStorageLimit = () => Cryptobase.config.storage.defaultStorageLimit || STORAGE_DEFAULT_LIMIT;
-export const siteKey = () => Cryptobase.config.captcha.siteKey;
-export const captchaType = () => Cryptobase.config.captcha.captchaType;
 export const gaTrackerKey = (): string => Cryptobase.config.gaTrackerKey || '';
 export const msAlertDisplayTime = (): string => Cryptobase.config.msAlertDisplayTime || '5000';
 export const rangerReconnectPeriod = (): number => Cryptobase.config.rangerReconnectPeriod ? Number(Cryptobase.config.rangerReconnectPeriod) : 1;
