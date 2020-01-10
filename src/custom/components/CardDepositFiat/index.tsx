@@ -142,7 +142,6 @@ const CardDepositFiat = (props) => {
                     style={{
                         width: '100px',
                         height: '65px',
-                        border: '2px solid rgb(214, 57, 57)',
                         borderRadius: '5px',
                         background: `url(${require('../../assets/images/mastercard.svg')}) center center `,
                         backgroundSize: '90% auto',
