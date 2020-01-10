@@ -1044,7 +1044,7 @@ export const ru: LangType = {
     'page.wallets.withdraw.fiat': 'Внимание: при внесении на счет сумм, превышающих установленные лимиты, Ваши средства будут возвращены, после вычета комиссий.',
     'activeTickets': 'Ваши активные билеты',
     'page.profile.update.balance': 'Чтобы повысить свой уровень, пожалуйста, пополните свой баланс минимум на $100',
-    'cardDepositFiat.mastercard.message1': 'Внимание: на данный момент оплату можно осуществить только кредитными и дебитными картами',
+    'cardDepositFiat.mastercard.message1': 'Внимание: на данный момент оплату можно осуществить только кредитными и дебетными картами',
   'cardDepositFiat.mastercard.message2': ' Mastercard',
   'cardDepositFiat.mastercard.message3': '.',
     'activate.banner.message': 'Активируйте билеты, чтобы принять участие в розыгрыше',

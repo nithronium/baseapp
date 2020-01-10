@@ -132,7 +132,7 @@ const CardDepositFiat = (props) => {
             <div onClick={handleClick} style={{position: 'relative', maxWidth: '500px', display: initForm ? 'block' : 'none', background: '#222627', borderRadius: '10px' }} className="depositCard">
                 <div style={rootStyles.info}>
                     <span>{translate('cardDepositFiat.mastercard.message1')}</span>
-                    <span style={{color: 'rgb(214, 57, 57)', fontWeight: 'bold'}}>{translate('cardDepositFiat.mastercard.message2')}</span>
+                    <span style={{color: '#E85E59', fontWeight: 'bold'}}>{translate('cardDepositFiat.mastercard.message2')}</span>
                     <span>{translate('cardDepositFiat.mastercard.message3')}</span>                    
                 </div>                
                 <div style={rootStyles.rowWrapper}>
@@ -142,7 +142,6 @@ const CardDepositFiat = (props) => {
                     style={{
                         width: '100px',
                         height: '65px',
-                        border: '2px solid rgb(214, 57, 57)',
                         borderRadius: '5px',
                         background: `url(${require('../../assets/images/mastercard.svg')}) center center `,
                         backgroundSize: '90% auto',

@@ -4,8 +4,9 @@
    align-items: center;
    padding: 20px 0;
 } 
-.depositCard__input: {
+.depositCard__input {
    border: 1px solid #7D9794;
+    outline: none;
    background: #222627;
    color: #FFFFFF;
    border-radius: 5px;
@@ -13,6 +14,10 @@
    font-size: 16px;
    padding: 10px;
    width: 100%;
+    &--focused {
+        border: 1px solid #FFD567 !important;
+        outline: none;
+    }
 }
 .depositCard__input2: {
    disabled: disabled;
