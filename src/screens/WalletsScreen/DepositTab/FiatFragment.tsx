@@ -43,7 +43,7 @@ export const FiatFragment = injectIntl((props) => {
              
             {card && (user.level > 1 ?
                 <div>
-                    <CardDepositFiat currency={currency.toUpperCase()} translate={translate} />
+                    <CardDepositFiat currency={currency.toUpperCase()} translate={translate} colorTheme={colorTheme}/>
                     <div className="fiat-alert">
                         {translate('page.wallets.withdraw.fiat')}
                     </div>

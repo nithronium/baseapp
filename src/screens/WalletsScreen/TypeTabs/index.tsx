@@ -15,7 +15,7 @@ const setTabStyleLight = (isActive) => ({
     padding: '10px 0',
     flex: '1 1 auto',
     cursor: 'pointer',
-    background: isActive ? '#11B382' : '#FFFFFF',
+    background: isActive ? '#2E4C80' : '#FFFFFF',
     border: isActive?  'none' : '1px solid #222627',
     color: isActive ?  '#FFFFFF' : '#222627',
 })
