@@ -5,50 +5,7 @@ import { initPayin } from '../../../api';
 
 // import Iframe from 'react-iframe';
 //tslint:disable
-const rootStyles = {
-    
 
-    h2: {
-        padding: '15px',
-        color: 'white',
-    },
-    rowWrapper: {
-       padding: '0 20px', 
-    },
-    row: {
-        display: 'flex',
-        alignItems: 'center',
-        paddingBottom: '40px',
-    },
-    topRow: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-    },
-    bottomRow: {
-        display: 'flex',
-        justifyContent: 'flex-start',
-        paddingBottom: '40px',
-        borderBottom: '1px solid #64828022',
-    },
-     label :{
-        position: 'absolute' as 'absolute',
-        top:'-8px',
-        left: '7px',
-        fontSize: '14px',
-        letterSpacing: '0.5',
-        background: '#222627',
-        color:'#7D9794',
-        padding: '0 4px',
-        zIndex: 1,
-    },
-     info: {
-         padding: '15px',
-         color: 'white',
-         fontSize: '16px',
-          
-     },
-};
 
 
 // interface CardDepositFiatProps {
@@ -60,6 +17,7 @@ const CardDepositFiat = (props) => {
     const {
         currency,
         translate,
+        colorTheme,
     } = props;
     const defaultAmount = currency.toLowerCase() === 'aed' ? '30' : '';
     const [amount, setAmount] = React.useState(defaultAmount);
@@ -89,13 +47,16 @@ const CardDepositFiat = (props) => {
         }
        
     }
-    
+
     const handleClick = (e) => {
+        const activeColor = colorTheme === 'basic' ? '#FFD567' : '#000000';
         const labels = document.querySelectorAll('label');
         labels.forEach(label => {
             if (e.target.id && label.id.includes(e.target.id)) {
-                label.style.color = '#FFD567';
+                label.style.color = `${activeColor}`;
+                document.getElementById(label.id.split('_')[1])!.style.border = `1px solid ${activeColor}`;
             } else {
+                document.getElementById(label.id.split('_')[1])!.style.border = '1px solid #7D9794';
                 label.style.color = '#7D9794';
             }
         })
@@ -126,10 +87,119 @@ const CardDepositFiat = (props) => {
         
     }
 
+    const rootStyles = {  
+        
+        root: {
+            position: 'relative' as 'relative',
+            maxWidth: '500px',
+            display: initForm ? 'block' : 'none',
+            background: colorTheme === 'basic' ? '#222627' : '#FFFFFF',
+            borderRadius: '10px'
+        },
+
+        h2: {
+            padding: '15px',
+            color: colorTheme === 'basic' ? '#FFFFFF' : '#2E4C80',
+        },
+        rowWrapper: {
+           padding: '0 20px', 
+        },
+        row: {
+            display: 'flex',
+            alignItems: 'center',
+            paddingBottom: '40px',
+        },
+        topRow: {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+        },
+        bottomRow: {
+            display: 'flex',
+            justifyContent: 'flex-start',
+            paddingBottom: '40px',
+            borderBottom: '1px solid #64828022',
+        },
+         label :{
+            position: 'absolute' as 'absolute',
+            top:'-8px',
+            left: '7px',
+            fontSize: '14px',
+            letterSpacing: '0.5',
+            background: colorTheme === 'basic' ? '#222627' : '#FFFFFF',
+            color: colorTheme === 'basic' ? '#7D9794' : '#2E4C80',
+            padding: '0 4px',
+            zIndex: 1,
+        },
+         info: {
+             padding: '15px',
+             color: colorTheme === 'basic' ? '#FFFFFF' : '#2E4C80',
+             fontSize: '16px',
+              
+         },
+         buttons: {
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            padding: '20px 0',
+         },
+         input: {
+            border: '1px solid #7D9794',
+            outline: 'none',
+           background: colorTheme === 'basic' ? '#222627' : '#FFFFFF',
+           color: colorTheme === 'basic' ? '#FFFFFF' : '#222627',
+           borderRadius: '5px',
+           height: '50px',
+           fontSize: '16px',
+           padding: '10px',
+           width: '100%',
+         },
+         input2: {
+            border: '1px solid #7D9794',
+            outline: 'none',
+            background: colorTheme === 'basic' ? '#222627' : '#FFFFFF',
+            color: colorTheme === 'basic' ? '#FFFFFF' : '#222627',
+           borderRadius: '5px',
+           height: '50px',
+           fontSize: '16px',
+           padding: '10px',
+           width: '100%',
+           disabled: 'disabled',
+        },
+        cancel: {
+            textDecoration: 'none',
+            color: colorTheme === 'basic' ? '#FFFFFF67' : '#2E4C80',
+            fontSize: '18px',
+            cursor: 'pointer',
+        },
+        button: {
+            padding: '10px 20px',
+            background: colorTheme === 'basic' ? '#11B382' : '#2E4C80',
+            border: 'none',
+            borderRadius: '4px', 
+            fontSize: '16px',
+            color: '#FFFFFF',
+            cursor: 'pointer',
+            marginLeft: '30px',
+            width: '200px',
+        },
+        buttonDisabled: {
+            padding: '10px 20px',
+            background:'gray',
+            border: 'none',
+            borderRadius: '4px', 
+            fontSize: '16px',
+            color: '#FFFFFF',
+            cursor: 'pointer',
+            marginLeft: '30px',
+            width: '200px',
+        },
+    };
+
 
     return (
         <React.Fragment>
-            <div onClick={handleClick} style={{position: 'relative', maxWidth: '500px', display: initForm ? 'block' : 'none', background: '#222627', borderRadius: '10px' }} className="depositCard">
+            <div onClick={handleClick} style={rootStyles.root} >
                 <div style={rootStyles.info}>
                     <span>{translate('cardDepositFiat.mastercard.message1')}</span>
                     <span style={{color: '#E85E59', fontWeight: 'bold'}}>{translate('cardDepositFiat.mastercard.message2')}</span>
@@ -150,22 +220,22 @@ const CardDepositFiat = (props) => {
                     />
                     </div>
                 <div style={rootStyles.row}>
-                    <div style={{position: 'relative', flex: '2 1 auto'}}><label style={rootStyles.label} id="label_amount">{translate('cardDepositFiat.amount')}</label> <input id="amount" onClick={handleClick} className="depositCard__input"  onInput={handleChange} type="text" value={amount} placeholder="0"/></div>
-                    <div style={{ position: 'relative', width: '150px', marginLeft: '15px' }}><label style={rootStyles.label} id="label_currency">{translate('cardDepositFiat.currency')}</label> <input id="currency" onClick={handleClick} className="depositCard__input depositCard__input2" type="text" value={currency} /></div>
+                    <div style={{position: 'relative', flex: '2 1 auto'}}><label style={rootStyles.label} id="label_amount">{translate('cardDepositFiat.amount')}</label> <input id="amount" onClick={handleClick} style={rootStyles.input} onInput={handleChange} type="text" value={amount} placeholder="0"/></div>
+                    <div style={{ position: 'relative', width: '150px', marginLeft: '15px' }}><label style={rootStyles.label} id="label_currency">{translate('cardDepositFiat.currency')}</label> <input id="currency" onClick={handleClick} style={rootStyles.input2} type="text" value={currency} /></div>
                 </div>
                 <div style={rootStyles.bottomRow}>
                     <div style={{ position: 'relative', width: '150px' }}>
                             <label style={rootStyles.label} id="label_fee">{translate('cardDepositFiat.fee')}</label>
-                            <input id="fee" onClick={handleClick} className="depositCard__input depositCard__input2" type="text" value={`${fee} ${currency.toUpperCase()}`} />
+                            <input id="fee" onClick={handleClick} style={rootStyles.input2} type="text" value={`${fee} ${currency.toUpperCase()}`} />
                     </div> 
                 </div>
-                <div className="depositCard__buttons">
-                    <a  onClick={clearInput}>{translate('cardDepositFiat.button.cancel')}</a>
+                <div style={rootStyles.buttons}>
+                    <a  style={rootStyles.cancel} onClick={clearInput}>{translate('cardDepositFiat.button.cancel')}</a>
                     <input 
                     disabled={(currency.toLowerCase() === 'aed' && parseInt(amount) < 30) || amount === '' ? true : false} 
                     onClick={getPaytoolsForm} 
                     type="submit" 
-                    className={(currency.toLowerCase() === 'aed' && parseInt(amount) < 30) || amount === '' ? 'button button-disabled' : 'button'} 
+                    style={(currency.toLowerCase() === 'aed' && parseInt(amount) < 30) || amount === '' ? rootStyles.buttonDisabled : rootStyles.button} 
                     value={translate('cardDepositFiat.button.payment')}
                     />
                     

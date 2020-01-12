@@ -23,6 +23,7 @@ export const FiatFragment = injectIntl((props) => {
     const {
         intl,
         card,
+        colorTheme,
         sepa,
         wire,
         currency,
@@ -36,13 +37,13 @@ export const FiatFragment = injectIntl((props) => {
     return (
         <React.Fragment >
              
-                {<TypeTabs wire={wire} sepa={sepa} card={card} action={action} currency={currency.toLowerCase()} />}
+                {<TypeTabs wire={wire} sepa={sepa} card={card} action={action} currency={currency.toLowerCase()} colorTheme={colorTheme}/>}
     
             {/* {card && <div style={styles.card}>{translate('comingsoon')}</div>}   */}
              
             {card && (user.level > 1 ?
                 <div>
-                    <CardDepositFiat currency={currency.toUpperCase()} translate={translate} />
+                    <CardDepositFiat currency={currency.toUpperCase()} translate={translate} colorTheme={colorTheme}/>
                     <div className="fiat-alert">
                         {translate('page.wallets.withdraw.fiat')}
                     </div>

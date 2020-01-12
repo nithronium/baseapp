@@ -4,6 +4,7 @@ import { FiatFragment } from './FiatFragment';
 
 export const DepositTab = ({
     addressDepositError,
+    colorTheme,
     wallets,
     user,
     selectedWalletAddress,
@@ -30,6 +31,7 @@ export const DepositTab = ({
         return (
         <FiatFragment
             card={card}
+            colorTheme={colorTheme}
             sepa={sepa}
             user={user}
             wire={wire}
