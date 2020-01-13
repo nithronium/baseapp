@@ -32,7 +32,7 @@ export const FiatFragment = injectIntl((props) => {
     const translate = (id) => intl.formatMessage({ id });
     const levelMessage = translate('page.body.wallets.tabs.deposit.fiat.levelMessage');
     const levelLink = translate('page.body.wallets.tabs.deposit.fiat.levelLink');
-    console.log(user);
+    // console.log(user);
     return (
         <React.Fragment >
              
@@ -48,9 +48,9 @@ export const FiatFragment = injectIntl((props) => {
                     </div>
                     {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
                 </div> :
-                <div style={{padding: '10px 20px', color: 'red', fontSize: '20px'}}>  
+                <div style={{padding: '10px 20px', color: '#648280', fontSize: '20px'}}>  
                     <p>{levelMessage}</p>                            
-                    <p><a href="/confirm">{levelLink}</a></p>
+                    <p><a style={{color: '#FFD567'}}href="/confirm">{levelLink}</a></p>
                 </div>
                 )}
 
