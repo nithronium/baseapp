@@ -33,7 +33,7 @@ export const FiatFragment = injectIntl((props) => {
     const translate = (id) => intl.formatMessage({ id });
     const levelMessage = translate('page.body.wallets.tabs.deposit.fiat.levelMessage');
     const levelLink = translate('page.body.wallets.tabs.deposit.fiat.levelLink');
-
+    console.log(user);
     return (
         <React.Fragment >
              
@@ -41,7 +41,7 @@ export const FiatFragment = injectIntl((props) => {
     
             {/* {card && <div style={styles.card}>{translate('comingsoon')}</div>}   */}
              
-            {card && (user.level > 1 ?
+            {card && (user.level > 3 ?
                 <div>
                     <CardDepositFiat currency={currency.toUpperCase()} translate={translate} colorTheme={colorTheme}/>
                     <div className="fiat-alert">
