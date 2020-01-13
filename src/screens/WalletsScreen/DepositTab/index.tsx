@@ -16,6 +16,7 @@ export const DepositTab = ({
     action,
     balance,
     message,
+    history,
 }) => {
     const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
 
@@ -43,6 +44,7 @@ export const DepositTab = ({
             action={action}
             balance={balance}
             message={message}
+            history={history}
         />);
     }
 };

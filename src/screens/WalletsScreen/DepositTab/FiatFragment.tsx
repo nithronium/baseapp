@@ -32,6 +32,7 @@ export const FiatFragment = injectIntl((props) => {
         user,
         balance,
         message,
+        history,
     } = props;
     const translate = (id) => intl.formatMessage({ id });
     const levelMessage = translate('page.body.wallets.tabs.deposit.fiat.levelMessage');
@@ -43,7 +44,7 @@ export const FiatFragment = injectIntl((props) => {
         if (balance < MINIMAL_BALANCE && user.level < 6 && user.level > 1) {
             message({ message: ['page.profile.update.balance'], type: 'error' });
         } else {
-            // this.props.history.push('/confirm');
+            history.push('/confirm');
         }
     };
 

@@ -46,7 +46,11 @@ import { DepositTab } from './DepositTab';
 import { TypeTabs } from './TypeTabs';
 import { getBalance } from '../../api';
 
+import { History } from 'history';
 
+interface HP {
+    history: History,
+}
 interface ReduxProps {
     colorTheme: string;
     currentLanguage: string;
@@ -101,7 +105,7 @@ interface WalletsState {
     balance: number;
 }
 
-type Props = ReduxProps & DispatchProps & RouterProps & InjectedIntlProps;
+type Props = ReduxProps & DispatchProps & RouterProps & InjectedIntlProps & HP;
 
 class WalletsComponent extends React.Component<Props, WalletsState> {
     constructor(props: Props) {
@@ -347,6 +351,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 action={this.setState.bind(this)}
                 balance={this.state.balance}
                 message={this.message}
+                history={this.props.history}
             /> 
         );
     }
