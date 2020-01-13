@@ -7,6 +7,7 @@ export * from './emailValidation';
 export * from './filterData';
 export * from './formatCCYAddress';
 export * from './formatDate';
+export * from './geetest';
 export * from './getHistorySagaParam';
 export * from './getLanguageByCode';
 export * from './getTotalPrice';

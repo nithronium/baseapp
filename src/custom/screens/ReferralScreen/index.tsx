@@ -8,6 +8,7 @@ import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redu
 //import { withRouter } from 'react-router-dom';
 import { captchaType, siteKey } from '../../../api';
 import { Modal, SignUpForm } from '../../../components';
+import ReCAPTCHA from 'react-google-recaptcha';
 import {
     EMAIL_REGEX,
     ERROR_INVALID_EMAIL,
@@ -72,13 +73,19 @@ type Props = ReduxProps & DispatchProps & RouterProps & InjectedIntlProps;
 export const extractRefID = (props: RouterProps) => new URLSearchParams(props.location.search).get('refid');
 
 class Referral extends React.Component<Props> {
+    public constructor(props) {
+        super(props);
+        this.reCaptchaRef = React.createRef();
+        this.geetestCaptchaRef = React.createRef();
+    }
+
     public readonly state = {
         showModal: false,
         email: '',
         password: '',
         confirmPassword: '',
         captcha_response: '',
-        recaptchaConfirmed: false,
+        reCaptchaSuccess: false,
         refId: '',
         hasConfirmed: false,
         emailError: '',
@@ -95,7 +102,11 @@ class Referral extends React.Component<Props> {
             hasCapitalLetters: false,
             hasLowerCaseLetters: false,
         },
+        shouldGeetestReset: false,
     };
+
+    private reCaptchaRef;
+    private geetestCaptchaRef;
 
     public componentDidMount() {
         saveParametersFromUrl(this.props.location.search);
@@ -131,7 +142,7 @@ class Referral extends React.Component<Props> {
             confirmPassword,
             refId,
             captcha_response,
-            recaptchaConfirmed,
+            reCaptchaSuccess,
             hasConfirmed,
             emailError,
             passwordError,
@@ -144,12 +155,6 @@ class Referral extends React.Component<Props> {
             passwordValidationDetails,
         } = this.state;
         const { loading, currentLanguage } = this.props;
-        const test = !geetestCaptchaSuccess ? (
-            <GeetestCaptcha ref={this.captchaRef} onSuccess={this.handleGeetestCaptchaSuccess} />
-        ) : (
-            undefined
-        );
-
         const className = cx('pg-referral-screen__container', { loading });
 
         const signupForm = () => {
@@ -159,29 +164,25 @@ class Referral extends React.Component<Props> {
                         <img src={logo} className="cr-logo__img" alt="Logo" />
                     </div>
                     <SignUpForm
-                        labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn' })}
-                        labelSignUp={this.props.intl.formatMessage({ id: 'page.referral.signup' })}
-                        emailLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.email' })}
-                        passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.password' })}
-                        confirmPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.confirmPassword' })}
-                        referalCodeLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.referalCode' })}
-                        termsMessage={this.props.intl.formatMessage({ id: 'page.header.signUp.terms' })}
+                        labelSignIn={this.props.intl.formatMessage({ id: 'page.header.signIn'})}
+                        labelSignUp={this.props.intl.formatMessage({ id: 'page.referal.signup'})}
+                        emailLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.email'})}
+                        passwordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.password'})}
+                        confirmPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.confirmPassword'})}
+                        referalCodeLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.referalCode'})}
+                        termsMessage={this.props.intl.formatMessage({ id: 'page.header.signUp.terms'})}
+                        corporateTextLink={this.props.intl.formatMessage({ id: 'page.header.signUp.corporateLink'})}
                         refId={refId}
                         handleChangeRefId={this.handleChangeRefId}
                         isLoading={loading}
                         onSignIn={this.handleSignIn}
                         onSignUp={this.handleSignUp}
-                        siteKey={siteKey()}
-                        captchaType={captchaType()}
                         email={email}
                         handleChangeEmail={this.handleChangeEmail}
                         password={password}
                         handleChangePassword={this.handleChangePassword}
                         confirmPassword={confirmPassword}
                         handleChangeConfirmPassword={this.handleChangeConfirmPassword}
-                        recaptchaConfirmed={recaptchaConfirmed}
-                        captcha_response={captcha_response}
-                        recaptchaOnChange={this.onChange}
                         hasConfirmed={hasConfirmed}
                         clickCheckBox={this.handleCheckboxClick}
                         validateForm={this.handleValidateForm}
@@ -197,8 +198,11 @@ class Referral extends React.Component<Props> {
                         handleFocusPassword={this.handleFocusPassword}
                         handleFocusConfirmPassword={this.handleFocusConfirmPassword}
                         handleFocusRefId={this.handleFocusRefId}
-                        geetestCaptcha={test}
+                        captchaType={captchaType()}
+                        renderCaptcha={this.renderCaptcha()}
+                        reCaptchaSuccess={reCaptchaSuccess}
                         geetestCaptchaSuccess={geetestCaptchaSuccess}
+                        captcha_response={captcha_response}
                     />
                     <Modal
                         show={this.state.showModal}
@@ -314,16 +318,44 @@ class Referral extends React.Component<Props> {
         );
     }
 
-    private handleCheckboxClick = () => {
+    private renderCaptcha = () => {
+        const { shouldGeetestReset } = this.state;
+
+        switch (captchaType()) {
+            case 'recaptcha':
+                return (
+                    <div className="cr-sign-up-form__recaptcha">
+                        <ReCAPTCHA
+                            ref={this.reCaptchaRef}
+                            sitekey={siteKey()}
+                            onChange={this.handleReCaptchaSuccess}
+                        />
+                    </div>
+                );
+            case 'geetest':
+                return (
+                    <GeetestCaptcha
+                        ref={this.geetestCaptchaRef}
+                        shouldCaptchaReset={shouldGeetestReset}
+                        onSuccess={this.handleGeetestCaptchaSuccess}
+                    />
+                );
+            default:
+                return null;
+
+        }
+    }
+
+    private handleReCaptchaSuccess = (value: string) => {
         this.setState({
-            hasConfirmed: !this.state.hasConfirmed,
+            reCaptchaSuccess: true,
+            captcha_response: value,
         });
     };
 
-    private onChange = (value: string) => {
+    private handleCheckboxClick = () => {
         this.setState({
-            recaptchaConfirmed: true,
-            captcha_response: value,
+            hasConfirmed: !this.state.hasConfirmed,
         });
     };
 
@@ -332,8 +364,6 @@ class Referral extends React.Component<Props> {
             email: value,
         });
     };
-
-    private captchaRef;
 
     private handleGeetestCaptchaSuccess = (value?: GeetestCaptchaResponse) => {
         this.setState({

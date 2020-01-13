@@ -2,7 +2,6 @@ import { Checkbox } from '@openware/components';
 import cr from 'classnames';
 import { CustomInput } from '../';
 import * as React from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
 import { EMAIL_REGEX, PASSWORD_REGEX } from '../../helpers';
 import { PasswordValidationPopup } from './PasswordValidationPopup';
 
@@ -14,14 +13,12 @@ export interface PasswordValidationDetails {
 }
 
 export interface SignUpFormProps {
-    siteKey?: string;
     isLoading?: boolean;
     title?: string;
     onSignUp: () => void;
     onSignIn?: () => void;
     className?: string;
     image?: string;
-    captchaType: 'recaptcha' | 'geetest' | 'none';
     labelSignIn?: string;
     labelSignUp?: string;
     emailLabel?: string;
@@ -34,9 +31,6 @@ export interface SignUpFormProps {
     password: string;
     email: string;
     confirmPassword: string;
-    captcha_response: string;
-    recaptchaConfirmed: boolean;
-    recaptchaOnChange: (value: string) => void;
     handleChangeEmail: (value: string) => void;
     handleChangePassword: (value: string) => void;
     handleChangeConfirmPassword: (value: string) => void;
@@ -56,8 +50,11 @@ export interface SignUpFormProps {
     refIdFocused: boolean;
     emailFocused: boolean;
     passwordFocused: boolean;
-    geetestCaptcha?: JSX.Element;
+    captchaType: 'recaptcha' | 'geetest' | 'none';
+    renderCaptcha: JSX.Element | null;
+    reCaptchaSuccess: boolean;
     geetestCaptchaSuccess: boolean;
+    captcha_response: string;
 }
 
 export class SignUpForm extends React.Component<SignUpFormProps> {
@@ -201,7 +198,7 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
                         />
                             {termsLink}
                         </div>
-                        {this.renderCaptcha()}
+                        {this.props.renderCaptcha}
                         <div className="cr-sign-up-form__button-wrapper">
                             <button
                                 type="submit"
@@ -219,38 +216,13 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
         );
     }
 
-    private renderCaptcha = () => {
-        const {
-            geetestCaptcha,
-            siteKey,
-            captchaType,
-            recaptchaOnChange,
-        } = this.props;
-        switch (captchaType) {
-            case 'recaptcha':
-                return (
-                    <div className="cr-sign-up-form__recaptcha">
-                        <ReCAPTCHA
-                            sitekey={siteKey}
-                            onChange={recaptchaOnChange}
-                        />
-                    </div>
-                );
-            case 'geetest':
-                return geetestCaptcha;
-            default:
-                return null;
-
-        }
-    }
-
     private disableButton = (): boolean => {
         const {
             email,
             password,
             confirmPassword,
             hasConfirmed,
-            recaptchaConfirmed,
+            reCaptchaSuccess,
             isLoading,
             captchaType,
             geetestCaptchaSuccess,
@@ -259,7 +231,7 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
         if (!hasConfirmed || isLoading || !email.match(EMAIL_REGEX) || !password || !confirmPassword) {
             return true;
         }
-        if (captchaType === 'recaptcha' && !recaptchaConfirmed) {
+        if (captchaType === 'recaptcha' && !reCaptchaSuccess) {
             return true;
         }
         if (captchaType === 'geetest' && !geetestCaptchaSuccess) {
