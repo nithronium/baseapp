@@ -43,6 +43,7 @@ interface OnChangeEvent {
 
 interface DocumentsState {
     documentsType: string;
+    documentsFocused: boolean;
     expiration: string;
     expirationFocused: boolean;
     idNumber: string;
@@ -67,6 +68,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
 
     public state = {
         documentsType: '',
+        documentsFocused :false,
         expiration: '',
         expirationFocused: false,
         idNumber: '',
@@ -85,6 +87,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
     public render() {
         const {
             documentsType,
+            documentsFocused,
             expiration,
             expirationFocused,
             idNumber,
@@ -93,6 +96,10 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         }: DocumentsState = this.state;
 
         const { loading } = this.props;
+
+        const dropdownFocusedClass = cr('pg-confirm__content-documents-col-row-content-3', {
+            'pg-confirm__content-documents-col-row-content-3--focused': documentsFocused,
+        });
 
         const expirationFocusedClass = cr('pg-confirm__content-documents-col-row-content', {
             'pg-confirm__content-documents-col-row-content--focused': expirationFocused,
@@ -110,7 +117,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                     <div className="pg-confirm__content-documents-col-row">
                         <div className="pg-confirm__content-documents-col">
                             <div className="pg-confirm__content-documents-col-row">
-                                <div className="pg-confirm__content-documents-col-row-content-3">
+                                <div className={dropdownFocusedClass} onClick={this.handleFieldFocus('document')} onBlur={this.handleFieldFocus('document')}>
                                     <div className="pg-confirm__content-documents-col-row-content-label">
                                         {documentsType && this.translate('page.body.kyc.documentsType')}
                                     </div>
@@ -129,6 +136,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                                         placeholder={numberType}
                                         inputValue={idNumber}
                                         handleChangeInput={this.handleChangeIdNumber}
+                                        handleFocusInput={this.handleFieldFocus('idNumber')}
                                     />
                                 </fieldset>
                                 <fieldset className={expirationFocusedClass}>
@@ -251,6 +259,11 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                 case 'idNumber':
                     this.setState({
                         idNumberFocused: !this.state.idNumberFocused,
+                    });
+                    break;
+                case 'document':
+                    this.setState({
+                        documentsFocused: !this.state.documentsFocused,
                     });
                     break;
                 default:
