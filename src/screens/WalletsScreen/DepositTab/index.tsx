@@ -14,6 +14,8 @@ export const DepositTab = ({
     wire,
     handleOnCopy,
     action,
+    balance,
+    message,
 }) => {
     const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
 
@@ -39,6 +41,8 @@ export const DepositTab = ({
             wallets={wallets}
             selectedWalletIndex={selectedWalletIndex}
             action={action}
+            balance={balance}
+            message={message}
         />);
     }
 };
