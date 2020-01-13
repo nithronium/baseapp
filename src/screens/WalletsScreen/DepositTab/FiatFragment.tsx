@@ -6,6 +6,7 @@ import { WireFragment } from './WireFragment';
 import { TypeTabs } from '../TypeTabs';
 import { CardDepositFiat } from '../../../custom/components/CardDepositFiat';
 import { WalletHistory } from '../../../containers/Wallets/History';
+import { MINIMAL_BALANCE } from '../../../constants';
 
 // interface Styles {
 //     card: React.CSSProperties
@@ -28,11 +29,23 @@ export const FiatFragment = injectIntl((props) => {
         currency,
         action,
         user,
+        balance,
+        message,
     } = props;
     const translate = (id) => intl.formatMessage({ id });
     const levelMessage = translate('page.body.wallets.tabs.deposit.fiat.levelMessage');
     const levelLink = translate('page.body.wallets.tabs.deposit.fiat.levelLink');
     // console.log(user);
+
+    const checkBalace = (e) => {
+        e.preventDefault();
+        if (balance < MINIMAL_BALANCE && user.level < 6 && user.level > 1) {
+            message({ message: ['page.profile.update.balance'], type: 'error' });
+        } else {
+            // this.props.history.push('/confirm');
+        }
+    };
+
     return (
         <React.Fragment >
              
@@ -50,7 +63,7 @@ export const FiatFragment = injectIntl((props) => {
                 </div> :
                 <div style={{padding: '10px 20px', color: '#648280', fontSize: '20px'}}>  
                     <p>{levelMessage}</p>                            
-                    <p><a style={{color: '#FFD567'}}href="/confirm">{levelLink}</a></p>
+                    <p><a style={{color: '#FFD567', cursor: 'pointer', textDecoration: 'underline'}} onClick={checkBalace}>{levelLink}</a></p>
                 </div>
                 )}
 
