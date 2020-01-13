@@ -72,58 +72,46 @@ export const API: ApiWrapper = {
 const conf: RequestOptions = {
     apiVersion: 'barong',
 };
-
-// const refConf: RequestOptions = {
-//     apiVersion: 'referral',
-// };
-
-const refUrl = `${window.document.location.origin}/api/v1/referral-code`;
-// const refUrl = `https://stage.emirex.com/api/v1/referral-code`;
 export const changePassword = async body => API.post(conf)('/identity/users/password/confirm_code', body);
-// export const checkReferralCode = async body => API.post(refConf)('', body);
+
+
+const baseURL = window.document.location.origin.includes('localhost') ? 'http://0.0.0.0:9002' : window.document.location.origin;
+
+const refUrl = `${baseURL}/api/v1/referral-code`;
+
 export const checkReferralCode = async body => {
     const res = await axios.post(refUrl, body);
     return res;
 };
-//tslint:disable
-const nodelogicUrl = `${window.document.location.origin}/api/v2/nodelogic`;
 
-// const nodelogicUrl = 'http://localhost:3004';
-// const data = require('./data.json');
-// const overAll = require('./overall.json');
-// console.log(data, overAll);
-// const referrals = data.list.slice();
+const nodelogicUrl = `${baseURL}/api/v2/nodelogic`;
 export const getReferralTickets = async body => {
-    const res = await axios.get(nodelogicUrl + body);
-    // const skip = parseInt(body.split('=')[2]);    
-//    data.list = referrals.slice(skip, 10+skip);
+    const res = await axios.get(`${nodelogicUrl }${body}`);
     return  res.data;
 };
 
 export const getOverall = async () => {
     const res = await axios.get(`${nodelogicUrl}/tickets/all`);
     return res.data;
-}
+};
 
 export const getBonusTickets = async () => {
     const res = await axios.get(`${nodelogicUrl}/tickets/bonus`);
     return res.data;
-}
+};
 
 export const getActiveTicketsList = async () => {
     const res = await axios.get(`${nodelogicUrl}/tickets/active`);
     return res.data;
-}
+};
 
-const paytoolsAPI = `${window.document.location.origin}/api/v2/paytools_api/private/initPayin`;
+const paytoolsAPI = `${baseURL}/api/v2/paytools_api/private/initPayin`;
 
-export const initPayin = async (body) => {
+export const initPayin = async body => {
     const res = await axios.post(paytoolsAPI, body);
-    // console.log(body);
-    // const res = { data: { url: 'http://127.0.0.1:5500/ptform.html' } };
     return res.data;
-}
+};
 export const getBalance = async () => {
     const res = await axios.get(`${nodelogicUrl}/getBalance`);
     return res.data;
-}
+};
