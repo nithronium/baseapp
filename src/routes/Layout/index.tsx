@@ -138,12 +138,13 @@ class LayoutComponent extends React.Component<LayoutProps> {
         this.props.userFetch();
         this.initInterval();
         this.check();
-        if (this.props.history.location.pathname.includes('/ru/') && this.props.currentLanguage.toLowerCase() === 'en') {
-            this.props.changeLanguage('ru');  
-            this.props.history.replace(this.props.history.location.pathname);
-        } else if ( !this.props.history.location.pathname.includes('/ru/') && this.props.currentLanguage.toLowerCase() === 'ru') {
+        const pathname = this.props.history.location.pathname;
+        if (pathname.split('/')[1].length === 2 ) {
+            this.props.changeLanguage(pathname.split('/')[1]);  
+            this.props.history.replace(pathname);
+        } else {
             this.props.changeLanguage('en');
-            this.props.history.replace(this.props.history.location.pathname);
+            this.props.history.replace(pathname);
         } 
 
     }
@@ -258,6 +259,24 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/referral-tickets'} component={ReferralTicketsScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/referral-commission'} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
                     <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/ru/referral-commission'} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
+                    
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/signin'} component={SignInScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/accounts/confirmation'} component={VerificationScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/signup'} component={SignUpScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/forgot_password'} component={ForgotPasswordScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/accounts/password_reset'} component={ChangeForgottenPasswordScreen} currentLanguage={currentLanguage} />
+                    <PublicRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/email-verification'} component={EmailVerificationScreen} currentLanguage={currentLanguage} />
+                    <Route loading={userLoading} isLogged={isLoggedIn} path={'/zh/referral'} component={ReferralScreen} />
+                    <Route exact={true} path={'/zh/trading/:market?'} component={TradingScreen} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/orders'} component={OrdersTabScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/history'} component={HistoryScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/confirm'} component={ConfirmScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/profile'} component={ProfileScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/wallets'} component={WalletsScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/security/2fa'} component={ProfileTwoFactorAuthScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/referral-tickets'} component={ReferralTicketsScreen} currentLanguage={currentLanguage} />
+                    <PrivateRoute loading={userLoading} isLogged={isLoggedIn} path={'/zh/referral-commission'} component={ReferralCommissionScreen} currentLanguage={currentLanguage} />
+                    
                     {renderPluginsRoutes()}
                     {/* <Route path="**"><Redirect to={'/trading/'} /></Route> */}
                     {/* <Route path="**"><Redirect to={'/ru/trading/'} /></Route> */}

@@ -116,7 +116,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         } = this.props;
         const { isOpenLanguage } = this.state;
         const address = location ? location.pathname : '';
-        const languageName = lang.toUpperCase();
+        const languageName = lang === 'zh' ? 'CN' : lang.toUpperCase();
         const languageClassName = classnames('dropdown-menu-language-field', {
             'dropdown-menu-language-field-active': isOpenLanguage,
         });
@@ -260,6 +260,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 </div>
                 <div className="dropdown-menu-item-lang" onClick={e => this.handleChangeLanguage('ru')}>
                     RU
+                </div>
+                <div className="dropdown-menu-item-lang" onClick={e => this.handleChangeLanguage('cn')}>
+                    CN
                 </div>
             </div>
         );
@@ -442,14 +445,15 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
 
     private handleChangeLanguage = (language: string) => {
         const lang = this.props.currentLanguage;
-        this.props.changeLanguage(language);
+        const l = language === 'cn' ? 'zh' : language;
+        this.props.changeLanguage(l);
         let location = '';
         if (lang=== 'en') {
             location = this.props.history.location.pathname;
         } else {
-            location = this.props.history.location.pathname.slice(language.length + 1);
+            location = this.props.history.location.pathname.slice(l.length + 1);
         }
-        this.props.history.push(buildPath(location, language));
+        this.props.history.push(buildPath(location, l));
     };
 }
 
