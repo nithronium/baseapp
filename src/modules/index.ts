@@ -151,6 +151,7 @@ export function* rootSaga() {
         call(rootKlineFetchSaga),
         call(rootLabelSaga),
         call(rootMarketsSaga),
+        call(rootMemberLevelsSaga),
         call(rootNewHistorySaga),
         call(rootOpenOrdersSaga),
         call(rootOrderBookSaga),
