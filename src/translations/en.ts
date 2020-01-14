@@ -213,6 +213,45 @@ export const en = {
     'page.body.wallets.whitelist.tipName': 'Name',
     'page.body.wallets.whitelist.tipDescription': 'Note',
 
+    'page.body.wallets.beneficiaries.title': 'Withdraw address',
+    'page.body.wallets.beneficiaries.fiat.title': 'Withdrawal details',
+    'page.body.wallets.beneficiaries.dropdown.address': 'Address',
+    'page.body.wallets.beneficiaries.dropdown.select': 'Select',
+
+    'page.body.wallets.beneficiaries.dropdown.fiat.account': 'Account',
+    'page.body.wallets.beneficiaries.dropdown.fiat.bankOfBeneficiary': 'Bank of Beneficiary',
+    'page.body.wallets.beneficiaries.dropdown.fiat.beneficiary': 'Beneficiary',
+    'page.body.wallets.beneficiaries.dropdown.fiat.description': 'Description',
+    'page.body.wallets.beneficiaries.dropdown.fiat.name': 'Name',
+    'page.body.wallets.beneficiaries.dropdown.fiat.fullName': 'Full Name',
+
+    'page.body.wallets.beneficiaries.addAddress': 'Add Address',
+    'page.body.wallets.beneficiaries.addAddressModal.header': 'Add new withdrawal address',
+
+    'page.body.wallets.beneficiaries.addAddressModal.body.coinAddress': 'Blockchain Address',
+    'page.body.wallets.beneficiaries.addAddressModal.body.coinBeneficiaryName': 'Beneficiary Name',
+    'page.body.wallets.beneficiaries.addAddressModal.body.coinDescription': 'Description (optional)',
+
+    'page.body.wallets.beneficiaries.addAddressModal.body.fiatName': 'Description',
+    'page.body.wallets.beneficiaries.addAddressModal.body.fiatFullName': 'Full Name',
+    'page.body.wallets.beneficiaries.addAddressModal.body.fiatAccountNumber': 'Account Number',
+    'page.body.wallets.beneficiaries.addAddressModal.body.fiatBankName': 'Bank Name',
+    'page.body.wallets.beneficiaries.addAddressModal.body.fiatBankSwiftCode': 'Bank Swift Code (optional)',
+    'page.body.wallets.beneficiaries.addAddressModal.body.fiatIntermediaryBankName': 'Intermediary Bank Name (optional)',
+    'page.body.wallets.beneficiaries.addAddressModal.body.fiatIntermediaryBankSwiftCode': 'Intermediary Bank Swift Code (optional)',
+
+
+    'page.body.wallets.beneficiaries.addAddressModal.body.button': 'Submit for confirmation',
+
+    'page.body.wallets.beneficiaries.confirmationModal.header': 'Confirm new address',
+    'page.body.wallets.beneficiaries.confirmationModal.body.text': 'We have sent you an email containing a confirmation code pin, please enter it below to save the new address:',
+    'page.body.wallets.beneficiaries.confirmationModal.body.confirmationModalCode': 'Pin code',
+    'page.body.wallets.beneficiaries.confirmationModal.body.button': 'Confirm',
+
+    'page.body.wallets.beneficiaries.tipAddress': 'Address',
+    'page.body.wallets.beneficiaries.tipName': 'Name',
+    'page.body.wallets.beneficiaries.tipDescription': 'Note',
+
     'page.body.wallets.beneficiaries.failAddModal.header': 'Warning',
     'page.body.wallets.beneficiaries.failAddModal.content': 'You need to confirm your account to add a beneficiary',
     'page.body.wallets.beneficiaries.failAddModal.button': 'Confirm an account',
