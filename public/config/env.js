@@ -32,4 +32,6 @@ window.env = {
             },
         },
     ],
+    isResizable: false,
+    isDraggable: false,
 };

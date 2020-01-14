@@ -23,6 +23,8 @@ export const defaultConfig: Config = {
     msAlertDisplayTime: '5000',
     incrementalOrderBook: false,
     plugins: [],
+    isResizable: false,
+    isDraggable: false,
 };
 
 export const Cryptobase = {
@@ -63,3 +65,5 @@ export const msAlertDisplayTime = (): string => Cryptobase.config.msAlertDisplay
 export const rangerReconnectPeriod = (): number => Cryptobase.config.rangerReconnectPeriod ? Number(Cryptobase.config.rangerReconnectPeriod) : 1;
 export const incrementalOrderBook = (): boolean => Cryptobase.config.incrementalOrderBook || false;
 export const pluginsList = () => Cryptobase.config.plugins || [];
+export const isResizableGrid = ():boolean => Cryptobase.config.isResizable || false;
+export const isDraggableGrid = ():boolean => Cryptobase.config.isDraggable || false;

@@ -23,4 +23,6 @@ export interface Config {
     incrementalOrderBook: boolean;
     // tslint:disable-next-line: no-any
     plugins: any[];
+    isResizable: boolean;
+    isDraggable: boolean;
 }
