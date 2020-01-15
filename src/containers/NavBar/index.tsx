@@ -5,13 +5,13 @@ import { FormattedMessage } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { Link, RouteProps, withRouter } from 'react-router-dom';
 // import { LogoutIcon } from '../../assets/images/LogoutIcon';
-import { Moon } from '../../assets/images/Moon';
+// import { Moon } from '../../assets/images/Moon';
 import {
     AvatarIcon,
     CloseIcon,
     OpenIcon,
 } from '../../assets/images/NavBarIcons';
-import { Sun } from '../../assets/images/Sun';
+// import { Sun } from '../../assets/images/Sun';
 import { colors, pgRoutes } from '../../constants';
 import { buildPath } from '../../custom/helpers';
 import {
@@ -108,7 +108,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     //tslint:disable
     public render() {
         const {
-            colorTheme,
+            // colorTheme,
             lang,
             location,
             isLoggedIn,
@@ -128,11 +128,11 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     {pgRoutes(user.state === 'active' && isLoggedIn).map(this.navItem(address, this.props.onLinkChange))}
                 </ul>
                 <div className="pg-navbar__header-settings">
-                    <div className="pg-navbar__header-settings__switcher">
+                    {/* <div className="pg-navbar__header-settings__switcher">
                         <div className="pg-navbar__header-settings__switcher__items" onClick={e => this.handleChangeCurrentStyleMode(colorTheme === 'light' ? 'basic' : 'light')}>
                             {this.getLightDarkMode()}
                         </div>
-                    </div>
+                    </div> */}
                     {user.state === 'active' && isLoggedIn  ? this.getUserEmailMenu() : null}
                     <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-toggle dropdown-menu-language-container">
                         <div onClick={this.toggleLanguageMenu} className={languageClassName}>
@@ -154,33 +154,33 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         );
     }
 
-    private getLightDarkMode = () => {
-        const { colorTheme } = this.props;
+    // private getLightDarkMode = () => {
+    //     const { colorTheme } = this.props;
 
-        if (colorTheme === 'basic') {
-            return (
-                <React.Fragment>
-                    <div className="switcher-item">
-                        <Sun fillColor={colors.light.navbar.sun}/>
-                    </div>
-                    <div className="switcher-item switcher-item--active">
-                        <Moon fillColor={colors.light.navbar.moon}/>
-                    </div>
-                </React.Fragment>
-            );
-        }
+    //     if (colorTheme === 'basic') {
+    //         return (
+    //             <React.Fragment>
+    //                 <div className="switcher-item">
+    //                     <Sun fillColor={colors.light.navbar.sun}/>
+    //                 </div>
+    //                 <div className="switcher-item switcher-item--active">
+    //                     <Moon fillColor={colors.light.navbar.moon}/>
+    //                 </div>
+    //             </React.Fragment>
+    //         );
+    //     }
 
-        return (
-            <React.Fragment>
-                <div className="switcher-item switcher-item--active">
-                    <Sun fillColor={colors.basic.navbar.sun}/>
-                </div>
-                <div className="switcher-item">
-                    <Moon fillColor={colors.basic.navbar.moon}/>
-                </div>
-            </React.Fragment>
-        );
-    };
+    //     return (
+    //         <React.Fragment>
+    //             <div className="switcher-item switcher-item--active">
+    //                 <Sun fillColor={colors.basic.navbar.sun}/>
+    //             </div>
+    //             <div className="switcher-item">
+    //                 <Moon fillColor={colors.basic.navbar.moon}/>
+    //             </div>
+    //         </React.Fragment>
+    //     );
+    // };
 
     private getLanguageMenuIcon = () => {
         const { colorTheme } = this.props;
@@ -365,13 +365,13 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         );
     };
 
-    private handleChangeCurrentStyleMode = (value: string) => {
-        if (this.props.version === 'Lite') {
-            this.props.openGuardModal();
-        } else {
-            this.props.changeColorTheme(value);
-        }
-    };
+    // private handleChangeCurrentStyleMode = (value: string) => {
+    //     if (this.props.version === 'Lite') {
+    //         this.props.openGuardModal();
+    //     } else {
+    //         this.props.changeColorTheme(value);
+    //     }
+    // };
 
     private handleRouteChange = (to: string) => () => {
         this.setState({ isOpen: false }, () => {
