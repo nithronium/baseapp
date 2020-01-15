@@ -44,8 +44,13 @@ import {
 import { CommonError } from '../../modules/types';
 import { DepositTab } from './DepositTab';
 import { TypeTabs } from './TypeTabs';
+import { getBalance } from '../../api';
 
+import { History } from 'history';
 
+interface HP {
+    history: History,
+}
 interface ReduxProps {
     colorTheme: string;
     currentLanguage: string;
@@ -97,9 +102,10 @@ interface WalletsState {
     card: boolean;
     sepa: boolean;
     wire: boolean;
+    balance: number;
 }
 
-type Props = ReduxProps & DispatchProps & RouterProps & InjectedIntlProps;
+type Props = ReduxProps & DispatchProps & RouterProps & InjectedIntlProps & HP;
 
 class WalletsComponent extends React.Component<Props, WalletsState> {
     constructor(props: Props) {
@@ -120,6 +126,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             card: false,
             sepa: false,
             wire: true,
+            balance: 0,
         };
     }
 
@@ -129,7 +136,15 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     public componentDidMount() {
         setDocumentTitle('Wallets');
         const { wallets, fetchAddress } = this.props; 
-        const { selectedWalletIndex } = this.state;       
+        const { selectedWalletIndex } = this.state; 
+        
+        getBalance().then(data => {
+            this.setState({
+                balance: data.balance || 0,
+            });
+        }).catch(() => {
+            this.setState({ balance: 0 });
+        });
 
         if (this.props.wallets.length === 0) {
             this.props.fetchWallets();
@@ -174,6 +189,10 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         ) {
             this.props.fetchWhitelist();
         }
+    }
+
+    public message = () => {
+        this.props.fetchSuccess({ message: ['page.profile.update.balance'], type: 'error' });
     }
 
     public render() {
@@ -330,6 +349,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 wire={wire}
                 handleOnCopy={this.handleOnCopy}
                 action={this.setState.bind(this)}
+                balance={this.state.balance}
+                message={this.message}
+                history={this.props.history}
             /> 
         );
     }
