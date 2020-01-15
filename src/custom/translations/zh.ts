@@ -738,6 +738,8 @@ export const zh = {
   'page.referral.winnersbanner.graz.1r': '第一轮Emirex抽奖！',
   'page.referral.winnersbanner.date': '12月24日',
   'page.referral.winnersbanner.ticketnum': '礼券号',
+  'page.referal.bottombanner.accepted_cur_value': '可以以USDT购买EMRX代币，但您也可以将BTC，ETH，EUR，USD，EUR，USDC，LTC，BCH兑换为USDT并购买EMRX',
+  'page.referal.bottombanner.IEO_start_date_value': 'IEO开始日期',
   'timeline.title': '时间线',
   'timeline.start.text': '赠送活动开始于',
   'timeline.start.date': '2019年11月21日',
