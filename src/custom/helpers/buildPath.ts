@@ -1,7 +1,8 @@
 export const buildPath = (path: string, lang: string) => {
   // tslint:disable
-  if (path.includes('http')) { path = '';}
-  const url = lang.toLowerCase() === 'en' ? path : `/${lang.toLowerCase()}${path}`;
+  let _path = path;
+  if (path.includes('http')) { _path = ''; }
+  const url = lang.toLowerCase() === 'en' ? _path : `/${lang.toLowerCase()}${_path}`;
   // tslint:disable-next-line: no-console
   // console.log(url);
   return url;
