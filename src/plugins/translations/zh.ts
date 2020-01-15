@@ -1,4 +1,5 @@
 export const zh = {
+  'page.body.ieo.profile.info.price.close.in': '预售关闭时间',
   'page.body.ieo.profile.info.price': '价格',
   'page.body.ieo.profile.info.goal': '目标',
   'page.body.ieo.profile.info.progress': '进展',
