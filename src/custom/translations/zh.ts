@@ -903,6 +903,13 @@ export const zh = {
   'page.wallets.withdraw.fiat': '注意：如果您汇出的金额超出限额，则将退还资金并收取费用。',
   'activeTickets': '您的激活票',
   'page.profile.update.balance': '要升级您的级别，请充值100美元或更多。',
+  'page.signup.pwdvalidation.header': 'Your password must contain',
+    'page.signup.pwdvalidation.length': '8 or more characters',
+    'page.signup.pwdvalidation.letters': 'Upper & Lowercase letters',
+    'page.signup.pwdvalidation.number': 'At least one number',
+  'page.signup.pwdvalidation.strength': 'Password strength',
+  'activate.banner.message': '激活您的礼券以参加抽奖活动！',
+  'activate.banner.buttontext': '学习如何',
 
   ...pluginsTranslations,
   ...nationalitiesNames,
