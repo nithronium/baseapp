@@ -139,12 +139,13 @@ class LayoutComponent extends React.Component<LayoutProps> {
         this.initInterval();
         this.check();
         const pathname = this.props.history.location.pathname;
+        const search = this.props.history.location.search;
         if (pathname.split('/')[1].length === 2 ) {
             this.props.changeLanguage(pathname.split('/')[1]);  
-            this.props.history.replace(pathname);
+            this.props.history.replace(`${pathname}${search}`);
         } else {
             this.props.changeLanguage('en');
-            this.props.history.replace(pathname);
+            this.props.history.replace(`${pathname}${search}`);
         } 
 
     }
