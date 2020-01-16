@@ -43,9 +43,9 @@ export const FiatFragment = injectIntl((props) => {
     // console.log(user);
 
     const checkBalace = (e) => {
-        console.log(lang);
+        console.log(balance < MINIMAL_BALANCE || (user.level < 6 && user.level > 1));
         e.preventDefault();
-        if (balance < MINIMAL_BALANCE && user.level < 6 && user.level > 1) {
+        if (balance < MINIMAL_BALANCE || (user.level < 6 && user.level > 1)) {
             message({ message: ['page.profile.update.balance'], type: 'error' });
         } else {
             history.push(buildPath('/confirm', lang));
