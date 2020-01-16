@@ -8,5 +8,7 @@ export const ieoRoutes = index => {
         <Route exact={true} path="/ieo/:id" component={IEODetailsScreen} key={index} />,
         <Route exact={true} path="/ru/ieo" component={IEOListScreen} key={index} />,
         <Route exact={true} path="/ru/ieo/:id" component={IEODetailsScreen} key={index} />,
+        <Route exact={true} path="/zh/ieo" component={IEOListScreen} key={index} />,
+        <Route exact={true} path="/zh/ieo/:id" component={IEODetailsScreen} key={index} />,
     ]);
 };

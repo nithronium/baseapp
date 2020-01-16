@@ -75,11 +75,12 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
 
     private renderContent = () => {
         const { kycAuthData, currentLanguage } = this.props;
+        const lang = currentLanguage.toLowerCase() === 'zh' ? 'en' : currentLanguage.toLowerCase();
         return !this.state.statusGet ? (
             <div className="pg-idenfy">
                 <iframe
                     id="iframe"
-                    src={`https://ui.idenfy.com/?authToken=${kycAuthData ? kycAuthData.auth_token : ''}&lang=${currentLanguage.toLowerCase()}`}
+                    src={`https://ui.idenfy.com/?authToken=${kycAuthData ? kycAuthData.auth_token : ''}&lang=${lang}`}
                     allow="camera"
                 />
                 <p id="display" />

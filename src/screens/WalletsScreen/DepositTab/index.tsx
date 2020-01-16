@@ -4,6 +4,7 @@ import { FiatFragment } from './FiatFragment';
 
 export const DepositTab = ({
     addressDepositError,
+    colorTheme,
     wallets,
     user,
     selectedWalletAddress,
@@ -16,6 +17,7 @@ export const DepositTab = ({
     balance,
     message,
     history,
+    lang,
 }) => {
     const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
 
@@ -33,6 +35,7 @@ export const DepositTab = ({
         return (
         <FiatFragment
             card={card}
+            colorTheme={colorTheme}
             sepa={sepa}
             user={user}
             wire={wire}
@@ -43,6 +46,7 @@ export const DepositTab = ({
             balance={balance}
             message={message}
             history={history}
+            lang={lang}
         />);
     }
 };

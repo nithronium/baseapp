@@ -23,6 +23,7 @@ import {
     RootState,
     selectBeneficiariesActivateSuccess,
     selectBeneficiariesDeleteSuccess,
+    selectCurrentColorTheme,
     selectCurrentLanguage,
     selectHistory,
     selectMobileWalletUi,
@@ -51,6 +52,7 @@ interface HP {
     history: History,
 }
 interface ReduxProps {
+    colorTheme: string;
     currentLanguage: string;
     user: User;
     wallets: WalletItemProps[];
@@ -332,11 +334,12 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     };
 
     private renderDeposit = () => {
-        const { addressDepositError, wallets, user, selectedWalletAddress } = this.props;
+        const { addressDepositError, wallets, user, selectedWalletAddress, colorTheme } = this.props;
         const { selectedWalletIndex, card, sepa, wire } = this.state;
         return (
             <DepositTab
                 addressDepositError={addressDepositError}
+                colorTheme={colorTheme}
                 wallets={wallets}
                 user={user}
                 selectedWalletAddress={selectedWalletAddress}
@@ -349,6 +352,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 balance={this.state.balance}
                 message={this.message}
                 history={this.props.history}
+                lang={this.props.currentLanguage}
             /> 
         );
     }
@@ -459,6 +463,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({
+    colorTheme: selectCurrentColorTheme(state),
     currentLanguage: selectCurrentLanguage(state),
     user: selectUserInfo(state),
     wallets: selectWallets(state),

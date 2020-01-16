@@ -58,7 +58,8 @@
     "spec:integration": "cypress open",
     "eject": "react-scripts-ts eject",
     "clean": "rimraf build",
-    "analyze": "source-map-explorer build/static/js/main.*"
+    "analyze": "source-map-explorer build/static/js/main.*",
+    "dev": "REACT_APP_BUILD_VERSION=Enterprise yarn start"
   },
   "devDependencies": {
     "@openware/coding-standards": "0.1.6",

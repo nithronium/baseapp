@@ -7,6 +7,8 @@ import { TypeTabs } from '../TypeTabs';
 import { CardDepositFiat } from '../../../custom/components/CardDepositFiat';
 import { WalletHistory } from '../../../containers/Wallets/History';
 import { MINIMAL_BALANCE } from '../../../constants';
+import { buildPath } from '../../../custom/helpers';
+
 
 // interface Styles {
 //     card: React.CSSProperties
@@ -24,6 +26,7 @@ export const FiatFragment = injectIntl((props) => {
     const {
         intl,
         card,
+        colorTheme,
         sepa,
         wire,
         currency,
@@ -32,6 +35,7 @@ export const FiatFragment = injectIntl((props) => {
         balance,
         message,
         history,
+        lang,
     } = props;
     const translate = (id) => intl.formatMessage({ id });
     const levelMessage = translate('page.body.wallets.tabs.deposit.fiat.levelMessage');
@@ -39,24 +43,25 @@ export const FiatFragment = injectIntl((props) => {
     // console.log(user);
 
     const checkBalace = (e) => {
+        console.log(balance < MINIMAL_BALANCE || (user.level < 6 && user.level > 1));
         e.preventDefault();
-        if (balance < MINIMAL_BALANCE && user.level < 6 && user.level > 1) {
+        if (balance < MINIMAL_BALANCE || (user.level < 6 && user.level > 1)) {
             message({ message: ['page.profile.update.balance'], type: 'error' });
         } else {
-            history.push('/confirm');
+            history.push(buildPath('/confirm', lang));
         }
     };
 
     return (
         <React.Fragment >
              
-                {<TypeTabs wire={wire} sepa={sepa} card={card} action={action} currency={currency.toLowerCase()} />}
+                {<TypeTabs wire={wire} sepa={sepa} card={card} action={action} currency={currency.toLowerCase()} colorTheme={colorTheme}/>}
     
             {/* {card && <div style={styles.card}>{translate('comingsoon')}</div>}   */}
              
             {card && (user.level > 3 ?
                 <div>
-                    <CardDepositFiat currency={currency.toUpperCase()} translate={translate} />
+                    <CardDepositFiat currency={currency.toUpperCase()} translate={translate} colorTheme={colorTheme}/>
                     <div className="fiat-alert">
                         {translate('page.wallets.withdraw.fiat')}
                     </div>
