@@ -1050,7 +1050,6 @@ export const ru: LangType = {
     'activate.banner.message': 'Активируйте билеты, чтобы принять участие в розыгрыше',
     'activate.banner.buttontext': 'Узнать как',
 
-
     ...nationalitiesNames,
     ...pluginsTranslations,
 };

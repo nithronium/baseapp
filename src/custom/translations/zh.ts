@@ -910,6 +910,9 @@ export const zh = {
   'page.signup.pwdvalidation.strength': 'Password strength',
   'activate.banner.message': '激活您的礼券以参加抽奖活动！',
   'activate.banner.buttontext': '学习如何',
+  'cardDepositFiat.mastercard.message1': 'Kindly note that, currently we accept only',
+  'cardDepositFiat.mastercard.message2': ' Mastercard',
+  'cardDepositFiat.mastercard.message3': ' Debit & Credit card payments.',
 
   ...pluginsTranslations,
   ...nationalitiesNames,
