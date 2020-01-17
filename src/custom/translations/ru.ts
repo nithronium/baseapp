@@ -265,9 +265,9 @@ export const ru: LangType = {
     'page.body.profile.header.account.content.twoFactorAuthentication': 'Двухфакторная аутентификация',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.enable': 'Включена',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.disable': 'Выключена',
-    'page.body.profile.header.account.content.twoFactorAuthentication.header': 'Google Authenticator',
+    'page.body.profile.header.account.content.twoFactorAuthentication.header': 'Authy Authenticator',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.1':
-        'Скачайте и установите приложение Google Authenticator с ',
+        'Скачайте и установите приложение Authy Authenticator с ',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.or': 'или ',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.2': 'Отсканируйте QR код или используйте код MFA:',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.3':

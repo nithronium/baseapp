@@ -237,9 +237,9 @@ export const en = {
     'page.body.profile.header.account.content.twoFactorAuthentication': '2FA',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.enable': 'Enabled',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.disable': 'Disabled',
-    'page.body.profile.header.account.content.twoFactorAuthentication.header': 'Google Authenticator',
+    'page.body.profile.header.account.content.twoFactorAuthentication.header': 'Authy Authenticator',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.1':
-        'Download and install Google Authenticator application from ',
+        'Download and install Authy Authenticator application from ',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.or': 'or ',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.2': 'Scan QR code or use secret MFA code:',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.3':
