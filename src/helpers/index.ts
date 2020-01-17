@@ -33,3 +33,4 @@ export * from './getCountdownDate';
 export * from './geetest';
 export * from './geetest';
 export * from './getCsrfToken';
+export * from './cleanPositiveFloatInput';

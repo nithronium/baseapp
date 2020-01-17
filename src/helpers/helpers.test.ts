@@ -386,27 +386,15 @@ describe('Helpers', () => {
         });
     });
 
-    it('buildQueryString', () => {
-        expect(helpers.buildQueryString({ page: 0, limit: 25 })).toBe('page=1&limit=25');
-        expect(helpers.buildQueryString({ page: 1, limit: 10 })).toBe('page=2&limit=10');
-        expect(helpers.buildQueryString({ page: 2, limit: 5, uid: 'ID873B710D88' })).toBe('page=3&limit=5&uid=ID873B710D88');
-        expect(helpers.buildQueryString({
-            page: 0,
-            limit: 50,
-            uid: 'ID873B710D88',
-            role: 'admin',
-        })).toBe('page=1&limit=50&uid=ID873B710D88&role=admin');
-        expect(helpers.buildQueryString({
-            page: 0,
-            limit: 25,
-            state: ['completed', 'cancelled'],
-        })).toBe('page=1&limit=25&state[]=completed&state[]=cancelled');
-    });
-
-    it('buildQueryStringArray', () => {
-        expect(helpers.buildQueryStringArray(['distributing', 'ongoing'], 'state')).toBe('state[]=distributing&state[]=ongoing');
-        expect(helpers.buildQueryStringArray(['red', 'green', 'blue'], 'colors')).toBe('colors[]=red&colors[]=green&colors[]=blue');
-        expect(helpers.buildQueryStringArray(['red'], 'colors')).toBe('colors[]=red');
-        expect(helpers.buildQueryStringArray([], '')).toBe('');
+    // cleanPositiveFloatInput.ts
+    describe('cleanPositiveFloatInput', () => {
+        it('return a positive float number', () => {
+            expect(helpers.cleanPositiveFloatInput('.0')).toBe('0.0');
+            expect(helpers.cleanPositiveFloatInput(',0')).toBe('0.0');
+            expect(helpers.cleanPositiveFloatInput('+')).toBe('+');
+            expect(helpers.cleanPositiveFloatInput('-')).toBe('');
+            expect(helpers.cleanPositiveFloatInput('000')).toBe('0');
+            expect(helpers.cleanPositiveFloatInput('00.0')).toBe('0.0');
+        });
     });
 });

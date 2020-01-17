@@ -8,6 +8,7 @@ import {
     WhiteList,
 } from '../../components';
 import { Beneficiary } from '../../modules';
+import { cleanPositiveFloatInput } from '../../helpers';
 
 export interface WithdrawProps {
     currency: string;
@@ -164,7 +165,7 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
                             inputValue={amount.toString()}
                             placeholder={withdrawAmountLabel || 'Amount'}
                             classNameInput="cr-withdraw__input"
-                            handleChangeInput={this.handleChangeInputAmountFiat}
+                            handleChangeInput={this.handleChangeInputAmount}
                         />
                         {inputError && <div className={"fiat-alert"}>{inputErrorText}</div>}
                     </div>
@@ -297,39 +298,30 @@ export class Withdraw extends React.Component<WithdrawProps, WithdrawState> {
         }
     };
 
-    // private handleChangeInputAmountCoin = (text: string) => {
-    //     const { fixed, fee } = this.props;
-    //     const reg = /^-?\d*[.]?\d*$/;
-    //     const _text = text.split(',').join('.');
-    //     if (reg.test(_text)) {
-    //         const value = (text !== '') ? Number(parseFloat(_text[_text.length - 1] === ',' ? _text.slice(0, -1) : _text).toFixed(fixed)) : 0;
-    //         const total = (value - fee) || 0;
-    //         if (total <= fee && (value < (fee * 2))) {
-    //             this.setTotal(fee);
-    //             this.setState({inputError: true});
-    //         } else {
-    //             this.setTotal(total);
-    //             this.setState({inputError: false});
-    //         }
-    //         this.setState({ amount: _text});
-    //     }
-    // };
-
-    private handleChangeInputAmountFiat = (text: string) => {
+    private handleChangeInputAmount = (value: string) => {
         const { fixed } = this.props;
-        const value = (text !== '') ? Number(parseFloat(text).toFixed(fixed)) : '';
-        const total = (value !== '') ? value - this.props.fee : 0;
-        if (total < 0) {
-            this.setState({total: 0});
-        } else {
-            this.setState({total});
+
+        const convertedValue = cleanPositiveFloatInput(String(value));
+        const condition = new RegExp(`^(?:[\\d-]*\\.?[\\d-]{0,${fixed}}|[\\d-]*\\.[\\d-])$`);
+        if (convertedValue.match(condition)) {
+            const amount = (convertedValue !== '') ? Number(parseFloat(convertedValue).toFixed(fixed)) : '';
+            const total = (amount !== '') ? amount - this.props.fee : 0;
+
+            if (total < 0) {
+                this.setTotal(0);
+            } else {
+                this.setTotal(total);
+            }
+
+            this.setState({
+                amount: convertedValue,
+            });
         }
-        this.setState({ amount: value });
     };
 
-    // private setTotal = (value: number) => {
-    //     this.setState({ total: value });
-    // };
+    private setTotal = (value: number) => {
+        this.setState({ total: value });
+    };
 
     private handleChangeBeneficiary = (value: Beneficiary) => {
         this.setState({
