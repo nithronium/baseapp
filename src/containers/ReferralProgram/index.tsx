@@ -60,7 +60,6 @@ class ReferralProgramClass extends React.Component<Props> {
         const domen = window.document.location.origin;
 
         const url = `${domen}/api/v1/referral-code?user_uid=${user.uid}&referral_code=${refId}`;
-        // const url = `https://stage.emirex.com/api/v1/referral-code?user_uid=${user.uid}&referral_code=IDBF19BD26D5`;
 
         try {
             const resp = await axios.get(url);
@@ -98,6 +97,8 @@ class ReferralProgramClass extends React.Component<Props> {
         const { user } = this.props;
         const { refId, userRefUid } = this.state;
         // tslint:disable
+        const lang = localStorage.getItem('lang_code') || 'en';
+        const locale = lang === 'en' ? '' : `/${lang}`;
         const referralLink = `${window.document.location.origin}/referral?refid=${user.uid}`;
         const referralLinkIEO = `https://ieo.emirex.com?emirex_referral_code=${user.uid}`;
         return (
@@ -132,7 +133,7 @@ class ReferralProgramClass extends React.Component<Props> {
                     <div className="ref-code-input-field">
                             <div className="ref-code-input-field-link">
                                 <p>{this.translate('profile.how_find_code')}{' '}</p>
-                                <p><a href="/referral#get-code">{this.translate('profile.click_here')}</a></p>
+                                <p><a href={`${locale}/referral#get-code"`}>{this.translate('profile.click_here')}</a></p>
                         </div>
                         <CustomInput
                             type="text"
