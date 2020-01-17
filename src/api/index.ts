@@ -10,6 +10,7 @@ export * from './config';
 export interface RequestOptions {
     apiVersion: 'applogic' | 'nodelogic' | 'peatio' | 'barong' | 'referral' | 'referralCommission' | 'exchangeRates' | 'instexService' | 'arke';
     withHeaders?: boolean;
+    headers?: Object;
 }
 
 export type RequestBody = JsonBody | FormData;

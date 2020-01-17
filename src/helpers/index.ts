@@ -32,3 +32,4 @@ export * from './buildQueryString';
 export * from './getCountdownDate';
 export * from './geetest';
 export * from './geetest';
+export * from './getCsrfToken';

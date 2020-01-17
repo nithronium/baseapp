@@ -47,6 +47,7 @@ export interface User {
     activeCurrency: string;
     referral_uid?: string;
     profile?: ProfileIdentity;
+    csrf_token?: string;
 }
 
 export interface ProfileIdentity {

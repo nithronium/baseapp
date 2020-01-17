@@ -17,6 +17,7 @@ export function* logoutSaga(action: LogoutFetch) {
         yield call(API.delete(requestOptions), '/identity/sessions');
         localStorage.removeItem('visited-chatello');
         yield put(userReset());
+        localStorage.removeItem('csrfToken');
         yield put(userOpenOrdersReset());
         yield put(signInRequire2FA({ require2fa: false }));
         yield put(resetHistory());
