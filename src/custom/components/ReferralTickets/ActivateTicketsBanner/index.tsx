@@ -1,7 +1,7 @@
 import * as React from 'react';
 /* tslint:disable */
 import { injectIntl } from 'react-intl';
-
+//tslint:disable
 import './style.css';
 
 const Banner = injectIntl(({intl}) => {
@@ -21,7 +21,6 @@ const Banner = injectIntl(({intl}) => {
           >
             <button className="activate-banner__button">{buttonText}</button>
             </a>
-
         </div>
       </div>
     </div>

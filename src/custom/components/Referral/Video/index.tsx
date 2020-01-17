@@ -7,8 +7,16 @@ import { Player } from 'video-react';
 
 import campaign = require('../../../assets/images/referral/campaign-bar.png');
 import campaignRus = require('../../../assets/images/referral/campaign-bar_ru.png');
+import campaignCn = require('./campaign-bar_cn.png');
 
 // import video = require('../../../assets/images/referral/video.svg');
+
+const campaigns = {
+    'en': campaign,
+    'ru': campaignRus,
+    'zh': campaignCn,
+}
+const banner = (lang) => <img src={campaigns[lang]} className="campaign" alt="campaign logo" />
 
 const Video = (props) => {
     return (
@@ -17,7 +25,7 @@ const Video = (props) => {
                 <div className="header">
                     <h4>{props.text}</h4>
                     <div className="win-with-emirex">#WinWithEmirex</div>
-                    <img src={props.lang === 'en' ? campaign : campaignRus} className="campaign" alt="campaign logo" />
+                    {banner(props.lang)}
                 </div>
                 <div className="video-wrap">
                 <Player

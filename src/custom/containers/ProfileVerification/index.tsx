@@ -18,6 +18,7 @@ import {
     marketsFetch,
     marketsTickersFetch,
     selectCurrencies,
+    selectCurrentLanguage,
     selectHistory,
     selectLabelData,
     selectMarkets,
@@ -34,6 +35,7 @@ import { rangerConnectFetch, RangerConnectFetch } from '../../../modules/public/
 import { RangerState } from '../../../modules/public/ranger/reducer';
 import { selectRanger } from '../../../modules/public/ranger/selectors';
 import { WithdrawLimit } from '../../../modules/user/withdrawLimit';
+import { buildPath } from '../../helpers';
 // import { buildPath } from '../../helpers';
 
 interface ReduxProps {
@@ -48,6 +50,7 @@ interface ReduxProps {
     withdrawLimitData: WithdrawLimit;
     user: User;
     userLoggedIn: boolean;
+    currentLanguage: string;
 }
 
 interface DispatchProps {
@@ -171,7 +174,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
             if (_balance < MINIMAL_BALANCE && this.props.user.level < 6 && this.props.user.level > 1) {
                 this.props.fetchSuccess({ message: ['page.profile.update.balance'], type: 'error' });
             } else {
-                this.props.history.push('/confirm');
+                this.props.history.push(buildPath('/confirm', this.props.currentLanguage));
             }
         };
         return (
@@ -390,6 +393,7 @@ const mapStateToProps = state => ({
     withdrawLimitData: selectWithdrawLimit(state),
     user: selectUserInfo(state),
     userLoggedIn: selectUserLoggedIn(state),
+    currentLanguage: selectCurrentLanguage(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =

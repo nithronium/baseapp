@@ -352,6 +352,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 balance={this.state.balance}
                 message={this.message}
                 history={this.props.history}
+                lang={this.props.currentLanguage}
             /> 
         );
     }

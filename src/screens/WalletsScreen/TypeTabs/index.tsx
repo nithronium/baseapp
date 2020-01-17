@@ -27,6 +27,7 @@ export const TypeTabs = injectIntl(({intl, currency, action, wire, sepa, card, c
     const onCardClick = () => action({ card: true, sepa: false, wire: false });
 
     const nothingSelected = (currency !== 'eur') && sepa;
+    const _colorTheme = colorTheme ? colorTheme : 'basic';
 
     if (nothingSelected) {
         onWireClick();
@@ -43,20 +44,20 @@ export const TypeTabs = injectIntl(({intl, currency, action, wire, sepa, card, c
             
         }}>
             <div 
-                style={colorTheme==='basic' ? {borderRadius: '5px 0 0 5px',...setTabStyleDark(wire)} : {borderRadius: '5px 0 0 5px',...setTabStyleLight(wire)}}
+                style={_colorTheme==='basic' ? {borderRadius: '5px 0 0 5px',...setTabStyleDark(wire)} : {borderRadius: '5px 0 0 5px',...setTabStyleLight(wire)}}
                 onClick={onWireClick}
             >
                 {translate('page.body.wallets.tabs.deposit.fiat.button.wire')}
             </div>
             { currency === 'eur' && 
             <div 
-                style={colorTheme==='basic' ? {...setTabStyleDark(sepa)} : {...setTabStyleLight(sepa)}}
+                style={_colorTheme==='basic' ? {...setTabStyleDark(sepa)} : {...setTabStyleLight(sepa)}}
                 onClick={onSepaClick}>
                 {translate('page.body.wallets.tabs.deposit.fiat.button.sepa')}
             </div>
             }
             <div 
-                style={colorTheme==='basic' ? {borderRadius: '0 5px 5px 0',...setTabStyleDark(card)} : {borderRadius: '0 5px 5px 0',...setTabStyleLight(card)}}
+                style={_colorTheme==='basic' ? {borderRadius: '0 5px 5px 0',...setTabStyleDark(card)} : {borderRadius: '0 5px 5px 0',...setTabStyleLight(card)}}
                 onClick={onCardClick}
             >
                 {translate('page.body.wallets.tabs.deposit.fiat.button.card')}

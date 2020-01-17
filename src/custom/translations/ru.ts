@@ -884,8 +884,8 @@ export const ru: LangType = {
     'page.referal.bottombanner.dont_miss_chance': 'Не упусти свой шанс',
     'page.referal.bottombanner.learn_more': 'Начать',
     'page.referral.winnersbanner.graz': 'Поздравляем победителей',
-    'page.referral.winnersbanner.graz.1r': '1-го раунда розыгрыша',
-    'page.referral.winnersbanner.date': '24 Декабря',
+    'page.referral.winnersbanner.graz.1r': '2-ого раунда розыгрыша',
+    'page.referral.winnersbanner.date': '8 января',
     'page.referral.winnersbanner.ticketnum': 'Тикет №',
     'timeline.title': 'Временные рамки',
     'timeline.start.text': 'Акция начинается',
@@ -1049,7 +1049,6 @@ export const ru: LangType = {
   'cardDepositFiat.mastercard.message3': '.',
     'activate.banner.message': 'Активируйте билеты, чтобы принять участие в розыгрыше',
     'activate.banner.buttontext': 'Узнать как',
-
 
     ...nationalitiesNames,
     ...pluginsTranslations,
