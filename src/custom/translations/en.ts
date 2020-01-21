@@ -411,4 +411,13 @@ export const en = {
   'activate.banner.message': 'Activate your tickets to take part in the raffle!',
   'activate.banner.buttontext': 'Learn How',
 
+  'cardDeposit.errorMessage.first_name': 'First Name is Required',
+  'cardDeposit.errorMessage.last_name': 'Last Name is Required',
+  'cardDeposit.errorMessage.address': 'Address is Required',
+  'cardDeposit.errorMessage.city': 'City is Required',
+  'cardDeposit.errorMessage.postcode': 'Post Code is Required',
+  'cardDeposit.errorMessage.country': 'Country is Required',
+  'cardDeposit.errorMessage.number': 'Phone should be valid',
+  'cardDeposit.errorMessage.email': 'Email should be valid',
+
 };

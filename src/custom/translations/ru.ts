@@ -1050,6 +1050,15 @@ export const ru: LangType = {
     'activate.banner.message': 'Активируйте билеты, чтобы принять участие в розыгрыше',
     'activate.banner.buttontext': 'Узнать как',
 
+    'cardDeposit.errorMessage.first_name': 'Заполните имя',
+    'cardDeposit.errorMessage.last_name': 'LЗаполните фамилию',
+    'cardDeposit.errorMessage.address': 'Заполните адрес',
+    'cardDeposit.errorMessage.city': 'Заполните город',
+    'cardDeposit.errorMessage.postcode': 'Заполните почтовый индекс',
+    'cardDeposit.errorMessage.country': 'Заполните страну',
+    'cardDeposit.errorMessage.number': 'Введите корректный номер телефона',
+    'cardDeposit.errorMessage.email': 'Введите корректный емэйл',
+
     ...nationalitiesNames,
     ...pluginsTranslations,
 };

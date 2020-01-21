@@ -914,6 +914,15 @@ export const zh = {
   'cardDepositFiat.mastercard.message2': ' Mastercard',
   'cardDepositFiat.mastercard.message3': ' Debit & Credit card payments.',
 
+  'cardDeposit.errorMessage.first_name': '名字为必填项',
+  'cardDeposit.errorMessage.last_name': '姓氏为必填项',
+  'cardDeposit.errorMessage.address': '地址为必填项',
+  'cardDeposit.errorMessage.city': '城市为必填项',
+  'cardDeposit.errorMessage.postcode': '邮编为必填项',
+  'cardDeposit.errorMessage.country': '国家为必填项',
+  'cardDeposit.errorMessage.number': '电子邮件应该有效',
+  'cardDeposit.errorMessage.email': '邮箱应该有效',
+
   ...pluginsTranslations,
   ...nationalitiesNames,
 }
