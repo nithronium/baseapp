@@ -268,6 +268,7 @@ export const en = {
     'page.body.history.withdraw.content.status.succeed': 'Succeed',
     'page.body.history.withdraw.content.status.failed': 'Failed',
     'page.body.history.withdraw.content.status.confirming': 'Confirming',
+    'page.body.history.withdraw.content.status.errored': 'Error',
 
     'page.body.history.trade': 'Trade History',
     'page.body.history.trade.header.id': 'ID',
@@ -280,6 +281,7 @@ export const en = {
     'page.body.history.trade.header.total': 'Total',
     'page.body.history.trade.header.amount': 'Amount',
     'page.body.history.trade.header.balance': 'Balance',
+
 
     'page.body.profile.header.account': 'Profile',
 
