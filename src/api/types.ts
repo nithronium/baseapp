@@ -21,4 +21,5 @@ export interface Config {
     plugins: any[];
     isResizable: boolean;
     isDraggable: boolean;
+    languages: string[];
 }

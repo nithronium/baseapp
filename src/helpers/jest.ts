@@ -26,6 +26,7 @@ const mockConfig: Config = {
     plugins: [],
     isResizable: false,
     isDraggable: false,
+    languages: ['en', 'ru'],
 };
 
 // tslint:disable no-any no-console

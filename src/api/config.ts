@@ -21,6 +21,7 @@ export const defaultConfig: Config = {
     plugins: [],
     isResizable: false,
     isDraggable: false,
+    languages: ['en'],
 };
 
 export const Cryptobase = {
@@ -60,3 +61,4 @@ export const incrementalOrderBook = (): boolean => Cryptobase.config.incremental
 export const pluginsList = () => Cryptobase.config.plugins || [];
 export const isResizableGrid = ():boolean => Cryptobase.config.isResizable || false;
 export const isDraggableGrid = ():boolean => Cryptobase.config.isDraggable || false;
+export const languages = Cryptobase.config.languages.length > 0 ? Cryptobase.config.languages : ['en'];

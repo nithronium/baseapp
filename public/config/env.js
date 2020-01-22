@@ -25,4 +25,5 @@ window.env = {
     ],
     isResizable: false,
     isDraggable: false,
+    languages: ['en', 'ru'],
 };
