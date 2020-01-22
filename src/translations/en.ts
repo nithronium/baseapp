@@ -323,6 +323,7 @@ export const en = {
     'page.body.profile.content.action.login.2fa': 'Login with 2FA',
     'page.body.profile.content.action.requestPasswordReset': 'Request password reset',
     'page.body.profile.content.action.passwordReset': 'Password reset',
+    'page.body.profile.content.action.create': 'Create',
 
     'page.body.profile.content.result.succeed': 'Succeed',
     'page.body.profile.content.result.failed': 'Failed',

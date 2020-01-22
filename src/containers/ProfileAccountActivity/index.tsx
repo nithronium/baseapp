@@ -131,6 +131,8 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
                 return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.requestPasswordReset'});
             case 'password reset':
                 return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.passwordReset'});
+            case 'create':
+                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.create'});
             default:
                 return value;
         }

@@ -361,6 +361,7 @@ export const ru: LangType = {
     'page.body.profile.content.action.login.2fa': 'Вход в систему с 2FA',
     'page.body.profile.content.action.requestPasswordReset': 'Запрос на сброс пароля',
     'page.body.profile.content.action.passwordReset': 'Сброс пароля',
+    'page.body.profile.content.action.create': 'Создание',
 
     'page.body.profile.content.result.succeed': 'Успешно',
     'page.body.profile.content.result.failed': 'Ошибка',

@@ -417,6 +417,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             withdrawFeeLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.fee' }),
             withdrawTotalLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.total' }),
             withdrawButtonLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.button' }),
+            soon: this.props.intl.formatMessage({id: 'comingsoon'}),
         };
 
         return otp ? <Withdraw {...withdrawProps} /> : this.isOtpDisabled();
