@@ -920,6 +920,7 @@ export const ru: LangType = {
     'get.text3': 'Во избежание мошенничества, только билеты, активированные аккаунтами на момент розыгрыша, будут считаться действительными.',
     'get.text4': 'Пожалуйста, прочтите <a href="https://knowledge-base.emirex.com"><b>Часто Задаваемые Вопросы</b></a>, чтобы получить необходимые ответы',
     "footer_copyright": "Копирайт (с) Emirex.com. Все права защищены",
+    "footer_demo": "Emirex.com, BME Technologies OU is a licensed crypto to fiat exchange, authorised by the Central Bank of Estonia.",
   "footer_subscribe": "Подпишитесь",
   "footer_inputPlaceholder": "Введите Ваш email",
   "footer_headers_company": "Компания",

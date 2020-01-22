@@ -33,7 +33,7 @@ const Copyright = props => {
     return (
         <div className="copyright">
             <div style={{color:'white'}} className="text">
-                Emirex.com, BME Technologies OU is a licensed crypto to fiat exchange, authorised by the Central Bank of Estonia.
+                {props.intl.formatMessage({id: 'footer_demo'})}
             </div>
     <div style={{color:'white'}}>{props.intl.formatMessage({id: 'footer_copyright'})}</div>
         </div>
@@ -120,7 +120,7 @@ const Address = props => {
     return (
         <div className="address">
             <h5>{props.intl.formatMessage({id: 'footer_addresses_title'})}</h5>
-            <p>47, Peterburi tee, Lasnamäe linnaosa, Harju maakond, Tallinn, Estonia</p>
+            <p>{props.intl.formatMessage({id: 'footer_addresses_first'})}</p>
         </div>
     );
 };

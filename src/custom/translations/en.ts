@@ -261,6 +261,7 @@ export const en = {
     'get.text3': 'To ensure that there is no fraud, only tickets activated by accounts at the time of the draw will count as valid.',
     'get.text4': 'Please read our <a href="https://knowledge-base.emirex.com"><b>FAQ</b></a>, which will answer all of your questions.',
     "footer_copyright": "© 2019 Emirex.com All rights reserved",
+    "footer_demo": "Emirex.com, BME Technologies OU is a licensed crypto to fiat exchange, authorised by the Central Bank of Estonia.",
   "footer_subscribe": "Subscribe",
   "footer_inputPlaceholder": "Enter your email",
   "footer_headers_company": "Company",

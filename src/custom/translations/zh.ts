@@ -773,6 +773,7 @@ export const zh = {
   'get.text3': '为确保不存在欺诈行为，只有在抽奖时由账号激活的礼券才算有效。',
   'get.text4': '请阅读我们的<a href=\'https://knowledge-base.emirex.com\'> <b>常见问题</ b> </a>，并找到全部的答案。',
   'footer_copyright': '©2019 Emirex.com保留所有权利',
+  "footer_demo": "Emirex.com，BME Technologies OU是由爱沙尼亚中央银行授权的法定货币兑换法币平台。",
   'footer_subscribe': '订阅',
   'footer_inputPlaceholder': '输入您的邮箱',
   'footer_headers_company': '公司',
