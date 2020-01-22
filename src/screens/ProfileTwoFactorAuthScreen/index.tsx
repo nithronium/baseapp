@@ -140,6 +140,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
                                 <a target="_blank" href="https://itunes.apple.com/ru/app/google-authenticator/id388497605?mt=8">AppStore </a>
                                 {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.message.or')}
                                 <a target="_blank" href="https://apps.apple.com/us/app/authy/id494168017">Google play</a>
+                                {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.message.1-1')}
                             </div>
                         </div>
                         <div className="row col-12 pg-profile-two-factor-auth__body--text--group">

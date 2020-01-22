@@ -241,6 +241,7 @@ export const en = {
     'page.body.profile.header.account.content.twoFactorAuthentication.message.1':
         'Download and install Authy Authenticator application from ',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.or': 'or ',
+    'page.body.profile.header.account.content.twoFactorAuthentication.message.1-1': ' ',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.2': 'Scan QR code or use secret MFA code:',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.3':
         '* Save this secret in a secure location. This code can be used to gain 2FA access from a different device.',

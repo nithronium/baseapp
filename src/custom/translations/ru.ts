@@ -269,6 +269,7 @@ export const ru: LangType = {
     'page.body.profile.header.account.content.twoFactorAuthentication.message.1':
         'Скачайте и установите приложение Authy Authenticator с ',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.or': 'или ',
+    'page.body.profile.header.account.content.twoFactorAuthentication.message.1-1': ' ',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.2': 'Отсканируйте QR код или используйте код MFA:',
     'page.body.profile.header.account.content.twoFactorAuthentication.message.3':
         '* Сохраните этот код в надежном месте. Он может быть использован для доступа 2FA кода с разных устройств.',
