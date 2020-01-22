@@ -1,6 +1,6 @@
-import { History } from 'history';
+import { createBrowserHistory, History } from 'history';
 import * as React from 'react';
-// import CookieConsent from 'react-cookie-consent';
+import * as ReactGA from 'react-ga';
 import { IntlProvider } from 'react-intl';
 import { connect, MapStateToProps } from 'react-redux';
 import { Router } from 'react-router';
@@ -8,7 +8,7 @@ import { Alerts, ErrorWrapper, Footer, Sidebar } from './containers';
 import { Header } from './custom/containers';
 import { RootState } from './modules';
 import { Layout } from './routes';
-
+import { gaTrackerKey } from '../src/api';
 import { googleTranslateElementInit, initLanguageChangeEvent } from './helpers/googleTranslate';
 
 interface Locale {
@@ -22,6 +22,17 @@ interface AppProps {
 
 interface ReduxProps {
     locale: Locale;
+}
+
+const gaKey = gaTrackerKey();
+const history = createBrowserHistory();
+
+if (gaKey) {
+    ReactGA.initialize(gaKey);
+    history.listen(location => {
+        ReactGA.set({ page: location.pathname });
+        ReactGA.pageview(location.pathname);
+    });
 }
 
 type Props = AppProps & ReduxProps;
@@ -53,6 +64,8 @@ class AppLayout extends React.Component<Props, {}, {}> {
          * also set a global flag `googleTranslateLoaded`, so we can track
          * the state of google scripts in our components.
          */
+
+        ReactGA.pageview(history.location.pathname);
         if ('googleTranslateLoaded' in window) {
             this.initGoogleTranslate();
             this.initLangChange();
@@ -81,7 +94,6 @@ class AppLayout extends React.Component<Props, {}, {}> {
     public render() {
         const {
             locale,
-            history,
         } = this.props;
         const { lang, messages } = locale;
 
