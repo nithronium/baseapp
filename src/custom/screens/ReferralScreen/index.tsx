@@ -272,6 +272,7 @@ class Referral extends React.Component<Props> {
                     <link key="ru" rel="alternate" href="https://emirex.com/ru/referral" hrefLang="ru" title="Русский"/>
                     {/* <link key="ar" rel="alternate" href="https://emirex.com/ar/referral" hrefLang="ar" /> */}
                     <link key="en" rel="alternate" href="https://emirex.com/referral" hrefLang="en" title="English"/>
+                    <link key="zh" rel="alternate" href='https://emirex.com/zh/referral' hrefLang="zh" title="中国人"/>
 
                     <meta name="og:title" content={this.props.intl.formatMessage({ id: 'referral_title' })} />
                     <meta
