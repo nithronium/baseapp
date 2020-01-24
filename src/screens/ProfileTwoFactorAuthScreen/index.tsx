@@ -139,7 +139,8 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
                                 {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.message.1')}
                                 <a target="_blank" href="https://itunes.apple.com/ru/app/google-authenticator/id388497605?mt=8">AppStore </a>
                                 {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.message.or')}
-                                <a target="_blank" href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl">Google play</a>
+                                <a target="_blank" href="https://apps.apple.com/us/app/authy/id494168017">Google play</a>
+                                {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.message.1-1')}
                             </div>
                         </div>
                         <div className="row col-12 pg-profile-two-factor-auth__body--text--group">
@@ -151,7 +152,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
                             </div>
                         </div>
                     </div>
-                    <div className="col-12 col-lg-4 col-md-3 pt-4 pg-profile-two-factor-auth__body--barcode">
+                    <div className="col-12 col-lg-4 col-md-3 pt-4 pg-profile-two-factor-auth__body--barcode" >
                         {enable2fa && this.renderTwoFactorAuthQR(barcode)}
                     </div>
                 </div>
@@ -194,7 +195,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
 
     private renderTwoFactorAuthQR(barcode: string) {
         const src = `data:image/png;base64,${barcode}`;
-        return barcode.length > 0 && <img className="pg-profile-two-factor-auth__qr" src={src} />;
+        return barcode.length > 0 && <img  className="pg-profile-two-factor-auth__qr" src={src} />;
     }
 
     private renderSecret(secret: string) {
