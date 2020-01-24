@@ -229,6 +229,7 @@ class Trading extends React.Component<Props, StateProps> {
             const link = `https://emirex.com${currentLanguage === 'en' ? '/' : '/' + currentLanguage + '/'}trading/${marketName.replace('/', '').toLowerCase()}`;
             const linkEn = `https://emirex.com/trading/${marketName.replace('/', '').toLowerCase()}`;
             const linkRu = `https://emirex.com/ru/trading/${marketName.replace('/', '').toLowerCase()}`;
+            const linkZh = `https://emirex.com/zh/trading/${marketName.replace('/', '').toLowerCase()}`;
             return (
                 <Helmet>
                     <link rel="canonical" href={link}/>
@@ -236,6 +237,7 @@ class Trading extends React.Component<Props, StateProps> {
                     <meta name="description" content={description} />
                     <link key="ru" rel="alternate" href={linkRu} hrefLang="ru" title="Русский" />
                     <link key="en" rel="alternate" href={linkEn} hrefLang="en" title="English"/>
+                    <link key="zh" rel="alternate" href={linkZh} hrefLang="zh" title="中国人"/>
                 </Helmet>
             );
         } else {
