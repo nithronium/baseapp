@@ -62,7 +62,8 @@
     "eject": "react-scripts-ts eject",
     "clean": "rimraf build",
     "analyze": "source-map-explorer build/static/js/main.*",
-    "dev": "REACT_APP_BUILD_VERSION=Enterprise yarn start"
+    "dev": "REACT_APP_BUILD_VERSION=Enterprise yarn start",
+    "b": "REACT_APP_BUILD_VERSION=Enterprise yarn build"
   },
   "devDependencies": {
     "@openware/coding-standards": "0.1.6",
