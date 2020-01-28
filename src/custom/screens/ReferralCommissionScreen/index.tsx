@@ -6,24 +6,26 @@ import {
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { setDocumentTitle } from '../../../helpers';
 import {
-    referralCommissionFetch,
-    ReferralCommissionSummaryInterface,
-    ReferralCommissionTradingInterface,
+    referralCommissionBalancesFetch,
+    referralCommissionReferralsFetch,
+    ReferralCommissionBalancesInterface,
+    ReferralCommissionReferralsInterface,
     RootState,
     selectReferralCommissionIeo,
-    selectReferralCommissionSummary,
+    selectReferralCommissionBalances,
     selectReferralCommissionTrading,
 } from '../../../modules';
 import {Card, ReferralHeader, Summary, TradingDetails} from '../../components/ReferralCommission';
 
 interface DispatchProps {
-    fetchReferralCommission: typeof referralCommissionFetch;
+    fetchReferralCommissionBalances: typeof referralCommissionBalancesFetch;
+    fetchReferralCommissionReferrals: typeof referralCommissionReferralsFetch;
 }
 
 interface ReduxProps {
-    trading: ReferralCommissionTradingInterface;
-    ieo: ReferralCommissionTradingInterface;
-    summary: ReferralCommissionSummaryInterface;
+    trade: ReferralCommissionReferralsInterface;
+    ieo: ReferralCommissionReferralsInterface;
+    balances: ReferralCommissionBalancesInterface;
 }
 
 type Props = DispatchProps & InjectedIntlProps & ReduxProps;
@@ -32,7 +34,7 @@ class ReferralCommission extends React.Component<Props> {
 
     public componentDidMount() {
         setDocumentTitle('Referral Commission');
-        this.props.fetchReferralCommission();
+        this.props.fetchReferralCommissionBalances({currencyId: this.props.currencyId});
     }
 
     public render(){
@@ -41,15 +43,15 @@ class ReferralCommission extends React.Component<Props> {
             <div className="pg-referral-commission">
                 <div className="top-holder">
                     <section id="top">
-                        <ReferralHeader context={this.props.summary} link="#summary">
-                            <Card context={this.props.trading} link="#trading"/>
-                            <Card context={this.props.ieo} link="#ieo"/>
+                        <ReferralHeader context={this.props.balances} link="#summary">
+                            <Card context={this.props.balances.trade} link="#trading"/>
+                            <Card context={this.props.balances.ieo} link="#ieo"/>
                         </ReferralHeader>
                     </section>
                 </div>
                 <section id="trading">
                     <div className="container">
-                        <TradingDetails entity="trading" context={this.props.trading} header="Trading commission details"/>
+                        <TradingDetails entity="trading" context={this.props.trade} header="Trading commission details"/>
                     </div>
                 </section>
                 <section id="ieo">
@@ -57,24 +59,26 @@ class ReferralCommission extends React.Component<Props> {
                         <TradingDetails entity="ieo" context={this.props.ieo} header="IEO commission details"/>
                     </div>
                 </section>
-                <section id="summary">
+                {/* <section id="summary">
                     <div className="container">
-                        <Summary entity="summary" context={this.props.summary} header="Transaction commission details" />
+                        <Summary entity="summary" context={this.props.balances} header="Transaction commission details" />
                     </div>
-                </section>
+                </section> */}
             </div>
           );
     }
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
-    trading: selectReferralCommissionTrading(state),
+    trade: selectReferralCommissionTrading(state),
     ieo: selectReferralCommissionIeo(state),
-    summary: selectReferralCommissionSummary(state),
+    balances: selectReferralCommissionBalances(state),
+    currency: selectReferralCommissionCurrency(state),
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
-    fetchReferralCommission: () => dispatch(referralCommissionFetch()),
+    fetchReferralCommissionBalances: (payload) => dispatch(referralCommissionBalancesFetch(payload)),
+    fetchReferralCommissionReferrals: (payload) => dispatch(referralCommissionReferralsFetch(payload)),
 });
 
 export const ReferralCommissionScreen = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ReferralCommission));

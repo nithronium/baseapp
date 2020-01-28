@@ -1,68 +1,101 @@
 import { ReferralCommissionActions } from './actions';
-import { REFERRAL_COMMISSION_DATA, REFERRAL_COMMISSION_ERROR, REFERRAL_COMMISSION_FETCH } from './constants';
+import { REFERRAL_COMMISSION_BALANCES_DATA, REFERRAL_COMMISSION_REFERRALS_DATA, REFERRAL_COMMISSION_ERROR, REFERRAL_COMMISSION_BALANCES_FETCH, REFERRAL_COMMISSION_REFERRALS_FETCH } from './constants';
 
 
-export interface ReferralCommissionTradingInterface {
-    details: [];
-    legend: [];
-    earned: number;
-    title: string;
+export interface ReferralCommissionReferralsInterface {
+    referrals: [];
+    type: string;
+    skip: number;
+    limit: number;
+    count: number;
+    loading: boolean;
 }
 
-export interface ReferralCommissionSummaryInterface {
-    title: string;
-    legend: [];
-    btc: number;
-    usd: number;
+export interface ReferralCommissionBalancesInterface {
+    commission: object;
+    earned: object;
+    loading: boolean;
 }
 
 export interface ReferralCommissionState {
     loading: boolean;
+    currency: string;
     data: {
-        trading: ReferralCommissionTradingInterface;
-        ieo: ReferralCommissionTradingInterface;
-        summary: ReferralCommissionSummaryInterface;
+        trading: ReferralCommissionReferralsInterface;
+        ieo: ReferralCommissionReferralsInterface;
+        balances: ReferralCommissionBalancesInterface;
     };
 }
 
 const initialState: ReferralCommissionState = {
     loading: false,
+    currency: 'btc',
     data: {
         trading: {
-            details: [],
-            legend: [],
-            earned: 0,
-            title: '',
+            referrals: [],
+            type: 'trade',
+            skip: 0,
+            limit: 10,
+            count: 0,
+            loading: true,
         },
         ieo: {
-            details: [],
-            legend: [],
-            earned: 0,
-            title: '',
+            referrals: [],
+            type: 'ieo',
+            skip: 0,
+            limit: 10,
+            count: 0,
+            loading: true,
         },
-        summary: {
-            title: '',
-            legend: [],
-            btc: 0,
-            usd: 0,
+        balances: {
+            commission: {
+                trading: [0.5, 0.2],
+                ieo : [0.1, 0.05],
+            },
+            earned: {
+                trading: 0,
+                ieo: 0,
+            },
+            loading: true,
         },
     },
 };
 
+
+// TODO match response
 export const referralCommissionReducer = (state = initialState, action: ReferralCommissionActions) => {
     switch (action.type) {
-        case REFERRAL_COMMISSION_DATA:
-            return {
+        case REFERRAL_COMMISSION_BALANCES_DATA: {
+            const newState = {
                 ...state,
-                loading: false,
-                data: action.payload,
             };
+            newState.data.balances = {
+                ...action.payload,
+                loading: false,
+            }
+            return newState;
+        }
+        case REFERRAL_COMMISSION_REFERRALS_DATA: {
+            const newState = {
+                ...state,
+            };
+            newState.data[action.payload.type] = {
+                ...action.payload,
+                loading: false
+            };
+            return newState;
+        }
         case REFERRAL_COMMISSION_ERROR:
             return {
                 ...state,
                 loading: false,
             };
-        case REFERRAL_COMMISSION_FETCH:
+        case REFERRAL_COMMISSION_BALANCES_FETCH:
+            return {
+                ...state,
+                loading: true,
+            };
+        case REFERRAL_COMMISSION_REFERRALS_FETCH:
             return {
                 ...state,
                 loading: true,
