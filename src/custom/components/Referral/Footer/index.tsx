@@ -134,7 +134,7 @@ const title1 = 'footer_headers_company';
 const links1 = [
     { key: '', href: '/about', label: 'footer_links_about' },
     { key: '', href: '/whitepaper', label: 'footer_links_wp' },
-    { key: '', href: '/fees', label: 'footer_links_fees' },
+    { key: '', href: 'https://kb.emirex.com/fees-structure', label: 'footer_links_fees' },
     /* { href: '/team', label: 'footer.links.team'},
   { href: '/careers', label: 'footer.links.careers'},
   { href: '/blog', label: 'footer.links.blog'},*/
