@@ -15,8 +15,7 @@ interface Props extends InjectedIntlProps {
 
 export const PasswordValidationPopup: React.FC<Props> = injectIntl(({passwordValidationDetails, visible, passwordError, intl}) => {
     const translate = (value: string) => intl.formatMessage({ id: value });
-    const lang = localStorage.getItem('lang_code');
-    const passwordStrengthMessage = lang === 'zh' ? '' : translate('page.signup.pwdvalidation.strength')
+    const passwordStrengthMessage = translate('page.signup.pwdvalidation.strength')
     const {
         isLengthAcceptable,
         hasDigits,

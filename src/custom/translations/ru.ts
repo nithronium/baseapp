@@ -361,6 +361,7 @@ export const ru: LangType = {
     'page.body.profile.content.action.login.2fa': 'Вход в систему с 2FA',
     'page.body.profile.content.action.requestPasswordReset': 'Запрос на сброс пароля',
     'page.body.profile.content.action.passwordReset': 'Сброс пароля',
+    'page.body.profile.content.action.create': 'Создание',
 
     'page.body.profile.content.result.succeed': 'Успешно',
     'page.body.profile.content.result.failed': 'Ошибка',
@@ -920,6 +921,7 @@ export const ru: LangType = {
     'get.text3': 'Во избежание мошенничества, только билеты, активированные аккаунтами на момент розыгрыша, будут считаться действительными.',
     'get.text4': 'Пожалуйста, прочтите <a href="https://knowledge-base.emirex.com"><b>Часто Задаваемые Вопросы</b></a>, чтобы получить необходимые ответы',
     "footer_copyright": "Копирайт (с) Emirex.com. Все права защищены",
+    "footer_demo": "Emirex.com, BME Technologies OU is a licensed crypto to fiat exchange, authorised by the Central Bank of Estonia.",
   "footer_subscribe": "Подпишитесь",
   "footer_inputPlaceholder": "Введите Ваш email",
   "footer_headers_company": "Компания",
@@ -1049,6 +1051,15 @@ export const ru: LangType = {
   'cardDepositFiat.mastercard.message3': '.',
     'activate.banner.message': 'Активируйте билеты, чтобы принять участие в розыгрыше',
     'activate.banner.buttontext': 'Узнать как',
+
+    'cardDeposit.errorMessage.first_name': 'Заполните имя',
+    'cardDeposit.errorMessage.last_name': 'LЗаполните фамилию',
+    'cardDeposit.errorMessage.address': 'Заполните адрес',
+    'cardDeposit.errorMessage.city': 'Заполните город',
+    'cardDeposit.errorMessage.postcode': 'Заполните почтовый индекс',
+    'cardDeposit.errorMessage.country': 'Заполните страну',
+    'cardDeposit.errorMessage.number': 'Введите корректный номер телефона',
+    'cardDeposit.errorMessage.email': 'Введите корректный емэйл',
 
     ...nationalitiesNames,
     ...pluginsTranslations,

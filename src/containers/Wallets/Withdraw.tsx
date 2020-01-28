@@ -27,6 +27,7 @@ interface WithdrawProps {
     withdrawTotalLabel?: string;
     withdrawButtonLabel?: string;
     withdrawDone: boolean;
+    soon: string;
 }
 
 const defaultBeneficiary: Beneficiary = {
@@ -89,6 +90,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
             // withdrawTotalLabel,
             withdrawButtonLabel,
             card,
+            soon,
         } = this.props;
 
         const cx = classnames('cr-withdraw', className);
@@ -102,7 +104,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
         });
 // tslint:disable
         return (
-            card ? <div style={{fontSize: '18px', margin: '20px auto', maxWidth: '200px'}}>COMING SOON</div> :
+            card ? <div style={{fontSize: '18px', margin: '20px auto', maxWidth: '200px'}}>{soon}</div> :
             <div className={cx}>
                 <div className="cr-withdraw-column">
                     <div className="cr-withdraw__group__address">

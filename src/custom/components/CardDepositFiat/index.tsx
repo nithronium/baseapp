@@ -24,6 +24,7 @@ const CardDepositFiat = (props) => {
     const [initForm, setInitForm] = React.useState(true);
     const [iFrame, setIFrame] = React.useState(false);
     const [initURL, setInitURL] = React.useState('');
+    const [errorMessage, setErrorMessage] = React.useState('');
 
     const getFee = (amount) => {
         const fee = +amount * 4.5 / 100;
@@ -79,10 +80,11 @@ const CardDepositFiat = (props) => {
             setInitURL(data.url);
             setIFrame(!iFrame);
             setInitForm(!initForm);
-        }).catch(err => {
+        }).catch(error => {
             setInitURL('');
             setIFrame(!iFrame);
             setInitForm(!initForm);
+            setErrorMessage(error.response.data.errors[0]);
         });
         
     }
@@ -246,7 +248,7 @@ const CardDepositFiat = (props) => {
                 {initURL ?
                     <iframe  src={initURL} width="100%" height="500px" frameBorder="0"></iframe>
                     :
-                    <h3>Server error</h3>}
+                    <h3>{translate(`cardDeposit.errorMessage.${errorMessage}`)}</h3>}
             </div>
         </React.Fragment>
     );
