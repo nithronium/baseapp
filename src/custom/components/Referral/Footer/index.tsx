@@ -190,6 +190,12 @@ const LinksList = ({ links, intl }) => {
     return (
         <ul className="footer-link-list">
             {links.map(({ key, href, label, className }) => (
+                label==='footer_links_fees' ?
+                <li key={key}>
+                    <a className={className} href={href} target="_blank" rel="nofollow noopener">
+                        {intl.formatMessage({ id: label })}
+                    </a>
+                </li> :
                 <li key={key}>
                     <a className={className} href={href}>
                         {intl.formatMessage({ id: label })}
