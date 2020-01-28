@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+//tslint:disable
 import facebook = require('../../../assets/images/referral/icons/facebook.svg');
 import instagram = require('../../../assets/images/referral/icons/instagram.svg');
 import linkedin = require('../../../assets/images/referral/icons/linkedin.svg');
@@ -8,7 +8,6 @@ import reddit = require('../../../assets/images/referral/icons/reddit.svg');
 import telegram = require('../../../assets/images/referral/icons/Telegram.svg');
 import twitter = require('../../../assets/images/referral/icons/twitter.svg');
 import logo = require('../../../assets/images/referral/logo-emirex.svg');
-
 
 import bitcoincom = require('../../../../assets/images/bitcoincom.png');
 import blockonomi = require('../../../../assets/images/blockonomi.png');
@@ -19,6 +18,14 @@ import newsbtc = require('../../../../assets/images/newsbtc.png');
 import yahoo = require('../../../../assets/images/yahoo.png');
 import zerohedge = require('../../../../assets/images/zerohedge.png');
 import { BottomBanner } from '../BottomBanner';
+
+import replaceHLink from '../../../helpers/scripts.js';
+
+declare module 'react' {
+    interface HTMLAttributes<T> {
+        rel?: string;
+    }
+}
 
 const Header = () => {
     return (
@@ -32,10 +39,10 @@ const Header = () => {
 const Copyright = props => {
     return (
         <div className="copyright">
-            <div style={{color:'white'}} className="text">
-                {props.intl.formatMessage({id: 'footer_demo'})}
+            <div style={{ color: 'white' }} className="text">
+                {props.intl.formatMessage({ id: 'footer_demo' })}
             </div>
-    <div style={{color:'white'}}>{props.intl.formatMessage({id: 'footer_copyright'})}</div>
+            <div style={{ color: 'white' }}>{props.intl.formatMessage({ id: 'footer_copyright' })}</div>
         </div>
     );
 };
@@ -44,12 +51,10 @@ const Copyright = props => {
 const Licenses = props => {
     return (
         <div className="licenses">
-            <h5>{props.intl.formatMessage({id: 'footer_licenses_title'})}</h5>
-            <p>{props.intl.formatMessage({id: 'footer_licenses_text1'})}</p>
-            <p>
-            {props.intl.formatMessage({id: 'footer_licenses_text2'})}
-            </p>
-            <p>{props.intl.formatMessage({id: 'footer_licenses_text3'})}</p>
+            <h5>{props.intl.formatMessage({ id: 'footer_licenses_title' })}</h5>
+            <p>{props.intl.formatMessage({ id: 'footer_licenses_text1' })}</p>
+            <p>{props.intl.formatMessage({ id: 'footer_licenses_text2' })}</p>
+            <p>{props.intl.formatMessage({ id: 'footer_licenses_text3' })}</p>
         </div>
     );
 };
@@ -108,7 +113,7 @@ const IconList = ({ links }) => {
 const GetInTouch = props => {
     return (
         <div className="social-block">
-            <h5>{props.intl.formatMessage({id: 'footer_headers_getintouch'})}</h5>
+            <h5>{props.intl.formatMessage({ id: 'footer_headers_getintouch' })}</h5>
             <IconList links={links6} />
         </div>
     );
@@ -119,8 +124,8 @@ const GetInTouch = props => {
 const Address = props => {
     return (
         <div className="address">
-            <h5>{props.intl.formatMessage({id: 'footer_addresses_title'})}</h5>
-            <p>{props.intl.formatMessage({id: 'footer_addresses_first'})}</p>
+            <h5>{props.intl.formatMessage({ id: 'footer_addresses_title' })}</h5>
+            <p>{props.intl.formatMessage({ id: 'footer_addresses_first' })}</p>
         </div>
     );
 };
@@ -129,6 +134,7 @@ const title1 = 'footer_headers_company';
 const links1 = [
     { key: '', href: '/about', label: 'footer_links_about' },
     { key: '', href: '/whitepaper', label: 'footer_links_wp' },
+    { key: '', href: '/fees', label: 'footer_links_fees' },
     /* { href: '/team', label: 'footer.links.team'},
   { href: '/careers', label: 'footer.links.careers'},
   { href: '/blog', label: 'footer.links.blog'},*/
@@ -165,7 +171,6 @@ const title4 = 'footer_headers_support';
 const links4 = [
     { key: '', href: 'https://kb.emirex.com/', label: 'footer_links_kb' },
     { key: '', href: 'https://kb.emirex.com/kb-tickets/new', label: 'footer_links_submitRequest' },
-    { key: '', href: '/fees', label: 'footer_links_fees' },
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
     return link;
@@ -187,7 +192,7 @@ const LinksList = ({ links, intl }) => {
             {links.map(({ key, href, label, className }) => (
                 <li key={key}>
                     <a className={className} href={href}>
-                        {intl.formatMessage({ id: label})}
+                        {intl.formatMessage({ id: label })}
                     </a>
                 </li>
             ))}
@@ -198,7 +203,7 @@ const LinksList = ({ links, intl }) => {
 const LinksColumn = ({ title, links, intl }) => {
     return (
         <div className="link-list-column">
-<h5>{intl.formatMessage({id: title})}</h5>
+            <h5>{intl.formatMessage({ id: title })}</h5>
             <LinksList intl={intl} links={links} />
         </div>
     );
@@ -215,45 +220,121 @@ const FooterBody = props => {
                 <LinksColumn intl={props.intl} title={title5} links={links5} />
             </div>
             <div>
-                <GetInTouch intl={props.intl}/>
-                <Address intl={props.intl}/>
+                <GetInTouch intl={props.intl} />
+                <Address intl={props.intl} />
             </div>
         </div>
     );
 };
 
 const MediaLogo = props => {
+    React.useEffect(() => {
+        replaceHLink();
+    });
     return (
         <div className="medialogo">
             <h2>{props.intl.formatMessage({ id: 'medialogo.title' })}</h2>
-             <div className="logo-wrapper">
-                <a href="https://news.bitcoin.com/cryptocurrency-exchanges-are-fighting-to-escape-binances-shadow/"><img src={bitcoincom} alt="logo" /></a>
+            <div className="logo-wrapper">
+                {/*<noindex>*/}
+                <span
+                    className={'hlink'}
+                    rel="nofollow"
+                    data-href={btoa('https://news.bitcoin.com/cryptocurrency-exchanges-are-fighting-to-escape-binances-shadow/')}
+                >
+                    <img src={bitcoincom} alt="new btc logo" />
+                </span>
+                {/*</noindex>*/}
+                {/*<noindex>*/}
+                <span className={'hlink'} rel="nofollow" data-href={btoa('https://blockonomi.com/emirex-review/')}>
+                    <img src={blockonomi} alt="yahoo logo" />
+                </span>
+                {/*</noindex>*/}
+                {/*<noindex>*/}
+                <span
+                    className={'hlink'}
+                    rel="nofollow"
+                    data-href={btoa('https://www.coinspeaker.com/blockchain-tokenization-commodities/')}
+                >
+                    <img src={coinspeaker} alt="coinspeaker logo" />
+                </span>
+                {/*</noindex>*/}
+                {/*<noindex>*/}
+                <span
+                    className={'hlink'}
+                    rel="nofollow"
+                    data-href={btoa(
+                        'https://cointelegraph.com/news/us-fed-weighs-up-potential-cbdc-as-countermove-against-china'
+                    )}
+                >
+                    <img src={cointelegraph} alt="new btc logo" />
+                </span>
+                {/*</noindex>*/}
+                {/*<noindex>*/}
+                <span
+                    className={'hlink'}
+                    rel="nofollow"
+                    data-href={btoa(
+                        'https://forbesmiddleeast.com/what-impact-could-tokenized-commodities-have-on-the-middle-east'
+                    )}
+                >
+                    <img src={forbes} alt="yahoo logo" />
+                </span>
+                {/*</noindex>*/}
+                {/*<noindex>*/}
+                <span
+                    className={'hlink'}
+                    rel="nofollow"
+                    data-href={btoa(
+                        'https://www.newsbtc.com/2019/11/26/emirex-doubles-down-with-ieo-announcement-building-a-comprehensive-crypto-ecosystem-in-the-middle-east/'
+                    )}
+                >
+                    <img src={newsbtc} alt="coinspeaker logo" />
+                </span>
+                {/*</noindex>*/}
+                {/*<noindex>*/}
+                <span
+                    className={'hlink'}
+                    rel="nofollow"
+                    data-href={btoa('https://finance.yahoo.com/news/platforms-solutions-confirm-growing-interest-164407914.html')}
+                >
+                    <img src={yahoo} alt="new btc logo" />
+                </span>
+                {/*</noindex>*/}
+                {/*<noindex>*/}
+                <span
+                    className={'hlink'}
+                    rel="nofollow"
+                    data-href={btoa('https://www.zerohedge.com/news/2019-11-26/blockchain-taking-over-middle-east')}
+                >
+                    <img src={zerohedge} alt="yahoo logo" />
+                </span>
+
+                {/* <a href="https://news.bitcoin.com/cryptocurrency-exchanges-are-fighting-to-escape-binances-shadow/"><img src={bitcoincom} alt="logo" /></a>
                 <a href="https://blockonomi.com/emirex-review/"><img src={blockonomi} alt="logo" /></a>        
                 <a href="https://www.coinspeaker.com/blockchain-tokenization-commodities/"><img src={coinspeaker} alt="logo" /></a>
                 <a href="https://cointelegraph.com/news/us-fed-weighs-up-potential-cbdc-as-countermove-against-china"><img src={cointelegraph} alt="ogo" /></a>
                 <a href="https://forbesmiddleeast.com/what-impact-could-tokenized-commodities-have-on-the-middle-east"><img src={forbes} alt="logo" /> </a>       
                 <a href="https://www.newsbtc.com/2019/11/26/emirex-doubles-down-with-ieo-announcement-building-a-comprehensive-crypto-ecosystem-in-the-middle-east/"><img src={newsbtc} alt="logo" /></a>
                 <a href="https://finance.yahoo.com/news/platforms-solutions-confirm-growing-interest-164407914.html"><img src={yahoo} alt="logo" /></a>
-                <a href="https://www.zerohedge.com/news/2019-11-26/blockchain-taking-over-middle-east"><img src={zerohedge} alt="logo" /> </a>       
-      </div>
+                <a href="https://www.zerohedge.com/news/2019-11-26/blockchain-taking-over-middle-east"><img src={zerohedge} alt="logo" /> </a>        */}
+            </div>
         </div>
-    )
-}
+    );
+};
 
 const Footer = props => {
     return (
         <div>
-            <MediaLogo intl={props.intl}/>
-            <BottomBanner/>
+            <MediaLogo intl={props.intl} />
+            <BottomBanner />
             <section id="footer">
-            
-            <div>
-                {/* <MobileStartTrading /> */}                
-                <Header />
-                <FooterBody intl={props.intl}/>
-                <Licenses intl={props.intl}/>
-                <Copyright intl={props.intl}/>
-            </div>
+                <div>
+                    {/* <MobileStartTrading /> */}
+                    <Header />
+                    <FooterBody intl={props.intl} />
+                    <Licenses intl={props.intl} />
+                    <Copyright intl={props.intl} />
+                </div>
             </section>
         </div>
     );
