@@ -13,8 +13,8 @@ export interface ReferralCommissionReferralsFetch {
     payload: {
         currencyId: string;
         type: string;
-        skip: number;
-        limit: number;
+        skip?: number;
+        limit?: number;
     };
 }
 

@@ -47,8 +47,8 @@ const initialState: ReferralCommissionState = {
         },
         balances: {
             commission: {
-                trade: [0.5, 0.2],
-                ieo : [0.1, 0.05],
+                trade: [0, 0],
+                ieo : [0, 0],
             },
             earned: {
                 trade: 0,
