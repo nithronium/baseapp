@@ -3,10 +3,15 @@ import { connect } from 'react-redux';
 import { RootState, selectUserInfo, User } from '../../../../modules';
 
 export interface ReferralHeaderInterface {
-    title: string;
-    btc: number;
-    usd: number;
-    legend: [];
+    commission: {
+        trade: number[];
+        ieo: number[];
+    };
+    earned: {
+        trade: number;
+        ieo: number;
+    };
+    loading: boolean;
 }
 
 interface ReduxProps {
@@ -15,32 +20,31 @@ interface ReduxProps {
 
 interface PassedProps {
     context: ReferralHeaderInterface;
+    title: string;
     link: string;
+    currencyId: string;
 }
 
 type Props = ReduxProps & PassedProps;
 //tslint:disable
-class ReferralHeaderContainer extends React.Component<Props> {
-    private calculateTotal(balances) {
-
-    }
-    
+class ReferralHeaderContainer extends React.Component<Props> {    
     public render() {
+        const total = (this.props.context.earned.trade || 0) + (this.props.context.earned.ieo || 0);
         return (
             <div className="container recalculate">
                 <div className="header">
                     <h1>Referral ballance</h1>
                     <a href="#!" className="round-button default arrow">
-                        BTC
+                        {this.props.currencyId}
                     </a>
                 </div>
                 <div className="contexter">
                     <div className="cards-wrapper">
                         {this.props.children}
                         <div className="summary recalculate">
-                            <div className="title">{this.props.context.title}</div>
+                            <div className="title">{this.props.title}</div>
                             <div className="summary-container">
-                                <div className="btc">{this.calculateTotal(this.props.context.total)} {this.props.context.currency}</div>
+                                <div className="btc">{total} {this.props.currencyId}</div>
                                 {/* <div className="usd">{this.props.context.usd} USD</div> */}
                                 {/* <a className="details-link" href={this.props.link}>
                                     view details

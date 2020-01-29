@@ -120,4 +120,4 @@ const referralCommissionServiceUrl = `${baseURL}/api/v2/referral`;
 export const getReferral = async body => {
     const res = await axios.get(`${referralCommissionServiceUrl}${body}`);
     return res.data;
-}
+};

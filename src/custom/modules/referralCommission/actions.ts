@@ -1,22 +1,21 @@
 import { CommonError } from '../../../modules/types';
-import { REFERRAL_COMMISSION_BALANCES_DATA, REFERRAL_COMMISSION_REFERRALS_DATA, REFERRAL_COMMISSION_ERROR, REFERRAL_COMMISSION_BALANCES_FETCH, REFERRAL_COMMISSION_REFERRALS_FETCH } from './constants';
-import { ReferralCommissionBalancesInterface, ReferralCommissionReferralsInterface } from './reducer';
+import { REFERRAL_COMMISSION_BALANCES_DATA, REFERRAL_COMMISSION_BALANCES_FETCH, REFERRAL_COMMISSION_ERROR, REFERRAL_COMMISSION_REFERRALS_DATA, REFERRAL_COMMISSION_REFERRALS_FETCH } from './constants';
 
 export interface ReferralCommissionBalancesFetch {
     type: typeof REFERRAL_COMMISSION_BALANCES_FETCH;
-    payload : {
+    payload: {
         currencyId: string;
-    }
+    };
 }
 
 export interface ReferralCommissionReferralsFetch {
     type: typeof REFERRAL_COMMISSION_REFERRALS_FETCH;
-    payload : {
+    payload: {
         currencyId: string;
         type: string;
         skip: number;
         limit: number;
-    }
+    };
 }
 
 export interface ReferralCommissionError {
@@ -26,13 +25,13 @@ export interface ReferralCommissionError {
 
 export interface ReferralCommissionBalancesPayload {
     commission: {
-        trading: Array<number>;
-        ieo : Array<number>;
+        trading: number[];
+        ieo: number[];
     };
     earned: {
         trading: number;
         ieo: number;
-    }
+    };
     loading: boolean;
 }
 
@@ -42,7 +41,7 @@ export interface ReferralCommissionReferralsPayload {
     type: string;
     skip: number;
     limit: number;
-    referrals: []
+    referrals: [];
 }
 
 export interface ReferralCommissionBalancesData {
@@ -59,12 +58,12 @@ export type ReferralCommissionActions = ReferralCommissionBalancesFetch | Referr
 
 export const referralCommissionBalancesFetch = (payload: ReferralCommissionBalancesFetch['payload']): ReferralCommissionBalancesFetch => ({
     type: REFERRAL_COMMISSION_BALANCES_FETCH,
-    payload
+    payload,
 });
 
 export const referralCommissionReferralsFetch = (payload: ReferralCommissionReferralsFetch['payload']): ReferralCommissionReferralsFetch => ({
     type: REFERRAL_COMMISSION_REFERRALS_FETCH,
-    payload
+    payload,
 });
 
 export const referralCommissionBalancesData = (payload: ReferralCommissionBalancesData['payload']): ReferralCommissionBalancesData => ({

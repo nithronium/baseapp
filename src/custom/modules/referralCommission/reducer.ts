@@ -1,5 +1,5 @@
 import { ReferralCommissionActions } from './actions';
-import { REFERRAL_COMMISSION_BALANCES_DATA, REFERRAL_COMMISSION_REFERRALS_DATA, REFERRAL_COMMISSION_ERROR, REFERRAL_COMMISSION_BALANCES_FETCH, REFERRAL_COMMISSION_REFERRALS_FETCH } from './constants';
+import { REFERRAL_COMMISSION_BALANCES_DATA, REFERRAL_COMMISSION_BALANCES_FETCH, REFERRAL_COMMISSION_ERROR, REFERRAL_COMMISSION_REFERRALS_DATA, REFERRAL_COMMISSION_REFERRALS_FETCH } from './constants';
 
 
 export interface ReferralCommissionReferralsInterface {
@@ -18,20 +18,18 @@ export interface ReferralCommissionBalancesInterface {
 }
 
 export interface ReferralCommissionState {
-    loading: boolean;
-    currency: string;
+    currencyId: string;
     data: {
-        trading: ReferralCommissionReferralsInterface;
+        trade: ReferralCommissionReferralsInterface;
         ieo: ReferralCommissionReferralsInterface;
         balances: ReferralCommissionBalancesInterface;
     };
 }
 
 const initialState: ReferralCommissionState = {
-    loading: false,
-    currency: 'btc',
+    currencyId: 'btc',
     data: {
-        trading: {
+        trade: {
             referrals: [],
             type: 'trade',
             skip: 0,
@@ -49,11 +47,11 @@ const initialState: ReferralCommissionState = {
         },
         balances: {
             commission: {
-                trading: [0.5, 0.2],
+                trade: [0.5, 0.2],
                 ieo : [0.1, 0.05],
             },
             earned: {
-                trading: 0,
+                trade: 0,
                 ieo: 0,
             },
             loading: true,
@@ -72,7 +70,7 @@ export const referralCommissionReducer = (state = initialState, action: Referral
             newState.data.balances = {
                 ...action.payload,
                 loading: false,
-            }
+            };
             return newState;
         }
         case REFERRAL_COMMISSION_REFERRALS_DATA: {
@@ -81,7 +79,7 @@ export const referralCommissionReducer = (state = initialState, action: Referral
             };
             newState.data[action.payload.type] = {
                 ...action.payload,
-                loading: false
+                loading: false,
             };
             return newState;
         }

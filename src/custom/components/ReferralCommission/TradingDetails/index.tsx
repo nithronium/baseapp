@@ -2,14 +2,20 @@ import * as React from 'react';
 
 interface Props {
     context: {
-        legend: [];
+        referrals: [];
+        type: string;
+        skip: number;
+        limit: number;
+        count: number;
+        loading: boolean;
     };
     header: string;
-    entity: 'ieo' | 'summary' | 'trading';
+    currencyId: string;
+    entity: 'ieo' | 'trade';
 }
 
 interface State {
-    legend: [];
+    referrals: [];
 }
 
 class TradingDetails extends React.Component<Props, State>{
@@ -18,28 +24,26 @@ class TradingDetails extends React.Component<Props, State>{
 
         super(props);
         this.state = {
-            legend: this.props.context && this.props.context.legend,
+            referrals: this.props.context && this.props.context.referrals,
         };
 
         //this.loadMore = this.loadMore.bind(this);
 
     }
 
-    public tbodies = legendArray => {
-        return legendArray.map((record, index) => {
+    public tbodies = rowsArray => {
+        return rowsArray.map((record, index) => {
             return(
             <tbody key={index} className="summary-row">
                 <tr>
-                    <td><div className="mobile-card-header">E-mail</div><div className="mobile-value">{record.mail}</div></td>
+                    <td><div className="mobile-card-header">E-mail</div><div className="mobile-value">{record.email}</div></td>
                     <td><div className="mobile-card-header"># of L1</div><div className="mobile-value">{record.l1_trades}</div></td>
-                    <td><div className="mobile-card-header">Commission L1 (BTC)</div><div className="mobile-value">{record.commission_l1}</div></td>
-                    <td><div className="mobile-card-header"># of L2</div><div className="mobile-value">{record.referrals} <span className="explanation">referrals</span></div></td>
-                    <td><div className="mobile-card-header"># of L2 trades</div><div className="mobile-value">{record.trades} <span className="explanation">trades</span></div></td>
-                    <td><div className="mobile-card-header"/><div className="mobile-value">{record.commission_l2} <span className="explanation">BTC</span></div></td>
+                    <td><div className="mobile-card-header">Commission L1 (BTC)</div><div className="mobile-value">{record.l1_commissions}</div></td>
+                    {/* <td><div className="mobile-card-header"># of L2</div><div className="mobile-value">{record.referrals} <span className="explanation">referrals</span></div></td> */}
+                    <td><div className="mobile-card-header"># of L2 trades</div><div className="mobile-value">{record.l2_trades} <span className="explanation">trades</span></div></td>
+                    <td><div className="mobile-card-header"/><div className="mobile-value">{record.l2_commissions} <span className="explanation">BTC</span></div></td>
                 </tr>
-                <tr>
-                    <td colSpan={6}>total amount: {record.total_amount} BTC</td>
-                </tr>
+                {/* <tr><td colSpan={6}>total amount: {record.total_amount} BTC</td></tr> */}
             </tbody>
             );
         });
@@ -47,14 +51,14 @@ class TradingDetails extends React.Component<Props, State>{
 
     public render(){
 
-        let legendArray = [];
+        let referrals = [];
 
-        if (this.props.context && this.props.context.legend) {
-            legendArray = this.props.context && this.props.context.legend;
+        if (this.props.context && this.props.context.referrals) {
+            referrals = this.props.context && this.props.context.referrals;
         }
 
-        if (this.state.legend && this.state.legend.length) {
-            legendArray = this.state.legend;
+        if (this.state.referrals && this.state.referrals.length) {
+            referrals = this.state.referrals;
         }
 
         return(
@@ -75,7 +79,7 @@ class TradingDetails extends React.Component<Props, State>{
                                 <td>Commission L2<div className="explanation"> (BTC)</div></td>
                             </tr>
                         </thead>
-                        {this.tbodies(legendArray)}
+                        {this.tbodies(referrals)}
                         <tfoot>
                             {/*<tr><td colSpan={3}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td><td colSpan={3}><a className="csv-trigger round-button" href="#!">export CSV</a></td></tr>*/}
                             <tr>
@@ -86,14 +90,7 @@ class TradingDetails extends React.Component<Props, State>{
                                 <td className="footer-header"># of L2 trades</td>
                                 <td className="footer-header">Commission L2 (BTC)</td>
                             </tr>
-                            <tr>
-                                <td>{this.getTotal('total_amount')} BTC</td>
-                                <td>{this.getTotal('l1_trades')}</td>
-                                <td>{this.getTotal('commission_l1')}</td>
-                                <td>{this.getTotal('referrals')}</td>
-                                <td>{this.getTotal('trades')}</td>
-                                <td>{this.getTotal('commission_l2')} BTC</td>
-                            </tr>
+                            {/* <tr><td>{this.getTotal('total_amount')} BTC</td><td>{this.getTotal('l1_trades')}</td><td>{this.getTotal('commission_l1')}</td><td>{this.getTotal('referrals')}</td><td>{this.getTotal('trades')}</td><td>{this.getTotal('commission_l2')} BTC</td></tr> */}
                         </tfoot>
                     </table>
                 </div>
@@ -101,30 +98,30 @@ class TradingDetails extends React.Component<Props, State>{
         );
     }
 
-    private getTotal(column, mode = 'default', condition?){
+    // private getTotal(column, mode = 'default', condition?){
 
-        const legendArray = //this.state.legend && this.state.legend.length ? this.state.legend :
-            this.props.context && this.props.context.legend;
+    //     const legendArray = //this.state.legend && this.state.legend.length ? this.state.legend :
+    //         this.props.context && this.props.context.legend;
 
-        let total = 0;
+    //     let total = 0;
 
-        if (!legendArray) {
-            return total;
-        }
+    //     if (!legendArray) {
+    //         return total;
+    //     }
 
-        legendArray.map(record => {
-            const value2add = mode === 'default' ? record[column] : 1;
-            if (!condition){
-                total += value2add;
-            }else{
-                if (record[column] === condition){
-                    total += value2add;
-                }
-            }
-        });
+    //     legendArray.map(record => {
+    //         const value2add = mode === 'default' ? record[column] : 1;
+    //         if (!condition){
+    //             total += value2add;
+    //         }else{
+    //             if (record[column] === condition){
+    //                 total += value2add;
+    //             }
+    //         }
+    //     });
 
-        return total;
-    }
+    //     return total;
+    // }
 
     /*private loadMore(){
 

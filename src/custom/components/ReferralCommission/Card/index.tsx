@@ -1,64 +1,47 @@
 import * as React from 'react';
 
-interface CardContextInterface {
-    details: [];
-    legend: [];
-    earned: number;
-    title: string;
-}
-
 interface Props {
-    context: CardContextInterface;
+    commission: number[];
+    earned: number;
+    currencyId: string;
+    header: string;
     link: string;
 }
 
 class Card extends React.Component<Props>{
-
-    public getSummary = () => {
-        if (this.props.context.details){
-            return this.props.context.details;
-        }else{
-            return [];
-        }
-    }
-
-    public summaryRows = () => {
-        return this.getSummary().map((row, index) => {
-            return(
-                <div className="card-details-row" key={index}>
-                    <div className="card-details-row__left">{Object.keys(row)[0]}</div>
-                    <div className="card-details-row__right">{row[Object.keys(row)[0]]}</div>
-                </div>
-            );
-        });
-    }
-
     public render(){
 
-        let preloader;
-        if (!(this.props.context && this.props.context.legend)){
-            preloader = (
-                <div className="preloader"/>
-            );
-        }else{
-            preloader = null;
-        }
+        // let preloader;
+        // if (!(this.props. && this.props.context.legend)){
+        //     preloader = (
+        //         <div className="preloader"/>
+        //     );
+        // }else{
+        //     preloader = null;
+        // }
         return(
 
             <div className="Card">
-                {preloader}
+                {/* {preloader} */}
                 <div className="card-top">
                     <div className="card-top__left">
-                        <p className="card-top__left__header">{this.props.context.title}</p>
+                        <p className="card-top__left__header">{this.props.header}</p>
                     </div>
                 </div>
                 <div className="card-middle">
-                    {this.summaryRows()}
+                    <div className="card-details-row">
+                        <div className="card-details-row__left">Referral L1</div>
+                        <div className="card-details-row__right">{this.props.commission[0]}</div>
+                    </div>
+                    <div className="card-details-row">
+                        <div className="card-details-row__left">Referral L2</div>
+                        <div className="card-details-row__right">{this.props.commission[1]}</div>
+                    </div>
                 </div>
                 <div className="card-middle">
                     <div className="card-earned-header">Earned</div>
                     <div className="card-details-row">
-                        {this.props.context.earned} BTC
+                        {this.props.earned} {this.props.currencyId}
                     </div>
                 </div>
                 <div className="card-bottom">

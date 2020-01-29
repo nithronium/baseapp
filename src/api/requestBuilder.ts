@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { applogicUrl, authUrl, nodelogicUrl, referralUrl, referralCommissionUrl, tenkoUrl, tradeUrl, withCredentials } from './config';
+import { applogicUrl, authUrl, nodelogicUrl, referralCommissionUrl, referralUrl, tenkoUrl, tradeUrl, withCredentials } from './config';
 
 export type HTTPMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
 

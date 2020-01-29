@@ -2,8 +2,8 @@
 import { call, put } from 'redux-saga/effects';
 import { API, RequestOptions } from '../../../../api';
 import {
-    referralCommissionReferralsData,
     referralCommissionError,
+    referralCommissionReferralsData,
     ReferralCommissionReferralsFetch,
 } from '../actions';
 
@@ -12,10 +12,12 @@ const referralCommissionOptions: RequestOptions = {
 };
 
 export function* referralCommissionReferralsFetchSaga(action: ReferralCommissionReferralsFetch) {
-    const {currencyId, type, skip, limit} = action.payload
+    const {currencyId, type, skip, limit} = action.payload;
+    let queryString = `/private/referrals?currency_id=${currencyId}&type=${type}`;
+    if (!!skip) {queryString = `${queryString}&skip=${skip}`;}
+    if (!!limit) {queryString = `${queryString}&limit=${limit}`;}
     try {
-        const referrals = yield call(API.get(referralCommissionOptions), `/private/referrals?currency_id=${currencyId}&type=${type}&skip=${skip}&limit=${limit}`);
-
+        const referrals = yield call(API.get(referralCommissionOptions), queryString);
         yield put(referralCommissionReferralsData(referrals));
     } catch (error) {
         yield put(referralCommissionError(error));
