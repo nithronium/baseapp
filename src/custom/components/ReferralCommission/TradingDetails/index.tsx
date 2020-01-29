@@ -12,6 +12,7 @@ interface Props {
     header: string;
     currencyId: string;
     entity: 'ieo' | 'trade';
+    changePage(currencyId, type, skip, limit): void;
 }
 
 interface State {
@@ -61,6 +62,9 @@ class TradingDetails extends React.Component<Props, State>{
             referrals = this.state.referrals;
         }
 
+        const disabledPrev = this.props.context.skip <= 0;
+        const disabledNext = (this.props.context.skip + this.props.context.limit) >= this.props.context.count;
+
         return(
 
             <div className="trading-commission-details">
@@ -74,7 +78,7 @@ class TradingDetails extends React.Component<Props, State>{
                                 <td>E-mail</td>
                                 <td><div className="explanation"># of L1 </div>trades</td>
                                 <td>Commission L1<div className="explanation"> (BTC)</div></td>
-                                <td><div className="explanation"># of </div>L2</td>
+                                {/* <td><div className="explanation"># of </div>L2</td> */}
                                 <td><div className="explanation"># of </div>L2 trades</td>
                                 <td>Commission L2<div className="explanation"> (BTC)</div></td>
                             </tr>
@@ -82,20 +86,31 @@ class TradingDetails extends React.Component<Props, State>{
                         {this.tbodies(referrals)}
                         <tfoot>
                             {/*<tr><td colSpan={3}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td><td colSpan={3}><a className="csv-trigger round-button" href="#!">export CSV</a></td></tr>*/}
-                            <tr>
-                                <td><span className="table-summary-header">total</span></td>
-                                <td className="footer-header"># of L1 trades</td>
-                                <td className="footer-header">Commission L1 (BTC)</td>
-                                <td className="footer-header"># of L2</td>
-                                <td className="footer-header"># of L2 trades</td>
-                                <td className="footer-header">Commission L2 (BTC)</td>
-                            </tr>
+                            {/* <tr><td><span className="table-summary-header">total</span></td><td className="footer-header"># of L1 trades</td><td className="footer-header">Commission L1 (BTC)</td><td className="footer-header"># of L2</td><td className="footer-header"># of L2 trades</td><td className="footer-header">Commission L2 (BTC)</td></tr> */}
                             {/* <tr><td>{this.getTotal('total_amount')} BTC</td><td>{this.getTotal('l1_trades')}</td><td>{this.getTotal('commission_l1')}</td><td>{this.getTotal('referrals')}</td><td>{this.getTotal('trades')}</td><td>{this.getTotal('commission_l2')} BTC</td></tr> */}
                         </tfoot>
                     </table>
+                    <div style={{ padding: '40px 0',display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '200px'}}>
+                            <button style={{background: disabledPrev ? 'gray' : '#00732F'}} disabled={disabledPrev} onClick={this.previousPage}>&larr; Prev</button>
+                            <button style={{background: disabledNext ? 'gray' : '#00732F'}} disabled={disabledNext} onClick={this.nextPage}>Next &rarr;</button>
+                    </div>
                 </div>
             </div>
         );
+    }
+
+    private nextPage = () => {
+        const limit = (this.props.context.limit || 10);
+        const skip = (this.props.context.skip || 0) + limit;
+
+        this.props.changePage(this.props.currencyId, this.props.context.type, skip, limit);
+    }
+
+    private previousPage = () => {
+        const limit = (this.props.context.limit || 10);
+        const skip = (this.props.context.skip || 0) - limit;
+
+        this.props.changePage(this.props.currencyId, this.props.context.type, skip, limit);
     }
 
     // private getTotal(column, mode = 'default', condition?){
@@ -122,30 +137,6 @@ class TradingDetails extends React.Component<Props, State>{
 
     //     return total;
     // }
-
-    /*private loadMore(){
-
-        this.setState({
-            filteredLegend: null,
-        });
-
-        const url = `/json/ReferralCommission/${this.props.entity}_more.json`;
-
-        fetch(url)
-        .then(async res => res.json())
-        .then(
-            result => {
-                this.setState({
-                    legend: result[`${this.props.entity}-commission`].legend,
-                });
-            },
-
-            error => {
-                //console.log(error);
-            },
-        );
-
-    }*/
 }
 
 export { TradingDetails };
