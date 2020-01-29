@@ -28,6 +28,8 @@ import {
     selectChangePasswordSuccess,
 } from '../../../modules/user/profile';
 import { PencilIcon } from '../../assets/images/PencilIcon';
+import { buildPath } from '../../helpers';
+
 
 interface ReduxProps {
     user: User;
@@ -323,12 +325,13 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     }
 
     private handleRedirectToConfirm = (editParam: string) => {
+        const lang = localStorage.getItem('lang_code') || 'en';
         switch (editParam) {
             case 'profile':
-                this.props.history.push('/confirm', { profileEdit: true });
+                this.props.history.push(buildPath('/confirm', lang), { profileEdit: true });
                 break;
             case 'address':
-                this.props.history.push('/confirm', { addressEdit: true });
+                this.props.history.push(buildPath('/confirm', lang), { addressEdit: true });
                 break;
             default:
                 break;
@@ -336,8 +339,9 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     }
 
     private handleNavigateTo2fa = (enable2fa: boolean) => {
+        const lang = localStorage.getItem('lang_code') || 'en';
         if (enable2fa) {
-            this.props.history.push('/security/2fa', { enable2fa });
+            this.props.history.push(buildPath('/security/2fa', lang), { enable2fa });
         } else {
             this.setState({
                 showModal: !this.state.showModal,
