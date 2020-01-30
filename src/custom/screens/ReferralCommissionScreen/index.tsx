@@ -35,6 +35,10 @@ type Props = DispatchProps & InjectedIntlProps & ReduxProps;
 
 class ReferralCommission extends React.Component<Props> {
 
+    public state = {
+        currentCurrencyId: 'btc',
+    };
+
     public componentDidMount() {
         setDocumentTitle('Referral Commission');
         this.props.fetchReferralCommissionBalances({currencyId: this.props.commissionsInfo.currencyId});
