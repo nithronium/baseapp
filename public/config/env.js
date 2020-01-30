@@ -5,7 +5,7 @@ window.env = {
         applogicUrl: 'http://localhost:9002/api/v2/applogic',
         rangerUrl: 'ws://localhost:9011/api/v2/ranger',
         tenkoUrl: 'http://localhost:9002/api/v2/tenko',
-        nodelogicUrl: 'https://localhost:9002/api/v2/nodelogic',
+        nodelogicUrl: 'http://localhost:9002/api/v2/nodelogic',
         
     },
     minutesUntilAutoLogout: '60',

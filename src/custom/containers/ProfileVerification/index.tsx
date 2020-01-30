@@ -171,7 +171,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
     public renderUpgradeLevelLink(balance?) {
         const _balance = balance ? balance : 0;
         const gotoConfirm = () => {
-            if (_balance < MINIMAL_BALANCE && this.props.user.level < 6 && this.props.user.level > 1) {
+            if (_balance < MINIMAL_BALANCE && this.props.user.level === 3) {
                 this.props.fetchSuccess({ message: ['page.profile.update.balance'], type: 'error' });
             } else {
                 this.props.history.push(buildPath('/confirm', this.props.currentLanguage));
