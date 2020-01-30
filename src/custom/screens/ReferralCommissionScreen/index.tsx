@@ -57,6 +57,10 @@ class ReferralCommission extends React.Component<Props> {
         }
     }
 
+    public changeCurrentCurrency = currencyId => {
+        this.props.changeCurrency({currencyId});
+    }
+
     public changePage = (currencyId, type, skip, limit) => {
         this.props.fetchReferralCommissionReferrals({currencyId, type, skip, limit});
     }
@@ -72,7 +76,7 @@ class ReferralCommission extends React.Component<Props> {
             <div className="pg-referral-commission">
                 <div className="top-holder">
                     <section id="top">
-                        <ReferralHeader title="Total Earnings" currencies={currenciesNames} context={balances} currencyId={currencyId} link="#summary">
+                        <ReferralHeader title="Total Earnings" currencies={currenciesNames} context={balances} currencyId={currencyId} changeCurrentCurrency={this.changeCurrentCurrency} link="#summary">
                             <Card earned={balances.earned.trade} commission={balances.commission.trade} currencyId={currencyId} header="Trading commission" link="#trade"/>
                             <Card earned={balances.earned.ieo} commission={balances.commission.ieo} currencyId={currencyId} header="IEO commission" link="#ieo"/>
                         </ReferralHeader>

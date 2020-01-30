@@ -2,6 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Currency, RootState, selectUserInfo, User } from '../../../../modules';
 
+import { CurrencySelect } from '../CurrencySelect';
+
 export interface ReferralHeaderInterface {
     commission: {
         trade: number[];
@@ -24,20 +26,25 @@ interface PassedProps {
     link: string;
     currencyId: string;
     currencies: Currency[];
+    changeCurrentCurrency(currencyId): void;
 }
 
 type Props = ReduxProps & PassedProps;
 //tslint:disable
-class ReferralHeaderContainer extends React.Component<Props> {    
+class ReferralHeaderContainer extends React.Component<Props> {   
+    public currencies = ['aed', 'btc', 'eur', 'usd', 'usdt', 'bch', 'emrx']; //mock currencies
+
+    public changeCurrentCurrency(curr) { //method to change current currency
+        console.log(curr);  
+    }
+
     public render() {
         const total = (this.props.context.earned.trade || 0) + (this.props.context.earned.ieo || 0);
         return (
             <div className="container recalculate">
                 <div className="header">
                     <h1>Referral ballance</h1>
-                    <a href="#!" className="round-button default arrow">
-                        {this.props.currencyId}
-                    </a>
+                    <CurrencySelect currencyId={this.props.currencyId} currencies={this.currencies} changeCurrentCurrency={this.props.changeCurrentCurrency}/>
                 </div>
                 <div className="contexter">
                     <div className="cards-wrapper">
