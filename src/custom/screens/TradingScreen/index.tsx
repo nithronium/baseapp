@@ -204,11 +204,10 @@ class Trading extends React.Component<Props, StateProps> {
             </div>
         );
     }
-
+//tslint:disable
     private setMarketFromUrlIfExists = (markets: Market[]): void => {
-        const urlMarket: string = getUrlPart(3, window.location.pathname);
+        const urlMarket: string = getUrlPart(2, window.location.pathname);
         const market: Market | undefined = markets.find(item => item.id === urlMarket);
-
         if (market) {
             this.props.setCurrentMarket(market);
         }
