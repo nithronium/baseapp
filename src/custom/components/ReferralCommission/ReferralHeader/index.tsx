@@ -30,6 +30,11 @@ interface PassedProps {
 type Props = ReduxProps & PassedProps;
 //tslint:disable
 class ReferralHeaderContainer extends React.Component<Props> {   
+    public currencies = ['aed', 'btc', 'eur', 'usd', 'usdt', 'bch', 'emrx']; //mock currencies
+
+    public changeCurrentCurrency(curr) { //method to change current currency
+        console.log(curr);  
+    }
 
     public render() {
         const total = (this.props.context.earned.trade || 0) + (this.props.context.earned.ieo || 0);
@@ -37,7 +42,7 @@ class ReferralHeaderContainer extends React.Component<Props> {
             <div className="container recalculate">
                 <div className="header">
                     <h1>Referral ballance</h1>
-                    <CurrencySelect currencyId={this.props.currencyId}/>
+                    <CurrencySelect currencyId={this.props.currencyId} currencies={this.currencies} changeCurrentCurrency={this.changeCurrentCurrency}/>
                 </div>
                 <div className="contexter">
                     <div className="cards-wrapper">
