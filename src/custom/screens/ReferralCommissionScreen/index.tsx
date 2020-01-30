@@ -58,7 +58,11 @@ class ReferralCommission extends React.Component<Props> {
     }
 
     public changeCurrentCurrency = currencyId => {
-        this.props.changeCurrency({currencyId});
+        const currencyIdFormatted = currencyId.toLowerCase();
+        this.props.fetchReferralCommissionBalances({currencyId: currencyIdFormatted});
+        this.props.fetchReferralCommissionReferrals({currencyId: currencyIdFormatted, type:'trade'});
+        this.props.fetchReferralCommissionReferrals({currencyId: currencyIdFormatted, type:'ieo'});
+        this.props.changeCurrency({currencyId: currencyId});
     }
 
     public changePage = (currencyId, type, skip, limit) => {
