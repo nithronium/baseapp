@@ -1,5 +1,5 @@
 import { CommonError } from '../../../modules/types';
-import { REFERRAL_COMMISSION_BALANCES_DATA, REFERRAL_COMMISSION_BALANCES_FETCH, REFERRAL_COMMISSION_ERROR, REFERRAL_COMMISSION_REFERRALS_DATA, REFERRAL_COMMISSION_REFERRALS_FETCH } from './constants';
+import { REFERRAL_COMMISSION_BALANCES_DATA, REFERRAL_COMMISSION_BALANCES_FETCH, REFERRAL_COMMISSION_CURRENCY_CHANGE, REFERRAL_COMMISSION_ERROR, REFERRAL_COMMISSION_REFERRALS_DATA, REFERRAL_COMMISSION_REFERRALS_FETCH } from './constants';
 
 export interface ReferralCommissionBalancesFetch {
     type: typeof REFERRAL_COMMISSION_BALANCES_FETCH;
@@ -15,6 +15,13 @@ export interface ReferralCommissionReferralsFetch {
         type: string;
         skip?: number;
         limit?: number;
+    };
+}
+
+export interface ReferralCommissionCurrencyChange {
+    type: typeof REFERRAL_COMMISSION_CURRENCY_CHANGE;
+    payload: {
+        currencyId: string;
     };
 }
 
@@ -54,7 +61,12 @@ export interface ReferralCommissionReferralsData {
     payload: ReferralCommissionReferralsPayload;
 }
 
-export type ReferralCommissionActions = ReferralCommissionBalancesFetch | ReferralCommissionReferralsFetch | ReferralCommissionBalancesData | ReferralCommissionReferralsData | ReferralCommissionError;
+export type ReferralCommissionActions = ReferralCommissionCurrencyChange | ReferralCommissionBalancesFetch | ReferralCommissionReferralsFetch | ReferralCommissionBalancesData | ReferralCommissionReferralsData | ReferralCommissionError;
+
+export const referralCommissionCurrencyChange = (payload: ReferralCommissionCurrencyChange['payload']): ReferralCommissionCurrencyChange => ({
+    type: REFERRAL_COMMISSION_CURRENCY_CHANGE,
+    payload,
+});
 
 export const referralCommissionBalancesFetch = (payload: ReferralCommissionBalancesFetch['payload']): ReferralCommissionBalancesFetch => ({
     type: REFERRAL_COMMISSION_BALANCES_FETCH,

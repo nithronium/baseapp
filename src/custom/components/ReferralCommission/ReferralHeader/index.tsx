@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import { RootState, selectUserInfo, User } from '../../../../modules';
+import { Currency, RootState, selectUserInfo, User } from '../../../../modules';
 
 export interface ReferralHeaderInterface {
     commission: {
@@ -23,6 +23,7 @@ interface PassedProps {
     title: string;
     link: string;
     currencyId: string;
+    currencies: Currency[];
 }
 
 type Props = ReduxProps & PassedProps;

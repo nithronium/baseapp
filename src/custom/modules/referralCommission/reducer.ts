@@ -1,5 +1,5 @@
 import { ReferralCommissionActions } from './actions';
-import { REFERRAL_COMMISSION_BALANCES_DATA, REFERRAL_COMMISSION_BALANCES_FETCH, REFERRAL_COMMISSION_ERROR, REFERRAL_COMMISSION_REFERRALS_DATA, REFERRAL_COMMISSION_REFERRALS_FETCH } from './constants';
+import { REFERRAL_COMMISSION_BALANCES_DATA, REFERRAL_COMMISSION_BALANCES_FETCH, REFERRAL_COMMISSION_CURRENCY_CHANGE, REFERRAL_COMMISSION_ERROR, REFERRAL_COMMISSION_REFERRALS_DATA, REFERRAL_COMMISSION_REFERRALS_FETCH } from './constants';
 
 
 export interface ReferralCommissionReferralsInterface {
@@ -97,6 +97,11 @@ export const referralCommissionReducer = (state = initialState, action: Referral
             return {
                 ...state,
                 loading: true,
+            };
+        case REFERRAL_COMMISSION_CURRENCY_CHANGE:
+            return {
+                ...state,
+                ...action.payload,
             };
         default:
             return state;
