@@ -6,59 +6,69 @@ import { Winner, WinnerItem } from './WinnerItem';
 
 const testData: Winner[] = [
     {
-        number: 871074,
+        number: 916772,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 549469,
+        number: 841996,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 548396,
+        number: 918203,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 909247,
+        number: 841956,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 549164,
+        number: 917195,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 841896,
+        number: 841565,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 869669,
+        number: 841459,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 549133,
-        value: 750,
-        currency: 'EMRX',
-    },
-    {
-        number: 841365,
-        value: 750,
-        currency: 'EMRX',
-    },
-    {
-        number: 550064,
-        value: 750,
-        currency: 'EMRX',
-    },
-    {
-        number: 549641,
+        number: 920901,
         value: 3500,
         currency: 'TFT',
+    },
+    {
+        number: 919293,
+        value: 3500,
+        currency: 'TFT',
+    },
+    {
+        number: 549722,
+        value: 500,
+        currency: 'BURN',
+    },
+    {
+        number: 548519,
+        value: 500,
+        currency: 'BURN',
+    },
+    {
+        number: 841254,
+        value: 500,
+        currency: 'BURN',
+    },
+    {
+        number: 917130,
+        value: 500,
+        currency: 'BURN',
     },
 ];
 

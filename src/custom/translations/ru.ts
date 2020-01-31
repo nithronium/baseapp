@@ -886,8 +886,8 @@ export const ru: LangType = {
     'page.referal.bottombanner.dont_miss_chance': 'Не упусти свой шанс',
     'page.referal.bottombanner.learn_more': 'Начать',
     'page.referral.winnersbanner.graz': 'Поздравляем победителей',
-    'page.referral.winnersbanner.graz.1r': '2-ого раунда розыгрыша',
-    'page.referral.winnersbanner.date': '8 января',
+    'page.referral.winnersbanner.graz.1r': '3-го раунда розыгрыша',
+    'page.referral.winnersbanner.date': '23 января',
     'page.referral.winnersbanner.ticketnum': 'Тикет №',
     'timeline.title': 'Временные рамки',
     'timeline.start.text': 'Акция начинается',
@@ -1061,6 +1061,11 @@ export const ru: LangType = {
     'cardDeposit.errorMessage.country': 'Заполните страну',
     'cardDeposit.errorMessage.number': 'Введите корректный номер телефона',
     'cardDeposit.errorMessage.email': 'Введите корректный емэйл',
+
+    'partners.banner.title': 'Партнеры программы Giveaway',
+    'partners.banner.subtitle': 'Только надежные партнеры, для Вашей уверенности',
+    'partners.banner.tokens': 'токены',
+  'partners.banner.takepart': 'ПРИМИТЕ УЧАСТИЕ',
 
     ...nationalitiesNames,
     ...pluginsTranslations,
