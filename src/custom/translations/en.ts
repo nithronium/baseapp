@@ -421,4 +421,9 @@ export const en = {
   'cardDeposit.errorMessage.number': 'Phone should be valid',
   'cardDeposit.errorMessage.email': 'Email should be valid',
 
+  'partners.banner.title': 'Giveaway Partners',
+  'partners.banner.subtitle': 'Only trusted partners, for your confidence',
+  'partners.banner.tokens': 'tokens',
+  'partners.banner.takepart': 'TAKE PART',
+
 };

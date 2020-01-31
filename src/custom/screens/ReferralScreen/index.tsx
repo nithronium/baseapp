@@ -31,7 +31,7 @@ import {
     User,
 } from '../../../modules';
 import { CommonError } from '../../../modules/types';
-import { Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, TopBanner, Video } from '../../components/Referral';
+import { Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, TopBanner, Video, Partners } from '../../components/Referral';
 
 import { buildPath } from '../../helpers';
 
@@ -301,6 +301,7 @@ class Referral extends React.Component<Props> {
                         text3={this.props.intl.formatMessage({id: 'howto.text3'})}
                         text4={this.props.intl.formatMessage({id: 'howto.text4'})}
                     />
+                    <Partners/>
                     <Prizes intl={this.props.intl}/>
                     <GetCode intl={this.props.intl}/>
                     <Footer intl={this.props.intl}/>

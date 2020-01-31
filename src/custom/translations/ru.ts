@@ -1062,6 +1062,11 @@ export const ru: LangType = {
     'cardDeposit.errorMessage.number': 'Введите корректный номер телефона',
     'cardDeposit.errorMessage.email': 'Введите корректный емэйл',
 
+    'partners.banner.title': 'Партнеры программы Giveaway',
+    'partners.banner.subtitle': 'Только надежные партнеры, для Вашей уверенности',
+    'partners.banner.tokens': 'токены',
+  'partners.banner.takepart': 'ПРИМИТЕ УЧАСТИЕ',
+
     ...nationalitiesNames,
     ...pluginsTranslations,
 };

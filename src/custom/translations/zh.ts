@@ -926,6 +926,11 @@ export const zh = {
   'cardDeposit.errorMessage.number': '电子邮件应该有效',
   'cardDeposit.errorMessage.email': '邮箱应该有效',
 
+  'partners.banner.title': '礼品合作伙伴',
+  'partners.banner.subtitle': '只有值得信赖的合作伙伴，您才能放心',
+  'partners.banner.tokens': '代币',
+  'partners.banner.takepart': '参与',
+
   ...pluginsTranslations,
   ...nationalitiesNames,
 }
