@@ -75,7 +75,7 @@ const conf: RequestOptions = {
 export const changePassword = async body => API.post(conf)('/identity/users/password/confirm_code', body);
 
 
-const baseURL = window.document.location.origin.includes('localhost') ? 'http://0.0.0.0:9002' : window.document.location.origin;
+const baseURL = window.document.location.origin.includes('localhost') ? 'http://localhost:9002' : window.document.location.origin;
 
 const refUrl = `${baseURL}/api/v1/referral-code`;
 
