@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { getReferral } from '../../../../api';
+import { exportToCsv } from '../../../helpers';
 
 interface Props {
     context: {
@@ -64,6 +66,7 @@ class TradingDetails extends React.Component<Props, State>{
 
         const disabledPrev = this.props.context.skip <= 0;
         const disabledNext = (this.props.context.skip + this.props.context.limit) >= this.props.context.count;
+        const disableExport = this.props.context.referrals.length < 1;
 
         return(
 
@@ -90,9 +93,15 @@ class TradingDetails extends React.Component<Props, State>{
                             {/* <tr><td>{this.getTotal('total_amount')} BTC</td><td>{this.getTotal('l1_trades')}</td><td>{this.getTotal('commission_l1')}</td><td>{this.getTotal('referrals')}</td><td>{this.getTotal('trades')}</td><td>{this.getTotal('commission_l2')} BTC</td></tr> */}
                         </tfoot>
                     </table>
-                    <div style={{ padding: '40px 0',display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '200px'}}>
-                            <button style={{background: disabledPrev ? 'gray' : '#00732F'}} disabled={disabledPrev} onClick={this.previousPage}>&larr; Prev</button>
-                            <button style={{background: disabledNext ? 'gray' : '#00732F'}} disabled={disabledNext} onClick={this.nextPage}>Next &rarr;</button>
+                    <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <div style={{ padding: '40px 0',display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '200px'}}>
+                                <button style={{background: disabledPrev ? 'gray' : '#00732F'}} disabled={disabledPrev} onClick={this.previousPage}>&larr; Prev</button>
+                                <button style={{background: disabledNext ? 'gray' : '#00732F'}} disabled={disabledNext} onClick={this.nextPage}>Next &rarr;</button>
+                        </div>
+
+                        <div style={{ padding: '40px 0',display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '200px'}}>
+                                <button style={{background: disableExport ? 'gray' : '#00732F'}} disabled={disableExport} onClick={this.downloadCsv}>Export to CSV</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -113,6 +122,18 @@ class TradingDetails extends React.Component<Props, State>{
         this.props.changePage(this.props.currencyId, this.props.context.type, skip, limit);
     }
 
+    private downloadCsv = async () => {
+        const fileName = `Export - ${this.props.entity}.csv`;
+        const query = `/private/referrals?type=${this.props.entity}&currency_id=${this.props.currencyId}&skip=0&limit=${this.props.context.count}`;
+        const json = await getReferral(query);
+        if (json.referrals.length < 1) {return;}
+        const rows: string[][] = [];
+        rows.push(Object.keys(json.referrals[0]));
+        for (const referral of json.referrals) {
+            rows.push(Object.values(referral));
+        }
+        exportToCsv(fileName, rows);
+    }
     // private getTotal(column, mode = 'default', condition?){
 
     //     const legendArray = //this.state.legend && this.state.legend.length ? this.state.legend :
