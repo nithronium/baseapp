@@ -184,15 +184,15 @@ class ReferralTicketDetails extends React.Component<Props, State> {
                                         {this.props.count} {this.props.message({ id: 'tickets.referrals' })}
                                     </td>
                                     <td>
-                                        {this.props.message({ id: 'tickets.yes' })} {this.getOverall('active')} /
-                                        {this.props.message({ id: 'tickets.no' })} {this.getOverall('inactive')}{' '}
+                                        {this.props.message({ id: 'tickets.yes' })} {this.props.countActive} /
+                                        {this.props.message({ id: 'tickets.no' })} {this.props.count - this.props.countActive}{' '}
                                     </td>
                                     <td>
                                         {this.props.L2count}{' '}
                                         <span className="explanation"> {this.props.message({ id: 'tickets.referrals' })}</span>
                                     </td>
                                     <td>
-                                        {this.getTotal('activeSubreferrals')}{' '}
+                                        {this.props.L2countActive}{' '}
                                         <span className="explanation">{this.props.message({ id: 'tickets.referrals' })}</span>
                                     </td>
                                 </tr>
