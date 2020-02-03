@@ -8,3 +8,4 @@ export * from './GetCode';
 export * from './Footer';
 export * from './Button';
 export * from './TopBanner';
+export * from './Partners';
