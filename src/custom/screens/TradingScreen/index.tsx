@@ -82,7 +82,7 @@ type Props = DispatchProps & ReduxProps & RouteComponentProps & InjectedIntlProp
 
 // tslint:disable:jsx-no-lambda
 class Trading extends React.Component<Props, StateProps> {
-    public  state = {
+    public state = {
         orderComponentResized: 10,
         marketId: '',
     };
@@ -107,12 +107,12 @@ class Trading extends React.Component<Props, StateProps> {
     ];
 
     private pageTitles = {
-         'BTC/USDT': { title: 'btcusdt_title', description: 'btcusdt_description' } ,
-         'ETH/USDT': { title: 'ethusdt_title', description: 'ethusdt_description' } ,
-         'ETH/BTC': { title: 'ethbtc_title', description: 'ethbtc_description' } ,
-         'EMRX/BTC': { title: 'emrxbtc_title', description: 'emrxbtc_description' } ,
-         'LTC/BTC': { title: 'ltcbtc_title', description: 'ltcbtc_description' } ,
-         'BCH/BTC': { title: 'bchbtc_title', description: 'bchbtc_description' } ,
+        'BTC/USDT': { title: 'btcusdt_title', description: 'btcusdt_description' },
+        'ETH/USDT': { title: 'ethusdt_title', description: 'ethusdt_description' },
+        'ETH/BTC': { title: 'ethbtc_title', description: 'ethbtc_description' },
+        'EMRX/BTC': { title: 'emrxbtc_title', description: 'emrxbtc_description' },
+        'LTC/BTC': { title: 'ltcbtc_title', description: 'ltcbtc_description' },
+        'BCH/BTC': { title: 'bchbtc_title', description: 'bchbtc_description' },
     };
 
     public componentDidMount() {
@@ -149,13 +149,7 @@ class Trading extends React.Component<Props, StateProps> {
 
     public componentWillReceiveProps(nextProps) {
         document.getElementsByTagName('html')[0].lang = this.props.currentLanguage;
-        const {
-            currentLanguage,
-            currentMarket,
-            history,
-            markets,
-            userLoggedIn,
-        } = this.props;
+        const { currentLanguage, currentMarket, history, markets, userLoggedIn } = this.props;
 
         if (userLoggedIn !== nextProps.userLoggedIn) {
             this.props.rangerConnect({ withAuth: nextProps.userLoggedIn });
@@ -204,9 +198,11 @@ class Trading extends React.Component<Props, StateProps> {
             </div>
         );
     }
-//tslint:disable
+    //tslint:disable
     private setMarketFromUrlIfExists = (markets: Market[]): void => {
-        const urlMarket: string = getUrlPart(2, window.location.pathname);
+        const currentLanguage = localStorage.getItem('lang_code');
+        const urlPart = currentLanguage === 'en' ? 2 : 3;
+        const urlMarket: string = getUrlPart(urlPart, window.location.pathname);
         const market: Market | undefined = markets.find(item => item.id === urlMarket);
         if (market) {
             this.props.setCurrentMarket(market);
@@ -225,18 +221,20 @@ class Trading extends React.Component<Props, StateProps> {
             const description = this.props.intl.formatMessage({ id: this.pageTitles[marketName].description });
 
             // tslint:disable
-            const link = `https://emirex.com${currentLanguage === 'en' ? '/' : '/' + currentLanguage + '/'}trading/${marketName.replace('/', '').toLowerCase()}`;
+            const link = `https://emirex.com${
+                currentLanguage === 'en' ? '/' : '/' + currentLanguage + '/'
+            }trading/${marketName.replace('/', '').toLowerCase()}`;
             const linkEn = `https://emirex.com/trading/${marketName.replace('/', '').toLowerCase()}`;
             const linkRu = `https://emirex.com/ru/trading/${marketName.replace('/', '').toLowerCase()}`;
             const linkZh = `https://emirex.com/zh/trading/${marketName.replace('/', '').toLowerCase()}`;
             return (
                 <Helmet>
-                    <link rel="canonical" href={link}/>
+                    <link rel="canonical" href={link} />
                     <title>{title}</title>
                     <meta name="description" content={description} />
                     <link key="ru" rel="alternate" href={linkRu} hrefLang="ru" title="Русский" />
-                    <link key="en" rel="alternate" href={linkEn} hrefLang="en" title="English"/>
-                    <link key="zh" rel="alternate" href={linkZh} hrefLang="zh" title="中国人"/>
+                    <link key="en" rel="alternate" href={linkEn} hrefLang="en" title="English" />
+                    <link key="zh" rel="alternate" href={linkZh} hrefLang="zh" title="中国人" />
                 </Helmet>
             );
         } else {
@@ -246,8 +244,7 @@ class Trading extends React.Component<Props, StateProps> {
                 </Helmet>
             );
         }
-
-    }
+    };
 
     // private setTradingTitle = (market: Market, tickers: ReduxProps['tickers']) => {
     //     const tickerPrice = tickers[market.id] ? tickers[market.id].last : '0.0';
@@ -289,10 +286,14 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
     saveLayouts: payload => dispatch(saveLayouts(payload)),
 });
 
-const TradingScreen = injectIntl(withRouter(connect(
-    mapStateToProps,
-    mapDispatchToProps,
-    // tslint:disable-next-line: no-any
-)(Trading) as any));
+const TradingScreen = injectIntl(
+    withRouter(
+        connect(
+            mapStateToProps,
+            mapDispatchToProps
+            // tslint:disable-next-line: no-any
+        )(Trading) as any
+    )
+);
 
 export { TradingScreen };
