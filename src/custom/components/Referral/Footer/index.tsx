@@ -26,6 +26,7 @@ import replaceHLink from '../../../helpers/scripts.js';
 declare module 'react' {
     interface HTMLAttributes<T> {
         rel?: string;
+        target?: string;
     }
 }
 
@@ -101,7 +102,7 @@ const IconList = ({ links }) => {
         <ul className="social-links">
             {links.map(({ key, href, icon, alt }) => (
                 <li key={key} className="sl-item">
-                    <a href={href}>
+                    <a href={href} target="_blank" rel="nofollow noopener">
                         <div className="icon">
                             <img className="icon-img" width="16" height="16" src={icon} alt={alt} />
                         </div>
@@ -134,13 +135,13 @@ const Address = props => {
 
 const title1 = 'footer_headers_company';
 const links1 = [
-    { key: '', href: '/about', label: 'footer_links_about' },
-    { key: '', href: '/whitepaper', label: 'footer_links_wp' },
-    { key: '', href: 'https://kb.emirex.com/fees-structure', label: 'footer_links_fees' },
+    { key: '', href: '/about', label: 'footer_links_about', ext: false },
+    { key: '', href: '/whitepaper', label: 'footer_links_wp', ext: false },
+    { key: '', href: 'https://kb.emirex.com/fees-structure', label: 'footer_links_fees', ext: true },
     /* { href: '/team', label: 'footer.links.team'},
   { href: '/careers', label: 'footer.links.careers'},
   { href: '/blog', label: 'footer.links.blog'},*/
-    { key: '', href: '/referral', label: 'footer_links_referral', className: 'gold' },
+    { key: '', href: '/referral', label: 'footer_links_referral', className: 'gold', ext: false },
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
     return link;
@@ -148,9 +149,9 @@ const links1 = [
 
 const title2 = 'footer_headers_services';
 const links2 = [
-    { key: '', href: '/trading/btcusdt', label: 'footer_links_platform' },
-    { key: '', href: 'https://emrx.emirex.com', label: 'footer_links_emrx' },
-    { key: '', href: 'https://advisory.emirex.com', label: 'footer_links_ad' },
+    { key: '', href: '/trading/btcusdt', label: 'footer_links_platform', ext: false },
+    { key: '', href: 'https://emrx.emirex.com', label: 'footer_links_emrx', ext: true },
+    { key: '', href: 'https://advisory.emirex.com', label: 'footer_links_ad', ext: true },
     /*  { href: '/listing', label: 'footer.links.listing'},*/
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
@@ -159,8 +160,8 @@ const links2 = [
 
 const title3 = 'footer_headers_buysell';
 const links3 = [
-    { key: '', href: '/trading/btcusdt', label: 'footer_links_buyBitcoin' },
-    { key: '', href: '/trading/ethusdt', label: 'footer_links_buyEthereum' },
+    { key: '', href: '/trading/btcusdt', label: 'footer_links_buyBitcoin', ext: false },
+    { key: '', href: '/trading/ethusdt', label: 'footer_links_buyEthereum', ext: false },
     /*{ href: '/trading', label: 'footer.links.buyRipple'},
   { href: '/trading', label: 'footer.links.buyLitecoin'},
   { href: '/trading', label: 'footer.links.buyEmrx'},*/
@@ -171,8 +172,8 @@ const links3 = [
 
 const title4 = 'footer_headers_support';
 const links4 = [
-    { key: '', href: 'https://kb.emirex.com/', label: 'footer_links_kb' },
-    { key: '', href: 'https://kb.emirex.com/kb-tickets/new', label: 'footer_links_submitRequest' },
+    { key: '', href: 'https://kb.emirex.com/', label: 'footer_links_kb', ext: true },
+    { key: '', href: 'https://kb.emirex.com/kb-tickets/new', label: 'footer_links_submitRequest', ext: true },
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
     return link;
@@ -180,9 +181,9 @@ const links4 = [
 
 const title5 = 'footer_headers_legal';
 const links5 = [
-    { key: '', href: '/terms', label: 'footer_links_terms' },
-    { key: '', href: '/privacy', label: 'footer_links_privacy' },
-    { key: '', href: '/kyc_policy', label: 'footer_links_kyc' },
+    { key: '', href: '/terms', label: 'footer_links_terms', ext: false },
+    { key: '', href: '/privacy', label: 'footer_links_privacy', ext: false },
+    { key: '', href: '/kyc_policy', label: 'footer_links_kyc', ext: false },
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
     return link;
@@ -191,8 +192,8 @@ const links5 = [
 const LinksList = ({ links, intl }) => {
     return (
         <ul className="footer-link-list">
-            {links.map(({ key, href, label, className }) =>
-                label === 'footer_links_fees' ? (
+            {links.map(({ key, href, label, className, ext }) =>
+                ext ? (
                     <li key={key}>
                         <a className={className} href={href} target="_blank" rel="nofollow noopener">
                             {intl.formatMessage({ id: label })}
@@ -250,12 +251,18 @@ const MediaLogo = props => {
                     className={'hlink'}
                     rel="nofollow"
                     data-href={btoa('https://news.bitcoin.com/cryptocurrency-exchanges-are-fighting-to-escape-binances-shadow/')}
+                    target="_blank"
                 >
                     <img src={bitcoincom} alt="new btc logo" />
                 </span>
                 {/*</noindex>*/}
                 {/*<noindex>*/}
-                <span className={'hlink'} rel="nofollow" data-href={btoa('https://blockonomi.com/emirex-review/')}>
+                <span
+                    className={'hlink'}
+                    rel="nofollow"
+                    data-href={btoa('https://blockonomi.com/emirex-review/')}
+                    target="_blank"
+                >
                     <img src={blockonomi} alt="yahoo logo" />
                 </span>
                 {/*</noindex>*/}
@@ -264,6 +271,7 @@ const MediaLogo = props => {
                     className={'hlink'}
                     rel="nofollow"
                     data-href={btoa('https://www.coinspeaker.com/blockchain-tokenization-commodities/')}
+                    target="_blank"
                 >
                     <img src={coinspeaker} alt="coinspeaker logo" />
                 </span>
@@ -275,6 +283,7 @@ const MediaLogo = props => {
                     data-href={btoa(
                         'https://cointelegraph.com/news/us-fed-weighs-up-potential-cbdc-as-countermove-against-china'
                     )}
+                    target="_blank"
                 >
                     <img src={cointelegraph} alt="new btc logo" />
                 </span>
@@ -286,6 +295,7 @@ const MediaLogo = props => {
                     data-href={btoa(
                         'https://forbesmiddleeast.com/what-impact-could-tokenized-commodities-have-on-the-middle-east'
                     )}
+                    target="_blank"
                 >
                     <img src={forbes} alt="yahoo logo" />
                 </span>
@@ -297,6 +307,7 @@ const MediaLogo = props => {
                     data-href={btoa(
                         'https://www.newsbtc.com/2019/11/26/emirex-doubles-down-with-ieo-announcement-building-a-comprehensive-crypto-ecosystem-in-the-middle-east/'
                     )}
+                    target="_blank"
                 >
                     <img src={newsbtc} alt="coinspeaker logo" />
                 </span>
@@ -306,6 +317,7 @@ const MediaLogo = props => {
                     className={'hlink'}
                     rel="nofollow"
                     data-href={btoa('https://finance.yahoo.com/news/platforms-solutions-confirm-growing-interest-164407914.html')}
+                    target="_blank"
                 >
                     <img src={yahoo} alt="new btc logo" />
                 </span>
@@ -315,6 +327,7 @@ const MediaLogo = props => {
                     className={'hlink'}
                     rel="nofollow"
                     data-href={btoa('https://www.zerohedge.com/news/2019-11-26/blockchain-taking-over-middle-east')}
+                    target="_blank"
                 >
                     <img src={zerohedge} alt="yahoo logo" />
                 </span>
