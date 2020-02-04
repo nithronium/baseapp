@@ -200,7 +200,7 @@ class Trading extends React.Component<Props, StateProps> {
     }
     //tslint:disable
     private setMarketFromUrlIfExists = (markets: Market[]): void => {
-        const currentLanguage = localStorage.getItem('lang_code');
+        const { currentLanguage } = this.props;
         const urlPart = currentLanguage === 'en' ? 2 : 3;
         const urlMarket: string = getUrlPart(urlPart, window.location.pathname);
         const market: Market | undefined = markets.find(item => item.id === urlMarket);
