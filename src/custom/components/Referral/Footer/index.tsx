@@ -1,4 +1,6 @@
 import * as React from 'react';
+
+import { GetCode } from '../GetCode';
 //tslint:disable
 import facebook = require('../../../assets/images/referral/icons/facebook.svg');
 import instagram = require('../../../assets/images/referral/icons/instagram.svg');
@@ -189,19 +191,21 @@ const links5 = [
 const LinksList = ({ links, intl }) => {
     return (
         <ul className="footer-link-list">
-            {links.map(({ key, href, label, className }) => (
-                label==='footer_links_fees' ?
-                <li key={key}>
-                    <a className={className} href={href} target="_blank" rel="nofollow noopener">
-                        {intl.formatMessage({ id: label })}
-                    </a>
-                </li> :
-                <li key={key}>
-                    <a className={className} href={href}>
-                        {intl.formatMessage({ id: label })}
-                    </a>
-                </li>
-            ))}
+            {links.map(({ key, href, label, className }) =>
+                label === 'footer_links_fees' ? (
+                    <li key={key}>
+                        <a className={className} href={href} target="_blank" rel="nofollow noopener">
+                            {intl.formatMessage({ id: label })}
+                        </a>
+                    </li>
+                ) : (
+                    <li key={key}>
+                        <a className={className} href={href}>
+                            {intl.formatMessage({ id: label })}
+                        </a>
+                    </li>
+                )
+            )}
         </ul>
     );
 };
@@ -332,7 +336,9 @@ const Footer = props => {
     return (
         <div>
             <MediaLogo intl={props.intl} />
+
             <BottomBanner />
+            <GetCode intl={props.intl} />
             <section id="footer">
                 <div>
                     {/* <MobileStartTrading /> */}

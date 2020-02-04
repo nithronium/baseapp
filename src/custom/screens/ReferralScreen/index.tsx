@@ -31,7 +31,17 @@ import {
     User,
 } from '../../../modules';
 import { CommonError } from '../../../modules/types';
-import { Banner, Footer, GetCode, HIW, HowTo, Prizes, Timelines, TopBanner, Video, Partners } from '../../components/Referral';
+import {
+    Banner,
+    Footer,
+    /*GetCode,*/ HIW,
+    HowTo,
+    Prizes,
+    Timelines,
+    TopBanner,
+    Video,
+    Partners,
+} from '../../components/Referral';
 
 import { buildPath } from '../../helpers';
 
@@ -90,7 +100,6 @@ class Referral extends React.Component<Props> {
     };
 
     public componentDidMount() {
-
         const lang = localStorage.getItem('lang_code') || 'en';
         if (this.props.location.pathname.includes('/ru/') && lang === 'en') {
             const location = this.props.location.pathname.slice(3);
@@ -108,23 +117,20 @@ class Referral extends React.Component<Props> {
         if (localStorage.getItem('refCode')) {
             this.setState({
                 refId: localStorage.getItem('refCode'),
-            })
+            });
         }
         this.setState({
             refId: referralCode,
         });
         const query = '/tickets/all';
         this.props.fetchReferralTickets(query);
-
     }
-
- 
 
     public componentWillReceiveProps(props: Props) {
         if (props.requireVerification) {
             props.history.push('/email-verification', { email: this.state.email });
         }
-        
+
         document.getElementsByTagName('html')![0].lang = this.props.currentLanguage;
 
         if (props.error) {
@@ -156,7 +162,11 @@ class Referral extends React.Component<Props> {
             passwordValidationDetails,
         } = this.state;
         const { loading, currentLanguage } = this.props;
-        const test = !geetestCaptchaSuccess ? <GeetestCaptcha ref={this.captchaRef} onSuccess={this.handleGeetestCaptchaSuccess}/> : undefined;
+        const test = !geetestCaptchaSuccess ? (
+            <GeetestCaptcha ref={this.captchaRef} onSuccess={this.handleGeetestCaptchaSuccess} />
+        ) : (
+            undefined
+        );
 
         const className = cx('pg-referral-screen__container', { loading });
 
@@ -222,9 +232,15 @@ class Referral extends React.Component<Props> {
             return (
                 <div className="total-tickets-wrapper">
                     <div className="total-tickets">
-                        <div className="header">{this.props.intl.formatMessage({ id: 'referral.teaser.total' })} {this.getTotalTickets()}</div>
+                        <div className="header">
+                            {this.props.intl.formatMessage({ id: 'referral.teaser.total' })} {this.getTotalTickets()}
+                        </div>
                         <div className="content">
-                        {this.props.intl.formatMessage({ id: 'referral.teaser.goto' })}<br/> <a href={buildPath('/referral-tickets', this.props.currentLanguage)}>{this.props.intl.formatMessage({ id: 'referral.teaser.balance' })}</a>
+                            {this.props.intl.formatMessage({ id: 'referral.teaser.goto' })}
+                            <br />{' '}
+                            <a href={buildPath('/referral-tickets', this.props.currentLanguage)}>
+                                {this.props.intl.formatMessage({ id: 'referral.teaser.balance' })}
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -263,48 +279,51 @@ class Referral extends React.Component<Props> {
             <div>
                 <Helmet>
                     <title>{this.props.intl.formatMessage({ id: 'referral_title' })}</title>
-                    <meta
-                        name="description"
-                        content={this.props.intl.formatMessage({ id: 'referral_description' })}
+                    <meta name="description" content={this.props.intl.formatMessage({ id: 'referral_description' })} />
+                    <link
+                        rel="canonical"
+                        href={`https://emirex.com${currentLanguage === 'en' ? '/' : '/' + currentLanguage + '/'}referral`}
                     />
-                    <link rel="canonical" href={`https://emirex.com${currentLanguage === 'en' ? '/' : '/' + currentLanguage + '/'}referral`} />
 
-                    <link key="ru" rel="alternate" href="https://emirex.com/ru/referral" hrefLang="ru" title="Русский"/>
+                    <link key="ru" rel="alternate" href="https://emirex.com/ru/referral" hrefLang="ru" title="Русский" />
                     {/* <link key="ar" rel="alternate" href="https://emirex.com/ar/referral" hrefLang="ar" /> */}
-                    <link key="en" rel="alternate" href="https://emirex.com/referral" hrefLang="en" title="English"/>
-                    <link key="zh" rel="alternate" href='https://emirex.com/zh/referral' hrefLang="zh" title="中国人"/>
+                    <link key="en" rel="alternate" href="https://emirex.com/referral" hrefLang="en" title="English" />
+                    <link key="zh" rel="alternate" href="https://emirex.com/zh/referral" hrefLang="zh" title="中国人" />
 
                     <meta name="og:title" content={this.props.intl.formatMessage({ id: 'referral_title' })} />
-                    <meta
-                        name="og:description"
-                        content={this.props.intl.formatMessage({ id: 'referral_description' })}
-                    />
+                    <meta name="og:description" content={this.props.intl.formatMessage({ id: 'referral_description' })} />
                     <meta name="og:image" content="https://emirex.com/public/img/logo-emirex.svg" />
                 </Helmet>
                 <div className="pg-referral-screen">
                     <TopBanner />
-                    <Banner lang={currentLanguage} children={this.props.user.state === 'active' ? totalTickets() : signupForm()} />
-                    <WinnersBanner/>
+                    <Banner
+                        lang={currentLanguage}
+                        children={this.props.user.state === 'active' ? totalTickets() : signupForm()}
+                    />
+                    <WinnersBanner />
                     <HIW
                         hiw={this.props.intl.formatMessage({ id: 'page.referral.hiw' })}
-                        subtitle={this.props.intl.formatMessage({id: 'page.referral.hiw.subtitle'})}
+                        subtitle={this.props.intl.formatMessage({ id: 'page.referral.hiw.subtitle' })}
                         steps={steps}
                     />
-                    <Video text={this.props.intl.formatMessage({id: 'page.referral.video.text'})} lang={this.props.currentLanguage}/>
+                    <Video
+                        text={this.props.intl.formatMessage({ id: 'page.referral.video.text' })}
+                        lang={this.props.currentLanguage}
+                    />
                     <Timelines />
                     <HowTo
                         h2={this.props.intl.formatMessage({ id: 'howto.h2' })}
                         h4={this.props.intl.formatMessage({ id: 'howto.h4' })}
-                        soon={this.props.intl.formatMessage({id: 'page.referral.soon'})}
-                        text1={this.props.intl.formatMessage({id: 'howto.text1'})}
-                        text2={this.props.intl.formatMessage({id: 'howto.text2'})}
-                        text3={this.props.intl.formatMessage({id: 'howto.text3'})}
-                        text4={this.props.intl.formatMessage({id: 'howto.text4'})}
+                        soon={this.props.intl.formatMessage({ id: 'page.referral.soon' })}
+                        text1={this.props.intl.formatMessage({ id: 'howto.text1' })}
+                        text2={this.props.intl.formatMessage({ id: 'howto.text2' })}
+                        text3={this.props.intl.formatMessage({ id: 'howto.text3' })}
+                        text4={this.props.intl.formatMessage({ id: 'howto.text4' })}
                     />
-                    <Partners/>
-                    <Prizes intl={this.props.intl}/>
-                    <GetCode intl={this.props.intl}/>
-                    <Footer intl={this.props.intl}/>
+                    <Partners />
+                    <Prizes intl={this.props.intl} />
+                    {/* <GetCode intl={this.props.intl}/> */}
+                    <Footer intl={this.props.intl} />
                 </div>
             </div>
         );
@@ -336,7 +355,7 @@ class Referral extends React.Component<Props> {
             geetestCaptchaSuccess: true,
             captcha_response: value || '',
         });
-    }
+    };
 
     private handleChangePassword = (value: string) => {
         const password = value;
@@ -355,12 +374,14 @@ class Referral extends React.Component<Props> {
     };
 
     private handleChangeConfirmPassword = (value: string) => {
-        const {password} = this.state;
+        const { password } = this.state;
         const confirmPassword = value;
         const isConfirmPasswordValid = password === confirmPassword;
         this.setState({
             confirmPassword: value,
-            confirmationError: !isConfirmPasswordValid ? this.props.intl.formatMessage({ id: ERROR_PASSWORD_CONFIRMATION }) : null,
+            confirmationError: !isConfirmPasswordValid
+                ? this.props.intl.formatMessage({ id: ERROR_PASSWORD_CONFIRMATION })
+                : null,
         });
     };
 
@@ -495,7 +516,8 @@ class Referral extends React.Component<Props> {
             hasCapitalLetters: !!password.match(/[A-Z]/),
             hasLowerCaseLetters: !!password.match(/[a-z]/),
         };
-        const isPasswordValid = passwordValidationDetails.isLengthAcceptable &&
+        const isPasswordValid =
+            passwordValidationDetails.isLengthAcceptable &&
             passwordValidationDetails.hasDigits &&
             passwordValidationDetails.hasCapitalLetters &&
             passwordValidationDetails.hasLowerCaseLetters;
@@ -575,13 +597,10 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
     signUp: credentials => dispatch(signUp(credentials)),
-    fetchReferralTickets:data => dispatch(referralTicketsFetch(data)),
+    fetchReferralTickets: data => dispatch(referralTicketsFetch(data)),
 });
 
 // tslint:disable
-const ReferralScreen = injectIntl(connect(
-    mapStateToProps,
-    mapDispatchProps
-)(Referral) as any);
+const ReferralScreen = injectIntl(connect(mapStateToProps, mapDispatchProps)(Referral) as any);
 
 export { ReferralScreen };
