@@ -6,11 +6,7 @@ import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redu
 import { Link, RouteProps, withRouter } from 'react-router-dom';
 // import { LogoutIcon } from '../../assets/images/LogoutIcon';
 // import { Moon } from '../../assets/images/Moon';
-import {
-    AvatarIcon,
-    CloseIcon,
-    OpenIcon,
-} from '../../assets/images/NavBarIcons';
+import { AvatarIcon, CloseIcon, OpenIcon } from '../../assets/images/NavBarIcons';
 // import { Sun } from '../../assets/images/Sun';
 import { colors, pgRoutes } from '../../constants';
 import { buildPath } from '../../custom/helpers';
@@ -82,11 +78,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
 
     public navItem = (address: string, onLinkChange?: () => void) => (values: string[], index: number) => {
         const [name, url] = values;
-        const {
-            currentMarket,
-            isLoggedIn,
-            lang,
-        } = this.props;
+        const { currentMarket, isLoggedIn, lang } = this.props;
         const cx = classnames('pg-navbar__content-item', {
             'pg-navbar__content-item--active': this.shouldUnderline(address, buildPath(url, lang), lang),
             'pg-navbar__content-item-logging': isLoggedIn,
@@ -133,7 +125,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                             {this.getLightDarkMode()}
                         </div>
                     </div> */}
-                    {user.state === 'active' && isLoggedIn  ? this.getUserEmailMenu() : null}
+                    {user.state === 'active' && isLoggedIn ? this.getUserEmailMenu() : null}
                     <div className="btn-group pg-navbar__header-settings__account-dropdown dropdown-toggle dropdown-menu-language-container">
                         <div onClick={this.toggleLanguageMenu} className={languageClassName}>
                             {languageName}
@@ -219,10 +211,18 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         return (
             <div className="pg-navbar__header-profile">
                 <span>{user.email}</span>
-                <Link className="pg-navbar__admin-logout" to={buildPath('/profile', lang)} onClick={this.handleRouteChange(buildPath('/profile', lang))}>
+                <Link
+                    className="pg-navbar__admin-logout"
+                    to={buildPath('/profile', lang)}
+                    onClick={this.handleRouteChange(buildPath('/profile', lang))}
+                >
                     <FormattedMessage id={'page.header.navbar.profile'} />
                 </Link>
-                <Link className="pg-navbar__admin-logout" to={buildPath('/referral', lang)} onClick={this.handleRouteChange(buildPath('/referral', lang))}>
+                <Link
+                    className="pg-navbar__admin-logout"
+                    to={buildPath('/referral', lang)}
+                    onClick={this.handleRouteChange(buildPath('/referral', lang))}
+                >
                     <FormattedMessage id={'page.header.navbar.refprogram'} />
                 </Link>
                 <Link
@@ -245,6 +245,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     className="pg-navbar__header-profile-logout"
                     fillColor={colorTheme === 'light' ? colors.light.navbar.logout : colors.basic.navbar.logout}
                 />  */}
+                <a className="pg-navbar__admin-logout" href="https://kb.emirex.com/" target="_blank" rel="nofollow noopener">
+                    <FormattedMessage id={'footer_links_kb'} />
+                </a>
                 <a className="pg-navbar__admin-logout" onClick={this.handleLogOut}>
                     <FormattedMessage id={'page.header.navbar.logout'} />
                 </a>
@@ -329,12 +332,20 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         return (
             <div className="dropdown-menu dropdown-menu-user" role="menu">
                 <div className="dropdown-menu-item-user">
-                    <Link className="pg-navbar__admin-logout" to={buildPath('/profile', lang)} onClick={this.handleRouteChange(buildPath('/profile', lang))}>
+                    <Link
+                        className="pg-navbar__admin-logout"
+                        to={buildPath('/profile', lang)}
+                        onClick={this.handleRouteChange(buildPath('/profile', lang))}
+                    >
                         <FormattedMessage id={'page.header.navbar.profile'} />
                     </Link>
                 </div>
                 <div className="dropdown-menu-item-user">
-                    <Link className="pg-navbar__admin-logout" to={buildPath('/referral', lang)} onClick={this.handleRouteChange(buildPath('/referral', lang))}>
+                    <Link
+                        className="pg-navbar__admin-logout"
+                        to={buildPath('/referral', lang)}
+                        onClick={this.handleRouteChange(buildPath('/referral', lang))}
+                    >
                         <FormattedMessage id={'page.header.navbar.refprogram'} />
                     </Link>
                 </div>
@@ -356,6 +367,11 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         <FormattedMessage id={'page.header.navbar.refcommission'} />
                     </Link>
                 </div>*/}
+                <div className="dropdown-menu-item-user">
+                    <a className="pg-navbar__admin-logout" href="https://kb.emirex.com/" target="_blank" rel="nofollow noopener">
+                        <FormattedMessage id={'footer_links_kb'} />
+                    </a>
+                </div>
                 <div className="dropdown-menu-item-user">
                     <a className="pg-navbar__admin-logout" onClick={this.handleLogOut}>
                         <FormattedMessage id={'page.header.navbar.logout'} />
@@ -449,7 +465,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         const l = language === 'cn' ? 'zh' : language;
         this.props.changeLanguage(l);
         let location = '';
-        if (lang=== 'en') {
+        if (lang === 'en') {
             location = this.props.history.location.pathname;
         } else {
             location = this.props.history.location.pathname.slice(l.length + 1);
@@ -466,7 +482,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = (state: Root
     user: selectUserInfo(state),
     isLoggedIn: selectUserLoggedIn(state),
     version: selectAppVersion(state),
-    currentLanguage: selectCurrentLanguage(state)
+    currentLanguage: selectCurrentLanguage(state),
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
@@ -477,9 +493,6 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
     openGuardModal: () => dispatch(openGuardModal()),
 });
 // tslint:disable no-any
-const NavBar = withRouter(connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(NavBarComponent) as any) as any;
+const NavBar = withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBarComponent) as any) as any;
 
 export { NavBar };
