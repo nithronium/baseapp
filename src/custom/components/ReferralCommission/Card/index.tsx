@@ -31,17 +31,17 @@ class Card extends React.Component<Props>{
                 <div className="card-middle">
                     <div className="card-details-row">
                         <div className="card-details-row__left">Referral L1</div>
-                        <div className="card-details-row__right">{this.props.commission[0]}</div>
+                        <div className="card-details-row__right">{this.props.commission[0] || 0}</div>
                     </div>
                     <div className="card-details-row">
                         <div className="card-details-row__left">Referral L2</div>
-                        <div className="card-details-row__right">{this.props.commission[1]}</div>
+                        <div className="card-details-row__right">{this.props.commission[1] || 0}</div>
                     </div>
                 </div>
                 <div className="card-middle">
                     <div className="card-earned-header">Earned</div>
                     <div className="card-details-row">
-                        {this.props.earned} {this.props.currencyId}
+                        {this.props.earned || 0} {this.props.currencyId.toUpperCase()}
                     </div>
                 </div>
                 <div className="card-bottom">

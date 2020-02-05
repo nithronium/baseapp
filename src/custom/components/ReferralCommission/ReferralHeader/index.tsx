@@ -52,7 +52,7 @@ class ReferralHeaderContainer extends React.Component<Props> {
                         <div className="summary recalculate">
                             <div className="title">{this.props.title}</div>
                             <div className="summary-container">
-                                <div className="btc">{total} {this.props.currencyId}</div>
+                                <div className="btc">{total} {this.props.currencyId.toUpperCase()}</div>
                                 {/* <div className="usd">{this.props.context.usd} USD</div> */}
                                 {/* <a className="details-link" href={this.props.link}>
                                     view details
