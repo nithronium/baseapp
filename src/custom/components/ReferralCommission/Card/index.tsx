@@ -1,6 +1,10 @@
 import * as React from 'react';
+import {
+    InjectedIntlProps,
+    injectIntl,
+} from 'react-intl';
 
-interface Props {
+interface PassedProps {
     commission: number[];
     earned: number;
     currencyId: string;
@@ -8,7 +12,9 @@ interface Props {
     link: string;
 }
 
-class Card extends React.Component<Props>{
+type Props = InjectedIntlProps & PassedProps;
+
+class CardComponent extends React.Component<Props>{
     public render(){
 
         // let preloader;
@@ -30,22 +36,22 @@ class Card extends React.Component<Props>{
                 </div>
                 <div className="card-middle">
                     <div className="card-details-row">
-                        <div className="card-details-row__left">Referral L1</div>
+                        <div className="card-details-row__left">{this.props.intl.formatMessage({id: 'referralCommission.card.referralL1'})}</div>
                         <div className="card-details-row__right">{this.props.commission[0] || 0}</div>
                     </div>
                     <div className="card-details-row">
-                        <div className="card-details-row__left">Referral L2</div>
+                        <div className="card-details-row__left">{this.props.intl.formatMessage({id: 'referralCommission.card.referralL2'})}</div>
                         <div className="card-details-row__right">{this.props.commission[1] || 0}</div>
                     </div>
                 </div>
                 <div className="card-middle">
-                    <div className="card-earned-header">Earned</div>
+                    <div className="card-earned-header">{this.props.intl.formatMessage({id: 'referralCommission.card.earned'})}</div>
                     <div className="card-details-row">
                         {this.props.earned || 0} {this.props.currencyId.toUpperCase()}
                     </div>
                 </div>
                 <div className="card-bottom">
-                    <a className="details-link" href={this.props.link}>view details</a>
+                    <a className="details-link" href={this.props.link}>{this.props.intl.formatMessage({id: 'referralCommission.card.viewDetails'})}</a>
                 </div>
             </div>
 
@@ -53,4 +59,4 @@ class Card extends React.Component<Props>{
     }
 }
 
-export {Card};
+export const Card =  injectIntl(CardComponent);

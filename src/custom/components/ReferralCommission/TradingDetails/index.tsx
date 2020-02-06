@@ -1,8 +1,12 @@
 import * as React from 'react';
+import {
+    InjectedIntlProps,
+    injectIntl,
+} from 'react-intl';
 import { getReferral } from '../../../../api';
 import { exportToCsv } from '../../../helpers';
 
-interface Props {
+interface PassedProps {
     context: {
         referrals: [];
         type: string;
@@ -21,7 +25,9 @@ interface State {
     referrals: [];
 }
 
-class TradingDetails extends React.Component<Props, State>{
+type Props = InjectedIntlProps & PassedProps;
+
+class TradingDetailsComponent extends React.Component<Props, State>{
 
     constructor(props){
 
@@ -42,14 +48,14 @@ class TradingDetails extends React.Component<Props, State>{
             return(
             <tbody key={index} className="summary-row">
                 <tr>
-                    <td><div className="mobile-card-header">E-mail</div><div className="mobile-value">{record.email}</div></td>
-                    <td><div className="mobile-card-header"># of L1</div><div className="mobile-value">{record.l1_trades}</div></td>
-                    <td><div className="mobile-card-header">Commission L1</div><div className="mobile-value">{record.l1_commissions}</div></td>
+                    <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.email'})}</div><div className="mobile-value">{record.email}</div></td>
+                    <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l1Trades'})}</div><div className="mobile-value">{record.l1_trades}</div></td>
+                    <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL1'})}</div><div className="mobile-value">{record.l1_commissions}</div></td>
                     {/* <td><div className="mobile-card-header"># of L2</div><div className="mobile-value">{record.referrals} <span className="explanation">referrals</span></div></td> */}
-                    <td><div className="mobile-card-header"># of L2 trades</div><div className="mobile-value">{record.l2_trades} <span className="explanation">trades</span></div></td>
-                    <td><div className="mobile-card-header"/><div className="mobile-value">{record.l2_commissions} <span className="explanation">BTC</span></div></td>
+                    <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l2Trades'})}</div><div className="mobile-value">{record.l2_trades}</div></td>
+                    <td><div className="mobile-card-header"/><div className="mobile-value">{record.l2_commissions} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></div></td>
                 </tr>
-                <tr><td colSpan={6}>total amount: {total} {this.props.currencyId.toUpperCase()}</td></tr>
+                <tr><td colSpan={6}>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.total'})}: {total} {this.props.currencyId.toUpperCase()}</td></tr>
             </tbody>
             );
         });
@@ -68,7 +74,7 @@ class TradingDetails extends React.Component<Props, State>{
         }
 
         const disabledPrev = this.props.context.skip <= 0;
-        const disabledNext = (this.props.context.skip + this.props.context.limit) >= this.props.context.count;
+        const disabledNext = ((this.props.context.skip as number) + (this.props.context.limit as number)) >= this.props.context.count;
         const disableExport = this.props.context.referrals.length < 1;
 
         const totalL1 = this.getTotal('l1_commissions');
@@ -84,12 +90,12 @@ class TradingDetails extends React.Component<Props, State>{
                     <table id="tc-details-list">
                         <thead>
                             <tr>
-                                <td>E-mail</td>
-                                <td><div className="explanation"># of L1 </div>trades</td>
-                                <td>Commission L1<div className="explanation"> {this.props.currencyId.toUpperCase()}</div></td>
+                                <td>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.email'})}</td>
+                                <td><div className="explanation">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l1Trades'})}</div></td>
+                                <td>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL1'})}<div className="explanation"> {this.props.currencyId.toUpperCase()}</div></td>
                                 {/* <td><div className="explanation"># of </div>L2</td> */}
-                                <td><div className="explanation"># of </div>L2 trades</td>
-                                <td>Commission L2<div className="explanation"> {this.props.currencyId.toUpperCase()}</div></td>
+                                <td><div className="explanation">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l2Trades'})}</div></td>
+                                <td>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL2'})}<div className="explanation"> {this.props.currencyId.toUpperCase()}</div></td>
                             </tr>
                         </thead>
                         {this.tbodies(referrals)}
@@ -97,19 +103,19 @@ class TradingDetails extends React.Component<Props, State>{
                             <tr style={{ paddingTop: 0 }}>
                                 <td>
                                     <div style={{ padding: '30px 0',display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '200px'}}>
-                                            <button style={{background: disabledPrev ? 'gray' : '#00732F'}} disabled={disabledPrev} onClick={this.previousPage}>&larr; Prev</button>
-                                            <button style={{background: disabledNext ? 'gray' : '#00732F'}} disabled={disabledNext} onClick={this.nextPage}>Next &rarr;</button>
+                                            <button style={{background: disabledPrev ? 'gray' : '#00732F'}} disabled={disabledPrev} onClick={this.previousPage}>&larr; {this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.prev'})}</button>
+                                            <button style={{background: disabledNext ? 'gray' : '#00732F'}} disabled={disabledNext} onClick={this.nextPage}>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.next'})} &rarr;</button>
                                     </div>
                                 </td>
                                 <td/>
                                 <td/>
                                 <td>
                                     <div style={{ padding: '30px 0',display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                                                <button style={{background: disableExport ? 'gray' : '#00732F'}} disabled={disableExport} onClick={this.downloadCsv}>Export to CSV</button>
+                                                <button style={{background: disableExport ? 'gray' : '#00732F'}} disabled={disableExport} onClick={this.downloadCsv}>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.exportToCsv'})}</button>
                                     </div>
                                 </td>
                             </tr>
-                            <tr><td><span className="table-summary-header">total</span></td><td className="footer-header"># of L1 trades</td><td className="footer-header">Commission L1 {this.props.currencyId.toUpperCase()}</td><td className="footer-header"># of L2 trades</td><td className="footer-header">Commission L2 {this.props.currencyId.toUpperCase()}</td></tr>
+                            <tr><td><span className="table-summary-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.total'})}</span></td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l1Trades'})}</td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL1'})} {this.props.currencyId.toUpperCase()}</td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l2Trades'})}</td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL2'})} {this.props.currencyId.toUpperCase()}</td></tr>
                             <tr><td>{totalL1 + totalL2} {this.props.currencyId.toUpperCase()}</td><td>{this.getTotal('l1_trades')}</td><td>{totalL1}</td><td>{this.getTotal('l2_trades')}</td><td>{totalL2} {this.props.currencyId.toUpperCase()}</td></tr>
                         </tfoot>
                     </table>
@@ -119,8 +125,8 @@ class TradingDetails extends React.Component<Props, State>{
     }
 
     private nextPage = () => {
-        const limit = (this.props.context.limit || 10);
-        const skip = (this.props.context.skip || 0) + limit;
+        const limit = (this.props.context.limit || 10) as number;
+        const skip = ((this.props.context.skip as number) || 0) + limit ;
 
         this.props.changePage(this.props.currencyId, this.props.context.type, skip, limit);
     }
@@ -171,4 +177,4 @@ class TradingDetails extends React.Component<Props, State>{
     }
 }
 
-export { TradingDetails };
+export const TradingDetails = injectIntl(TradingDetailsComponent);

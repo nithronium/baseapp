@@ -1,4 +1,8 @@
 import * as React from 'react';
+import {
+    InjectedIntlProps,
+    injectIntl,
+} from 'react-intl';
 import { connect } from 'react-redux';
 import { Currency, RootState, selectUserInfo, User } from '../../../../modules';
 
@@ -29,7 +33,7 @@ interface PassedProps {
     changeCurrentCurrency(currencyId): void;
 }
 
-type Props = ReduxProps & PassedProps;
+type Props = ReduxProps & PassedProps & InjectedIntlProps;
 //tslint:disable
 class ReferralHeaderContainer extends React.Component<Props> {   
     public currencies = ['aed', 'btc', 'eur', 'usd', 'usdt', 'bch', 'emrx']; //mock currencies
@@ -43,7 +47,7 @@ class ReferralHeaderContainer extends React.Component<Props> {
         return (
             <div className="container recalculate">
                 <div className="header">
-                    <h1>Referral ballance</h1>
+                    <h1>{this.props.intl.formatMessage({id: 'referralCommission.rootScreen.referralBalance'})}</h1>
                     <CurrencySelect currencyId={this.props.currencyId} currencies={this.currencies} changeCurrentCurrency={this.props.changeCurrentCurrency}/>
                 </div>
                 <div className="contexter">
@@ -64,7 +68,7 @@ class ReferralHeaderContainer extends React.Component<Props> {
                                     <div className="code">
                                         {this.props.user.uid}
                                     </div> */}
-                                <a href="/profile">Get Your Referral Code</a>
+                                <a href="/profile">{this.props.intl.formatMessage({id: 'referralCommission.rootScreen.getYourReferralCode'})}</a>
                                 </div>
                             </div>
                         </div>
@@ -79,4 +83,4 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     user: selectUserInfo(state),
 });
 
-export const ReferralHeader = connect(mapStateToProps)(ReferralHeaderContainer);
+export const ReferralHeader = injectIntl(connect(mapStateToProps)(ReferralHeaderContainer));
