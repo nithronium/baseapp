@@ -277,6 +277,7 @@ export const zh = {
   'page.body.profile.content.action.requestPasswordReset': '要求重设密码',
   'page.body.profile.content.action.passwordReset': '重设密码',
   'page.body.profile.content.action.create': '创建',
+  'page.body.profile.content.action.read': '阅读',
   'page.body.profile.content.result.succeed': '成功',
   'page.body.profile.content.result.failed': '失败',
   'page.body.profile.content.result.denied': '被拒绝',

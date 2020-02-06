@@ -1,11 +1,7 @@
 import { Pagination, Table } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
-import {
-    FormattedMessage,
-    InjectedIntlProps,
-    injectIntl,
-} from 'react-intl';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { getUserAgent, localeDate } from '../../helpers';
 import {
@@ -48,12 +44,14 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
 
     public render() {
         const { loading, userActivity } = this.props;
-        const emptyMsg = this.props.intl.formatMessage({id: 'page.noDataToShow'});
+        const emptyMsg = this.props.intl.formatMessage({ id: 'page.noDataToShow' });
 
         return (
             <div className="pg-profile-page__activity">
                 <div className="pg-profile-page-header">
-                    <h3><FormattedMessage id="page.body.profile.header.accountActivity" /></h3>
+                    <h3>
+                        <FormattedMessage id="page.body.profile.header.accountActivity" />
+                    </h3>
                 </div>
                 <div className={`pg-history-elem ${userActivity.length ? '' : 'pg-history-empty'}`}>
                     {userActivity.length ? this.renderContent() : null}
@@ -67,10 +65,7 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
         const { total, firstElemIndex, lastElemIndex, page, nextPageExists, userActivity } = this.props;
         return (
             <React.Fragment>
-                <Table
-                    header={this.getHeaders()}
-                    data={this.getActivityData(userActivity)}
-                />
+                <Table header={this.getHeaders()} data={this.getActivityData(userActivity)} />
                 <Pagination
                     firstElemIndex={firstElemIndex}
                     lastElemIndex={lastElemIndex}
@@ -86,11 +81,11 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
 
     private getHeaders = () => {
         return [
-            this.props.intl.formatMessage({id: 'page.body.profile.header.accountActivity.content.date'}),
-            this.props.intl.formatMessage({id: 'page.body.profile.header.accountActivity.content.action'}),
-            this.props.intl.formatMessage({id: 'page.body.profile.header.accountActivity.content.result'}),
-            this.props.intl.formatMessage({id: 'page.body.profile.header.accountActivity.content.addressip'}),
-            this.props.intl.formatMessage({id: 'page.body.profile.header.accountActivity.content.userAgent'}),
+            this.props.intl.formatMessage({ id: 'page.body.profile.header.accountActivity.content.date' }),
+            this.props.intl.formatMessage({ id: 'page.body.profile.header.accountActivity.content.action' }),
+            this.props.intl.formatMessage({ id: 'page.body.profile.header.accountActivity.content.result' }),
+            this.props.intl.formatMessage({ id: 'page.body.profile.header.accountActivity.content.addressip' }),
+            this.props.intl.formatMessage({ id: 'page.body.profile.header.accountActivity.content.userAgent' }),
         ];
     };
 
@@ -99,7 +94,7 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
             return [
                 localeDate(item.created_at, 'fullDate'),
                 this.getResultOfUserAction(item.action),
-                this.renderResult(this.props.intl.formatMessage({ id: `page.body.profile.content.result.${item.result}`})),
+                this.renderResult(this.props.intl.formatMessage({ id: `page.body.profile.content.result.${item.result}` })),
                 item.user_ip,
                 getUserAgent(item.user_agent),
             ];
@@ -108,9 +103,11 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
 
     private renderResult(result: string) {
         const className = classnames({
-            'pg-profile-page__activity-result-succeed': result === this.props.intl.formatMessage({id: 'page.body.profile.content.result.succeed'}),
-            'pg-profile-page__activity-result-failed':  result === this.props.intl.formatMessage({id: 'page.body.profile.content.result.failed'}) ||
-                                                        result === this.props.intl.formatMessage({id: 'page.body.profile.content.result.denied'}),
+            'pg-profile-page__activity-result-succeed':
+                result === this.props.intl.formatMessage({ id: 'page.body.profile.content.result.succeed' }),
+            'pg-profile-page__activity-result-failed':
+                result === this.props.intl.formatMessage({ id: 'page.body.profile.content.result.failed' }) ||
+                result === this.props.intl.formatMessage({ id: 'page.body.profile.content.result.denied' }),
         });
         return <span className={className}>{result}</span>;
     }
@@ -118,25 +115,27 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
     private getResultOfUserAction = (value: string) => {
         switch (value) {
             case 'login':
-                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.login'});
+                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.login' });
             case 'logout':
-                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.logout'});
+                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.logout' });
             case 'request QR code for 2FA':
-                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.request2fa'});
+                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.request2fa' });
             case 'enable 2FA':
-                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.enable2fa'});
+                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.enable2fa' });
             case 'login::2fa':
-                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.login.2fa'});
+                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.login.2fa' });
             case 'request password reset':
-                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.requestPasswordReset'});
+                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.requestPasswordReset' });
             case 'password reset':
-                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.passwordReset'});
+                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.passwordReset' });
             case 'create':
-                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.create'});
+                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.create' });
+            case 'read':
+                return this.props.intl.formatMessage({ id: 'page.body.profile.content.action.read' });
             default:
                 return value;
         }
-    }
+    };
 
     private onClickPrevPage = () => {
         const { page } = this.props;
@@ -160,9 +159,8 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     nextPageExists: selectUserActivityNextPageExists(state, paginationLimit),
 });
 
-const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
-    dispatch => ({
-        getUserActivity: params => dispatch(getUserActivity(params)),
-    });
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
+    getUserActivity: params => dispatch(getUserActivity(params)),
+});
 
 export const ProfileAccountActivity = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ProfileAccountActivityComponent));

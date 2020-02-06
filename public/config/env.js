@@ -3,10 +3,9 @@ window.env = {
         authUrl: 'http://localhost:9002/api/v2/barong',
         tradeUrl: 'http://localhost:9002/api/v2/peatio',
         applogicUrl: 'http://localhost:9002/api/v2/applogic',
-        rangerUrl: 'ws://localhost:9011/api/v2/ranger',
+        rangerUrl: '',
         tenkoUrl: 'http://localhost:9002/api/v2/tenko',
         nodelogicUrl: 'http://localhost:9002/api/v2/nodelogic',
-        
     },
     minutesUntilAutoLogout: '60',
     withCredentials: false,
@@ -15,7 +14,7 @@ window.env = {
         siteKey: '',
         // captchaType: 'geetest',
         // siteKey: '6Le4gLQUAAAAAGRqFa2ErLeQwLR1XDdBOQF7dJ-z',
-        
+
         // captchaType: 'recaptcha',
         // siteKey: '6Le4gLQUAAAAAGRqFa2ErLeQwLR1XDdBOQF7dJ-z',
     },
@@ -24,6 +23,12 @@ window.env = {
     licenseKey: '',
     incrementalOrderBook: true,
     plugins: [
-        { name: 'ieo', config: { types: [ 'proportional', 'fcfs' ], metadata: true } },
+        {
+            name: 'ieo',
+            config: {
+                types: ['proportional', 'fcfs'],
+                metadata: true,
+            },
+        },
     ],
 };
