@@ -44,7 +44,7 @@ interface ReduxProps {
     label: Label[];
     markets: Market[];
     tickers: {
-        [key: string]: Ticker,
+        [key: string]: Ticker;
     };
     rangerState: RangerState;
     withdrawLimitData: WithdrawLimit;
@@ -87,7 +87,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
             fetchTickers,
             fetchWithdrawLimit,
             markets,
-            rangerState: {connected},
+            rangerState: { connected },
             userLoggedIn,
         } = this.props;
         // tslint:disable-next-line: no-console
@@ -106,7 +106,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         }
 
         if (!connected) {
-            this.props.rangerConnect({withAuth: userLoggedIn});
+            this.props.rangerConnect({ withAuth: userLoggedIn });
         }
     }
 
@@ -114,8 +114,11 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         const { currencies, depositHistory } = this.props;
         const { formattedDepositHistory } = this.state;
 
-        if (nextProps.depositHistory.length && currencies.length &&
-            (JSON.stringify(nextProps.depositHistory) !== JSON.stringify(depositHistory) || !formattedDepositHistory.length)) {
+        if (
+            nextProps.depositHistory.length &&
+            currencies.length &&
+            (JSON.stringify(nextProps.depositHistory) !== JSON.stringify(depositHistory) || !formattedDepositHistory.length)
+        ) {
             if (nextProps.depositHistory[0].confirmations !== undefined) {
                 const fiatDepositHistory = this.handleFilterDepositHistory(currencies, nextProps.depositHistory);
                 this.setState({ formattedDepositHistory: this.handleFormatDepositHistory(fiatDepositHistory) });
@@ -124,16 +127,23 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
     }
 
     public componentDidUpdate(prevProps: ProfileProps, prevState: State) {
-        const {
-            currencies,
-            markets,
-            tickers,
-        } = this.props;
+        const { currencies, markets, tickers } = this.props;
         const { formattedDepositHistory } = this.state;
-        if (formattedDepositHistory.length && currencies.length && markets.length && tickers &&
-            JSON.stringify(prevState.formattedDepositHistory) !== JSON.stringify(formattedDepositHistory)) {
+        if (
+            formattedDepositHistory.length &&
+            currencies.length &&
+            markets.length &&
+            tickers &&
+            JSON.stringify(prevState.formattedDepositHistory) !== JSON.stringify(formattedDepositHistory)
+        ) {
             this.setState({
-                evaluatedDepositsTotal: estimateValue(VALUATION_PRIMARY_CURRENCY, currencies, formattedDepositHistory, markets, tickers),
+                evaluatedDepositsTotal: estimateValue(
+                    VALUATION_PRIMARY_CURRENCY,
+                    currencies,
+                    formattedDepositHistory,
+                    markets,
+                    tickers
+                ),
             });
         }
     }
@@ -167,7 +177,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
             </div>
         );
     }
-//tslint:disable
+    //tslint:disable
     public renderUpgradeLevelLink(balance?) {
         const _balance = balance ? balance : 0;
         const gotoConfirm = () => {
@@ -179,35 +189,39 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         };
         return (
             <span onClick={gotoConfirm} className="pg-profile-verification__upgrade-level">
-                <FormattedMessage id="page.body.profile.header.account.profile.upgrade"/>
+                <FormattedMessage id="page.body.profile.header.account.profile.upgrade" />
             </span>
         );
     }
 
-
     public renderDocumentPending() {
         return (
             <span className="pg-profile-verification__know-more__document-pending">
-                <FormattedMessage id="resource.profile.document"/>
+                <FormattedMessage id="resource.profile.document" />
             </span>
         );
     }
 
     public renderUserAbilities(level: number, withdrawLimitData: WithdrawLimit) {
-        const withdrawalLimitCurrency = withdrawLimitData.withdraw.currency.toLocaleLowerCase().includes('usd') ?
-            '$' : ` ${withdrawLimitData.withdraw.currency.toUpperCase()}`;
+        const withdrawalLimitCurrency = withdrawLimitData.withdraw.currency.toLocaleLowerCase().includes('usd')
+            ? '$'
+            : ` ${withdrawLimitData.withdraw.currency.toUpperCase()}`;
 
         // tslint:disable-next-line: prefer-switch
         if (level === 2 || level === 3) {
             const firstAbility = this.props.intl.formatMessage(
                 { id: 'page.body.profile.header.account.profile.abilities.first.message1' },
-                { amount: withdrawLimitData.withdraw.limit, currency: withdrawalLimitCurrency },
+                { amount: withdrawLimitData.withdraw.limit, currency: withdrawalLimitCurrency }
             );
 
             return (
                 <div className="pg-profile-verification__abilities">
-                    <p style={{ fontSize: '12px'}} >{firstAbility}</p>
-                    <p style={{ fontSize: '12px'}}>{this.props.intl.formatMessage({id: 'page.body.profile.header.account.profile.abilities.first.message2'})}</p>
+                    <p style={{ fontSize: '12px' }}>{firstAbility}</p>
+                    <p style={{ fontSize: '12px' }}>
+                        {this.props.intl.formatMessage({
+                            id: 'page.body.profile.header.account.profile.abilities.first.message2',
+                        })}
+                    </p>
                 </div>
             );
         }
@@ -216,11 +230,11 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         if (level === 4 || level === 5) {
             const firstAbility = this.props.intl.formatMessage(
                 { id: 'page.body.profile.header.account.profile.abilities.second.message1' },
-                { amount: withdrawLimitData.withdraw.limit, currency: withdrawalLimitCurrency },
+                { amount: withdrawLimitData.withdraw.limit, currency: withdrawalLimitCurrency }
             );
 
             const secondAbility = this.props.intl.formatMessage(
-                { id: 'page.body.profile.header.account.profile.abilities.second.message2' },
+                { id: 'page.body.profile.header.account.profile.abilities.second.message2' }
                 // { amount: withdrawLimitData.withdraw.limit, currency: withdrawalLimitCurrency },
             );
 
@@ -240,21 +254,18 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
             );
         }
 
-        return (
-            <div className="pg-profile-verification__abilities pg-profile-verification__abilities--blank" />
-        );
+        return <div className="pg-profile-verification__abilities pg-profile-verification__abilities--blank" />;
     }
 
     public renderWithdrawLimit(userLevel: number, withdrawLimitData: WithdrawLimit) {
         if (!userLevel || userLevel === 1 || userLevel === 6) {
-            return (
-                <div className="pg-profile-verification__withdraw-limit" />
-            );
+            return <div className="pg-profile-verification__withdraw-limit" />;
         }
 
-        const percentage = Math.round(+withdrawLimitData.withdraw.withdrawal_amount / +withdrawLimitData.withdraw.limit * 100);
-        const withdrawalLimitCurrency = withdrawLimitData.withdraw.currency.toLocaleLowerCase().includes('usd') ?
-            '$' : ` ${withdrawLimitData.withdraw.currency.toUpperCase()}`;
+        const percentage = Math.round((+withdrawLimitData.withdraw.withdrawal_amount / +withdrawLimitData.withdraw.limit) * 100);
+        const withdrawalLimitCurrency = withdrawLimitData.withdraw.currency.toLocaleLowerCase().includes('usd')
+            ? '$'
+            : ` ${withdrawLimitData.withdraw.currency.toUpperCase()}`;
         // const currentCurrency = this.props.currencies.find(currecy => currecy.id.toLowerCase() === withdrawLimitData.withdraw.currency.toLowerCase() ? currecy : 'USD');
         // const currencyPrecision = currentCurrency && currentCurrency.precision || 2;
         // const currentCurrency = 'USD';
@@ -265,12 +276,14 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                     <div className="pg-profile-verification__withdraw-limit__wrap__progress-bar">
                         <div
                             className="pg-profile-verification__withdraw-limit__wrap__progress-bar--filled"
-                            style={{width: `${percentage < 100 ? percentage : 100}%`}}
+                            style={{ width: `${percentage < 100 ? percentage : 100}%` }}
                         />
                     </div>
                     <span className="pg-profile-verification__withdraw-limit__wrap__text">
                         <FormattedMessage id="page.body.profile.header.account.profile.withdraw" />
-                        &nbsp;{Decimal.format(withdrawLimitData.withdraw.withdrawal_amount, currencyPrecision)} / {Decimal.format(withdrawLimitData.withdraw.limit, currencyPrecision)}{withdrawalLimitCurrency}
+                        &nbsp;{Decimal.format(withdrawLimitData.withdraw.withdrawal_amount, currencyPrecision)} /{' '}
+                        {Decimal.format(withdrawLimitData.withdraw.limit, currencyPrecision)}
+                        {withdrawalLimitCurrency}
                     </span>
                 </div>
                 <div className="pg-profile-verification__withdraw-limit__know-more" />
@@ -288,10 +301,11 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                 </div>
             );
         }
-        const percentage = Math.round(+evaluatedDepositsTotal / +withdrawLimitData.deposit.limit * 100);
+        const percentage = Math.round((+evaluatedDepositsTotal / +withdrawLimitData.deposit.limit) * 100);
         const currentCurrency = 'USD';
-        const withdrawalLimitCurrency = currentCurrency.toLocaleLowerCase().includes('usd') ?
-            '$' : ` ${currentCurrency.toUpperCase()}`;
+        const withdrawalLimitCurrency = currentCurrency.toLocaleLowerCase().includes('usd')
+            ? '$'
+            : ` ${currentCurrency.toUpperCase()}`;
         const currencyPrecision = 2;
 
         return (
@@ -300,44 +314,39 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                     <div className="pg-profile-verification__deposit-limit__wrap__progress-bar">
                         <div
                             className="pg-profile-verification__deposit-limit__wrap__progress-bar--filled"
-                            style={{width: `${percentage < 100 ? percentage : 100}%`}}
+                            style={{ width: `${percentage < 100 ? percentage : 100}%` }}
                         />
                     </div>
                     <span className="pg-profile-verification__deposit-limit__wrap__text">
                         <FormattedMessage id="page.body.profile.header.account.profile.deposit" />
-                        &nbsp;{Decimal.format(evaluatedDepositsTotal, currencyPrecision)} / {Decimal.format(withdrawLimitData.deposit.limit, currencyPrecision)}{withdrawalLimitCurrency}
+                        &nbsp;{Decimal.format(evaluatedDepositsTotal, currencyPrecision)} /{' '}
+                        {Decimal.format(withdrawLimitData.deposit.limit, currencyPrecision)}
+                        {withdrawalLimitCurrency}
                     </span>
                 </div>
             </div>
         );
     }
 
-
     public render() {
-        const {
-            label,
-            user,
-            withdrawLimitData,
-        } = this.props;
+        const { label, user, withdrawLimitData } = this.props;
         const userLevel = user.level;
 
-        const withdrawLimitDataExists = withdrawLimitData &&
-            withdrawLimitData.withdraw &&
-            withdrawLimitData.deposit;
+        const withdrawLimitDataExists = withdrawLimitData && withdrawLimitData.withdraw && withdrawLimitData.deposit;
 
         const pendingDocumentLabel = label.find(l => l.key === 'document' && l.value === 'pending' && l.scope === 'private');
 
         return (
             <div className="pg-profile-verification">
                 <div className="pg-profile-verification__title">
-                    <FormattedMessage id="page.body.profile.header.account.profile"/>
+                    <FormattedMessage id="page.body.profile.header.account.profile" />
                 </div>
                 <div className="pg-profile-verification__user-level">
                     {this.renderUserLevel(userLevel)}
                     {userLevel < 6 && this.renderUpgradeLevelLink(this.props.balance)}
                 </div>
                 <div className="pg-profile-verification__know-more">
-                    <a href="https://knowledge-base.emirex.com/emirex">
+                    <a href="https://knowledge-base.emirex.com/emirex" target="_blank" rel="nofollow noopener">
                         <FormattedMessage id="page.body.profile.header.account.profile.knowMore" />
                     </a>
                     {pendingDocumentLabel && this.renderDocumentPending()}
@@ -363,7 +372,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         }
 
         return fiatDepositHistory;
-    }
+    };
 
     private handleFormatDepositHistory = (depositHistory: WalletHistoryList) => {
         const depositsAsWallets: WalletItemProps[] = [];
@@ -380,7 +389,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         }
 
         return depositsAsWallets;
-    }
+    };
 }
 
 const mapStateToProps = state => ({
@@ -396,20 +405,17 @@ const mapStateToProps = state => ({
     currentLanguage: selectCurrentLanguage(state),
 });
 
-const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
-    dispatch => ({
-        fetchCurrencies: () => dispatch(currenciesFetch()),
-        fetchHistory: params => dispatch(fetchHistory(params)),
-        fetchLabels: () => dispatch(labelFetch()),
-        fetchMarkets: () => dispatch(marketsFetch()),
-        fetchTickers: () => dispatch(marketsTickersFetch()),
-        fetchWithdrawLimit: () => dispatch(withdrawLimitFetch()),
-        rangerConnect: (payload: RangerConnectFetch['payload']) => dispatch(rangerConnectFetch(payload)),
-        fetchSuccess: payload => dispatch(alertPush(payload)),
-    });
+const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
+    fetchCurrencies: () => dispatch(currenciesFetch()),
+    fetchHistory: params => dispatch(fetchHistory(params)),
+    fetchLabels: () => dispatch(labelFetch()),
+    fetchMarkets: () => dispatch(marketsFetch()),
+    fetchTickers: () => dispatch(marketsTickersFetch()),
+    fetchWithdrawLimit: () => dispatch(withdrawLimitFetch()),
+    rangerConnect: (payload: RangerConnectFetch['payload']) => dispatch(rangerConnectFetch(payload)),
+    fetchSuccess: payload => dispatch(alertPush(payload)),
+});
 
 const ProfileVerification = injectIntl(connect(mapStateToProps, mapDispatchProps)(ProfileVerificationComponent));
 
-export {
-    ProfileVerification,
-};
+export { ProfileVerification };
