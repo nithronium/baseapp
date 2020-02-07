@@ -209,24 +209,23 @@ class Trading extends React.Component<Props, StateProps> {
         }
     };
 
-    private setPageTitle = (market?: Market) => {
+    private setPageTitle = (market: Market) => {
         const { currentLanguage } = this.props;
         let marketName = 'ETH/USDT';
         if (market) {
             marketName = market.name;
         }
+        const link = `https://emirex.com${
+            currentLanguage === 'en' ? '/' : '/' + currentLanguage + '/'
+        }trading/${marketName.replace('/', '').toLowerCase()}`;
+        const linkEn = `https://emirex.com/trading/${marketName.replace('/', '').toLowerCase()}`;
+        const linkRu = `https://emirex.com/ru/trading/${marketName.replace('/', '').toLowerCase()}`;
+        const linkZh = `https://emirex.com/zh/trading/${marketName.replace('/', '').toLowerCase()}`;
+
         if (this.pageTitles[marketName]) {
-            const title = this.props.intl.formatMessage({ id: this.pageTitles[`${marketName}`].title });
-
-            const description = this.props.intl.formatMessage({ id: this.pageTitles[marketName].description });
-
             // tslint:disable
-            const link = `https://emirex.com${
-                currentLanguage === 'en' ? '/' : '/' + currentLanguage + '/'
-            }trading/${marketName.replace('/', '').toLowerCase()}`;
-            const linkEn = `https://emirex.com/trading/${marketName.replace('/', '').toLowerCase()}`;
-            const linkRu = `https://emirex.com/ru/trading/${marketName.replace('/', '').toLowerCase()}`;
-            const linkZh = `https://emirex.com/zh/trading/${marketName.replace('/', '').toLowerCase()}`;
+            const title = this.props.intl.formatMessage({ id: this.pageTitles[`${marketName}`].title });
+            const description = this.props.intl.formatMessage({ id: this.pageTitles[marketName].description });
             return (
                 <Helmet>
                     <link rel="canonical" href={link} />
@@ -240,7 +239,12 @@ class Trading extends React.Component<Props, StateProps> {
         } else {
             return (
                 <Helmet>
+                    <link rel="canonical" href={link} />
                     <title>Trading</title>
+                    <meta name="description" content={''} />
+                    <link key="ru" rel="alternate" href={linkRu} hrefLang="ru" title="Русский" />
+                    <link key="en" rel="alternate" href={linkEn} hrefLang="en" title="English" />
+                    <link key="zh" rel="alternate" href={linkZh} hrefLang="zh" title="中国人" />
                 </Helmet>
             );
         }
