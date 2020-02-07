@@ -1,7 +1,7 @@
 import { en as customTranslations } from '../custom/translations/en';
 import { en as pluginsTranslations } from '../plugins/translations/en';
 import { nationalitiesNames } from './nationalities';
-
+//tslint:disable
 export const en = {
     'page.header.navbar.signIn': 'Sign In',
     'page.header.navbar.trade': 'Trade',
@@ -145,11 +145,11 @@ export const en = {
     'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankName': 'Intermediary Bank Name (optional)',
     'page.body.wallets.whitelist.addAddressModal.body.fiatIntermediaryBankSwiftCode': 'Intermediary Bank Swift Code (optional)',
 
-
     'page.body.wallets.whitelist.addAddressModal.body.button': 'submit for confirmation',
 
     'page.body.wallets.whitelist.confirmationModal.header': 'Confirm new address',
-    'page.body.wallets.whitelist.confirmationModal.body.text': 'We have sent you an email containing a confirmation code pin, please enter it below to save the new address:',
+    'page.body.wallets.whitelist.confirmationModal.body.text':
+        'We have sent you an email containing a confirmation code pin, please enter it below to save the new address:',
     'page.body.wallets.whitelist.confirmationModal.body.confirmationModalCode': 'Pin code',
     'page.body.wallets.whitelist.confirmationModal.body.button': 'confirm',
 
@@ -230,7 +230,7 @@ export const en = {
     'page.body.profile.header.account.content.password.button.save': 'Save',
     'page.body.profile.header.account.content.password.button.cancel': 'Cancel',
     'page.body.profile.header.account.content.password.conf': 'Password Confirmation',
-    'page.body.profile.header.account.content.password.dont.match': 'Passwords don\'t match',
+    'page.body.profile.header.account.content.password.dont.match': "Passwords don't match ",
     'page.body.profile.header.account.content.password.change.success': 'Success!',
     'page.body.profile.header.account.content.password.change': 'Change password',
 
@@ -325,6 +325,7 @@ export const en = {
     'page.body.profile.content.action.requestPasswordReset': 'Request password reset',
     'page.body.profile.content.action.passwordReset': 'Password reset',
     'page.body.profile.content.action.create': 'Create',
+    'page.body.profile.content.action.read': 'Read',
 
     'page.body.profile.content.result.succeed': 'Succeed',
     'page.body.profile.content.result.failed': 'Failed',
@@ -376,7 +377,7 @@ export const en = {
     'page.header.signIn.email': 'Email',
     'page.header.signIn.password': 'Password',
     'page.header.signIn.password.message.error': 'Password is invalid',
-    'page.header.signIn.receiveConfirmation': 'Didn\'t receive your confirmation email?',
+    'page.header.signIn.receiveConfirmation': "Didn't receive your confirmation email?",
     'page.header.signIn.forgotPassword': 'Forgot your password?',
     'page.header.signIn.resetPassword.title': 'Reset password',
     'page.header.signIn.resetPassword.newPassword': 'New password',
@@ -391,7 +392,7 @@ export const en = {
     'page.header.signUp.password.message.error':
         'Password must contain at least 8 characters, at least one capital letter and one digit',
     'page.header.signUp.confirmPassword': 'Confirm Password',
-    'page.header.signUp.confirmPassword.message.error': 'Passwords don\'t match',
+    'page.header.signUp.confirmPassword.message.error': "Passwords don't match",
     'page.header.signUp.referalCode': 'Referral Code',
     'page.header.signUp.terms': 'I hereby confirm that I am 21 years old and have read & agreed to the: Terms of Use',
     'page.header.signUp.modal.header': 'VERIFY YOUR EMAIL ADDRESS',
@@ -435,7 +436,7 @@ export const en = {
 
     // error messages
     // barong
-    'resource.labels.private': 'Can\'t update label',
+    'resource.labels.private': "Can't update label",
     'resource.user.no_activity': 'No activity recorded or wrong topic',
     'resource.profile.not_exist': 'User has no profile',
     'resource.profile.exist': 'Profile already exists',
@@ -451,7 +452,7 @@ export const en = {
     'resource.documents.limit_will_be_reached': 'Documents amount will reach limit by this upload',
     'resource.otp.already_enabled': '2FA has been already enabled for this account',
     'resource.otp.invalid': 'OTP code is invalid',
-    'resource.password.doesnt_match': 'New passwords don\'t match',
+    'resource.password.doesnt_match': "New passwords don't match",
     'resource.password.prev_pass_not_correct': 'Previous password is not correct',
     'resource.password.no_change_provided': 'New password cant be the same, as old one',
     'resource.document.empty_doc_expire': 'Expiration Date is invalid',
@@ -461,10 +462,10 @@ export const en = {
     'email.taken': 'Email already have been taken',
 
     'identity.user.invalid_referral_format': 'Invalid referral uid format',
-    'identity.user.referral_doesnt_exist': 'Referral doesn\'t exist',
-    'identity.user.active_or_doesnt_exist': 'User doesn\'t exist or has already been activated',
-    'identity.password.user_doesnt_exist': 'User doesn\'t exist',
-    'identity.user.passwords_doesnt_match': 'Passwords don\'t match',
+    'identity.user.referral_doesnt_exist': "Referral doesn't exist",
+    'identity.user.active_or_doesnt_exist': "User doesn't exist or has already been activated",
+    'identity.password.user_doesnt_exist': "User doesn't exist",
+    'identity.user.passwords_doesnt_match': "Passwords don't match",
     'identity.user.utilized_token': 'JWT has already been used',
     'identity.session.invalid_login_params': 'Invalid Email or Password',
     'identity.session.invalid': 'Invalid Session',
@@ -496,8 +497,8 @@ export const en = {
     'jwt.decode_and_verify': 'Failed to decode and verify JWT',
     'authz.invalid_session': 'Failed to decode cookies',
     'authz.user_not_active': 'User is not active',
-    'authz.invalid_signature': 'API Key header \'signature\' is invalid',
-    'authz.apikey_not_active': 'API Key state is \'inactive',
+    'authz.invalid_signature': "API Key header 'signature' is invalid",
+    'authz.apikey_not_active': "API Key state is 'inactive",
     'authz.disabled_2fa': 'API Key owner has disabled 2FA',
     'authz.invalid_api_key_headers': 'Blank or missing API Key headers',
     'authz.permission_denied': 'Path is blacklisted',
@@ -569,14 +570,14 @@ export const en = {
     'resource.phone.empty_verification_code': 'Verification code is missing or empty',
 
     // peatio
-    'account.currency.doesnt_exist': 'Currency doesn\'t exist',
+    'account.currency.doesnt_exist': "Currency doesn't exist",
     'account.deposit.invalid_state': 'Deposit invalid state',
     'account.deposit.non_integer_limit': 'Value you send could not be parsed into Integer type',
     'account.deposit.invalid_limit': 'Invalid limit',
     'account.deposit.non_positive_page': 'Page value must be positive',
     'account.deposit.empty_txid': 'Txid is missing, txid is empty',
     'account.deposit_address.invalid_address_format': 'Invalid deposit address format',
-    'account.deposit_address.doesnt_support_cash_address_format': 'Currency doesn\'t support cash address format',
+    'account.deposit_address.doesnt_support_cash_address_format': "Currency doesn't support cash address format",
     'account.withdraw.non_integer_limit': 'Limit Value you send could not be parsed into Integer type',
     'account.withdraw.invalid_limit': 'Invalid limit',
     'account.withdraw.non_positive_page': 'Page value must be positive',
@@ -593,7 +594,7 @@ export const en = {
     'account.withdraw.invalid_otp': 'Invalid otp',
     'account.withdraw.disabled_api': 'Withdrawal API is disabled',
 
-    'market.market.doesnt_exist': 'Market doesn\'t exist',
+    'market.market.doesnt_exist': "Market doesn't exist",
     'market.order.invalid_state': 'Invalid deposit state',
     'market.order.invalid_limit': 'Invalid limit',
     'market.order.non_integer_limit': 'Limit value you send could not be parsed into Integer type',
@@ -616,13 +617,13 @@ export const en = {
     'market.order.invalid_volume_or_price': 'Invalid volume or price',
     'market.order.create_error': 'Failed to create error',
     'market.order.cancel_error': 'Failed to cancel error',
-    'market.order.market_order_price': 'Market order doesn\'t have price',
+    'market.order.market_order_price': "Market order doesn't have price",
     'market.trade.not_permitted': 'Please, pass the corresponding verification steps to enable trading',
     'market.account.insufficient_balance': 'Account balance is insufficient',
 
-    'public.currency.doesnt_exist': 'Currency doesn\'t exist',
+    'public.currency.doesnt_exist': "Currency doesn't exist",
     'public.currency.invalid_type': 'Invalid currency type',
-    'public.market.doesnt_exist': 'Market doesn\'t exist',
+    'public.market.doesnt_exist': "Market doesn't exist",
     'public.order_book.non_integer_ask_limit': 'Ask limit value you send could not be parsed into Integer type',
     'public.order_book.invalid_ask_limit': 'Invlalid ask limit',
     'public.order_book.non_integer_bid_limit': 'Bid limir value you send could not be parsed into Integer type',
