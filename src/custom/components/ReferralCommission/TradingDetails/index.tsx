@@ -50,10 +50,10 @@ class TradingDetailsComponent extends React.Component<Props, State>{
                 <tr>
                     <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.email'})}</div><div className="mobile-value">{record.email}</div></td>
                     <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l1Trades'})}</div><div className="mobile-value">{record.l1_trades}</div></td>
-                    <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL1'})}</div><div className="mobile-value">{record.l1_commissions}</div></td>
+                    <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL1'})}</div><div className="mobile-value">{record.l1_commissions} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></div></td>
                     {/* <td><div className="mobile-card-header"># of L2</div><div className="mobile-value">{record.referrals} <span className="explanation">referrals</span></div></td> */}
                     <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l2Trades'})}</div><div className="mobile-value">{record.l2_trades}</div></td>
-                    <td><div className="mobile-card-header"/><div className="mobile-value">{record.l2_commissions} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></div></td>
+                    <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL2'})}</div><div className="mobile-value">{record.l2_commissions} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></div></td>
                 </tr>
                 <tr><td colSpan={6}>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.total'})}: {total} {this.props.currencyId.toUpperCase()}</td></tr>
             </tbody>
@@ -92,10 +92,10 @@ class TradingDetailsComponent extends React.Component<Props, State>{
                             <tr>
                                 <td>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.email'})}</td>
                                 <td><div className="explanation">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l1Trades'})}</div></td>
-                                <td>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL1'})}<div className="explanation"> {this.props.currencyId.toUpperCase()}</div></td>
+                                <td><div className="explanation">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL1'})} {this.props.currencyId.toUpperCase()}</div></td>
                                 {/* <td><div className="explanation"># of </div>L2</td> */}
                                 <td><div className="explanation">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l2Trades'})}</div></td>
-                                <td>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL2'})}<div className="explanation"> {this.props.currencyId.toUpperCase()}</div></td>
+                                <td><div className="explanation">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL2'})} {this.props.currencyId.toUpperCase()}</div></td>
                             </tr>
                         </thead>
                         {this.tbodies(referrals)}
@@ -116,7 +116,7 @@ class TradingDetailsComponent extends React.Component<Props, State>{
                                 </td>
                             </tr>
                             <tr><td><span className="table-summary-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.total'})}</span></td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l1Trades'})}</td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL1'})} {this.props.currencyId.toUpperCase()}</td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l2Trades'})}</td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL2'})} {this.props.currencyId.toUpperCase()}</td></tr>
-                            <tr><td>{totalL1 + totalL2} {this.props.currencyId.toUpperCase()}</td><td>{this.getTotal('l1_trades')}</td><td>{totalL1}</td><td>{this.getTotal('l2_trades')}</td><td>{totalL2} {this.props.currencyId.toUpperCase()}</td></tr>
+                            <tr><td>{totalL1 + totalL2} {this.props.currencyId.toUpperCase()}</td><td>{this.getTotal('l1_trades')}</td><td>{totalL1} {this.props.currencyId.toUpperCase()}</td><td>{this.getTotal('l2_trades')}</td><td>{totalL2} {this.props.currencyId.toUpperCase()}</td></tr>
                         </tfoot>
                     </table>
                 </div>
