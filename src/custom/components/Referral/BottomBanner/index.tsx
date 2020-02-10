@@ -27,25 +27,30 @@ export const BottomBanner = injectIntl(({ intl }) => {
                         img={require('./icons/hand.svg')}
                         header={format({ id: 'page.referal.bottombanner.IEO_token_price' })}
                     >
-                        $0.4
+                        <div>{format({ id: 'page.referal.bottombanner.IEO_round1' })} : $0.4</div>
+                        <div>{format({ id: 'page.referal.bottombanner.IEO_round2' })} : $0.45</div>
                     </ListItem>
                     <ListItem
                         img={require('./icons/index.svg')}
                         header={format({ id: 'page.referal.bottombanner.IEO_max_supply' })}
                     >
-                        25 000 000 <span style={styles.currency}>EMRX*</span>
+                        25 000 000 <span style={styles.currency}>EMRX</span>
                     </ListItem>
-                    <ListItem
-                        img={require('./icons/money.svg')}
-                        header={format({ id: 'page.referal.bottombanner.IEO_start_date' })}
-                    >
-                        {format({ id: 'page.referal.bottombanner.IEO_start_date_value' })}
+                    <ListItem img={require('./icons/money.svg')} header={format({ id: 'page.referal.bottombanner.IEO_rounds' })}>
+                        <div>
+                            {format({ id: 'page.referal.bottombanner.IEO_round1' })} :{' '}
+                            {format({ id: 'page.referal.bottombanner.IEO_round_now' })}
+                        </div>
+                        <div>
+                            {format({ id: 'page.referal.bottombanner.IEO_round2' })} :{' '}
+                            {format({ id: 'page.referal.bottombanner.IEO_round_next' })}
+                        </div>
                     </ListItem>
                     <ListItem
                         img={require('./icons/investment.svg')}
                         header={format({ id: 'page.referal.bottombanner.hard_cap' })}
                     >
-                        $10 000 000**
+                        $10 000 000
                     </ListItem>
                     <ListItem
                         img={require('./icons/stock-price.svg')}
