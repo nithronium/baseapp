@@ -1100,6 +1100,9 @@ export const ru: LangType = {
     'partners.banner.subtitle': 'Только надежные партнеры, для Вашей уверенности',
     'partners.banner.tokens': 'токены',
     'partners.banner.takepart': 'ПРИМИТЕ УЧАСТИЕ',
+    'page.wallets.eth.notice':
+        'Обратите внимание. В настоящее время Emirex не поддерживает транзакции на основе смарт-контрактов.',
+    'page.wallets.eth.notice.button': 'Да, я подтверждаю',
 
     ...nationalitiesNames,
     ...pluginsTranslations,
