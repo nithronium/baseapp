@@ -1,94 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="ui-version" content="%REACT_APP_GIT_SHA%" />
+        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+        <title>Emirex</title>
+        <!-- Google Tag Manager -->
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <meta name="theme-color" content="#000000">
-    <meta name="ui-version" content="%REACT_APP_GIT_SHA%" />
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <title>Emirex</title>
-    <!-- Google Tag Manager -->
+        <script>
+            (function(w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({
+                    'gtm.start': new Date().getTime(),
+                    event: 'gtm.js',
+                });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-WMSPHGP');
+        </script>
+        <!-- End Google Tag Manager -->
 
-    <script>
-      (function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-          'gtm.start': new Date().getTime(),
-          event: 'gtm.js'
-        });
-        var f = d.getElementsByTagName(s)[0],
-          j = d.createElement(s),
-          dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
-      })(window, document, 'script', 'dataLayer', 'GTM-WMSPHGP');
+        <!-- Global site tag (gtag.js) - Google Analytics -->
 
-    </script>
-    <!-- End Google Tag Manager -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146884842-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146884842-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
+            gtag('config', 'UA-146884842-1');
+        </script>
+        <!-- End global site tag-->
 
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag('js', new Date());
+        <!-- Facebook Pixel Code -->
+        <script>
+            !(function(f, b, e, v, n, t, s) {
+                if (f.fbq) return;
+                n = f.fbq = function() {
+                    n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments);
+                };
+                if (!f._fbq) f._fbq = n;
+                n.push = n;
+                n.loaded = !0;
+                n.version = '2.0';
+                n.queue = [];
+                t = b.createElement(e);
+                t.async = !0;
+                t.src = v;
+                s = b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t, s);
+            })(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+            fbq('init', '554619862060487');
+            fbq('track', 'PageView');
+        </script>
+        <noscript
+            ><img
+                height="1"
+                width="1"
+                style="display:none"
+                src="https://www.facebook.com/tr?id=554619862060487&ev=PageView&noscript=1"
+        /></noscript>
+        <!-- End Facebook Pixel Code -->
+    </head>
 
-      gtag('config', 'UA-146884842-1');
-
-    </script>
-    <!-- End global site tag-->
-
-    <!-- Facebook Pixel Code -->
-    <script>
-      ! function (f, b, e, v, n, t, s) {
-        if (f.fbq) return;
-        n = f.fbq = function () {
-          n.callMethod ?
-            n.callMethod.apply(n, arguments) : n.queue.push(arguments)
-        };
-        if (!f._fbq) f._fbq = n;
-        n.push = n;
-        n.loaded = !0;
-        n.version = '2.0';
-        n.queue = [];
-        t = b.createElement(e);
-        t.async = !0;
-        t.src = v;
-        s = b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t, s)
-      }(window, document, 'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-      fbq('init', '554619862060487');
-      fbq('track', 'PageView');
-
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-        src="https://www.facebook.com/tr?id=554619862060487&ev=PageView&noscript=1" /></noscript>
-    <!-- End Facebook Pixel Code -->
-
-  </head>
-
-  <body>
-    <script src="%PUBLIC_URL%/config/env.js"></script>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WMSPHGP" height="0" width="0"
-        style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <div id="root"></div>
-    <!-- Start of HubSpot Embed Code -->
-    <script type=“text/javascript” id=“hs-script-loader” async defer src=“//js.hs-scripts.com/6447437.js”> </script>
-      <!-- End of HubSpot Embed Code -->
-      </body>
-
+    <body>
+        <script src="%PUBLIC_URL%/config/env.js"></script>
+        <noscript>
+            You need to enable JavaScript to run this app.
+        </noscript>
+        <!-- Google Tag Manager (noscript) -->
+        <noscript
+            ><iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-WMSPHGP"
+                height="0"
+                width="0"
+                style="display:none;visibility:hidden"
+            ></iframe
+        ></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+        <div id="root"></div>
+        <!-- Start of HubSpot Embed Code -->
+        <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/6447437.js"></script>
+        <!-- End of HubSpot Embed Code -->
+    </body>
 </html>
