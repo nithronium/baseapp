@@ -1,3 +1,6 @@
-export const REFERRAL_COMMISSION_FETCH = 'referralCommission/FETCH';
+export const REFERRAL_COMMISSION_BALANCES_FETCH = 'referralCommission/BALANCES_FETCH';
+export const REFERRAL_COMMISSION_REFERRALS_FETCH = 'referralCommission/REFERRALS_FETCH';
+export const REFERRAL_COMMISSION_CURRENCY_CHANGE = 'referralCommission/CURRENCY_CHANGE';
 export const REFERRAL_COMMISSION_ERROR = 'referralCommission/ERROR';
-export const REFERRAL_COMMISSION_DATA = 'referralCommission/DATA';
+export const REFERRAL_COMMISSION_BALANCES_DATA = 'referralCommission/BALANCES_DATA';
+export const REFERRAL_COMMISSION_REFERRALS_DATA = 'referralCommission/REFERRALS_DATA';

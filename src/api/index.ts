@@ -115,3 +115,9 @@ export const getBalance = async () => {
     const res = await axios.get(`${nodelogicUrl}/getBalance`);
     return res.data;
 };
+
+const referralCommissionServiceUrl = `${baseURL}/api/v2/referral`;
+export const getReferral = async body => {
+    const res = await axios.get(`${referralCommissionServiceUrl}${body}`);
+    return res.data;
+};

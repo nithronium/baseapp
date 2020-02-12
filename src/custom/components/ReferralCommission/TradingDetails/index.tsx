@@ -1,45 +1,61 @@
 import * as React from 'react';
+import {
+    InjectedIntlProps,
+    injectIntl,
+} from 'react-intl';
+import { getReferral } from '../../../../api';
+import { exportToCsv } from '../../../helpers';
 
-interface Props {
+interface PassedProps {
     context: {
-        legend: [];
+        referrals: [];
+        type: string;
+        skip: number;
+        limit: number;
+        count: number;
+        loading: boolean;
     };
     header: string;
-    entity: 'ieo' | 'summary' | 'trading';
+    currencyId: string;
+    entity: 'ieo' | 'trade';
+    changePage(currencyId, type, skip, limit): void;
 }
 
 interface State {
-    legend: [];
+    referrals: [];
 }
 
-class TradingDetails extends React.Component<Props, State>{
+type Props = InjectedIntlProps & PassedProps;
+
+class TradingDetailsComponent extends React.Component<Props, State>{
 
     constructor(props){
 
         super(props);
         this.state = {
-            legend: this.props.context && this.props.context.legend,
+            referrals: this.props.context && this.props.context.referrals,
         };
 
         //this.loadMore = this.loadMore.bind(this);
 
     }
 
-    public tbodies = legendArray => {
-        return legendArray.map((record, index) => {
+    public tbodies = rowsArray => {
+        return rowsArray.map((record, index) => {
+            const l1Commissions = record.l1_commissions as number;
+            const l2Commissions = record.l2_commissions as number;
+            const total = l1Commissions + l2Commissions;
             return(
             <tbody key={index} className="summary-row">
                 <tr>
-                    <td><div className="mobile-card-header">E-mail</div><div className="mobile-value">{record.mail}</div></td>
-                    <td><div className="mobile-card-header"># of L1</div><div className="mobile-value">{record.l1_trades}</div></td>
-                    <td><div className="mobile-card-header">Commission L1 (BTC)</div><div className="mobile-value">{record.commission_l1}</div></td>
-                    <td><div className="mobile-card-header"># of L2</div><div className="mobile-value">{record.referrals} <span className="explanation">referrals</span></div></td>
-                    <td><div className="mobile-card-header"># of L2 trades</div><div className="mobile-value">{record.trades} <span className="explanation">trades</span></div></td>
-                    <td><div className="mobile-card-header"/><div className="mobile-value">{record.commission_l2} <span className="explanation">BTC</span></div></td>
+                    <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.email'})}</div><div className="mobile-value">{record.email}</div></td>
+                    <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l1Trades'})}</div><div className="mobile-value">{record.l1_trades}</div></td>
+                    <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL1'})}</div><div className="mobile-value">{record.l1_commissions} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></div></td>
+                    {/* <td><div className="mobile-card-header"># of L2</div><div className="mobile-value">{record.referrals} <span className="explanation">referrals</span></div></td> */}
+                    <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l2Trades'})}</div><div className="mobile-value">{record.l2_trades}</div></td>
+                    <td><div className="mobile-card-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL2'})}</div><div className="mobile-value">{record.l2_commissions} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></div></td>
                 </tr>
-                <tr>
-                    <td colSpan={6}>total amount: {record.total_amount} BTC</td>
-                </tr>
+                <tr><td colSpan={6}>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.total'})}: {total} {this.props.currencyId.toUpperCase()}</td></tr>
             </tbody>
             );
         });
@@ -47,15 +63,22 @@ class TradingDetails extends React.Component<Props, State>{
 
     public render(){
 
-        let legendArray = [];
+        let referrals = [];
 
-        if (this.props.context && this.props.context.legend) {
-            legendArray = this.props.context && this.props.context.legend;
+        if (this.props.context && this.props.context.referrals) {
+            referrals = this.props.context && this.props.context.referrals;
         }
 
-        if (this.state.legend && this.state.legend.length) {
-            legendArray = this.state.legend;
+        if (this.state.referrals && this.state.referrals.length) {
+            referrals = this.state.referrals;
         }
+
+        const disabledPrev = this.props.context.skip <= 0;
+        const disabledNext = ((this.props.context.skip as number) + (this.props.context.limit as number)) >= this.props.context.count;
+        const disableExport = this.props.context.referrals.length < 1;
+
+        const totalL1 = this.getTotal('l1_commissions');
+        const totalL2 = this.getTotal('l2_commissions');
 
         return(
 
@@ -67,33 +90,33 @@ class TradingDetails extends React.Component<Props, State>{
                     <table id="tc-details-list">
                         <thead>
                             <tr>
-                                <td>E-mail</td>
-                                <td><div className="explanation"># of L1 </div>trades</td>
-                                <td>Commission L1<div className="explanation"> (BTC)</div></td>
-                                <td><div className="explanation"># of </div>L2</td>
-                                <td><div className="explanation"># of </div>L2 trades</td>
-                                <td>Commission L2<div className="explanation"> (BTC)</div></td>
+                                <td>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.email'})}</td>
+                                <td><div className="explanation">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l1Trades'})}</div></td>
+                                <td><div className="explanation">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL1'})} {this.props.currencyId.toUpperCase()}</div></td>
+                                {/* <td><div className="explanation"># of </div>L2</td> */}
+                                <td><div className="explanation">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l2Trades'})}</div></td>
+                                <td><div className="explanation">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL2'})} {this.props.currencyId.toUpperCase()}</div></td>
                             </tr>
                         </thead>
-                        {this.tbodies(legendArray)}
+                        {this.tbodies(referrals)}
                         <tfoot>
-                            {/*<tr><td colSpan={3}><a className="lazy-trigger" href="#!" onClick={this.loadMore}>more</a></td><td colSpan={3}><a className="csv-trigger round-button" href="#!">export CSV</a></td></tr>*/}
-                            <tr>
-                                <td><span className="table-summary-header">total</span></td>
-                                <td className="footer-header"># of L1 trades</td>
-                                <td className="footer-header">Commission L1 (BTC)</td>
-                                <td className="footer-header"># of L2</td>
-                                <td className="footer-header"># of L2 trades</td>
-                                <td className="footer-header">Commission L2 (BTC)</td>
+                            <tr style={{ paddingTop: 0 }}>
+                                <td>
+                                    <div style={{ padding: '30px 0',display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '200px'}}>
+                                            <button style={{background: disabledPrev ? 'gray' : '#00732F'}} disabled={disabledPrev} onClick={this.previousPage}>&larr; {this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.prev'})}</button>
+                                            <button style={{background: disabledNext ? 'gray' : '#00732F'}} disabled={disabledNext} onClick={this.nextPage}>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.next'})} &rarr;</button>
+                                    </div>
+                                </td>
+                                <td/>
+                                <td/>
+                                <td>
+                                    <div style={{ padding: '30px 0',display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                                <button style={{background: disableExport ? 'gray' : '#00732F'}} disabled={disableExport} onClick={this.downloadCsv}>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.exportToCsv'})}</button>
+                                    </div>
+                                </td>
                             </tr>
-                            <tr>
-                                <td>{this.getTotal('total_amount')} BTC</td>
-                                <td>{this.getTotal('l1_trades')}</td>
-                                <td>{this.getTotal('commission_l1')}</td>
-                                <td>{this.getTotal('referrals')}</td>
-                                <td>{this.getTotal('trades')}</td>
-                                <td>{this.getTotal('commission_l2')} BTC</td>
-                            </tr>
+                            <tr><td><span className="table-summary-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.total'})}</span></td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l1Trades'})}</td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL1'})} {this.props.currencyId.toUpperCase()}</td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l2Trades'})}</td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL2'})} {this.props.currencyId.toUpperCase()}</td></tr>
+                            <tr><td>{totalL1 + totalL2} {this.props.currencyId.toUpperCase()}</td><td>{this.getTotal('l1_trades')}</td><td>{totalL1} {this.props.currencyId.toUpperCase()}</td><td>{this.getTotal('l2_trades')}</td><td>{totalL2} {this.props.currencyId.toUpperCase()}</td></tr>
                         </tfoot>
                     </table>
                 </div>
@@ -101,10 +124,37 @@ class TradingDetails extends React.Component<Props, State>{
         );
     }
 
+    private nextPage = () => {
+        const limit = (this.props.context.limit || 10) as number;
+        const skip = ((this.props.context.skip as number) || 0) + limit ;
+
+        this.props.changePage(this.props.currencyId, this.props.context.type, skip, limit);
+    }
+
+    private previousPage = () => {
+        const limit = (this.props.context.limit || 10);
+        const skip = (this.props.context.skip || 0) - limit;
+
+        this.props.changePage(this.props.currencyId, this.props.context.type, skip, limit);
+    }
+
+    private downloadCsv = async () => {
+        const fileName = `Export - ${this.props.entity}.csv`;
+        const query = `/private/referrals?type=${this.props.entity}&currency_id=${this.props.currencyId}&skip=0&limit=${this.props.context.count}`;
+        const json = await getReferral(query);
+        if (json.referrals.length < 1) {return;}
+        const rows: string[][] = [];
+        rows.push(Object.keys(json.referrals[0]));
+        for (const referral of json.referrals) {
+            rows.push(Object.values(referral));
+        }
+        exportToCsv(fileName, rows);
+    }
+
     private getTotal(column, mode = 'default', condition?){
 
         const legendArray = //this.state.legend && this.state.legend.length ? this.state.legend :
-            this.props.context && this.props.context.legend;
+            this.props.context && this.props.context.referrals;
 
         let total = 0;
 
@@ -125,30 +175,6 @@ class TradingDetails extends React.Component<Props, State>{
 
         return total;
     }
-
-    /*private loadMore(){
-
-        this.setState({
-            filteredLegend: null,
-        });
-
-        const url = `/json/ReferralCommission/${this.props.entity}_more.json`;
-
-        fetch(url)
-        .then(async res => res.json())
-        .then(
-            result => {
-                this.setState({
-                    legend: result[`${this.props.entity}-commission`].legend,
-                });
-            },
-
-            error => {
-                //console.log(error);
-            },
-        );
-
-    }*/
 }
 
-export { TradingDetails };
+export const TradingDetails = injectIntl(TradingDetailsComponent);

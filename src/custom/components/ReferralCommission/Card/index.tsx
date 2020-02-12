@@ -1,68 +1,57 @@
 import * as React from 'react';
+import {
+    InjectedIntlProps,
+    injectIntl,
+} from 'react-intl';
 
-interface CardContextInterface {
-    details: [];
-    legend: [];
+interface PassedProps {
+    commission: number[];
     earned: number;
-    title: string;
-}
-
-interface Props {
-    context: CardContextInterface;
+    currencyId: string;
+    header: string;
     link: string;
 }
 
-class Card extends React.Component<Props>{
+type Props = InjectedIntlProps & PassedProps;
 
-    public getSummary = () => {
-        if (this.props.context.details){
-            return this.props.context.details;
-        }else{
-            return [];
-        }
-    }
-
-    public summaryRows = () => {
-        return this.getSummary().map((row, index) => {
-            return(
-                <div className="card-details-row" key={index}>
-                    <div className="card-details-row__left">{Object.keys(row)[0]}</div>
-                    <div className="card-details-row__right">{row[Object.keys(row)[0]]}</div>
-                </div>
-            );
-        });
-    }
-
+class CardComponent extends React.Component<Props>{
     public render(){
 
-        let preloader;
-        if (!(this.props.context && this.props.context.legend)){
-            preloader = (
-                <div className="preloader"/>
-            );
-        }else{
-            preloader = null;
-        }
+        // let preloader;
+        // if (!(this.props. && this.props.context.legend)){
+        //     preloader = (
+        //         <div className="preloader"/>
+        //     );
+        // }else{
+        //     preloader = null;
+        // }
         return(
 
             <div className="Card">
-                {preloader}
+                {/* {preloader} */}
                 <div className="card-top">
                     <div className="card-top__left">
-                        <p className="card-top__left__header">{this.props.context.title}</p>
+                        <p className="card-top__left__header">{this.props.header}</p>
                     </div>
                 </div>
                 <div className="card-middle">
-                    {this.summaryRows()}
+                    <div className="card-details-row">
+                        <div className="card-details-row__left">{this.props.intl.formatMessage({id: 'referralCommission.card.referralL1'})}</div>
+                        <div className="card-details-row__right">{this.props.commission[0] || 0}</div>
+                    </div>
+                    <div className="card-details-row">
+                        <div className="card-details-row__left">{this.props.intl.formatMessage({id: 'referralCommission.card.referralL2'})}</div>
+                        <div className="card-details-row__right">{this.props.commission[1] || 0}</div>
+                    </div>
                 </div>
                 <div className="card-middle">
-                    <div className="card-earned-header">Earned</div>
+                    <div className="card-earned-header">{this.props.intl.formatMessage({id: 'referralCommission.card.earned'})}</div>
                     <div className="card-details-row">
-                        {this.props.context.earned} BTC
+                        {this.props.earned || 0} {this.props.currencyId.toUpperCase()}
                     </div>
                 </div>
                 <div className="card-bottom">
-                    <a className="details-link" href={this.props.link}>view details</a>
+                    <a className="details-link" href={this.props.link}>{this.props.intl.formatMessage({id: 'referralCommission.card.viewDetails'})}</a>
                 </div>
             </div>
 
@@ -70,4 +59,4 @@ class Card extends React.Component<Props>{
     }
 }
 
-export {Card};
+export const Card =  injectIntl(CardComponent);
