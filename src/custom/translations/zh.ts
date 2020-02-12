@@ -948,6 +948,8 @@ export const zh = {
     'partners.banner.subtitle': '只有值得信赖的合作伙伴，您才能放心',
     'partners.banner.tokens': '代币',
     'partners.banner.takepart': '参与',
+    'page.wallets.eth.notice': '注意。 Emirex当前不接受智能合约发送的交易',
+    'page.wallets.eth.notice.button': '是的，我确认',
 
     ...pluginsTranslations,
     ...nationalitiesNames,

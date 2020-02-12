@@ -455,4 +455,6 @@ export const en = {
     'partners.banner.subtitle': 'Only trusted partners, for your confidence',
     'partners.banner.tokens': 'tokens',
     'partners.banner.takepart': 'TAKE PART',
+    'page.wallets.eth.notice': 'Notice. Emirex does not currently accept transactions sent from smart contracts.',
+    'page.wallets.eth.notice.button': 'Yes, I confirm',
 };
