@@ -341,6 +341,7 @@ export const zh = {
     'page.header.signUp.confirmPassword': '确认密码',
     'page.header.signUp.confirmPassword.message.error': '密码不匹配',
     'page.header.signUp.referalCode': '推荐代码',
+    'page.header.signUp.corporateLink': '想要建立公司账号吗？ 点击此处！',
     'page.header.signUp.terms': '我特此确认我今年21岁以上，并已阅读并同意以下条款：使用条款',
     'page.header.signUp.modal.header': '验证您的邮箱',
     'page.header.signUp.modal.body':

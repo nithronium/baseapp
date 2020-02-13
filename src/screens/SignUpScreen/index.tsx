@@ -148,6 +148,7 @@ class SignUp extends React.Component<Props> {
                         confirmPasswordLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.confirmPassword'})}
                         referalCodeLabel={this.props.intl.formatMessage({ id: 'page.header.signUp.referalCode'})}
                         termsMessage={this.props.intl.formatMessage({ id: 'page.header.signUp.terms'})}
+                        corporateTextLink={this.props.intl.formatMessage({ id: 'page.header.signUp.corporateLink'})}
                         refId={refId}
                         handleChangeRefId={this.handleChangeRefId}
                         isLoading={loading}
