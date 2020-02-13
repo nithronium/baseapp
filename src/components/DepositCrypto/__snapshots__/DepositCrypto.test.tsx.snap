@@ -12,6 +12,7 @@ exports[`DepositCrypto should match snapshot 1`] = `
         className="cr-deposit-info"
       >
         text123
+         
       </p>
       <div
         className="d-none d-md-block qr-code-wrapper"
