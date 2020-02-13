@@ -119,6 +119,14 @@ exports[`SignUp component should render 1`] = `
           onClick={[Function]}
           type="submit"
         />
+        <a
+          className="cr-sign-up-form__corporate-link"
+          href="https://kb.emirex.com/corporate_account_verification"
+          hrefLang="ru"
+          key="ru"
+          rel="alternate"
+          target="_blank"
+        />
       </div>
     </div>
   </div>

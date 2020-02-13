@@ -29,6 +29,7 @@ interface SignUpFormProps {
     passwordLabel?: string;
     confirmPasswordLabel?: string;
     referalCodeLabel?: string;
+    corporateTextLink?: string;
     termsMessage?: string;
     refId: string;
     password: string;
@@ -86,6 +87,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
             passwordFocused,
             confirmPasswordFocused,
             refIdFocused,
+            corporateTextLink,
         } = this.props;
 
         const emailGroupClass = cr('cr-sign-up-form__group', {
@@ -209,6 +211,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
                                 disabled={this.disableButton()}
                                 onClick={this.handleClick}
                             />
+                            <a className="cr-sign-up-form__corporate-link" key="ru" rel="alternate" href={'https://kb.emirex.com/corporate_account_verification'} hrefLang="ru" title={corporateTextLink} target="_blank">{corporateTextLink}</a>
                         </div>
                     </div>
                 </div>
