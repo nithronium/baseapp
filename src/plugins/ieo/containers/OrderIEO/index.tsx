@@ -162,7 +162,7 @@ class OrderIEOContainer extends React.PureComponent<Props> {
     }
 
     private getAvailableValue(wallet: Wallet | undefined) {
-        return wallet ? wallet.balance : 0;
+        return wallet && wallet.balance !== undefined ? wallet.balance : 0;
     }
 
     private handleToggleOrderExecuteModal = (data: OrderIEOData) => {

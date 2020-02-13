@@ -141,6 +141,8 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.ccy.message.address': 'Пополнить кошелек',
     'page.body.wallets.tabs.deposit.ccy.message.button': 'Копир.',
     'page.body.wallets.tabs.deposit.ccy.message.success': 'Адрес скопирован',
+    'page.body.wallets.tabs.deposit.ccy.button.generate': 'Сгенерировать',
+    'page.body.wallets.tabs.deposit.ccy.button.address': 'адресс',
 
 
     'page.body.wallets.tabs.deposit.ccy.message.generating': 'Генерация адреса',

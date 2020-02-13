@@ -12,7 +12,7 @@ import { EstimatedValue } from '../../containers/Wallets/EstimatedValue';
 import { WalletHistory } from '../../containers/Wallets/History';
 import { BlurComponent } from '../../custom/components';
 import { buildPath } from '../../custom/helpers';
-import { setDocumentTitle } from '../../helpers';
+import { formatCCYAddress, setDocumentTitle } from '../../helpers';
 import {
     alertPush,
     beneficiariesFetch,
@@ -44,10 +44,11 @@ import {
     withdrawLimitFetch,
 } from '../../modules';
 import { CommonError } from '../../modules/types';
-import { DepositTab } from './DepositTab';
 import { TypeTabs } from './TypeTabs';
 import { getBalance } from '../../api';
 import { History } from 'history';
+import { CoinFragment } from './DepositTab/CoinFragment';
+import { FiatFragment } from './DepositTab/FiatFragment';
 
 interface HP {
     history: History;
@@ -162,7 +163,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 
         if (selectedWalletIndex === -1 && wallets.length) {
             this.setState({ selectedWalletIndex: 0 });
-            wallets[0].type === 'coin' && fetchAddress({ currency: wallets[0].currency });
+            wallets[0].type === 'coin' && wallets[0].balance !== undefined && fetchAddress({ currency: wallets[0].currency });
         }
 
         if (!this.props.currencies.length) {
@@ -186,7 +187,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 card: false,
             });
             this.props.fetchBeneficiaries();
-            next.wallets[0].type === 'coin' && this.props.fetchAddress({ currency: next.wallets[0].currency });
+            next.wallets[0].type === 'coin' && next.wallets[0].balance !== undefined && this.props.fetchAddress({ currency: next.wallets[0].currency });
         }
 
         if (!withdrawSuccess && next.withdrawSuccess) {
@@ -341,34 +342,60 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         this.props.fetchSuccess({ message: ['page.body.wallets.tabs.deposit.ccy.message.success'], type: 'success' });
     };
 
-    private onError = (data) => {
-        this.props.paymentError(data);
-    };
+    private handleGenerateAddress = () => {
+        const { selectedWalletIndex } = this.state;
+        const { wallets } = this.props;
+
+        if (!wallets[selectedWalletIndex].address && wallets.length && wallets[selectedWalletIndex].type !== 'fiat') {
+            this.props.fetchAddress({ currency: wallets[selectedWalletIndex].currency });
+        }
+    }
 
     private renderDeposit = () => {
-        const { addressDepositError, wallets, user, selectedWalletAddress, colorTheme, withdrawLimitData } = this.props;
-        const { selectedWalletIndex, card, sepa, wire } = this.state;
-        return (
-            <DepositTab
-                addressDepositError={addressDepositError}
-                colorTheme={colorTheme}
-                wallets={wallets}
-                user={user}
-                selectedWalletAddress={selectedWalletAddress}
-                selectedWalletIndex={selectedWalletIndex}
-                card={card}
-                sepa={sepa}
-                wire={wire}
-                handleOnCopy={this.handleOnCopy}
-                action={this.setState.bind(this)}
-                balance={this.state.balance}
-                message={this.message}
-                history={this.props.history}
-                withdrawLimitData={withdrawLimitData}
-                lang={this.props.currentLanguage}
-                onError={this.onError}
-            />
-        );
+        const { addressDepositError, wallets, user, selectedWalletAddress, currencies } = this.props;
+        const { selectedWalletIndex } = this.state;
+        const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
+        const currencyItem = (currencies && currencies.find(item => item.id === currency)) || { min_confirmations: 6 };
+        const text = this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' },
+                                                   { confirmations: currencyItem.min_confirmations });
+        const error = addressDepositError ?
+            this.props.intl.formatMessage({id: addressDepositError.message}) :
+            this.props.intl.formatMessage({id: 'page.body.wallets.tabs.deposit.ccy.message.error'});
+
+        const walletAddress = formatCCYAddress(currency, selectedWalletAddress);
+
+        const buttonLabel = `
+            ${this.translate('page.body.wallets.tabs.deposit.ccy.button.generate')} ${currency.toUpperCase()} ${this.translate('page.body.wallets.tabs.deposit.ccy.button.address')}
+        `;
+
+        if (wallets[selectedWalletIndex].type === 'coin') {
+            return (
+                <React.Fragment>
+                    <CurrencyInfo wallet={wallets[selectedWalletIndex]}/>
+                    <CoinFragment
+                        data={walletAddress}
+                        handleOnCopy={this.handleOnCopy}
+                        error={error}
+                        text={text}
+                        disabled={walletAddress === ''}
+                        copiableTextFieldText={this.translate('page.body.wallets.tabs.deposit.ccy.message.address')}
+                        copyButtonText={this.translate('page.body.wallets.tabs.deposit.ccy.message.button')}
+                        handleGenerateAddress={this.handleGenerateAddress}
+                        buttonLabel={buttonLabel}
+                        isAccountActivated={wallets[selectedWalletIndex].balance !== undefined}
+                    />
+                    {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
+                </React.Fragment>
+            );
+        } else {
+            return (
+                <React.Fragment>
+                    <CurrencyInfo wallet={wallets[selectedWalletIndex]}/>
+                    <FiatFragment title={this.title} description={this.description} uid={user ? user.uid : ''}/>
+                    {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
+                </React.Fragment>
+            );
+        }
     };
 
     private renderWithdraw = () => {
@@ -444,6 +471,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         return otp ? <Withdraw {...withdrawProps} /> : this.isOtpDisabled();
     };
 
+    private title = this.translate('page.body.wallets.tabs.deposit.fiat.message1');
+    private description = this.translate('page.body.wallets.tabs.deposit.fiat.message2');
+
     private isOtpDisabled = () => {
         return (
             <React.Fragment>
@@ -471,7 +501,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 
     private onWalletSelectionChange = (value: WalletItemProps) => {
         const { wallets } = this.props;
-        if (!value.address && wallets.length && value.type !== 'fiat') {
+        if (!value.address && wallets.length && value.balance !== undefined && value.type !== 'fiat') {
             this.props.fetchAddress({ currency: value.currency });
         }
         const nextWalletIndex = this.props.wallets.findIndex(

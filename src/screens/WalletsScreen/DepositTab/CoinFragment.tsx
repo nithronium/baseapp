@@ -21,6 +21,8 @@ export const CoinFragment = injectIntl(
         setUsedCoins,
         user,
         withdrawLimitData,
+        isAccountActivated,
+        handleGenerateAddress,
      }) => {
         const usedCoinsLocal = usedCoins.slice();
         const format = intl.formatMessage;
@@ -59,7 +61,7 @@ export const CoinFragment = injectIntl(
             walletAddress :
             format({ id: 'page.body.wallets.tabs.deposit.ccy.message.generating' });
         const realWalletAddress = user.level < 2 ? error : addressValue;
-        
+
         return (
             <React.Fragment>
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
@@ -96,6 +98,8 @@ export const CoinFragment = injectIntl(
                         disabledLimit={user.level > 5}
                         copiableTextFieldText={format({ id: 'page.body.wallets.tabs.deposit.ccy.message.address' })}
                         copyButtonText={format({ id: 'page.body.wallets.tabs.deposit.ccy.message.button' })}
+                        isAccountActivated={isAccountActivated}
+                        handleGenerateAddress={handleGenerateAddress}
                     />
                 )}
                 {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}

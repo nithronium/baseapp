@@ -25,9 +25,7 @@ export function* walletsSaga() {
 
             if (!walletInfo) {
                 walletInfo = {
-                    balance: 0,
                     currency: currency.id,
-                    locked: 0,
                 };
             }
 

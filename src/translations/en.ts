@@ -134,6 +134,8 @@ export const en = {
     'page.body.wallets.tabs.deposit.ccy.message.success': 'Address copied',
     'page.body.wallets.tabs.deposit.ccy.message.error': 'Upgrade your level to get the deposit address',
     'page.body.wallets.tabs.deposit.ccy.message.generating': 'Generating deposit address',
+    'page.body.wallets.tabs.deposit.ccy.button.generate': 'Generate',
+    'page.body.wallets.tabs.deposit.ccy.button.address': 'address',
 
     'page.body.wallets.tabs.deposit.fiat.message1': 'Deposit using bank transfer',
     'page.body.wallets.tabs.deposit.fiat.message1.sepa': 'Deposit using SEPA transfer',
