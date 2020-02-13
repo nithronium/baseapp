@@ -398,6 +398,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     private handleLogOut = () => {
         localStorage.removeItem('uil');
         localStorage.removeItem('refCode');
+        localStorage.removeItem('usedCoins');
         this.setState(
             {
                 isOpen: false,

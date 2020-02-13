@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { CoinFragment } from './CoinFragment';
 import { FiatFragment } from './FiatFragment';
-
+//tslint:disable
 export const DepositTab = ({
     addressDepositError,
     colorTheme,
@@ -19,9 +19,12 @@ export const DepositTab = ({
     history,
     lang,
 }) => {
+    const coins = localStorage.getItem('usedCoins') ? JSON.parse(localStorage.getItem('usedCoins') || '') : [];
+
     const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
     const [userAgree, setUserAgree] = React.useState(false);
-    const [usedCoins, setUsedCoins] = React.useState([]);
+    const [usedCoins, setUsedCoins] = React.useState(coins);
+
     if (wallets[selectedWalletIndex].type === 'coin') {
         return (
             <CoinFragment

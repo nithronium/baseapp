@@ -19,7 +19,8 @@ export const CoinFragment = injectIntl(
         usedCoins,
         setUsedCoins,
     }) => {
-        const usedCoinsLocal = usedCoins;
+        const usedCoinsLocal = usedCoins.slice();
+
         const format = intl.formatMessage;
         const text = format({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' });
         const walletAddress = formatCCYAddress(currency, selectedWalletAddress);
@@ -33,7 +34,9 @@ export const CoinFragment = injectIntl(
         }
         const setAgree = () => {
             setUserAgree(true);
+
             usedCoinsLocal.push(currency);
+            localStorage.setItem('usedCoins', JSON.stringify(usedCoinsLocal));
             setUsedCoins(usedCoinsLocal);
         };
         const notice = currency === 'eth' ? format({ id: 'page.wallets.eth.notice' }) : null;
