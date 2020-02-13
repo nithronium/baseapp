@@ -177,7 +177,7 @@ class ReferralTicketDetails extends React.Component<Props, State> {
                                 </tr>
                                 <tr>
                                     <td>
-                                        <span className="count">{this.getOverall('active') + this.getOverall('inactive')}</span>{' '}
+                                        <span className="count">{this.getOverall('active')}</span>{' '}
                                         <span className="explanation">{this.props.message({ id: 'tickets.tick' })}</span>
                                     </td>
                                     <td>
