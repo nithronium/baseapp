@@ -3,7 +3,6 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { CopyableTextField } from '../CopyableTextField';
 
-
 interface DepositCryptoProps {
     /**
      * Data which is used to generate QR code
@@ -26,6 +25,10 @@ interface DepositCryptoProps {
      * @default 'Deposit by Wallet Address'
      * Renders text of the label of CopyableTextField component
      */
+    notice?: string;
+    /**
+     * render notice if needed with red color
+     */
     copiableTextFieldText?: string;
     /**
      * @default 'Copy'
@@ -43,24 +46,28 @@ interface DepositCryptoProps {
     disabled?: boolean;
 }
 
-
 /**
  *  Component that displays wallet details that can be used to deposit cryptocurrency.
  */
 const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: DepositCryptoProps) => {
     const QR_SIZE = 118;
-    const { data, dimensions, error, text, copiableTextFieldText, copyButtonText, handleOnCopy, disabled } = props;
+    const { data, dimensions, error, text, copiableTextFieldText, copyButtonText, handleOnCopy, disabled, notice } = props;
     const size = dimensions || QR_SIZE;
     const onCopy = !disabled ? handleOnCopy : undefined;
-    const className = classnames({'cr-copyable-text-field__disabled': data === ''});
-
+    const className = classnames({ 'cr-copyable-text-field__disabled': data === '' });
+    //tslint:disable
     return (
         <div className={className}>
             <div className={'cr-deposit-crypto'}>
                 <div>
-                    <p className={'cr-deposit-info'}>{text}</p>
-                    {data ? <div className="d-none d-md-block qr-code-wrapper"><QRCode dimensions={size} data={data}/></div> : null}
+                    <p className={'cr-deposit-info'}>{text} </p>
+                    {data ? (
+                        <div className="d-none d-md-block qr-code-wrapper">
+                            <QRCode dimensions={size} data={data} />
+                        </div>
+                    ) : null}
                 </div>
+                {notice ? <p style={{ color: '#e85e59', fontSize: '14px' }}>{notice} </p> : null}
                 <div>
                     <form className={'cr-deposit-crypto__copyable'}>
                         <fieldset className={'cr-copyable-text-field'} onClick={onCopy}>
@@ -82,7 +89,4 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
     );
 };
 
-export {
-    DepositCrypto,
-    DepositCryptoProps,
-};
+export { DepositCrypto, DepositCryptoProps };

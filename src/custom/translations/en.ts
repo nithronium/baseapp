@@ -457,4 +457,6 @@ export const en = {
     'partners.banner.takepart': 'TAKE PART',
     'page.wallets.eth.notice': 'Notice. Emirex does not currently accept transactions sent from smart contracts.',
     'page.wallets.eth.notice.button': 'Yes, I confirm',
+    'page.wallets.coin.notice':
+        'By making a deposit, I confirm that Emirex is not responsible for any coins sent to the wrong address.',
 };

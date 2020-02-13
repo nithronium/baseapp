@@ -21,6 +21,7 @@ export const DepositTab = ({
 }) => {
     const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
     const [userAgree, setUserAgree] = React.useState(false);
+    const [usedCoins, setUsedCoins] = React.useState([]);
     if (wallets[selectedWalletIndex].type === 'coin') {
         return (
             <CoinFragment
@@ -32,6 +33,8 @@ export const DepositTab = ({
                 selectedWalletIndex={selectedWalletIndex}
                 userAgree={userAgree}
                 setUserAgree={setUserAgree}
+                usedCoins={usedCoins}
+                setUsedCoins={setUsedCoins}
             />
         );
     } else {

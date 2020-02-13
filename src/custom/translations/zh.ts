@@ -950,6 +950,8 @@ export const zh = {
     'partners.banner.takepart': '参与',
     'page.wallets.eth.notice': '注意。 Emirex当前不接受智能合约发送的交易',
     'page.wallets.eth.notice.button': '是的，我确认',
+    'page.wallets.coin.notice':
+        'By making a deposit, I confirm that Emirex is not responsible for any coins sent to the wrong address.',
 
     ...pluginsTranslations,
     ...nationalitiesNames,
