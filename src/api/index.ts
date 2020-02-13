@@ -8,7 +8,7 @@ export * from './types';
 export * from './config';
 
 export interface RequestOptions {
-    apiVersion: 'applogic' | 'nodelogic' | 'peatio' | 'barong' | 'referral' | 'referralCommission' | 'exchangeRates' | 'instexService' | 'arke';
+    apiVersion: 'applogic' | 'nodelogic' | 'peatio' | 'barong' | 'referral' | 'referralCommission' | 'exchangeRates' | 'instexService' | 'arke' | 'finex';
     withHeaders?: boolean;
     headers?: Object;
 }

@@ -10,6 +10,7 @@ export const defaultConfig: Config = {
         nodelogicUrl: '',
         exchangeRatesUrl: '',
         arkeUrl: '',
+        finexUrl: '',
     },
     minutesUntilAutoLogout: '5',
     rangerReconnectPeriod: '1',
@@ -19,6 +20,7 @@ export const defaultConfig: Config = {
     msAlertDisplayTime: '5000',
     incrementalOrderBook: false,
     plugins: [],
+    finex: false,
     isResizable: false,
     isDraggable: false,
     languages: ['en'],
@@ -51,6 +53,7 @@ export const tradeUrl = () => Cryptobase.config.api.tradeUrl;
 export const arkeUrl = () => Cryptobase.config.api.arkeUrl || tradeUrl();
 export const applogicUrl = () => Cryptobase.config.api.applogicUrl;
 export const rangerUrl = () => Cryptobase.config.api.rangerUrl;
+export const finexUrl = () => Cryptobase.config.api.finexUrl || tradeUrl();
 export const minutesUntilAutoLogout = (): string => Cryptobase.config.minutesUntilAutoLogout || '5';
 export const withCredentials = () => Cryptobase.config.withCredentials;
 export const defaultStorageLimit = () => Cryptobase.config.storage.defaultStorageLimit || STORAGE_DEFAULT_LIMIT;
@@ -62,3 +65,4 @@ export const pluginsList = () => Cryptobase.config.plugins || [];
 export const isResizableGrid = ():boolean => Cryptobase.config.isResizable || false;
 export const isDraggableGrid = ():boolean => Cryptobase.config.isDraggable || false;
 export const languages = Cryptobase.config.languages.length > 0 ? Cryptobase.config.languages : ['en'];
+export const isFinexEnabled = (): boolean => Cryptobase.config.finex || false;

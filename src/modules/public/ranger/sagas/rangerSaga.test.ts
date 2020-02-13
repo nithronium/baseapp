@@ -52,6 +52,7 @@ describe('Ranger module', () => {
                 nodelogicUrl: '',
                 exchangeRatesUrl: '',
                 arkeUrl: '',
+                finexUrl: '',
             },
             rangerReconnectPeriod: '0.1',
         };

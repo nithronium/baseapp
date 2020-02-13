@@ -7,6 +7,7 @@ export interface Config {
         nodelogicUrl: string;
         exchangeRatesUrl: string;
         arkeUrl: string;
+        finexUrl: string;
     };
     minutesUntilAutoLogout?: string;
     rangerReconnectPeriod?: string;
@@ -19,6 +20,7 @@ export interface Config {
     incrementalOrderBook: boolean;
     // tslint:disable-next-line: no-any
     plugins: any[];
+    finex: boolean;
     isResizable: boolean;
     isDraggable: boolean;
     languages: string[];

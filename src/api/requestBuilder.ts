@@ -7,6 +7,7 @@ import {
     referralCommissionUrl,
     referralUrl,
     tradeUrl,
+    finexUrl,
     withCredentials,
     arkeUrl,
 } from './config';
@@ -30,7 +31,7 @@ export interface JsonBody {
 }
 
 export interface RequestOptions {
-    apiVersion: 'applogic' | 'nodelogic' | 'peatio' | 'barong' | 'referral' | 'referralCommission' | 'exchangeRates' | 'instexService' | 'arke';
+    apiVersion: 'applogic' | 'nodelogic' | 'peatio' | 'barong' | 'referral' | 'referralCommission' | 'exchangeRates' | 'instexService' | 'arke' | 'finex';
     withHeaders?: boolean;
     headers?: Object;
 }
@@ -57,6 +58,7 @@ const getAPI = () => ({
     referralCommission: `${referralCommissionUrl()}`,
     instexService: `${instexServiceUrl()}`,
     arke: `${arkeUrl()}`,
+    finex: `${finexUrl()}`,
 });
 
 const buildRequest = (request: Request, configData: RequestOptions) => {
