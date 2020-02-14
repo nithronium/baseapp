@@ -27,8 +27,8 @@ export const BottomBanner = injectIntl(({ intl }) => {
                         img={require('./icons/hand.svg')}
                         header={format({ id: 'page.referal.bottombanner.IEO_token_price' })}
                     >
-                        <div>{format({ id: 'page.referal.bottombanner.IEO_round1' })} : $0.4</div>
-                        <div>{format({ id: 'page.referal.bottombanner.IEO_round2' })} : $0.45</div>
+                        <div>{format({ id: 'page.referal.bottombanner.IEO_round1' })} : $0.45</div>
+                        <div>{format({ id: 'page.referal.bottombanner.IEO_round2' })} : $0.47</div>
                     </ListItem>
                     <ListItem
                         img={require('./icons/index.svg')}
@@ -37,11 +37,11 @@ export const BottomBanner = injectIntl(({ intl }) => {
                         25 000 000 <span style={styles.currency}>EMRX</span>
                     </ListItem>
                     <ListItem img={require('./icons/money.svg')} header={format({ id: 'page.referal.bottombanner.IEO_rounds' })}>
-                        <div>
+                        <div style={{ fontSize: '20px' }}>
                             {format({ id: 'page.referal.bottombanner.IEO_round1' })} :{' '}
                             {format({ id: 'page.referal.bottombanner.IEO_round_now' })}
                         </div>
-                        <div>
+                        <div style={{ fontSize: '20px' }}>
                             {format({ id: 'page.referal.bottombanner.IEO_round2' })} :{' '}
                             {format({ id: 'page.referal.bottombanner.IEO_round_next' })}
                         </div>
