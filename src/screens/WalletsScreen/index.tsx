@@ -49,7 +49,7 @@ import { getBalance } from '../../api';
 import { History } from 'history';
 
 interface HP {
-    history: History,
+    history: History;
 }
 interface ReduxProps {
     colorTheme: string;
@@ -132,19 +132,21 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 
     //tslint:disable
     public translate = (id: string) => this.props.intl.formatMessage({ id });
- 
+
     public componentDidMount() {
         setDocumentTitle('Wallets');
-        const { wallets, fetchAddress } = this.props; 
-        const { selectedWalletIndex } = this.state; 
-        
-        getBalance().then(data => {
-            this.setState({
-                balance: data.balance || 0,
+        const { wallets, fetchAddress } = this.props;
+        const { selectedWalletIndex } = this.state;
+
+        getBalance()
+            .then(data => {
+                this.setState({
+                    balance: data.balance || 0,
+                });
+            })
+            .catch(() => {
+                this.setState({ balance: 0 });
             });
-        }).catch(() => {
-            this.setState({ balance: 0 });
-        });
 
         if (this.props.wallets.length === 0) {
             this.props.fetchWallets();
@@ -173,7 +175,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 selectedWalletIndex: 0,
                 sepa: isEurFirst,
                 wire: !isEurFirst,
-                card: false
+                card: false,
             });
             this.props.fetchWhitelist();
             next.wallets[0].type === 'coin' && this.props.fetchAddress({ currency: next.wallets[0].currency });
@@ -193,7 +195,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 
     public message = () => {
         this.props.fetchSuccess({ message: ['page.profile.update.balance'], type: 'error' });
-    }
+    };
 
     public render() {
         const { wallets, historyList, mobileWalletChosen, walletsLoading } = this.props;
@@ -312,7 +314,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     }
 
     private handleWithdraw = () => {
-        const {wallets} = this.props;
+        const { wallets } = this.props;
         const { selectedWalletIndex, otpCode, amount, beneficiary } = this.state;
         if (selectedWalletIndex === -1) {
             return;
@@ -353,9 +355,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 message={this.message}
                 history={this.props.history}
                 lang={this.props.currentLanguage}
-            /> 
+            />
         );
-    }
+    };
 
     private renderWithdraw = () => {
         const { walletsError, user, wallets } = this.props;
@@ -364,19 +366,23 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 
         return (
             <React.Fragment>
-                {
-                    wallets[selectedWalletIndex].type === 'fiat' &&
-                    <TypeTabs 
+                {wallets[selectedWalletIndex].type === 'fiat' && (
+                    <TypeTabs
                         action={this.setState.bind(this)}
                         currency={currency.toLowerCase()}
                         sepa={sepa}
                         card={card}
                         wire={wire}
                     />
-                }
+                )}
+                {currency.toLowerCase() === 'usd'}
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
-                {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}                
-                {this.renderWithdrawBlock()}
+                {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}
+                {currency.toLowerCase() === 'usd' ? (
+                    <div style={{ textAlign: 'center', fontSize: '18px', padding: '20px' }}>{this.translate('comingsoon')}</div>
+                ) : (
+                    this.renderWithdrawBlock()
+                )}
                 {user.otp && currency && <WalletHistory label="withdraw" type="withdraws" currency={currency} />}
             </React.Fragment>
         );
@@ -417,7 +423,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             withdrawFeeLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.fee' }),
             withdrawTotalLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.total' }),
             withdrawButtonLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.button' }),
-            soon: this.props.intl.formatMessage({id: 'comingsoon'}),
+            soon: this.props.intl.formatMessage({ id: 'comingsoon' }),
         };
 
         return otp ? <Withdraw {...withdrawProps} /> : this.isOtpDisabled();
@@ -438,8 +444,8 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         );
     };
 
-
-    private redirectToEnable2fa = () => this.props.history.push(buildPath('/security/2fa', this.props.currentLanguage), { enable2fa: true });
+    private redirectToEnable2fa = () =>
+        this.props.history.push(buildPath('/security/2fa', this.props.currentLanguage), { enable2fa: true });
 
     private isTwoFactorAuthRequired(level: number, is2faEnabled: boolean) {
         return level > 1 || (level === 1 && is2faEnabled);
@@ -454,10 +460,11 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             wallet => wallet.currency.toLowerCase() === value.currency.toLowerCase()
         );
         const isEur = value.currency.toLowerCase() === 'eur';
-        const tabs = ({
+        const tabs = {
             sepa: isEur,
             wire: !isEur,
-            card: false});
+            card: false,
+        };
         this.setState({ selectedWalletIndex: nextWalletIndex, withdrawDone: false, ...tabs });
         this.props.setMobileWalletUi(wallets[nextWalletIndex].name);
     };
@@ -490,9 +497,4 @@ const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
 });
 
 // tslint:disable-next-line:no-any
-export const WalletsScreen = injectIntl(
-    withRouter(connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(WalletsComponent) as any)
-);
+export const WalletsScreen = injectIntl(withRouter(connect(mapStateToProps, mapDispatchToProps)(WalletsComponent) as any));
