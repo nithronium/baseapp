@@ -1127,7 +1127,7 @@ export const ru: LangType = {
         'Обратите внимание. В настоящее время Emirex не поддерживает транзакции на основе смарт-контрактов.',
     'page.wallets.eth.notice.button': 'Да, я подтверждаю',
     'page.wallets.coin.notice':
-        'By making a deposit, I confirm that Emirex is not responsible for any coins sent to the wrong address.',
+        'Внося депозит, я подтверждаю, что Emirex не несет ответственности за любые монеты, отправленные на неправильный адрес.',
 
     ...nationalitiesNames,
     ...pluginsTranslations,
