@@ -73,8 +73,12 @@ export const zh = {
     'page.body.wallets.tabs.deposit.ccy.message.success': '地址已被复制',
     'page.body.wallets.tabs.deposit.ccy.message.error': '生成存款地址',
     'page.body.wallets.tabs.deposit.fiat.message1': '通过银行转账存款',
+    'page.body.wallets.tabs.deposit.fiat.message1.sepa': 'Deposit using SEPA transfer',
     'page.body.wallets.tabs.deposit.fiat.message2': '请使用以下凭据发起银行转帐。 您的存款将在5个工作日内到您的账号中。',
     'page.body.wallets.tabs.deposit.fiat.message2.sepa': '请使用以下凭据发起银行转帐。 您的存款将在24个小时内到您的账号中。',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.confirm': 'Chose the amount of money you would like to deposit. Different fee will be applicable depending on your preferred mode of payment.',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.less': 'Below 800 EUR',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.more': 'Above 800 EUR',
     'page.body.wallets.tabs.deposit.fiat.bankName': '银行名称',
     'page.body.wallets.tabs.deposit.fiat.accountNumber': '帐号',
     'page.body.wallets.tabs.deposit.fiat.accountName': '用户名',
@@ -675,13 +679,22 @@ export const zh = {
     'cardDepositFiat.fee': '手续费',
     'page.body.wallets.tabs.deposit.fiat.levelMessage': '为了能使用信用卡或借记卡充值余额选项，需要通过2级验证。',
     'page.body.wallets.tabs.deposit.fiat.levelLink': '请升级您的验证级别',
-    'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepa.value': '欧元',
-    'page.body.wallets.tabs.deposit.fiat.sepa.value': 'MT24PHPY270070PHOENIX0000884546',
-    'page.body.wallets.tabs.deposit.fiat.bankName.sepa.value': 'PHOENIX PAYMENTS LTD',
-    'page.body.wallets.tabs.deposit.fiat.bankAddress.sepa.value':
+
+    'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaLess.value': '欧元',
+    'page.body.wallets.tabs.deposit.fiat.sepaLess.value': 'MT24PHPY270070PHOENIX0000884546',
+    'page.body.wallets.tabs.deposit.fiat.bankName.sepaLess.value': 'PHOENIX PAYMENTS LTD',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress.sepaLess.value':
         'Vision Exchange Building，Territorials Street，Mriehel，BKR 3000-马耳他',
-    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepa.value': 'PHPYMTM1XXX',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepaLess.value': 'PHPYMTM1XXX',
     'page.body.wallets.tabs.deposit.fiat.eur.sepa': '国家环保总局',
+
+    'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaMore.value': '欧元',
+    'page.body.wallets.tabs.deposit.fiat.sepaMore.value': 'LT933220020000572000',
+    'page.body.wallets.tabs.deposit.fiat.bankName.sepaMore.value': 'UAB Phoenix Payments',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress.sepaMore.value':
+        'Mesiniu Str. 5, Vilnius, LT-01133 - Lithuania',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepaMore.value': 'UAPPLT21XXX',
+
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.usd.value': '美元',
     'page.body.wallets.tabs.deposit.fiat.bankName.usd.value': '阿治曼银行',
     'page.body.wallets.tabs.deposit.fiat.bankAddress.usd.value': '阿联酋迪拜Garhoud支行',
@@ -701,6 +714,10 @@ export const zh = {
     'page.body.wallets.tabs.deposit.fiat.bankAddress.eur.value': '59 Boulevard Royal，2449, 卢森堡',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text': '最低存款金额为',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': '50欧元',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.text.sepa': '最低存款金额为',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepa': '10欧元.',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaLess': 'Fee is 0.5% (min 1 EUR)',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaMore': 'Fee is 4 EUR',
     'page.body.profile.mfa.button.text': '复制',
     'refcode.code_owner_not_found': '找不到代码所有者',
     'refcode.inactive_code': '代码无效',
@@ -973,8 +990,7 @@ export const zh = {
     'partners.banner.takepart': '参与',
     'page.wallets.eth.notice': '注意。 Emirex当前不接受智能合约发送的交易',
     'page.wallets.eth.notice.button': '是的，我确认',
-    'page.wallets.coin.notice':
-        'By making a deposit, I confirm that Emirex is not responsible for any coins sent to the wrong address.',
+    'page.wallets.coin.notice': '我确认, 存款后Emirex对发送到错误地址的任何硬币概不负责。',
 
     ...pluginsTranslations,
     ...nationalitiesNames,

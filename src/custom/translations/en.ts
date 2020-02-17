@@ -132,6 +132,9 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Bank SWIFT :',
     'page.body.wallets.tabs.deposit.fiat.message3':
         'Please, ALWAYS mention the reference code during the wire transfer, otherwise it will take longer to deposit your funds.',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.confirm': 'Chose the amount of money you would like to deposit. Different fee will be applicable depending on your preferred mode of payment.',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.less': 'Below 800 EUR',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.more': 'Above 800 EUR',
 
     'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
 
@@ -150,13 +153,20 @@ export const en = {
         'Verification level 2 is required in order to access the option of balance top up via credit or debit card.',
     'page.body.wallets.tabs.deposit.fiat.levelLink': 'Please upgrade your verification level',
 
-    'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepa.value': 'EUR',
-    'page.body.wallets.tabs.deposit.fiat.sepa.value': 'MT24PHPY270070PHOENIX0000884546',
-    'page.body.wallets.tabs.deposit.fiat.bankName.sepa.value': 'PHOENIX PAYMENTS LTD',
-    'page.body.wallets.tabs.deposit.fiat.bankAddress.sepa.value':
+    'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaLess.value': 'EUR',
+    'page.body.wallets.tabs.deposit.fiat.sepaLess.value': 'MT24PHPY270070PHOENIX0000884546',
+    'page.body.wallets.tabs.deposit.fiat.bankName.sepaLess.value': 'PHOENIX PAYMENTS LTD',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress.sepaLess.value':
         'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
-    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepa.value': 'PHPYMTM1XXX',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepaLess.value': 'PHPYMTM1XXX',
     'page.body.wallets.tabs.deposit.fiat.eur.sepa': 'SEPA IBAN',
+
+    'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaMore.value': 'EUR',
+    'page.body.wallets.tabs.deposit.fiat.sepaMore.value': 'LT933220020000572000',
+    'page.body.wallets.tabs.deposit.fiat.bankName.sepaMore.value': 'UAB Phoenix Payments',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress.sepaMore.value':
+        'Mesiniu Str. 5, Vilnius, LT-01133 - Lithuania',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepaMore.value': 'UAPPLT21XXX',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.usd.value': 'USD',
     'page.body.wallets.tabs.deposit.fiat.iban.usd.value': 'AE 240570000011101251020',
@@ -182,6 +192,10 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'ONPXLULM',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text': 'Minimal deposit amount is ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': 'EUR 50',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.text.sepa': 'Minimum deposit amount is ',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepa': '10 EUR.',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaLess': 'Fee is 0.5% (min 1 EUR)',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaMore': 'Fee is 4 EUR',
     'page.body.profile.mfa.button.text': 'COPY',
     'refcode.code_owner_not_found': 'Code Owner not found',
     'refcode.inactive_code': 'Code is inactive',
