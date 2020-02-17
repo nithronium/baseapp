@@ -132,6 +132,9 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.bankSwift': 'Bank SWIFT :',
     'page.body.wallets.tabs.deposit.fiat.message3':
         'Please, ALWAYS mention the reference code during the wire transfer, otherwise it will take longer to deposit your funds.',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.confirm': 'Chose the amount of money you would like to deposit. Different fee will be applicable depending on your preferred mode of payment.',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.less': 'Below 800 EUR',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.more': 'Above 800 EUR',
 
     'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
 

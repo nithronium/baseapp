@@ -820,6 +820,9 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.beneficiary': 'Бенефициар :',
     'page.body.wallets.tabs.deposit.fiat.message3':
         'Пожалуйста, ВСЕГДА указывайте Ваш уникальный код во время банковского перевода, в противном случае внесение средств займет больше времени.',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.confirm': 'Выберите сумму, которую вы хотели бы внести. В зависимости от величины депозита будет применяться различная комиссия.',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.less': 'Менее 800 EUR',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.more': 'Более 800 EUR',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaLess.value': 'EUR',
     'page.body.wallets.tabs.deposit.fiat.sepaLess.value': 'MT24PHPY270070PHOENIX0000884546',
@@ -862,8 +865,8 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': '50 EUR',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text.sepa': 'Минимальный депозит ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepa': '10 EUR.',
-    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaLess': 'Fee is 0.5% (min 1 EUR)',
-    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaMore': 'Fee is 4 EUR',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaLess': 'Комиссия за транзакцию составляет 0.5% (минимально 1 EUR)',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaMore': 'Комиссия за транзакцию составляет 4 EUR',
     'refcode.code_owner_not_found': 'Владелец кода не найден',
     'refcode.inactive_code': 'Код не активирован',
     'refcode.user_not_found': 'Пользователь не найден',

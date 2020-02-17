@@ -39,8 +39,11 @@ class SepaComponent extends React.Component<Props, SepaState> {
         const title = translate('page.body.wallets.tabs.deposit.fiat.message1.sepa');
         const description = translate('page.body.wallets.tabs.deposit.fiat.message2.sepa');
         const details = translate('page.body.wallets.tabs.deposit.fiat.message3');
+        const confirmText = translate('page.body.wallets.tabs.deposit.fiat.message.sepa.confirm');
+        const lessBtn = translate('page.body.wallets.tabs.deposit.fiat.message.sepa.less');
+        const moreBtn = translate('page.body.wallets.tabs.deposit.fiat.message.sepa.more');
         return (
-            <div>
+            <React.Fragment>
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]}/>
                 {isSelectedOperation
                     ? <div>
@@ -60,18 +63,16 @@ class SepaComponent extends React.Component<Props, SepaState> {
                         {currency && <WalletHistory label="deposit" type="deposits" currency={currency}/>}
                     </div>
                     : <div className="sepa-confirm">
-                        <span className="sepa-confirm__text">Chose the amount of money you would like to deposit. Different fee will be applicable depending on your preferred mode of payment.</span>
+                        <span className="sepa-confirm__text">{confirmText}</span>
                         <div className="sepa-confirm__btn-block">
-                            <button className="sepa-confirm__btn" onClick={() => this.setTypeOperation(false)}>Below 800 EUR</button>
-                            <button className="sepa-confirm__btn" onClick={() => this.setTypeOperation(true)}>Above 800 EUR</button>
+                            <button className="sepa-confirm__btn" onClick={() => this.setTypeOperation(false)}>{lessBtn}</button>
+                            <button className="sepa-confirm__btn" onClick={() => this.setTypeOperation(true)}>{moreBtn}</button>
                         </div>
                     </div>
                 }
-
-
-            </div>
+            </React.Fragment>
         );
     }
 };
 
-export const SepaFragment = injectIntl(SepaComponent)
+export const SepaFragment = injectIntl(SepaComponent);
