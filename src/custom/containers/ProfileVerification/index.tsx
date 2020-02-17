@@ -378,7 +378,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
 
         for (const deposit of depositHistory as Deposit[]) {
             depositsAsWallets.push({
-                balance: +deposit.amount,
+                balance: deposit.amount,
                 currency: deposit.currency,
                 name: '',
                 fee: 0,
