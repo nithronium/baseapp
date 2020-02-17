@@ -35,7 +35,7 @@ export const en = {
 
     'page.body.ieo.details.order.youWillGet': 'Price per unit',
     'page.body.ieo.details.order.youWillPay': 'Tokens ordered',
-    'page.body.ieo.details.order.content.blur.title': 'Sales will be start after',
+    'page.body.ieo.details.order.content.blur.title': 'Sales will start after',
     'page.body.ieo.details.order.content.blur.titleFinished': 'Sales have been finished',
     'page.body.ieo.details.info.startsAt': 'Starts at',
     'page.body.ieo.details.info.finishesAt': 'Finishes at',
