@@ -25,10 +25,6 @@ interface DepositCryptoProps {
      * @default 'Deposit by Wallet Address'
      * Renders text of the label of CopyableTextField component
      */
-    notice?: string;
-    /**
-     * render notice if needed with red color
-     */
     copiableTextFieldText?: string;
     /**
      * @default 'Copy'
@@ -51,7 +47,7 @@ interface DepositCryptoProps {
  */
 const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: DepositCryptoProps) => {
     const QR_SIZE = 118;
-    const { data, dimensions, error, text, copiableTextFieldText, copyButtonText, handleOnCopy, disabled, notice } = props;
+    const { data, dimensions, error, text, copiableTextFieldText, copyButtonText, handleOnCopy, disabled } = props;
     const size = dimensions || QR_SIZE;
     const onCopy = !disabled ? handleOnCopy : undefined;
     const className = classnames({ 'cr-copyable-text-field__disabled': data === '' });
@@ -67,7 +63,6 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
                         </div>
                     ) : null}
                 </div>
-                {notice ? <p style={{ color: '#e85e59', fontSize: '14px' }}>{notice} </p> : null}
                 <div>
                     <form className={'cr-deposit-crypto__copyable'}>
                         <fieldset className={'cr-copyable-text-field'} onClick={onCopy}>

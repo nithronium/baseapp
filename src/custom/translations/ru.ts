@@ -105,6 +105,7 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.ccy.message.error': 'Генерация адреса',
 
     'page.body.wallets.tabs.deposit.fiat.message1': 'Вы можете внести депозит, используя следующие реквизиты',
+    'page.body.wallets.tabs.deposit.fiat.message1.sepa': 'Вы можете внести депозит, используя следующие реквизиты',
     'page.body.wallets.tabs.deposit.fiat.message2':
         'Пожалуйста, используйте предоставленную информацию для успешного завершения банковского платежа. Ваш депозит станет доступным в течение 5-и рабочих дней.',
     'page.body.wallets.tabs.deposit.fiat.message2.sepa':
@@ -819,14 +820,24 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.beneficiary': 'Бенефициар :',
     'page.body.wallets.tabs.deposit.fiat.message3':
         'Пожалуйста, ВСЕГДА указывайте Ваш уникальный код во время банковского перевода, в противном случае внесение средств займет больше времени.',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.confirm': 'Выберите сумму, которую вы хотели бы внести. В зависимости от величины депозита будет применяться различная комиссия.',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.less': 'Менее 800 EUR',
+    'page.body.wallets.tabs.deposit.fiat.message.sepa.more': 'Более 800 EUR',
 
-    'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepa.value': 'EUR',
-    'page.body.wallets.tabs.deposit.fiat.sepa.value': 'MT24PHPY270070PHOENIX0000884546',
-    'page.body.wallets.tabs.deposit.fiat.bankName.sepa.value': 'PHOENIX PAYMENTS LTD',
-    'page.body.wallets.tabs.deposit.fiat.bankAddress.sepa.value':
+    'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaLess.value': 'EUR',
+    'page.body.wallets.tabs.deposit.fiat.sepaLess.value': 'MT24PHPY270070PHOENIX0000884546',
+    'page.body.wallets.tabs.deposit.fiat.bankName.sepaLess.value': 'PHOENIX PAYMENTS LTD',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress.sepaLess.value':
         'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
-    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepa.value': 'PHPYMTM1XXX',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepaLess.value': 'PHPYMTM1XXX',
     'page.body.wallets.tabs.deposit.fiat.eur.sepa': 'SEPA IBAN',
+
+    'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaMore.value': 'EUR',
+    'page.body.wallets.tabs.deposit.fiat.sepaMore.value': 'LT933220020000572000',
+    'page.body.wallets.tabs.deposit.fiat.bankName.sepaMore.value': 'UAB Phoenix Payments',
+    'page.body.wallets.tabs.deposit.fiat.bankAddress.sepaMore.value':
+        'Mesiniu Str. 5, Vilnius, LT-01133 - Lithuania',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepaMore.value': 'UAPPLT21XXX',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.usd.value': 'USD',
     'page.body.wallets.tabs.deposit.fiat.iban.usd.value': 'AE 240570000011101251020',
@@ -852,6 +863,10 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.bankSwift.eur.value': 'ONPXLULM',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text': 'Минимальный депозит ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': '50 EUR',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.text.sepa': 'Минимальный депозит ',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepa': '10 EUR.',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaLess': 'Комиссия за транзакцию составляет 0.5% (минимально 1 EUR)',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaMore': 'Комиссия за транзакцию составляет 4 EUR',
     'refcode.code_owner_not_found': 'Владелец кода не найден',
     'refcode.inactive_code': 'Код не активирован',
     'refcode.user_not_found': 'Пользователь не найден',
@@ -895,11 +910,11 @@ export const ru: LangType = {
     'page.referal.bottombanner.IEO_max_supply': 'Максимальное количество токенов на IEO',
     'page.referal.bottombanner.IEO_start_date': 'Дата начала IEO',
     'page.referal.bottombanner.IEO_start_date_value': '16 декабря 2019',
-    'page.referal.bottombanner.IEO_round1': 'Раунд 1',
-    'page.referal.bottombanner.IEO_round2': 'Раунд 2',
+    'page.referal.bottombanner.IEO_round1': 'Раунд 2',
+    'page.referal.bottombanner.IEO_round2': 'Раунд 3',
     'page.referal.bottombanner.IEO_rounds': 'Раунды IEO',
-    'page.referal.bottombanner.IEO_round_now': 'Сейчас',
-    'page.referal.bottombanner.IEO_round_next': '14 Фев - 28 Фев 2020',
+    'page.referal.bottombanner.IEO_round_now': '14 Фев - 28 Фев 2020',
+    'page.referal.bottombanner.IEO_round_next': '28 Фев - 13 Мар 2020',
     'page.referal.bottombanner.hard_cap': 'Хард кэп',
     'page.referal.bottombanner.token_distrib_date': 'Дата распределения токенов',
     'page.referal.bottombanner.2_weeks_after_IEO': 'Через 2 недели после даты окончания IEO',
@@ -963,6 +978,12 @@ export const ru: LangType = {
     footer_links_buyRipple: 'Купить Ripple',
     footer_links_buyLitecoin: 'Купить Litecoin',
     footer_links_buyEmrx: 'Купить токен Emirex',
+    footer_links_buyTether: 'Buy Tether',
+    footer_links_buyUSDCoin: 'Buy USD Coin',
+    footer_links_buyBlockburn: 'Buy Blockburn token',
+    footer_links_buyEmirex: 'Buy Emirex Token',
+    footer_links_buyBitcoinCash: 'Buy Bitcoin cash',
+    footer_links_buyT69Coin: 'Buy T69 coin',
     footer_links_careers: 'Трудоустройство',
     footer_links_emrx: 'Токен EMRX',
     footer_links_faq: 'ЧаВо',
