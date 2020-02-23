@@ -32,3 +32,4 @@ export * from './Markets';
 export * from './PercentageButton';
 export * from './OrderInput';
 export * from './FilterInput';
+export * from './TickerTable';

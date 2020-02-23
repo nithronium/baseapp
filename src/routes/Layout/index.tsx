@@ -43,6 +43,7 @@ import {
     EmailVerificationScreen,
     ForgotPasswordScreen,
     HistoryScreen,
+    LandingScreen,
     OrdersTabScreen,
     ProfileScreen,
     ProfileTwoFactorAuthScreen,
@@ -672,6 +673,8 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
                     {renderPluginsRoutes()}
                     {/* <Route path="**"><Redirect to={'/trading/'} /></Route> */}
                     {/* <Route path="**"><Redirect to={'/ru/trading/'} /></Route> */}
+                    <Route exact={true} path="/" component={LandingScreen} />
+                    <Route path="**"><Redirect to="/trading/" /></Route>
                 </Switch>
                 <LoginModal
                     classname={cx}
