@@ -6,67 +6,132 @@ import { Winner, WinnerItem } from './WinnerItem';
 
 const testData: Winner[] = [
     {
-        number: 916772,
+        number: 336,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 841996,
+        number: 1862,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 918203,
+        number: 1961,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 841956,
+        number: 344161,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 917195,
+        number: 1906,
         value: 750,
         currency: 'EMRX',
     },
     {
-        number: 841565,
-        value: 750,
-        currency: 'EMRX',
+        number: 349851,
+        value: 500,
+        currency: 'T69',
     },
     {
-        number: 841459,
-        value: 750,
-        currency: 'EMRX',
+        number: 248461,
+        value: 500,
+        currency: 'T69',
     },
     {
-        number: 920901,
+        number: 350335,
+        value: 500,
+        currency: 'T69',
+    },
+    {
+        number: 347230,
+        value: 500,
+        currency: 'T69',
+    },
+    {
+        number: 347654,
+        value: 500,
+        currency: 'T69',
+    },
+    {
+        number: 346773,
+        value: 500,
+        currency: 'T69',
+    },
+    {
+        number: 347930,
+        value: 500,
+        currency: 'T69',
+    },
+    {
+        number: 310234,
+        value: 500,
+        currency: 'T69',
+    },
+    {
+        number: 344024,
+        value: 500,
+        currency: 'T69',
+    },
+    {
+        number: 346974,
+        value: 500,
+        currency: 'T69',
+    },
+    {
+        number: 351040,
+        value: 500,
+        currency: 'T69',
+    },
+    {
+        number: 321131,
+        value: 500,
+        currency: 'T69',
+    },
+    {
+        number: 347006,
+        value: 500,
+        currency: 'T69',
+    },
+    {
+        number: 2511,
+        value: 500,
+        currency: 'T69',
+    },
+    {
+        number: 344138,
+        value: 500,
+        currency: 'T69',
+    },
+    {
+        number: 346255,
         value: 3500,
         currency: 'TFT',
     },
     {
-        number: 919293,
+        number: 1576,
         value: 3500,
         currency: 'TFT',
     },
     {
-        number: 549722,
+        number: 350689,
+        value: 3500,
+        currency: 'TFT',
+    },
+    {
+        number: 344704,
         value: 500,
         currency: 'BURN',
     },
     {
-        number: 548519,
+        number: 203,
         value: 500,
         currency: 'BURN',
     },
     {
-        number: 841254,
-        value: 500,
-        currency: 'BURN',
-    },
-    {
-        number: 917130,
+        number: 346389,
         value: 500,
         currency: 'BURN',
     },

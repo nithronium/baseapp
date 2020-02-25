@@ -767,8 +767,8 @@ export const zh = {
     'page.referal.bottombanner.dont_miss_chance': '别错过机会！',
     'page.referal.bottombanner.learn_more': '了解更多',
     'page.referral.winnersbanner.graz': '祝贺获奖者',
-    'page.referral.winnersbanner.graz.1r': '第三轮EMIREX抽奖！',
-    'page.referral.winnersbanner.date': '01月23日',
+    'page.referral.winnersbanner.graz.1r': '第五轮EMIREX抽奖！',
+    'page.referral.winnersbanner.date': '02月20日',
     'page.referral.winnersbanner.ticketnum': '礼券号',
     'page.referal.bottombanner.accepted_cur_value':
         '可以以USDT购买EMRX代币，但您也可以将BTC，ETH，EUR，USD，EUR，USDC，LTC，BCH兑换为USDT并购买EMRX',
