@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Helmet } from 'react-helmet';
 import {
     InjectedIntlProps,
     injectIntl,
@@ -89,9 +90,13 @@ class IEOListContainer extends React.Component<Props> {
 
     public render() {
         const { loading, ieo} = this.props;
-
         return (
             <div className="pg-ieo-page container">
+                <Helmet>
+                    <title>{this.props.intl.formatMessage({ id: 'ieo_title' })}</title>
+                    <meta name="og:title" content={this.props.intl.formatMessage({ id: 'ieo_title' })} />
+                    <meta name="og:description" content={this.props.intl.formatMessage({ id: 'ieo_description' })} />
+                </Helmet>
                 {!loading && ieo.length ? this.renderContent() : null}
             </div>
 
@@ -102,7 +107,6 @@ class IEOListContainer extends React.Component<Props> {
         const listPreparing = this.handleFilterIEO(['preparing']);
         const listInProgress = this.handleFilterIEO(['ongoing', 'distributing']);
         const listPast = this.handleFilterIEO(['finished', 'released']);
-
         return (
             <React.Fragment>
                 {this.renderPreparing(listPreparing)}

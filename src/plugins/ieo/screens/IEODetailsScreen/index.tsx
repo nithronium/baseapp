@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
+import { Helmet } from 'react-helmet';
 import {
     InjectedIntlProps,
     injectIntl,
@@ -98,15 +99,19 @@ class IEODetailsContainer extends React.Component<Props, State> {
     }
 
     public render() {
-        const { currentIEO, loading } = this.props;
+        const { currentIEO, loading, match } = this.props;
         const { showOrderExecuteModal } = this.state;
-
         const ieoDetailsClass = classnames('container pg-currentIEO-page', {
             'pg-currentIEO-page--bounded': showOrderExecuteModal,
         });
 
         return (
             <div className={ieoDetailsClass}>
+                <Helmet>
+                    <title>{this.props.intl.formatMessage({ id: `ieo_${match.params.id}_title` })}</title>
+                    <meta name="og:title" content={this.props.intl.formatMessage({ id: `ieo_${match.params.id}_title` })} />
+                    <meta name="og:description" content={this.props.intl.formatMessage({ id: `ieo_${match.params.id}_description` })} />
+                </Helmet>
                 {currentIEO && !loading ? this.renderContent() : null}
             </div>
         );
