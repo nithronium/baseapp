@@ -29,6 +29,7 @@ import {
     rangerSubscribeKlineMarket,
     rangerUnsubscribeKlineMarket,
 } from '../../modules/public/ranger';
+import { periodStringToMinutes } from '../../modules/public/ranger/helpers';
 import {
     CurrentKlineSubscription,
     dataFeedObject,
@@ -121,8 +122,9 @@ export class TradingChartComponent extends React.PureComponent<Props> {
         const clockPeriod = currentTimeOffset === stdTimezoneOffset(new Date()) ? 'STD' : 'DST';
 
         if (this.props.kline.period) {
-            widgetParams.interval = this.props.kline.period;
+            widgetParams.interval = String(periodStringToMinutes(this.props.kline.period));
         }
+
         const defaultWidgetOptions = {
             symbol: currentMarket.id,
             datafeed: this.datafeed,
@@ -154,7 +156,7 @@ export class TradingChartComponent extends React.PureComponent<Props> {
             }
 
             if (previousResolution) {
-                this.tvWidget!.activeChart().setResolution(previousResolution.toUpperCase(), () => {
+                this.tvWidget!.activeChart().setResolution(String(periodStringToMinutes(previousResolution)), () => {
                     print('Resolution set', previousResolution);
                 });
             }
