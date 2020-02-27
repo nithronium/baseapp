@@ -257,7 +257,7 @@ export const en = {
     'page.referal.bottombanner.learn_more': 'Learn more',
     'page.referral.winnersbanner.graz': 'Congratulation to the winners',
     'page.referral.winnersbanner.graz.1r': 'OF THE FIFTH ROUND OF THE EMIREX PRIZE DRAW!',
-    'page.referral.winnersbanner.date': 'THE 20RD FEBRUARY',
+    'page.referral.winnersbanner.date': 'THE 20TH FEBRUARY',
     'page.referral.winnersbanner.ticketnum': 'Ticket №',
     'timeline.title': 'Timelines',
     'timeline.start.text': 'The giveaway starts on',

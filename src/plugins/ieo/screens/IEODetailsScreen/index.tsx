@@ -99,26 +99,37 @@ class IEODetailsContainer extends React.Component<Props, State> {
     }
 
     public render() {
-        const { currentIEO, loading, match } = this.props;
+        const { currentIEO, loading, intl, match } = this.props;
         const { showOrderExecuteModal } = this.state;
+        const { locale } = intl;
         const ieoDetailsClass = classnames('container pg-currentIEO-page', {
             'pg-currentIEO-page--bounded': showOrderExecuteModal,
         });
-
         return (
             <div className={ieoDetailsClass}>
                 <Helmet>
                     <title>{this.props.intl.formatMessage({ id: `ieo_${match.params.id}_title` })}</title>
                     <meta name="og:title" content={this.props.intl.formatMessage({ id: `ieo_${match.params.id}_title` })} />
                     <meta name="og:description" content={this.props.intl.formatMessage({ id: `ieo_${match.params.id}_description` })} />
+                    <link rel="canonical" href={`https://emirex.com/${locale === 'en' ? 'ieo' : `${locale}/ieo`}/${this.props.match.params.id}`} />
+                    <link key={locale} rel="alternate" href={`https://emirex.com/${locale === 'en' ? 'ieo' : `${locale}/ieo`}/${this.props.match.params.id}`} hrefLang={locale} title={this.getFullLocaleName(locale)} />
                 </Helmet>
                 {currentIEO && !loading ? this.renderContent() : null}
             </div>
         );
     }
+    private getFullLocaleName = locale => {
+        switch (locale) {
+            case 'en': return 'English';
+            case 'ru': return 'Русский';
+            case 'zh': return '中国人';
+            default: return 'English';
+        }
+    }
 
     private renderContent = () => {
         const { currencies, currentIEO, userLoggedIn } = this.props;
+
         const { orderExecuteModalData, showOrderExecuteModal } = this.state;
         const quoteCurrency = currencies.length && currentIEO && currencies.find(currency => currency.id && currency.id.toLowerCase() === currentIEO.pairs[0].quote_currency_id && currentIEO.pairs[0].quote_currency_id.toLowerCase());
 
