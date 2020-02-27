@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Helmet } from 'react-helmet';
 import {
     InjectedIntlProps,
     injectIntl,
@@ -88,10 +89,14 @@ class IEOListContainer extends React.Component<Props> {
     };
 
     public render() {
-        const { loading, ieo} = this.props;
-
+        const { loading, ieo, intl} = this.props;
+        const { locale } = intl;
         return (
             <div className="pg-ieo-page container">
+                <Helmet>
+                    <link rel="canonical" href={`https://emirex.com/${locale === 'en' ? 'ieo' : `${locale}/ieo`}`} />
+                    <link key="en" rel="alternate" href={`https://emirex.com/${locale === 'en' ? 'ieo' : `${locale}/ieo`}`} hrefLang="en" title="English" />
+                </Helmet>
                 {!loading && ieo.length ? this.renderContent() : null}
             </div>
 
