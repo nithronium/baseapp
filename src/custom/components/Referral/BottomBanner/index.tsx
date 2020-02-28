@@ -27,8 +27,8 @@ export const BottomBanner = injectIntl(({ intl }) => {
                         img={require('./icons/hand.svg')}
                         header={format({ id: 'page.referal.bottombanner.IEO_token_price' })}
                     >
-                        <div>{format({ id: 'page.referal.bottombanner.IEO_round1' })} : $0.45</div>
-                        <div>{format({ id: 'page.referal.bottombanner.IEO_round2' })} : $0.47</div>
+                        <div>{format({ id: 'page.referal.bottombanner.IEO_round1' })} : $0.47</div>
+                        <div>{format({ id: 'page.referal.bottombanner.IEO_round2' })} : $0.49</div>
                     </ListItem>
                     <ListItem
                         img={require('./icons/index.svg')}
