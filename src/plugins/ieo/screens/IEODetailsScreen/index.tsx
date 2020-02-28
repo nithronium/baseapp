@@ -108,6 +108,10 @@ class IEODetailsContainer extends React.Component<Props, State> {
         return (
             <div className={ieoDetailsClass}>
                 <Helmet>
+                    <link rel="canonical" href={`https://emirex.com/${locale === 'en' ? 'ieo' : `${locale}/ieo`}/${this.props.match.params.id}`} />
+                    <link key="en" rel="alternate" href={`https://emirex.com/ieo/${this.props.match.params.id}`} hrefLang="en" title="English" />
+                    <link key="ru" rel="alternate" href={`https://emirex.com/ru/ieo/${this.props.match.params.id}`} hrefLang="ru" title="Русский" />
+                    <link key="zh" rel="alternate" href={`https://emirex.com/zh/ieo/${this.props.match.params.id}`} hrefLang="zh" title="中国人" />
                     <title>{this.props.intl.formatMessage({ id: `ieo_${match.params.id}_title` })}</title>
                     <meta name="og:title" content={this.props.intl.formatMessage({ id: `ieo_${match.params.id}_title` })} />
                     <meta name="og:description" content={this.props.intl.formatMessage({ id: `ieo_${match.params.id}_description` })} />
