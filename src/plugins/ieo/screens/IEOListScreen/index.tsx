@@ -94,6 +94,9 @@ class IEOListContainer extends React.Component<Props> {
         return (
             <div className="pg-ieo-page container">
                 <Helmet>
+                    <title>{this.props.intl.formatMessage({ id: 'ieo_title' })}</title>
+                    <meta name="og:title" content={this.props.intl.formatMessage({ id: 'ieo_title' })} />
+                    <meta name="og:description" content={this.props.intl.formatMessage({ id: 'ieo_description' })} />
                     <link rel="canonical" href={`https://emirex.com/${locale === 'en' ? 'ieo' : `${locale}/ieo`}`} />
                     <link key="en" rel="alternate" href={`https://emirex.com/${locale === 'en' ? 'ieo' : `${locale}/ieo`}`} hrefLang="en" title="English" />
                 </Helmet>
@@ -107,7 +110,6 @@ class IEOListContainer extends React.Component<Props> {
         const listPreparing = this.handleFilterIEO(['preparing']);
         const listInProgress = this.handleFilterIEO(['ongoing', 'distributing']);
         const listPast = this.handleFilterIEO(['finished', 'released']);
-
         return (
             <React.Fragment>
                 {this.renderPreparing(listPreparing)}

@@ -99,7 +99,7 @@ class IEODetailsContainer extends React.Component<Props, State> {
     }
 
     public render() {
-        const { currentIEO, loading, intl } = this.props;
+        const { currentIEO, loading, intl, match } = this.props;
         const { showOrderExecuteModal } = this.state;
         const { locale } = intl;
         const ieoDetailsClass = classnames('container pg-currentIEO-page', {
@@ -110,6 +110,9 @@ class IEODetailsContainer extends React.Component<Props, State> {
                 <Helmet>
                     <link rel="canonical" href={`https://emirex.com/${locale === 'en' ? 'ieo' : `${locale}/ieo`}/${this.props.match.params.id}`} />
                     <link key={locale} rel="alternate" href={`https://emirex.com/${locale === 'en' ? 'ieo' : `${locale}/ieo`}/${this.props.match.params.id}`} hrefLang={locale} title={this.getFullLocaleName(locale)} />
+                    <title>{this.props.intl.formatMessage({ id: `ieo_${match.params.id}_title` })}</title>
+                    <meta name="og:title" content={this.props.intl.formatMessage({ id: `ieo_${match.params.id}_title` })} />
+                    <meta name="og:description" content={this.props.intl.formatMessage({ id: `ieo_${match.params.id}_description` })} />
                 </Helmet>
                 {currentIEO && !loading ? this.renderContent() : null}
             </div>
