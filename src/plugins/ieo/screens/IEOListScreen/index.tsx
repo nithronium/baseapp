@@ -89,7 +89,8 @@ class IEOListContainer extends React.Component<Props> {
     };
 
     public render() {
-        const { loading, ieo} = this.props;
+        const { loading, ieo, intl} = this.props;
+        const { locale } = intl;
         return (
             <div className="pg-ieo-page container">
                 <Helmet>

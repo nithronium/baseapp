@@ -99,8 +99,9 @@ class IEODetailsContainer extends React.Component<Props, State> {
     }
 
     public render() {
-        const { currentIEO, loading, match } = this.props;
+        const { currentIEO, loading, match, intl } = this.props;
         const { showOrderExecuteModal } = this.state;
+        const { locale } = intl;
         const ieoDetailsClass = classnames('container pg-currentIEO-page', {
             'pg-currentIEO-page--bounded': showOrderExecuteModal,
         });
