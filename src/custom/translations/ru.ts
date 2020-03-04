@@ -906,7 +906,7 @@ export const ru: LangType = {
     'page.referal.bottombanner.dont_miss_chance': 'Не упусти свой шанс',
     'page.referal.bottombanner.learn_more': 'Начать',
     'page.referral.winnersbanner.graz': 'Поздравляем победителей',
-    'page.referral.winnersbanner.graz.1r': '5-ГО РАУНДА РОЗЫГРЫША',
+    'page.referral.winnersbanner.graz.1r': '5-го раунда розыгрыша',
     'page.referral.winnersbanner.date': '20 февраля',
     'page.referral.winnersbanner.ticketnum': 'Тикет №',
     'timeline.title': 'Временные рамки',

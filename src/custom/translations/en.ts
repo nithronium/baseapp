@@ -242,7 +242,7 @@ export const en = {
     'page.referal.bottombanner.dont_miss_chance': 'Don’t miss your chance!',
     'page.referal.bottombanner.learn_more': 'Learn more',
     'page.referral.winnersbanner.graz': 'Congratulation to the winners',
-    'page.referral.winnersbanner.graz.1r': 'OF THE FIFTH ROUND OF THE EMIREX PRIZE DRAW!',
+    'page.referral.winnersbanner.graz.1r': 'of the fifth round of the emirex prize draw!',
     'page.referral.winnersbanner.date': 'THE 20TH FEBRUARY',
     'page.referral.winnersbanner.ticketnum': 'Ticket №',
     'timeline.title': 'Timelines',
