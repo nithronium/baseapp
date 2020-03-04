@@ -94,8 +94,13 @@ class IEOListContainer extends React.Component<Props> {
         return (
             <div className="pg-ieo-page container">
                 <Helmet>
+                    <title>{this.props.intl.formatMessage({ id: 'ieo_title' })}</title>
+                    <meta name="og:title" content={this.props.intl.formatMessage({ id: 'ieo_title' })} />
+                    <meta name="og:description" content={this.props.intl.formatMessage({ id: 'ieo_description' })} />
                     <link rel="canonical" href={`https://emirex.com/${locale === 'en' ? 'ieo' : `${locale}/ieo`}`} />
-                    <link key="en" rel="alternate" href={`https://emirex.com/${locale === 'en' ? 'ieo' : `${locale}/ieo`}`} hrefLang="en" title="English" />
+                    <link key="en" rel="alternate" href={`https://emirex.com/ieo`} hrefLang="en" title="English" />
+                    <link key="ru" rel="alternate" href={`https://emirex.com/ru/ieo`} hrefLang="ru" title="Русский" />
+                    <link key="zh" rel="alternate" href={`https://emirex.com/zh/ieo`} hrefLang="zh" title="中国人" />
                 </Helmet>
                 {!loading && ieo.length ? this.renderContent() : null}
             </div>
