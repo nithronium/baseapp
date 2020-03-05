@@ -838,6 +838,13 @@ export const ru: LangType = {
     'success.message.sent': 'Письмо было успешно отправлено',
     'success.email.confirmed': 'Email был успешно подтвержден',
     'success.dataStorage.pushed': 'Успех!',
+    'success.order.done': 'Запрос успешно завершён',
+
+    // error messages
+    'error.order.rejected': 'Запрос отвергнут',
+    'error.invalid_request': 'Запрос - неверный запрос',
+    'error.bad_request': 'Запрос - неправильный запрос',
+    'error.request_entity_too_large': 'Запрос - слишком большой объект запроса',
 
     // error messages
     // barong

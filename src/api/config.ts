@@ -24,6 +24,8 @@ export const defaultConfig: Config = {
     isResizable: false,
     isDraggable: false,
     languages: ['en'],
+    sessionCheckInterval: '15000',
+    balancesFetchInterval: '3000',
 };
 
 export const Cryptobase = {
@@ -65,4 +67,6 @@ export const pluginsList = () => Cryptobase.config.plugins || [];
 export const isResizableGrid = ():boolean => Cryptobase.config.isResizable || false;
 export const isDraggableGrid = ():boolean => Cryptobase.config.isDraggable || false;
 export const languages = Cryptobase.config.languages.length > 0 ? Cryptobase.config.languages : ['en'];
+export const sessionCheckInterval = (): string => Cryptobase.config.sessionCheckInterval || '15000';
+export const balancesFetchInterval = (): string => Cryptobase.config.balancesFetchInterval || '3000';
 export const isFinexEnabled = (): boolean => Cryptobase.config.finex || false;

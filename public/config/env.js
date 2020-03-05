@@ -3,8 +3,7 @@ window.env = {
         authUrl: 'http://localhost:9002/api/v2/barong',
         tradeUrl: 'http://localhost:9002/api/v2/peatio',
         applogicUrl: 'http://localhost:9002/api/v2/applogic',
-        exchangeRatesUrl: 'http://localhost:9002/api/v2/exchange-rates',
-        rangerUrl: 'ws://localhost:9011/api/v2/ranger',
+        rangerUrl: 'ws://localhost:9003/api/v2/ranger',
         nodelogicUrl: 'http://localhost:9002/api/v2/nodelogic',
         exchangeRatesUrl: 'http://localhost:9002/api/v2/exchange-rates',
         finexUrl: '',
@@ -28,4 +27,6 @@ window.env = {
     isResizable: false,
     isDraggable: false,
     languages: ['en', 'ru'],
+    sessionCheckInterval: '15000',
+    balancesFetchInterval: '3000',
 };

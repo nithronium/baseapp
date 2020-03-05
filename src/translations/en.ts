@@ -657,8 +657,14 @@ export const en = {
     'success.phone.confirmation.message': 'Success!',
     'success.message.sent': 'Message was sent',
     'success.email.confirmed': 'Your email address has been successfully confirmed',
+    'success.order.done': 'Order successfully completed',
 
     // error messages
+    'error.order.rejected': 'Order rejected',
+    'error.invalid_request': 'Order - invalid request',
+    'error.bad_request': 'Order - bad request',
+    'error.request_entity_too_large': 'Order - request entity too large',
+
     // barong
     'resource.labels.private': "Can't update label",
     'resource.user.no_activity': 'No activity recorded or wrong topic',

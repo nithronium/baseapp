@@ -1,4 +1,5 @@
 import { DataIEOInterface } from '../../../plugins/ieo/modules/public';
+import { isFinexEnabled } from '../../../api';
 import { Market, Ticker, TickerEvent } from '../markets';
 import { marketStreams } from './actions';
 
@@ -25,6 +26,13 @@ export const streamsBuilder = (withAuth: boolean, prevSubscriptions: string[], m
             'order',
             'trade',
         ];
+
+        if (isFinexEnabled()) {
+            streams = [
+                ...streams,
+                'balances',
+            ];
+        }
     }
     if (market) {
         streams = [

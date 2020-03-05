@@ -8,7 +8,6 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
-import { minutesUntilAutoLogout } from '../../api';
 import {
     BuyWithCreditCardScreen,
     ChatelloScreen,
@@ -20,6 +19,7 @@ import {
 import { buildPath, saveParametersFromUrl } from '../../custom/helpers';
 import { LoginModal } from '../../custom/components/KYCLoginModal';
 import { ConfirmScreen } from '../../custom/screens';
+import { minutesUntilAutoLogout, sessionCheckInterval } from '../../api';
 import { toggleColorTheme } from '../../helpers';
 import {
     changeLanguage,
@@ -90,7 +90,6 @@ const renderLoader = () => (
     </div>
 );
 
-const CHECK_INTERVAL = 15000;
 const STORE_KEY = 'lastAction';
 
 //tslint:disable-next-line no-any
@@ -741,7 +740,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
     private initInterval = () => {
         this.timer = setInterval(() => {
             this.check();
-        }, CHECK_INTERVAL);
+        }, parseFloat(sessionCheckInterval()));
     };
 
     private check = () => {
