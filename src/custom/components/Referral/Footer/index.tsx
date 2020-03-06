@@ -160,15 +160,15 @@ const links2 = [
 
 const title3 = 'footer_headers_buysell';
 const links3 = [
-    { key: '', href: '/trading/btcusdt', label: 'footer_links_buyBitcoin', ext: false },
-    { key: '', href: '/trading/ethusdt', label: 'footer_links_buyEthereum', ext: false },
-    { key: '', href: '/trading/btcusdt', label: 'footer_links_buyTether', ext: false},
-    { key: '', href: '/trading/usdcusdt', label: 'footer_links_buyUSDCoin', ext: false},
-    { key: '', href: '/trading/btcusdt', label: 'footer_links_buyBlockburn', ext: false},
-    { key: '', href: '/trading/emrxbtc', label: 'footer_links_buyEmirex', ext: false},
-    { key: '', href: '/trading/ltcbtc', label: 'footer_links_buyLitecoin', ext: false},
-    { key: '', href: '/trading/bchbtc', label: 'footer_links_buyBitcoinCash', ext: false},
-    { key: '', href: '/trading/t69usdt', label: 'footer_links_buyT69Coin', ext: false},
+    { key: '', href: '/buybtc', label: 'footer_links_buyBitcoin' },
+    { key: '', href: '/buyeth', label: 'footer_links_buyEthereum'},
+    { key: '', href: '/buyusdt', label: 'footer_links_buyTether'},
+    { key: '', href: '/buyusdc', label: 'footer_links_buyUSDCoin'},
+    { key: '', href: '/buyburn', label: 'footer_links_buyBlockburn'},
+    { key: '', href: '/buyemrx', label: 'footer_links_buyEmirex'},
+    { key: '', href: '/buyltc', label: 'footer_links_buyLitecoin'},
+    { key: '', href: '/buybch', label: 'footer_links_buyBitcoinCash'},
+    { key: '', href: '/buyt69', label: 'footer_links_buyT69Coin'},
     /*{ href: '/trading', label: 'footer.links.buyRipple'},
   { href: '/trading', label: 'footer.links.buyLitecoin'},
   { href: '/trading', label: 'footer.links.buyEmrx'},*/
