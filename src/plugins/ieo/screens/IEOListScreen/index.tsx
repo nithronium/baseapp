@@ -96,6 +96,7 @@ class IEOListContainer extends React.Component<Props> {
                 <Helmet>
                     <title>{this.props.intl.formatMessage({ id: 'ieo_title' })}</title>
                     <meta name="og:title" content={this.props.intl.formatMessage({ id: 'ieo_title' })} />
+                    <meta name="description" content={this.props.intl.formatMessage({ id: 'ieo_description' })} />
                     <meta name="og:description" content={this.props.intl.formatMessage({ id: 'ieo_description' })} />
                     <link rel="canonical" href={`https://emirex.com/${locale === 'en' ? 'ieo' : `${locale}/ieo`}`} />
                     <link key="en" rel="alternate" href={`https://emirex.com/ieo`} hrefLang="en" title="English" />

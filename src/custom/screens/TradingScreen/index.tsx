@@ -107,12 +107,27 @@ class Trading extends React.Component<Props, StateProps> {
     ];
 
     private pageTitles = {
-        'BTC/USDT': { title: 'btcusdt_title', description: 'btcusdt_description' },
-        'ETH/USDT': { title: 'ethusdt_title', description: 'ethusdt_description' },
-        'ETH/BTC': { title: 'ethbtc_title', description: 'ethbtc_description' },
-        'EMRX/BTC': { title: 'emrxbtc_title', description: 'emrxbtc_description' },
-        'LTC/BTC': { title: 'ltcbtc_title', description: 'ltcbtc_description' },
         'BCH/BTC': { title: 'bchbtc_title', description: 'bchbtc_description' },
+        'BTC/USD': { title: 'btcusd_title', description: 'btcusd_description' },
+        'BTC/USDT': { title: 'btcusdt_title', description: 'btcusdt_description' },
+        'EMRX/BTC': { title: 'emrxbtc_title', description: 'emrxbtc_description' },
+        'ETH/BTC': { title: 'ethbtc_title', description: 'ethbtc_description' },
+        'ETH/USD': { title: 'ethusd_title', description: 'ethusd_description' },
+        'ETH/USDT': { title: 'ethusdt_title', description: 'ethusdt_description' },
+        'LTC/BTC': { title: 'ltcbtc_title', description: 'ltcbtc_description' },
+        'T69/EUR': { title: 't69eur_title', description: 't69eur_description' },
+        'T69/USDT': { title: 't69usdt_title', description: 't69usdt_description' },
+        'USD/EUR': { title: 'usdeur_title', description: 'usdeur_description' },
+        'USDT/USD': { title: 'usdtusd_title', description: 'usdtusd_description' },
+        'BTC/AED': { title: 'btcaed_title', description: 'btcaed_description' },
+        'ETH/AED': { title: 'ethaed_title', description: 'ethaed_description' },
+        'USDT/AED': { title: 'usdtaed_title', description: 'usdtaed_description' },
+        'BTC/EUR': { title: 'btceur_title', description: 'btceur_description' },
+        'ETH/EUR': { title: 'etheur_title', description: 'etheur_description' },
+        'BCH/USDT': { title: 'bchusdt_title', description: 'bchusdt_description' },
+        'USDT/EUR': { title: 'usdteur_title', description: 'usdteur_description' },
+        'USDC/USDT': { title: 'usdcusdt_title', description: 'usdcusdt_description' },
+        'BTC/USDC': { title: 'btcusdc_title', description: 'btcusdc_description' },
     };
 
     public componentDidMount() {
