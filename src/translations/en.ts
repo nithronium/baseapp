@@ -86,6 +86,7 @@ export const en = {
     'page.body.wallets.tabs.deposit.ccy.message.error': 'Generating deposit address',
 
     'page.body.wallets.tabs.deposit.fiat.message1': 'Deposit using bank transfer',
+    'page.body.wallets.tabs.deposit.fiat.message1.sepa': 'Deposit using SEPA transfer',
     'page.body.wallets.tabs.deposit.fiat.message2':
         'Please use the following credentials to initiate your bank transfer. Your deposit will be reflected in your account within 5 business days.',
     'page.body.wallets.tabs.deposit.fiat.message2.sepa':
