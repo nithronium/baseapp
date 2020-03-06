@@ -1,5 +1,6 @@
 import { DataIEOInterface } from '../../../plugins/ieo/modules/public';
 import { isFinexEnabled } from '../../../api';
+import { DEFAULT_TRADING_VIEW_INTERVAL } from '../../../constants';
 import { Market, Ticker, TickerEvent } from '../markets';
 import { marketStreams } from './actions';
 
@@ -78,8 +79,8 @@ export const periodsMapString: { [pair: number]: string } = {
     10080: '1w',
 };
 
-export const periodStringToMinutes = (period: string): number => periodsMapNumber[period];
-export const periodMinutesToString = (period: number): string => periodsMapString[period];
+export const periodStringToMinutes = (period: string): number => periodsMapNumber[period] || +DEFAULT_TRADING_VIEW_INTERVAL;
+export const periodMinutesToString = (period: number): string => periodsMapString[period] || periodsMapString[+DEFAULT_TRADING_VIEW_INTERVAL];
 
 export const marketKlineStreams = (marketId: string, periodString: string) => ({
     channels: [
