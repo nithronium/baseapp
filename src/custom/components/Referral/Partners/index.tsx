@@ -9,11 +9,13 @@ import './style.css';
 
 const blockburn = require('./blockburn.svg');
 const treefold = require('./treefold.svg');
+const tycoon69 = require('./tycoon69.svg');
 
 const Partner = ({src, summ, currency, tokens, href }) => {
     return (
         <a className="partner" href={href} target="_blank" rel="nofollow noopener">
             <img src={src} alt="logo"/>
+            <span className="partner__middle-line" />
             <div className="summ-row">
                 <div className="summ">{summ}</div>
                 <div className="currency">
@@ -44,6 +46,7 @@ export const Partners = injectIntl(({intl}) => {
             <div className="partners">
                 <Partner src={blockburn} summ={'5,000$'} currency={'BURN'} tokens={tokens} href={'https://bit.emirex.com/blockburn'}/>
                 <Partner src={treefold} summ={'35,000$'} currency={'TFT'} tokens={tokens} href={'https://bit.emirex.com/threefold'}/>
+                <Partner src={tycoon69} summ={'30,000$'} currency={'T69'} tokens={tokens} href={'https://bit.emirex.com/2P894Di'}/>
             </div>
             <Button text={text}/>
         </div>
