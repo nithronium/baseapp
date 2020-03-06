@@ -115,6 +115,7 @@ class IEODetailsContainer extends React.Component<Props, State> {
                     <title>{this.props.intl.formatMessage({ id: `ieo_${match.params.id}_title` })}</title>
                     <meta name="og:title" content={this.props.intl.formatMessage({ id: `ieo_${match.params.id}_title` })} />
                     <meta name="og:description" content={this.props.intl.formatMessage({ id: `ieo_${match.params.id}_description` })} />
+                    <meta name="description" content={this.props.intl.formatMessage({ id: `ieo_${match.params.id}_description` })} />
                 </Helmet>
                 {currentIEO && !loading ? this.renderContent() : null}
             </div>
