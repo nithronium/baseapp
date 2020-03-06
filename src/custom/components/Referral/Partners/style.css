@@ -21,10 +21,10 @@
 
 .partners-wrapper .partners {
     display: flex;
-    width: 600px;
     margin: 0 auto;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 0 100px;
+    flex-wrap: wrap;
 }
 
 .partners-wrapper .partner {
@@ -34,10 +34,11 @@
     justify-content: center;
     align-items: center;
     background: #FFFFFF;
-    width: 280px;
-    height: 150px;
+    width: 370px;
+    height: 230px;
+    margin: 0 15px 15px;
     border-radius: 8px;
-    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.07);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.07);
     cursor: pointer;
 }
 
@@ -45,6 +46,9 @@
     color: #000000;
     display: flex;
     flex-direction: column;
+    font-size: 20px;
+    line-height: 24px;
+    letter-spacing: 0.72px;
 }
 
 .partners-wrapper .summ-row {
@@ -54,13 +58,17 @@
 }
 
 .partners-wrapper .summ {
-    font-size: 42px;
     font-weight: bold;
     color: #00732F;
+    font-size: 50px;
+    line-height: 65px;
+    text-align: right;
+    letter-spacing: 0.72px;
 }
 
 .partners-wrapper .partner img {
-    width: 150px;
+    width: 215px;
+    height: 68px;
 }
 
 .partners-wrapper .partner span {
@@ -84,6 +92,14 @@
     animation: flickerAnimation 1s infinite;
 }
 
+.partner__middle-line {
+    width: 58px;
+    height: 2px;
+    display: inline-block;
+    background-color: #BC995A;
+    margin: 20px;
+}
+
 @media screen and (max-width: 640px) {
     .partners-wrapper .partners {
         flex-direction: column;
@@ -92,7 +108,7 @@
     }
 
     .partners-wrapper .partner {
-        margin-bottom: 10px;
+        margin: 0 0 15px;
         width: 100%;
     }
 
