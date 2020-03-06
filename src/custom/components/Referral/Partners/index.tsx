@@ -46,7 +46,7 @@ export const Partners = injectIntl(({intl}) => {
             <div className="partners">
                 <Partner src={blockburn} summ={'5,000$'} currency={'BURN'} tokens={tokens} href={'https://bit.emirex.com/blockburn'}/>
                 <Partner src={treefold} summ={'35,000$'} currency={'TFT'} tokens={tokens} href={'https://bit.emirex.com/threefold'}/>
-                <Partner src={tycoon69} summ={'30,000$'} currency={'T69'} tokens={tokens} href={'https://bit.emirex.com/2P894Di'}/>
+                <Partner src={tycoon69} summ={'30,000$'} currency={'T69'} tokens={tokens} href={'https://bit.emirex.com/38pnKF7'}/>
             </div>
             <Button text={text}/>
         </div>
