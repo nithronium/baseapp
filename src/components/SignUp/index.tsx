@@ -113,7 +113,7 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
 
         return (
             <form>
-                <div className="cr-sign-up-form">
+                <div className="cr-sign-up-form" onKeyPress={this.handleEnterPress}>
                     <div className="cr-sign-up-form__options-group">
                         <div className="cr-sign-up-form__option">
                             <div className="cr-sign-up-form__option-inner cr-sign-in-form__tab-signin" onClick={onSignIn}>
@@ -268,4 +268,12 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
             this.handleSubmitForm();
         }
     };
+
+    private handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+
+            this.handleClick();
+        }
+    }
 }

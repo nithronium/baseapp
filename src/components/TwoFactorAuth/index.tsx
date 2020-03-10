@@ -87,7 +87,7 @@ class TwoFactorAuthComponent extends React.Component<TwoFactorAuthProps> {
                             </div>
                             <div className={buttonWrapperClass}>
                                 <Button
-                                    disabled={isLoading || !otpCode.match(/.{6}/g)}
+                                    disabled={isLoading || !otpCode.match(`^[0-9]{6}$`)}
                                     onClick={this.handleSubmit}
                                     size="lg"
                                     variant="primary"
@@ -111,9 +111,17 @@ class TwoFactorAuthComponent extends React.Component<TwoFactorAuthProps> {
     };
 
     private handleEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        const {
+            isLoading,
+            otpCode,
+        } = this.props;
+
         if (event.key === 'Enter') {
             event.preventDefault();
-            this.handleSubmit();
+
+            if (!isLoading && otpCode.match(`^[0-9]{6}$`)) {
+                this.handleSubmit();
+            }
         }
     }
 }
