@@ -84,6 +84,8 @@ export const zh = {
     'page.body.wallets.tabs.deposit.fiat.admin': '要发起法定货币提款，请联系管理员！',
     'page.body.wallets.tabs.withdraw': '提款',
     'page.body.wallets.tabs.withdraw.content.amount': '提款金额',
+    'page.body.wallets.tabs.withdraw.content.receive': 'You will receive',
+    'page.body.wallets.tabs.withdraw.content.transaction': 'Transaction fee',
     'page.body.wallets.tabs.withdraw.content.code2fa': '2FA代码',
     'page.body.wallets.tabs.withdraw.content.fee': '手续费',
     'page.body.wallets.tabs.withdraw.content.total': '总提款金额',
