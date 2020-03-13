@@ -200,6 +200,8 @@
 
         &__group__address,
         &__group__amount,
+        &__group__receive,
+        &__group__transaction,
         &__group__code {
           background: var(--transparent);
           margin-bottom: calc(var(--gap) * 1.83);
@@ -235,7 +237,9 @@
           }
         }
 
-        &__group__amount {
+        &__group__amount,
+        &__group__receive,
+        &__group__transaction {
           width: 50%;
         }
         &__group__code {
@@ -251,6 +255,8 @@
 
         &__group__address--focused,
         &__group__amount--focused,
+        &__group__receive--focused,
+        &__group__transaction--focused,
         &__group__code--focused {
           .cr-withdraw__label {
             color: var(--sign-in-accent) !important;

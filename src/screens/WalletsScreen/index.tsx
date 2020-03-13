@@ -419,6 +419,8 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             fixed,
             type,
             withdrawAmountLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.amount' }),
+            withdrawReceiveLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.receive' }),
+            withdrawTransactionLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.transaction' }),
             withdraw2faLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.code2fa' }),
             withdrawFeeLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.fee' }),
             withdrawTotalLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.total' }),

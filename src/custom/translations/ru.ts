@@ -119,7 +119,9 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.admin': 'Для того, чтобы вывести эту валюту, обратитесь к администратору!',
 
     'page.body.wallets.tabs.withdraw': 'Вывод',
-    'page.body.wallets.tabs.withdraw.content.amount': 'Сумма вывода',
+    'page.body.wallets.tabs.withdraw.content.amount': 'Минимальная сумма вывода',
+    'page.body.wallets.tabs.withdraw.content.receive': 'Вы получите',
+    'page.body.wallets.tabs.withdraw.content.transaction': 'Комиссия при транзакции',
     'page.body.wallets.tabs.withdraw.content.code2fa': '6-ти значный GAuthenticator код',
     'page.body.wallets.tabs.withdraw.content.fee': 'Комиссия',
     'page.body.wallets.tabs.withdraw.content.total': 'Сумма вывода',

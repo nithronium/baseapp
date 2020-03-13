@@ -100,7 +100,9 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.admin': ' To initiate a fiat withdrawal, please contact administrator!',
 
     'page.body.wallets.tabs.withdraw': 'Withdraw',
-    'page.body.wallets.tabs.withdraw.content.amount': 'Withdrawal Amount',
+    'page.body.wallets.tabs.withdraw.content.amount': 'Minimum withdrawal',
+    'page.body.wallets.tabs.withdraw.content.receive': 'You will receive',
+    'page.body.wallets.tabs.withdraw.content.transaction': 'Transaction fee',
     'page.body.wallets.tabs.withdraw.content.code2fa': '2FA code',
     'page.body.wallets.tabs.withdraw.content.fee': 'Fee',
     'page.body.wallets.tabs.withdraw.content.total': 'Total Withdrawal Amount',
