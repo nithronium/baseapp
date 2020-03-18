@@ -18,8 +18,6 @@ pipeline {
             def msg = "Building: $env.APP_NAME_TAG by $env.COMMIT_AUTHOR, commit message: \"$env.COMMIT_MSG\""
             telegramSend(message: msg)
             build_and_push(docker_image_tag)
-            def msg2 = "Status: \"$currentStage.result\""
-            telegramSend(message: msg2)
           }
 
         }
