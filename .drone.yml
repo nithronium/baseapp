@@ -101,7 +101,7 @@ steps:
       json_key:
         from_secret: openware_gcp_creds_base64
 
-  - name: "Redeploy on devkube"
+  - name: "Redeploy on master.devkube.com"
     image: rubykube/microkube:0.2.0
     environment:
       WEBHOOK_JWT_SECRET:
@@ -109,7 +109,7 @@ steps:
     commands:
       - export latest_image=reg.openware.work/emirex/baseapp:$(cat .tags)
       - cd /home/app
-      - bundle exec rake payload:send[frontend,$latest_image,http://www.devkube.com:1337]
+      - bundle exec rake payload:send[frontend,$latest_image,http://master.devkube.com:1337]
 
   - name: "Push and Notify"
     image: quay.io/openware/sdk-citools:2.3.1
