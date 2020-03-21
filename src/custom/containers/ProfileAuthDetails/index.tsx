@@ -1,7 +1,7 @@
-import { Button } from '@openware/components';
 import cr from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
 import {
     FormattedMessage,
     InjectedIntlProps,
@@ -360,9 +360,8 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
             <div className="pg-exchange-modal-submit-footer">
                 <Button
                     className="pg-exchange-modal-submit-footer__button-inverse"
-                    label="OK"
                     onClick={this.closeModal}
-                />
+                >OK</Button>
             </div>
         );
     };

@@ -4,13 +4,8 @@ import {
     injectIntl,
 } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
-
+import { Table } from '../../../components';
 import { CopyableTextField } from '../../../components/CopyableTextField';
-
-import { Table } from '@openware/components';
-
-import { Pagination } from './Pagination';
-
 import { setDocumentTitle } from '../../../helpers';
 import {
     alertPush,
@@ -27,6 +22,7 @@ import {
     selectReferralCommission,
 } from '../../../modules';
 import { InfoCard, LevelCard } from '../../components/ReferralCommission';
+import { Pagination } from './Pagination';
 
 import { getExchangeRates } from '../../../api';
 

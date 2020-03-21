@@ -1,12 +1,13 @@
-import { CombinedOrderBook, Decimal, Loader } from '@openware/components';
 import classNames from 'classnames';
 import * as React from 'react';
+import { Spinner } from 'react-bootstrap';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import {
     connect,
     MapDispatchToPropsFunction,
     MapStateToProps,
 } from 'react-redux';
+import { CombinedOrderBook, Decimal } from '../../../components';
 import { accumulateVolume, calcMaxVolume, sortAsks, sortBids } from '../../../helpers';
 import {
     Market,
@@ -71,7 +72,7 @@ class OrderBookContainer extends React.Component<Props, State> {
 
         return (
             <div className={cn} ref={this.orderRef}>
-                {isLoading ? <div><Loader /></div> : this.orderBook(sortBids(bids), sortAsks(asks))}
+                {isLoading ? <div><Spinner animation="border" variant="primary" /></div> : this.orderBook(sortBids(bids), sortAsks(asks))}
             </div>
         );
     }

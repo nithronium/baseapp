@@ -1,7 +1,3 @@
-import {
-    Decimal,
-    Table,
-} from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
 import {
@@ -9,6 +5,10 @@ import {
     injectIntl,
 } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import {
+    Decimal,
+    Table,
+} from '../../../components';
 import { WalletItemProps } from '../../../components/WalletItem';
 import { handleCCYPrecision } from '../../../helpers';
 import {

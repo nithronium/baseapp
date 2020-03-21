@@ -1,11 +1,10 @@
-import {
-    Button,
-    Dropdown,
-    Loader,
-} from '@openware/components';
 import cr from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
+import {
+    Button,
+    Spinner,
+} from 'react-bootstrap';
 import {
     InjectedIntlProps,
     injectIntl,
@@ -16,6 +15,7 @@ import {
   MapDispatchToPropsFunction,
 } from 'react-redux';
 import {withRouter} from 'react-router';
+import { DropdownComponent } from '../../../../components';
 import { formatDate } from '../../../../helpers';
 import { isDateInFuture } from '../../../../helpers/checkDate';
 import {
@@ -125,13 +125,11 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                                     <div className="pg-confirm__content-documents-col-row-content-label">
                                         {documentsType && this.translate('page.body.kyc.documentsType')}
                                     </div>
-                                    <Dropdown
+                                    <DropdownComponent
                                         className="pg-confirm__content-documents-col-row-content-number"
                                         list={this.data}
                                         placeholder={this.translate('page.body.kyc.documentsType')}
                                         onSelect={onSelect}
-                                        elemHeight={40}
-                                        listHeight={160}
                                     />
                                 </div>
                                 <fieldset className={expirationFocusedClass}>
@@ -150,7 +148,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                             </div>
                         </div>
                         <div className="pg-confirm__loader">
-                            {loading ? <Loader /> : null}
+                            {loading ? <Spinner animation="border" variant="primary" /> : null}
                         </div>
                         <div className="pg-confirm__content-documents-col pg-confirm__content-documents-drag">
                             <div className="pg-confirm__content-documents-col-row">
@@ -200,13 +198,11 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                 <div className="pg-confirm__content-deep">
                     <Button
                         className="pg-confirm__content-deep-back"
-                        label={this.translate('page.body.kyc.back')}
                         onClick={this.backBtn}
-                    />
+                    >{this.translate('page.body.kyc.back')}</Button>
                     <div className="pg-confirm__content-deep-margin" />
                     <Button
                         className="pg-confirm__content-phone-deep-button"
-                        label={this.translate('page.body.kyc.next')}
                         onClick={this.sendDocuments}
                         disabled={buttonDisabled}
                     >

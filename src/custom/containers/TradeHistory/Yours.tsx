@@ -1,12 +1,12 @@
-
-import { Decimal, Loader, Table } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
+import { Spinner } from 'react-bootstrap';
 import {
     InjectedIntlProps,
     injectIntl,
 } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { Decimal, Table } from '../../../components';
 import { capitalize, localeDate, setTradesType } from '../../../helpers';
 import {
     fetchHistory,
@@ -66,7 +66,7 @@ class YoursComponent extends React.Component<Props> {
 
         return (
             <div className={className}>
-                {fetching ? <Loader /> : this.renderContent()}
+                {fetching ? <Spinner animation="border" variant="primary" /> : this.renderContent()}
             </div>
         );
     }

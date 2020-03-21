@@ -1,14 +1,13 @@
 // tslint:disable
-import { Decimal } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import {Link} from 'react-router-dom';
 // import { Link } from 'react-router-dom';
-
+import { Decimal } from '../../../components';
 import { WalletItemProps } from '../../../components/WalletItem';
-import { 
+import {
     VALUATION_PRIMARY_CURRENCY,
 } from '../../../constants';
 import { checkQuestionnaire } from '../../../helpers';

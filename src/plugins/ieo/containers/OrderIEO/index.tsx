@@ -1,11 +1,10 @@
-import { Decimal } from '@openware/components';
 import * as React from 'react';
 import {
     InjectedIntlProps,
     injectIntl,
 } from 'react-intl';
 import { connect } from 'react-redux';
-import { WalletItemProps } from '../../../../components';
+import { Decimal, WalletItemProps } from '../../../../components';
 import { DEFAULT_CCY_PRECISION } from '../../../../constants';
 import { handleCCYPrecision, localeDate } from '../../../../helpers';
 import {

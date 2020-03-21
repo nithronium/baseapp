@@ -1,10 +1,10 @@
-import { Decimal } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { OrderIEO } from '../';
+import { Decimal } from '../../../../components';
 import { getCountdownDate, localeDate } from '../../../../helpers';
 import { Currency } from '../../../../modules';
 import { Blur, LoginBlur } from '../../components';

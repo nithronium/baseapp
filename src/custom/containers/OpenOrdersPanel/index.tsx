@@ -1,4 +1,3 @@
-import { TabPanel } from '@openware/components';
 import cx from 'classnames';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -10,6 +9,7 @@ import {
     OrderHistory,
     YoursTab,
 } from '../';
+import { TabPanel } from '../../../components';
 import {
     Market,
     ordersCancelAllFetch,
@@ -46,6 +46,7 @@ interface State {
 type Props = ReduxProps & DispatchProps & InjectedIntlProps;
 
 export class OpenOrdersPanelContainer extends React.Component<Props, State> {
+    public tabs = ['openOrders', 'orderHistory', 'tradeHistory', 'balances'];
     public state = { tab: 'openOrders', additionalTab: 'market' };
 
     public componentWillUnmount() {
@@ -66,6 +67,7 @@ export class OpenOrdersPanelContainer extends React.Component<Props, State> {
                     panels={this.renderTabs()}
                     onTabChange={this.handleMakeRequest}
                     optionalHead={this.renderOptionalHead()}
+                    currentTabIndex={this.tabs.indexOf(this.state.tab)}
                 />
             </div>
         );

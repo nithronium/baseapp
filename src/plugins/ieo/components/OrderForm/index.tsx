@@ -1,6 +1,7 @@
-import { Button, CryptoIcon, Decimal, OrderInput, PercentageButton } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
+import { CryptoIcon, Decimal, OrderInput, PercentageButton } from '../../../../components';
 import { OrderProps } from '../../../../components/Order';
 import { getAmount, getTotalPrice } from '../../../../helpers/getTotalPrice';
 
@@ -284,10 +285,8 @@ class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
                 <div className="cr-order-item">
                     <Button
                         disabled={checkButtonIsDisabled(safeAmount, priceMarket, this.props)}
-                        label={submitButtonText || type}
-                        noMargin={true}
                         onClick={this.handleSubmit}
-                    />
+                    >{submitButtonText || type}</Button>
                 </div>
             </div>
         );

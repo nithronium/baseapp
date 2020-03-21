@@ -1,7 +1,8 @@
-import { CloseButton, Decimal, Loader } from '@openware/components';
 import * as React from 'react';
+import { CloseButton, Spinner } from 'react-bootstrap';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { Decimal } from '../../../components';
 import { localeDate, setTradeColor } from '../../../helpers';
 import {
     Market,
@@ -62,7 +63,7 @@ class OrderHistoryComponent extends React.PureComponent<Props, OrdersState>  {
 
         return (
             <div className={`pg-history-elem ${updateList.length ? '' : 'pg-history-elem-empty'}`}>
-                {fetching && <Loader />}
+                {fetching && <Spinner animation="border" variant="primary" />}
                 {updateList.length ? this.renderContent(updateList) : null}
                 {!updateList.length && !fetching ? <p className="pg-history-elem__empty">{emptyMsg}</p> : null}
             </div>

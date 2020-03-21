@@ -1,4 +1,3 @@
-import { Decimal } from '@openware/components';
 import * as moment from 'moment';
 import * as qs from 'qs';
 import * as React from 'react';
@@ -6,6 +5,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router';
 import {
+    Decimal,
     Modal,
 } from '../../../../components';
 import { getTotalPrice } from '../../../../helpers';

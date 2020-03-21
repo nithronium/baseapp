@@ -1,5 +1,5 @@
-import { Loader } from '@openware/components';
 import * as React from 'react';
+import { Spinner } from 'react-bootstrap';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 import { Order, OrderProps, WalletItemProps } from '../../../components';
@@ -149,7 +149,7 @@ class OrderInsert extends React.PureComponent<Props, StoreProps> {
                     width={this.state.width}
                     listenInputPrice={this.listenInputPrice}
                 />
-                {executeLoading && <Loader />}
+                {executeLoading && <Spinner animation="border" variant="primary" />}
             </div>
         );
     }

@@ -1,7 +1,7 @@
-import { Decimal } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
+import { Decimal } from '../../../../components';
 import { getCountdownDate, localeDate } from '../../../../helpers';
 import { Currency } from '../../../../modules';
 import { DataIEOInterface } from '../../modules';

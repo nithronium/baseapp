@@ -1,7 +1,7 @@
-import {Button} from '@openware/components';
 import cr from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import {
     connect,
@@ -167,13 +167,11 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
                 <div className="pg-confirm__content-deep">
                     <Button
                         className="pg-confirm__content-deep-back"
-                        label={this.translate('page.body.kyc.back')}
                         onClick={this.backBtn}
-                    />
+                    >{this.translate('page.body.kyc.back')}</Button>
                     <div className="pg-confirm__content-deep-margin" />
                     <Button
                         className="pg-confirm__content-phone-deep-button"
-                        label={this.translate('page.body.kyc.next')}
                         onClick={this.confirmPhone}
                     >
                         {this.translate('page.body.kyc.next')}

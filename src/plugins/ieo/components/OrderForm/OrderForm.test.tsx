@@ -1,7 +1,8 @@
-import { Button, PercentageButton } from '@openware/components';
 import { shallow, ShallowWrapper } from 'enzyme';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
 import { SinonSpy, spy } from 'sinon';
+import { PercentageButton } from '../../../../components';
 import { OrderForm, OrderFormProps } from './';
 
 const defaultProps = {

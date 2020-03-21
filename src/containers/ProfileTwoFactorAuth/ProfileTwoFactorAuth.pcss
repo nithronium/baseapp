@@ -7,13 +7,27 @@
         }
       }
 
+      .custom-control-input:checked~.custom-control-label {
+        &::before {
+          background-color: var(--primary-cta-color-level-3);
+          border: none;
+        }
+
+        &::after {
+          left: -29px;
+          background-color: var(--rgb-primary-cta-color);
+        }
+      }
+
       &-label {
-        &:before {
-          top: 27px;
+        &::before {
+          top: 21px;
           left: -39px;
           width: 33px;
           height: 18px;
           border-radius: 12px;
+          background-color: var(--primary-cta-color-level-3);
+          border: none;
         }
 
         &:after {
@@ -21,6 +35,7 @@
           left: -33px;
           width: 14px;
           height: 14px;
+          background-color: var(--primary-cta-color-level-3);
         }
 
         &:hover {

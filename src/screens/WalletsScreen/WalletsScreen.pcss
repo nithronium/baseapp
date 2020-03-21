@@ -38,7 +38,7 @@
   }
 
   .cr-crypto-icon {
-    color: var(--white-color);
+    color: var(--rgb-primary-text-color);
     opacity: 1;
 
     img {
@@ -48,7 +48,7 @@
   }
 
   .cr-wallet-list {
-    background-color: var(--wallets-item-bg);
+    background-color: var(--wallets-item-background-color);
     margin-top: 0;
     overflow: hidden;
     margin-bottom: 0;
@@ -57,7 +57,7 @@
       padding: 0 !important;
       &:last-child {
         .cr-wallet-item {
-          border-bottom: 0.5px solid var(--wallets-item-border);
+          border-bottom: 0.5px solid var(--wallets-item-border-color);
         }
       }
 
@@ -65,12 +65,12 @@
     }
 
     .cr-wallet-item {
-      border-color: var(--wallets-item-border);
+      border-color: var(--wallets-item-border-color);
       border-radius: 0;
       color: var(--wallets-item-font);
 
       &:hover {
-        background: var(--wallets-item-bg-hover);
+        background: var(--wallets-item-background-color-hover);
       }
 
       &__info {
@@ -86,7 +86,7 @@
         background: transparent;
 
         span {
-          color: var(--color-white);
+          color: var(--rgb-primary-text-color);
           &:nth-child(1) {
             opacity: 0.5
           }
@@ -107,7 +107,7 @@
         opacity: 0.60;
 
         path {
-          fill: var(--color-white);
+          fill: var(--rgb-primary-text-color);
         }
       }
 
@@ -123,17 +123,17 @@
       }
 
       &--active {
-        background-color: var(--wallets-item-bg-active);
+        background-color: var(--wallets-item-background-color-active);
         outline: none;
         border: none;
         color: var(--wallets-item-font-active);
 
         &:hover {
-          background: var(--wallets-item-bg-active);
+          background: var(--wallets-item-background-color-active);
         }
 
         .cr-crypto-icon {
-          color: var(--white-color);
+          color: var(--rgb-primary-text-color);
           opacity: 1;
         }
 
@@ -142,7 +142,7 @@
           opacity: 1;
 
           path {
-            fill: var(--color-white);
+            fill: var(--rgb-primary-text-color);
           }
         }
 
@@ -163,7 +163,7 @@
         &::before {
           content: '';
           width: 4px;
-          background-color: var(--color-blue);
+          background-color: var(--rgb-primary-cta-color);
           height: calc(var(--gap) * 9);
           border-top-left-radius: calc(var(--gap) * 0.66);
           border-bottom-left-radius: calc(var(--gap) * 0.66);
@@ -173,8 +173,8 @@
   }
 
   .pg-wallet__tabs {
-    background: var(--base-bright);
-    border-left: 1px solid var(--wallets-item-border);
+    background: var(--tab-pabel-background-color);
+    border-left: 1px solid var(--wallets-item-border-color);
   }
 
   .cr-withdraw {
@@ -229,7 +229,7 @@
         left: calc(var(--gap) * 1.66);
         padding: calc(var(--gap) * 0.33) var(--gap);
         border-radius: calc(var(--gap) * 0.33);
-        background: var(--estimated-value-background);
+        background: var(--rgb-input-background-color);
       }
 
       .custom-input {
@@ -248,7 +248,7 @@
 
         &:focus-within {
           label {
-            color: var(--accent) !important;
+            color: var(--input-legend-color-active) !important;
           }
         }
       }
@@ -280,16 +280,16 @@
     &__group__amount--focused,
     &__group__code--focused {
       .cr-withdraw__label {
-      color: var(--sign-in-accent) !important;
+      color: var(--input-legend-color-active) !important;
       }
 
       input {
-        border-color: var(--sign-in-accent) !important;
+        border-color: var(--input-border-color-active) !important;
       }
     }
 
     &__divider {
-      background-color: var(--wallet-withdraw-line-color);
+      background-color: var(--divider-color-level-2);
       margin-left: calc(var(--gap) * 3.49);
       display: none;
       &-two {
@@ -315,7 +315,7 @@
     font-size: calc(var(--gap) * 2.6);
 
     &__active {
-      border-bottom: 1px solid var(--active-tab-color);
+      border-bottom: 1px solid var(--tab-panel-border-color-active);
       background: transparent;
     }
   }
@@ -325,16 +325,16 @@
       &__copyable {
         fieldset {
           &:focus-within {
-            border-color: var(--base-2);
+            border-color: var(--input-border-color-active);
             legend {
-              color: var(--table-text-color);
+              color: var(--input-legend-color-active);
             }
           }
         }
 
         .cr-deposit-crypto__copyable-area {
 
-          border: 1px solid var(--base);
+          border: 1px solid var(--input-border-color);
           .custom-input {
             width: 85%;
             .input-group {
@@ -351,8 +351,8 @@
   }
 
   .cr-tab-panel__navigation-container {
-    background: var(--table-dark-header-color);
-    border-bottom: 1px solid var(--header-border);
+    background: var(--tab-panel-background-color);
+    border-bottom: 1px solid var(--tab-panel-border-line-color);
     border-radius: 0;
     margin-bottom: 0;
     &-navigation {
@@ -362,7 +362,7 @@
   }
 
   .cr-tab-content {
-    background: var(--base-bright);
+    background: var(--rgb-body-background-color);
     display: none;
     border-bottom-right-radius: calc(var(--gap) * .5);
     border-bottom-left-radius: calc(var(--gap) * .5);
@@ -374,13 +374,13 @@
 
   .cr-wallet-item {
     cursor: pointer;
-    background: var(--background-wallet-item);
-    color: var(--bright-1);
+    background: var(--rgb-body-background-color);
+    color: var(--rgb-primary-text-color);
     height: calc(var(--gap) * 9);
     box-sizing: border-box;
-    border-bottom: 1px solid var(--wallets-item-border);
+    border-bottom: 1px solid var(--wallets-item-border-color);
     border-radius: calc(var(--gap) * 0.5);
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 0px 2px var(--shadow-color-level-1);
     font-size: calc(var(--gap) * 2.66);
 
     & > * {
@@ -412,7 +412,7 @@
 
     &--active {
       border-radius: calc(var(--gap) * 0.66);
-      background: var(--active-color);
+      background: rgv(var(--primary-cta-color));
       outline: none;
 
       .cr-wallet-item__icon,
@@ -431,7 +431,7 @@
 
   .pg-wallet__tabs-content {
     display: flex;
-    background: var(--background);
+    background: var(--rgb-body-background-color);
   }
 
   .cr-search {
@@ -443,7 +443,7 @@
   }
 
   &__error {
-    color: var(--order-error-color);
+    color: var(--rgb-system-red);
     font-size: 1.2rem;
     margin-left: calc(var(--gap) * 4);
   }
@@ -452,17 +452,17 @@
     margin-left: calc(var(--gap) * 5);
 
     label {
-      color: var(--text-muted);
+      color: var(--rgb-secondary-contrast-cta-color);
       display: block;
     }
 
     .cr-input {
-      border-bottom: 1px solid black;
+      border-bottom: 1px solid var(--input-border-color);
       display: block;
       width: calc(var(--gap) * 20);
 
       input {
-        color: var(--dark-color);
+        color: var(--input-text-color);
         font-size: 1.2rem;
         padding: var(--gap) 0;
         text-align: left;
@@ -481,7 +481,7 @@
   padding: calc(var(--gap) * 3);
 
   .pg-history-elem__label {
-    color: var(--wallets-balance);
+    color: var(--wallets-balance-color);
     font-size: calc(var(--gap) * 5);
     font-weight: 300;
   }
@@ -508,9 +508,9 @@
       &__head {
         margin: 10px;
         &-row {
-          border-bottom: 1px solid var(--header-border);
+          border-bottom: 1px solid var(--table-border-color);
           th {
-            background-color: var(--background-dark);
+            background-color: var(--table-background-color);
             color: var(--table-text-color);
             font-size: 12px !important;
             font-weight: 500;
@@ -532,12 +532,12 @@
         }
       }
       &__body {
-        background-color: var(--background-dark);
+        background-color: var(--table-background-color);
         tr {
-          background-color: var(--background-dark);
+          background-color: var(--table-background-color);
           border-bottom: 1px solid var(--header-border);
           td {
-            background-color: var(--background-dark);
+            background-color: var(--table-background-color);
             color: var(--table-text-color);
             font-size: 13px !important;
             font-weight: 400;
@@ -622,6 +622,4 @@
     }
 
   }
-
-
 }

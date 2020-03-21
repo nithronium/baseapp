@@ -1,6 +1,6 @@
-import { Button } from '@openware/components';
 import { History } from 'history';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RouterProps } from 'react-router';
@@ -107,15 +107,13 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
                     <div className="pg-confirm__content-deep">
                         <Button
                             className="pg-confirm__content-deep-back"
-                            label={this.props.intl.formatMessage({ id: 'page.body.kyc.back' })}
                             onClick={this.backBtn}
-                        />
+                        >{this.props.intl.formatMessage({ id: 'page.body.kyc.back' })}</Button>
                         <div className="pg-confirm__content-deep-margin" />
                         <Button
                             className="pg-confirm__content-phone-deep-button"
-                            label={this.props.intl.formatMessage({ id: 'page.idenfy.understand' })}
                             onClick={this.onBackButtonClick}
-                        />
+                        >{this.props.intl.formatMessage({ id: 'page.idenfy.understand' })}</Button>
                     </div>
                 </div>
             </div>

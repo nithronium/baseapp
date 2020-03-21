@@ -1,11 +1,13 @@
-import { Button, Dropdown } from '@openware/components';
 import cr from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import { removeQuestionnaire } from '../../../../api';
+import { DropdownComponent } from '../../../../components';
 import {checkQuestionnaire} from '../../../../helpers';
 import {
     Label,
@@ -16,15 +18,12 @@ import {
     User,
 } from '../../../../modules';
 import { changeUserLevel } from '../../../../modules/user/profile';
+import { redirect, redirectIfSpecified } from '../../../helpers';
 import {
     dataStoragePush,
     selectDataStoragePushSuccess,
 } from '../../../modules/user/dataStorage';
 import { DataStorageItemInterface } from '../../../modules/user/dataStorage/types';
-
-import { redirect, redirectIfSpecified } from '../../../helpers';
-
-import { removeQuestionnaire } from '../../../../api';
 
 interface ReduxProps {
     dataStoragePushSuccess: boolean;
@@ -158,7 +157,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
         return (
             <div className="pg-questionnaire__list__dropdown-item">
                 <span className="pg-questionnaire__list__dropdown-item__title">{title}</span>
-                <Dropdown
+                <DropdownComponent
                     className="pg-questionnaire__list__dropdown-item__dropdown"
                     list={answers}
                     onSelect={index => this.handleSelectDropdownAnswer(title, answers[index])}
@@ -303,10 +302,9 @@ class QuestionnaireContainer extends React.Component<Props, State> {
                     <div className="pg-questionnaire__button">
                         <Button
                             className="pg-questionnaire__button__item"
-                            label={this.translate('page.body.kyc.confirm')}
                             onClick={this.handleClickConfirm}
                             disabled={questionnaire.length !== 18 || !this.handleValidateQuestionnaire(questionnaire)}
-                        />
+                        >{this.translate('page.body.kyc.confirm')}</Button>
                     </div>
                 </div>
             </div>

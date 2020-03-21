@@ -1,6 +1,6 @@
-import { Loader } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
+import { Spinner } from 'react-bootstrap';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { OpenOrders } from '../../../components';
@@ -63,7 +63,7 @@ export class OpenOrdersContainer extends React.Component<Props> {
 
         return (
             <div className={classNames}>
-                {fetching ? <div className="open-order-loading"><Loader /></div> : this.openOrders()}
+                {fetching ? <div className="open-order-loading"><Spinner animation="border" variant="primary" /></div> : this.openOrders()}
             </div>
         );
     }

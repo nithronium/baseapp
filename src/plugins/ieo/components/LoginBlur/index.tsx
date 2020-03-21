@@ -1,5 +1,5 @@
-import { Button } from '@openware/components';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
 
 interface Props {
     title?: string;
@@ -19,11 +19,10 @@ export class LoginBlur extends React.Component<Props> {
                     {title ? <span className="pg-blur__content__login">{title}</span> : null}
                     <div className="pg-blur__content__button-wrapper">
                         <Button
-                            label={btnLabel || 'Login'}
-                            type="submit"
+                            type="button"
                             className={'cr-sign-in-form__button'}
                             onClick={this.props.onSignInClick}
-                        />
+                        >{btnLabel || 'Login'}</Button>
                     </div>
                     <div className="pg-blur__content__create-account">
                             <div
