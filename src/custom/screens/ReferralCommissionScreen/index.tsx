@@ -90,12 +90,12 @@ class ReferralCommission extends React.Component<Props> {
                 </div>
                 <section id="trade">
                     <div className="container">
-                        <TradingDetails entity="trade" changePage={this.changePage} context={trade} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.tradingCommissionDetails'})}/>
+                        <TradingDetails entity="trade" precision={currencyPrecision} changePage={this.changePage} context={trade} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.tradingCommissionDetails'})}/>
                     </div>
                 </section>
                 <section id="ieo">
                     <div className="container">
-                        <TradingDetails entity="ieo" changePage={this.changePage} context={ieo} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.ieoCommissionDetails'})}/>
+                        <TradingDetails entity="ieo" precision={currencyPrecision} changePage={this.changePage} context={ieo} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.ieoCommissionDetails'})}/>
                     </div>
                 </section>
                 {/* <section id="summary"><div className="container"><Summary entity="summary" context={this.props.balances} header="Transaction commission details" /></div></section> */}
