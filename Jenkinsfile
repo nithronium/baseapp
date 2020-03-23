@@ -5,7 +5,6 @@ pipeline {
         steps {
           echo 'init stage'
           setEnvironments()
-          
         }
       }
       stage('build') {
