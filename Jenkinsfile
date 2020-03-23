@@ -38,7 +38,6 @@ pipeline {
     }
 }
 
-
 def setEnvironments() {
   env.DOCKER_REGISTRY = 'https://eu.gcr.io'
   env.DOCKER_REGISTRY_LOCATION = 'eu.gcr.io'
