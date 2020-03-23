@@ -10,8 +10,8 @@ pipeline {
       stage('build') {
         steps {
           script {
-            //def msg = "Building: $env.APP_NAME_TAG by $env.COMMIT_AUTHOR, commit message: \"$env.COMMIT_MSG\""
-            //telegramSend(message: msg)
+            def msg = "Building: $env.APP_NAME_TAG by $env.COMMIT_AUTHOR, commit message: \"$env.COMMIT_MSG\""
+            telegramSend(message: msg)
             build_and_push(docker_image_tag)
           }
 
@@ -21,16 +21,12 @@ pipeline {
         steps{
           script {
             sshagent(credentials : ['JCI_SSH_KEY']) {
-              //def msg = "Deploying: $env.APP_NAME_TAG to $env.DOCKER_CRED_ID, commit message: \"$env.COMMIT_MSG\""
-              //telegramSend(message: msg)
+              def msg = "Deploying: $env.APP_NAME_TAG to $env.DOCKER_CRED_ID, commit message: \"$env.COMMIT_MSG\""
+              telegramSend(message: msg)
               commandStringChangeTag = "sudo -u deploy /home/deploy/emirex-preprod/config/environments/preprod/baseapp-tag.sh ${env.IMAGE_TAG}"
-              //echo commandStringChangeTag
               sh "ssh -o StrictHostKeyChecking=no Jenkins@35.205.47.217 /bin/bash -c '\"${commandStringChangeTag}\"'"
-              //sh "ssh -o StrictHostKeyChecking=no Jenkins@35.205.47.217 sudo -u deploy /home/deploy/bin/opex app install frontend"
-              //commandString = "sudo -u deploy kubectl set image deployment main-site-new main-site-new=${env.DOCKER_IMAGE_TAG}"
-              //sh "ssh -o StrictHostKeyChecking=no Jenkins@35.205.47.217 /bin/bash -c '\"${commandString}\"'"
-              //def msg2 = "Deployed: $env.APP_NAME_TAG to $env.DOCKER_CRED_ID, commit message: \"$env.COMMIT_MSG\""
-              //telegramSend(message: msg2)
+              def msg2 = "Deployed: $env.APP_NAME_TAG to $env.DOCKER_CRED_ID, commit message: \"$env.COMMIT_MSG\""
+              telegramSend(message: msg2)
             }
           }
         }
@@ -72,4 +68,3 @@ def build_and_push(docker_image_tag) {
     sh "docker rmi ${env.DOCKER_IMAGE_TAG}"
   }
 }
-
