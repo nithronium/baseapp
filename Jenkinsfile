@@ -73,3 +73,4 @@ def build_and_push(docker_image_tag) {
     sh "docker rmi ${env.DOCKER_IMAGE_TAG}"
   }
 }
+
