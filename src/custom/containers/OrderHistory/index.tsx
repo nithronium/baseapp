@@ -16,7 +16,6 @@ import {
     selectOrdersHistoryLoading,
     selectOrdersLastElemIndex,
     selectOrdersNextPageExists,
-    selectTotalOrdersHistory,
     userOrdersHistoryFetch,
 } from '../../../modules';
 import { OrderCommon } from '../../../modules/types';
@@ -35,7 +34,6 @@ interface ReduxProps {
     fetching: boolean;
     lastElemIndex: number;
     nextPageExists: boolean;
-    total: number;
     cancelAllFetching: boolean;
     cancelFetching: boolean;
 }
@@ -177,7 +175,6 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     fetching: selectOrdersHistoryLoading(state),
     lastElemIndex: selectOrdersLastElemIndex(state, 25),
     nextPageExists: selectOrdersNextPageExists(state, 25),
-    total: selectTotalOrdersHistory(state),
     cancelAllFetching: selectCancelAllFetching(state),
     cancelFetching: selectCancelFetching(state),
 });

@@ -19,6 +19,7 @@ import {
     selectOrdersLastElemIndex,
     selectOrdersNextPageExists,
     userOrdersHistoryFetch,
+    selectHistoryTotal,
 } from '../../modules';
 import { OrderCommon } from '../../modules/types';
 
@@ -32,6 +33,7 @@ interface ReduxProps {
     firstElemIndex: number;
     list: OrderCommon[];
     fetching: boolean;
+    total: number;
     lastElemIndex: number;
     nextPageExists: boolean;
     cancelAllFetching: boolean;
@@ -75,7 +77,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState>  {
     }
 
     public renderContent = list => {
-        const { firstElemIndex, lastElemIndex, pageIndex, nextPageExists } = this.props;
+        const { firstElemIndex, lastElemIndex, total, pageIndex, nextPageExists } = this.props;
 
         return (
             <React.Fragment>
@@ -84,6 +86,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState>  {
                     firstElemIndex={firstElemIndex}
                     lastElemIndex={lastElemIndex}
                     page={pageIndex}
+                    total={total}
                     nextPageExists={nextPageExists}
                     onClickPrevPage={this.onClickPrevPage}
                     onClickNextPage={this.onClickNextPage}
@@ -207,6 +210,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     firstElemIndex: selectOrdersFirstElemIndex(state, 25),
     list: selectOrdersHistory(state),
     fetching: selectOrdersHistoryLoading(state),
+    total: selectHistoryTotal(state),
     lastElemIndex: selectOrdersLastElemIndex(state, 25),
     nextPageExists: selectOrdersNextPageExists(state, 25),
     cancelAllFetching: selectCancelAllFetching(state),
