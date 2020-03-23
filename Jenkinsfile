@@ -24,7 +24,7 @@ pipeline {
             sshagent(credentials : ['JCI_SSH_KEY']) {
               //def msg = "Deploying: $env.APP_NAME_TAG to $env.DOCKER_CRED_ID, commit message: \"$env.COMMIT_MSG\""
               //telegramSend(message: msg)
-              commandStringChangeTag = "sudo -u deploy sed -i 's/tag:.*/tag: ${env.IMAGE_TAG}/g' /home/deploy/emirex-preprod/config/environments/preprod/testfront.yml"
+              commandStringChangeTag = "sudo -u deploy 'sed -i s/tag:.*/tag: ${env.IMAGE_TAG}/g' /home/deploy/emirex-preprod/config/environments/preprod/testfront.yml"
               //echo commandStringChangeTag
               sh "ssh -o StrictHostKeyChecking=no Jenkins@35.205.47.217 /bin/bash -c '\"${commandStringChangeTag}\"'"
               sh "ssh -o StrictHostKeyChecking=no Jenkins@35.205.47.217 cat /home/deploy/emirex-preprod/config/environments/preprod/testfront.yml"
