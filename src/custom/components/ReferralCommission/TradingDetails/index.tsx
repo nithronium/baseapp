@@ -49,12 +49,12 @@ class TradingDetailsComponent extends React.Component<Props, State>{
             return(
             <tbody key={index} className="summary-row">
                 <tr>
-                    <td>{record.email}</td>
+                    <td className="email-cell">{record.email}</td>
                     <td>{record.l1_trades}</td>
-                    <td>{record.l1_commissions} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></td>
+                    <td>{l1Commissions.toFixed(this.props.precision)} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></td>
                     {/* <td><div className="mobile-card-header"># of L2</div><div className="mobile-value">{record.referrals} <span className="explanation">referrals</span></div></td> */}
                     <td>{record.l2_trades}</td>
-                    <td>{record.l2_commissions} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></td>
+                    <td>{l2Commissions.toFixed(this.props.precision)} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></td>
                 </tr>
                 <tr><td colSpan={6}>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.total'})}: {total.toFixed(this.props.precision)} {this.props.currencyId.toUpperCase()}</td></tr>
             </tbody>
