@@ -232,6 +232,13 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 >
                     <FormattedMessage id={'page.header.navbar.reftickets'} />
                 </Link>
+                <Link
+                    className="pg-navbar__admin-logout"
+                    to={buildPath('/referral-commission', lang)}
+                    onClick={this.handleRouteChange(buildPath('/referral-commission', lang))}
+                >
+                    <FormattedMessage id={'page.header.navbar.refcommission'} />
+                </Link>
                 {/*<Link
                     className="pg-navbar__admin-logout"
                     to="/referral-commission"
@@ -356,6 +363,15 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         onClick={this.handleRouteChange(buildPath('/referral-tickets', lang))}
                     >
                         <FormattedMessage id={'page.header.navbar.reftickets'} />
+                    </Link>
+                </div>
+                <div className="dropdown-menu-item-user">
+                    <Link
+                        className="pg-navbar__admin-logout"
+                        to={buildPath('/referral-commission', lang)}
+                        onClick={this.handleRouteChange(buildPath('/referral-commission', lang))}
+                    >
+                        <FormattedMessage id={'page.header.navbar.refcommission'} />
                     </Link>
                 </div>
                 {/*<div className="dropdown-menu-item-user">
