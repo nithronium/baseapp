@@ -363,9 +363,8 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         const { walletsError, user, wallets } = this.props;
         const { selectedWalletIndex, sepa, card, wire } = this.state;
         const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
-
         return (
-            <React.Fragment>
+           <React.Fragment>
                 {wallets[selectedWalletIndex].type === 'fiat' && (
                     <TypeTabs
                         action={this.setState.bind(this)}
@@ -375,6 +374,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                         wire={wire}
                     />
                 )}
+               { wire && currency === 'eur'
+                   ? <div style={{ fontSize: '18px', paddingTop: '20px', textAlign: 'center' }}>{this.translate('comingsoon')}</div>
+                   : <React.Fragment>
                 {currency.toLowerCase() === 'usd'}
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
                 {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}
@@ -384,6 +386,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                     this.renderWithdrawBlock()
                 )}
                 {user.otp && currency && <WalletHistory label="withdraw" type="withdraws" currency={currency} />}
+                </React.Fragment>  }
             </React.Fragment>
         );
     };
