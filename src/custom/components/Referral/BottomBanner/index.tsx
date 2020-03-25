@@ -18,7 +18,7 @@ export const BottomBanner = injectIntl(({ intl }) => {
                 </div>
                 <div style={styles.list}>
                     <ListItem
-                        img={require('./icons/wallet.svg')}
+                        img={require('./icons/investment.svg')}
                         header={format({ id: 'page.referal.bottombanner.accepted_cur' })}
                     >
                         <p style={styles.currency}>{format({ id: 'page.referal.bottombanner.accepted_cur_value' })}</p>
@@ -27,30 +27,15 @@ export const BottomBanner = injectIntl(({ intl }) => {
                         img={require('./icons/hand.svg')}
                         header={format({ id: 'page.referal.bottombanner.IEO_token_price' })}
                     >
-                        <div>{format({ id: 'page.referal.bottombanner.IEO_round1' })} : $0.49</div>
-                        <div>{format({ id: 'page.referal.bottombanner.IEO_round2' })} : $0.51</div>
+                        <div>{format({ id: 'page.referal.bottombanner.IEO_round1' })} $0.4</div>
                     </ListItem>
                     <ListItem
                         img={require('./icons/index.svg')}
                         header={format({ id: 'page.referal.bottombanner.IEO_max_supply' })}
+                        header2={format({id: 'page.referal.bottombanner.hard_cap'})}
+                        children2={(<div>$10 000 000</div>)}
                     >
-                        25 000 000 <span style={styles.currency}>EMRX</span>
-                    </ListItem>
-                    <ListItem img={require('./icons/money.svg')} header={format({ id: 'page.referal.bottombanner.IEO_rounds' })}>
-                        <div style={{ fontSize: '20px' }}>
-                            {format({ id: 'page.referal.bottombanner.IEO_round1' })} :{' '}
-                            {format({ id: 'page.referal.bottombanner.IEO_round_now' })}
-                        </div>
-                        <div style={{ fontSize: '20px' }}>
-                            {format({ id: 'page.referal.bottombanner.IEO_round2' })} :{' '}
-                            {format({ id: 'page.referal.bottombanner.IEO_round_next' })}
-                        </div>
-                    </ListItem>
-                    <ListItem
-                        img={require('./icons/investment.svg')}
-                        header={format({ id: 'page.referal.bottombanner.hard_cap' })}
-                    >
-                        $10 000 000
+                        <div>25 000 000 <span style={styles.currency}>EMRX</span></div>
                     </ListItem>
                     <ListItem
                         img={require('./icons/stock-price.svg')}
