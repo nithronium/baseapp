@@ -42,21 +42,26 @@ class TradingDetailsComponent extends React.Component<Props, State>{
     }
 
     public tbodies = rowsArray => {
-        return rowsArray.map((record, index) => {
+            return rowsArray.map((record, index) => {
             const l1Commissions = +record.l1_commissions;
             const l2Commissions = +record.l2_commissions;
             const total = l1Commissions + l2Commissions;
+
+            const l1CommissionsDisp = this.formatFloat(l1Commissions, this.props.precision);
+            const l2CommissionsDisp = this.formatFloat(l2Commissions, this.props.precision);
+            const totalDisp = this.formatFloat(total, this.props.precision);
+
             return(
             <tbody key={index} className="summary-row">
                 <tr>
                     <td className="email-cell">{record.email}</td>
                     <td>{record.l1_trades}</td>
-                    <td>{l1Commissions.toFixed(this.props.precision)} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></td>
+                    <td>{l1CommissionsDisp} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></td>
                     {/* <td><div className="mobile-card-header"># of L2</div><div className="mobile-value">{record.referrals} <span className="explanation">referrals</span></div></td> */}
                     <td>{record.l2_trades}</td>
-                    <td>{l2Commissions.toFixed(this.props.precision)} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></td>
+                    <td>{l2CommissionsDisp} <span className="explanation">{this.props.currencyId.toUpperCase()}</span></td>
                 </tr>
-                <tr><td colSpan={6}>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.total'})}: {total.toFixed(this.props.precision)} {this.props.currencyId.toUpperCase()}</td></tr>
+                <tr><td colSpan={6}>{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.total'})}: {totalDisp} {this.props.currencyId.toUpperCase()}</td></tr>
             </tbody>
             );
         });
@@ -80,6 +85,10 @@ class TradingDetailsComponent extends React.Component<Props, State>{
 
         const totalL1 = this.getTotal('l1_commissions');
         const totalL2 = this.getTotal('l2_commissions');
+        const totalAll = totalL1 + totalL2;
+        const totalL1Disp = this.formatFloat(totalL1, this.props.precision);
+        const totalL2Disp = this.formatFloat(totalL2, this.props.precision);
+        const totalAllDisp = this.formatFloat(totalAll, this.props.precision);
 
         return(
 
@@ -117,7 +126,7 @@ class TradingDetailsComponent extends React.Component<Props, State>{
                                 </td>
                             </tr>
                             <tr><td><span className="table-summary-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.total'})}</span></td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l1Trades'})}</td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL1'})} {this.props.currencyId.toUpperCase()}</td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.l2Trades'})}</td><td className="footer-header">{this.props.intl.formatMessage({id: 'referralCommission.tradingDetails.commissionL2'})} {this.props.currencyId.toUpperCase()}</td></tr>
-                            <tr><td>{(totalL1 + totalL2).toFixed(this.props.precision)} {this.props.currencyId.toUpperCase()}</td><td>{this.getTotal('l1_trades')}</td><td>{totalL1.toFixed(this.props.precision)} {this.props.currencyId.toUpperCase()}</td><td>{this.getTotal('l2_trades')}</td><td>{totalL2.toFixed(this.props.precision)} {this.props.currencyId.toUpperCase()}</td></tr>
+                            <tr><td>{totalAllDisp} {this.props.currencyId.toUpperCase()}</td><td>{this.getTotal('l1_trades')}</td><td>{totalL1Disp} {this.props.currencyId.toUpperCase()}</td><td>{this.getTotal('l2_trades')}</td><td>{totalL2Disp} {this.props.currencyId.toUpperCase()}</td></tr>
                         </tfoot>
                     </table>
                 </div>
@@ -175,6 +184,11 @@ class TradingDetailsComponent extends React.Component<Props, State>{
         });
 
         return total;
+    }
+
+    private formatFloat(float, precision) {
+        const basefactor = 1 / (10 ** precision);
+        return (float > 0 && float < basefactor) ? `< ${basefactor.toFixed(precision)}` : float.toFixed(precision);
     }
 }
 

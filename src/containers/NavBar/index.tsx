@@ -374,15 +374,6 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         <FormattedMessage id={'page.header.navbar.refcommission'} />
                     </Link>
                 </div>
-                {/*<div className="dropdown-menu-item-user">
-                    <Link
-                        className="pg-navbar__admin-logout"
-                        to="/referral-commission"
-                        onClick={this.handleRouteChange('/referral-commission')}
-                    >
-                        <FormattedMessage id={'page.header.navbar.refcommission'} />
-                    </Link>
-                </div>*/}
                 <div className="dropdown-menu-item-user">
                     <a className="pg-navbar__admin-logout" href="https://kb.emirex.com/" target="_blank" rel="nofollow noopener">
                         <FormattedMessage id={'footer_links_kb'} />
