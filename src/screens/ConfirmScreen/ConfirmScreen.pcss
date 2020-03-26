@@ -31,7 +31,7 @@
   }
 
   &-box {
-    background-color: var(--rgb-body-background-color);
+    background-color: var(--body-background-color);
     box-shadow: 1px 1px 5px rgba(46, 76, 128, 0.2);
     display: block;
     margin: 0 auto;
@@ -61,15 +61,15 @@
   }
 
   &__error {
-    color: var(--rgb-system-red);
+    color: var(--system-red);
   }
 
   &__success {
-    color: var(--rgb-system-green);
+    color: var(--system-green);
   }
 
   &__title {
-    color: var(--rgb-primary-text-color);
+    color: var(--primary-text-color);
     text-align: center;
 
     &-text {
@@ -87,7 +87,7 @@
   &__progress {
     margin: 0 auto;
     height: 100px;
-    background: var(--rgb-subheader-background-color);
+    background: var(--subheader-background-color);
     border-bottom: 1px solid var(--divider-color-level-2);
     border-radius: 4px 4px 0 0;
 
@@ -97,7 +97,7 @@
       &-2,
       &-3,
       &-4 {
-        background: var(--rgb-dropdown-background-color);
+        background: var(--dropdown-background-color);
         border-radius: 50%;
         box-sizing: border-box;
         height: 25px;
@@ -111,7 +111,7 @@
           align-items: center;
           height: 100%;
           font-weight: bold;
-          color: var(--rgb-cta-layer-color);
+          color: var(--cta-layer-color);
           margin-top: 2px;
         }
       }
@@ -175,74 +175,53 @@
 
     &-zero {
       .pg-confirm__progress-circle-1 {
-        background: var(--rgb-primary-cta-color);
+        background: var(--primary-cta-color);
 
         &:after {
-          color: var(--rgb-cta-layer-color);
+          color: var(--cta-layer-color);
         }
       }
        .pg-confirm__active-1 {
-        color: var(--rgb-primary-text-color);
+        color: var(--primary-text-color);
         font-weight: bold;
       }
     }
   }
 
-  &-first {
-    .pg-confirm__progress-circle-1 {
-      background: var(--kyc-active-color);
-
-      &:after {
-        color: var(--white);
-      }
-    }
-     .pg-confirm__active-1 {
-      color: var(--color-white);
-      font-weight: bold;
-    }
-  }
-
   &-second {
     .pg-confirm__progress-circle-2 {
-      background: var(--kyc-active-color);
+      background: var(--primary-cta-color);
 
       &:after {
-        color: var(--white);
+        color: var(--cta-layer-color);
       }
     }
-     .pg-confirm__active-2 {
-      color: var(--color-white);
+      .pg-confirm__active-2 {
+      color: var(--primary-text-color);
       font-weight: bold;
     }
   }
 
   &-third {
     .pg-confirm__progress-circle-3 {
-      background: var(--kyc-active-color);
+      background: var(--primary-cta-color);
 
       &:after {
-        color: var(--white);
+        color: var(--cta-layer-color);
       }
     }
-     .pg-confirm__active-3 {
-      color: var(--color-white);
+
+    .pg-confirm__active-3 {
+      color: var(--primary-text-color);
       font-weight: bold;
     }
   }
 
-  &-fourth {
-    .pg-confirm__progress-circle-4 {
-      background: var(--kyc-active-color);
-
-      &:after {
-        color: var(--white);
-      }
-    }
-     .pg-confirm__active-4 {
-      color: var(--color-white);
-      font-weight: bold;
-    }
+  .pg-confirm__active-4 {
+    color: var(--color-white);
+    font-weight: bold;
   }
+
   .pg-confirm__progress-circle-1,
   .pg-confirm__progress-circle-2,
   .pg-confirm__progress-circle-3,
@@ -330,7 +309,7 @@
     &__progress {
       margin: 0 auto;
       height: 100px;
-      background: var(--rgb-subheader-background-color);
+      background: var(--subheader-background-color);
       border-bottom: 1px solid var(--divider-color-level-2);
       border-radius: 4px 4px 0 0;
 
