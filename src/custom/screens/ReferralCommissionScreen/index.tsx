@@ -70,32 +70,30 @@ class ReferralCommission extends React.Component<Props> {
     }
 
     public render(){
-        const currencyId = this.props.commissionsInfo.currencyId;
-        const currenciesNames = this.props.currencies.map(el => el.id);
-        const currencyPrecision = (this.props.currencies.find(el => el.id === currencyId.toLowerCase()) || {}).precision;
         const balances = this.props.commissionsInfo.data.balances;
+        const currencyId = this.props.commissionsInfo.currencyId;
         const trade = this.props.commissionsInfo.data.trade;
         const ieo = this.props.commissionsInfo.data.ieo;
-
+        const currenciesNames = this.props.currencies.map(el => el.id);
 
         return (
             <div className="pg-referral-commission">
                 <div className="top-holder">
                     <section id="top">
-                        <ReferralHeader title={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.totalEarnings'})} currencies={currenciesNames} context={balances} precision={currencyPrecision} currencyId={currencyId} changeCurrentCurrency={this.changeCurrentCurrency} link="#summary">
-                            <Card earned={balances.earned.trade} precision={currencyPrecision} commission={balances.commission.trade} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.tradingCommission'})} link="#trade"/>
-                            <Card earned={balances.earned.ieo} precision={currencyPrecision} commission={balances.commission.ieo} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.ieoCommission'})} link="#ieo"/>
+                        <ReferralHeader title={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.totalEarnings'})} currencies={currenciesNames} context={balances} currencyId={currencyId} changeCurrentCurrency={this.changeCurrentCurrency} link="#summary">
+                            <Card earned={balances.earned.trade} commission={balances.commission.trade} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.tradingCommission'})} link="#trade"/>
+                            <Card earned={balances.earned.ieo} commission={balances.commission.ieo} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.ieoCommission'})} link="#ieo"/>
                         </ReferralHeader>
                     </section>
                 </div>
                 <section id="trade">
                     <div className="container">
-                        <TradingDetails entity="trade" precision={currencyPrecision} changePage={this.changePage} context={trade} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.tradingCommissionDetails'})}/>
+                        <TradingDetails entity="trade" changePage={this.changePage} context={trade} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.tradingCommissionDetails'})}/>
                     </div>
                 </section>
                 <section id="ieo">
                     <div className="container">
-                        <TradingDetails entity="ieo" precision={currencyPrecision} changePage={this.changePage} context={ieo} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.ieoCommissionDetails'})}/>
+                        <TradingDetails entity="ieo" changePage={this.changePage} context={ieo} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.ieoCommissionDetails'})}/>
                     </div>
                 </section>
                 {/* <section id="summary"><div className="container"><Summary entity="summary" context={this.props.balances} header="Transaction commission details" /></div></section> */}
