@@ -74,7 +74,7 @@ class SignIn extends React.Component<Props, SignInState> {
         const { currentLanguage, history } = this.props;
 
         if (props.isLoggedIn) {
-            history.push(buildPath('/wallets', currentLanguage));
+            history.push(buildPath('/profile', currentLanguage));
         }
         if (props.requireEmailVerification) {
             props.history.push(buildPath('/email-verification', currentLanguage), { email: this.state.email });

@@ -104,7 +104,7 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
     if (isLogged) {
         return (
             <Route {...rest}>
-                <Redirect to={buildPath('/wallets', rest.currentLanguage)} />
+                <Redirect to={buildPath('/profile', rest.currentLanguage)} />
             </Route>
         );
     }

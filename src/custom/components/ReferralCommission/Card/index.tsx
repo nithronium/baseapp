@@ -6,7 +6,6 @@ import {
 
 interface PassedProps {
     commission: number[];
-    precision: number;
     earned: number;
     currencyId: string;
     header: string;
@@ -52,7 +51,7 @@ class CardComponent extends React.Component<Props>{
                 <div className="card-middle">
                     <div className="card-earned-header">{this.props.intl.formatMessage({id: 'referralCommission.card.earned'})}</div>
                     <div className="card-details-row">
-                        {earned} {this.props.currencyId.toUpperCase()}
+                        {earned || 0} {this.props.currencyId.toUpperCase()}
                     </div>
                 </div>
                 <div className="card-bottom">
