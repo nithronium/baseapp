@@ -26,6 +26,7 @@ interface ReduxProps {
 
 interface PassedProps {
     context: ReferralHeaderInterface;
+    precision: number;
     title: string;
     link: string;
     currencyId: string;
@@ -35,20 +36,14 @@ interface PassedProps {
 
 type Props = ReduxProps & PassedProps & InjectedIntlProps;
 //tslint:disable
-class ReferralHeaderContainer extends React.Component<Props> {   
-    public currencies = ['aed', 'btc', 'eur', 'usd', 'usdt', 'bch', 'emrx']; //mock currencies
-
-    public changeCurrentCurrency(curr) { //method to change current currency
-        console.log(curr);  
-    }
-
+class ReferralHeaderContainer extends React.Component<Props> {
     public render() {
-        const total = (this.props.context.earned.trade || 0) + (this.props.context.earned.ieo || 0);
+        const total = ((this.props.context.earned.trade || 0) + (this.props.context.earned.ieo || 0)).toFixed(this.props.precision);
         return (
             <div className="container recalculate">
                 <div className="header">
                     <h1>{this.props.intl.formatMessage({id: 'referralCommission.rootScreen.referralBalance'})}</h1>
-                    <CurrencySelect currencyId={this.props.currencyId} currencies={this.currencies} changeCurrentCurrency={this.props.changeCurrentCurrency}/>
+                    <CurrencySelect currencyId={this.props.currencyId} currencies={this.props.currencies} changeCurrentCurrency={this.props.changeCurrentCurrency}/>
                 </div>
                 <div className="contexter">
                     <div className="cards-wrapper">
