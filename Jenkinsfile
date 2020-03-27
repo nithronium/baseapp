@@ -25,6 +25,8 @@ pipeline {
               telegramSend(message: msg)
               commandStringChangeTag = "sudo -u deploy /home/deploy/emirex-preprod/config/environments/preprod/baseapp-tag.sh ${env.IMAGE_TAG}"
               sh "ssh -o StrictHostKeyChecking=no Jenkins@35.205.47.217 /bin/bash -c '\"${commandStringChangeTag}\"'"
+              commandStringDeployAwait = "sudo -u deploy /home/deploy/emirex-preprod/config/environments/preprod/check-deployment.sh ${env.APP_NAME}"
+              sh "ssh -o StrictHostKeyChecking=no Jenkins@35.205.47.217 /bin/bash -c '\"${commandStringDeployAwait}\"'"
               def msg2 = "Deployed: $env.APP_NAME_TAG to $env.DOCKER_CRED_ID, commit message: \"$env.COMMIT_MSG\""
               telegramSend(message: msg2)
             }
