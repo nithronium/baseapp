@@ -26,7 +26,9 @@ class CardComponent extends React.Component<Props>{
         // }else{
         //     preloader = null;
         // }
-        const earned = (this.props.earned || 0).toFixed(this.props.precision);
+        const earnedBase = (this.props.earned || 0);
+        const basefactor = 1 / (10 ** this.props.precision);
+        const earned = (earnedBase > 0 && earnedBase < basefactor) ? `< ${basefactor.toFixed(this.props.precision)}` : earnedBase.toFixed(this.props.precision);
 
         return(
 
@@ -40,11 +42,11 @@ class CardComponent extends React.Component<Props>{
                 <div className="card-middle">
                     <div className="card-details-row">
                         <div className="card-details-row__left">{this.props.intl.formatMessage({id: 'referralCommission.card.referralL1'})}</div>
-                        <div className="card-details-row__right">{`${(this.props.commission[0] || 0) * 100}%`}</div>
+                        <div className="card-details-row__right">{`${((this.props.commission[0] || 0) * 100).toFixed(1)}%`}</div>
                     </div>
                     <div className="card-details-row">
                         <div className="card-details-row__left">{this.props.intl.formatMessage({id: 'referralCommission.card.referralL2'})}</div>
-                        <div className="card-details-row__right">{`${(this.props.commission[1] || 0) * 100}%`}</div>
+                        <div className="card-details-row__right">{`${((this.props.commission[1] || 0) * 100).toFixed(1)}%`}</div>
                     </div>
                 </div>
                 <div className="card-middle">
