@@ -14,6 +14,9 @@ export interface TwoFactorAuthProps {
     label: string;
     buttonLabel: string;
     message: string;
+    text: string;
+    link1: string;
+    link2: string;
     otpCode: string;
     error: string;
     codeFocused: boolean;
@@ -31,6 +34,9 @@ class TwoFactorAuthComponent extends React.Component<TwoFactorAuthProps> {
             label,
             buttonLabel,
             message,
+            text,
+            link1,
+            link2,
             error,
             otpCode,
             codeFocused,
@@ -75,6 +81,11 @@ class TwoFactorAuthComponent extends React.Component<TwoFactorAuthProps> {
                                     onKeyPress={this.handleEnterPress}
                                     autoFocus={true}
                                 />
+                                <div className="link-block">
+                                    <div className="text">{text}</div>
+                                    <a href="https://kb.emirex.com/lost-access-to-smartphone-with-google-authenticator-app" target="_blank" className="link">{link1}</a>
+                                    <a href="https://kb.emirex.com/my-2fa-codes-are-not-working" target="_blank" className="link">{link2}</a>
+                                </div>
                                 {errorMessage && <div className="cr-email-form__error">{errorMessage}</div>}
                             </div>
                             <div className={buttonWrapperClass}>

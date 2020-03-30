@@ -141,6 +141,9 @@ class SignIn extends React.Component<Props, SignInState> {
                 label={this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.code2fa' })}
                 buttonLabel={this.props.intl.formatMessage({ id: 'page.header.signIn' })}
                 message={this.props.intl.formatMessage({ id: 'page.password2fa.message' })}
+                text={this.props.intl.formatMessage({ id: 'page.password2fa.text' })}
+                link1={this.props.intl.formatMessage({ id: 'page.password2fa.link1' })}
+                link2={this.props.intl.formatMessage({ id: 'page.password2fa.link2' })}
                 codeFocused={codeFocused}
                 otpCode={otpCode}
                 error={error2fa}
