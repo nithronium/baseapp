@@ -6,6 +6,7 @@ import {
 
 interface PassedProps {
     commission: number[];
+    precision: number;
     earned: number;
     currencyId: string;
     header: string;

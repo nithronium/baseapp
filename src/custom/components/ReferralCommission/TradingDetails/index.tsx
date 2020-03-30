@@ -17,6 +17,7 @@ interface PassedProps {
     };
     header: string;
     currencyId: string;
+    precision: number;
     entity: 'ieo' | 'trade';
     changePage(currencyId, type, skip, limit): void;
 }
