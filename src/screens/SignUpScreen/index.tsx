@@ -89,10 +89,17 @@ class SignUp extends React.Component<Props> {
 
     public componentDidMount() {
         setDocumentTitle('Sign Up');
+        const localReferralCode = localStorage.getItem('referralCode');
         const referralCode = this.extractRefID(this.props.location.search) || '';
-        this.setState({
-            refId: referralCode,
-        });
+        const haventLocalCode = !localReferralCode && referralCode;
+        const haveLocalCode = localReferralCode && referralCode;
+        if (haventLocalCode || haveLocalCode) {
+            localStorage.setItem('referralCode', referralCode);
+            this.setState({ refId: referralCode });
+        }
+        if (!referralCode) {
+            this.setState({ refId: localReferralCode });
+        }
     }
 
     public componentWillReceiveProps(props: Props) {

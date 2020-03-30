@@ -99,25 +99,12 @@ class ReferralProgramClass extends React.Component<Props> {
         // tslint:disable
         const lang = localStorage.getItem('lang_code') || 'en';
         const locale = lang === 'en' ? '' : `/${lang}`;
-        const referralLink = `${window.document.location.origin}/referral?refid=${user.uid}`;
-        const referralLinkIEO = `https://ieo.emirex.com?emirex_referral_code=${user.uid}`;
+        const referralLink = `${window.document.location.origin}/signup?refid=${user.uid}`;
         return (
             <div className="pg-profile-page__referral mb-3">
-                {userRefUid ? (
+                {!userRefUid ? (
                     <React.Fragment>
-                    <fieldset className="pg-copyable-text__section" onClick={this.doCopyIEO}>
-                        <legend className="cr-deposit-crypto__copyable-title">
-                            <FormattedMessage id="page.body.profile.header.referralProgramIEO"/>
-                        </legend>
-                        <CopyableTextField
-                            className="pg-copyable-text-field__input"
-                            value={referralLinkIEO}
-                            fieldId="referral-IEO-id"
-                            copyButtonText={this.translate('page.body.profile.content.copyLink')}
-                        />
-                        </fieldset>
-                        <div style={{ padding: '5px 0' }} />
-                        <fieldset className="pg-copyable-text__section" onClick={this.doCopy}>
+                    <fieldset className="pg-copyable-text__section" onClick={this.doCopy}>
                     <legend className="cr-deposit-crypto__copyable-title">
                         <FormattedMessage id="page.body.profile.header.referralProgram" />
                     </legend>
