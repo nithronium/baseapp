@@ -112,6 +112,27 @@
       margin-top: -3px;
       text-decoration: none;
       white-space: nowrap;
+      position: relative;
+    }
+
+    &__icon-hover {
+      visibility: hidden;
+      width: 250px;
+      background-color: rgba(1,1,1, 0.25);
+      color: var(--accent);
+      border-radius: 6px;
+      transform: translate(-45%, 20%);
+      padding: 10px 15px;
+      position: absolute;
+      z-index: 5;
+    }
+
+    &__icon-hover span {
+      white-space: normal;
+    }
+
+    &__icon-container:hover &__icon-hover {
+      visibility: visible;
     }
   }
 

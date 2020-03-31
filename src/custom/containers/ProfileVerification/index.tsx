@@ -41,9 +41,9 @@ import { RangerState } from '../../../modules/public/ranger/reducer';
 import { selectRanger } from '../../../modules/public/ranger/selectors';
 import { WithdrawLimit } from '../../../modules/user/withdrawLimit';
 import { buildPath } from '../../helpers';
-// import checkCircleSvg = require('../../assets/images/check-circle.svg');
+import checkCircleSvg = require('../../assets/images/check-circle.svg');
 import clockSvg = require('../../assets/images/clock.svg');
-// import infoSvg = require('../../assets/images/info.svg');
+import infoSvg = require('../../assets/images/info.svg');
 
 interface ReduxProps {
     currencies: Currency[];
@@ -400,8 +400,8 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                 case 'pending' : {
                     return (
                         <div className="pg-profile-verification__know-more__icon-container">
-                            <img className="pg-profile-verification__know-more__icon-img__kyc" width="20" height="20" src={clockSvg} alt='Pending' />
-                            <span>{/* <FormattedMessage id="resource.profile.identity.pending" /> */}</span>
+                            <img className="pg-profile-verification__know-more__icon-img" width="20" height="20" src={clockSvg} alt='Pending' />
+                            <div className="pg-profile-verification__know-more__icon-hover"><FormattedMessage id="resource.profile.identity.pending" /></div>
                         </div>
                     );
                 }
@@ -409,8 +409,8 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                 case 'denied' : {
                     return (
                         <div className="pg-profile-verification__know-more__icon-container">
-                            <img className="pg-profile-verification__know-more__icon-img__kyc" width="20" height="20" src={clockSvg} alt='Denied' />
-                            <span>{/* <FormattedMessage id="resource.profile.identity.denied" /> */}</span>
+                            <img className="pg-profile-verification__know-more__icon-img" width="20" height="20" src={infoSvg} alt='Denied' />
+                            <div className="pg-profile-verification__know-more__icon-hover"><FormattedMessage id="resource.profile.identity.denied" /></div>
                         </div>
                     );
                 }
@@ -425,8 +425,8 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                 case 'pending' : {
                     return (
                         <div className="pg-profile-verification__know-more__icon-container">
-                            <img className="pg-profile-verification__know-more__icon-img__kyc" width="20" height="20" src={clockSvg} alt='Pending' />
-                            <span>{/* <FormattedMessage id="resource.profile.document.pending" /> */}</span>
+                            <img className="pg-profile-verification__know-more__icon-img" width="20" height="20" src={clockSvg} alt='Pending' />
+                            <div className="pg-profile-verification__know-more__icon-hover"><FormattedMessage id="resource.profile.document.pending" /></div>
                         </div>
                     );
                 }
@@ -434,8 +434,8 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                 case 'denied' : {
                     return (
                         <div className="pg-profile-verification__know-more__icon-container">
-                            <img className="pg-profile-verification__know-more__icon-img__kyc" width="20" height="20" src={clockSvg} alt='Denied' />
-                            <span>{/* <FormattedMessage id="resource.profile.document.denied" /> */}</span>
+                            <img className="pg-profile-verification__know-more__icon-img" width="20" height="20" src={infoSvg} alt='Denied' />
+                            <div className="pg-profile-verification__know-more__icon-hover"><FormattedMessage id="resource.profile.document.denied" /></div>
                         </div>
                     );
                 }
@@ -443,8 +443,8 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                 case 'verified' : {
                     return (
                         <div className="pg-profile-verification__know-more__icon-container">
-                            <img className="pg-profile-verification__know-more__icon-img__kyc" width="20" height="20" src={clockSvg} alt='Verified' />
-                            <span>{/* <FormattedMessage id="resource.profile.document.verified" /> */}</span>
+                            <img className="pg-profile-verification__know-more__icon-img" width="20" height="20" src={checkCircleSvg} alt='Verified' />
+                            <div className="pg-profile-verification__know-more__icon-hover"><FormattedMessage id="resource.profile.document.verified" /></div>
                         </div>
                     );
                 }
