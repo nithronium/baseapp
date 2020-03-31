@@ -75,7 +75,7 @@ const links6 = [
     { key: '', href: 'https://twitter.com/EMIREX_OFFICIAL', icon: twitter, alt: 'twitter icon' },
     {
         key: '',
-        href: 'https://t.me/emirex_official',
+        href: 'tg://resolve?domain=emirex_official',
         icon: telegram,
         alt: 'telegram icon',
     },
