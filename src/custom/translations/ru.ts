@@ -599,9 +599,10 @@ export const ru: LangType = {
     'resource.profile.profile': 'Профиль проверяется',
     'resource.profile.phone': 'Телефон проверяется',
     'resource.profile.kyc': 'Личность проверяется',
-    'resource.profile.document': 'Место жительства проверяется',
+    'resource.profile.document.pending': 'Место жительства проверяется',
     'resource.profile.questionnaire': 'Анкета проверяется',
-    'resource.profile.identity': 'Личность проверяется',
+    'resource.profile.identity.pending': 'Личность проверяется',
+    'resource.profile.identity.denied': 'Верификация вашей личности не была успешной. Пожалуйста, попробуйте еще раз. Вы можете найти причину отказа в автоматическом письме, которые было отправлено на ваш адрес',
     'resource.documents.expirationDate': 'Дата выдачи недействителена',
 
     'email.taken': 'Почта уже зарегистрирована',
@@ -700,6 +701,7 @@ export const ru: LangType = {
     'resource.profile.missing_country': 'Страна отсутствует',
 
     'resource.profile.document.denied': 'Your last kyc was denied. Please, try again',
+    'resource.profile.document.verified': 'Ваше место жительства подтверждено. Пожалуйста заполните анкету',
     'resource.profile.kyc.denied': 'Your documents were denied. Please, try again',
 
     'resource.api_key.missing_algorithm': 'Алгоритм отсутствует',
@@ -1125,6 +1127,7 @@ export const ru: LangType = {
     'page.idenfy.your-identity': 'Your identity is now being verified by our team. ',
     'page.idenfy.process': 'This process usually takes up to 15 minutes. ',
     'page.idenfy.please': 'Please, do not make any attempts to verify your account, as they will fail. ',
+    'page.idenfy.if': 'If verification of your identity is not successful, you will be notified by email. ',
     'page.idenfy.thanks': 'Thank you for your patience.',
     'page.idenfy.understand': 'I understand',
     comingsoon: 'СКОРО',
