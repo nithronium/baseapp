@@ -462,7 +462,7 @@ export const en = {
     'resource.profile.kyc': 'KYC is under review',
     'resource.profile.document.pending': 'Proof of residence is under review',
     'resource.profile.questionnaire': 'Questionnaire is under review',
-    'resource.profile.identity.pending': 'Identity is under review',
+    'resource.profile.identity.pending': 'Your identity is being verified',
     'resource.profile.identity.denied': 'Your identity has not been verified. Please try again. You can find the reason for the failure in the automatic email that was sent to you',
 
     'resource.profile.kyc.denied': 'Your last kyc was denied. Please, try again',

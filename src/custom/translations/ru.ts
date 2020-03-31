@@ -599,9 +599,9 @@ export const ru: LangType = {
     'resource.profile.profile': 'Профиль проверяется',
     'resource.profile.phone': 'Телефон проверяется',
     'resource.profile.kyc': 'Личность проверяется',
-    'resource.profile.document.pending': 'Место жительства проверяется',
+    'resource.profile.document.pending': 'Подтверждение места жительства в процессе',
     'resource.profile.questionnaire': 'Анкета проверяется',
-    'resource.profile.identity.pending': 'Личность проверяется',
+    'resource.profile.identity.pending': 'Проверка вашей личности в процессе',
     'resource.profile.identity.denied': 'Верификация вашей личности не была успешной. Пожалуйста, попробуйте еще раз. Вы можете найти причину отказа в автоматическом письме, которые было отправлено на ваш адрес',
     'resource.documents.expirationDate': 'Дата выдачи недействителена',
 
@@ -700,7 +700,7 @@ export const ru: LangType = {
     'resource.profile.missing_city': 'Город отсутствует',
     'resource.profile.missing_country': 'Страна отсутствует',
 
-    'resource.profile.document.denied': 'Your last kyc was denied. Please, try again',
+    'resource.profile.document.denied': 'Ваше место жительства подтверждено. Пожалуйста попробуйте еще раз',
     'resource.profile.document.verified': 'Ваше место жительства подтверждено. Пожалуйста заполните анкету',
     'resource.profile.kyc.denied': 'Your documents were denied. Please, try again',
 
