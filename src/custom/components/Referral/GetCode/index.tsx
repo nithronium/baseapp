@@ -34,7 +34,7 @@ const GetCode = props => {
                             <a href="https://twitter.com/EMIREX_OFFICIAL" target="_blank" rel="nofollow noopener">
                                 <img src={twitter} alt="" />
                             </a>
-                            <a href="https://t.me/emirex_official" target="_blank" rel="nofollow noopener">
+                            <a href="tg://resolve?domain=emirex_official" target="_blank" rel="nofollow noopener">
                                 <img src={telegram} alt="" />
                             </a>
                         </div>

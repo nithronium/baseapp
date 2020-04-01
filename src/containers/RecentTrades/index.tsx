@@ -86,7 +86,7 @@ class RecentTradesComponent extends React.Component<RecentTradesProps, State> {
             </div>
         );
 
-    }
+    };
 
     private renderTabs = () => {
         const { tab, index } = this.state;
