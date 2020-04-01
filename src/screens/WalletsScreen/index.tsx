@@ -380,7 +380,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 {currency.toLowerCase() === 'usd'}
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
                 {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}
-                {currency.toLowerCase() === 'usd' ? (
+                {['usd', 'aed'].includes(currency.toLowerCase()) ? (
                     <div style={{ textAlign: 'center', fontSize: '18px', padding: '20px' }}>{this.translate('comingsoon')}</div>
                 ) : (
                     this.renderWithdrawBlock()

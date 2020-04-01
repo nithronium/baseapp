@@ -18,7 +18,7 @@ export const WireFragment = injectIntl(({
     const details = translate('page.body.wallets.tabs.deposit.fiat.message3');
     const uid = (currency.toLowerCase() === 'eur') ? `16351518438882197104${user.uid}` : user.uid
     return (
-       !['eur', 'usd'].includes(currency.toLowerCase()) ?
+       !['eur', 'usd', 'aed'].includes(currency.toLowerCase()) ?
         <div>
             <CurrencyInfo wallet={wallets[selectedWalletIndex]} />                        
             <DepositFiat
