@@ -357,10 +357,10 @@ class QuestionnaireContainer extends React.Component<Props, State> {
     private handleValidateInput = (field: string, value: string): boolean => {
         switch (field) {
             case 'input':
-                const inputRegex = new RegExp(`^[a-zA-Z]{1,100}$`);
+                const inputRegex = new RegExp(`^[a-zA-Zа-яА-Я ]{1,100}$`);
                 return value.match(inputRegex) ? true : false;
             case 'textarea':
-                const textareaRegex = new RegExp(`^[a-zA-Z0-9\-,.;/\\s]+$`);
+                const textareaRegex = new RegExp(`^[a-zA-Zа-яА-Я0-9 \-,.;/\\s]+$`);
                 return value.match(textareaRegex) ? true : false;
             default:
                 return true;

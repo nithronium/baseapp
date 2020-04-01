@@ -93,6 +93,7 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
                         <p>{this.translate('page.idenfy.your-identity')}</p>
                         <p>{this.translate('page.idenfy.process')}</p>
                         <p>{this.translate('page.idenfy.please')}</p>
+                        <p>{this.translate('page.idenfy.if')}</p>
                         <p>{this.translate('page.idenfy.thanks')}</p>
                     </div>
                     <Button

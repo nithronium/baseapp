@@ -1,11 +1,16 @@
+// tslint:disable
 import { Decimal } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 // import { Link } from 'react-router-dom';
+
 import { WalletItemProps } from '../../../components/WalletItem';
-import { MINIMAL_BALANCE, VALUATION_PRIMARY_CURRENCY } from '../../../constants';
+import { 
+    MINIMAL_BALANCE, 
+    VALUATION_PRIMARY_CURRENCY,
+} from '../../../constants';
 import { estimateValue } from '../../../helpers/estimateValue';
 import {
     alertPush,
@@ -36,7 +41,9 @@ import { RangerState } from '../../../modules/public/ranger/reducer';
 import { selectRanger } from '../../../modules/public/ranger/selectors';
 import { WithdrawLimit } from '../../../modules/user/withdrawLimit';
 import { buildPath } from '../../helpers';
-// import { buildPath } from '../../helpers';
+import checkCircleSvg = require('../../assets/images/check-circle.svg');
+import clockSvg = require('../../assets/images/clock.svg');
+import infoSvg = require('../../assets/images/info.svg');
 
 interface ReduxProps {
     currencies: Currency[];
@@ -194,14 +201,6 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         );
     }
 
-    public renderDocumentPending() {
-        return (
-            <span className="pg-profile-verification__know-more__document-pending">
-                <FormattedMessage id="resource.profile.document" />
-            </span>
-        );
-    }
-
     public renderUserAbilities(level: number, withdrawLimitData: WithdrawLimit) {
         const withdrawalLimitCurrency = withdrawLimitData.withdraw.currency.toLocaleLowerCase().includes('usd')
             ? '$'
@@ -334,8 +333,6 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
 
         const withdrawLimitDataExists = withdrawLimitData && withdrawLimitData.withdraw && withdrawLimitData.deposit;
 
-        const pendingDocumentLabel = label.find(l => l.key === 'document' && l.value === 'pending' && l.scope === 'private');
-
         return (
             <div className="pg-profile-verification">
                 <div className="pg-profile-verification__title">
@@ -349,7 +346,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                     <a href="https://knowledge-base.emirex.com/emirex" target="_blank" rel="nofollow noopener">
                         <FormattedMessage id="page.body.profile.header.account.profile.knowMore" />
                     </a>
-                    {pendingDocumentLabel && this.renderDocumentPending()}
+                    {this.renderDocumentStatus(label)}
                 </div>
                 {withdrawLimitDataExists && this.renderUserAbilities(userLevel, withdrawLimitData)}
                 {withdrawLimitDataExists && this.renderWithdrawLimit(userLevel, withdrawLimitData)}
@@ -390,6 +387,76 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
 
         return depositsAsWallets;
     };
+
+    
+    private renderDocumentStatus(label: Label[]) {
+        const identityLabel = label.find(l => l.key === 'identity' && l.scope === 'private');
+        const documentLabel = label.find(l => l.key === 'document' && l.scope === 'private');
+        const questionnaireApprovedLabel = label.find(l => l.key === 'questionnaire' && l.value === 'verified' && l.scope === 'private');
+        if (questionnaireApprovedLabel) return null;
+        
+        if (identityLabel) {
+            switch (identityLabel.value) {
+                case 'pending' : {
+                    return (
+                        <div className="pg-profile-verification__know-more__icon-container">
+                            <img className="pg-profile-verification__know-more__icon-img" width="20" height="20" src={clockSvg} alt='Pending' />
+                            <div className="pg-profile-verification__know-more__icon-hover"><FormattedMessage id="resource.profile.identity.pending" /></div>
+                        </div>
+                    );
+                }
+    
+                case 'denied' : {
+                    return (
+                        <div className="pg-profile-verification__know-more__icon-container">
+                            <img className="pg-profile-verification__know-more__icon-img" width="20" height="20" src={infoSvg} alt='Denied' />
+                            <div className="pg-profile-verification__know-more__icon-hover"><FormattedMessage id="resource.profile.identity.denied" /></div>
+                        </div>
+                    );
+                }
+                
+                default: {
+                }
+            }
+        }
+
+        if (documentLabel) {
+            switch (documentLabel.value) {
+                case 'pending' : {
+                    return (
+                        <div className="pg-profile-verification__know-more__icon-container">
+                            <img className="pg-profile-verification__know-more__icon-img" width="20" height="20" src={clockSvg} alt='Pending' />
+                            <div className="pg-profile-verification__know-more__icon-hover"><FormattedMessage id="resource.profile.document.pending" /></div>
+                        </div>
+                    );
+                }
+    
+                case 'denied' : {
+                    return (
+                        <div className="pg-profile-verification__know-more__icon-container">
+                            <img className="pg-profile-verification__know-more__icon-img" width="20" height="20" src={infoSvg} alt='Denied' />
+                            <div className="pg-profile-verification__know-more__icon-hover"><FormattedMessage id="resource.profile.document.denied" /></div>
+                        </div>
+                    );
+                }
+    
+                case 'verified' : {
+                    return (
+                        <div className="pg-profile-verification__know-more__icon-container">
+                            <img className="pg-profile-verification__know-more__icon-img" width="20" height="20" src={checkCircleSvg} alt='Verified' />
+                            <div className="pg-profile-verification__know-more__icon-hover"><FormattedMessage id="resource.profile.document.verified" /></div>
+                        </div>
+                    );
+                }
+    
+                default: {
+                    return null;
+                }
+            }
+        }
+
+        return null;
+    }
 }
 
 const mapStateToProps = state => ({
