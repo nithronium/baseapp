@@ -234,7 +234,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const pendingLabel = labels.find(l => labelsToCheck.includes(l.key) && l.value === 'pending' && l.scope === 'private');
 
         if (pendingLabel) {
-            fetchAlert({ message: [`resource.profile.${pendingLabel.key}`], type: 'error'});
+            fetchAlert({ message: [`resource.profile.${pendingLabel.key}.pending`], type: 'error'});
             history.push('/profile');
         }
     }
@@ -242,17 +242,8 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     private renderThirdLevel() {
         const {
             labels,
-            fetchAlert,
         } = this.props;
-        const kycDenied = labels.find(label => label.key === 'identity' && label.value === 'denied' && label.scope === 'private');
         const kycApproved = labels.find(label => label.key === 'identity' && label.value === 'approved' && label.scope === 'private');
-
-        if (kycDenied && !this.state.kycAlert) {
-            fetchAlert({ message: ['resource.profile.kyc.denied'], type: 'error' });
-            this.setState({
-                kycAlert: true,
-            });
-        }
 
         if (kycApproved) {
             this.props.changeUserLevel({ level: 4 });

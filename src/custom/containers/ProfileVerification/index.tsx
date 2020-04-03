@@ -340,13 +340,16 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                 </div>
                 <div className="pg-profile-verification__user-level">
                     {this.renderUserLevel(userLevel)}
-                    {userLevel < 6 && this.renderUpgradeLevelLink(this.props.balance)}
                 </div>
                 <div className="pg-profile-verification__know-more">
                     <a href="https://knowledge-base.emirex.com/emirex" target="_blank" rel="nofollow noopener">
                         <FormattedMessage id="page.body.profile.header.account.profile.knowMore" />
                     </a>
-                    {this.renderDocumentStatus(label)}
+                </div>
+                <hr className="pg-profile-verification__hr" />
+                <div className="pg-profile-verification__know-more">
+                    {userLevel < 6 && this.renderUpgradeLevelLink(this.props.balance)}
+                    {this.renderStatusIcon(label)}
                 </div>
                 {withdrawLimitDataExists && this.renderUserAbilities(userLevel, withdrawLimitData)}
                 {withdrawLimitDataExists && this.renderWithdrawLimit(userLevel, withdrawLimitData)}
@@ -389,11 +392,11 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
     };
 
     
-    private renderDocumentStatus(label: Label[]) {
+    private renderStatusIcon(label: Label[]) {
         const identityLabel = label.find(l => l.key === 'identity' && l.scope === 'private');
         const documentLabel = label.find(l => l.key === 'document' && l.scope === 'private');
-        const questionnaireApprovedLabel = label.find(l => l.key === 'questionnaire' && l.value === 'verified' && l.scope === 'private');
-        if (questionnaireApprovedLabel) return null;
+        const questionnaireRecordedLabel = label.find(l => l.key === 'questionnaire' && l.value === 'recorded' && l.scope === 'private');
+        if (questionnaireRecordedLabel) return null;
         
         if (identityLabel) {
             switch (identityLabel.value) {
