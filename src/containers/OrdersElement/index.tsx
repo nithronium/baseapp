@@ -2,6 +2,7 @@ import * as React from 'react';
 import { CloseButton, Spinner } from 'react-bootstrap';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { compose } from 'redux';
 import { History, Pagination } from '../../components';
 import { Decimal } from '../../components/Decimal';
 import { localeDate, setTradeColor } from '../../helpers';
@@ -12,7 +13,6 @@ import {
     selectCancelAllFetching,
     selectCancelFetching,
     selectCurrentPageIndex,
-    selectHistoryTotal,
     selectMarkets,
     selectOrdersFirstElemIndex,
     selectOrdersHistory,
@@ -33,7 +33,6 @@ interface ReduxProps {
     firstElemIndex: number;
     list: OrderCommon[];
     fetching: boolean;
-    total: number;
     lastElemIndex: number;
     nextPageExists: boolean;
     cancelAllFetching: boolean;
@@ -78,7 +77,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState>  {
     }
 
     public renderContent = list => {
-        const { firstElemIndex, lastElemIndex, total, pageIndex, nextPageExists } = this.props;
+        const { firstElemIndex, lastElemIndex, pageIndex, nextPageExists } = this.props;
 
         return (
             <React.Fragment>
@@ -87,7 +86,6 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState>  {
                     firstElemIndex={firstElemIndex}
                     lastElemIndex={lastElemIndex}
                     page={pageIndex}
-                    total={total}
                     nextPageExists={nextPageExists}
                     onClickPrevPage={this.onClickPrevPage}
                     onClickNextPage={this.onClickNextPage}
@@ -212,9 +210,8 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     firstElemIndex: selectOrdersFirstElemIndex(state, 25),
     list: selectOrdersHistory(state),
     fetching: selectOrdersHistoryLoading(state),
-    total: selectHistoryTotal(state),
     lastElemIndex: selectOrdersLastElemIndex(state, 25),
-    nextPageExists: selectOrdersNextPageExists(state, 25),
+    nextPageExists: selectOrdersNextPageExists(state),
     cancelAllFetching: selectCancelAllFetching(state),
     cancelFetching: selectCancelFetching(state),
 });
@@ -225,4 +222,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
         userOrdersHistoryFetch: payload => dispatch(userOrdersHistoryFetch(payload)),
     });
 
-export const OrdersElement = injectIntl(connect(mapStateToProps, mapDispatchToProps)(OrdersComponent));
+export const OrdersElement = compose(
+    injectIntl,
+    connect(mapStateToProps, mapDispatchToProps),
+)(OrdersComponent) as any; // tslint:disable-line

@@ -177,7 +177,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     list: selectOrdersHistory(state),
     fetching: selectOrdersHistoryLoading(state),
     lastElemIndex: selectOrdersLastElemIndex(state, 25),
-    nextPageExists: selectOrdersNextPageExists(state, 25),
+    nextPageExists: selectOrdersNextPageExists(state),
     cancelAllFetching: selectCancelAllFetching(state),
     cancelFetching: selectCancelFetching(state),
 });
