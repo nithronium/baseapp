@@ -14,6 +14,7 @@ import {
     PROFILE_IDENTITY_ERROR,
     PROFILE_IDENTITY_FETCH,
     PROFILE_RESET_USER,
+    PROFILE_SET_BALANCE,
     PROFILE_TIERS_DATA,
     PROFILE_TIERS_DISABLE,
     PROFILE_TIERS_ERROR,
@@ -68,6 +69,12 @@ const defaultUser = {
     role: '',
     state: '',
     uid: '',
+    balance: {
+        USD: 0,
+        BTC: 0,
+    },
+    cryptoCurrency: 'BTC',
+    activeCurrency: 'USD',
 };
 
 const defaultProfileIdentity = {
@@ -218,7 +225,10 @@ export const userReducer = (state: ProfileState['userData'], action: ProfileActi
             return {
                 ...state,
                 isFetching: false,
-                user: action.payload.user,
+                user: {
+                    ...state.user,
+                    ...action.payload.user,
+                },
             };
         case PROFILE_USER_ERROR:
             return {
@@ -253,6 +263,16 @@ export const userReducer = (state: ProfileState['userData'], action: ProfileActi
                 user: {
                     ...state.user,
                     otp: true,
+                },
+            };
+        case PROFILE_SET_BALANCE:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    balance: action.payload.quote,
+                    cryptoCurrency: action.payload.symbol[0],
+                    activeCurrency: action.payload.symbol[1],
                 },
             };
         default:
@@ -324,6 +344,7 @@ export const profileReducer = (state = initialStateProfile, action: ProfileActio
         case PROFILE_CHANGE_USER_LEVEL:
         case PROFILE_CHANGE_USER_PROFILE_DATA:
         case PROFILE_ENABLE_USER_2FA:
+        case PROFILE_SET_BALANCE:
             const userState = { ...state.userData };
             return {
                 ...state,

@@ -37,6 +37,8 @@ describe('Module: User', () => {
         level: 3,
         otp: false,
         state: 'active',
+        cryptoCurrency: 'BTC',
+        activeCurrency: 'USD',
     };
 
     const mockUser = () => {

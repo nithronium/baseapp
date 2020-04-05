@@ -11,6 +11,8 @@ describe('Profile reducer', () => {
             level: 3,
             otp: false,
             state: 'active',
+            cryptoCurrency: 'BTC',
+            activeCurrency: 'USD',
         },
     };
 
