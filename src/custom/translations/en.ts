@@ -460,12 +460,14 @@ export const en = {
     'resource.profile.profile': 'Profile is under review',
     'resource.profile.phone': 'Phone is under review',
     'resource.profile.kyc': 'KYC is under review',
-    'resource.profile.document': 'Proof of residence is under review',
+    'resource.profile.document.pending': 'Proof of residence is under review',
     'resource.profile.questionnaire': 'Questionnaire is under review',
-    'resource.profile.identity': 'Identity is under review',
+    'resource.profile.identity.pending': 'Your identity is being verified',
+    'resource.profile.identity.denied': 'Your identity has not been verified. Please try again. You can find the reason for the failure in the automatic email that was sent to you',
 
     'resource.profile.kyc.denied': 'Your last kyc was denied. Please, try again',
     'resource.profile.document.denied': 'Your documents were denied. Please, try again',
+    'resource.profile.document.verified': 'Your proof of residence has been verified. Please fill out the questionnaire',
     'success.dataStorage.pushed': 'Success!',
 
     'page.body.modal.kyc.login.header': 'Finalize your registration',
@@ -478,6 +480,7 @@ export const en = {
     'page.idenfy.your-identity': 'Your identity is now being verified by our team. ',
     'page.idenfy.process': 'This process usually takes up to 15 minutes. ',
     'page.idenfy.please': 'Please, do not make any attempts to verify your account, as they will fail. ',
+    'page.idenfy.if': 'If verification of your identity is not successful, you will be notified by email. ',
     'page.idenfy.thanks': 'Thank you for your patience.',
     'page.idenfy.understand': 'I understand',
 
