@@ -2,7 +2,7 @@ import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { NavBar } from '../../../containers';
+import { NavBar } from '../';
 import {
     Market,
     RootState,

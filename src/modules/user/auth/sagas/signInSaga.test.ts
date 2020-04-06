@@ -40,6 +40,8 @@ describe('SignIn saga', () => {
         },
         cryptoCurrency: 'BTC',
         activeCurrency: 'USD',
+        profiles: [],
+        documents: [],
     };
 
     const mockSignIn = () => {

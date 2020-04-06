@@ -1,23 +1,14 @@
 import { CommonError } from '../../types';
-import { ProfileAction, ProfileIdentity, Tier, User } from './actions';
+import { ProfileAction } from './actions';
 import {
     PROFILE_CHANGE_PASSWORD_DATA,
     PROFILE_CHANGE_PASSWORD_ERROR,
     PROFILE_CHANGE_PASSWORD_FETCH,
     PROFILE_CHANGE_USER_LEVEL,
-    PROFILE_CHANGE_USER_PROFILE_DATA,
     PROFILE_GENERATE_2FA_QRCODE_DATA,
     PROFILE_GENERATE_2FA_QRCODE_ERROR,
     PROFILE_GENERATE_2FA_QRCODE_FETCH,
-    PROFILE_IDENTITY_DATA,
-    PROFILE_IDENTITY_ERROR,
-    PROFILE_IDENTITY_FETCH,
     PROFILE_RESET_USER,
-    PROFILE_SET_BALANCE,
-    PROFILE_TIERS_DATA,
-    PROFILE_TIERS_DISABLE,
-    PROFILE_TIERS_ERROR,
-    PROFILE_TIERS_FETCH,
     PROFILE_TOGGLE_2FA_DATA,
     PROFILE_TOGGLE_2FA_ERROR,
     PROFILE_TOGGLE_2FA_FETCH,
@@ -26,6 +17,7 @@ import {
     PROFILE_USER_ERROR,
     PROFILE_USER_FETCH,
 } from './constants';
+import { User } from './types';
 
 export interface ProfileState {
     passwordChange: {
@@ -38,29 +30,12 @@ export interface ProfileState {
         success?: boolean;
         error?: CommonError;
     };
-    tiers: {
-        tier: Tier;
-        disabled: boolean;
-        error?: CommonError;
-    };
     userData: {
         user: User;
         error?: CommonError;
         isFetching: boolean;
     };
-    identity: {
-        profileIdentity: ProfileIdentity;
-        error?: CommonError;
-        isFetching: boolean;
-    };
 }
-
-const defaultTier = {
-    color: '',
-    name: '',
-    min_holding: 0,
-    fee_discount: 0,
-};
 
 const defaultUser = {
     email: '',
@@ -69,23 +44,10 @@ const defaultUser = {
     role: '',
     state: '',
     uid: '',
-    balance: {
-        USD: 0,
-        BTC: 0,
-    },
-    cryptoCurrency: 'BTC',
-    activeCurrency: 'USD',
-};
-
-const defaultProfileIdentity = {
-    first_name: '',
-    last_name: '',
-    dob: '',
-    address: '',
-    postcode: '',
-    city: '',
-    country: '',
-    number: '',
+    cryptoCurrency: '',
+    activeCurrency: '',
+    profiles: [],
+    documents: [],
 };
 
 export const initialStateProfile: ProfileState = {
@@ -96,16 +58,8 @@ export const initialStateProfile: ProfileState = {
         barcode: '',
         url: '',
     },
-    tiers: {
-        tier: defaultTier,
-        disabled: false,
-    },
     userData: {
         user: defaultUser,
-        isFetching: true,
-    },
-    identity: {
-        profileIdentity: defaultProfileIdentity,
         isFetching: true,
     },
 };
@@ -182,38 +136,6 @@ const twoAuthReducer = (state: ProfileState['twoFactorAuth'], action: ProfileAct
     }
 };
 
-const tiersReducer = (state: ProfileState['tiers'], action: ProfileAction) => {
-    switch (action.type) {
-        case PROFILE_TIERS_FETCH:
-            return {
-                ...state,
-                disabled: false,
-                error: undefined,
-                tier: defaultTier,
-            };
-        case PROFILE_TIERS_DATA:
-            return {
-                ...state,
-                error: undefined,
-                disabled: false,
-                tier: action.payload,
-            };
-        case PROFILE_TIERS_ERROR:
-            return {
-                ...state,
-                disabled: false,
-                error: action.payload,
-            };
-        case PROFILE_TIERS_DISABLE:
-            return {
-                ...state,
-                disabled: true,
-            };
-        default:
-            return state;
-    }
-};
-
 export const userReducer = (state: ProfileState['userData'], action: ProfileAction) => {
     switch (action.type) {
         case PROFILE_USER_FETCH:
@@ -249,14 +171,6 @@ export const userReducer = (state: ProfileState['userData'], action: ProfileActi
                     level: action.payload.level,
                 },
             };
-        case PROFILE_CHANGE_USER_PROFILE_DATA:
-            return {
-                ...state,
-                user: {
-                    ...state.user,
-                    profile: action.payload,
-                },
-            };
         case PROFILE_TOGGLE_USER_2FA:
             return {
                 ...state,
@@ -264,40 +178,6 @@ export const userReducer = (state: ProfileState['userData'], action: ProfileActi
                     ...state.user,
                     otp: !state.user.otp,
                 },
-            };
-        case PROFILE_SET_BALANCE:
-            return {
-                ...state,
-                user: {
-                    ...state.user,
-                    balance: action.payload.quote,
-                    cryptoCurrency: Object.keys(action.payload.quote)[0],
-                    activeCurrency: Object.keys(action.payload.quote)[1],
-                },
-            };
-        default:
-            return state;
-    }
-};
-
-export const profileIdentityReducer = (state: ProfileState['identity'], action: ProfileAction) => {
-    switch (action.type) {
-        case PROFILE_IDENTITY_FETCH:
-            return {
-                ...state,
-                isFetching: true,
-            };
-        case PROFILE_IDENTITY_DATA:
-            return {
-                ...state,
-                isFetching: false,
-                profileIdentity: action.payload,
-            };
-        case PROFILE_IDENTITY_ERROR:
-            return {
-                ...state,
-                isFetching: false,
-                error: action.payload,
             };
         default:
             return state;
@@ -329,24 +209,11 @@ export const profileReducer = (state = initialStateProfile, action: ProfileActio
                 twoFactorAuth: twoAuthReducer(twoFactorAuthState, action),
             };
 
-        case PROFILE_TIERS_FETCH:
-        case PROFILE_TIERS_DATA:
-        case PROFILE_TIERS_DISABLE:
-        case PROFILE_TIERS_ERROR:
-            const tiersState = { ...state.tiers };
-
-            return {
-                ...state,
-                tiers: tiersReducer(tiersState, action),
-            };
-
         case PROFILE_USER_FETCH:
         case PROFILE_USER_DATA:
         case PROFILE_RESET_USER:
         case PROFILE_USER_ERROR:
         case PROFILE_CHANGE_USER_LEVEL:
-        case PROFILE_CHANGE_USER_PROFILE_DATA:
-        case PROFILE_SET_BALANCE:
         case PROFILE_TOGGLE_USER_2FA:
             const userState = { ...state.userData };
 
@@ -355,15 +222,6 @@ export const profileReducer = (state = initialStateProfile, action: ProfileActio
                 userData: userReducer(userState, action),
             };
 
-        case PROFILE_IDENTITY_FETCH:
-        case PROFILE_IDENTITY_DATA:
-        case PROFILE_IDENTITY_ERROR:
-            const profileIdentityState = { ...state.identity };
-
-            return {
-                ...state,
-                identity: profileIdentityReducer(profileIdentityState, action),
-            };
         default:
             return state;
     }

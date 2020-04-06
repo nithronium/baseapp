@@ -3,8 +3,8 @@ import { call, put } from 'redux-saga/effects';
 import { API, RequestOptions } from '../../../../api';
 import {
     GetBalanceFetch,
-    profileIdentityError,
     setBalance,
+    userError,
 } from '../actions';
 
 const userOptions: RequestOptions = {
@@ -25,6 +25,6 @@ export function* getBalanceSaga(action: GetBalanceFetch) {
         localStorage.setItem('balance', JSON.stringify(balance.quote));
         yield put(setBalance(balance));
     } catch (error) {
-        yield put(profileIdentityError(error));
+        yield put(userError(error));
     }
 }

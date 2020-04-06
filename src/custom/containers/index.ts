@@ -12,4 +12,4 @@ export * from './TradeHistory/Yours';
 export * from './Balances';
 export * from './ProfileVerification';
 export * from './Header';
-
+export * from './NavBar';

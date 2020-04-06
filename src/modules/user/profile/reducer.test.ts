@@ -1,8 +1,24 @@
 import * as actions from './actions';
-import {PROFILE_TEST_STATE} from './constants';
-import {initialStateProfile, profileReducer} from './reducer';
+import { initialStateProfile, profileReducer } from './reducer';
+import { UserProfile } from './types';
 
 describe('Profile reducer', () => {
+    const fakeProfiles: UserProfile[] = [
+        {
+            first_name: '',
+            last_name: '',
+            dob: '',
+            address: '',
+            metadata: '',
+            postcode: '',
+            city: '',
+            country: '',
+            state: '',
+            created_at: '',
+            updated_at: '',
+        },
+    ];
+
     const userData = {
         user: {
             email: 'admin@barong.io',
@@ -18,28 +34,15 @@ describe('Profile reducer', () => {
             cryptoCurrency: 'BTC',
             activeCurrency: 'USD',
             csrf_token: '31415926535897932384626433832795028841971',
+            profiles: fakeProfiles,
+            documents: [],
         },
-    };
-
-    const profileIdentity = {
-        first_name: '',
-        last_name: '',
-        dob: '',
-        address: '',
-        postcode: '',
-        city: '',
-        country: '',
-        number: '',
     };
 
     const error = {
         code: 401,
         message: ['Invalid Session'],
     };
-
-    it('should return initial state', () => {
-        expect(profileReducer(undefined, {type: PROFILE_TEST_STATE})).toEqual(initialStateProfile);
-    });
 
     it('should handle GET_USER_FETCH', () => {
         const expectedState = {
@@ -73,38 +76,6 @@ describe('Profile reducer', () => {
         expect(profileReducer(actualState, actions.userError(error))).toEqual(expectedState);
     });
 
-    it('should handle GET_IDENTITY_FETCH', () => {
-        const expectedState = {
-            ...initialStateProfile,
-            identity: {...initialStateProfile.identity, isFetching: true},
-        };
-        expect(profileReducer(initialStateProfile, actions.profileIdentityFetch())).toEqual(expectedState);
-    });
-
-    it('should handle GET_IDENTITY_DATA', () => {
-        const actualState = {
-            ...initialStateProfile,
-            identity: {...initialStateProfile.identity, isFetching: true},
-        };
-        const expectedState = {
-            ...initialStateProfile,
-            identity: {...initialStateProfile.identity, isFetching: false, profileIdentity: profileIdentity},
-        };
-        expect(profileReducer(actualState, actions.profileIdentityData(profileIdentity))).toEqual(expectedState);
-    });
-
-    it('should handle GET_IDENTITY_ERROR', () => {
-        const actualState = {
-            ...initialStateProfile,
-            identity: {...initialStateProfile.identity, isFetching: true},
-        };
-        const expectedState = {
-            ...initialStateProfile,
-            identity: {...initialStateProfile.identity, isFetching: false, error},
-        };
-        expect(profileReducer(actualState, actions.profileIdentityError(error))).toEqual(expectedState);
-    });
-
     it('should handle RESET_USER', () => {
         const actualState = {
             ...initialStateProfile,
@@ -133,35 +104,6 @@ describe('Profile reducer', () => {
             },
         };
         expect(profileReducer(actualState, actions.changeUserLevel({level: 2}))).toEqual(expectedState);
-    });
-
-    it('should handle CHANGE_USER_PROFILE_DATA', () => {
-        const profileIdentityToUpdate = {
-            first_name: 'John',
-            last_name: 'Smith',
-            dob: '11/12/1980',
-            address: 'Black street 1',
-            postcode: '000777',
-            city: 'London',
-            country: 'GB',
-            number: '123',
-        };
-
-        const actualState = {
-            ...initialStateProfile,
-            userData: {...initialStateProfile.userData, user: userData.user},
-        };
-        const expectedState = {
-            ...initialStateProfile,
-            userData: {
-                ...initialStateProfile.userData,
-                user: {
-                    ...userData.user,
-                    profile: profileIdentityToUpdate,
-                },
-            },
-        };
-        expect(profileReducer(actualState, actions.changeUserProfileData(profileIdentityToUpdate))).toEqual(expectedState);
     });
 
     it('should handle CHANGE_PASSWORD_FETCH', () => {

@@ -126,7 +126,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             case 2:
             case 3: handleRedirectToConfirm('profilePartialStep', history);break;
             case 4:
-                if (userData.profile && userData.profile.address) {
+                if (userData.profiles && userData.profiles.length) {
                     const redirectUrl = getRedirectUrl();
                     if (redirectUrl && hasUrlForRedirect(redirectUrl)) {
                         redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
