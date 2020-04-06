@@ -14,8 +14,8 @@ import {
 
 interface ReduxProps {
     currentLanguage: string;
-    label: Label[];
     user: User;
+    labels: Label[];
 }
 
 interface DispatchProps {
@@ -82,9 +82,11 @@ class ProfileVerificationComponent extends React.Component<Props> {
     }
 
     private renderThirdLevel(userLevel: number) {
+        const { labels } = this.props;
         const targetLevel = 3;
-        const documentLabel = this.props.label.find((label: Label) => label.key === 'document');
-        const isPending = documentLabel && documentLabel.value === 'pending' ? this.renderPendingIcon() : '';
+        const documentLabel = labels && labels.find(l => l.key === 'document' && l.scope === 'private');
+        const isProfileSubmitted = labels && labels.find(l => l.key === 'profile' && l.scope === 'private' && l.value === 'submitted');
+        const isPendingLabel = (documentLabel && documentLabel.value === 'pending') || isProfileSubmitted;
 
         const {
             titleClassName,
@@ -93,10 +95,10 @@ class ProfileVerificationComponent extends React.Component<Props> {
         return (
             <div className="pg-profile-page__row pg-profile-page__level-verification">
                 <div className={titleClassName}>
-                    {this.renderIdentityVerification('page.body.profile.header.account.profile.identity', userLevel, targetLevel, documentLabel)}
+                    {this.renderIdentityVerification('page.body.profile.header.account.profile.identity', userLevel, targetLevel, documentLabel, isProfileSubmitted)}
                     <p><FormattedMessage id="page.body.profile.header.account.profile.identity.message" /></p>
                 </div>
-                {isPending}
+                {isPendingLabel ? this.renderPendingIcon() : null}
             </div>
         );
     }
@@ -136,14 +138,13 @@ class ProfileVerificationComponent extends React.Component<Props> {
         }
     }
 
-    private renderIdentityVerification(text: string, userLevel, targetLevel, documentLabel) {
-      const { currentLanguage, label } = this.props;
-      const isLabelExist = label;
+    private renderIdentityVerification(text: string, userLevel, targetLevel, documentLabel, isProfileSubmitted) {
+      const { currentLanguage, labels } = this.props;
 
-      if (isLabelExist.length > 0) {
+      if (labels.length) {
         switch (userLevel) {
           case targetLevel - 1: {
-            if (documentLabel) {
+            if (documentLabel || isProfileSubmitted) {
               return (
                 <p className="pg-profile-page__level-verification__name">
                   <FormattedMessage id={`${text}.unverified.title`}/>
@@ -194,7 +195,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
 const mapStateToProps = state => ({
     currentLanguage: selectCurrentLanguage(state),
     user: selectUserInfo(state),
-    label: selectLabelData(state),
+    labels: selectLabelData(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
