@@ -304,7 +304,7 @@ export const ru: LangType = {
         '- Возможность пополнять / выводить до {amount}{currency} или эквивалент этой суммы в любой (крипто) валюте',
     'page.body.profile.header.account.profile.abilities.second.message2':
         '- Возможность пополнять / выводить фиат используя кредитную / дебетовую карту',
-    'page.body.profile.header.account.profile.abilities.third': '- No limit of deposit / withdrawals',
+    'page.body.profile.header.account.profile.abilities.third': '- Нет ограничений для депозита / вывода',
     'page.body.profile.header.account.profile.withdraw': 'Лимит вывода: ',
     'page.body.profile.header.account.profile.deposit': 'Лимит пополнения: ',
     'page.body.profile.header.account.profile.knowMore': 'Узнать больше об уровнях верификации',
