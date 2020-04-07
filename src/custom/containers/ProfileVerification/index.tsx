@@ -202,6 +202,14 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
     }
 
     public renderUserAbilities(level: number, withdrawLimitData: WithdrawLimit) {
+        if (level === 6 || !!withdrawLimitData.limit) {
+            return (
+                <div className="pg-profile-verification__abilities">
+                    <FormattedMessage id="page.body.profile.header.account.profile.abilities.third" />
+                </div>
+            );
+        }
+        
         const withdrawalLimitCurrency = withdrawLimitData.withdraw.currency.toLocaleLowerCase().includes('usd')
             ? '$'
             : ` ${withdrawLimitData.withdraw.currency.toUpperCase()}`;
@@ -241,14 +249,6 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                 <div className="pg-profile-verification__abilities">
                     <p>{firstAbility}</p>
                     <p>{secondAbility}</p>
-                </div>
-            );
-        }
-
-        if (level === 6) {
-            return (
-                <div className="pg-profile-verification__abilities">
-                    <FormattedMessage id="page.body.profile.header.account.profile.abilities.third" />
                 </div>
             );
         }
@@ -332,6 +332,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         const userLevel = user.level;
 
         const withdrawLimitDataExists = withdrawLimitData && withdrawLimitData.withdraw && withdrawLimitData.deposit;
+        const withdrawLimitMessageExists = withdrawLimitData && withdrawLimitData.limit;
 
         return (
             <div className="pg-profile-verification">
@@ -351,7 +352,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                     {userLevel < 6 && this.renderUpgradeLevelLink(this.props.balance)}
                     {this.renderStatusIcon(label)}
                 </div>
-                {withdrawLimitDataExists && this.renderUserAbilities(userLevel, withdrawLimitData)}
+                {(withdrawLimitDataExists || withdrawLimitMessageExists) && this.renderUserAbilities(userLevel, withdrawLimitData)}
                 {withdrawLimitDataExists && this.renderWithdrawLimit(userLevel, withdrawLimitData)}
                 {withdrawLimitDataExists && this.renderDepositLimit(userLevel, withdrawLimitData)}
             </div>

@@ -9,4 +9,5 @@ export interface WithdrawLimit {
         limit: number | string,
         period: number,
     };
+    limit?: string;
 }

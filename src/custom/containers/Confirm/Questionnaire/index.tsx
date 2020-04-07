@@ -92,12 +92,10 @@ const answersForQuestion10 = translate => [
 ];
 
 const answersForQuestion11 = translate => [
-    translate('page.body.kyc.questionnaire.question11.answer1'),
     translate('page.body.kyc.questionnaire.question11.answer2'),
 ];
 
 const answersForQuestion12 = translate => [
-    translate('page.body.kyc.questionnaire.question12.answer1'),
     translate('page.body.kyc.questionnaire.question12.answer2'),
 ];
 

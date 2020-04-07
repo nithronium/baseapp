@@ -14,6 +14,7 @@ import {
     labelFetch,
     RootState,
     selectCurrentColorTheme,
+    selectCurrentLanguage,
     selectLabelData,
     selectUserInfo,
     User,
@@ -26,11 +27,13 @@ import { Phone } from '../../containers/Confirm/Phone';
 import { ProfileAddress } from '../../containers/Confirm/ProfileAddress';
 import { ProfilePartial } from '../../containers/Confirm/ProfilePartial';
 import { Questionnaire } from '../../containers/Confirm/Questionnaire';
+import { buildPath } from '../../helpers/buildPath';
 
 interface ReduxProps {
     colorTheme: string;
     userData: User;
     labels: Label[];
+    currentLanguage: string;
 }
 
 interface HistoryProps {
@@ -76,8 +79,9 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     }
 
     public goBack = event => {
+      const lang = this.props.currentLanguage;
       event.preventDefault();
-      this.props.history.push('/profile');
+      this.props.history.push(buildPath('/profile', lang));
     };
 
     public renderDoubleProgressBar() {
@@ -323,6 +327,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     colorTheme: selectCurrentColorTheme(state),
     userData: selectUserInfo(state),
     labels: selectLabelData(state),
+    currentLanguage: selectCurrentLanguage(state),
 });
 
 const mapDispatchToProps = dispatch => ({
