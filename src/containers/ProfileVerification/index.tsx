@@ -2,6 +2,7 @@ import cn from 'classnames';
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
+import { RejectedIcon } from '../../assets/images/RejectedIcon';
 import { buildPath } from '../../custom/helpers';
 import {
     Label,
@@ -64,21 +65,25 @@ class ProfileVerificationComponent extends React.Component<Props> {
     public renderThirdLevel(userLevel: number) {
         const { labels } = this.props;
         const targetLevel = 3;
-        const documentLabel = labels && labels.find(l => l.key === 'document' && l.scope === 'private');
-        const isProfileSubmitted = labels && labels.find(l => l.key === 'profile' && l.scope === 'private' && l.value === 'submitted');
-        const isPendingLabel = (documentLabel && documentLabel.value === 'pending') || isProfileSubmitted;
 
-        const {
-            titleClassName,
-        } = this.getLevelsClassNames(userLevel, targetLevel);
+        const isProfileSubmitted = labels && labels.find(l => l.key === 'profile' && l.scope === 'private' && l.value === 'submitted');
+        const isProfileRejected = labels && labels.find(l => l.key === 'profile' && l.scope === 'private' && l.value === 'rejected');
+        const isDocumentPending = labels && labels.find(l => l.key === 'document' && l.scope === 'private' && l.value === 'pending');
+        const isDocumentRejected = labels && labels.find(l => l.key === 'document' && l.scope === 'private' && l.value === 'rejected');
+
+        const isPendingLabel = isDocumentPending || isProfileSubmitted;
+        const isRejectedLabel = isDocumentRejected || isProfileRejected;
+
+        const { titleClassName } = this.getLevelsClassNames(userLevel, targetLevel);
 
         return (
             <div className="pg-profile-page__row pg-profile-page__level-verification">
                 <div className={titleClassName}>
-                    {this.renderIdentityVerification('page.body.profile.header.account.profile.identity', userLevel, targetLevel, documentLabel, isProfileSubmitted)}
+                    {this.renderIdentityVerification('page.body.profile.header.account.profile.identity', userLevel, targetLevel, isPendingLabel)}
                     <p><FormattedMessage id="page.body.profile.header.account.profile.identity.message" /></p>
                 </div>
                 {isPendingLabel ? this.renderPendingIcon() : null}
+                {isRejectedLabel && !isPendingLabel ? this.renderRejectedIcon() : null}
             </div>
         );
     }
@@ -125,12 +130,19 @@ class ProfileVerificationComponent extends React.Component<Props> {
         );
     }
 
-    private renderVerificationLevel(text: string, userLevel, targetLevel) {
-        const { currentLanguage } = this.props;
+    public renderRejectedIcon() {
+        return (
+            <div className="pg-profile-page__level-verification__rejected">
+                <p><FormattedMessage id="page.body.wallets.table.rejected" /></p>
+                <RejectedIcon />
+            </div>
+        );
+    }
 
+    public renderVerificationLevel(text: string, userLevel, targetLevel) {
         if (userLevel === (targetLevel - 1)) {
             return (
-                <a href={buildPath('/confirm', currentLanguage)} className="pg-profile-page__level-verification__url">
+                <a href={buildPath('/confirm', this.props.currentLanguage)} className="pg-profile-page__level-verification__url">
                     <FormattedMessage id={`${text}.unverified.title`}/>
                 </a>
             );
@@ -151,24 +163,24 @@ class ProfileVerificationComponent extends React.Component<Props> {
         }
     }
 
-    private renderIdentityVerification(text: string, userLevel, targetLevel, documentLabel, isProfileSubmitted) {
-      const { currentLanguage, labels } = this.props;
+    public renderIdentityVerification(text: string, userLevel, targetLevel, isPendingLabel) {
+        const { labels } = this.props;
 
         if (labels.length) {
             switch (userLevel) {
             case targetLevel - 1: {
-                if (documentLabel || isProfileSubmitted) {
-                return (
-                    <p className="pg-profile-page__level-verification__name">
-                    <FormattedMessage id={`${text}.unverified.title`}/>
-                    </p>
-                );
+                if (isPendingLabel) {
+                    return (
+                        <p className="pg-profile-page__level-verification__name">
+                            <FormattedMessage id={`${text}.unverified.title`}/>
+                        </p>
+                    );
                 } else {
-                return (
-                    <a href="/confirm" className="pg-profile-page__level-verification__url">
-                    <FormattedMessage id={`${text}.unverified.title`}/>
-                    </a>
-                );
+                    return (
+                        <a href="/confirm" className="pg-profile-page__level-verification__url">
+                            <FormattedMessage id={`${text}.unverified.title`}/>
+                        </a>
+                    );
                 }
             }
             case targetLevel: return (
@@ -177,7 +189,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
                 </p>
               );
             default: return (
-                    <a href={buildPath('/confirm', currentLanguage)} className="pg-profile-page__level-verification__url">
+                    <a href={buildPath('/confirm', this.props.currentLanguage)} className="pg-profile-page__level-verification__url">
                         <FormattedMessage id={`${text}.unverified.title`}/>
                     </a>
                 );
