@@ -1,6 +1,6 @@
 import * as actions from './actions';
-import { PROFILE_TEST_STATE } from './constants';
-import { initialStateProfile, profileReducer } from './reducer';
+import {PROFILE_TEST_STATE} from './constants';
+import {initialStateProfile, profileReducer} from './reducer';
 
 describe('Profile reducer', () => {
     const userData = {
@@ -11,6 +11,10 @@ describe('Profile reducer', () => {
             level: 3,
             otp: false,
             state: 'active',
+            balance: {
+                BTC: 0,
+                USD: 0,
+            },
             cryptoCurrency: 'BTC',
             activeCurrency: 'USD',
         },
@@ -33,13 +37,13 @@ describe('Profile reducer', () => {
     };
 
     it('should return initial state', () => {
-        expect(profileReducer(undefined, { type: PROFILE_TEST_STATE })).toEqual(initialStateProfile);
+        expect(profileReducer(undefined, {type: PROFILE_TEST_STATE})).toEqual(initialStateProfile);
     });
 
     it('should handle GET_USER_FETCH', () => {
         const expectedState = {
             ...initialStateProfile,
-            userData: { ...initialStateProfile.userData, isFetching: true },
+            userData: {...initialStateProfile.userData, isFetching: true},
         };
         expect(profileReducer(initialStateProfile, actions.userFetch())).toEqual(expectedState);
     });
@@ -47,11 +51,11 @@ describe('Profile reducer', () => {
     it('should handle GET_USER_DATA', () => {
         const actualState = {
             ...initialStateProfile,
-            userData: { ...initialStateProfile.userData, isFetching: true },
+            userData: {...initialStateProfile.userData, isFetching: true},
         };
         const expectedState = {
             ...initialStateProfile,
-            userData: { ...initialStateProfile.userData, isFetching: false, user: userData.user },
+            userData: {...initialStateProfile.userData, isFetching: false, user: userData.user},
         };
         expect(profileReducer(actualState, actions.userData(userData))).toEqual(expectedState);
     });
@@ -59,11 +63,11 @@ describe('Profile reducer', () => {
     it('should handle GET_USER_ERROR', () => {
         const actualState = {
             ...initialStateProfile,
-            userData: { ...initialStateProfile.userData, isFetching: true },
+            userData: {...initialStateProfile.userData, isFetching: true},
         };
         const expectedState = {
             ...initialStateProfile,
-            userData: { ...initialStateProfile.userData, isFetching: false, error },
+            userData: {...initialStateProfile.userData, isFetching: false, error},
         };
         expect(profileReducer(actualState, actions.userError(error))).toEqual(expectedState);
     });
@@ -71,7 +75,7 @@ describe('Profile reducer', () => {
     it('should handle GET_IDENTITY_FETCH', () => {
         const expectedState = {
             ...initialStateProfile,
-            identity: { ...initialStateProfile.identity, isFetching: true },
+            identity: {...initialStateProfile.identity, isFetching: true},
         };
         expect(profileReducer(initialStateProfile, actions.profileIdentityFetch())).toEqual(expectedState);
     });
@@ -79,11 +83,11 @@ describe('Profile reducer', () => {
     it('should handle GET_IDENTITY_DATA', () => {
         const actualState = {
             ...initialStateProfile,
-            identity: { ...initialStateProfile.identity, isFetching: true },
+            identity: {...initialStateProfile.identity, isFetching: true},
         };
         const expectedState = {
             ...initialStateProfile,
-            identity: { ...initialStateProfile.identity, isFetching: false, profileIdentity: profileIdentity },
+            identity: {...initialStateProfile.identity, isFetching: false, profileIdentity: profileIdentity},
         };
         expect(profileReducer(actualState, actions.profileIdentityData(profileIdentity))).toEqual(expectedState);
     });
@@ -91,11 +95,11 @@ describe('Profile reducer', () => {
     it('should handle GET_IDENTITY_ERROR', () => {
         const actualState = {
             ...initialStateProfile,
-            identity: { ...initialStateProfile.identity, isFetching: true },
+            identity: {...initialStateProfile.identity, isFetching: true},
         };
         const expectedState = {
             ...initialStateProfile,
-            identity: { ...initialStateProfile.identity, isFetching: false, error },
+            identity: {...initialStateProfile.identity, isFetching: false, error},
         };
         expect(profileReducer(actualState, actions.profileIdentityError(error))).toEqual(expectedState);
     });
@@ -103,11 +107,11 @@ describe('Profile reducer', () => {
     it('should handle RESET_USER', () => {
         const actualState = {
             ...initialStateProfile,
-            userData: { ...initialStateProfile.userData, isFetching: false, user: userData.user },
+            userData: {...initialStateProfile.userData, isFetching: false, user: userData.user},
         };
         const expectedState = {
             ...initialStateProfile,
-            userData: { ...initialStateProfile.userData, isFetching: false },
+            userData: {...initialStateProfile.userData, isFetching: false},
         };
         expect(profileReducer(actualState, actions.userReset())).toEqual(expectedState);
     });
@@ -115,7 +119,7 @@ describe('Profile reducer', () => {
     it('should handle CHANGE_USER_LEVEL', () => {
         const actualState = {
             ...initialStateProfile,
-            userData: { ...initialStateProfile.userData, user: userData.user },
+            userData: {...initialStateProfile.userData, user: userData.user},
         };
         const expectedState = {
             ...initialStateProfile,
@@ -127,7 +131,7 @@ describe('Profile reducer', () => {
                 },
             },
         };
-        expect(profileReducer(actualState, actions.changeUserLevel({ level: 2 }))).toEqual(expectedState);
+        expect(profileReducer(actualState, actions.changeUserLevel({level: 2}))).toEqual(expectedState);
     });
 
     it('should handle CHANGE_USER_PROFILE_DATA', () => {
@@ -144,7 +148,7 @@ describe('Profile reducer', () => {
 
         const actualState = {
             ...initialStateProfile,
-            userData: { ...initialStateProfile.userData, user: userData.user },
+            userData: {...initialStateProfile.userData, user: userData.user},
         };
         const expectedState = {
             ...initialStateProfile,
@@ -167,7 +171,7 @@ describe('Profile reducer', () => {
         };
         const expectedState = {
             ...initialStateProfile,
-            passwordChange: { ...initialStateProfile.passwordChange, error: undefined },
+            passwordChange: {...initialStateProfile.passwordChange, error: undefined},
         };
         expect(profileReducer(initialStateProfile, actions.changePasswordFetch(payload))).toEqual(expectedState);
     });
@@ -175,11 +179,11 @@ describe('Profile reducer', () => {
     it('should handle CHANGE_PASSWORD_DATA', () => {
         const actualState = {
             ...initialStateProfile,
-            passwordChange: { ...initialStateProfile.passwordChange, error: undefined },
+            passwordChange: {...initialStateProfile.passwordChange, error: undefined},
         };
         const expectedState = {
             ...initialStateProfile,
-            passwordChange: { ...initialStateProfile.passwordChange, success: true, error: undefined },
+            passwordChange: {...initialStateProfile.passwordChange, success: true, error: undefined},
         };
         expect(profileReducer(actualState, actions.changePasswordData())).toEqual(expectedState);
     });
@@ -187,11 +191,11 @@ describe('Profile reducer', () => {
     it('should handle CHANGE_PASSWORD_ERROR', () => {
         const actualState = {
             ...initialStateProfile,
-            passwordChange: { ...initialStateProfile.passwordChange, error: undefined },
+            passwordChange: {...initialStateProfile.passwordChange, error: undefined},
         };
         const expectedState = {
             ...initialStateProfile,
-            passwordChange: { ...initialStateProfile.passwordChange, error },
+            passwordChange: {...initialStateProfile.passwordChange, error},
         };
         expect(profileReducer(actualState, actions.changePasswordError(error))).toEqual(expectedState);
     });
@@ -227,7 +231,7 @@ describe('Profile reducer', () => {
         };
         const expectedState = {
             ...initialStateProfile,
-            twoFactorAuth: { ...actualState.twoFactorAuth, error: undefined, ...payload },
+            twoFactorAuth: {...actualState.twoFactorAuth, error: undefined, ...payload},
         };
         expect(profileReducer(actualState, actions.generate2faQRData(payload))).toEqual(expectedState);
     });
@@ -263,7 +267,7 @@ describe('Profile reducer', () => {
         };
         const expectedState = {
             ...initialStateProfile,
-            twoFactorAuth: { ...initialStateProfile.twoFactorAuth, success: false, error: undefined },
+            twoFactorAuth: {...initialStateProfile.twoFactorAuth, success: false, error: undefined},
         };
         expect(profileReducer(initialStateProfile, actions.toggle2faFetch(payload))).toEqual(expectedState);
     });
@@ -271,11 +275,11 @@ describe('Profile reducer', () => {
     it('should handle TOGGLE_2FA_DATA', () => {
         const actualState = {
             ...initialStateProfile,
-            twoFactorAuth: { ...initialStateProfile.twoFactorAuth, success: false, error: undefined },
+            twoFactorAuth: {...initialStateProfile.twoFactorAuth, success: false, error: undefined},
         };
         const expectedState = {
             ...initialStateProfile,
-            twoFactorAuth: { ...initialStateProfile.twoFactorAuth, success: true, error: undefined },
+            twoFactorAuth: {...initialStateProfile.twoFactorAuth, success: true, error: undefined},
         };
         expect(profileReducer(actualState, actions.toggle2faData())).toEqual(expectedState);
     });
@@ -283,11 +287,11 @@ describe('Profile reducer', () => {
     it('should handle TOGGLE_2FA_ERROR', () => {
         const actualState = {
             ...initialStateProfile,
-            twoFactorAuth: { ...initialStateProfile.twoFactorAuth, success: false, error: undefined },
+            twoFactorAuth: {...initialStateProfile.twoFactorAuth, success: false, error: undefined},
         };
         const expectedState = {
             ...initialStateProfile,
-            twoFactorAuth: { ...initialStateProfile.twoFactorAuth, success: false, error },
+            twoFactorAuth: {...initialStateProfile.twoFactorAuth, success: false, error},
         };
         expect(profileReducer(actualState, actions.toggle2faError(error))).toEqual(expectedState);
     });

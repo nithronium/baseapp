@@ -3,7 +3,7 @@ import { en as pluginsTranslations } from '../plugins/translations/en';
 import { nationalitiesNames } from './nationalities';
 //tslint:disable
 export const en = {
-    'page.header.navbar.signIn': 'Sign In',
+    'page.header.navbar.signIn': 'Log In',
     'page.header.navbar.trade': 'Trade',
     'page.header.navbar.wallets': 'Wallets',
     'page.header.navbar.openOrders': 'Orders',
@@ -433,6 +433,14 @@ export const en = {
     'page.header.currency.rub': 'RUS',
     'page.header.currency.cny': 'CNY',
     'page.header.currency.aed': 'AED',
+
+    "nav_account": "Account",
+    "nav_my_assets": "My Assets",
+    "nav_my_orders": "My Orders",
+    "nav_account_security": "Account Security",
+    "nav_referral_program": "Referral program",
+    "nav_api_setting": "API Setting",
+    "nav_logout": "Log Out",
 
     "page.header.orders": "Orders",
     "page.header.assets": "Assets",

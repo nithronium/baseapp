@@ -13,9 +13,10 @@ import {
     OpenUserMenu,
     RUBIcon,
     USDIcon,
+    UserIcon,
 } from '../../assets/images/NavBarIcons';
 // import { Sun } from '../../assets/images/Sun';
-import {coinOption, earnOption, ordersOption, tradeOption} from '../../constants';
+import {coinOption, earnOption, ordersOption, tradeOption, userOption} from '../../constants';
 import {buildPath} from '../../custom/helpers';
 import {
     changeColorTheme,
@@ -108,7 +109,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         return (
             <div className={'pg-navbar'}>
                 <ul className="pg-navbar__content">
-                    <div className="item"><FormattedMessage id={'page.header.navbar.markets'} /></div>
+                    <div className="item">
+                        <FormattedMessage id={'page.header.navbar.markets'} />
+                    </div>
                     {this.renderBuyWithCard()}
                     {this.renderTrade()}
                     {this.renderEarn()}
@@ -118,16 +121,17 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         ? <React.Fragment>
                             {this.renderOrders()}
                             {this.renderAssets(user.balance, user.cryptoCurrency, user.activeCurrency)}
+                            {this.renderUserBlock()}
                         </React.Fragment>
                         : <React.Fragment>
                             <div className="log-btn">
                                 <Link to={'/signin'}>
-                                    Log In
+                                    <FormattedMessage id={'page.header.navbar.signIn'} />
                                 </Link>
                             </div>
                             <div className="log-btn sign-up">
                                 <Link to={'/signup'}>
-                                    Sign Up
+                                    <FormattedMessage id={'page.header.signUp'} />
                                 </Link>
                             </div>
                         </React.Fragment>
@@ -341,18 +345,35 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     private renderDropdownMenu = (options) => {
         return (<ul className={`dropdown-menu`}>
             {options.map(option => (
-                <li>
-                    <Link to={option.href}>
-                        {option.label && <div className="label">
-                            <FormattedMessage id={option.label}/>
+                <li className={`${option.border ? 'border' : ''}`}>
+                    {!option.logout
+                        ? <Link to={option.href}>
+                            {option.label && <div className="label">
+                                <FormattedMessage id={option.label}/>
+                            </div>}
+                            {option.description && <div className="description">
+                                <FormattedMessage id={option.description}/>
+                            </div>}
+                        </Link>
+                        :  <div className="label" onClick={() => this.handleLogOut()}>
+                                <FormattedMessage id={option.label}/>
                         </div>}
-                        {option.description && <div className="description">
-                            <FormattedMessage id={option.description}/>
-                        </div>}
-                    </Link>
                 </li>
             ))}
         </ul>);
+    };
+    private renderUserBlock = () => {
+        const options = userOption();
+        const { openMenuType } = this.state;
+        return (<div className="dropdown-block orders">
+            <div className={`desktop-switcher-button${openMenuType === 'orders' ? ' active-menu' : ''}`} onClick={() => this.openDropdown('user')}>
+                <span className="icon">
+                    <UserIcon />
+                </span>
+            </div>
+            {openMenuType === 'user' && this.renderDropdownMenu(options)}
+
+        </div>)
     };
     private renderOrders = () => {
         const options = ordersOption();
@@ -414,19 +435,19 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     //     });
     // };
     //
-    // private handleLogOut = () => {
-    //     localStorage.removeItem('uil');
-    //     localStorage.removeItem('refCode');
-    //     localStorage.removeItem('usedCoins');
-    //     this.setState(
-    //         {
-    //             isOpen: false,
-    //         },
-    //         () => {
-    //             this.props.logout();
-    //         }
-    //     );
-    // };
+    private handleLogOut = () => {
+        localStorage.removeItem('uil');
+        localStorage.removeItem('refCode');
+        localStorage.removeItem('usedCoins');
+        this.setState(
+            {
+                isOpen: false,
+            },
+            () => {
+                this.props.logout();
+            }
+        );
+    };
 
     private closeMenu = () => {
         this.setState(

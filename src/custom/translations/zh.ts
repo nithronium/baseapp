@@ -378,6 +378,14 @@ export const zh = {
     'page.header.currency.cny': 'CNY',
     'page.header.currency.aed': 'AED',
 
+    "nav_account": "Account",
+    "nav_my_assets": "My Assets",
+    "nav_my_orders": "My Orders",
+    "nav_account_security": "Account Security",
+    "nav_referral_program": "Referral program",
+    "nav_api_setting": "API Setting",
+    "nav_logout": "Log Out",
+
     "page.header.orders": "Orders",
     "page.header.assets": "Assets",
     "page.header.orders_spot": "Spot Orders",
