@@ -35,7 +35,6 @@ describe('Profile reducer', () => {
             activeCurrency: 'USD',
             csrf_token: '31415926535897932384626433832795028841971',
             profiles: fakeProfiles,
-            documents: [],
         },
     };
 

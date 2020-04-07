@@ -39,7 +39,6 @@ const defaultState = {
     confirmationModalCodeFocused: false,
 };
 
-// tslint:disable:jsx-no-lambda
 class BeneficiariesActivateModalComponent extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);

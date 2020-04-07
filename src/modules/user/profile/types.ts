@@ -1,4 +1,3 @@
-
 export interface UserProfile {
     first_name: string;
     last_name: string;
@@ -13,17 +12,6 @@ export interface UserProfile {
     metadata?: string;
 }
 
-export interface UserDocument {
-    upload: {
-        url: string;
-    };
-    doc_type: string;
-    doc_number: string;
-    doc_expire: string;
-    created_at?: string;
-    updated_at?: string;
-}
-
 export interface User {
     email: string;
     level: number;
@@ -36,7 +24,6 @@ export interface User {
     activeCurrency: string;
     referral_uid?: string;
     profiles: UserProfile[];
-    documents: UserDocument[];
     csrf_token?: string;
 }
 

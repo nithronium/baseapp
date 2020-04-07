@@ -1,11 +1,8 @@
 import classnames from 'classnames';
 import * as React from 'react';
-import {
-    InjectedIntlProps,
-    injectIntl,
-    intlShape,
-} from 'react-intl';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { incrementalOrderBook } from '../../../../api';
 import { SortAsc, SortDefault, SortDesc } from '../../../../assets/images/SortIcons';
 import { Decimal, Table } from '../../../../components';
@@ -60,13 +57,7 @@ const handleChangeSortIcon = (sortBy: string, id: string, reverseOrder: boolean)
 
 type Props = ReduxProps & OwnProps & DispatchProps & InjectedIntlProps;
 
-//tslint:disable jsx-no-lambda
 class MarketsListComponent extends React.Component<Props, State> {
-    //tslint:disable-next-line:no-any
-    public static propTypes: React.ValidationMap<any> = {
-        intl: intlShape.isRequired,
-    };
-
     constructor(props: Props) {
         super(props);
 
@@ -218,5 +209,7 @@ const mapDispatchToProps = {
     setCurrentPrice,
 };
 
-// tslint:disable-next-line
-export const MarketsList = injectIntl(connect(mapStateToProps, mapDispatchToProps)(MarketsListComponent));
+export const MarketsList = compose(
+    injectIntl,
+    connect(mapStateToProps, mapDispatchToProps),
+)(MarketsListComponent) as any; // tslint:disable-line

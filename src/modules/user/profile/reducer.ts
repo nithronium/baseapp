@@ -47,7 +47,6 @@ const defaultUser = {
     cryptoCurrency: '',
     activeCurrency: '',
     profiles: [],
-    documents: [],
 };
 
 export const initialStateProfile: ProfileState = {

@@ -6,6 +6,7 @@ import {
     MapStateToProps,
 } from 'react-redux';
 import { RouteProps, withRouter } from 'react-router-dom';
+import { compose } from 'redux';
 import { Moon } from '../../assets/images/Moon';
 import { Sun } from '../../assets/images/Sun';
 import { colors } from '../../constants';
@@ -140,9 +141,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
         walletsReset: () => dispatch(walletsReset()),
     });
 
-// tslint:disable-next-line:no-any
-const NavBar = withRouter(connect(mapStateToProps, mapDispatchToProps)(NavBarComponent) as any) as any;
-
-export {
-    NavBar,
-};
+export const NavBar = compose(
+    withRouter,
+    connect(mapStateToProps, mapDispatchToProps),
+)(NavBarComponent) as any; // tslint:disable-line
