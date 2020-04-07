@@ -1,5 +1,6 @@
 import classnames from 'classnames';
 import * as React from 'react';
+import iconSearch = require('../../../containers/ToolBar/icons/search.svg');
 import iconDown = require('./chevron-down.svg');
 import iconUp = require('./chevron-up.svg');
 
@@ -75,7 +76,7 @@ class Dropdown extends React.Component<DropdownProps & {}, DropdownState> {
                         contentEditable={disableContentEditable ? false : true}
                         suppressContentEditableWarning={true}
                     >
-                        {this.state.selected}
+                        {this.renderPlaceholder()}
                     </span>
                     <span className="cr-dropdown__input-icon">
                         <img src={isOpen ? iconUp : iconDown} />
@@ -325,6 +326,14 @@ class Dropdown extends React.Component<DropdownProps & {}, DropdownState> {
                     this.scrollAnchorRef.current.scrollIntoView({ block: 'center', behavior: 'auto' });
                 }
         }
+    }
+
+    private renderPlaceholder = () => {
+        if (this.state.isFocused) {
+            return <span><span className="cr-dropdown__input-search-icon"><img src={iconSearch} /></span>Search</span>;
+        }
+
+        return this.state.selected;
     }
 }
 
