@@ -9,9 +9,11 @@ export const zh = {
     'page.header.navbar.openOrders': '订单',
     'page.header.navbar.history': '历史记录',
     'page.header.navbar.ieo': 'IEO',
-    'page.header.navbar.markets': 'Markets',
     'page.header.navbar.buy_credit_card': 'Buy with Credit Card',
     'page.header.navbar.earn': 'Earn',
+
+    'page.header.navbar.download_mobile': 'Download app',
+    'page.header.navbar.download': 'App',
 
     "nav.link.spot": "Spot",
     "nav.link.spot.description": "Trading among crypto currencies",
@@ -385,6 +387,8 @@ export const zh = {
     "nav_referral_program": "Referral program",
     "nav_api_setting": "API Setting",
     "nav_logout": "Log Out",
+    "nav_language": "Language",
+    "nav_currency": "Currency",
 
     "page.header.orders": "Orders",
     "page.header.assets": "Assets",

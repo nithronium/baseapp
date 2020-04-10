@@ -5,17 +5,20 @@ import {connect, MapDispatchToPropsFunction, MapStateToProps} from 'react-redux'
 import {Link, RouteProps, withRouter} from 'react-router-dom';
 // import { LogoutIcon } from '../../assets/images/LogoutIcon';
 // import { Moon } from '../../assets/images/Moon';
+// import { Sun } from '../../assets/images/Sun';
+import logo = require('../../assets/images/logo.svg');
 import {
     AEDIcon,
     CNYIcon,
     DownloadIcon,
     EURIcon,
+    LeftMenuIcon,
     OpenUserMenu,
+    RightMenuIcon,
     RUBIcon,
     USDIcon,
     UserIcon,
 } from '../../assets/images/NavBarIcons';
-// import { Sun } from '../../assets/images/Sun';
 import {coinOption, earnOption, ordersOption, tradeOption, userOption} from '../../constants';
 import {buildPath} from '../../custom/helpers';
 import {
@@ -68,6 +71,7 @@ interface NavbarState {
     isOpen: boolean;
     isOpenLanguage: boolean;
     openMenuType: string;
+    openMobileMenu: string;
     email: string;
     message: string;
     name: string;
@@ -81,6 +85,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         isOpen: false,
         isOpenLanguage: false,
         openMenuType: '',
+        openMobileMenu: '',
         email: '',
         name: '',
         message: '',
@@ -96,116 +101,143 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         this.setState({openMenuType: openMenuType === type ? '' : type});
     };
 
+    private openMobileMenu = (type: string) => {
+        const {openMobileMenu} = this.state;
+        this.setState({openMobileMenu: openMobileMenu === type ? '' : type});
+    };
+
     //tslint:disable
     public render() {
         const {
             // colorTheme,
             lang,
+            currentLanguage,
             // location,
             isLoggedIn,
             user,
         } = this.props;
-        const {openMenuType} = this.state;
+        const baseURL = window.document.location.origin;
+        const {openMenuType, openMobileMenu} = this.state;
         return (
             <div className={'pg-navbar'}>
+                <a href={currentLanguage === 'en' ? baseURL : `${baseURL}/${currentLanguage}`} className="pg-navbar__logo">
+                    <span>
+                        <img src={logo} className="pg-logo__img" alt="Logo" />
+                    </span>
+                </a>
                 <ul className="pg-navbar__content">
-                    <div className="item">
-                        <FormattedMessage id={'page.header.navbar.markets'} />
+                    <span className="pg-navbar__mobile-icon pg-navbar__left-icon" onClick={() => this.openMobileMenu('left')}>
+                        <LeftMenuIcon />
+                    </span>
+                    <div className={`pg-navbar__mobile-menu${openMobileMenu === 'left' ? ' pg-navbar__mobile-open' : ''}`}>
+                        <div className="item">
+                            <FormattedMessage id={'page.body.trade.header.markets'} />
+                        </div>
+                        {this.renderBuyWithCard()}
+                        {this.renderTrade()}
+                        {this.renderEarn()}
                     </div>
-                    {this.renderBuyWithCard()}
-                    {this.renderTrade()}
-                    {this.renderEarn()}
                 </ul>
                 <div className={"pg-navbar__right"}>
-                    {isLoggedIn
-                        ? <React.Fragment>
-                            {this.renderOrders()}
-                            {this.renderAssets(user.balance, user.cryptoCurrency, user.activeCurrency)}
-                            {this.renderUserBlock()}
-                        </React.Fragment>
-                        : <React.Fragment>
-                            <div className="log-btn">
-                                <Link to={'/signin'}>
-                                    <FormattedMessage id={'page.header.navbar.signIn'} />
-                                </Link>
-                            </div>
-                            <div className="log-btn sign-up">
-                                <Link to={'/signup'}>
-                                    <FormattedMessage id={'page.header.signUp'} />
-                                </Link>
-                            </div>
-                        </React.Fragment>
-                    }
-                    <div className="download">
-                        App
-                        <span className="icon">
-                            <DownloadIcon />
-                        </span>
-                    </div>
-                    <div className="dropdown-block" onClick={() => this.openDropdown('language')}>
-                        <div className={`desktop-switcher-button${openMenuType === 'language' ? ' active-menu' : ''}`} onClick={() => this.toggleLanguageMenu()}>
-                        <span className="current-language">{
-                            lang === 'zh' ? '中文简体' :
-                                lang === 'en' ? 'English' : 'Русский'}</span>
-                            <span className="slash">/</span>
-                            <span className="current-currency">
-                          {user.activeCurrency}
-                        </span>
+                    <span className="pg-navbar__mobile-icon pg-navbar__right-icon" onClick={() => this.openMobileMenu('right')}>
+                        <RightMenuIcon />
+                    </span>
+                    <div className={`pg-navbar__mobile-menu${openMobileMenu === 'right' ? ' pg-navbar__mobile-open' : ''}`}>
+                        {isLoggedIn
+                            ? <React.Fragment>
+                                {this.renderOrders()}
+                                {this.renderAssets(user.balance, user.cryptoCurrency, user.activeCurrency)}
+                                {this.renderUserBlock()}
+                            </React.Fragment>
+                            : <React.Fragment>
+                                <div className="log-btn">
+                                    <a href={`${baseURL}/signin`}>
+                                        <FormattedMessage id={'page.header.navbar.signIn'} />
+                                    </a>
+                                </div>
+                                <div className="log-btn sign-up">
+                                    <a href={`${baseURL}/signup`}>
+                                        <FormattedMessage id={'page.header.signUp'} />
+                                    </a>
+                                </div>
+                            </React.Fragment>
+                        }
+                        <div className="download">
+                            {openMobileMenu === 'right' ? <FormattedMessage id={'page.header.navbar.download_mobile'} /> : <FormattedMessage id={'page.header.navbar.download'} />}
+                            <span className="icon">
+                                <DownloadIcon />
+                            </span>
                         </div>
-                        { openMenuType === 'language' && <div className={`dropdown-menu language-menu`}>
-                            <div className="left">
-                                <div className="header">Language</div>
-                                <ul>
-                                    <li className={`${lang === 'en' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('en')}>
-                                        <FormattedMessage id={'page.header.language.en'}/>
-                                    </li>
-                                    <li className={`${lang === 'ru' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('ru')}>
-                                        <FormattedMessage id={'page.header.language.ru'}/>
-                                    </li>
-                                    <li className={`${lang === 'zh' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('zh')}>
-                                        <FormattedMessage id={'page.header.language.zh'}/>
-                                    </li>
-                                    <li className={`${lang === 'ae' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('ea')}>
-                                        <FormattedMessage id={'page.header.language.ae'}/>
-                                    </li>
-                                </ul>
+                        <div className="dropdown-block language" onClick={() => this.openDropdown('language')}>
+                            <div className={`desktop-switcher-button${openMenuType === 'language' ? ' active-menu' : ''}`} onClick={() => this.toggleLanguageMenu()}>
+                                <div>
+                                    <span className="current-language">{
+                                        lang === 'zh' ? '中文简体' :
+                                            lang === 'en' ? 'English' : 'Русский'}</span>
+                                    <span className="slash">/</span>
+                                    <span className="current-currency">
+                                        {user.activeCurrency}
+                                    </span>
+                                </div>
+                                <span className="icon">
+                                    <OpenUserMenu/>
+                                </span>
                             </div>
-                            <div className="right">
-                                <div className="header">Currency</div>
-                                <ul>
-                                    <li className={`${user.activeCurrency.toLowerCase() === 'usd' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('usd')}>
-                                        <span className="icon">
-                                            <USDIcon/>
-                                        </span>
-                                        <FormattedMessage id={'page.header.currency.usd'}/>
-                                    </li>
-                                    <li className={`${user.activeCurrency.toLowerCase() === 'eur' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('eur')}>
-                                        <span className="icon">
-                                            <EURIcon/>
-                                        </span>
-                                        <FormattedMessage id={'page.header.currency.eur'}/>
-                                    </li>
-                                    <li className={`${user.activeCurrency.toLowerCase() === 'rub' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('rub')}>
-                                        <span className="icon">
-                                            <RUBIcon/>
-                                        </span>
-                                        <FormattedMessage id={'page.header.currency.rub'}/>
-                                    </li>
-                                    <li className={`${user.activeCurrency.toLowerCase() === 'cny' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('cny')}>
-                                        <span className="icon">
-                                            <CNYIcon/>
-                                        </span>
-                                        <FormattedMessage id={'page.header.currency.cny'}/>
-                                    </li>
-                                    <li className={`${user.activeCurrency.toLowerCase() === 'aed' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('aed')}>
-                                        <span className="icon">
-                                            <AEDIcon/>
-                                        </span>
-                                        <FormattedMessage id={'page.header.currency.aed'}/>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>}
+                            { openMenuType === 'language' && <div className={`dropdown-menu language-menu`}>
+                                <div className="left">
+                                    <div className="header"> <FormattedMessage id={'nav_language'} /></div>
+                                    <ul>
+                                        <li className={`${lang === 'en' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('en')}>
+                                            <FormattedMessage id={'page.header.language.en'}/>
+                                        </li>
+                                        <li className={`${lang === 'ru' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('ru')}>
+                                            <FormattedMessage id={'page.header.language.ru'}/>
+                                        </li>
+                                        <li className={`${lang === 'zh' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('zh')}>
+                                            <FormattedMessage id={'page.header.language.zh'}/>
+                                        </li>
+                                        <li className={`${lang === 'ae' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('ea')}>
+                                            <FormattedMessage id={'page.header.language.ae'}/>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="right">
+                                    <div className="header"> <FormattedMessage id={'nav_currency'} /></div>
+                                    <ul>
+                                        <li className={`${user.activeCurrency.toLowerCase() === 'usd' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('usd')}>
+                                            <span className="icon">
+                                                <USDIcon/>
+                                            </span>
+                                            <FormattedMessage id={'page.header.currency.usd'}/>
+                                        </li>
+                                        <li className={`${user.activeCurrency.toLowerCase() === 'eur' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('eur')}>
+                                            <span className="icon">
+                                                <EURIcon/>
+                                            </span>
+                                            <FormattedMessage id={'page.header.currency.eur'}/>
+                                        </li>
+                                        <li className={`${user.activeCurrency.toLowerCase() === 'rub' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('rub')}>
+                                            <span className="icon">
+                                                <RUBIcon/>
+                                            </span>
+                                            <FormattedMessage id={'page.header.currency.rub'}/>
+                                        </li>
+                                        <li className={`${user.activeCurrency.toLowerCase() === 'cny' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('cny')}>
+                                            <span className="icon">
+                                                <CNYIcon/>
+                                            </span>
+                                            <FormattedMessage id={'page.header.currency.cny'}/>
+                                        </li>
+                                        <li className={`${user.activeCurrency.toLowerCase() === 'aed' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('aed')}>
+                                            <span className="icon">
+                                                <AEDIcon/>
+                                            </span>
+                                            <FormattedMessage id={'page.header.currency.aed'}/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -244,64 +276,12 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     //     );
     // };
 
-
-    // tslint:disable
-    // private getProfile = () => {
-    //    const { /*colorTheme,*/ lang, user} = this.props;
-    //
-    //     return (
-    //         <div className="pg-navbar__header-profile">
-    //             <span>{user.email}</span>
-    //             <Link
-    //                 className="pg-navbar__admin-logout"
-    //                 to={buildPath('/profile', lang)}
-    //                 onClick={this.handleRouteChange(buildPath('/profile', lang))}
-    //             >
-    //                 <FormattedMessage id={'page.header.navbar.profile'}/>
-    //             </Link>
-    //             <Link
-    //                 className="pg-navbar__admin-logout"
-    //                 to={buildPath('/referral', lang)}
-    //                 onClick={this.handleRouteChange(buildPath('/referral', lang))}
-    //             >
-    //                 <FormattedMessage id={'page.header.navbar.refprogram'}/>
-    //             </Link>
-    //             <Link
-    //                 className="pg-navbar__admin-logout"
-    //                 to={buildPath('/referral-tickets', lang)}
-    //                 onClick={this.handleRouteChange(buildPath('/referral-tickets', lang))}
-    //             >
-    //                 <FormattedMessage id={'page.header.navbar.reftickets'}/>
-    //             </Link>
-    //             {/*<Link
-    //                 className="pg-navbar__admin-logout"
-    //                 to="/referral-commission"
-    //                 onClick={this.handleRouteChange('/referral-commission')}
-    //             >
-    //                 <FormattedMessage id={'page.header.navbar.refcommission'} />
-    //             </Link>*/}
-    //
-    //             {/* <LogoutIcon
-    //                 onClick={() => this.handleLogOut()}
-    //                 className="pg-navbar__header-profile-logout"
-    //                 fillColor={colorTheme === 'light' ? colors.light.navbar.logout : colors.basic.navbar.logout}
-    //             />  */}
-    //             <a className="pg-navbar__admin-logout" href="https://kb.emirex.com/" target="_blank"
-    //                rel="nofollow noopener">
-    //                 <FormattedMessage id={'footer_links_kb'}/>
-    //             </a>
-    //             <a className="pg-navbar__admin-logout" onClick={this.handleLogOut}>
-    //                 <FormattedMessage id={'page.header.navbar.logout'}/>
-    //             </a>
-    //         </div>
-    //     );
-    // };
-
     private renderBuyWithCard = () => {
         const options = coinOption();
-        const {openMenuType} = this.state;
+        const {openMenuType, openMobileMenu} = this.state;
+        const isMobileOpen = openMenuType === 'buyWithCard' && openMobileMenu === 'left';
 
-        return (<div className="dropdown-block">
+        return (<div className={`dropdown-block${isMobileOpen ? ' mobile-background' : ''}`}>
             <div className={`desktop-switcher-button${openMenuType === 'buyWithCard' ? ' active-menu' : ''}`} onClick={() => this.openDropdown('buyWithCard')}>
                 <FormattedMessage id={'page.header.navbar.buy_credit_card'}/>
                 <span className="icon">
@@ -314,9 +294,10 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
 
     private renderTrade = () => {
         const options = tradeOption();
-        const {openMenuType} = this.state;
+        const {openMenuType, openMobileMenu} = this.state;
+        const isMobileOpen = openMenuType === 'trade' && openMobileMenu === 'left';
 
-        return (<div className="dropdown-block">
+        return (<div className={`dropdown-block${isMobileOpen ? ' mobile-background' : ''}`}>
             <div className={`desktop-switcher-button${openMenuType === 'trade' ? ' active-menu' : ''}`} onClick={() => this.openDropdown('trade')}>
                 <FormattedMessage id={'page.header.navbar.trade'}/>
                 <span className="icon">
@@ -329,9 +310,10 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
 
     private renderEarn = () => {
         const options = earnOption();
-        const {openMenuType} = this.state;
+        const {openMenuType, openMobileMenu} = this.state;
+        const isMobileOpen = openMenuType === 'earn' && openMobileMenu === 'left';
 
-        return (<div className="dropdown-block">
+        return (<div className={`dropdown-block${isMobileOpen ? ' mobile-background' : ''}`}>
             <div className={`desktop-switcher-button${openMenuType === 'earn' ? ' active-menu' : ''}`} onClick={() => this.openDropdown('earn')}>
                 <FormattedMessage id={'page.header.navbar.earn'}/>
                 <span className="icon">
@@ -364,33 +346,45 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     };
     private renderUserBlock = () => {
         const options = userOption();
-        const { openMenuType } = this.state;
-        return (<div className="dropdown-block orders">
+        const { openMenuType, openMobileMenu } = this.state;
+        const isMobileOpen = openMobileMenu === 'right';
+
+        return (<div className="dropdown-block user">
             <div className={`desktop-switcher-button${openMenuType === 'orders' ? ' active-menu' : ''}`} onClick={() => this.openDropdown('user')}>
-                <span className="icon">
+                {!isMobileOpen && <span className="icon">
                     <UserIcon />
-                </span>
+                </span> }
             </div>
-            {openMenuType === 'user' && this.renderDropdownMenu(options)}
+            {(openMenuType === 'user' || isMobileOpen) && this.renderDropdownMenu(options)}
 
         </div>)
     };
     private renderOrders = () => {
         const options = ordersOption();
-        const { openMenuType } = this.state;
-        return (<div className="dropdown-block orders">
+        const { openMenuType, openMobileMenu } = this.state;
+        const isMobileOpen = openMenuType === 'orders' && openMobileMenu === 'right';
+
+        return (<div className={`dropdown-block${isMobileOpen ? ' mobile-background' : ''} orders`}>
             <div className={`desktop-switcher-button${openMenuType === 'orders' ? ' active-menu' : ''}`} onClick={() => this.openDropdown('orders')}>
                 <FormattedMessage id={'page.header.orders'}/>
+                <span className="icon">
+                    <OpenUserMenu/>
+                </span>
             </div>
             {openMenuType === 'orders' && this.renderDropdownMenu(options)}
 
         </div>)
     };
     private renderAssets = (balance, crypto, currency) => {
-        const { openMenuType } = this.state;
-        return (<div className="dropdown-block">
+        const { openMenuType, openMobileMenu } = this.state;
+        const isMobileOpen = openMenuType === 'assets' && openMobileMenu === 'right';
+
+        return (<div className={`dropdown-block${isMobileOpen ? ' mobile-background' : '' } assets`}>
             <div className={`desktop-switcher-button${openMenuType === 'assets' ? ' active-menu' : ''}`} onClick={() => this.openDropdown('assets')}>
                 <FormattedMessage id={'page.header.assets'}/>
+                <span className="icon">
+                    <OpenUserMenu/>
+                </span>
             </div>
             {openMenuType === 'assets' && <ul className={`dropdown-menu assets-menu`}>
                 <li className="assets">

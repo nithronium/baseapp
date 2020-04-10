@@ -9,9 +9,11 @@ export const en = {
     'page.header.navbar.openOrders': 'Orders',
     'page.header.navbar.history': 'History',
     'page.header.navbar.ieo': 'IEO',
-    'page.header.navbar.markets': 'Markets',
     'page.header.navbar.buy_credit_card': 'Buy with Credit Card',
     'page.header.navbar.earn': 'Earn',
+
+    'page.header.navbar.download_mobile': 'Download app',
+    'page.header.navbar.download': 'App',
 
     "footer_links_buyBitcoin": "Buy Bitcoin",
     "footer_links_buyEthereum": "Buy Ethereum",
@@ -441,6 +443,8 @@ export const en = {
     "nav_referral_program": "Referral program",
     "nav_api_setting": "API Setting",
     "nav_logout": "Log Out",
+    "nav_language": "Language",
+    "nav_currency": "Currency",
 
     "page.header.orders": "Orders",
     "page.header.assets": "Assets",
