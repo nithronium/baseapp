@@ -9,7 +9,7 @@ import { OpenOrdersPanel, OrderBook } from '../../containers';
 
 import { Helmet } from 'react-helmet';
 
-import { getUrlPart, setDocumentTitle } from '../../../helpers';
+import { getUrlPart } from '../../../helpers';
 import {
     RootState,
     selectCurrentLanguage,
@@ -131,7 +131,6 @@ class Trading extends React.Component<Props, StateProps> {
     };
 
     public componentDidMount() {
-        setDocumentTitle('Trading');
         const {
             currentLanguage,
             currentMarket,
