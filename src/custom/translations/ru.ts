@@ -102,7 +102,7 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.ccy.message.button': 'Копир.',
     'page.body.wallets.tabs.deposit.ccy.message.success': 'Адрес скопирован',
 
-    'page.body.wallets.tabs.deposit.ccy.message.error': 'Генерация адреса',
+    'page.body.wallets.tabs.deposit.ccy.message.error': 'Повысьте свой уровень верификации, чтобы получить депозитный адрес',
 
     'page.body.wallets.tabs.deposit.fiat.message1': 'Вы можете внести депозит, используя следующие реквизиты',
     'page.body.wallets.tabs.deposit.fiat.message1.sepa': 'Вы можете внести депозит, используя следующие реквизиты',
