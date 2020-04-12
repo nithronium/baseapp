@@ -79,6 +79,7 @@ const bankDataSEPA = (uid, isMore) => [
     {
         key: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.eur.sepa`} />,
         value: <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.sepa${isMore ? 'More' : 'Less'}.value`} />,
+        isSepa: true,
     },
     {
         key: <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.bankName" />,
@@ -121,6 +122,7 @@ const DepositFiat: React.FunctionComponent<DepositFiatProps> = (props: DepositFi
     } = props;
     const bankData = sepa ? bankDataSEPA : currency.toLowerCase() === 'aed' ? bankDataAED : bankDataIBAN;
 
+
     const renderDetails = (detail, index: number) => {
         const isRefCodDetail = detail.value === uid;
         return (
@@ -128,7 +130,7 @@ const DepositFiat: React.FunctionComponent<DepositFiatProps> = (props: DepositFi
                 <p className="cr-deposit-fiat-detail__label">{detail.key}</p>
                 <p
                     style={{color: isRefCodDetail ? '#E85E59' : ''}}
-                    className="cr-deposit-fiat-detail__value"
+                    className={`cr-deposit-fiat-detail__value ${detail.isSepa ? 'cr-deposit-fiat-detail__value--sepa' : ''}`}
                 >
                     {detail.value}
                 </p>
