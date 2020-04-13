@@ -953,6 +953,8 @@ export const zh = {
     ieo_1_description: 'EMRX Token ➤ In progress ✅ Get full information about EMRX - IEO details, rating, price, token sale strategies, distribution',
     ieo_2_title: 'T69 coin IEO rating and details | Emirex.com',
     ieo_2_description: 'T69 coin IEO ➤ In progress ✅ Get full information about Tycoon 69 - IEO details, rating, price, token sale strategies, distribution',
+    ieo_3_title: 'Lead Token IEO. Rating, News, Details | Emirex.com',
+    ieo_3_description: 'Lead token IEO ✅ Details, rating, price ➤ The Lead Token is the native currency that fuels the products and services that are delivered on Lead Wallet',
     'page.body.modal.blockNationality.header': '拒绝访问',
     'page.body.modal.blockNationality.message':
         '根据国际和当地金融/加密货币法规，我们目前不向所选国家/地区的公民提供服务。 感谢您的理解。',

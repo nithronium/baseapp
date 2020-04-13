@@ -1115,6 +1115,8 @@ export const ru: LangType = {
     ieo_1_description: 'EMRX Token  ➤ Активный  проект ➤ Рейтинг, цена, стратегия продажи EMRX IEO ➤ Получи доход  ➤ Инвестируй сейчас',
     ieo_2_title: 'T69 coin IEO. Детали и рейтинг | Emirex.com',
     ieo_2_description: 'T69 coin IEO  ➤ Активный  проект ➤ Рейтинг, цена, стратегия продажи Tycoon 69 IEO ➤ Получи доход  ➤ Инвестируй сейчас',
+    ieo_3_title: 'Lead Token IEO. Рейтинг, детали, новости | Emirex.com',
+    ieo_3_description: 'Lead token IEO ✅ Рейтинг и детали ➤ Токен LEAD - это токен стандарта ERC-20, который используется для питания продуктов и услуг, предоставляемых в Lead Wallet',
     'page.body.modal.blockNationality.header': 'Access denied',
     'page.body.modal.blockNationality.message':
         'Due to international and local financial/cryptocurrency regulations we do not currently provide services to citizens of the selected country. Thank you for understanding.',
