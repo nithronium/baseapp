@@ -18,11 +18,12 @@ export const CoinFragment = injectIntl(
         setUserAgree,
         usedCoins,
         setUsedCoins,
+        user,
     }) => {
         const usedCoinsLocal = usedCoins.slice();
         const format = intl.formatMessage;
         const text = format({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' });
-        const walletAddress = formatCCYAddress(currency, selectedWalletAddress);
+        let walletAddress = formatCCYAddress(currency, selectedWalletAddress);
         const error = addressDepositError
             ? format({ id: addressDepositError.message })
             : format({ id: 'page.body.wallets.tabs.deposit.ccy.message.error' });
@@ -39,6 +40,12 @@ export const CoinFragment = injectIntl(
             setUsedCoins(usedCoinsLocal);
         };
         const notice = currency === 'eth' ? format({ id: 'page.wallets.eth.notice' }) : null;
+        console.log('walletAddress', walletAddress);
+        const addressValue = walletAddress ?
+            walletAddress :
+            format({ id: 'page.body.wallets.tabs.deposit.ccy.message.generating' });
+        walletAddress = user.level < 2 ? error : addressValue;
+        
         return (
             <React.Fragment>
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />

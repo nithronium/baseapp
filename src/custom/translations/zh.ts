@@ -72,6 +72,7 @@ export const zh = {
     'page.body.wallets.tabs.deposit.ccy.message.button': '复制',
     'page.body.wallets.tabs.deposit.ccy.message.success': '地址已被复制',
     'page.body.wallets.tabs.deposit.ccy.message.error': '升级您的级别以获得存款地址',
+    'page.body.wallets.tabs.deposit.ccy.message.generating': '生成存款地址',
     'page.body.wallets.tabs.deposit.fiat.message1': '通过银行转账存款',
     'page.body.wallets.tabs.deposit.fiat.message1.sepa': 'Deposit using SEPA transfer',
     'page.body.wallets.tabs.deposit.fiat.message2': '请使用以下凭据发起银行转帐。 您的存款将在5个工作日内到您的账号中。',
