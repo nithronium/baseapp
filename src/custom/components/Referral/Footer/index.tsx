@@ -19,6 +19,7 @@ import forbes = require('../../../../assets/images/forbes.png');
 import newsbtc = require('../../../../assets/images/newsbtc.png');
 import yahoo = require('../../../../assets/images/yahoo.png');
 import zerohedge = require('../../../../assets/images/zerohedge.png');
+import hitbtc = require('../../../../assets/images/hit-btc-logo.png');
 import { BottomBanner } from '../BottomBanner';
 
 import replaceHLink from '../../../helpers/scripts.js';
@@ -338,6 +339,18 @@ const MediaLogo = props => {
                 >
                     <img src={zerohedge} alt="yahoo logo" />
                 </span>
+                {/*</noindex>*/}
+
+                {/*<noindex>*/}
+                <span
+                    className={'hlink'}
+                    rel="nofollow"
+                    data-href={btoa('https://hitbtc.com/exchange/EMRX-to-BTC')}
+                    target="_blank"
+                >
+                    <img src={hitbtc} alt="hit btc logo" />
+                </span>
+                {/*</noindex>*/}
 
                 {/* <a href="https://news.bitcoin.com/cryptocurrency-exchanges-are-fighting-to-escape-binances-shadow/"><img src={bitcoincom} alt="logo" /></a>
                 <a href="https://blockonomi.com/emirex-review/"><img src={blockonomi} alt="logo" /></a>        
