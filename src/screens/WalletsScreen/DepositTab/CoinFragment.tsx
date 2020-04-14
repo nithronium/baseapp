@@ -40,7 +40,6 @@ export const CoinFragment = injectIntl(
             setUsedCoins(usedCoinsLocal);
         };
         const notice = currency === 'eth' ? format({ id: 'page.wallets.eth.notice' }) : null;
-        console.log('walletAddress', walletAddress);
         const addressValue = walletAddress ?
             walletAddress :
             format({ id: 'page.body.wallets.tabs.deposit.ccy.message.generating' });
