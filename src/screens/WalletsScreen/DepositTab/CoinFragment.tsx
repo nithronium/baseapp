@@ -43,7 +43,7 @@ export const CoinFragment = injectIntl(
         const addressValue = walletAddress ?
             walletAddress :
             format({ id: 'page.body.wallets.tabs.deposit.ccy.message.generating' });
-        walletAddress = user.level < 2 ? error : addressValue;
+        const realWalletAddress = user.level < 2 ? error : addressValue;
         
         return (
             <React.Fragment>
@@ -70,12 +70,12 @@ export const CoinFragment = injectIntl(
                     </div>
                 ) : (
                     <DepositCrypto
-                        data={walletAddress}
+                        data={realWalletAddress}
                         handleOnCopy={handleOnCopy}
                         error={error}
                         text={text}
                         notice={notice}
-                        disabled={walletAddress === ''}
+                        disabled={walletAddress === '' || user.level < 2}
                         copiableTextFieldText={format({ id: 'page.body.wallets.tabs.deposit.ccy.message.address' })}
                         copyButtonText={format({ id: 'page.body.wallets.tabs.deposit.ccy.message.button' })}
                     />
