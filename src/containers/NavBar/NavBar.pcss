@@ -94,6 +94,12 @@
         .item {
             font-size: 14px;
             color: #FFFFFF;
+            a {
+                text-decoration: none;
+                color: #ffffff;
+                letter-spacing: 0.2px;
+                font-size: 14px;
+            }
         }
 
     }
@@ -118,6 +124,14 @@
             a {
                 text-decoration: none;
                 color: white;
+            }
+        }
+
+        .dropdown-block {
+            .desktop-switcher-button {
+                .icon {
+                    display: none;
+                }
             }
         }
 
@@ -673,6 +687,10 @@
                     margin-bottom: 5px;
                     justify-content: space-between;
                     width: 100%;
+
+                    .icon {
+                        display: flex;
+                    }
                 }
 
                 .dropdown-menu {

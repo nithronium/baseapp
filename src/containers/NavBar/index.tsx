@@ -131,7 +131,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     </span>
                     <div className={`pg-navbar__mobile-menu${openMobileMenu === 'left' ? ' pg-navbar__mobile-open' : ''}`}>
                         <div className="item">
-                            <FormattedMessage id={'page.body.trade.header.markets'} />
+                            <Link to={`/markets`}>
+                                <FormattedMessage id={'page.body.trade.header.markets'} />
+                            </Link>
                         </div>
                         {this.renderBuyWithCard()}
                         {this.renderTrade()}

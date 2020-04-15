@@ -550,7 +550,7 @@ export const ru: LangType = {
 
     'page.header.currency.usd': 'USD',
     'page.header.currency.eur': 'EUR',
-    'page.header.currency.rub': 'RUS',
+    'page.header.currency.rub': 'RUB',
     'page.header.currency.cny': 'CNY',
     'page.header.currency.aed': 'AED',
 
