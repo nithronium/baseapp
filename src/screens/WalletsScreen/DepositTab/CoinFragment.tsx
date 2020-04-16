@@ -18,11 +18,12 @@ export const CoinFragment = injectIntl(
         setUserAgree,
         usedCoins,
         setUsedCoins,
+        user,
     }) => {
         const usedCoinsLocal = usedCoins.slice();
         const format = intl.formatMessage;
         const text = format({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' });
-        const walletAddress = formatCCYAddress(currency, selectedWalletAddress);
+        let walletAddress = formatCCYAddress(currency, selectedWalletAddress);
         const error = addressDepositError
             ? format({ id: addressDepositError.message })
             : format({ id: 'page.body.wallets.tabs.deposit.ccy.message.error' });
@@ -39,6 +40,11 @@ export const CoinFragment = injectIntl(
             setUsedCoins(usedCoinsLocal);
         };
         const notice = currency === 'eth' ? format({ id: 'page.wallets.eth.notice' }) : null;
+        const addressValue = walletAddress ?
+            walletAddress :
+            format({ id: 'page.body.wallets.tabs.deposit.ccy.message.generating' });
+        const realWalletAddress = user.level < 2 ? error : addressValue;
+        
         return (
             <React.Fragment>
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
@@ -64,12 +70,12 @@ export const CoinFragment = injectIntl(
                     </div>
                 ) : (
                     <DepositCrypto
-                        data={walletAddress}
+                        data={realWalletAddress}
                         handleOnCopy={handleOnCopy}
                         error={error}
                         text={text}
                         notice={notice}
-                        disabled={walletAddress === ''}
+                        disabled={walletAddress === '' || user.level < 2}
                         copiableTextFieldText={format({ id: 'page.body.wallets.tabs.deposit.ccy.message.address' })}
                         copyButtonText={format({ id: 'page.body.wallets.tabs.deposit.ccy.message.button' })}
                     />

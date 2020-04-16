@@ -9,7 +9,7 @@ import { OpenOrdersPanel, OrderBook } from '../../containers';
 
 import { Helmet } from 'react-helmet';
 
-import { getUrlPart, setDocumentTitle } from '../../../helpers';
+import { getUrlPart } from '../../../helpers';
 import {
     RootState,
     selectCurrentLanguage,
@@ -107,31 +107,30 @@ class Trading extends React.Component<Props, StateProps> {
     ];
 
     private pageTitles = {
-        'BCH/BTC': { title: 'bchbtc_title', description: 'bchbtc_description' },
-        'BTC/USD': { title: 'btcusd_title', description: 'btcusd_description' },
-        'BTC/USDT': { title: 'btcusdt_title', description: 'btcusdt_description' },
-        'EMRX/BTC': { title: 'emrxbtc_title', description: 'emrxbtc_description' },
-        'ETH/BTC': { title: 'ethbtc_title', description: 'ethbtc_description' },
-        'ETH/USD': { title: 'ethusd_title', description: 'ethusd_description' },
-        'ETH/USDT': { title: 'ethusdt_title', description: 'ethusdt_description' },
-        'LTC/BTC': { title: 'ltcbtc_title', description: 'ltcbtc_description' },
-        'T69/EUR': { title: 't69eur_title', description: 't69eur_description' },
-        'T69/USDT': { title: 't69usdt_title', description: 't69usdt_description' },
-        'USD/EUR': { title: 'usdeur_title', description: 'usdeur_description' },
-        'USDT/USD': { title: 'usdtusd_title', description: 'usdtusd_description' },
-        'BTC/AED': { title: 'btcaed_title', description: 'btcaed_description' },
-        'ETH/AED': { title: 'ethaed_title', description: 'ethaed_description' },
-        'USDT/AED': { title: 'usdtaed_title', description: 'usdtaed_description' },
-        'BTC/EUR': { title: 'btceur_title', description: 'btceur_description' },
-        'ETH/EUR': { title: 'etheur_title', description: 'etheur_description' },
-        'BCH/USDT': { title: 'bchusdt_title', description: 'bchusdt_description' },
-        'USDT/EUR': { title: 'usdteur_title', description: 'usdteur_description' },
-        'USDC/USDT': { title: 'usdcusdt_title', description: 'usdcusdt_description' },
-        'BTC/USDC': { title: 'btcusdc_title', description: 'btcusdc_description' },
+        bchbtc: { title: 'bchbtc_title', description: 'bchbtc_description' },
+        btcusd: { title: 'btcusd_title', description: 'btcusd_description' },
+        btcusdt: { title: 'btcusdt_title', description: 'btcusdt_description' },
+        emrxbtc: { title: 'emrxbtc_title', description: 'emrxbtc_description' },
+        ethbtc: { title: 'ethbtc_title', description: 'ethbtc_description' },
+        ethusd: { title: 'ethusd_title', description: 'ethusd_description' },
+        ethusdt: { title: 'ethusdt_title', description: 'ethusdt_description' },
+        ltcbtc: { title: 'ltcbtc_title', description: 'ltcbtc_description' },
+        t69eur: { title: 't69eur_title', description: 't69eur_description' },
+        t69usdt: { title: 't69usdt_title', description: 't69usdt_description' },
+        usdeur: { title: 'usdeur_title', description: 'usdeur_description' },
+        usdtusd: { title: 'usdtusd_title', description: 'usdtusd_description' },
+        btcaed: { title: 'btcaed_title', description: 'btcaed_description' },
+        ethaed: { title: 'ethaed_title', description: 'ethaed_description' },
+        usdtaed: { title: 'usdtaed_title', description: 'usdtaed_description' },
+        btceur: { title: 'btceur_title', description: 'btceur_description' },
+        etheur: { title: 'etheur_title', description: 'etheur_description' },
+        bchusdt: { title: 'bchusdt_title', description: 'bchusdt_description' },
+        usdteur: { title: 'usdteur_title', description: 'usdteur_description' },
+        usdcusdt: { title: 'usdcusdt_title', description: 'usdcusdt_description' },
+        btcusdc: { title: 'btcusdc_title', description: 'btcusdc_description' },
     };
 
     public componentDidMount() {
-        setDocumentTitle('Trading');
         const {
             currentLanguage,
             currentMarket,
@@ -187,12 +186,12 @@ class Trading extends React.Component<Props, StateProps> {
     public render() {
         const rowHeight = 14;
         const allGridItems = [...this.gridItems];
-        const { rgl, userLoggedIn, currentMarket } = this.props;
+        const { rgl, userLoggedIn } = this.props;
 
         return (
             <div className={'pg-trading-screen'}>
                 <div className={'pg-trading-wrap'}>
-                    {this.setPageTitle(currentMarket)}
+                    {this.setPageTitle()}
                     <ToolBar />
                     <Grid
                         breakpoints={breakpoints}
@@ -215,30 +214,28 @@ class Trading extends React.Component<Props, StateProps> {
     }
     //tslint:disable
     private setMarketFromUrlIfExists = (markets: Market[]): void => {
-        const { currentLanguage } = this.props;
-        const urlPart = currentLanguage === 'en' ? 2 : 3;
-        const urlMarket: string = getUrlPart(urlPart, window.location.pathname);
+        const urlMarket: string = this.getMarketFromUrl();
         const market: Market | undefined = markets.find(item => item.id === urlMarket);
         if (market) {
             this.props.setCurrentMarket(market);
         }
     };
 
-    private setPageTitle = (market: Market) => {
+    private setPageTitle = () => {
         const { currentLanguage } = this.props;
-        let marketName = market ? market.name : '';
-        if (market) {
+        const urlMarket = this.getMarketFromUrl();
+        if (!!this.pageTitles[`${urlMarket}`]) {
             const link = `https://emirex.com${
                 currentLanguage === 'en' ? '/' : '/' + currentLanguage + '/'
-            }trading/${marketName.replace('/', '').toLowerCase()}`;
-            const linkEn = `https://emirex.com/trading/${marketName.replace('/', '').toLowerCase()}`;
-            const linkRu = `https://emirex.com/ru/trading/${marketName.replace('/', '').toLowerCase()}`;
-            const linkZh = `https://emirex.com/zh/trading/${marketName.replace('/', '').toLowerCase()}`;
+            }trading/${urlMarket.toLowerCase()}`;
+            const linkEn = `https://emirex.com/trading/${urlMarket.toLowerCase()}`;
+            const linkRu = `https://emirex.com/ru/trading/${urlMarket.toLowerCase()}`;
+            const linkZh = `https://emirex.com/zh/trading/${urlMarket.toLowerCase()}`;
 
-            if (this.pageTitles[marketName]) {
+            if (this.pageTitles[urlMarket]) {
                 // tslint:disable
-                const title = this.props.intl.formatMessage({ id: this.pageTitles[`${marketName}`].title });
-                const description = this.props.intl.formatMessage({ id: this.pageTitles[marketName].description });
+                const title = this.props.intl.formatMessage({ id: this.pageTitles[`${urlMarket}`].title });
+                const description = this.props.intl.formatMessage({ id: this.pageTitles[urlMarket].description });
                 return (
                     <Helmet>
                         <link rel="canonical" href={link} />
@@ -265,6 +262,12 @@ class Trading extends React.Component<Props, StateProps> {
             return <Helmet />;
         }
     };
+
+    private getMarketFromUrl = () => {
+        const { currentLanguage } = this.props;
+        const urlPart: number = currentLanguage === 'en' ? 2 : 3;
+        return getUrlPart(urlPart, window.location.pathname);
+    }
 
     // private setTradingTitle = (market: Market, tickers: ReduxProps['tickers']) => {
     //     const tickerPrice = tickers[market.id] ? tickers[market.id].last : '0.0';
