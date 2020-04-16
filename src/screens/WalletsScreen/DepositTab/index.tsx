@@ -38,6 +38,7 @@ export const DepositTab = ({
                 setUserAgree={setUserAgree}
                 usedCoins={usedCoins}
                 setUsedCoins={setUsedCoins}
+                user={user}
             />
         );
     } else {
