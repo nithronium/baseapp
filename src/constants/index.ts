@@ -41,12 +41,12 @@ export const earnOption = (): object[] => ([
 }));
 
 export const ordersOption = (): object[] => ([
-    { key: '', href: '/spot-order', label: 'page.header.orders_spot'},
-    { key: '', href: '/futures-order', label: 'page.header.orders_futures'},
-    { key: '', href: '/margin-order', label: 'page.header.orders_margin', border: true},
-    { key: '', href: '/spot-history', label: 'page.header.history_spot'},
-    { key: '', href: '/futures-history', label: 'page.header.history_futures'},
-    { key: '', href: '/margin-history', label: 'page.header.history_margin'},
+    { key: '', href: '/orders', label: 'page.header.orders_spot'},
+    { key: '', href: '/', label: 'page.header.orders_futures'},
+    { key: '', href: '/', label: 'page.header.orders_margin', border: true},
+    { key: '', href: '/history', label: 'page.header.history_spot'},
+    { key: '', href: '/', label: 'page.header.history_futures'},
+    { key: '', href: '/', label: 'page.header.history_margin'},
 ].map((link, index) => {
     link.key = `nav-link-${index}-${link.href}-${link.label}`;
     return link;

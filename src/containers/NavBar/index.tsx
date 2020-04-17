@@ -131,9 +131,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     </span>
                     <div className={`pg-navbar__mobile-menu${openMobileMenu === 'left' ? ' pg-navbar__mobile-open' : ''}`}>
                         <div className="item">
-                            <Link to={`/markets`}>
+                            <a href={`${baseURL}/markets`}>
                                 <FormattedMessage id={'page.body.trade.header.markets'} />
-                            </Link>
+                            </a>
                         </div>
                         {this.renderBuyWithCard()}
                         {this.renderTrade()}
@@ -290,7 +290,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <OpenUserMenu/>
                 </span>
             </div>
-            {openMenuType === 'buyWithCard' && this.renderDropdownMenu(options)}
+            {openMenuType === 'buyWithCard' && this.renderDropdownMenu(options, true)}
         </div>);
     };
 
@@ -306,7 +306,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <OpenUserMenu/>
                 </span>
             </div>
-            {openMenuType === 'trade' && this.renderDropdownMenu(options)}
+            {openMenuType === 'trade' && this.renderDropdownMenu(options, false)}
         </div>);
     };
 
@@ -322,23 +322,35 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <OpenUserMenu/>
                 </span>
             </div>
-            {openMenuType === 'earn' && this.renderDropdownMenu(options)}
+            {openMenuType === 'earn' && this.renderDropdownMenu(options, false)}
         </div>);
     };
 
-    private renderDropdownMenu = (options) => {
+    private renderDropdownMenu = (options, isMainSite) => {
+        const path = window.document.location.origin;
+        const { currentLanguage } = this.props;
         return (<ul className={`dropdown-menu`}>
             {options.map(option => (
                 <li className={`${option.border ? 'border' : ''}`}>
                     {!option.logout
-                        ? <Link to={option.href}>
-                            {option.label && <div className="label">
-                                <FormattedMessage id={option.label}/>
-                            </div>}
-                            {option.description && <div className="description">
-                                <FormattedMessage id={option.description}/>
-                            </div>}
-                        </Link>
+                        ?
+                        !isMainSite
+                            ? <Link to={`${option.href}`}>
+                                {option.label && <div className="label">
+                                    <FormattedMessage id={option.label}/>
+                                </div>}
+                                {option.description && <div className="description">
+                                    <FormattedMessage id={option.description}/>
+                                </div>}
+                            </Link>
+                            : <a href={`${path}${currentLanguage === 'en' ? '' : `/${currentLanguage}`}${option.href}`}>
+                                {option.label && <div className="label">
+                                    <FormattedMessage id={option.label}/>
+                                </div>}
+                                {option.description && <div className="description">
+                                    <FormattedMessage id={option.description}/>
+                                </div>}
+                            </a>
                         :  <div className="label" onClick={() => this.handleLogOut()}>
                                 <FormattedMessage id={option.label}/>
                         </div>}
@@ -357,7 +369,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <UserIcon />
                 </span> }
             </div>
-            {(openMenuType === 'user' || isMobileOpen) && this.renderDropdownMenu(options)}
+            {(openMenuType === 'user' || isMobileOpen) && this.renderDropdownMenu(options, false)}
 
         </div>)
     };
@@ -373,7 +385,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <OpenUserMenu/>
                 </span>
             </div>
-            {openMenuType === 'orders' && this.renderDropdownMenu(options)}
+            {openMenuType === 'orders' && this.renderDropdownMenu(options, false)}
 
         </div>)
     };
@@ -402,7 +414,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     </div>
                 </li>
                 <li>
-                    <Link to={'/desopit'}>
+                    <Link to={'/wallets'}>
                         <FormattedMessage id={'page.header.deposit_withdraw'}/>
                     </Link>
                 </li>
