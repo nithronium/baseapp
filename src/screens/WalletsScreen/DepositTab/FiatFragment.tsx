@@ -1,7 +1,7 @@
 // tslint:disable:jsx-no-multiline-js
 import * as React from 'react';
 import { injectIntl } from 'react-intl';
-import { MINIMAL_BALANCE } from '../../../constants';
+// import { MINIMAL_BALANCE } from '../../../constants';
 import { WalletHistory } from '../../../containers/Wallets/History';
 import { CardDepositFiat } from '../../../custom/components/CardDepositFiat';
 import { buildPath } from '../../../custom/helpers';
@@ -19,8 +19,8 @@ export const FiatFragment = injectIntl(props => {
         currency,
         action,
         user,
-        balance,
-        message,
+        // balance,
+        // message,
         history,
         lang,
     } = props;
@@ -31,11 +31,12 @@ export const FiatFragment = injectIntl(props => {
 
     const checkBalace = e => {
         e.preventDefault();
-        if (balance < MINIMAL_BALANCE && (user.level < 4 && user.level > 1)) {
-            message({ message: ['page.profile.update.balance'], type: 'error' });
-        } else {
-            history.push(buildPath('/confirm', lang));
-        }
+        history.push(buildPath('/confirm', lang));
+        // if (balance < MINIMAL_BALANCE && (user.level < 4 && user.level > 1)) {
+        //     message({ message: ['page.profile.update.balance'], type: 'error' });
+        // } else {
+        //     history.push(buildPath('/confirm', lang));
+        // }
     };
 
 
