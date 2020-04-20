@@ -21,7 +21,7 @@ export function* getBalanceSaga(action: GetBalanceFetch) {
         if (cryptoCurrency !== action.payload[0]) {
             localStorage.setItem('cryptoCurrency', action.payload[0]);
         }
-        const balance = yield call(API.get(userOptions), `/rates/balance?symbol="${action.payload.join(',')}"`);
+        const balance = yield call(API.get(userOptions), `/user/balance?symbol="${action.payload.join(',')}"`);
         localStorage.setItem('balance', JSON.stringify(balance.quote));
         yield put(setBalance(balance));
     } catch (error) {
