@@ -271,8 +271,8 @@ export const userReducer = (state: ProfileState['userData'], action: ProfileActi
                 user: {
                     ...state.user,
                     balance: action.payload.quote,
-                    cryptoCurrency: action.payload.symbol[0],
-                    activeCurrency: action.payload.symbol[1],
+                    cryptoCurrency: Object.keys(action.payload.quote)[0],
+                    activeCurrency: Object.keys(action.payload.quote)[1],
                 },
             };
         default:
