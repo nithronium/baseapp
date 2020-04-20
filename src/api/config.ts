@@ -9,6 +9,7 @@ export const defaultConfig: Config = {
         rangerUrl: '',
         tenkoUrl: '',
         nodelogicUrl: '',
+        exchangeRatesUrl: '',
     },
     minutesUntilAutoLogout: '5',
     rangerReconnectPeriod: '1',
@@ -44,6 +45,7 @@ export const referralCommissionUrl = () => `${window.document.location.origin}/a
 // export const referralUrl = () => `https://stage.emirex.com/api/v1/referral-code`;
 export const authUrl = () => Cryptobase.config.api.authUrl;
 export const nodelogicUrl = () => Cryptobase.config.api.nodelogicUrl;
+export const exchangeRatesUrl = () => Cryptobase.config.api.exchangeRatesUrl;
 export const tradeUrl = () => Cryptobase.config.api.tradeUrl;
 export const applogicUrl = () => Cryptobase.config.api.applogicUrl;
 export const tenkoUrl = () => Cryptobase.config.api.tenkoUrl;

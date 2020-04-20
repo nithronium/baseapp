@@ -8,7 +8,7 @@ import {
 } from '../actions';
 
 const userOptions: RequestOptions = {
-    apiVersion: 'nodelogic',
+    apiVersion: 'exchangeRates',
 };
 
 export function* getBalanceSaga(action: GetBalanceFetch) {
