@@ -112,6 +112,8 @@ export const ru: LangType = {
         'Пожалуйста, используйте предоставленную информацию для успешного завершения банковского платежа. Ваш депозит станет доступным в течение 5-и рабочих дней.',
     'page.body.wallets.tabs.deposit.fiat.message2.sepa':
         'Пожалуйста, используйте предоставленную информацию для успешного завершения банковского платежа. Ваш депозит станет доступным в течение 24-х часов.',
+    'page.body.wallets.tabs.deposit.fiat.message.accountName':
+        'Убедитесь, что имя владельца банковского счета, с которого вы вносите депозит, совпадает с именем в профиле аккаунта Emirex',
     'page.body.wallets.tabs.deposit.fiat.bankName': 'Название банка',
     'page.body.wallets.tabs.deposit.fiat.accountNumber': 'Номер счета',
     'page.body.wallets.tabs.deposit.fiat.accountName': 'Имя счета',

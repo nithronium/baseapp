@@ -135,6 +135,8 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.message.sepa.confirm': 'Chose the amount of money you would like to deposit. Different fee will be applicable depending on your preferred mode of payment.',
     'page.body.wallets.tabs.deposit.fiat.message.sepa.less': 'Below 800 EUR',
     'page.body.wallets.tabs.deposit.fiat.message.sepa.more': 'Above 800 EUR',
+    'page.body.wallets.tabs.deposit.fiat.message.accountName':
+        'Make sure that the name on the bank account from which you are making a deposit matches the name on your Emirex account',
 
     'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
 

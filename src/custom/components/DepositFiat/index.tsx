@@ -99,6 +99,7 @@ const bankDataSEPA = (uid, isMore) => [
     },
 ];
 
+const accountName = <FormattedMessage id="page.body.wallets.tabs.deposit.fiat.message.accountName"/>;
 
 const minimal1 = (currency, sepa) => <FormattedMessage id={`page.body.wallets.tabs.deposit.fiat.minimal.${currency && `${currency}.`}text${sepa ? '.sepa' : ''}`} />;
 
@@ -142,6 +143,7 @@ const DepositFiat: React.FunctionComponent<DepositFiatProps> = (props: DepositFi
         <div className="cr-deposit-fiat">
             <p className="cr-deposit-fiat__title">{title}</p>
             <p className="cr-deposit-fiat__description">{description}</p>
+            <p className="cr-deposit-fiat__description fiat-alert">{accountName}</p>
             {currency ? <p className="cr-deposit-fiat__description">{minimal1(currency, sepa)}<b>{minimal(currency, sepa)}</b> {sepa && sepaFee(isMore)}</p> : null}
             <div className="cr-deposit-fiat-credentials">{bankData(uid, sepa ? isMore : currency).map(renderDetails)}</div>
             <p className="cr-deposit-fiat__description">{details}</p>

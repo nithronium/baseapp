@@ -92,6 +92,8 @@ export const en = {
         'Please use the following credentials to initiate your bank transfer. Your deposit will be reflected in your account within 5 business days.',
     'page.body.wallets.tabs.deposit.fiat.message2.sepa':
         'Please use the following credentials to initiate your bank transfer. Your deposit will be reflected in your account within 24hours.',
+    'page.body.wallets.tabs.deposit.fiat.message.accountName':
+        'Make sure that the name on the bank account from which you are making a deposit matches the name on your Emirex account',
     'page.body.wallets.tabs.deposit.fiat.bankName': 'Bank Name',
     'page.body.wallets.tabs.deposit.fiat.accountNumber': 'Account number',
     'page.body.wallets.tabs.deposit.fiat.accountName': 'Account name',
