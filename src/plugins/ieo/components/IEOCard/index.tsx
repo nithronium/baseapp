@@ -207,12 +207,12 @@ class IEOCardComponent extends React.Component<Props, State> {
 
         return (
             <div className="pg-ieo__card-content-block">
-                <div className="pg-ieo__card-content-block__row">
+                {!isProgressHidden && <div className="pg-ieo__card-content-block__row">
                     <span className="pg-ieo__card-content-block__text">{this.translate('page.body.ieo.card.raised')}</span>
                     <span className="pg-ieo__card-content-block__text text-bold">
                         {amountOfQuote} {pairs[0].quote_currency_id && pairs[0].quote_currency_id.toUpperCase()}
                     </span>
-                </div>
+                </div>}
                 {!isProgressHidden && this.renderProgressBar()}
             </div>
         );

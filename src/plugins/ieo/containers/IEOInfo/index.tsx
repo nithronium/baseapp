@@ -284,14 +284,14 @@ class IEOInfoComponent extends React.Component<Props, State> {
                     </div>
                 </div>
                 ) : null}
-                <div className="ieo-price">
+                {!hidePregress && <div className="ieo-price">
                     <div className="ieo-price__label">
                         {this.translate('page.body.ieo.card.raised')}
                     </div>
                     <div className="ieo-price__value">
                         {amountOfQuote} {amountOfQuote && ieo.pairs[0].quote_currency_id && ieo.pairs[0].quote_currency_id.toUpperCase()}
                     </div>
-                </div>
+                </div>}
                 {!hidePregress && this.renderProgressBar()}
             </div>
         );
