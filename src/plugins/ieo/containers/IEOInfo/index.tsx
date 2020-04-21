@@ -234,6 +234,9 @@ class IEOInfoComponent extends React.Component<Props, State> {
     private renderInProgress = () => {
         const { countdownValue } = this.state;
         const { ieo, currency } = this.props;
+        const { id } = ieo;
+
+        const hidePregress = id.toString() === '3';
 
         return (
             <div className="ieo-profile-info__main__info__value">
@@ -257,7 +260,7 @@ class IEOInfoComponent extends React.Component<Props, State> {
                         {ieo.currency_id && ieo.currency_id.toUpperCase()}
                     </div>
                 </div>
-                {this.renderProgressBar()}
+                {!hidePregress && this.renderProgressBar()}
             </div>
         );
     }
@@ -265,6 +268,9 @@ class IEOInfoComponent extends React.Component<Props, State> {
     private renderFinished = () => {
         const { ieo, currency } = this.props;
         const amountOfQuote = ieo.tokens_ordered && Decimal.format(+ieo.tokens_ordered * +ieo.pairs[0].price, +currency.precision);
+        const { id } = ieo;
+
+        const hidePregress = id.toString() === '3';
 
         return (
             <div className="ieo-profile-info__main__info__value">
@@ -286,7 +292,7 @@ class IEOInfoComponent extends React.Component<Props, State> {
                         {amountOfQuote} {amountOfQuote && ieo.pairs[0].quote_currency_id && ieo.pairs[0].quote_currency_id.toUpperCase()}
                     </div>
                 </div>
-                {this.renderProgressBar()}
+                {!hidePregress && this.renderProgressBar()}
             </div>
         );
     }

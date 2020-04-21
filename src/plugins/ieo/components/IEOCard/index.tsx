@@ -180,7 +180,8 @@ class IEOCardComponent extends React.Component<Props, State> {
     };
 
     private renderInProgress = () => {
-        const { supply, currency_id, metadata } = this.props.ieo;
+        const { supply, currency_id, metadata, id } = this.props.ieo;
+        const isProgressHidden = id.toString() === '3';
 
         return (
             <div className="pg-ieo__card-content-block">
@@ -191,16 +192,18 @@ class IEOCardComponent extends React.Component<Props, State> {
                         {currency_id && currency_id.toUpperCase()}
                     </span>
                 </div>
-                {this.renderProgressBar()}
+                {!isProgressHidden && this.renderProgressBar()}
             </div>
         );
     };
 
     private renderFinished = () => {
-        const { tokens_ordered, pairs } = this.props.ieo;
+        const { tokens_ordered, pairs, id } = this.props.ieo;
         const { currencies } = this.props;
         const quoteCurrency = currencies.length ? currencies.find(currency => currency.id && currency.id.toLowerCase() === pairs[0].quote_currency_id && pairs[0].quote_currency_id.toLowerCase()) : null;
         const amountOfQuote = tokens_ordered && quoteCurrency ? Decimal.format(+tokens_ordered * +pairs[0].price, +quoteCurrency.precision) : null;
+
+        const isProgressHidden = id.toString() === '3';
 
         return (
             <div className="pg-ieo__card-content-block">
@@ -210,7 +213,7 @@ class IEOCardComponent extends React.Component<Props, State> {
                         {amountOfQuote} {pairs[0].quote_currency_id && pairs[0].quote_currency_id.toUpperCase()}
                     </span>
                 </div>
-                {this.renderProgressBar()}
+                {!isProgressHidden && this.renderProgressBar()}
             </div>
         );
     };
