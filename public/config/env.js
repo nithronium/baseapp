@@ -6,6 +6,7 @@ window.env = {
         rangerUrl: '',
         tenkoUrl: 'http://localhost:9002/api/v2/tenko',
         nodelogicUrl: 'http://localhost:9002/api/v2/nodelogic',
+        exchangeRatesUrl: 'http://localhost:9002/api/v2/exchange-rates',
     },
     minutesUntilAutoLogout: '60',
     withCredentials: false,

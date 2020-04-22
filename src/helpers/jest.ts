@@ -13,6 +13,7 @@ const mockConfig: Config = {
         rangerUrl: '/api/v2/ranger',
         tenkoUrl: '/api/v2/tenko',
         nodelogicUrl: '/api/v2/nodelogic',
+        exchangeRatesUrl: '/api/v2/exchange-rates',
     },
     minutesUntilAutoLogout: '5',
     rangerReconnectPeriod: '1',
