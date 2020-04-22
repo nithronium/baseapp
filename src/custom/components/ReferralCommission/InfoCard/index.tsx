@@ -33,11 +33,13 @@ class InfoCardComponent extends React.Component<Props>{
 
     public render(){
 
-        const { title, text, emrxConverted, usdConverted } = this.props;
+        const { iconName, title, text, emrxConverted, usdConverted } = this.props;
 
         return(
             <div className="info-card">
-                <div className="info-card__icon" />
+                <div className="info-card__icon">
+                    <div className={`info-card__icon--${iconName}`} />
+                </div>
                 <div>
                     <div className="info-card__title">{title}</div>
                     <div className="info-card__text">{text}</div>

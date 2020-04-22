@@ -4,6 +4,9 @@ import {
     injectIntl,
 } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
+
+import { CopyableTextField } from '../../../components/CopyableTextField';
+
 import { setDocumentTitle } from '../../../helpers';
 import {
     currenciesFetch,
@@ -89,33 +92,51 @@ class ReferralCommission extends React.Component<Props> {
 
                         <div className="info-card__wrap">
                             <InfoCard
-                                iconName="123"
+                                iconName="commission"
                                 title="Commission rate"
                                 text="MAX - 30%"
                             />
                             <InfoCard
-                                iconName="123"
+                                iconName="referrals"
                                 title="Your referrals"
                                 text="1233"
                             />
                             <InfoCard
-                                iconName="123"
+                                iconName="fee"
                                 title="Trade fee"
                                 text="0.2%"
                             />
                             <InfoCard
-                                iconName="123"
+                                iconName="profit"
                                 title="Your Profit"
                                 text="9.0956767 BTC"
                                 emrxConverted="23.3434 EMRX"
                                 usdConverted="≈  456.8 USD"
                             />
                         </div>
+                        <div>
+                            <fieldset className={'copyable-text-field'} onClick={this.onCopy}>
+                                <legend className={'copyable-title'}>
+                                    Referral link
+                                </legend>
+                                <CopyableTextField
+                                    className={'cr-deposit-crypto__copyable-area'}
+                                    value={'www.google.com'}
+                                    fieldId={'copy_referral_link'}
+                                    copyButtonText={'COPY'}
+                                />
+                            </fieldset>
+                        </div>
                     </div>
                 </div>
             </div>
           );
     }
+
+
+    private onCopy = () => {
+        setDocumentTitle('copy');
+    };
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
