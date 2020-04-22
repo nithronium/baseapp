@@ -1,4 +1,7 @@
 import * as React from 'react';
+
+import { Decimal } from '@openware/components';
+
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { WalletItemProps } from '../../../components/WalletItem';
@@ -96,7 +99,7 @@ class EstimatedValueContainer extends React.Component<Props, State> {
                     {this.translate('page.body.wallets.estimated_value')}
                     <span className="value-container">
                         <span className="value">
-                            {estimated.USD}
+                            {Decimal.format(estimated.USD, 8)}
                         </span>
                         <span className="value-sign">USD</span>
                     </span>
@@ -115,7 +118,7 @@ class EstimatedValueContainer extends React.Component<Props, State> {
         return (
             <span className="value-container">
                 <span className="value">
-                    {estimated.BTC}
+                    {Decimal.format(estimated.BTC, 8)}
                 </span>
                 <span className="value-sign">BTC</span>
             </span>
