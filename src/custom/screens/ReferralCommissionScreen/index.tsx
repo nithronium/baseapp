@@ -17,7 +17,7 @@ import {
     selectCurrencies,
     selectReferralCommission,
 } from '../../../modules';
-import {Card, ReferralHeader, TradingDetails} from '../../components/ReferralCommission';
+import { InfoCard } from '../../components/ReferralCommission';
 
 interface DispatchProps {
     fetchReferralCommissionBalances: typeof referralCommissionBalancesFetch;
@@ -70,35 +70,49 @@ class ReferralCommission extends React.Component<Props> {
     }
 
     public render(){
-        const currencyId = this.props.commissionsInfo.currencyId;
-        const currenciesNames = this.props.currencies.map(el => el.id);
-        const currencyPrecision = (this.props.currencies.find(el => el.id === currencyId.toLowerCase()) || {}).precision;
-        const balances = this.props.commissionsInfo.data.balances;
-        const trade = this.props.commissionsInfo.data.trade;
-        const ieo = this.props.commissionsInfo.data.ieo;
+        // const currencyId = this.props.commissionsInfo.currencyId;
+        // const currenciesNames = this.props.currencies.map(el => el.id);
+        // const currencyPrecision = (this.props.currencies.find(el => el.id === currencyId.toLowerCase()) || {}).precision;
+        // const balances = this.props.commissionsInfo.data.balances;
+        // const trade = this.props.commissionsInfo.data.trade;
+        // const ieo = this.props.commissionsInfo.data.ieo;
 
 
         return (
             <div className="pg-referral-commission">
-                <div className="top-holder">
-                    <section id="top">
-                        <ReferralHeader title={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.totalEarnings'})} currencies={currenciesNames} context={balances} precision={currencyPrecision} currencyId={currencyId} changeCurrentCurrency={this.changeCurrentCurrency} link="#summary">
-                            <Card earned={balances.earned.trade} precision={currencyPrecision} commission={balances.commission.trade} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.tradingCommission'})} link="#trade"/>
-                            <Card earned={balances.earned.ieo} precision={currencyPrecision} commission={balances.commission.ieo} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.ieoCommission'})} link="#ieo"/>
-                        </ReferralHeader>
-                    </section>
+                <div className="container">
+                    <div className="section">
+                        <div className="section__header">
+                            Referral Traiding
+                        </div>
+
+
+                        <div className="info-card__wrap">
+                            <InfoCard
+                                iconName="123"
+                                title="Commission rate"
+                                text="MAX - 30%"
+                            />
+                            <InfoCard
+                                iconName="123"
+                                title="Your referrals"
+                                text="1233"
+                            />
+                            <InfoCard
+                                iconName="123"
+                                title="Trade fee"
+                                text="0.2%"
+                            />
+                            <InfoCard
+                                iconName="123"
+                                title="Your Profit"
+                                text="9.0956767 BTC"
+                                emrxConverted="23.3434 EMRX"
+                                usdConverted="≈  456.8 USD"
+                            />
+                        </div>
+                    </div>
                 </div>
-                <section id="trade">
-                    <div className="container">
-                        <TradingDetails entity="trade" precision={currencyPrecision} changePage={this.changePage} context={trade} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.tradingCommissionDetails'})}/>
-                    </div>
-                </section>
-                <section id="ieo">
-                    <div className="container">
-                        <TradingDetails entity="ieo" precision={currencyPrecision} changePage={this.changePage} context={ieo} currencyId={currencyId} header={this.props.intl.formatMessage({id: 'referralCommission.rootScreen.ieoCommissionDetails'})}/>
-                    </div>
-                </section>
-                {/* <section id="summary"><div className="container"><Summary entity="summary" context={this.props.balances} header="Transaction commission details" /></div></section> */}
             </div>
           );
     }

@@ -1,687 +1,82 @@
 .pg-referral-commission {
-    background: white;
     color: black;
     font-size: 16px;
     margin: 0;
-    a{
+
+/*    a{
         color: black;
         text-decoration: none;
 
         &:hover{
             text-decoration: underline;
         }
+    }*/
+
+
+    &__level-card {
+        background: #263434;
+        border-radius: 4px;
     }
 
-    button{
-        color: #fff;
-        background: #00732F;
-        padding: 10px 20px;
-        border-radius: 20px;
-        border: 0;
-        cursor: pointer;
-
-        &:focus{
-            outline: none;
-        }
-    }
-
-    .container{
-        width: 1140px;
-        margin: auto;
+    .info-card {
         display: flex;
 
-        &.column{
-            flex-direction: column;
-        }
-    }
-
-    .round-button{
-        border: 1px solid green;
-        color: green;
-        padding: 6px 16px;
-        border-radius: 16px;
-        transition: background .4s, color .4s, box-shadow .4s;
-
-        &:after{
-            display: none !important;
+        &:not(:last-child) {
+            margin-right: 50px;
         }
 
-        &:hover{
-            color: #fff;
-            background: green;
-            text-decoration: none;
-            box-shadow: 0 2px 4px rgba(0,0,0, .5);
+        &__icon {
+            background: #FFD567;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 12px;
         }
 
-        &.default{
-            background: green url(./custom/assets/images/referral-commission/arrow-right-white.svg) right 15px center no-repeat;
-            color: #fff;
-            padding-right: 30px;
-
-            .hidden{
-                display: block;
-                background: green;
-                position: absolute;
-                width: 300px;
-                column-count: 3;
-                top: 30px;
-                border-radius: 8px;
-                padding: 20px;
-                box-sizing: border-box;
-                max-height: 0;
-                padding: 0;
-                border: 0;
-                opacity: 0;
-                pointer-events: none;
-                transition: max-height .4s, padding .4s, opacity .4s, border .4s;
-                
-                .selector{
-                    display: block;
-                    padding-bottom: 10px;
-                    
-                    &:hover{
-                        text-decoration: underline;
-                    }
-                }
-                
-                &.opened{
-                    .round-button.default{
-                        position: relative;
-        
-                        .hidden{
-                            display: block;
-                            border: 1px solid green;
-                            background: green;
-                            position: absolute;
-                            width: 300px;
-                            column-count: 3;
-                            top: 30px;
-                            border-radius: 8px;
-                            padding: 20px;
-                            box-sizing: border-box;
-        
-                            .selector{
-                                border: 1px solid green;
-                                display: block;
-                                padding-bottom: 10px;
-        
-                                &:hover{
-                                    text-decoration: underline;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .trading-commission-details{
-        width: 100%;
-    }
-
-    h1{
-        width: 180px;
-        font-weight: 400;
-        text-transform: capitalize;
-    }
-
-    h2{
-        font-weight: 800;
-        padding-left: 30px;
-        border-left: 3px solid;
-    }
-    section{
-        margin: 46px 0;
-    }
-
-    .total-summary{
-        width: 368px;
-        margin-left: auto;
-        margin-top: 40px;
-        margin-bottom: 60px;
-        margin-right: 147px;
-
-        .value, .header{
-            padding:  10px 0;
+        &__title {
+            font-weight: normal;
+            color: #648280;
+            font-size: 12px;
         }
 
-        .header{
-            color: #ccc;
+        &__text {
+            font-weight: 600;
+            font-size: 20px;
+            color: #E5E6EF;
+        }
+
+        &__emrx {
             font-size: 14px;
-            border-bottom: 1px solid #ccc;
-        }
-    }
-
-    .top-holder{
-        background: #f0f0f0;
-        position: relative;
-        padding-bottom: 40px;
-
-        &:before{
-            content: '';
-            display: block;
-            width: 20px;
-            height: 20px;
-            background: #fff;
-            position: absolute;
-            bottom: -10px;
-            transform: rotate(45deg);
-            right:20vw;
+            color: #E5E6EF;
+            text-align: right;
         }
 
-        &:after{
-            content: '';
-            display: block;
-            width: 100px;
-            height: 100px;
-            position: absolute;
-            bottom: -50px;
-            right: 30vw;
-            background: url(./custom/assets/images/referral-commission/cube.svg) center center no-repeat;
-        }
-
-        .contexter{
-            
-            margin-top: 12px;
-            flex-grow: 1;
-
-            .cards-wrapper{
-
-                display: flex;
-                flex-grow: 1;
-                justify-content: flex-end;
-
-                .Card{
-                    margin-left: 30px;
-                    width: 26%;
-                    box-sizing: border-box;
-                    padding: 20px;
-                    display: flex;
-                    flex-direction: column;
-                    border-radius: 14px;
-                    box-shadow: 0 0 12px rgba(0,0,0, .03);
-                    background: #fff;
-                    transition: box-shadow .4s;
-                    position: relative;
-
-                    &:nth-child(2){
-                        background: #FFD541;
-                    }
-
-                    &:nth-child(3){
-                        background: #00C620;
-                    }
-                    
-                    &:hover{
-                        box-shadow: 0 6px 12px rgba(0,0,0, .3);
-                    }
-                    
-                    .card-top{
-
-                        font-size: 18px;
-                        font-weight: 500;
-
-                        p{
-                            margin: 0;
-                        }
-                    }
-
-                    .card-middle{
-
-                        .card-earned-header{
-                            font-size: 18px;
-                            font-weight: 500;
-                        }
-
-                        flex-grow: 1;
-                        margin: 10px 0;
-
-                        .card-details-row{
-                            display: flex;
-                            font-size: 14px;
-                            margin-top: 12px;
-
-                            .card-details-row__left{
-                                flex-grow: 1;
-                            }
-
-                            .card-details-row__right{
-                                font-weight: 500;
-                                font-size: 16px;
-                            }
-                        }
-                    }
-
-                    .card-bottom{
-                        text-decoration: none;
-                        margin-top: 10px;
-                    }
-
-                    &:after{
-                        content: '';
-                        display: block;
-                        width: 40px;
-                        bottom: 40px;
-                        left: 0px;
-                        position: absolute;
-                        border-top: 1px solid rgba(0,0,0, .3);
-                    }
-                }
-            }
-
-            .summary{
-
-                padding-left: 30px;
-                box-sizing: border-box;
-                padding-top: 20px;
-
-                .details-link{
-
-                    &:before{
-                        content: '';
-                        display: block;
-                        position: absolute;
-                        width: 50vw;
-                        bottom: -20px;
-                        left: 0;
-                        border-bottom: 1px solid #ccc;
-                    }
-                }
-                
-
-                .title{
-                    font-size: 18px;
-                    font-weight: 500;
-                }
-
-                .summary-container{
-
-                    margin-top: 20px;
-
-                    & > *{
-                        margin: 16px 0;
-                    }
-
-                    .referral-code{
-                        margin-top: 36px;
-                    }
-                }
-            }
-        }
-
-        .direct-ticket-details{
-            
-            position: relative;
-
-            &:before{
-                content: '';
-                display: block;
-                position: absolute;
-                background: url(./custom/assets/images/referral-commission/1.svg)  center center no-repeat;
-                width: 110px;
-                height: 110px;
-                left: 18vw;
-                top: 0;
-            }
-
-            &:after{
-                content: '';
-                display: block;
-                position: absolute;
-                background: url(./custom/assets/images/referral-commission/2.svg) center center no-repeat;
-                width: 110px;
-                height: 110px;
-                right: 5vw;
-                top: 0;
-            }
-            
-            .container{
-
-                position: relative;
-                justify-content: flex-end;
-
-            }
-
-            .container-wrapper{
-                width: calc(69% + 56px);
-            }
-
-            h2{
-                border-color: transparent;
-            }
-        }
-
-        .details-link{
-                            
+        &__usd {
             font-size: 14px;
-            color: #000;
-            text-decoration: none;
-            position: relative;
-            
-            &:after{
-                content: '';
-                display: inline-block;
-                height: 12px;
-                width: 12px;
-                transform: translateX(6px) translateY(2px);
-                background: url(./custom/assets/images/referral-commission/right-arrow.svg) center center no-repeat;
-            }
+            color: #7D9794;
+        }
+
+        &__wrap {
+            display: flex;
+            padding: 15px 30px;
         }
     }
 
-    table{
-        border-spacing: 0;
-        margin-left: 30px;
-        table-layout: fixed;
-        width: 100%;
+    &__container {
+        max-width: 940px;
+    }
 
-        .explanation{
-            display: inline-block;
-        }
+    .section {
+        border-radius: 3px;
+        background: #222627;
 
-        th,
-        td{
+        &__header {
+            background: #263434;
+            color: #9ECFC3;
             font-size: 14px;
-            width: 20%;
-        }
-
-        thead{
-            
-
-            td{
-                padding: 20px 8px 20px 0;
-                color:  #ccc;
-
-                &:last-of-type{
-                    text-align: right;
-                }
-            }
-        }
-
-        tbody{
-
-            transition: background-color .4s;
-            
-            tr{
-            
-
-                transition: background-color .2s;
-
-                &:hover{
-                    background: rgba(204,204,204, .2);
-                }
-
-                td{
-                    padding: 20px 8px 20px 0;
-                    border-top: 1px solid #ccc;
-                    border-collapse: collapse;
-
-                    .mobile-card-header{
-                        display: none;
-                    }
-
-                    .mobile-value{
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        overflow: hidden;
-                    }
-        
-                    &:last-of-type{
-                        text-align: right;
-                    }
-
-                    span.count{
-                        font-size: 18px;
-                        font-weight: 500;
-                    }
-                }
-
-                .email-cell{
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                }
-            }
-
-            &.summary-row{
-
-                tr{
-                    &:first-of-type{
-
-                        td{
-                            border: 0;
-                            border-top: 1px solid #ccc;
-                            padding-bottom: 5px;
-                        }
-                    }
-
-                    &:last-of-type{
-                        
-                        td{
-                            border: 0;
-                            color: green;
-                            padding-top: 5px;
-                        }
-                    }
-
-                    &:hover{
-                        background: transparent;
-                    }
-                }
-
-                &:hover{
-                    background: rgba(204,204,204, .2);
-                }
-            }
-
-        }
-
-        tfoot{
-
-            tr{
-
-                &:first-of-type{
-
-                    td{
-                        padding-top: 20px;
-                    }
-                }
-                    
-                td[colspan]{
-                    padding-bottom: 22px;
-
-                    a{
-                        position: relative;
-                        display: inline-block;
-                        font-weight: 600;
-                        &:after{
-                            content: '';
-                            display: block;
-                            width: 20px;
-                            height: 20px;
-                            position: absolute;
-                            top: 0px;
-                            right: -23px;
-                            background: url(./custom/assets/images/referral-commission/right-arrow.svg) center center no-repeat;
-                        }
-                    }
-                }
-
-                td{
-                    .table-summary-header{
-                        display: block;
-                        border-bottom: 1px solid #ccc;
-                        width: 80px;
-                        padding-bottom: 10px;
-                        font-weight: bold;
-                    }
-
-                    &.footer-header{
-
-                        color: #ccc;
-
-                        &:last-of-type{
-                            text-align: right;
-                        }
-                    }
-
-                    &:last-of-type{
-                        text-align: right;
-                    }
-                }
-
-                &:last-of-type{
-
-                    td{
-            
-                        padding: 0 8px 20px 0;
-            
-                        &:last-of-type{
-            
-                            text-align: right;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    #ieo {
-        h2 {
-            border-left-color: #FFD541;
-        }
-    }
-
-    #summary {
-        h2 {
-            border-left-color: #F0F0F0;
-        }
-    }
-
-    @media (max-width: 700px){
-        .container{
-            .container{
-                margin: 0;
-                padding: 0;
-            }
-
-            .column {
-                width: 100% !important;
-                max-width: 100%;
-            }
-        }
-
-        .explanation{
-            display: none;
-        }
-
-        #trading, #ieo, #summary{
-            & > .container{
-                margin: 0;
-                max-width: calc(100vw - 20px);
-            }
-        }
-
-        .top-holder{
-
-            #top{
-
-                .container.recalculate{
-
-                    .contexter{
-                        
-                        .cards-wrapper{
-                
-                            flex-direction: column;
-                    
-                            .Card, .summary{
-                                margin: 0;
-                                width: 100%;
-                                margin-bottom: 20px;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-
-        div{
-
-            &:before, &:after{
-                background: none !important;
-            }
-        }
-
-        .footer-middle .container{
-            flex-direction: column !important;
-
-            div{
-                width: 100% !important;
-                column-count: 3;
-            }
-        }
-
-        table{
-            width: 1000px;
-
-        }
-    }
-
-    @media(max-width: 1200px){
-
-        .container{
-            width: 100vw;
-            max-width: calc(100% - 40px);
-            padding: 0 20px;
-            box-sizing: border-box;
-
-            .container{
-                padding-left: 0;
-                width: calc(100vw - 40px);
-            }
-
-            .column {
-                overflow: auto;
-            }
-        }
-
-        .top{
-
-
-            .container{
-                
-                .contexter{
-
-                    .cards-wrapper{
-
-                        .Card{
-                            margin-left: 0;
-                            width: 33%;
-                            margin: 0 20px;
-                        }
-
-                        .summary{
-                            margin: 0;
-                            width: 33%;
-                        }
-                    }
-                }
-            }
-        }
-
-        .recalculate{
-            flex-direction: column;
-            justify-items: center;
-            margin: auto;
-            max-width: 100%;
-            
-            & > div{
-                margin: auto;
-                width: 100%;
-
-            }
+            padding-left: 14px;
+            height: 32px;
+            line-height: 32px;
         }
     }
 }
