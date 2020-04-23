@@ -66,7 +66,7 @@ class EstimatedValueContainer extends React.Component<Props, State> {
 
     public async componentDidMount() {
 
-        const data = await getBalance();
+        const data = await getBalance(['btc', 'usd']);
         this.setState({ estimated: data.quote });
     }
 
