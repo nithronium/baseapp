@@ -1,9 +1,12 @@
 import * as React from 'react';
+
+import { Decimal } from '@openware/components';
+
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { WalletItemProps } from '../../../components/WalletItem';
-import { VALUATION_PRIMARY_CURRENCY, VALUATION_SECONDARY_CURRENCY } from '../../../constants';
-import { estimateUnitValue, estimateValue } from '../../../helpers/estimateValue';
+// import { VALUATION_PRIMARY_CURRENCY, VALUATION_SECONDARY_CURRENCY } from '../../../constants';
+// import { estimateUnitValue, estimateValue } from '../../../helpers/estimateValue';
 import {
     currenciesFetch,
     Currency,
@@ -15,6 +18,11 @@ import {
     selectMarketTickers,
     selectUserLoggedIn,
 } from '../../../modules';
+
+import {
+    getBalance,
+} from '../../../api';
+
 import { Market, Ticker } from '../../../modules/public/markets';
 import { rangerConnectFetch, RangerConnectFetch } from '../../../modules/public/ranger';
 import { RangerState } from '../../../modules/public/ranger/reducer';
@@ -23,6 +31,10 @@ import { selectRanger } from '../../../modules/public/ranger/selectors';
 interface EstimatedValueProps {
     wallets: WalletItemProps[];
     hello: string;
+}
+
+interface State {
+    estimated: { [key: string]: number };
 }
 
 interface ReduxProps {
@@ -44,30 +56,18 @@ interface DispatchProps {
 
 type Props = DispatchProps & ReduxProps & EstimatedValueProps & InjectedIntlProps;
 
-class EstimatedValueContainer extends React.Component<Props> {
-    public componentDidMount(): void {
-        const {
-            currencies,
-            fetchCurrencies,
-            fetchMarkets,
-            fetchTickers,
-            markets,
-            rangerState: {connected},
-            userLoggedIn,
-        } = this.props;
+class EstimatedValueContainer extends React.Component<Props, State> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            estimated: {},
+        };
+    }
 
-        if (markets.length === 0) {
-            fetchMarkets();
-            fetchTickers();
-        }
+    public async componentDidMount() {
 
-        if (currencies.length === 0) {
-            fetchCurrencies();
-        }
-
-        if (!connected) {
-            this.props.rangerConnect({withAuth: userLoggedIn});
-        }
+        const data = await getBalance(['btc', 'usd']);
+        this.setState({ estimated: data.quote });
     }
 
     public componentWillReceiveProps(next: Props) {
@@ -90,13 +90,8 @@ class EstimatedValueContainer extends React.Component<Props> {
     }
 
     public render(): React.ReactNode {
-        const {
-            currencies,
-            markets,
-            tickers,
-            wallets,
-        } = this.props;
-        const estimatedValue = estimateValue(VALUATION_PRIMARY_CURRENCY, currencies, wallets, markets, tickers);
+        let { estimated } = this.state;
+        estimated = estimated || {};
 
         return (
             <div className="pg-estimated-value">
@@ -104,11 +99,11 @@ class EstimatedValueContainer extends React.Component<Props> {
                     {this.translate('page.body.wallets.estimated_value')}
                     <span className="value-container">
                         <span className="value">
-                            {estimatedValue}
+                            {Decimal.format(estimated.USD, 8)}
                         </span>
-                        <span className="value-sign">{VALUATION_PRIMARY_CURRENCY.toUpperCase()}</span>
+                        <span className="value-sign">USD</span>
                     </span>
-                    {VALUATION_SECONDARY_CURRENCY && this.renderSecondaryCurrencyValuation(estimatedValue)}
+                    {this.renderSecondaryCurrencyValuation()}
                 </div>
             </div>
         );
@@ -116,20 +111,16 @@ class EstimatedValueContainer extends React.Component<Props> {
 
     public translate = (key: string) => this.props.intl.formatMessage({id: key});
 
-    private renderSecondaryCurrencyValuation = (estimatedValue: string) => {
-        const {
-            currencies,
-            markets,
-            tickers,
-        } = this.props;
-        const estimatedValueSecondary = estimateUnitValue(VALUATION_SECONDARY_CURRENCY, VALUATION_PRIMARY_CURRENCY, +estimatedValue, currencies, markets, tickers);
+    private renderSecondaryCurrencyValuation = () => {
+        let { estimated } = this.state;
+        estimated = estimated || {};
 
         return (
             <span className="value-container">
                 <span className="value">
-                    {estimatedValueSecondary}
+                    {Decimal.format(estimated.BTC, 8)}
                 </span>
-                <span className="value-sign">{VALUATION_SECONDARY_CURRENCY.toUpperCase()}</span>
+                <span className="value-sign">BTC</span>
             </span>
         );
     };

@@ -9,6 +9,7 @@ export const defaultConfig: Config = {
         rangerUrl: '',
         tenkoUrl: '',
         nodelogicUrl: '',
+        exchangeRatesUrl: '',
     },
     minutesUntilAutoLogout: '5',
     rangerReconnectPeriod: '1',
@@ -48,6 +49,7 @@ export const tradeUrl = () => Cryptobase.config.api.tradeUrl;
 export const applogicUrl = () => Cryptobase.config.api.applogicUrl;
 export const tenkoUrl = () => Cryptobase.config.api.tenkoUrl;
 export const rangerUrl = () => Cryptobase.config.api.rangerUrl;
+export const exchangeRatesUrl = () => Cryptobase.config.api.exchangeRatesUrl;
 export const minutesUntilAutoLogout = (): string => Cryptobase.config.minutesUntilAutoLogout || '5';
 export const withCredentials = () => Cryptobase.config.withCredentials;
 export const defaultStorageLimit = () => Cryptobase.config.storage.defaultStorageLimit || STORAGE_DEFAULT_LIMIT;

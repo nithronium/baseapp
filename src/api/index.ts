@@ -85,6 +85,7 @@ export const checkReferralCode = async body => {
 };
 
 const nodelogicUrl = `${baseURL}/api/v2/nodelogic`;
+const exchangeRatesUrl = `${baseURL}/api/v2/exchange-rates`;
 export const getReferralTickets = async body => {
     const res = await axios.get(`${nodelogicUrl }${body}`);
     return  res.data;
@@ -111,8 +112,11 @@ export const initPayin = async body => {
     const res = await axios.post(paytoolsAPI, body);
     return res.data;
 };
-export const getBalance = async () => {
-    const res = await axios.get(`${nodelogicUrl}/getBalance`);
+export const getBalance = async (data?: string[]) => {
+    const activeCurrency = localStorage.getItem('activeCurrency');
+    const cryptoCurrency = localStorage.getItem('cryptoCurrency');
+    const query = data ? data : [cryptoCurrency, activeCurrency];
+    const res = await axios.get(`${exchangeRatesUrl}/user/balance?symbol=%22${query.join(',')}%22`);
     return res.data;
 };
 
