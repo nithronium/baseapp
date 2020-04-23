@@ -112,10 +112,10 @@ export const initPayin = async body => {
     const res = await axios.post(paytoolsAPI, body);
     return res.data;
 };
-export const getBalance = async () => {
+export const getBalance = async (data?: string[]) => {
     const activeCurrency = localStorage.getItem('activeCurrency');
     const cryptoCurrency = localStorage.getItem('cryptoCurrency');
-    const query = [cryptoCurrency, activeCurrency];
+    const query = data ? data : [cryptoCurrency, activeCurrency];
     const res = await axios.get(`${exchangeRatesUrl}/user/balance?symbol=%22${query.join(',')}%22`);
     return res.data;
 };
