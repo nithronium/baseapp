@@ -95,6 +95,9 @@
         &__usd {
             font-size: 14px;
             color: #7D9794;
+            position: relative;
+            top: 22px;
+            left: 8px;
         }
 
         &__wrap {
@@ -103,13 +106,105 @@
         }
     }
 
+
+    .copyable-text-field {
+        border: none;
+        color: var(--table-text-color);
+        position: relative;
+        z-index: 1;
+        font-size: 12px;
+    }
+
+    .copyable-title {
+        background: #222627;
+        position: relative;
+        left: 6px;
+        top: 2px;
+        padding: 0 6px;
+    }
+
+    #copy_referral_link {
+        height: 50px;
+        text-indent: 12px;
+    }
+
+    .cr-copyable-text-field__button {
+        position: relative;
+        left: -5px;
+        top: 5px;
+    }
+
+    .level-card {
+        background: #171e1e;
+        border-radius: 4px;
+        display: flex;
+        flex: 1;
+        padding: 28px;
+
+        &:not(:last-child) {
+            margin-right: 20px;
+        }
+
+        &__content {
+            padding-left: 25px;
+        }
+
+        &__level {
+            background-image: url(./assets/images/referral-level-bg.png);
+            width: 68px;
+            height: 68px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            font-size: 12px;
+            line-height: 14px;
+            text-align: center;
+            color: #141717;
+
+            div {
+                text-align: center;
+                color: #141717;
+                font-size: 24px;
+                line-height: 28px;
+                padding-top: 9px;
+            }
+        }
+
+        &__header {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 23px;
+            color: #E5E6EF;
+        }
+
+        &__subheader {
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 16px;
+            color: #7D9794;
+        }
+
+        &__caption {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 16px;
+            color: #E8AF59;
+            position: relative;
+            top: 13px;
+        }
+    }
+
     &__container {
         max-width: 940px;
+    }
+
+    .section-margin {
+        margin-top: 40px;
     }
 
     .section {
         border-radius: 3px;
         background: #222627;
+        margin-top: 20px;
 
         &__header {
             background: #263434;
@@ -118,13 +213,58 @@
             padding-left: 14px;
             height: 32px;
             line-height: 32px;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     }
 
-    .copyable-text-field {
-        color: var(--table-text-color);
-        position: relative;
-        z-index: 1;
+    .section--transparent {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .table {
         font-size: 12px;
+        white-space: nowrap;
+
+        tr {
+            background-color: #222627;
+            border-bottom: 1px solid var(--header-border);
+            height: 47px;
+
+            &:last-child {
+                td {
+                    background-color: #141717;
+                    color: #fff;
+                    font-weight: 600;
+
+                    &:first-child {
+                        color: #FFD567;
+                        font-weight: normal;
+                    }
+
+                    &:nth-child(2),
+                    &:nth-child(4),
+                    &:nth-child(5) {
+                        font-weight: normal;
+                    }
+                }
+            }
+        }
+
+        .cr-table__head-row {
+            th {
+                background-color: #1f2223;
+            }
+        }
+
+        .pg-history-elem__pagination {
+            p {
+                color: #648280;
+            }
+        }
     }
 }

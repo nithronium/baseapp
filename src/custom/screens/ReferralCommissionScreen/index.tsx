@@ -7,6 +7,8 @@ import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redu
 
 import { CopyableTextField } from '../../../components/CopyableTextField';
 
+import { Pagination, Table } from '@openware/components';
+
 import { setDocumentTitle } from '../../../helpers';
 import {
     currenciesFetch,
@@ -20,7 +22,7 @@ import {
     selectCurrencies,
     selectReferralCommission,
 } from '../../../modules';
-import { InfoCard } from '../../components/ReferralCommission';
+import { InfoCard, LevelCard } from '../../components/ReferralCommission';
 
 interface DispatchProps {
     fetchReferralCommissionBalances: typeof referralCommissionBalancesFetch;
@@ -80,6 +82,69 @@ class ReferralCommission extends React.Component<Props> {
         // const trade = this.props.commissionsInfo.data.trade;
         // const ieo = this.props.commissionsInfo.data.ieo;
 
+        const levels = [{
+            header: 'Commission: 20%',
+            subheader: '≈ 0.02% from each trade!',
+            caption: 'Your Referrals: 180',
+        }, {
+            header: 'Commission: 10%',
+            subheader: '≈ 0.01% from each trade!',
+            caption: 'Your Referrals: 1380',
+        }];
+
+
+        const tableData = new Array(5).fill(1).map(() => [
+            'erfxxx.sd@gmail.com',
+            '16 trades',
+            '1003909.8970953 BTC',
+            '9',
+            '16 trades',
+            '1003909.8970953 BTC',
+            '1003909.8970953 BTC',
+        ]);
+        const headers = [
+            'Email',
+            '# of L1 trades',
+            'Commision L1 (BTC)',
+            '# of L2 users',
+            '# of L2 trades',
+            'Commision L2 (BTC)',
+            'Total Amount',
+        ];
+        const title = '';
+
+        const headers2 = [
+            'Email',
+            'Level',
+            'IEO',
+            'Invested',
+            'Commision (BTC)',
+            'Invested L2-L3',
+            'Commision (BTC) L2-L3',
+        ];
+
+        const tableData2 = new Array(5).fill(1).map(() => [
+            'erfxxx.sd@gmail.com',
+            'Level 1',
+            'EMRX',
+            '1000 USD',
+            '1003909.8970953 BTC',
+            '',
+            '',
+        ]);
+
+        const headers3 = [
+            'L1 Referral',
+            'Active',
+            'Level 2 Referrals Total / Active',
+        ];
+
+        const tableData3 = new Array(5).fill(1).map(() => [
+            'erfxxx.sd@gmail.com',
+            'Yes',
+            '5 / 2',
+        ]);
+
 
         return (
             <div className="pg-referral-commission">
@@ -88,7 +153,6 @@ class ReferralCommission extends React.Component<Props> {
                         <div className="section__header">
                             Referral Traiding
                         </div>
-
 
                         <div className="info-card__wrap">
                             <InfoCard
@@ -128,10 +192,205 @@ class ReferralCommission extends React.Component<Props> {
                             </fieldset>
                         </div>
                     </div>
+
+                    <div className="section--transparent">
+                        {levels.map((item, index) => {
+                            return <LevelCard
+                                level={index + 1}
+                                header={item.header}
+                                subheader={item.subheader}
+                                caption={item.caption}
+                                key={index}
+                            />;
+                        })}
+                    </div>
+
+                    <div className="section table">
+                        <div className="section__header">
+                            <span>Referral Trading Details</span>
+                            <span>Export to CSV</span>
+                        </div>
+
+                        <Table
+                            data={tableData}
+                            header={headers}
+                            titleComponent={title}
+                        />
+                        <Pagination
+                            firstElemIndex={0}
+                            lastElemIndex={tableData.length}
+                            total={105}
+                            page={1}
+                            nextPageExists={true}
+                            onClickPrevPage={this.onClickPrevPage}
+                            onClickNextPage={this.onClickNextPage}
+                        />
+                    </div>
+
+
+                    <div className="section section-margin">
+                        <div className="section__header">
+                            Referral IEO
+                        </div>
+
+                        <div className="info-card__wrap">
+                            <InfoCard
+                                iconName="commission"
+                                title="Commission rate"
+                                text="MAX - 30%"
+                            />
+                            <InfoCard
+                                iconName="referrals"
+                                title="Your investors"
+                                text="1233"
+                            />
+                            <InfoCard
+                                iconName="profit"
+                                title="Your Profit"
+                                text="9.0956767 BTC"
+                                emrxConverted="23.3434 EMRX"
+                                usdConverted="≈  456.8 USD"
+                            />
+                        </div>
+                        <div>
+                            <fieldset className={'copyable-text-field'} onClick={this.onCopy}>
+                                <legend className={'copyable-title'}>
+                                    Referral link
+                                </legend>
+                                <CopyableTextField
+                                    className={'cr-deposit-crypto__copyable-area'}
+                                    value={'www.google.com'}
+                                    fieldId={'copy_referral_link'}
+                                    copyButtonText={'COPY'}
+                                />
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div className="section--transparent">
+                        {levels.map((item, index) => {
+                            return <LevelCard
+                                level={index + 1}
+                                header={item.header}
+                                subheader={item.subheader}
+                                caption={item.caption}
+                                key={index}
+                            />;
+                        })}
+                    </div>
+
+                    <div className="section table">
+                        <div className="section__header">
+                            <span>Referral Trading Details</span>
+                            <span>Export to CSV</span>
+                        </div>
+
+                        <Table
+                            data={tableData2}
+                            header={headers2}
+                            titleComponent={title}
+                        />
+                        <Pagination
+                            firstElemIndex={0}
+                            lastElemIndex={tableData.length}
+                            total={105}
+                            page={1}
+                            nextPageExists={true}
+                            onClickPrevPage={this.onClickPrevPage}
+                            onClickNextPage={this.onClickNextPage}
+                        />
+                    </div>
+
+
+                    <div className="section section-margin">
+                        <div className="section__header">
+                            Referrals List
+                        </div>
+
+                        <div className="info-card__wrap">
+                            <InfoCard
+                                iconName="total-referrals"
+                                title="Total referrals"
+                                text="1231"
+                            />
+                            <InfoCard
+                                iconName="active-referrals"
+                                title="Active referrals (Deposit)"
+                                text="720"
+                            />
+                            <InfoCard
+                                iconName="active-ratio"
+                                title="Active Ratio"
+                                text="58.4%"
+                            />
+                            <InfoCard
+                                iconName="profit"
+                                title="Your Profit"
+                                text="9.0956767 BTC"
+                                emrxConverted="23.3434 EMRX"
+                                usdConverted="≈ 456.8 USD"
+                            />
+                        </div>
+                        <div>
+                            <fieldset className={'copyable-text-field'} onClick={this.onCopy}>
+                                <legend className={'copyable-title'}>
+                                    Referral link
+                                </legend>
+                                <CopyableTextField
+                                    className={'cr-deposit-crypto__copyable-area'}
+                                    value={'www.google.com'}
+                                    fieldId={'copy_referral_link'}
+                                    copyButtonText={'COPY'}
+                                />
+                            </fieldset>
+                        </div>
+                    </div>
+
+                    <div className="section--transparent">
+                        {levels.map((item, index) => {
+                            return <LevelCard
+                                level={index + 1}
+                                header={item.header}
+                                subheader={item.subheader}
+                                caption={item.caption}
+                                key={index}
+                            />;
+                        })}
+                    </div>
+
+                    <div className="section table">
+                        <div className="section__header">
+                            <span>Your Referrals</span>
+                            <span>Export to CSV</span>
+                        </div>
+
+                        <Table
+                            data={tableData3}
+                            header={headers3}
+                            titleComponent={title}
+                        />
+                        <Pagination
+                            firstElemIndex={0}
+                            lastElemIndex={tableData.length}
+                            total={105}
+                            page={1}
+                            nextPageExists={true}
+                            onClickPrevPage={this.onClickPrevPage}
+                            onClickNextPage={this.onClickNextPage}
+                        />
+                    </div>
                 </div>
             </div>
           );
     }
+
+    private onClickPrevPage = () => {
+        setDocumentTitle('Referral Commission');
+    };
+
+    private onClickNextPage = () => {
+        setDocumentTitle('Referral Commission');
+    };
 
 
     private onCopy = () => {
