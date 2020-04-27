@@ -743,7 +743,7 @@ export const ru: LangType = {
     'account.withdraw.non_decimal_amount':
         'Значение суммы, которую вы отправили, не может быть проанализировано в десятичном виде',
     'account.withdraw.non_positive_amount': 'Значение суммы должно быть положительным',
-    'account.deposit.not_permitted': 'Депозиты разрешены после подтверждения телефона',
+    'account.deposit.not_permitted': 'Повысьте свой уровень верификации, чтобы получить депозитный адрес',
     'account.withdraw.not_permitted': 'Пожалуйста, пройдите соответствующие шаги проверки для вывода средств',
     'account.withdraw.insufficient_balance': 'Недостаточно средств на счете',
     'account.withdraw.invalid_amount': 'Неверная сумма снятия',

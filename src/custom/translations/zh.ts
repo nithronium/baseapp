@@ -514,7 +514,7 @@ export const zh = {
     'account.withdraw.empty_rid': 'Rid遗失，Rid为空',
     'account.withdraw.non_decimal_amount': '您发送的金额值无法解析为十进制类型',
     'account.withdraw.non_positive_amount': '金额必须为正',
-    'account.deposit.not_permitted': '电话验证后才允许进行充值',
+    'account.deposit.not_permitted': '升级您的级别以获得存款地址',
     'account.withdraw.not_permitted': '请通过相应的验证步骤以提取资金',
     'account.withdraw.insufficient_balance': '账号余额不足',
     'account.withdraw.invalid_amount': '无效的提款金额',
