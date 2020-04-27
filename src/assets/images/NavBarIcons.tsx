@@ -118,3 +118,12 @@ export const RightMenuIcon = () => {
         </svg>
     );
 };
+
+export const CheckIcon = () => {
+    return (
+        <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0.799805 3.6002L4.7998 7.6002L11.1998 1.2002" stroke="#FFD541"/>
+        </svg>
+
+    );
+};

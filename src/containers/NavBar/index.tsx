@@ -9,6 +9,7 @@ import {Link, RouteProps, withRouter} from 'react-router-dom';
 import logo = require('../../assets/images/logo.svg');
 import {
     AEDIcon,
+    CheckIcon,
     CNYIcon,
     DownloadIcon,
     EURIcon,
@@ -191,50 +192,69 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                     <ul>
                                         <li className={`${lang === 'en' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('en')}>
                                             <FormattedMessage id={'page.header.language.en'}/>
+                                            {lang === 'en' && <CheckIcon />}
                                         </li>
                                         <li className={`${lang === 'ru' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('ru')}>
                                             <FormattedMessage id={'page.header.language.ru'}/>
+                                            {lang === 'ru' && <CheckIcon />}
                                         </li>
                                         <li className={`${lang === 'zh' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('zh')}>
                                             <FormattedMessage id={'page.header.language.zh'}/>
+                                            {lang === 'zh' && <CheckIcon />}
                                         </li>
                                         <li className={`${lang === 'ae' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('ea')}>
                                             <FormattedMessage id={'page.header.language.ae'}/>
+                                            {lang === 'ae' && <CheckIcon />}
                                         </li>
                                     </ul>
                                 </div>
                                 <div className="right">
                                     <div className="header"> <FormattedMessage id={'nav_currency'} /></div>
-                                    <ul>
+                                    <ul className="currency-menu">
                                         <li className={`${user.activeCurrency.toLowerCase() === 'usd' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('usd')}>
-                                            <span className="icon">
-                                                <USDIcon/>
+                                            <span className="currency-line">
+                                                <span className="icon">
+                                                    <USDIcon/>
+                                                </span>
+                                                <FormattedMessage id={'page.header.currency.usd'}/>
                                             </span>
-                                            <FormattedMessage id={'page.header.currency.usd'}/>
+                                            {user.activeCurrency.toLowerCase() === 'usd' && <CheckIcon />}
                                         </li>
                                         <li className={`${user.activeCurrency.toLowerCase() === 'eur' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('eur')}>
-                                            <span className="icon">
-                                                <EURIcon/>
+                                            <span className="currency-line">
+                                                <span className="icon">
+                                                    <EURIcon/>
+                                                </span>
+                                                <FormattedMessage id={'page.header.currency.eur'}/>
                                             </span>
-                                            <FormattedMessage id={'page.header.currency.eur'}/>
+                                            {user.activeCurrency.toLowerCase() === 'eur' && <CheckIcon />}
                                         </li>
                                         <li className={`${user.activeCurrency.toLowerCase() === 'rub' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('rub')}>
-                                            <span className="icon">
-                                                <RUBIcon/>
+                                            <span className="currency-line">
+                                                <span className="icon">
+                                                    <RUBIcon/>
+                                                </span>
+                                                <FormattedMessage id={'page.header.currency.rub'}/>
                                             </span>
-                                            <FormattedMessage id={'page.header.currency.rub'}/>
+                                            {user.activeCurrency.toLowerCase() === 'rub' && <CheckIcon />}
                                         </li>
                                         <li className={`${user.activeCurrency.toLowerCase() === 'cny' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('cny')}>
-                                            <span className="icon">
-                                                <CNYIcon/>
+                                            <span className="currency-line">
+                                                <span className="icon">
+                                                    <CNYIcon/>
+                                                </span>
+                                                <FormattedMessage id={'page.header.currency.cny'}/>
                                             </span>
-                                            <FormattedMessage id={'page.header.currency.cny'}/>
+                                            {user.activeCurrency.toLowerCase() === 'cny' && <CheckIcon />}
                                         </li>
                                         <li className={`${user.activeCurrency.toLowerCase() === 'aed' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('aed')}>
-                                            <span className="icon">
-                                                <AEDIcon/>
+                                            <span className="currency-line">
+                                                <span className="icon">
+                                                    <AEDIcon/>
+                                                </span>
+                                                <FormattedMessage id={'page.header.currency.aed'}/>
                                             </span>
-                                            <FormattedMessage id={'page.header.currency.aed'}/>
+                                            {user.activeCurrency.toLowerCase() === 'aed' && <CheckIcon />}
                                         </li>
                                     </ul>
                                 </div>

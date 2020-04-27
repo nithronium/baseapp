@@ -9,7 +9,7 @@ export const en = {
     'page.header.navbar.openOrders': 'Orders',
     'page.header.navbar.history': 'History',
     'page.header.navbar.ieo': 'IEO',
-    'page.header.navbar.buy_credit_card': 'Buy with Credit Card',
+    'page.header.navbar.buy_credit_card': 'Buy Crypto',
     'page.header.navbar.earn': 'Earn',
 
     'page.header.navbar.download_mobile': 'Download app',
