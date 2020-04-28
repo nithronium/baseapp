@@ -14,6 +14,7 @@ import {
     DownloadIcon,
     EURIcon,
     LeftMenuIcon,
+    NotLoginIcon,
     OpenUserMenu,
     RightMenuIcon,
     RUBIcon,
@@ -380,13 +381,15 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     };
     private renderUserBlock = () => {
         const options = userOption();
+        const { isLoggedIn } = this.props;
         const { openMenuType, openMobileMenu } = this.state;
         const isMobileOpen = openMobileMenu === 'right';
-
+        // tslint:disable-next-line:no-console
+        console.log('...........isLoggedIn', isLoggedIn);
         return (<div className="dropdown-block user">
             <div className={`desktop-switcher-button${openMenuType === 'orders' ? ' active-menu' : ''}`} onClick={() => this.openDropdown('user')}>
                 {!isMobileOpen && <span className="icon">
-                    <UserIcon />
+                    {isLoggedIn ? <UserIcon /> : <NotLoginIcon /> }
                 </span> }
             </div>
             {(openMenuType === 'user' || isMobileOpen) && this.renderDropdownMenu(options, false)}
