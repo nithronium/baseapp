@@ -903,6 +903,37 @@
             flex-wrap: wrap;
             justify-content: space-between;
 
+            .left-blocks {
+                width: 60%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+
+                .link-list-column {
+                    width: calc(100% / 3);
+                }
+            }
+
+            .right-block {
+                width: 40%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+
+                .address {
+                    width: 50%;
+                    padding-right: 20px;
+                }
+
+                .licenses {
+                    width: 100%;
+                }
+
+                .licenses {
+                    width: 100%;
+                }
+            }
+
             .footer-link-list {
                 padding-bottom: 2em;
                 display: flex;
@@ -929,7 +960,6 @@
             }
 
             .address {
-                width: 250px;
                 p {
                     font-size: 13px;
                     color: #ffffff99;

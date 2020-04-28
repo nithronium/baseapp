@@ -133,68 +133,61 @@ const Address = props => {
     );
 };
 
-const title1 = 'footer_headers_company';
-const links1 = [
-    { key: '', href: '/about', label: 'footer_links_about', ext: false },
-    { key: '', href: '/whitepaper', label: 'footer_links_wp', ext: false },
-    { key: '', href: 'https://kb.emirex.com/fees-structure', label: 'footer_links_fees', ext: true },
-    /* { href: '/team', label: 'footer.links.team'},
-  { href: '/careers', label: 'footer.links.careers'},
-  { href: '/blog', label: 'footer.links.blog'},*/
-    { key: '', href: '/referral', label: 'footer_links_referral', className: 'gold', ext: false },
-].map((link, index) => {
-    link.key = `footer-link-${index}-${link.href}-${link.label}`;
-    return link;
-});
-
-const title2 = 'footer_headers_services';
-const links2 = [
-    { key: '', href: '/trading/btcusdt', label: 'footer_links_platform', ext: false },
-    { key: '', href: 'https://emrx.emirex.com', label: 'footer_links_emrx', ext: true },
-    { key: '', href: 'https://advisory.emirex.com', label: 'footer_links_ad', ext: true },
-    /*  { href: '/listing', label: 'footer.links.listing'},*/
-].map((link, index) => {
-    link.key = `footer-link-${index}-${link.href}-${link.label}`;
-    return link;
-});
-
-const title3 = 'footer_headers_buysell';
-const links3 = [
-    { key: '', href: '/buybtc', label: 'footer_links_buyBitcoin' },
-    { key: '', href: '/buyeth', label: 'footer_links_buyEthereum'},
-    { key: '', href: '/buyusdt', label: 'footer_links_buyTether'},
-    { key: '', href: '/buyusdc', label: 'footer_links_buyUSDCoin'},
-    { key: '', href: '/buyburn', label: 'footer_links_buyBlockburn'},
-    { key: '', href: '/buyemrx', label: 'footer_links_buyEmirex'},
-    { key: '', href: '/buyltc', label: 'footer_links_buyLitecoin'},
-    { key: '', href: '/buybch', label: 'footer_links_buyBitcoinCash'},
-    { key: '', href: '/buyt69', label: 'footer_links_buyT69Coin'},
-    /*{ href: '/trading', label: 'footer.links.buyRipple'},
-  { href: '/trading', label: 'footer.links.buyLitecoin'},
-  { href: '/trading', label: 'footer.links.buyEmrx'},*/
-].map((link, index) => {
-    link.key = `footer-link-${index}-${link.href}-${link.label}`;
-    return link;
-});
-
-const title4 = 'footer_headers_support';
-const links4 = [
-    { key: '', href: 'https://kb.emirex.com/', label: 'footer_links_kb', ext: true },
-    { key: '', href: 'https://kb.emirex.com/kb-tickets/new', label: 'footer_links_submitRequest', ext: true },
-].map((link, index) => {
-    link.key = `footer-link-${index}-${link.href}-${link.label}`;
-    return link;
-});
-
-const title5 = 'footer_headers_legal';
-const links5 = [
-    { key: '', href: '/terms', label: 'footer_links_terms', ext: false },
-    { key: '', href: '/privacy', label: 'footer_links_privacy', ext: false },
-    { key: '', href: '/kyc_policy', label: 'footer_links_kyc', ext: false },
-].map((link, index) => {
-    link.key = `footer-link-${index}-${link.href}-${link.label}`;
-    return link;
-});
+const linkBlock = {
+    links1: {
+        header: 'footer_headers_advisory',
+        body: [
+            { key: '', href: 'https://advisory.emirex.com/services', label: 'footer_headers_our_services' },
+            { key: '', href: 'https://advisory.emirex.com/commodities', label: 'footer_headers_сommodities' },
+            { key: '', href: 'https://advisory.emirex.com/expertise', label: 'footer_headers_expertise' },
+        ].map((link, index) => {
+            link.key = `footer-link-${index}-${link.href}-${link.label}`;
+            return link;
+        }),
+    },
+    links2: {
+        header: 'footer_headers_products',
+        body: [
+            { key: '', href: '/trading/btcusdt', label: 'footer_headers_spot_trade' },
+            { key: '', href: '/spot', label: 'footer_headers_ieo' },
+            { key: '', href: '/referral', label: 'footer_headers_referral_program' },
+        ].map((link, index) => {
+            link.key = `footer-link-${index}-${link.href}-${link.label}`;
+            return link;
+        }),
+    },
+    links3: {
+        header: 'footer_headers_legal',
+        body: [
+            { key: '', href: '/terms', label: 'footer_headers_terms_of_use' },
+            { key: '', href: '/privacy', label: 'footer_headers_privacy' },
+            { key: '', href: '/kyc_policy', label: 'footer_headers_KYC_AML_policy' },
+        ].map((link, index) => {
+            link.key = `footer-link-${index}-${link.href}-${link.label}`;
+            return link;
+        }),
+    },
+    links4: {
+        header: 'footer_headers_service',
+        body: [
+            { key: '', href: 'https://kb.emirex.com/', label: 'footer_headers_knowledge_base' },
+            { key: '', href: 'https://kb.emirex.com/kb-tickets/new', label: 'footer_headers_submit_a_ticket' },
+        ].map((link, index) => {
+            link.key = `footer-link-${index}-${link.href}-${link.label}`;
+            return link;
+        }),
+    },
+    links5: {
+        header: 'footer_headers_contact_us',
+        body: [
+            { key: '', href: '/about', label: 'footer_headers_about' },
+            { key: '', href: 'https://blog.emirex.com/', label: 'footer_headers_emirex_blog' },
+        ].map((link, index) => {
+            link.key = `footer-link-${index}-${link.href}-${link.label}`;
+            return link;
+        }),
+    },
+};
 
 const LinksList = ({ links, intl }) => {
     return (
@@ -230,16 +223,15 @@ const LinksColumn = ({ title, links, intl }) => {
 const FooterBody = props => {
     return (
         <div className="footer-row">
-            <LinksColumn intl={props.intl} title={title1} links={links1} />
-            <LinksColumn intl={props.intl} title={title2} links={links2} />
-            <LinksColumn intl={props.intl} title={title3} links={links3} />
-            <div>
-                <LinksColumn intl={props.intl} title={title4} links={links4} />
-                <LinksColumn intl={props.intl} title={title5} links={links5} />
+            <div className="left-blocks">
+                {[1,2,3,4,5].map(number => (
+                    <LinksColumn intl={props.intl} title={linkBlock[`links${number}`].header} links={linkBlock[`links${number}`].body} />
+                ))}
             </div>
-            <div>
-                <GetInTouch intl={props.intl} />
+            <div className="right-block">
                 <Address intl={props.intl} />
+                <GetInTouch intl={props.intl} />
+                <Licenses intl={props.intl} />
             </div>
         </div>
     );
@@ -364,7 +356,6 @@ const Footer = props => {
                     {/* <MobileStartTrading /> */}
                     <Header />
                     <FooterBody intl={props.intl} />
-                    <Licenses intl={props.intl} />
                     <Copyright intl={props.intl} />
                 </div>
             </section>
