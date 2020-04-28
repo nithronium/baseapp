@@ -3,15 +3,11 @@ export const PG_TITLE_PREFIX = 'Emirex';
 export const MINIMAL_BALANCE = 100;
 
 export const coinOption = (): object[] =>  ([
+    { key: '', href: '/buyemrx', label: 'footer_links_buyEmirex'},
     { key: '', href: '/buybtc', label: 'footer_links_buyBitcoin' },
     { key: '', href: '/buyeth', label: 'footer_links_buyEthereum'},
     { key: '', href: '/buyusdt', label: 'footer_links_buyTether'},
-    { key: '', href: '/buyusdc', label: 'footer_links_buyUSDCoin'},
-    { key: '', href: '/buyburn', label: 'footer_links_buyBlockburn'},
-    { key: '', href: '/buyemrx', label: 'footer_links_buyEmirex'},
-    { key: '', href: '/buyltc', label: 'footer_links_buyLitecoin'},
-    { key: '', href: '/buybch', label: 'footer_links_buyBitcoinCash'},
-    { key: '', href: '/buyt69', label: 'footer_links_buyT69Coin'},
+    { key: '', href: '/buybtc', label: 'footer_links_other_crypto'},
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
     return link;

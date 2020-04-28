@@ -1071,6 +1071,7 @@ export const ru: LangType = {
     footer_links_buyEmirex: 'Купить Emirex Token',
     footer_links_buyBitcoinCash: 'Купить Bitcoin cash',
     footer_links_buyT69Coin: 'Купить T69 coin',
+    footer_links_other_crypto: "Другие криптовалюты",
     footer_links_careers: 'Трудоустройство',
     footer_links_emrx: 'Токен EMRX',
     footer_links_faq: 'ЧаВо',

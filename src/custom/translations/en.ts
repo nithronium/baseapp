@@ -337,6 +337,7 @@ export const en = {
     footer_links_buyEmirex: 'Buy Emirex Token',
     footer_links_buyBitcoinCash: 'Buy Bitcoin cash',
     footer_links_buyT69Coin: 'Buy T69 coin',
+    footer_links_other_crypto: "Others Crypto",
     footer_links_careers: 'Careers',
     footer_links_emrx: 'EMRX Token',
     footer_links_faq: 'FAQ',
