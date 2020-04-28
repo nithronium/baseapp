@@ -582,12 +582,12 @@ export const zh = {
     'page.body.profile.header.account.content.profile.edit': '编辑个人信息',
 
 
-    'page.body.profile.header.account.auth2fa.mfa.header': 'MFA code',
-    'page.body.profile.header.account.auth2fa.mfa.text1': 'Dear customer',
-    'page.body.profile.header.account.auth2fa.mfa.text2': 'In the next step you will be asked to save your secret MFA code',
-    'page.body.profile.header.account.auth2fa.mfa.text3': 'Please note that this is very important!',
-    'page.body.profile.header.account.auth2fa.mfa.text4': 'MFA code is necessery to restore access to the account on your own in case you lose your phone or change it',
-    'page.body.profile.header.account.auth2fa.mfa.text5': 'If you lost access to the device with GA installed and did not save your MFA code, gaining access to your account on Emirex can take up to 10 days',
+    'page.body.profile.header.account.auth2fa.mfa.header': 'MFA代码',
+    'page.body.profile.header.account.auth2fa.mfa.text1': '尊敬的用户',
+    'page.body.profile.header.account.auth2fa.mfa.text2': '在下一页，将要求您保存MFA代码',
+    'page.body.profile.header.account.auth2fa.mfa.text3': '以便您在丢失或更换设备的情况下在一分钟内可以重新获得对账号的访问权限, 请按照步骤操作。',
+    'page.body.profile.header.account.auth2fa.mfa.text4': '请注意，如果无法访问安装的GA(谷歌验证器)应用程序的设备，并且缺少MFA代码，则恢复对该账号的访问最多可能需要10天。',
+    'page.body.profile.header.account.auth2fa.mfa.text5': ' ',
 
     'page.body.profile.header.account.content.address.edit': '编辑地址',
     'page.body.trade.header.orderHistory': '订单历史记录',
