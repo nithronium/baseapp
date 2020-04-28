@@ -580,6 +580,15 @@ export const zh = {
     'page.body.profile.header.account.profile.deposit': '您的存款限额: ',
     'page.body.profile.header.account.profile.knowMore': '进一步了解验证级别',
     'page.body.profile.header.account.content.profile.edit': '编辑个人信息',
+
+
+    'page.body.profile.header.account.auth2fa.mfa.header': 'MFA code',
+    'page.body.profile.header.account.auth2fa.mfa.text1': 'Dear customer',
+    'page.body.profile.header.account.auth2fa.mfa.text2': 'In the next step you will be asked to save your secret MFA code',
+    'page.body.profile.header.account.auth2fa.mfa.text3': 'Please note that this is very important!',
+    'page.body.profile.header.account.auth2fa.mfa.text4': 'MFA code is necessery to restore access to the account on your own in case you lose your phone or change it',
+    'page.body.profile.header.account.auth2fa.mfa.text5': 'If you lost access to the device with GA installed and did not save your MFA code, gaining access to your account on Emirex can take up to 10 days',
+
     'page.body.profile.header.account.content.address.edit': '编辑地址',
     'page.body.trade.header.orderHistory': '订单历史记录',
     'page.body.trade.header.balances': '余额',

@@ -65,6 +65,7 @@ interface State {
     oldPasswordFocus: boolean;
     newPasswordFocus: boolean;
     confirmPasswordFocus: boolean;
+    isConfirm2faOpen: boolean;
 }
 
 type Props = ReduxProps & DispatchProps & RouterProps & ProfileProps & InjectedIntlProps & OnChangeEvent;
@@ -83,6 +84,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
             oldPasswordFocus: false,
             newPasswordFocus: false,
             confirmPasswordFocus: false,
+            isConfirm2faOpen: false,
         };
     }
 
@@ -222,15 +224,68 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                     {modal}
                 </div>
                 {this.renderProfileTwoFactor()}
-                <Modal
-                    show={this.state.showModal}
-                    header={this.renderModalHeader()}
-                    content={this.renderModalBody()}
-                    footer={this.renderModalFooter()}
-                />
+
+                <div className="profile-2fa-mfa-popup">
+                    <Modal
+                        show={this.state.showModal}
+                        header={this.renderModalHeader()}
+                        content={this.renderModalBody()}
+                        footer={this.renderModalFooter()}
+                    />
+
+                    <Modal
+                        show={this.state.isConfirm2faOpen}
+                        header={this.renderConfirm2faHeader()}
+                        content={this.renderConfirm2faBody()}
+                        footer={this.renderConfirm2faFooter()}
+                    />
+                </div>
             </div>
         );
     }
+
+    private renderConfirm2faHeader = () => {
+        return (
+            <div className="mfa-popup-header">
+                {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.auth2fa.mfa.header'})}
+                <div
+                    className="mfa-popup-close-button"
+                    onClick={this.cancel2fa}
+                >
+                    ✕
+                </div>
+            </div>
+        );
+    };
+
+    private renderConfirm2faBody = () => {
+        const keys = [
+            1, 2, 3, 4, 5,
+        ];
+        return (
+            <div>
+                {keys.map(key => {
+                    return (
+                        <div key={key} className="popup-content-item">
+                            {this.props.intl.formatMessage({ id: `page.body.profile.header.account.auth2fa.mfa.text${key}`})}
+                        </div>
+                    );
+                })}
+            </div>
+        );
+    };
+
+    private renderConfirm2faFooter = () => {
+        return (
+            <div className="auth2fa-mfa-footer">
+                <Button
+                    className="pg-profile-page__btn-secondary-change"
+                    onClick={this.goTo2fa}
+                    label={this.props.intl.formatMessage({ id: 'page.body.kyc.confirm'})}
+                />
+            </div>
+        );
+    };
 
     private renderEditProfileLink() {
         return (
@@ -338,10 +393,18 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
         }
     }
 
-    private handleNavigateTo2fa = (enable2fa: boolean) => {
+    private cancel2fa = () => {
+        this.setState({ isConfirm2faOpen: false });
+    };
+
+    private goTo2fa = () => {
         const lang = localStorage.getItem('lang_code') || 'en';
+        this.props.history.push(buildPath('/security/2fa', lang), { enable2fa: true });
+    };
+
+    private handleNavigateTo2fa = (enable2fa: boolean) => {
         if (enable2fa) {
-            this.props.history.push(buildPath('/security/2fa', lang), { enable2fa });
+            this.setState({ isConfirm2faOpen: true });
         } else {
             this.setState({
                 showModal: !this.state.showModal,

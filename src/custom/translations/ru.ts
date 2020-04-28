@@ -290,6 +290,14 @@ export const ru: LangType = {
     'page.body.profile.header.account.content.profile.edit': 'Редактировать профиль',
     'page.body.profile.header.account.content.address.edit': 'Редактировать адрес',
 
+
+    'page.body.profile.header.account.auth2fa.mfa.header': 'MFA код',
+    'page.body.profile.header.account.auth2fa.mfa.text1': 'Уважаемый пользователь',
+    'page.body.profile.header.account.auth2fa.mfa.text2': 'На следующей странице вам будет предложено сохранить MFA код',
+    'page.body.profile.header.account.auth2fa.mfa.text3': 'Пожалуйста, сделайте это, чтобы вы могли восстановить доступ в ваш аккаунт в течение минуты в случае потери или смены устройства',
+    'page.body.profile.header.account.auth2fa.mfa.text4': 'Обратите внимание, что в случае утраты доступа к устройству, на котором установлено приложение GA и отсутствия MFA кода, восстановление доступа к аккаунту может занять до 10 дней',
+    'page.body.profile.header.account.auth2fa.mfa.text5': ' ',
+
     'page.body.profile.header.account.profile': 'Верификация Вашего профиля',
     'page.body.profile.header.account.profile.email.title': 'Почта - подтверждено',
     'page.body.profile.header.account.profile.email.message': 'Депозиты и вывод средств не разрешены',
