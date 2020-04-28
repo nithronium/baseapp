@@ -16,6 +16,7 @@
       "jsx-double"
     ],
     "no-magic-numbers": false,
-    "jsx-no-multiline-js": false
+    "jsx-no-multiline-js": false,
+    "no-console": false
   }
 }

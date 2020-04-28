@@ -2,16 +2,7 @@
     color: black;
     font-size: 16px;
     margin: 0;
-
-/*    a{
-        color: black;
-        text-decoration: none;
-
-        &:hover{
-            text-decoration: underline;
-        }
-    }*/
-
+    padding-bottom: 30px;
 
     &__level-card {
         background: #263434;
@@ -22,12 +13,12 @@
         display: flex;
 
         &:not(:last-child) {
-            margin-right: 50px;
+            margin-right: 30px;
         }
 
         &__icon {
             background: #FFD567;
-            width: 40px;
+            width: 41px;
             height: 40px;
             border-radius: 50%;
             margin: 0 12px;
@@ -35,30 +26,32 @@
 
             div {
                 height: 25px;
-                width: 22px;
+                width: 25px;
                 background-size: contain;
                 background-repeat: no-repeat;
                 position: absolute;
-                background-position: center center;
-                left: 9px;
-                top: 7px;
+                background-position: left top;
+                left: 8px;
+                top: 8px;
             }
 
             &--commission {
-                background-image: url(./assets/images/referral-commission-icon.png);
+                background-image: url(./assets/images/referral-commission-icon.svg);
                 top: 9px;
             }
 
             &--referrals {
-                background-image: url(./assets/images/referrals-icon.png);
+                background-image: url(./assets/images/referrals-icon.svg);
+                left: 9px;
             }
 
             &--fee {
                 background-image: url(./assets/images/trade-fee-icon.svg);
+                left: 9px;
             }
 
             &--profit {
-                background-image: url(./assets/images/referral-profit-icon.png);
+                background-image: url(./assets/images/referral-profit-icon.svg);
             }
 
             &--total-referrals {
@@ -70,7 +63,7 @@
             }
 
             &--active-ratio {
-                background-image: url(./assets/images/active-ration-icon.png);
+                background-image: url(./assets/images/active-ration-icon.svg);
             }
         }
 
@@ -78,18 +71,21 @@
             font-weight: normal;
             color: #648280;
             font-size: 12px;
+            white-space: nowrap;
         }
 
         &__text {
             font-weight: 600;
             font-size: 20px;
             color: #E5E6EF;
+            white-space: nowrap;
         }
 
         &__emrx {
             font-size: 14px;
             color: #E5E6EF;
             text-align: right;
+            white-space: nowrap;
         }
 
         &__usd {
@@ -98,6 +94,7 @@
             position: relative;
             top: 22px;
             left: 8px;
+            white-space: nowrap;
         }
 
         &__wrap {
@@ -113,6 +110,7 @@
         position: relative;
         z-index: 1;
         font-size: 12px;
+        margin-bottom: 5px;
     }
 
     .copyable-title {
@@ -197,10 +195,6 @@
         max-width: 940px;
     }
 
-    .section-margin {
-        margin-top: 40px;
-    }
-
     .section {
         border-radius: 3px;
         background: #222627;
@@ -218,6 +212,10 @@
             justify-content: space-between;
             align-items: center;
         }
+    }
+
+    .section-margin {
+        margin-top: 40px;
     }
 
     .section--transparent {
@@ -264,6 +262,79 @@
         .pg-history-elem__pagination {
             p {
                 color: #648280;
+            }
+        }
+    }
+}
+
+
+
+@media (max-width: 767px) {
+    .pg-referral-commission {
+        .info-card {
+            flex: 0 0 50%;
+            margin-right: 0 !important;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+
+            &__wrap {
+                flex-wrap: wrap;
+                align-items: flex-start;
+                justify-content: center;
+            }
+
+            &__title {
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            &__text {
+                position: relative;
+                text-align: center;
+            }
+
+            &__emrx {
+                text-align: left;
+                left: -27px;
+                position: relative;
+            }
+
+            &__usd {
+                position: relative;
+                top: -18px;
+                left: 56px;
+            }
+        }
+
+        .level-card {
+            flex: 0 0 100%;
+            margin-bottom: 10px;
+        }
+
+        .section--transparent {
+            flex-wrap: wrap;
+        }
+
+        .section {
+            margin-top: 10px;
+        }
+
+        .section--transparent {
+            margin-top: 10px;
+        }
+
+        .cr-table-container {
+            overflow: scroll;
+
+            tr {
+                font-size: 12px;
+                
+            }
+
+            .cr-table__head tr th {
+                top: 0;
             }
         }
     }

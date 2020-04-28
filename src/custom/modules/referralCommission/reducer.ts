@@ -1,5 +1,14 @@
 import { ReferralCommissionActions } from './actions';
-import { REFERRAL_COMMISSION_BALANCES_DATA, REFERRAL_COMMISSION_BALANCES_FETCH, REFERRAL_COMMISSION_CURRENCY_CHANGE, REFERRAL_COMMISSION_ERROR, REFERRAL_COMMISSION_REFERRALS_DATA, REFERRAL_COMMISSION_REFERRALS_FETCH } from './constants';
+import {
+    REFERRAL_COMMISSION_BALANCES_DATA,
+    REFERRAL_COMMISSION_BALANCES_FETCH,
+    REFERRAL_COMMISSION_CURRENCY_CHANGE,
+    REFERRAL_COMMISSION_ERROR,
+    REFERRAL_COMMISSION_PARTICIPANTS_DATA,
+    REFERRAL_COMMISSION_PARTICIPANTS_FETCH,
+    REFERRAL_COMMISSION_REFERRALS_DATA,
+    REFERRAL_COMMISSION_REFERRALS_FETCH,
+} from './constants';
 
 
 export interface ReferralCommissionReferralsInterface {
@@ -14,7 +23,16 @@ export interface ReferralCommissionReferralsInterface {
 export interface ReferralCommissionBalancesInterface {
     commission: object;
     earned: object;
+    investors: object;
+    participants: object;
     loading: boolean;
+}
+
+export interface ReferralCommissionParticipantsInterface {
+    count: number;
+    skip: number;
+    limit: number;
+    participants: [];
 }
 
 export interface ReferralCommissionState {
@@ -23,6 +41,7 @@ export interface ReferralCommissionState {
         trade: ReferralCommissionReferralsInterface;
         ieo: ReferralCommissionReferralsInterface;
         balances: ReferralCommissionBalancesInterface;
+        participants: ReferralCommissionParticipantsInterface;
     };
 }
 
@@ -45,6 +64,12 @@ const initialState: ReferralCommissionState = {
             count: 0,
             loading: true,
         },
+        participants: {
+            count: 0,
+            limit: 10,
+            skip: 0,
+            participants: [],
+        },
         balances: {
             commission: {
                 trade: [0, 0],
@@ -54,6 +79,22 @@ const initialState: ReferralCommissionState = {
                 trade: 0,
                 ieo: 0,
             },
+            participants: [{
+                active: 0,
+                level: '1',
+                total: 3,
+            }, {
+                active: 0,
+                level: '2',
+                total: 1,
+            }],
+            investors: [{
+                level: '1',
+                total: 3,
+            }, {
+                level: '2',
+                total: 6,
+            }],
             loading: true,
         },
     },
@@ -62,8 +103,11 @@ const initialState: ReferralCommissionState = {
 
 // TODO match response
 export const referralCommissionReducer = (state = initialState, action: ReferralCommissionActions) => {
+
+    // console.log('action.type', action.type);
     switch (action.type) {
         case REFERRAL_COMMISSION_BALANCES_DATA: {
+            console.log('action.payload from reducer', action.payload);
             const newState = {
                 ...state,
             };
@@ -102,6 +146,20 @@ export const referralCommissionReducer = (state = initialState, action: Referral
             return {
                 ...state,
                 ...action.payload,
+            };
+        case REFERRAL_COMMISSION_PARTICIPANTS_DATA:
+            const tmpState = {
+                ...state,
+                loading: false,
+            };
+            tmpState.data.participants = {
+                ...action.payload,
+            };
+            return tmpState;
+        case REFERRAL_COMMISSION_PARTICIPANTS_FETCH:
+            return {
+                ...state,
+                loading: true,
             };
         default:
             return state;

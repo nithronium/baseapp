@@ -1,5 +1,25 @@
 import { CommonError } from '../../../modules/types';
-import { REFERRAL_COMMISSION_BALANCES_DATA, REFERRAL_COMMISSION_BALANCES_FETCH, REFERRAL_COMMISSION_CURRENCY_CHANGE, REFERRAL_COMMISSION_ERROR, REFERRAL_COMMISSION_REFERRALS_DATA, REFERRAL_COMMISSION_REFERRALS_FETCH } from './constants';
+import {
+    REFERRAL_COMMISSION_BALANCES_DATA,
+    REFERRAL_COMMISSION_BALANCES_FETCH,
+    REFERRAL_COMMISSION_CURRENCY_CHANGE,
+    REFERRAL_COMMISSION_ERROR,
+    REFERRAL_COMMISSION_PARTICIPANTS_DATA,
+    REFERRAL_COMMISSION_PARTICIPANTS_FETCH,
+    REFERRAL_COMMISSION_REFERRALS_DATA,
+    REFERRAL_COMMISSION_REFERRALS_FETCH,
+} from './constants';
+
+export interface ReferralCommissionParticipantsFetch {
+    type: typeof REFERRAL_COMMISSION_PARTICIPANTS_FETCH;
+    payload: {
+
+        currencyId: string;
+        type: string;
+        skip?: number;
+        limit?: number;
+    };
+}
 
 export interface ReferralCommissionBalancesFetch {
     type: typeof REFERRAL_COMMISSION_BALANCES_FETCH;
@@ -29,6 +49,13 @@ export interface ReferralCommissionError {
     type: typeof REFERRAL_COMMISSION_ERROR;
     payload?: CommonError;
 }
+export interface ReferralCommissionParticipantsPayload {
+    count: number;
+    participants: [];
+    skip: number;
+    limit: number;
+}
+
 
 export interface ReferralCommissionBalancesPayload {
     commission: {
@@ -39,6 +66,8 @@ export interface ReferralCommissionBalancesPayload {
         trading: number;
         ieo: number;
     };
+    investors: [];
+    participants: [];
     loading: boolean;
 }
 
@@ -61,7 +90,12 @@ export interface ReferralCommissionReferralsData {
     payload: ReferralCommissionReferralsPayload;
 }
 
-export type ReferralCommissionActions = ReferralCommissionCurrencyChange | ReferralCommissionBalancesFetch | ReferralCommissionReferralsFetch | ReferralCommissionBalancesData | ReferralCommissionReferralsData | ReferralCommissionError;
+export interface ReferralCommissionParticipantsData {
+    type: typeof REFERRAL_COMMISSION_PARTICIPANTS_DATA;
+    payload: ReferralCommissionParticipantsPayload;
+}
+
+export type ReferralCommissionActions = ReferralCommissionCurrencyChange | ReferralCommissionBalancesFetch | ReferralCommissionReferralsFetch | ReferralCommissionBalancesData | ReferralCommissionReferralsData | ReferralCommissionError | ReferralCommissionParticipantsFetch | ReferralCommissionParticipantsData;
 
 export const referralCommissionCurrencyChange = (payload: ReferralCommissionCurrencyChange['payload']): ReferralCommissionCurrencyChange => ({
     type: REFERRAL_COMMISSION_CURRENCY_CHANGE,
@@ -90,5 +124,16 @@ export const referralCommissionReferralsData = (payload: ReferralCommissionRefer
 
 export const referralCommissionError = (payload: ReferralCommissionError['payload']): ReferralCommissionError => ({
     type: REFERRAL_COMMISSION_ERROR,
+    payload,
+});
+
+export const referralCommissionParticipantsFetch = (payload: ReferralCommissionParticipantsFetch['payload']): ReferralCommissionParticipantsFetch => ({
+    type: REFERRAL_COMMISSION_PARTICIPANTS_FETCH,
+    payload,
+});
+
+
+export const referralCommissionParticipantsData = (payload: ReferralCommissionParticipantsData['payload']): ReferralCommissionParticipantsData => ({
+    type: REFERRAL_COMMISSION_PARTICIPANTS_DATA,
     payload,
 });

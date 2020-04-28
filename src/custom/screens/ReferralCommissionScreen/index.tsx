@@ -16,6 +16,7 @@ import {
     referralCommissionBalancesFetch,
     ReferralCommissionBalancesInterface,
     referralCommissionCurrencyChange,
+    referralCommissionParticipantsFetch,
     referralCommissionReferralsFetch,
     ReferralCommissionReferralsInterface,
     RootState,
@@ -27,6 +28,7 @@ import { InfoCard, LevelCard } from '../../components/ReferralCommission';
 interface DispatchProps {
     fetchReferralCommissionBalances: typeof referralCommissionBalancesFetch;
     fetchReferralCommissionReferrals: typeof referralCommissionReferralsFetch;
+    fetchReferralCommissionParticipants: typeof referralCommissionParticipantsFetch;
     changeCurrency: typeof referralCommissionCurrencyChange;
 }
 
@@ -44,14 +46,46 @@ interface ReduxProps {
 
 type Props = DispatchProps & InjectedIntlProps & ReduxProps;
 
-class ReferralCommission extends React.Component<Props> {
+interface State {
+    tradingPage: number;
+    ieoPage: number;
+    referralsPage: number;
+    pageSize: number;
+}
+
+class ReferralCommission extends React.Component<Props, State> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            tradingPage: 1,
+            ieoPage: 1,
+            referralsPage: 1,
+            pageSize: 10,
+        };
+    }
+
+    private tradeFields = ['email', 'trades', 'commissions',
+        'tradersUnder', 'tradesUnder', 'commissionUnder'];
+
+    private ieoFields = ['email', 'ieo', 'investment', 'commission',
+        'investmentUnder', 'commissionUnder'];
 
     public componentDidMount() {
         setDocumentTitle('Referral Commission');
+        const { tradingPage, ieoPage, referralsPage, pageSize } = this.state;
         this.props.fetchCurrencies();
         this.props.fetchReferralCommissionBalances({currencyId: this.props.commissionsInfo.currencyId});
-        this.props.fetchReferralCommissionReferrals({currencyId: this.props.commissionsInfo.currencyId, type:'trade'});
-        this.props.fetchReferralCommissionReferrals({currencyId: this.props.commissionsInfo.currencyId, type:'ieo'});
+        this.props.fetchReferralCommissionParticipants({ limit: pageSize, skip: (referralsPage - 1) * pageSize });
+        this.props.fetchReferralCommissionReferrals({
+            currencyId: this.props.commissionsInfo.currencyId, type:'trade',
+            limit: pageSize,
+            skip: (tradingPage - 1) * pageSize,
+        });
+        this.props.fetchReferralCommissionReferrals({
+            currencyId: this.props.commissionsInfo.currencyId, type:'ieo',
+            limit: pageSize,
+            skip: (ieoPage - 1) * pageSize,
+        });
     }
 
     public componentWillReceiveProps(nextProps) {
@@ -63,11 +97,22 @@ class ReferralCommission extends React.Component<Props> {
     }
 
     public changeCurrentCurrency = currencyId => {
-        const currencyIdFormatted = currencyId.toLowerCase();
-        this.props.fetchReferralCommissionBalances({currencyId: currencyIdFormatted});
-        this.props.fetchReferralCommissionReferrals({currencyId: currencyIdFormatted, type:'trade'});
-        this.props.fetchReferralCommissionReferrals({currencyId: currencyIdFormatted, type:'ieo'});
-        this.props.changeCurrency({currencyId: currencyId});
+        // const currencyIdFormatted = currencyId.toLowerCase();
+
+        const { tradingPage, ieoPage, referralsPage, pageSize } = this.state;
+        this.props.fetchCurrencies();
+        this.props.fetchReferralCommissionBalances({currencyId: this.props.commissionsInfo.currencyId});
+        this.props.fetchReferralCommissionParticipants({ limit: pageSize, skip: (referralsPage - 1) * pageSize });
+        this.props.fetchReferralCommissionReferrals({
+            currencyId: this.props.commissionsInfo.currencyId, type:'trade',
+            limit: pageSize,
+            skip: (tradingPage - 1) * pageSize,
+        });
+        this.props.fetchReferralCommissionReferrals({
+            currencyId: this.props.commissionsInfo.currencyId, type:'ieo',
+            limit: pageSize,
+            skip: (ieoPage - 1) * pageSize,
+        });
     }
 
     public changePage = (currencyId, type, skip, limit) => {
@@ -75,81 +120,118 @@ class ReferralCommission extends React.Component<Props> {
     }
 
     public render(){
-        // const currencyId = this.props.commissionsInfo.currencyId;
-        // const currenciesNames = this.props.currencies.map(el => el.id);
-        // const currencyPrecision = (this.props.currencies.find(el => el.id === currencyId.toLowerCase()) || {}).precision;
-        // const balances = this.props.commissionsInfo.data.balances;
-        // const trade = this.props.commissionsInfo.data.trade;
-        // const ieo = this.props.commissionsInfo.data.ieo;
+        const { trade, ieo, participants, balances } = this.props;
+        console.log('balance', balances);
 
-        const levels = [{
-            header: 'Commission: 20%',
-            subheader: '≈ 0.02% from each trade!',
-            caption: 'Your Referrals: 180',
-        }, {
-            header: 'Commission: 10%',
-            subheader: '≈ 0.01% from each trade!',
-            caption: 'Your Referrals: 1380',
-        }];
+        const levelTrade = balances.commission.trade.map((val, index) => {
+            const refs = balances.participants[index].total;
+            return {
+                header: `Commission: ${val * 100}%`,
+                subheader: `≈ ${val / 10}% from each trade!`,
+                caption: `Your Referrals: ${refs}`,
+            };
+        });
+
+        const tradeMaxCommission = Math.floor(balances.commission.trade.reduce((acc, item) => {
+            return Number(acc) + Number(item);
+        }, 0) * 1000) / 10;
+
+        const tradeRefs = balances.participants.reduce((acc, item) => {
+            return Number(acc) + Number(item.total);
+        }, 0);
 
 
-        const tableData = new Array(5).fill(1).map(() => [
-            'erfxxx.sd@gmail.com',
-            '16 trades',
-            '1003909.8970953 BTC',
-            '9',
-            '16 trades',
-            '1003909.8970953 BTC',
-            '1003909.8970953 BTC',
-        ]);
-        const headers = [
+        const levelIeo = balances.commission.ieo.map((val, index) => {
+            const refs = balances.investors[index].total;
+            return {
+                header: `Commission: ${val * 100}%`,
+                subheader: `= ${val * 100}% from each investment!`,
+                caption: `Your Investors: ${refs}`,
+            };
+        });
+
+        const ieoMaxCommission = Math.floor(balances.commission.ieo.reduce((acc, item) => {
+            return Number(acc) + Number(item);
+        }, 0) * 1000) / 10;
+
+        const ieoInvestors = balances.investors.reduce((acc, item) => {
+            return Number(acc) + Number(item.total);
+        }, 0);
+
+
+        const levelPart = balances.participants.map(item => {
+            return {
+                header: `Your referrals: ${item.total}`,
+                caption: `Active referrals: ${item.active}`,
+            };
+        });
+
+        const totalReferrals = balances.participants.reduce((acc, item) => {
+            return Number(acc) + Number(item.total);
+        }, 0);
+        const activeReferrals = balances.participants.reduce((acc, item) => {
+            return Number(acc) + Number(item.active);
+        }, 0);
+
+
+        let tradeData = trade.referrals.map(data => {
+            const res = this.tradeFields.map(key => data[key]);
+            res.push(Number(data.commissions) + Number(data.commissionUnder));
+            return res;
+        });
+
+        tradeData = this.addTradeTotal(tradeData);
+        tradeData = this.addTradeText(tradeData);
+
+        const tradeHeaders = [
             'Email',
             '# of L1 trades',
             'Commision L1 (BTC)',
-            '# of L2 users',
-            '# of L2 trades',
-            'Commision L2 (BTC)',
+            '# of L2-L5 users',
+            '# of L2-L5 trades',
+            'Commision L2-L5 (BTC)',
             'Total Amount',
         ];
         const title = '';
 
-        const headers2 = [
+        const ieoHeaders = [
             'Email',
-            'Level',
             'IEO',
             'Invested',
             'Commision (BTC)',
-            'Invested L2-L3',
-            'Commision (BTC) L2-L3',
+            'Invested L2-L5',
+            'Commision (BTC) L2-L5',
         ];
 
-        const tableData2 = new Array(5).fill(1).map(() => [
-            'erfxxx.sd@gmail.com',
-            'Level 1',
-            'EMRX',
-            '1000 USD',
-            '1003909.8970953 BTC',
-            '',
-            '',
-        ]);
+        let ieoData = ieo.referrals.map(row => {
+            return this.ieoFields.map(key => row[key]);
+        });
+        ieoData = this.addIeoTotal(ieoData);
+        ieoData = this.addIeoText(ieoData);
 
-        const headers3 = [
+        const headersPart = [
             'L1 Referral',
             'Active',
             'Level 2 Referrals Total / Active',
+            'Level 3 Referrals Total / Active',
+            'Level 4 Referrals Total / Active',
+            'Level 5 Referrals Total / Active',
         ];
 
-        const tableData3 = new Array(5).fill(1).map(() => [
-            'erfxxx.sd@gmail.com',
-            'Yes',
-            '5 / 2',
-        ]);
+        let partData = participants.participants.map(row => {
+            const res = [row.email, row.active];
+            for (const key of ['l2', 'l3', 'l4', 'l5']) {
+                res.push(`${row[`total_${key}`]} / ${row[`active_${key}`]} `);
+            }
+            return res;
+        });
 
+        partData = this.addPartTotal(partData);
 
         return (
             <div className="pg-referral-commission">
-                <div className="container">
-                    <div className="section">
+                <div className="pg-referral-commission__container">
+                    <div className="section section-margin">
                         <div className="section__header">
                             Referral Traiding
                         </div>
@@ -158,12 +240,12 @@ class ReferralCommission extends React.Component<Props> {
                             <InfoCard
                                 iconName="commission"
                                 title="Commission rate"
-                                text="MAX - 30%"
+                                text={`MAX - ${tradeMaxCommission}%`}
                             />
                             <InfoCard
                                 iconName="referrals"
                                 title="Your referrals"
-                                text="1233"
+                                text={tradeRefs}
                             />
                             <InfoCard
                                 iconName="fee"
@@ -173,9 +255,9 @@ class ReferralCommission extends React.Component<Props> {
                             <InfoCard
                                 iconName="profit"
                                 title="Your Profit"
-                                text="9.0956767 BTC"
-                                emrxConverted="23.3434 EMRX"
-                                usdConverted="≈  456.8 USD"
+                                text={`${balances.earned.trade} BTC`}
+                                emrxConverted={`${balances.earned.trade} EMRX`}
+                                usdConverted={`≈ ${balances.earned.trade} USD`}
                             />
                         </div>
                         <div>
@@ -194,9 +276,9 @@ class ReferralCommission extends React.Component<Props> {
                     </div>
 
                     <div className="section--transparent">
-                        {levels.map((item, index) => {
+                        {levelTrade.map((item, index) => {
                             return <LevelCard
-                                level={index + 1}
+                                level={Number(index) + 1}
                                 header={item.header}
                                 subheader={item.subheader}
                                 caption={item.caption}
@@ -205,27 +287,26 @@ class ReferralCommission extends React.Component<Props> {
                         })}
                     </div>
 
-                    <div className="section table">
+                    {tradeData.length && <div className="section table">
                         <div className="section__header">
                             <span>Referral Trading Details</span>
-                            <span>Export to CSV</span>
+                            {/* <span>Export to CSV</span> */}
                         </div>
-
                         <Table
-                            data={tableData}
-                            header={headers}
+                            data={tradeData}
+                            header={tradeHeaders}
                             titleComponent={title}
                         />
                         <Pagination
-                            firstElemIndex={0}
-                            lastElemIndex={tableData.length}
-                            total={105}
-                            page={1}
+                            firstElemIndex={Number(trade.skip) + 1}
+                            lastElemIndex={Number(trade.skip) + Number(trade.referrals.length)}
+                            total={trade.count}
+                            page={Math.ceil(trade.skip / trade.limit)}
                             nextPageExists={true}
-                            onClickPrevPage={this.onClickPrevPage}
-                            onClickNextPage={this.onClickNextPage}
+                            onClickPrevPage={this.onClickPrevTrade}
+                            onClickNextPage={this.onClickNextTrade}
                         />
-                    </div>
+                    </div>}
 
 
                     <div className="section section-margin">
@@ -237,19 +318,19 @@ class ReferralCommission extends React.Component<Props> {
                             <InfoCard
                                 iconName="commission"
                                 title="Commission rate"
-                                text="MAX - 30%"
+                                text={`MAX - ${ieoMaxCommission}%`}
                             />
                             <InfoCard
                                 iconName="referrals"
                                 title="Your investors"
-                                text="1233"
+                                text={ieoInvestors}
                             />
                             <InfoCard
                                 iconName="profit"
                                 title="Your Profit"
-                                text="9.0956767 BTC"
-                                emrxConverted="23.3434 EMRX"
-                                usdConverted="≈  456.8 USD"
+                                text={`${balances.earned.ieo} BTC`}
+                                emrxConverted={`${balances.earned.ieo} EMRX`}
+                                usdConverted={`≈ ${balances.earned.ieo} USD`}
                             />
                         </div>
                         <div>
@@ -268,9 +349,9 @@ class ReferralCommission extends React.Component<Props> {
                     </div>
 
                     <div className="section--transparent">
-                        {levels.map((item, index) => {
+                        {levelIeo.map((item, index) => {
                             return <LevelCard
-                                level={index + 1}
+                                level={Number(index) + 1}
                                 header={item.header}
                                 subheader={item.subheader}
                                 caption={item.caption}
@@ -279,27 +360,27 @@ class ReferralCommission extends React.Component<Props> {
                         })}
                     </div>
 
-                    <div className="section table">
+                    {ieoData.length && <div className="section table">
                         <div className="section__header">
-                            <span>Referral Trading Details</span>
-                            <span>Export to CSV</span>
+                            <span>IEO Investment Details</span>
+                            {/* <span>Export to CSV</span> */}
                         </div>
 
                         <Table
-                            data={tableData2}
-                            header={headers2}
+                            data={ieoData}
+                            header={ieoHeaders}
                             titleComponent={title}
                         />
                         <Pagination
-                            firstElemIndex={0}
-                            lastElemIndex={tableData.length}
-                            total={105}
-                            page={1}
+                            firstElemIndex={Number(ieo.skip) + 1}
+                            lastElemIndex={Number(ieo.skip) + Number(ieo.referrals.length)}
+                            total={ieo.count}
+                            page={Math.ceil(ieo.skip / ieo.limit)}
                             nextPageExists={true}
-                            onClickPrevPage={this.onClickPrevPage}
-                            onClickNextPage={this.onClickNextPage}
+                            onClickPrevPage={this.onClickPrevIeo}
+                            onClickNextPage={this.onClickNextIeo}
                         />
-                    </div>
+                    </div>}
 
 
                     <div className="section section-margin">
@@ -311,24 +392,24 @@ class ReferralCommission extends React.Component<Props> {
                             <InfoCard
                                 iconName="total-referrals"
                                 title="Total referrals"
-                                text="1231"
+                                text={totalReferrals}
                             />
                             <InfoCard
                                 iconName="active-referrals"
                                 title="Active referrals (Deposit)"
-                                text="720"
+                                text={activeReferrals}
                             />
                             <InfoCard
                                 iconName="active-ratio"
                                 title="Active Ratio"
-                                text="58.4%"
+                                text={`${Math.floor(activeReferrals / totalReferrals * 10) / 10}%`}
                             />
                             <InfoCard
                                 iconName="profit"
-                                title="Your Profit"
-                                text="9.0956767 BTC"
-                                emrxConverted="23.3434 EMRX"
-                                usdConverted="≈ 456.8 USD"
+                                title="Profit per referral"
+                                text={`${balances.earned.trade / totalReferrals} `}
+                                emrxConverted={`${balances.earned.trade / totalReferrals} EMRX`}
+                                usdConverted={`≈ ${balances.earned.trade / totalReferrals} USD`}
                             />
                         </div>
                         <div>
@@ -347,9 +428,9 @@ class ReferralCommission extends React.Component<Props> {
                     </div>
 
                     <div className="section--transparent">
-                        {levels.map((item, index) => {
+                        {levelPart.map((item, index) => {
                             return <LevelCard
-                                level={index + 1}
+                                level={Number(index) + 1}
                                 header={item.header}
                                 subheader={item.subheader}
                                 caption={item.caption}
@@ -358,40 +439,218 @@ class ReferralCommission extends React.Component<Props> {
                         })}
                     </div>
 
-                    <div className="section table">
+                    {partData.length && <div className="section table">
                         <div className="section__header">
                             <span>Your Referrals</span>
-                            <span>Export to CSV</span>
+                            {/* <span>Export to CSV</span> */}
                         </div>
 
                         <Table
-                            data={tableData3}
-                            header={headers3}
+                            data={partData}
+                            header={headersPart}
                             titleComponent={title}
                         />
                         <Pagination
-                            firstElemIndex={0}
-                            lastElemIndex={tableData.length}
-                            total={105}
-                            page={1}
+                            firstElemIndex={Number(participants.skip) + 1}
+                            lastElemIndex={Number(participants.skip) + Number(participants.participants.length)}
+                            total={participants.count}
+                            page={Math.ceil(participants.skip / participants.limit)}
                             nextPageExists={true}
-                            onClickPrevPage={this.onClickPrevPage}
-                            onClickNextPage={this.onClickNextPage}
+                            onClickPrevPage={this.onClickPrevPart}
+                            onClickNextPage={this.onClickNextPart}
                         />
-                    </div>
+                    </div>}
                 </div>
             </div>
           );
     }
 
-    private onClickPrevPage = () => {
-        setDocumentTitle('Referral Commission');
+
+    private addTradeTotal = list => {
+        // return list;
+        const newList = [...list];
+        const totalRow: Array<string|number> = ['Total amount'];
+
+        const fields = this.tradeFields.slice(1);
+        for (let i = 1; i < fields.length + 1; i++) {
+            const sum = newList.reduce((acc, row) => Number(acc) + Number(row[i]), 0);
+            totalRow[i] = sum;
+        }
+        totalRow.push(Number(totalRow[2]) + Number(totalRow[5]));
+
+        newList.push(totalRow);
+        return newList;
     };
 
-    private onClickNextPage = () => {
-        setDocumentTitle('Referral Commission');
+    private addTradeText = list => {
+        const trades = x => `${x} trades`;
+        const curr = x => `${x} BTC`;
+        const users = x => `${x} users`;
+        const map = [x => x, trades, curr, users, trades, curr, curr];
+        return list.map(row => {
+            return row.map((item, index) => {
+                return map[index](item);
+            });
+        });
     };
 
+    private addIeoTotal = list => {
+        const totalCommission = list.reduce((acc, row) => Number(acc) + Number(row[3]), 0);
+        const totalCommissionL2 = list.reduce((acc, row) => Number(acc) + Number(row[5]), 0);
+
+        const totalRow: Array<string|number> = [
+            'Total amount', '', '',
+            totalCommission, '', totalCommissionL2,
+        ];
+        return [...list, totalRow];
+    };
+
+    private addIeoText = list => {
+        const map = [
+            x => x, x => x.toUpperCase(),
+            (x, curr) => `${x} ${curr}`,
+            x => `${x} BTC`,
+            (x, curr) => `${x} ${curr}`,
+            x => `${x} BTC`,
+        ];
+        const { ieo } = this.props;
+
+        return list.map((row, rowIndex) => {
+            if (rowIndex === list.length - 1) {
+                return row;
+            }
+            return row.map((item, colIndex) => {
+                const originalRow = ieo.referrals[rowIndex];
+
+                if ([1, 3].includes(colIndex)) {
+                    return map[colIndex](item, originalRow.investment_currency_id);
+                } else {
+                    return map[colIndex](item, '');
+                }
+            });
+        });
+    };
+
+    private addPartTotal = list => {
+        const res = ['Total amount', ''];
+        const { participants } = this.props;
+
+        for (const key of ['l2', 'l3', 'l4', 'l5']) {
+            const sumActive = participants.participants.reduce((acc, item) => {
+                return Number(acc) + Number(item[`active_${key}`]);
+            }, 0);
+            const sumTotal = participants.participants.reduce((acc, item) => {
+                return Number(acc) + Number(item[`total_${key}`]);
+            }, 0);
+            res.push(`${sumTotal} / ${sumActive}`);
+        }
+
+        return [...list, res];
+    };
+
+    private onClickNextTrade = () => {
+        // const { trade } = this.props;
+        // const { count, limit } = trade;
+        const { tradingPage } = this.state;
+        // const totalPages = Math.ceil(count / limit);
+
+        // if (tradingPage >= totalPages) {
+        //     return;
+        // }
+        this.setState({
+            tradingPage: tradingPage + 1,
+        }, this.fetchTrade);
+    };
+
+    private onClickPrevTrade = () => {
+        const { tradingPage } = this.state;
+
+        if (tradingPage <= 1) {
+            return;
+        }
+        this.setState({
+            tradingPage: tradingPage - 1,
+        }, this.fetchTrade);
+    };
+
+    private fetchTrade = () => {
+        const { pageSize, tradingPage } = this.state;
+        this.props.fetchReferralCommissionReferrals({
+            currencyId: this.props.commissionsInfo.currencyId, type:'trade',
+            limit: pageSize,
+            skip: (tradingPage - 1) * pageSize,
+        });
+    };
+
+
+    private onClickNextIeo = () => {
+        const { ieo } = this.props;
+        const { count, limit } = ieo;
+        const { ieoPage } = this.state;
+        const totalPages = Math.ceil(count / limit);
+
+        if (ieoPage >= totalPages) {
+            return;
+        }
+        this.setState({
+            ieoPage: ieoPage + 1,
+        }, this.fetchIeo);
+    };
+
+    private onClickPrevIeo = () => {
+        const { ieoPage } = this.state;
+
+        if (ieoPage <= 1) {
+            return;
+        }
+        this.setState({
+            ieoPage: ieoPage - 1,
+        }, this.fetchIeo);
+    };
+
+    private fetchIeo = () => {
+        const { pageSize, ieoPage } = this.state;
+        this.props.fetchReferralCommissionReferrals({
+            currencyId: this.props.commissionsInfo.currencyId, type:'ieo',
+            limit: pageSize,
+            skip: (ieoPage - 1) * pageSize,
+        });
+    };
+
+
+    private onClickNextPart = () => {
+        const { participants } = this.props;
+        const { count, limit } = participants;
+        const { referralsPage } = this.state;
+        const totalPages = Math.ceil(count / limit);
+
+        if (referralsPage >= totalPages) {
+            return;
+        }
+        this.setState({
+            referralsPage: referralsPage + 1,
+        }, this.fetchPart);
+    };
+
+    private onClickPrevPart = () => {
+        const { referralsPage } = this.state;
+
+        if (referralsPage <= 1) {
+            return;
+        }
+        this.setState({
+            referralsPage: referralsPage - 1,
+        }, this.fetchPart);
+    };
+
+    private fetchPart = () => {
+        const { pageSize, referralsPage } = this.state;
+        this.props.fetchReferralCommissionParticipants({
+            currencyId: this.props.commissionsInfo.currencyId,
+            limit: pageSize,
+            skip: (referralsPage - 1) * pageSize,
+        });
+    };
 
     private onCopy = () => {
         setDocumentTitle('copy');
@@ -401,12 +660,17 @@ class ReferralCommission extends React.Component<Props> {
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     commissionsInfo: selectReferralCommission(state),
     currencies: selectCurrencies(state),
+    balances: selectReferralCommission(state).data.balances,
+    trade: selectReferralCommission(state).data.trade,
+    ieo: selectReferralCommission(state).data.ieo,
+    participants: selectReferralCommission(state).data.participants,
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
     fetchCurrencies: () => dispatch(currenciesFetch()),
     fetchReferralCommissionBalances: payload => dispatch(referralCommissionBalancesFetch(payload)),
     fetchReferralCommissionReferrals: payload => dispatch(referralCommissionReferralsFetch(payload)),
+    fetchReferralCommissionParticipants: payload => dispatch(referralCommissionParticipantsFetch(payload)),
     changeCurrency: payload => dispatch(referralCommissionCurrencyChange(payload)),
 });
 
