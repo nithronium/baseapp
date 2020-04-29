@@ -112,24 +112,39 @@ class ReferralCommission extends React.Component<Props, State> {
         this.loadConvertedValues(nextProps);
     }
 
+    public getCurrencies = () => {
+        const { user } = this.props;
+        return {
+            fiat: user.activeCurrency || 'USD',
+            crypto: user.cryptoCurrency || 'BTC',
+            emrx: 'EMRX',
+        };
+    };
+
     public loadConvertedValues = async nextProps => {
-        const { balances } = this.props;
+        const { balances, user } = this.props;
         if (
-            !balances.earned ||
-            balances.earned.trade !== nextProps.balances.earned.trade
+            balances.earned && (
+                balances.earned.trade !== nextProps.balances.earned.trade ||
+                user.activeCurrency !== nextProps.user.activeCurrency ||
+                user.cryptoCurrency !== nextProps.user.cryptoCurrency
+            )
         ) {
             const totalReferrals = balances.participants.reduce((acc, item) => {
                 return Number(acc) + Number(item.total);
             }, 0);
 
+            const currencies = this.getCurrencies();
+            const currenciesArray = [currencies.crypto, currencies.emrx, currencies.fiat];
+
             const tradeConverted = await getExchangeRates(
-                'USD', nextProps.balances.earned.trade, ['BTC', 'EMRX', 'USD'],
+                'USD', nextProps.balances.earned.trade, currenciesArray,
             );
             const ieoConverted = await getExchangeRates(
-                'USD', nextProps.balances.earned.ieo, ['BTC', 'EMRX', 'USD'],
+                'USD', nextProps.balances.earned.ieo, currenciesArray,
             );
             const referralConverted = await getExchangeRates(
-                'USD', nextProps.balances.earned.trade / totalReferrals, ['BTC', 'EMRX', 'USD'],
+                'USD', nextProps.balances.earned.trade / totalReferrals, currenciesArray,
             );
             this.setState({
                 tradeConverted,
@@ -178,9 +193,11 @@ class ReferralCommission extends React.Component<Props, State> {
     }
 
     public render(){
-        const { trade, ieo, participants, balances } = this.props;
+        const { trade, ieo, participants, balances, user } = this.props;
         const { tradeConverted, ieoConverted, referralConverted } = this.state;
         console.log('balance', balances);
+
+        const currencies = this.getCurrencies();
 
         const levelTrade = balances.commission.trade.map((val, index) => {
             const refs = balances.participants[index].total;
@@ -314,9 +331,9 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="profit"
                                 title="Your Profit"
-                                text={`${this.getCoverteValue(tradeConverted, 'BTC')} BTC`}
-                                emrxConverted={`${this.getCoverteValue(tradeConverted, 'EMRX')} EMRX`}
-                                usdConverted={`≈ ${this.getCoverteValue(tradeConverted, 'USD')} USD`}
+                                text={`${this.getCoverteValue(tradeConverted, currencies.crypto)} ${currencies.crypto}`}
+                                emrxConverted={`${this.getCoverteValue(tradeConverted, currencies.emrx)} ${currencies.emrx}`}
+                                usdConverted={`≈ ${this.getCoverteValue(tradeConverted, currencies.fiat)} ${currencies.fiat}`}
                             />
                         </div>
                         <div>
@@ -326,7 +343,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 </legend>
                                 <CopyableTextField
                                     className={'cr-deposit-crypto__copyable-area'}
-                                    value={'www.google.com'}
+                                    value={`emirex.com/signup?refid=${user.referral_uid}`}
                                     fieldId={'copy_referral_link'}
                                     copyButtonText={'COPY'}
                                 />
@@ -387,9 +404,9 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="profit"
                                 title="Your Profit"
-                                text={`${this.getCoverteValue(ieoConverted, 'BTC')} BTC`}
-                                emrxConverted={`${this.getCoverteValue(ieoConverted, 'EMRX')} EMRX`}
-                                usdConverted={`≈ ${this.getCoverteValue(ieoConverted, 'USD')} USD`}
+                                text={`${this.getCoverteValue(ieoConverted, currencies.crypto)} ${currencies.crypto}`}
+                                emrxConverted={`${this.getCoverteValue(ieoConverted, currencies.emrx)} ${currencies.emrx}`}
+                                usdConverted={`≈ ${this.getCoverteValue(ieoConverted, currencies.fiat)} ${currencies.fiat}`}
                             />
                         </div>
                         <div>
@@ -399,7 +416,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 </legend>
                                 <CopyableTextField
                                     className={'cr-deposit-crypto__copyable-area'}
-                                    value={'www.google.com'}
+                                    value={`emirex.com/signup?refid=${user.referral_uid}`}
                                     fieldId={'copy_referral_link'}
                                     copyButtonText={'COPY'}
                                 />
@@ -466,9 +483,9 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="profit"
                                 title="Profit per referral"
-                                text={`${this.getCoverteValue(referralConverted, 'BTC')} BTC`}
-                                emrxConverted={`${this.getCoverteValue(referralConverted, 'EMRX')} EMRX`}
-                                usdConverted={`≈ ${this.getCoverteValue(referralConverted, 'USD')} USD`}
+                                text={`${this.getCoverteValue(referralConverted, currencies.crypto)} ${currencies.fiat}`}
+                                emrxConverted={`${this.getCoverteValue(referralConverted, currencies.emrx)} ${currencies.emrx}`}
+                                usdConverted={`≈ ${this.getCoverteValue(referralConverted, currencies.fiat)} ${currencies.fiat}`}
                             />
                         </div>
                         <div>
@@ -478,7 +495,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 </legend>
                                 <CopyableTextField
                                     className={'cr-deposit-crypto__copyable-area'}
-                                    value={'www.google.com'}
+                                    value={`emirex.com/signup?refid=${user.referral_uid}`}
                                     fieldId={'copy_referral_link'}
                                     copyButtonText={'COPY'}
                                 />
@@ -723,6 +740,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     trade: selectReferralCommission(state).data.trade,
     ieo: selectReferralCommission(state).data.ieo,
     participants: selectReferralCommission(state).data.participants,
+    user: state.user.profile,
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
