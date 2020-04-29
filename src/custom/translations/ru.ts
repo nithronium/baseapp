@@ -163,7 +163,7 @@ export const ru: LangType = {
     'page.body.wallets.whitelist.addAddressModal.body.coinDescription': 'Описание (необязательно)',
 
     'page.body.wallets.whitelist.addAddressModal.body.fiatName': 'Описание',
-    'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': 'Имя и фамилия получателя ',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': 'Имя и фамилия (должно совпадать с именем, указанным в вашем профиле)',
     'page.body.wallets.whitelist.addAddressModal.body.fiatAccountNumber': 'Номер счета',
     'page.body.wallets.whitelist.addAddressModal.body.fiatBankName': 'Название банка',
     'page.body.wallets.whitelist.addAddressModal.body.fiatBankSwiftCode': 'SWIFT-код',
