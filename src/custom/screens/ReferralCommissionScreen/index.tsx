@@ -25,6 +25,8 @@ import {
 } from '../../../modules';
 import { InfoCard, LevelCard } from '../../components/ReferralCommission';
 
+import { getExchangeRates } from '../../../api';
+
 interface DispatchProps {
     fetchReferralCommissionBalances: typeof referralCommissionBalancesFetch;
     fetchReferralCommissionReferrals: typeof referralCommissionReferralsFetch;
@@ -46,11 +48,23 @@ interface ReduxProps {
 
 type Props = DispatchProps & InjectedIntlProps & ReduxProps;
 
+interface ConvertedResponse {
+    symbol: string;
+    amount: number;
+    quote: [{
+        symbol: string;
+        price: number;
+    }];
+}
+
 interface State {
     tradingPage: number;
     ieoPage: number;
     referralsPage: number;
     pageSize: number;
+    tradeConverted?: ConvertedResponse;
+    ieoConverted?: ConvertedResponse;
+    referralConverted?: ConvertedResponse;
 }
 
 class ReferralCommission extends React.Component<Props, State> {
@@ -94,7 +108,51 @@ class ReferralCommission extends React.Component<Props, State> {
         if (nextProps.currencies.length === 0 && nextProps.currencies !== currencies) {
             this.props.fetchCurrencies();
         }
+        // tslint:disable-next-line
+        this.loadConvertedValues(nextProps);
     }
+
+    public loadConvertedValues = async nextProps => {
+        const { balances } = this.props;
+        if (
+            !balances.earned ||
+            balances.earned.trade !== nextProps.balances.earned.trade
+        ) {
+            const totalReferrals = balances.participants.reduce((acc, item) => {
+                return Number(acc) + Number(item.total);
+            }, 0);
+
+            const tradeConverted = await getExchangeRates(
+                'USD', nextProps.balances.earned.trade, ['BTC', 'EMRX', 'USD'],
+            );
+            const ieoConverted = await getExchangeRates(
+                'USD', nextProps.balances.earned.ieo, ['BTC', 'EMRX', 'USD'],
+            );
+            const referralConverted = await getExchangeRates(
+                'USD', nextProps.balances.earned.trade / totalReferrals, ['BTC', 'EMRX', 'USD'],
+            );
+            this.setState({
+                tradeConverted,
+                ieoConverted,
+                referralConverted,
+            });
+
+            console.log('converted',
+            tradeConverted,
+            ieoConverted,
+            referralConverted,
+            );
+        }
+    };
+
+    public getCoverteValue = (converted: ConvertedResponse|undefined, curr: string) => {
+        if (!converted) {
+            return 0;
+        }
+        return converted.quote.filter(item => {
+            return item.symbol.toLowerCase() === curr.toLowerCase();
+        })[0].price;
+    };
 
     public changeCurrentCurrency = currencyId => {
         // const currencyIdFormatted = currencyId.toLowerCase();
@@ -121,6 +179,7 @@ class ReferralCommission extends React.Component<Props, State> {
 
     public render(){
         const { trade, ieo, participants, balances } = this.props;
+        const { tradeConverted, ieoConverted, referralConverted } = this.state;
         console.log('balance', balances);
 
         const levelTrade = balances.commission.trade.map((val, index) => {
@@ -255,9 +314,9 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="profit"
                                 title="Your Profit"
-                                text={`${balances.earned.trade} BTC`}
-                                emrxConverted={`${balances.earned.trade} EMRX`}
-                                usdConverted={`≈ ${balances.earned.trade} USD`}
+                                text={`${this.getCoverteValue(tradeConverted, 'BTC')} BTC`}
+                                emrxConverted={`${this.getCoverteValue(tradeConverted, 'EMRX')} EMRX`}
+                                usdConverted={`≈ ${this.getCoverteValue(tradeConverted, 'USD')} USD`}
                             />
                         </div>
                         <div>
@@ -328,9 +387,9 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="profit"
                                 title="Your Profit"
-                                text={`${balances.earned.ieo} BTC`}
-                                emrxConverted={`${balances.earned.ieo} EMRX`}
-                                usdConverted={`≈ ${balances.earned.ieo} USD`}
+                                text={`${this.getCoverteValue(ieoConverted, 'BTC')} BTC`}
+                                emrxConverted={`${this.getCoverteValue(ieoConverted, 'EMRX')} EMRX`}
+                                usdConverted={`≈ ${this.getCoverteValue(ieoConverted, 'USD')} USD`}
                             />
                         </div>
                         <div>
@@ -407,9 +466,9 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="profit"
                                 title="Profit per referral"
-                                text={`${balances.earned.trade / totalReferrals} `}
-                                emrxConverted={`${balances.earned.trade / totalReferrals} EMRX`}
-                                usdConverted={`≈ ${balances.earned.trade / totalReferrals} USD`}
+                                text={`${this.getCoverteValue(referralConverted, 'BTC')} BTC`}
+                                emrxConverted={`${this.getCoverteValue(referralConverted, 'EMRX')} EMRX`}
+                                usdConverted={`≈ ${this.getCoverteValue(referralConverted, 'USD')} USD`}
                             />
                         </div>
                         <div>
