@@ -200,7 +200,8 @@ class ReferralCommission extends React.Component<Props, State> {
         const currencies = this.getCurrencies();
 
         const levelTrade = balances.commission.trade.map((val, index) => {
-            const refs = balances.participants[index].total;
+            const participant = balances.participants[index] || { total: 0 };
+            const refs = participant.total;
             return {
                 header: `Commission: ${val * 100}%`,
                 subheader: `≈ ${val / 10}% from each trade!`,
@@ -218,7 +219,8 @@ class ReferralCommission extends React.Component<Props, State> {
 
 
         const levelIeo = balances.commission.ieo.map((val, index) => {
-            const refs = balances.investors[index].total;
+            const inverstor = balances.investors[index] || { total: 0 };
+            const refs = inverstor.total;
             return {
                 header: `Commission: ${val * 100}%`,
                 subheader: `= ${val * 100}% from each investment!`,
