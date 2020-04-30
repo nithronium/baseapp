@@ -55,6 +55,12 @@ interface ConvertedResponse {
     quote: [{
         symbol: string;
         price: number;
+    }, {
+        symbol: string;
+        price: number;
+    }, {
+        symbol: string;
+        price: number;
     }];
 }
 
@@ -66,6 +72,7 @@ interface State {
     tradeConverted?: ConvertedResponse;
     ieoConverted?: ConvertedResponse;
     referralConverted?: ConvertedResponse;
+    ratio?: ConvertedResponse;
 }
 
 class ReferralCommission extends React.Component<Props, State> {
@@ -76,6 +83,20 @@ class ReferralCommission extends React.Component<Props, State> {
             ieoPage: 1,
             referralsPage: 1,
             pageSize: 10,
+            ratio: {
+                symbol: 'USD',
+                amount: 1,
+                quote: [{
+                    symbol: 'BTC',
+                    price: 1,
+                }, {
+                    symbol: 'EMRX',
+                    price: 1,
+                }, {
+                    symbol: 'USD',
+                    price: 1,
+                }],
+            },
         };
     }
 
@@ -139,7 +160,11 @@ class ReferralCommission extends React.Component<Props, State> {
             }, 0);
 
             const currencies = this.getCurrencies();
-            const currenciesArray = [currencies.crypto, currencies.emrx, currencies.fiat];
+            const currenciesArray = [currencies.crypto, currencies.emrx, user.activeCurrency || currencies.fiat];
+
+            const ratio = await getExchangeRates(
+                'USD', 1, currenciesArray,
+            );
 
             const tradeConverted = await getExchangeRates(
                 'USD', nextProps.balances.earned.trade, currenciesArray,
@@ -154,6 +179,7 @@ class ReferralCommission extends React.Component<Props, State> {
                 tradeConverted,
                 ieoConverted,
                 referralConverted,
+                ratio,
             });
 
             console.log('converted',
@@ -200,10 +226,23 @@ class ReferralCommission extends React.Component<Props, State> {
 
     public getUser = (props?) => {
         let { user } = (props || this.props);
-        // console.log('user', user);
         user = user && user.userData;
         user = user && user.user;
         return user || {};
+    };
+
+    public convertToBtc = value => {
+        const { ratio } = this.state;
+
+        if (!ratio) {
+            return 0;
+        } else {
+            console.log('ratio', ratio);
+            const btc = ratio.quote.filter(item => {
+                return item.symbol.toLowerCase() === 'btc';
+            })[0];
+            return value * btc.price;
+        }
     };
 
     public render(){
@@ -231,6 +270,8 @@ class ReferralCommission extends React.Component<Props, State> {
         const tradeRefs = balances.participants.reduce((acc, item) => {
             return Number(acc) + Number(item.total);
         }, 0);
+
+        console.log(this.state.ratio, 'this.state.ratio');
 
 
         const levelIeo = balances.commission.ieo.map((val, index) => {
@@ -268,7 +309,12 @@ class ReferralCommission extends React.Component<Props, State> {
 
 
         let tradeData = trade.referrals.map(data => {
-            const res = this.tradeFields.map(key => data[key]);
+            const res = this.tradeFields.map((key, index) => {
+                if ([2, 5].includes(index)) {
+                    return this.convertToBtc(data[key]);
+                }
+                return data[key];
+            });
             res.push(Number(data.commission) + Number(data.commissionUnder));
             return res;
         });
@@ -297,7 +343,12 @@ class ReferralCommission extends React.Component<Props, State> {
         ];
 
         let ieoData = ieo.referrals.map(row => {
-            return this.ieoFields.map(key => row[key]);
+            return this.ieoFields.map((key, index) => {
+                if ([3, 5].includes(index)) {
+                    return this.convertToBtc(row[key]);
+                }
+                return row[key];
+            });
         });
         ieoData = this.addIeoTotal(ieoData);
         ieoData = this.addIeoText(ieoData);
@@ -320,8 +371,6 @@ class ReferralCommission extends React.Component<Props, State> {
         });
 
         partData = this.addPartTotal(partData);
-
-        console.log('origin', window.location.origin);
 
         const activeCurrency = user.activeCurrency || 'USD';
 
@@ -574,7 +623,6 @@ class ReferralCommission extends React.Component<Props, State> {
             totalRow[i] = sum;
         }
         totalRow.push(Number(totalRow[2]) + Number(totalRow[5]));
-        // console.log('Number(totalRow[2]) + Number(totalRow[5])', Number(totalRow[2]) + Number(totalRow[5]));
 
         newList.push(totalRow);
         return newList;
