@@ -328,7 +328,7 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="commission"
                                 title="Commission rate"
-                                text={`MAX - ${tradeMaxCommission}%`}
+                                text={`MAX = ${tradeMaxCommission}%`}
                             />
                             <InfoCard
                                 iconName="referrals"
@@ -406,7 +406,7 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="commission"
                                 title="Commission rate"
-                                text={`MAX - ${ieoMaxCommission}%`}
+                                text={`MAX = ${ieoMaxCommission}%`}
                             />
                             <InfoCard
                                 iconName="referrals"
