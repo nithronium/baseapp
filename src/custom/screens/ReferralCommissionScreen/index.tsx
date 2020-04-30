@@ -122,7 +122,8 @@ class ReferralCommission extends React.Component<Props, State> {
     };
 
     public loadConvertedValues = async nextProps => {
-        const { balances, user } = this.props;
+        const { balances } = this.props;
+        const user = this.getUser();
         if (
             balances.earned && (
                 balances.earned.trade !== nextProps.balances.earned.trade ||
@@ -192,10 +193,19 @@ class ReferralCommission extends React.Component<Props, State> {
         this.props.fetchReferralCommissionReferrals({currencyId, type, skip, limit});
     }
 
+    public getUser = () => {
+        let { user } = this.props;
+        // console.log('user', user);
+        user = user && user.userData;
+        user = user && user.user;
+        return user || {};
+    };
+
     public render(){
-        const { trade, ieo, participants, balances, user } = this.props;
+        const { trade, ieo, participants, balances } = this.props;
         const { tradeConverted, ieoConverted, referralConverted } = this.state;
-        console.log('balance', balances);
+        const user = this.getUser();
+        console.log('user', user);
 
         const currencies = this.getCurrencies();
 
@@ -345,7 +355,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 </legend>
                                 <CopyableTextField
                                     className={'cr-deposit-crypto__copyable-area'}
-                                    value={`emirex.com/signup?refid=${user.referral_uid}`}
+                                    value={`emirex.com/signup?refid=${user.uid}`}
                                     fieldId={'copy_referral_link'}
                                     copyButtonText={'COPY'}
                                 />
@@ -418,7 +428,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 </legend>
                                 <CopyableTextField
                                     className={'cr-deposit-crypto__copyable-area'}
-                                    value={`emirex.com/signup?refid=${user.referral_uid}`}
+                                    value={`emirex.com/signup?refid=${user.uid}`}
                                     fieldId={'copy_referral_link'}
                                     copyButtonText={'COPY'}
                                 />
@@ -497,7 +507,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 </legend>
                                 <CopyableTextField
                                     className={'cr-deposit-crypto__copyable-area'}
-                                    value={`emirex.com/signup?refid=${user.referral_uid}`}
+                                    value={`emirex.com/signup?refid=${user.uid}`}
                                     fieldId={'copy_referral_link'}
                                     copyButtonText={'COPY'}
                                 />
