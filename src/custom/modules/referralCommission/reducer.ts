@@ -72,29 +72,15 @@ const initialState: ReferralCommissionState = {
         },
         balances: {
             commission: {
-                trade: [0, 0],
-                ieo : [0, 0],
+                trade: [],
+                ieo : [],
             },
             earned: {
                 trade: 0,
                 ieo: 0,
             },
-            participants: [{
-                active: 0,
-                level: '1',
-                total: 3,
-            }, {
-                active: 0,
-                level: '2',
-                total: 1,
-            }],
-            investors: [{
-                level: '1',
-                total: 3,
-            }, {
-                level: '2',
-                total: 6,
-            }],
+            participants: [],
+            investors: [],
             loading: true,
         },
     },
@@ -107,7 +93,6 @@ export const referralCommissionReducer = (state = initialState, action: Referral
     // console.log('action.type', action.type);
     switch (action.type) {
         case REFERRAL_COMMISSION_BALANCES_DATA: {
-            console.log('action.payload from reducer', action.payload);
             const newState = {
                 ...state,
             };
