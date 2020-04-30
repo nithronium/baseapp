@@ -241,8 +241,12 @@ class ReferralCommission extends React.Component<Props, State> {
             const btc = ratio.quote.filter(item => {
                 return item.symbol.toLowerCase() === 'btc';
             })[0];
-            return Number((value * btc.price).toFixed(8));
+            return this.trimNumber(value * btc.price);
         }
+    };
+
+    public trimNumber = value => {
+        return Number((Number(value) || 0).toFixed(8));
     };
 
     public render(){
@@ -315,7 +319,7 @@ class ReferralCommission extends React.Component<Props, State> {
                 }
                 return data[key];
             });
-            res.push(Number(data.commission) + Number(data.commissionUnder));
+            res.push(this.trimNumber(Number(data.commission) + Number(data.commissionUnder)));
             return res;
         });
 
@@ -401,9 +405,9 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="profit"
                                 title="Your Profit"
-                                text={`${this.getCoverteValue(tradeConverted, currencies.crypto)} ${currencies.crypto}`}
-                                emrxConverted={`${this.getCoverteValue(tradeConverted, currencies.emrx)} ${currencies.emrx}`}
-                                usdConverted={`≈ ${this.getCoverteValue(tradeConverted, activeCurrency)} ${activeCurrency}`}
+                                text={`${this.trimNumber(this.getCoverteValue(tradeConverted, currencies.crypto))} ${currencies.crypto}`}
+                                emrxConverted={`${this.trimNumber(this.getCoverteValue(tradeConverted, currencies.emrx))} ${currencies.emrx}`}
+                                usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(tradeConverted, activeCurrency))} ${activeCurrency}`}
                             />
                         </div>
                         <div>
@@ -474,9 +478,9 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="profit"
                                 title="Your Profit"
-                                text={`${this.getCoverteValue(ieoConverted, currencies.crypto)} ${currencies.crypto}`}
-                                emrxConverted={`${this.getCoverteValue(ieoConverted, currencies.emrx)} ${currencies.emrx}`}
-                                usdConverted={`≈ ${this.getCoverteValue(ieoConverted, activeCurrency)} ${activeCurrency}`}
+                                text={`${this.trimNumber(this.getCoverteValue(ieoConverted, currencies.crypto))} ${currencies.crypto}`}
+                                emrxConverted={`${this.trimNumber(this.getCoverteValue(ieoConverted, currencies.emrx))} ${currencies.emrx}`}
+                                usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(ieoConverted, activeCurrency))} ${activeCurrency}`}
                             />
                         </div>
                         <div>
@@ -553,9 +557,9 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="profit"
                                 title="Profit per referral"
-                                text={`${this.getCoverteValue(referralConverted, currencies.crypto)} ${currencies.crypto}`}
-                                emrxConverted={`${this.getCoverteValue(referralConverted, currencies.emrx)} ${currencies.emrx}`}
-                                usdConverted={`≈ ${this.getCoverteValue(referralConverted, activeCurrency)} ${activeCurrency}`}
+                                text={`${this.trimNumber(this.getCoverteValue(referralConverted, currencies.crypto))} ${currencies.crypto}`}
+                                emrxConverted={`${this.trimNumber(this.getCoverteValue(referralConverted, currencies.emrx))} ${currencies.emrx}`}
+                                usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(referralConverted, activeCurrency))} ${activeCurrency}`}
                             />
                         </div>
                         <div>
@@ -620,9 +624,9 @@ class ReferralCommission extends React.Component<Props, State> {
         const fields = this.tradeFields.slice(1);
         for (let i = 1; i < fields.length + 1; i++) {
             const sum = newList.reduce((acc, row) => Number(acc) + Number(row[i]), 0);
-            totalRow[i] = sum;
+            totalRow[i] = this.trimNumber(sum);
         }
-        totalRow.push(Number(totalRow[2]) + Number(totalRow[5]));
+        totalRow.push(this.trimNumber(Number(totalRow[2]) + Number(totalRow[5])));
 
         newList.push(totalRow);
         return newList;
@@ -646,7 +650,8 @@ class ReferralCommission extends React.Component<Props, State> {
 
         const totalRow: Array<string|number> = [
             'Total amount', '', '',
-            totalCommission, '', totalCommissionL2,
+            `${this.trimNumber(totalCommission)} BTC`, '',
+            `${this.trimNumber(totalCommissionL2)} BTC`,
         ];
         return [...list, totalRow];
     };
