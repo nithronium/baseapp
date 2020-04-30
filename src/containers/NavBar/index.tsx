@@ -155,12 +155,12 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                             </React.Fragment>
                             : <React.Fragment>
                                 <div className="log-btn">
-                                    <a href={`${baseURL}/signin`}>
+                                    <a href={`${baseURL}/signin`} onClick={() => this.openDropdown('')}>
                                         <FormattedMessage id={'page.header.navbar.signIn'} />
                                     </a>
                                 </div>
                                 <div className="log-btn sign-up">
-                                    <a href={`${baseURL}/signup`}>
+                                    <a href={`${baseURL}/signup`} onClick={() => this.openDropdown('')}>
                                         <FormattedMessage id={'page.header.signUp'} />
                                     </a>
                                 </div>
@@ -356,7 +356,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     {!option.logout
                         ?
                         !isMainSite
-                            ? <Link to={`${option.href}`}>
+                            ? <Link to={`${option.href}`} onClick={() => this.openDropdown('')}>
                                 {option.label && <div className="label">
                                     <FormattedMessage id={option.label}/>
                                 </div>}
@@ -364,7 +364,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                     <FormattedMessage id={option.description}/>
                                 </div>}
                             </Link>
-                            : <a href={`${path}${currentLanguage === 'en' ? '' : `/${currentLanguage}`}${option.href}`}>
+                            : <a href={`${path}${currentLanguage === 'en' ? '' : `/${currentLanguage}`}${option.href}`} onClick={() => this.openDropdown('')}>
                                 {option.label && <div className="label">
                                     <FormattedMessage id={option.label}/>
                                 </div>}
@@ -384,8 +384,6 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         const { isLoggedIn } = this.props;
         const { openMenuType, openMobileMenu } = this.state;
         const isMobileOpen = openMobileMenu === 'right';
-        // tslint:disable-next-line:no-console
-        console.log('...........isLoggedIn', isLoggedIn);
         return (<div className="dropdown-block user">
             <div className={`desktop-switcher-button${openMenuType === 'orders' ? ' active-menu' : ''}`} onClick={() => this.openDropdown('user')}>
                 {!isMobileOpen && <span className="icon">
@@ -437,12 +435,12 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     </div>
                 </li>
                 <li>
-                    <Link to={'/wallets'}>
+                    <Link to={'/wallets'} onClick={() => this.openDropdown('')}>
                         <FormattedMessage id={'page.header.deposit_withdraw'}/>
                     </Link>
                 </li>
                 <li>
-                    <Link to={'/buycrypto'}>
+                    <Link to={'/buycrypto'} onClick={() => this.openDropdown('')}>
                         <FormattedMessage id={'page.header.buy_crypto'}/>
                     </Link>
                 </li>
