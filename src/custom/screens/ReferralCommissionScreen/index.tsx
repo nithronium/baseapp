@@ -160,7 +160,7 @@ class ReferralCommission extends React.Component<Props, State> {
             }, 0);
 
             const currencies = this.getCurrencies();
-            const currenciesArray = [currencies.crypto, currencies.emrx, user.activeCurrency || currencies.fiat];
+            const currenciesArray = [currencies.crypto, currencies.emrx, this.getUser(nextProps).activeCurrency || currencies.fiat];
 
             const ratio = await getExchangeRates(
                 'USD', 1, currenciesArray,
