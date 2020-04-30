@@ -146,7 +146,6 @@ class ReferralCommission extends React.Component<Props, State> {
     public loadConvertedValues = async nextProps => {
         const { balances } = this.props;
         const user = this.getUser();
-        console.log('user', user);
         if (
             balances.earned && (
                 balances.earned.trade !== nextProps.balances.earned.trade ||
@@ -181,12 +180,6 @@ class ReferralCommission extends React.Component<Props, State> {
                 referralConverted,
                 ratio,
             });
-
-            console.log('converted',
-            tradeConverted,
-            ieoConverted,
-            referralConverted,
-            );
         }
     };
 
@@ -237,7 +230,6 @@ class ReferralCommission extends React.Component<Props, State> {
         if (!ratio) {
             return 0;
         } else {
-            console.log('ratio', ratio);
             const btc = ratio.quote.filter(item => {
                 return item.symbol.toLowerCase() === 'btc';
             })[0];
@@ -274,9 +266,6 @@ class ReferralCommission extends React.Component<Props, State> {
         const tradeRefs = balances.participants.reduce((acc, item) => {
             return Number(acc) + Number(item.total);
         }, 0);
-
-        console.log(this.state.ratio, 'this.state.ratio');
-
 
         const levelIeo = balances.commission.ieo.map((val, index) => {
             const inverstor = balances.investors[index] || { total: 0 };
@@ -367,7 +356,7 @@ class ReferralCommission extends React.Component<Props, State> {
         ];
 
         let partData = participants.participants.map(row => {
-            const res = [row.email, row.active];
+            const res = [row.email, row.state === 'active' ? 'Yes' : 'No'];
             for (const key of ['l2', 'l3', 'l4', 'l5']) {
                 res.push(`${row[`total_${key}`]} / ${row[`active_${key}`]} `);
             }
@@ -683,7 +672,10 @@ class ReferralCommission extends React.Component<Props, State> {
     };
 
     private addPartTotal = list => {
-        const res = ['Total amount', ''];
+        const active = list.reduce((acc, item) => {
+            return Number(acc) + (item[1] === 'Yes' ? 1 : 0);
+        }, 0);
+        const res = ['Total amount', `${active} Yes / ${list.length - active} No`];
         const { participants } = this.props;
 
         for (const key of ['l2', 'l3', 'l4', 'l5']) {
