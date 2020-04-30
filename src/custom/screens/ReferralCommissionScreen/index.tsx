@@ -241,7 +241,7 @@ class ReferralCommission extends React.Component<Props, State> {
             const btc = ratio.quote.filter(item => {
                 return item.symbol.toLowerCase() === 'btc';
             })[0];
-            return value * btc.price;
+            return Number((value * btc.price).toFixed(8));
         }
     };
 
