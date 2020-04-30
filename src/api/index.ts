@@ -129,7 +129,7 @@ export const getReferral = async body => {
 
 export const getExchangeRates = async (currency: string, amount: number, currencies: string[]) => {
     const res = await axios.get(
-        `${exchangeRatesUrl}/tools/price-conversion?symbol=${currency}&amount=${amount}&convert=${currencies.join(',')}`,
+        `${exchangeRatesUrl}/tools/price-conversion?symbol=${currency}&amount=${encodeURIComponent(amount.toString())}&convert=${currencies.join(',')}`,
     );
     return res.data;
 };

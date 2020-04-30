@@ -4,6 +4,15 @@
     margin: 0;
     padding-bottom: 30px;
 
+    .cr-table-container {
+        max-width: 960px;
+        overflow-x: auto;
+
+        .cr-table thead th {
+            top: 0;
+        }
+    }
+
     &__level-card {
         background: #263434;
         border-radius: 4px;
@@ -264,15 +273,6 @@
             p {
                 color: #648280;
             }
-        }
-    }
-
-    .cr-table-container {
-        max-width: 960px;
-        overflow-x: auto;
-
-        .cr-table thead th {
-            top: 0;
         }
     }
 }
