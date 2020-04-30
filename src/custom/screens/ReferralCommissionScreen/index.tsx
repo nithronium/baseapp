@@ -585,7 +585,7 @@ class ReferralCommission extends React.Component<Props, State> {
 
     private addIeoText = list => {
         const map = [
-            x => x, x => x.toUpperCase(),
+            x => x, x => (x || '').toUpperCase(),
             (x, curr) => `${x} ${curr}`,
             x => `${x} BTC`,
             (x, curr) => `${x} ${curr}`,
