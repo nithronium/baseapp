@@ -132,6 +132,8 @@ class ReferralCommission extends React.Component<Props, State> {
         }
         // tslint:disable-next-line
         this.loadConvertedValues(nextProps);
+        // tslint:disable-next-line
+        this.loadReferralConverted(nextProps);
     }
 
     public getCurrencies = () => {
@@ -154,9 +156,9 @@ class ReferralCommission extends React.Component<Props, State> {
                 // user.cryptoCurrency !== nextProps.user.cryptoCurrency
             )
         ) {
-            const totalReferrals = balances.participants.reduce((acc, item) => {
-                return Number(acc) + Number(item.total);
-            }, 0);
+            // const totalReferrals = balances.participants.reduce((acc, item) => {
+            //     return Number(acc) + Number(item.total);
+            // }, 0);
 
             const currencies = this.getCurrencies();
             const currenciesArray = [currencies.crypto, currencies.emrx, this.getUser(nextProps).activeCurrency || currencies.fiat];
@@ -171,14 +173,37 @@ class ReferralCommission extends React.Component<Props, State> {
             const ieoConverted = await getExchangeRates(
                 'USD', nextProps.balances.earned.ieo, currenciesArray,
             );
+            // const referralConverted = await getExchangeRates(
+            //     'USD', nextProps.balances.earned.trade / totalReferrals, currenciesArray,
+            // );
+            this.setState({
+                tradeConverted,
+                ieoConverted,
+                // referralConverted,
+                ratio,
+            });
+        }
+    };
+
+    public loadReferralConverted = async nextProps => {
+        const { balances } = this.props;
+        const user = this.getUser(nextProps);
+        if (
+            balances.participants && (
+                balances.participants.length !== nextProps.balances.participants.length
+            )
+        ) {
+            const totalReferrals = nextProps.balances.participants.reduce((acc, item) => {
+                return Number(acc) + Number(item.total);
+            }, 0);
+
+            const currencies = this.getCurrencies();
+            const currenciesArray = [currencies.crypto, currencies.emrx, user.activeCurrency || currencies.fiat];
             const referralConverted = await getExchangeRates(
                 'USD', nextProps.balances.earned.trade / totalReferrals, currenciesArray,
             );
             this.setState({
-                tradeConverted,
-                ieoConverted,
                 referralConverted,
-                ratio,
             });
         }
     };
