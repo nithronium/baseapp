@@ -130,7 +130,7 @@ class ReferralCommission extends React.Component<Props, State> {
             balances.earned && (
                 balances.earned.trade !== nextProps.balances.earned.trade ||
                 balances.earned.ieo !== nextProps.balances.earned.ieo ||
-                user.activeCurrency !== nextProps.user.activeCurrency
+                user.activeCurrency !== this.getUser(nextProps).activeCurrency
                 // user.cryptoCurrency !== nextProps.user.cryptoCurrency
             )
         ) {
@@ -196,8 +196,8 @@ class ReferralCommission extends React.Component<Props, State> {
         this.props.fetchReferralCommissionReferrals({currencyId, type, skip, limit});
     }
 
-    public getUser = () => {
-        let { user } = this.props;
+    public getUser = (props?) => {
+        let { user } = (props || this.props);
         // console.log('user', user);
         user = user && user.userData;
         user = user && user.user;
@@ -321,6 +321,8 @@ class ReferralCommission extends React.Component<Props, State> {
 
         console.log('origin', window.location.origin);
 
+        const activeCurrency = user.activeCurrency || 'USD';
+
         return (
             <div className="pg-referral-commission">
                 <div className="pg-referral-commission__container">
@@ -350,7 +352,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 title="Your Profit"
                                 text={`${this.getCoverteValue(tradeConverted, currencies.crypto)} ${currencies.crypto}`}
                                 emrxConverted={`${this.getCoverteValue(tradeConverted, currencies.emrx)} ${currencies.emrx}`}
-                                usdConverted={`≈ ${this.getCoverteValue(tradeConverted, currencies.fiat)} ${currencies.fiat}`}
+                                usdConverted={`≈ ${this.getCoverteValue(tradeConverted, activeCurrency)} ${activeCurrency}`}
                             />
                         </div>
                         <div>
@@ -423,7 +425,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 title="Your Profit"
                                 text={`${this.getCoverteValue(ieoConverted, currencies.crypto)} ${currencies.crypto}`}
                                 emrxConverted={`${this.getCoverteValue(ieoConverted, currencies.emrx)} ${currencies.emrx}`}
-                                usdConverted={`≈ ${this.getCoverteValue(ieoConverted, currencies.fiat)} ${currencies.fiat}`}
+                                usdConverted={`≈ ${this.getCoverteValue(ieoConverted, activeCurrency)} ${activeCurrency}`}
                             />
                         </div>
                         <div>
@@ -502,7 +504,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 title="Profit per referral"
                                 text={`${this.getCoverteValue(referralConverted, currencies.crypto)} ${currencies.crypto}`}
                                 emrxConverted={`${this.getCoverteValue(referralConverted, currencies.emrx)} ${currencies.emrx}`}
-                                usdConverted={`≈ ${this.getCoverteValue(referralConverted, currencies.fiat)} ${currencies.fiat}`}
+                                usdConverted={`≈ ${this.getCoverteValue(referralConverted, activeCurrency)} ${activeCurrency}`}
                             />
                         </div>
                         <div>
