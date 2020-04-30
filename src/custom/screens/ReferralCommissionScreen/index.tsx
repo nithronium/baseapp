@@ -11,6 +11,7 @@ import { Pagination, Table } from '@openware/components';
 
 import { setDocumentTitle } from '../../../helpers';
 import {
+    alertPush,
     currenciesFetch,
     Currency,
     referralCommissionBalancesFetch,
@@ -78,7 +79,7 @@ class ReferralCommission extends React.Component<Props, State> {
         };
     }
 
-    private tradeFields = ['email', 'trades', 'commissions',
+    private tradeFields = ['email', 'trades', 'commission',
         'tradersUnder', 'tradesUnder', 'commissionUnder'];
 
     private ieoFields = ['email', 'ieo', 'investment', 'commission',
@@ -124,11 +125,13 @@ class ReferralCommission extends React.Component<Props, State> {
     public loadConvertedValues = async nextProps => {
         const { balances } = this.props;
         const user = this.getUser();
+        console.log('user', user);
         if (
             balances.earned && (
                 balances.earned.trade !== nextProps.balances.earned.trade ||
-                user.activeCurrency !== nextProps.user.activeCurrency ||
-                user.cryptoCurrency !== nextProps.user.cryptoCurrency
+                balances.earned.ieo !== nextProps.balances.earned.ieo ||
+                user.activeCurrency !== nextProps.user.activeCurrency
+                // user.cryptoCurrency !== nextProps.user.cryptoCurrency
             )
         ) {
             const totalReferrals = balances.participants.reduce((acc, item) => {
@@ -316,6 +319,8 @@ class ReferralCommission extends React.Component<Props, State> {
 
         partData = this.addPartTotal(partData);
 
+        console.log('origin', window.location.origin);
+
         return (
             <div className="pg-referral-commission">
                 <div className="pg-referral-commission__container">
@@ -355,7 +360,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 </legend>
                                 <CopyableTextField
                                     className={'cr-deposit-crypto__copyable-area'}
-                                    value={`emirex.com/signup?refid=${user.uid}`}
+                                    value={`${window.location.origin}/signup?refid=${user.uid}`}
                                     fieldId={'copy_referral_link'}
                                     copyButtonText={'COPY'}
                                 />
@@ -428,7 +433,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 </legend>
                                 <CopyableTextField
                                     className={'cr-deposit-crypto__copyable-area'}
-                                    value={`emirex.com/signup?refid=${user.uid}`}
+                                    value={`${window.location.origin}/signup?refid=${user.uid}`}
                                     fieldId={'copy_referral_link'}
                                     copyButtonText={'COPY'}
                                 />
@@ -507,7 +512,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 </legend>
                                 <CopyableTextField
                                     className={'cr-deposit-crypto__copyable-area'}
-                                    value={`emirex.com/signup?refid=${user.uid}`}
+                                    value={`${window.location.origin}/signup?refid=${user.uid}`}
                                     fieldId={'copy_referral_link'}
                                     copyButtonText={'COPY'}
                                 />
@@ -741,7 +746,7 @@ class ReferralCommission extends React.Component<Props, State> {
     };
 
     private onCopy = () => {
-        setDocumentTitle('copy');
+        this.props.fetchSuccess({ message: ['referralCommission.copied'], type: 'success' });
     };
 }
 
@@ -760,6 +765,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
     fetchReferralCommissionBalances: payload => dispatch(referralCommissionBalancesFetch(payload)),
     fetchReferralCommissionReferrals: payload => dispatch(referralCommissionReferralsFetch(payload)),
     fetchReferralCommissionParticipants: payload => dispatch(referralCommissionParticipantsFetch(payload)),
+    fetchSuccess: payload => dispatch(alertPush(payload)),
     changeCurrency: payload => dispatch(referralCommissionCurrencyChange(payload)),
 });
 
