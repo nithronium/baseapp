@@ -267,7 +267,7 @@ class ReferralCommission extends React.Component<Props, State> {
 
         let tradeData = trade.referrals.map(data => {
             const res = this.tradeFields.map(key => data[key]);
-            res.push(Number(data.commissions) + Number(data.commissionUnder));
+            res.push(Number(data.commission) + Number(data.commissionUnder));
             return res;
         });
 
@@ -288,7 +288,7 @@ class ReferralCommission extends React.Component<Props, State> {
         const ieoHeaders = [
             'Email',
             'IEO',
-            'Invested',
+            'Invested L1',
             'Commision (BTC)',
             'Invested L2-L5',
             'Commision (BTC) L2-L5',
@@ -570,6 +570,7 @@ class ReferralCommission extends React.Component<Props, State> {
             totalRow[i] = sum;
         }
         totalRow.push(Number(totalRow[2]) + Number(totalRow[5]));
+        // console.log('Number(totalRow[2]) + Number(totalRow[5])', Number(totalRow[2]) + Number(totalRow[5]));
 
         newList.push(totalRow);
         return newList;
@@ -601,9 +602,9 @@ class ReferralCommission extends React.Component<Props, State> {
     private addIeoText = list => {
         const map = [
             x => x, x => (x || '').toUpperCase(),
-            (x, curr) => `${x} ${curr}`,
+            (x, curr) => `${x} ${(curr || '').toUpperCase()}`,
             x => `${x} BTC`,
-            (x, curr) => `${x} ${curr}`,
+            (x, curr) => `${x} ${(curr || '').toUpperCase()}`,
             x => `${x} BTC`,
         ];
         const { ieo } = this.props;
@@ -615,7 +616,7 @@ class ReferralCommission extends React.Component<Props, State> {
             return row.map((item, colIndex) => {
                 const originalRow = ieo.referrals[rowIndex];
 
-                if ([1, 3].includes(colIndex)) {
+                if ([2, 4].includes(colIndex)) {
                     return map[colIndex](item, originalRow.investment_currency_id);
                 } else {
                     return map[colIndex](item, '');
