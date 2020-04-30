@@ -168,9 +168,11 @@ class ReferralCommission extends React.Component<Props, State> {
         if (!converted) {
             return 0;
         }
-        return converted.quote.filter(item => {
+        const value = converted.quote.filter(item => {
             return item.symbol.toLowerCase() === curr.toLowerCase();
-        })[0].price;
+        })[0] || { price: 0 };
+
+        return value.price;
     };
 
     public changeCurrentCurrency = currencyId => {
