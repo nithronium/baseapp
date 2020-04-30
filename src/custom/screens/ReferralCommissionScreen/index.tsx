@@ -495,7 +495,7 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="profit"
                                 title="Profit per referral"
-                                text={`${this.getCoverteValue(referralConverted, currencies.crypto)} ${currencies.fiat}`}
+                                text={`${this.getCoverteValue(referralConverted, currencies.crypto)} ${currencies.crypto}`}
                                 emrxConverted={`${this.getCoverteValue(referralConverted, currencies.emrx)} ${currencies.emrx}`}
                                 usdConverted={`≈ ${this.getCoverteValue(referralConverted, currencies.fiat)} ${currencies.fiat}`}
                             />
