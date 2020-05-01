@@ -94,18 +94,69 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         recaptchaResponse: '',
         errorModal: false,
     };
+    private dropdownMenu = React.createRef<HTMLUListElement>();
+    private mobileDropdownMenu = React.createRef<HTMLDivElement>();
     public componentDidMount(): void {
         this.props.getBalanceFetch(['btc', 'usd']);
     }
 
     private openDropdown = (type: string) => {
         const {openMenuType} = this.state;
-        this.setState({openMenuType: openMenuType === type ? '' : type});
+        if (type) {
+            if (type === openMenuType) {
+                this.setState({openMenuType: ''}, () => {
+                    document.removeEventListener('click', this.closeMenu);
+                });
+            } else {
+                document.removeEventListener('click', this.closeMenu);
+                this.setState({openMenuType: type}, () => {
+                    document.addEventListener('click', this.closeMenu);
+                });
+            }
+        } else {
+            this.setState({openMenuType: ''}, () => {
+                document.removeEventListener('click', this.closeMenu);
+            });
+        }
+    };
+
+    private closeMenu = event => {
+        // tslint:disable
+        if (this.dropdownMenu && this.dropdownMenu.current && !this.dropdownMenu.current.contains(event.target)) {
+            this.setState({openMenuType: ''}, () => {
+                document.removeEventListener('click', this.closeMenu);
+            });
+        }
+    };
+
+
+    private closeMobileMenu = event => {
+        // tslint:disable
+        if (this.mobileDropdownMenu && this.mobileDropdownMenu.current && !this.mobileDropdownMenu.current.contains(event.target)) {
+            this.setState({openMobileMenu: ''}, () => {
+                document.removeEventListener('click', this.closeMobileMenu);
+            });
+        }
     };
 
     private openMobileMenu = (type: string) => {
         const {openMobileMenu} = this.state;
-        this.setState({openMobileMenu: openMobileMenu === type ? '' : type});
+        if (type) {
+            if (type === openMobileMenu) {
+                this.setState({openMobileMenu: ''}, () => {
+                    document.removeEventListener('click', this.closeMobileMenu);
+                });
+            } else {
+                document.removeEventListener('click', this.closeMobileMenu);
+                this.setState({openMobileMenu: type}, () => {
+                    document.addEventListener('click', this.closeMobileMenu);
+                });
+            }
+        } else {
+            this.setState({openMobileMenu: ''}, () => {
+                document.removeEventListener('click', this.closeMobileMenu);
+            });
+        }
     };
 
     //tslint:disable
@@ -120,6 +171,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         } = this.props;
         const baseURL = window.document.location.origin;
         const {openMenuType, openMobileMenu} = this.state;
+        const isMobileWith = window.outerWidth < 800;
         return (
             <div className={'pg-navbar'}>
                 <a href={currentLanguage === 'en' ? baseURL : `${baseURL}/${currentLanguage}`} className="pg-navbar__logo">
@@ -131,7 +183,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <span className="pg-navbar__mobile-icon pg-navbar__left-icon" onClick={() => this.openMobileMenu('left')}>
                         <LeftMenuIcon />
                     </span>
-                    <div className={`pg-navbar__mobile-menu${openMobileMenu === 'left' ? ' pg-navbar__mobile-open' : ''}`}>
+                    { (!isMobileWith || openMobileMenu === 'left') && <div ref={this.mobileDropdownMenu} className={`pg-navbar__mobile-menu${openMobileMenu === 'left' ? ' pg-navbar__mobile-open' : ''}`}>
                         <div className="item">
                             <a href={currentLanguage === 'en' ? `${baseURL}/markets` : `${baseURL}/${currentLanguage}/markets`}>
                                 <FormattedMessage id={'page.body.trade.header.markets'} />
@@ -140,13 +192,13 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         {this.renderBuyWithCard()}
                         {this.renderTrade()}
                         {this.renderEarn()}
-                    </div>
+                    </div>}
                 </ul>
                 <div className={"pg-navbar__right"}>
                     <span className="pg-navbar__mobile-icon pg-navbar__right-icon" onClick={() => this.openMobileMenu('right')}>
-                        <RightMenuIcon />
+                        {isLoggedIn ? <RightMenuIcon /> : <NotLoginIcon /> }
                     </span>
-                    <div className={`pg-navbar__mobile-menu${openMobileMenu === 'right' ? ' pg-navbar__mobile-open' : ''}`}>
+                    {(!isMobileWith || openMobileMenu === 'right') && <div ref={this.mobileDropdownMenu} className={`pg-navbar__mobile-menu${openMobileMenu === 'right' ? ' pg-navbar__mobile-open' : ''}`}>
                         {isLoggedIn
                             ? <React.Fragment>
                                 {this.renderOrders()}
@@ -187,7 +239,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                     <OpenUserMenu/>
                                 </span>
                             </div>
-                            { openMenuType === 'language' && <div className={`dropdown-menu language-menu`}>
+                            { openMenuType === 'language' && <ul ref={this.dropdownMenu} className={`dropdown-menu language-menu`}>
                                 <div className="left">
                                     <div className="header"> <FormattedMessage id={'nav_language'} /></div>
                                     <ul>
@@ -259,9 +311,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                         </li>
                                     </ul>
                                 </div>
-                            </div>}
+                            </ul>}
                         </div>
-                    </div>
+                    </div>}
                 </div>
             </div>
         );
@@ -350,7 +402,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     private renderDropdownMenu = (options, isMainSite) => {
         const path = window.document.location.origin;
         const { currentLanguage } = this.props;
-        return (<ul className={`dropdown-menu`}>
+        return (<ul ref={this.dropdownMenu} className={`dropdown-menu`}>
             {options.map(option => (
                 <li className={`${option.border ? 'border' : ''}`}>
                     {!option.logout
@@ -474,17 +526,6 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             },
             () => {
                 this.props.logout();
-            }
-        );
-    };
-
-    private closeMenu = () => {
-        this.setState(
-            {
-                isOpen: false,
-            },
-            () => {
-                document.removeEventListener('click', this.closeMenu);
             }
         );
     };
