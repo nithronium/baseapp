@@ -351,10 +351,10 @@ class ReferralCommission extends React.Component<Props, State> {
         const tradeHeaders = [
             'Email',
             '# of L1 trades',
-            'Commision L1 (BTC)',
+            'Commission L1 (BTC)',
             '# of L2-L5 users',
             '# of L2-L5 trades',
-            'Commision L2-L5 (BTC)',
+            'Commission L2-L5 (BTC)',
             'Total Amount',
         ];
         const title = '';
@@ -363,9 +363,9 @@ class ReferralCommission extends React.Component<Props, State> {
             'Email',
             'IEO',
             'Invested L1',
-            'Commision (BTC)',
+            'Commission (BTC)',
             'Invested L2-L5',
-            'Commision (BTC) L2-L5',
+            'Commission (BTC) L2-L5',
         ];
 
         let ieoData = ieo.referrals.map(row => {
