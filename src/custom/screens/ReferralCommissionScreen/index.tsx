@@ -156,9 +156,9 @@ class ReferralCommission extends React.Component<Props, State> {
                 // user.cryptoCurrency !== nextProps.user.cryptoCurrency
             )
         ) {
-            // const totalReferrals = balances.participants.reduce((acc, item) => {
-            //     return Number(acc) + Number(item.total);
-            // }, 0);
+            const totalReferrals = balances.participants.reduce((acc, item) => {
+                return Number(acc) + Number(item.total);
+            }, 0);
 
             const currencies = this.getCurrencies();
             const currenciesArray = [currencies.crypto, currencies.emrx, this.getUser(nextProps).activeCurrency || currencies.fiat];
@@ -173,13 +173,13 @@ class ReferralCommission extends React.Component<Props, State> {
             const ieoConverted = await getExchangeRates(
                 'USD', nextProps.balances.earned.ieo, currenciesArray,
             );
-            // const referralConverted = await getExchangeRates(
-            //     'USD', nextProps.balances.earned.trade / totalReferrals, currenciesArray,
-            // );
+            const referralConverted = await getExchangeRates(
+                'USD', nextProps.balances.earned.trade / totalReferrals, currenciesArray,
+            );
             this.setState({
                 tradeConverted,
                 ieoConverted,
-                // referralConverted,
+                referralConverted,
                 ratio,
             });
         }
