@@ -382,10 +382,10 @@ class ReferralCommission extends React.Component<Props, State> {
         const headersPart = [
             'L1 Referral',
             'Active',
-            'Level 2 Referrals Total / Active',
-            'Level 3 Referrals Total / Active',
-            'Level 4 Referrals Total / Active',
-            'Level 5 Referrals Total / Active',
+            'Level 2 Refs Total / Active',
+            'Level 3 Refs Total / Active',
+            'Level 4 Refs Total / Active',
+            'Level 5 Refs Total / Active',
         ];
 
         let partData = participants.participants.map(row => {
@@ -637,9 +637,7 @@ class ReferralCommission extends React.Component<Props, State> {
           );
     }
 
-
     private addTradeTotal = list => {
-        // return list;
         const newList = [...list];
         const totalRow: Array<string|number> = ['Total amount'];
 
@@ -648,7 +646,8 @@ class ReferralCommission extends React.Component<Props, State> {
             const sum = newList.reduce((acc, row) => Number(acc) + Number(row[i]), 0);
             totalRow[i] = this.trimNumber(sum);
         }
-        totalRow.push(this.trimNumber(Number(totalRow[2]) + Number(totalRow[5])));
+        const total = newList.reduce((acc, row) => Number(acc) + Number(row[6]), 0);
+        totalRow.push(this.trimNumber(total));
 
         newList.push(totalRow);
         return newList;
