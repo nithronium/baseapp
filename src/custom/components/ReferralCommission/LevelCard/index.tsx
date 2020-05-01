@@ -15,6 +15,7 @@ interface PassedProps {
         count: number;
         loading: boolean;
     };
+    levels: number;
     level: number;
     header: string;
     subheader: string;
@@ -29,10 +30,67 @@ class LevelCardComponent extends React.Component<Props>{
     constructor(props){
         super(props);
     }
+
+    public getStyle = (level, levels) => {
+        if (levels < 3) {
+            return {};
+        }
+
+        if (levels === 3) {
+            return {
+                fontSize: '16px',
+            };
+        }
+
+        if (levels === 4) {
+            if (level === 1) {
+                return {
+                    flex: '1 1 calc(50% - 20px)',
+                    marginBottom: 15,
+                };
+            }
+            if (level === 2) {
+                return {
+                    flex: '1 1 calc(50% - 20px)',
+                    marginRight: 0,
+                    marginBottom: 15,
+                };
+            }
+            return {
+                flex: '1 1 calc(50% - 20px)',
+            };
+        }
+
+        if (levels === 5) {
+            return [{}, {
+                flex: '1 1 calc(50% - 20px)',
+                marginBottom: 15,
+                fontSize: '17px',
+            }, {
+                flex: '1 1 calc(50% - 20px)',
+                marginRight: 0,
+                marginBottom: 15,
+                fontSize: '17px',
+            }, {
+                flex: '1 1 calc(33.3% - 20px)',
+                fontSize: '16px',
+            }, {
+                flex: '1 1 calc(33.3% - 20px)',
+                fontSize: '16px',
+            }, {
+                flex: '1 1 calc(33.3% - 20px)',
+                fontSize: '16px',
+                marginRight: 0,
+            }][level];
+        }
+
+        return {};
+    };
+
     public render(){
-        const { level, header, subheader, caption } = this.props;
+        const { level, header, subheader, caption, levels } = this.props;
         return(
-            <div className="level-card">
+            <div className="level-card" style={this.getStyle(level, levels)}>
                 <div className="level-card__level">
                     <div>{level}</div>
                     level

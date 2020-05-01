@@ -447,7 +447,7 @@ class ReferralCommission extends React.Component<Props, State> {
                         </div>
                     </div>
 
-                    <div className="section--transparent">
+                    <div className="section--transparent" style={{ flexWrap: 'wrap' }}>
                         {levelTrade.map((item, index) => {
                             return <LevelCard
                                 level={Number(index) + 1}
@@ -455,6 +455,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 subheader={item.subheader}
                                 caption={item.caption}
                                 key={index}
+                                levels={levelTrade.length}
                             />;
                         })}
                     </div>
@@ -520,7 +521,7 @@ class ReferralCommission extends React.Component<Props, State> {
                         </div>
                     </div>
 
-                    <div className="section--transparent">
+                    <div className="section--transparent" style={{ flexWrap: 'wrap' }}>
                         {levelIeo.map((item, index) => {
                             return <LevelCard
                                 level={Number(index) + 1}
@@ -528,6 +529,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 subheader={item.subheader}
                                 caption={item.caption}
                                 key={index}
+                                levels={levelIeo.length}
                             />;
                         })}
                     </div>
@@ -574,7 +576,7 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="active-ratio"
                                 title="Active Ratio"
-                                text={`${Math.floor(activeReferrals / totalReferrals * 10) / 10}%`}
+                                text={`${Math.floor(activeReferrals / totalReferrals * 1000) / 10}%`}
                             />
                             <InfoCard
                                 iconName="profit"
@@ -599,7 +601,7 @@ class ReferralCommission extends React.Component<Props, State> {
                         </div>
                     </div>
 
-                    <div className="section--transparent">
+                    <div className="section--transparent" style={{ flexWrap: 'wrap' }}>
                         {levelPart.map((item, index) => {
                             return <LevelCard
                                 level={Number(index) + 1}
@@ -607,6 +609,7 @@ class ReferralCommission extends React.Component<Props, State> {
                                 subheader={item.subheader}
                                 caption={item.caption}
                                 key={index}
+                                levels={levelPart.length}
                             />;
                         })}
                     </div>
