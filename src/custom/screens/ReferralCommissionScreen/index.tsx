@@ -173,9 +173,12 @@ class ReferralCommission extends React.Component<Props, State> {
             const ieoConverted = await getExchangeRates(
                 'USD', nextProps.balances.earned.ieo, currenciesArray,
             );
-            const referralConverted = await getExchangeRates(
-                'USD', nextProps.balances.earned.trade / totalReferrals, currenciesArray,
-            );
+            let referralConverted = this.state.referralConverted;
+            if (totalReferrals) {
+                referralConverted = await getExchangeRates(
+                    'USD', nextProps.balances.earned.trade / totalReferrals, currenciesArray,
+                );
+            }
             this.setState({
                 tradeConverted,
                 ieoConverted,
@@ -263,7 +266,12 @@ class ReferralCommission extends React.Component<Props, State> {
     };
 
     public trimNumber = value => {
-        return Number((Number(value) || 0).toFixed(8));
+        const res = (Number(value) || 0).toFixed(8);
+        const resNumber = Number(res);
+        if (resNumber.toString().includes('e')) {
+            return res;
+        }
+        return resNumber;
     };
 
     public render(){
