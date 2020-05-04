@@ -109,7 +109,7 @@ class MarketsListComponent extends React.Component<Props, State> {
             this.props.orderBookFetch(marketToSet);
         }
         this.props.onRowSelect(marketToSet);
-        this.props.history.push(`/trading/${markets}`);
+        document.location.reload(true);
     };
 
     private getHeaders = () => [
