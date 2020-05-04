@@ -109,7 +109,7 @@ class MarketsListComponent extends React.Component<Props, State> {
             this.props.orderBookFetch(marketToSet);
         }
         this.props.onRowSelect(marketToSet);
-        document.location.reload(true);
+        document.location.reload();
     };
 
     private getHeaders = () => [
