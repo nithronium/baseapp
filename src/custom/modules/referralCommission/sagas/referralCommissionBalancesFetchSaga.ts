@@ -14,7 +14,6 @@ const referralCommissionOptions: RequestOptions = {
 export function* referralCommissionBalancesFetchSaga(action: ReferralCommissionBalancesFetch) {
     try {
         const balances = yield call(API.get(referralCommissionOptions), `/private/balances`);
-        console.log('balances from saga', balances);
         yield put(referralCommissionBalancesData(balances));
     } catch (error) {
         console.log('error', error);
