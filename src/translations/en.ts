@@ -142,7 +142,7 @@ export const en = {
     'page.body.wallets.whitelist.addAddressModal.body.coinDescription': 'Description (optional)',
 
     'page.body.wallets.whitelist.addAddressModal.body.fiatName': 'Description',
-    'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': 'Full Name',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': 'Full Name (must match the name specified in your profile)',
     'page.body.wallets.whitelist.addAddressModal.body.fiatAccountNumber': 'Account Number',
     'page.body.wallets.whitelist.addAddressModal.body.fiatBankName': 'Bank Name',
     'page.body.wallets.whitelist.addAddressModal.body.fiatBankSwiftCode': 'Bank Swift Code',

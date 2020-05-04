@@ -120,7 +120,7 @@ export const zh = {
     'page.body.wallets.whitelist.addAddressModal.body.coinBeneficiaryName': '收款人姓名',
     'page.body.wallets.whitelist.addAddressModal.body.coinDescription': '描述（可选）',
     'page.body.wallets.whitelist.addAddressModal.body.fiatName': '描述',
-    'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': '全名',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': '全名 (必须与您的个人资料中指定的名称匹配)',
     'page.body.wallets.whitelist.addAddressModal.body.fiatAccountNumber': '帐号',
     'page.body.wallets.whitelist.addAddressModal.body.fiatBankName': '银行名称',
     'page.body.wallets.whitelist.addAddressModal.body.fiatBankSwiftCode': '银行代码',
