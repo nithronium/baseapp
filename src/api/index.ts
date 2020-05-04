@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { JsonBody, makeRequest, RequestOptions } from './requestBuilder';
+// import { currenciesData } from '../modules';
 
 // import { nodelogicUrl } from './config';
 
@@ -123,5 +124,12 @@ export const getBalance = async (data?: string[]) => {
 const referralCommissionServiceUrl = `${baseURL}/api/v2/referral`;
 export const getReferral = async body => {
     const res = await axios.get(`${referralCommissionServiceUrl}${body}`);
+    return res.data;
+};
+
+export const getExchangeRates = async (currency: string, amount: number, currencies: string[]) => {
+    const res = await axios.get(
+        `${exchangeRatesUrl}/tools/price-conversion?symbol=${currency}&amount=${encodeURIComponent(amount.toString())}&convert=${currencies.join(',')}`,
+    );
     return res.data;
 };

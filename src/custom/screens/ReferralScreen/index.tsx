@@ -220,6 +220,7 @@ class Referral extends React.Component<Props> {
         };
 
         const totalTickets = () => {
+            return null;
             return (
                 <div className="total-tickets-wrapper">
                     <div className="total-tickets">

@@ -163,7 +163,7 @@ export const ru: LangType = {
     'page.body.wallets.whitelist.addAddressModal.body.coinDescription': 'Описание (необязательно)',
 
     'page.body.wallets.whitelist.addAddressModal.body.fiatName': 'Описание',
-    'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': 'Имя и фамилия получателя ',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': 'Имя и фамилия (должно совпадать с именем, указанным в вашем профиле)',
     'page.body.wallets.whitelist.addAddressModal.body.fiatAccountNumber': 'Номер счета',
     'page.body.wallets.whitelist.addAddressModal.body.fiatBankName': 'Название банка',
     'page.body.wallets.whitelist.addAddressModal.body.fiatBankSwiftCode': 'SWIFT-код',
@@ -1182,6 +1182,7 @@ export const ru: LangType = {
     'referralCommission.tradingDetails.next': 'След',
     'referralCommission.tradingDetails.exportToCsv': 'Скачать CSV',
     'referralCommission.tradingDetails.total': 'Итого',
+    'referralCommission.copied': 'Copied to clipboard',
 
     'cardDeposit.errorMessage.first_name': 'Заполните имя',
     'cardDeposit.errorMessage.last_name': 'LЗаполните фамилию',

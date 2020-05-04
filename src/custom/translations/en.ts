@@ -545,6 +545,7 @@ export const en = {
     'referralCommission.tradingDetails.next': 'Next',
     'referralCommission.tradingDetails.exportToCsv': 'Export to CSV',
     'referralCommission.tradingDetails.total': 'total',
+    'referralCommission.copied': 'Copied to clipboard',
     'page.wallets.coin.notice':
         'By making a deposit, I confirm that Emirex is not responsible for any coins sent to the wrong address.',
 };

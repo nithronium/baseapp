@@ -349,7 +349,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         <FormattedMessage id={'page.header.navbar.refprogram'} />
                     </Link>
                 </div>
-                <div className="dropdown-menu-item-user">
+                {/* <div className="dropdown-menu-item-user">
                     <Link
                         className="pg-navbar__admin-logout"
                         to={buildPath('/referral-tickets', lang)}
@@ -357,7 +357,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     >
                         <FormattedMessage id={'page.header.navbar.reftickets'} />
                     </Link>
-                </div>
+                </div> */}
                 <div className="dropdown-menu-item-user">
                     <Link
                         className="pg-navbar__admin-logout"
