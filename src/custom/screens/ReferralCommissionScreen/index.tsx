@@ -278,7 +278,6 @@ class ReferralCommission extends React.Component<Props, State> {
         const { trade, ieo, participants, balances } = this.props;
         const { tradeConverted, ieoConverted, referralConverted } = this.state;
         const user = this.getUser();
-        console.log('user', user);
 
         const currencies = this.getCurrencies();
 
