@@ -1023,6 +1023,7 @@ export const zh = {
     'referralCommission.tradingDetails.next': '下一个',
     'referralCommission.tradingDetails.exportToCsv': '导出为CSV',
     'referralCommission.tradingDetails.total': '总计',
+    'referralCommission.copied': 'Copied to clipboard',
 
     'cardDeposit.errorMessage.first_name': '名字为必填项',
     'cardDeposit.errorMessage.last_name': '姓氏为必填项',
