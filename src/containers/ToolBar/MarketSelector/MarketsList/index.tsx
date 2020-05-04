@@ -1,6 +1,5 @@
 import { Decimal, Table } from '@openware/components';
 import classnames from 'classnames';
-import { History } from 'history';
 import * as React from 'react';
 import {
     InjectedIntlProps,
@@ -8,7 +7,6 @@ import {
     intlShape,
 } from 'react-intl';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import { SortAsc, SortDefault, SortDesc } from '../../../../assets/images/SortIcons';
 import {
     depthFetch,
@@ -44,10 +42,6 @@ interface OwnProps {
     onRowSelect?(): void;
 }
 
-interface HistoryProps {
-    history: History;
-}
-
 interface State {
     sortBy: string;
     reverseOrder: boolean;
@@ -65,7 +59,7 @@ const handleChangeSortIcon = (sortBy: string, id: string, reverseOrder: boolean)
     return <SortDefault/>;
 };
 
-type Props = ReduxProps & OwnProps & DispatchProps & InjectedIntlProps & HistoryProps;
+type Props = ReduxProps & OwnProps & DispatchProps & InjectedIntlProps;
 
 //tslint:disable jsx-no-lambda
 class MarketsListComponent extends React.Component<Props, State> {
@@ -101,7 +95,6 @@ class MarketsListComponent extends React.Component<Props, State> {
     private currencyPairSelectHandler = (key: string) => {
         const { markets } = this.props;
         const marketToSet = markets.find(el => el.name === key);
-
         this.props.setCurrentPrice();
         if (marketToSet) {
             this.props.setCurrentMarket(marketToSet);
@@ -109,7 +102,6 @@ class MarketsListComponent extends React.Component<Props, State> {
             this.props.orderBookFetch(marketToSet);
         }
         this.props.onRowSelect(marketToSet);
-        document.location.reload();
     };
 
     private getHeaders = () => [
@@ -224,4 +216,4 @@ const mapDispatchToProps = {
 };
 
 // tslint:disable-next-line
-export const MarketsList = injectIntl(withRouter(connect(mapStateToProps, mapDispatchToProps)(MarketsListComponent) as any));
+export const MarketsList = injectIntl(connect(mapStateToProps, mapDispatchToProps)(MarketsListComponent));
