@@ -332,7 +332,7 @@ class ReferralCommission extends React.Component<Props, State> {
         const activeReferrals = balances.participants.reduce((acc, item) => {
             return Number(acc) + Number(item.active);
         }, 0);
-
+        const ratio = totalReferrals === 0 ? 0 : activeReferrals / totalReferrals;
 
         let tradeData = trade.referrals.map(data => {
             const res = this.tradeFields.map((key, index) => {
@@ -341,7 +341,7 @@ class ReferralCommission extends React.Component<Props, State> {
                 }
                 return data[key];
             });
-            res.push(this.trimNumber(Number(data.commission) + Number(data.commissionUnder)));
+            res.push(this.trimNumber(Number(res[2]) + Number(res[5])));
             return res;
         });
 
@@ -576,7 +576,7 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="active-ratio"
                                 title="Active Ratio"
-                                text={`${Math.floor(activeReferrals / totalReferrals * 1000) / 10}%`}
+                                text={`${Math.floor(ratio * 1000) / 10}%`}
                             />
                             <InfoCard
                                 iconName="profit"
