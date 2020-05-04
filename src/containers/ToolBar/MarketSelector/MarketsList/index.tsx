@@ -1,5 +1,6 @@
 import { Decimal, Table } from '@openware/components';
 import classnames from 'classnames';
+import { History } from 'history';
 import * as React from 'react';
 import {
     InjectedIntlProps,
@@ -7,6 +8,7 @@ import {
     intlShape,
 } from 'react-intl';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { SortAsc, SortDefault, SortDesc } from '../../../../assets/images/SortIcons';
 import {
     depthFetch,
@@ -42,6 +44,10 @@ interface OwnProps {
     onRowSelect?(): void;
 }
 
+interface HistoryProps {
+    history: History;
+}
+
 interface State {
     sortBy: string;
     reverseOrder: boolean;
@@ -59,7 +65,7 @@ const handleChangeSortIcon = (sortBy: string, id: string, reverseOrder: boolean)
     return <SortDefault/>;
 };
 
-type Props = ReduxProps & OwnProps & DispatchProps & InjectedIntlProps;
+type Props = ReduxProps & OwnProps & DispatchProps & InjectedIntlProps & HistoryProps;
 
 //tslint:disable jsx-no-lambda
 class MarketsListComponent extends React.Component<Props, State> {
@@ -103,6 +109,7 @@ class MarketsListComponent extends React.Component<Props, State> {
             this.props.orderBookFetch(marketToSet);
         }
         this.props.onRowSelect(marketToSet);
+        this.props.history.push(`/trading/${markets}`);
     };
 
     private getHeaders = () => [
@@ -216,4 +223,5 @@ const mapDispatchToProps = {
     setCurrentPrice,
 };
 
-export const MarketsList = injectIntl(connect(mapStateToProps, mapDispatchToProps)(MarketsListComponent));
+// tslint:disable-next-line
+export const MarketsList = injectIntl(withRouter(connect(mapStateToProps, mapDispatchToProps)(MarketsListComponent) as any));
