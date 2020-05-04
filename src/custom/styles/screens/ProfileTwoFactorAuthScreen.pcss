@@ -18,6 +18,8 @@
 
   .mfa-popup-header {
     position: relative;
+    font-weight: bold;
+    text-transform: uppercase;
   }
 
   .mfa-popup-close-button {
@@ -30,10 +32,49 @@
   }
 
   .cr-button {
-    line-height: 12px;
+    line-height: 0;
+    background-color: #FFD567;
+    color: #141717;
+    font-family: Roboto !important;
+
+    &:hover,
+    &:focus {
+      background-color: #FFD567;
+    }
   }
 
   .auth2fa-mfa-footer {
     text-align: center;
   }
+
+  .popup-content-item {
+    display: inline;
+    color: #7D9794;
+    line-height: 20px;
+
+    span {
+      color: #fff;
+    }
+
+    &--header {
+      color: #FFD567;
+      font-size: 18px;
+    }
+  }
+
+  .popup-content {
+    &__spacer {
+      position: relative;
+      margin-bottom: 21px;
+    }
+  }
+
+  .cr-modal__container-content {
+    text-align: center;
+    padding: 0 calc(var(--gap) * 10.23) !important;
+  }
+
+   .cr-modal__container {
+      width: calc(var(--gap) * 89.3);
+   }
 }

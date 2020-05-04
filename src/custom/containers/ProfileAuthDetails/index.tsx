@@ -259,16 +259,36 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     };
 
     private renderConfirm2faBody = () => {
-        const keys = [
-            1, 2, 3, 4, 5,
-        ];
+        const keys = new Array(15).fill(1).map((e, index) => index + 1).slice(1);
+        const isMarked = (index: number) => [3, 5, 7, 9, 11, 13, 15].includes(index);
+        const locale = location.pathname.includes('/ru') ? 'ru' : (location.pathname.includes('/zh') ? 'zh' : 'en');
+        const breaks = {
+            en: [3, 5, 9],
+            ru: [3, 7],
+            zh: [3, 9],
+        }[locale];
+        const hasBreakAfter = (index: number) => breaks.includes(index);
         return (
             <div>
+                <div className="popup-content__spacer" />
+                <div className="popup-content__spacer" />
+                <div key={1} className="popup-content-item popup-content-item--header">
+                    {this.props.intl.formatMessage({ id: `page.body.profile.header.account.auth2fa.mfa.text1`})}
+                </div>
+                <div className="popup-content__spacer" />
                 {keys.map(key => {
+                    const message = this.props.intl.formatMessage({ id: `page.body.profile.header.account.auth2fa.mfa.text${key}`});
                     return (
-                        <div key={key} className="popup-content-item">
-                            {this.props.intl.formatMessage({ id: `page.body.profile.header.account.auth2fa.mfa.text${key}`})}
-                        </div>
+                        <>
+                            <div key={key} className="popup-content-item">
+                                {
+                                    isMarked(key) ?
+                                        <span>{message}</span> :
+                                        message
+                                }
+                            </div>
+                            {hasBreakAfter(key) ? <div className="popup-content__spacer" /> : null}
+                        </>
                     );
                 })}
             </div>
