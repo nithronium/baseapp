@@ -1174,6 +1174,7 @@ export const ru: LangType = {
     'referralCommission.tradingDetails.next': 'След',
     'referralCommission.tradingDetails.exportToCsv': 'Скачать CSV',
     'referralCommission.tradingDetails.total': 'Итого',
+    'referralCommission.copied': 'Copied to clipboard',
 
     'cardDeposit.errorMessage.first_name': 'Заполните имя',
     'cardDeposit.errorMessage.last_name': 'LЗаполните фамилию',
