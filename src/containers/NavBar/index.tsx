@@ -11,7 +11,7 @@ import {
     AEDIcon,
     CheckIcon,
     CNYIcon,
-    DownloadIcon,
+    //TODO: return after DownloadIcon,
     EURIcon,
     LeftMenuIcon,
     NotLoginIcon,
@@ -218,12 +218,12 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                 </div>
                             </React.Fragment>
                         }
-                        <div className="download">
-                            {openMobileMenu === 'right' ? <FormattedMessage id={'page.header.navbar.download_mobile'} /> : <FormattedMessage id={'page.header.navbar.download'} />}
-                            <span className="icon">
-                                <DownloadIcon />
-                            </span>
-                        </div>
+                        {/*<div className="download">*/}
+                        {/*    {openMobileMenu === 'right' ? <FormattedMessage id={'page.header.navbar.download_mobile'} /> : <FormattedMessage id={'page.header.navbar.download'} />}*/}
+                        {/*    <span className="icon">*/}
+                        {/*        <DownloadIcon />*/}
+                        {/*    </span>*/}
+                        {/*</div>*/}
                         <div className="dropdown-block language" onClick={() => this.openDropdown('language')}>
                             <div className={`desktop-switcher-button${openMenuType === 'language' ? ' active-menu' : ''}`} onClick={() => this.toggleLanguageMenu()}>
                                 <div>
@@ -491,11 +491,11 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         <FormattedMessage id={'page.header.deposit_withdraw'}/>
                     </Link>
                 </li>
-                <li>
-                    <Link to={'/buycrypto'} onClick={() => this.openDropdown('')}>
-                        <FormattedMessage id={'page.header.buy_crypto'}/>
-                    </Link>
-                </li>
+                {/*<li>*/}
+                {/*    <Link to={'/buycrypto'} onClick={() => this.openDropdown('')}>*/}
+                {/*        <FormattedMessage id={'page.header.buy_crypto'}/>*/}
+                {/*    </Link>*/}
+                {/*</li>*/}
             </ul>}
 
         </div>)

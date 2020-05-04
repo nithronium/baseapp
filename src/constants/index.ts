@@ -16,9 +16,9 @@ export const coinOption = (): object[] =>  ([
 export const tradeOption = (): object[] => ([
     { key: '', href: '/trading/btcusdt', label: 'nav.link.spot' , description: 'nav.link.spot.description'},
     { key: '', href: '/futures', label: 'nav.link.futures', description: 'nav.link.futures.description'},
-    { key: '', href: '/margin', label: 'nav.link.margin', description: 'nav.link.margin.description'},
+    // { key: '', href: '/margin', label: 'nav.link.margin', description: 'nav.link.margin.description'},
     { key: '', href: '/instant-exchange', label: 'nav.link.instant-exchange', description: 'nav.link.instant-exchange.description'},
-    { key: '', href: '/p2p', label: 'nav.link.p2p', description: 'nav.link.p2p.description'},
+    // { key: '', href: '/p2p', label: 'nav.link.p2p', description: 'nav.link.p2p.description'},
 ].map((link, index) => {
     link.key = `nav-link-${index}-${link.href}-${link.label}`;
     return link;
@@ -27,8 +27,8 @@ export const tradeOption = (): object[] => ([
 export const earnOption = (): object[] => ([
     { key: '', href: '/emrx-treasure', label: 'nav.link.emrx-treasure' , description: 'nav.link.emrx-treasure.description'},
     { key: '', href: '/ieo', label: 'nav.link.ieo', description: 'nav.link.ieo.description'},
-    { key: '', href: '/staking', label: 'nav.link.staking', description: 'nav.link.staking.description'},
-    { key: '', href: '/landing', label: 'nav.link.landing', description: 'nav.link.landing.description'},
+    // { key: '', href: '/staking', label: 'nav.link.staking', description: 'nav.link.staking.description'},
+    // { key: '', href: '/landing', label: 'nav.link.landing', description: 'nav.link.landing.description'},
     { key: '', href: '/referral', label: 'nav.link.referral-giveaway', description: 'nav.link.referral-giveaway.description'},
     { key: '', href: '/referral-program', label: 'nav.link.referral-program', description: 'nav.link.referral-program.description'},
 ].map((link, index) => {
@@ -38,11 +38,11 @@ export const earnOption = (): object[] => ([
 
 export const ordersOption = (): object[] => ([
     { key: '', href: '/orders', label: 'page.header.orders_spot'},
-    { key: '', href: '/', label: 'page.header.orders_futures'},
-    { key: '', href: '/', label: 'page.header.orders_margin', border: true},
+    // { key: '', href: '/', label: 'page.header.orders_futures'},
+    // { key: '', href: '/', label: 'page.header.orders_margin', border: true},
     { key: '', href: '/history', label: 'page.header.history_spot'},
-    { key: '', href: '/', label: 'page.header.history_futures'},
-    { key: '', href: '/', label: 'page.header.history_margin'},
+    // { key: '', href: '/', label: 'page.header.history_futures'},
+    // { key: '', href: '/', label: 'page.header.history_margin'},
 ].map((link, index) => {
     link.key = `nav-link-${index}-${link.href}-${link.label}`;
     return link;
@@ -53,7 +53,7 @@ export const userOption = (): object[] => ([
     { key: '', href: '/wallets', label: 'nav_my_assets'},
     { key: '', href: '/orders', label: 'nav_my_orders'},
     { key: '', href: '/security', label: 'nav_account_security'},
-    { key: '', href: '/referral', label: 'nav_referral_program'},
+    // { key: '', href: '/referral', label: 'nav_referral_program'},
     { key: '', href: '/api-setting', label: 'nav_api_setting', border: true},
     { key: '', href: '/', label: 'nav_logout', logout: true},
 ].map((link, index) => {
