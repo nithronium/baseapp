@@ -77,7 +77,7 @@ export class TradingChartComponent extends React.PureComponent<Props> {
             console.log('...........second if');
             if (this.props.currentMarket && (this.props.currentMarket.id && this.tvWidget)) {
                 // tslint:disable-next-line:no-console
-                console.log('...........3 id');
+                console.log('...........3 id', next.currentMarket);
                 this.updateChart(next.currentMarket);
             } else {
                 // tslint:disable-next-line:no-console
@@ -175,7 +175,11 @@ export class TradingChartComponent extends React.PureComponent<Props> {
     };
 
     private updateChart = (currentMarket: Market) => {
+        // tslint:disable-next-line:no-console
+        console.log('...........this.tvWidget', this.tvWidget);
         if (this.tvWidget) {
+            // tslint:disable-next-line:no-console
+            console.log('...........currentMarket', currentMarket);
             this.tvWidget.onChartReady(() => {
                 this.tvWidget!.activeChart().setSymbol(currentMarket.id, () => {
                     print('Symbol set', currentMarket.id);
