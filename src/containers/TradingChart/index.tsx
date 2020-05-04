@@ -99,11 +99,7 @@ export class TradingChartComponent extends React.PureComponent<Props> {
             currentMarket,
             markets,
         } = this.props;
-        // tslint:disable-next-line:no-console
-        console.log('...........test', this.props);
         if (currentMarket) {
-            // tslint:disable-next-line:no-console
-            console.log('...........markets, currentMarket, colorTheme', markets, currentMarket, colorTheme);
             this.setChart(markets, currentMarket, colorTheme);
         }
     }
