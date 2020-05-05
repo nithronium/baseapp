@@ -154,7 +154,7 @@ class Trading extends React.Component<Props, StateProps> {
         }
         if (!userLoggedIn && currentMarket) {
             // tslint:disable-next-line:no-console
-            console.log('...........test this place');
+            console.log('...........test this place', currentMarket.id);
             this.props.history.replace(buildPath(`/trading/${currentMarket.id}`, currentLanguage));
         }
     }
@@ -176,6 +176,8 @@ class Trading extends React.Component<Props, StateProps> {
         }
 
         if (nextProps.currentMarket && currentMarket !== nextProps.currentMarket) {
+            // tslint:disable-next-line:no-console
+            console.log('...........test this also', nextProps.currentMarket, currentMarket);
             history.replace(buildPath(`/trading/${nextProps.currentMarket.id}`, currentLanguage));
             this.props.depthFetch(nextProps.currentMarket);
         }
