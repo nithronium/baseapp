@@ -95,7 +95,6 @@ class MarketsListComponent extends React.Component<Props, State> {
     private currencyPairSelectHandler = (key: string) => {
         const { markets } = this.props;
         const marketToSet = markets.find(el => el.name === key);
-
         this.props.setCurrentPrice();
         if (marketToSet) {
             this.props.setCurrentMarket(marketToSet);
@@ -216,4 +215,5 @@ const mapDispatchToProps = {
     setCurrentPrice,
 };
 
+// tslint:disable-next-line
 export const MarketsList = injectIntl(connect(mapStateToProps, mapDispatchToProps)(MarketsListComponent));

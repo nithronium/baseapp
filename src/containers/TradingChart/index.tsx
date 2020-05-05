@@ -64,31 +64,19 @@ export class TradingChartComponent extends React.PureComponent<Props> {
     private datafeed = dataFeedObject(this, this.props.markets);
 
     public componentWillReceiveProps(next: Props) {
-        // tslint:disable-next-line:no-console
-        console.log('...........componentWillReceiveProps');
         if (next.currentMarket && next.colorTheme && next.colorTheme !== this.props.colorTheme) {
-            // tslint:disable-next-line:no-console
-            console.log('...........first if');
             this.setChart(next.markets, next.currentMarket, next.colorTheme);
         }
 
         if (next.currentMarket && (!this.props.currentMarket || next.currentMarket.id !== this.props.currentMarket.id)) {
-            // tslint:disable-next-line:no-console
-            console.log('...........second if');
             if (this.props.currentMarket && (this.props.currentMarket.id && this.tvWidget)) {
-                // tslint:disable-next-line:no-console
-                console.log('...........3 id', next.currentMarket);
                 this.updateChart(next.currentMarket);
             } else {
-                // tslint:disable-next-line:no-console
-                console.log('...........else');
                 this.setChart(next.markets, next.currentMarket, next.colorTheme);
             }
         }
 
         if (next.kline && next.kline !== this.props.kline) {
-            // tslint:disable-next-line:no-console
-            console.log('...........4 if');
             this.datafeed.onRealtimeCallback(next.kline);
         }
     }
@@ -175,13 +163,9 @@ export class TradingChartComponent extends React.PureComponent<Props> {
     };
 
     private updateChart = (currentMarket: Market) => {
-        // tslint:disable-next-line:no-console
-        console.log('...........this.tvWidget', this.tvWidget);
         if (this.tvWidget) {
-            // tslint:disable-next-line:no-console
-            console.log('...........currentMarket', currentMarket);
             this.tvWidget.onChartReady(() => {
-                this.tvWidget && this.tvWidget.activeChart().setSymbol(currentMarket.id, () => {
+                this.tvWidget!.activeChart().setSymbol(currentMarket.id, () => {
                     print('Symbol set', currentMarket.id);
                 });
             });
