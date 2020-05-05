@@ -164,8 +164,10 @@ export class TradingChartComponent extends React.PureComponent<Props> {
 
     private updateChart = (currentMarket: Market) => {
         if (this.tvWidget) {
-            this.tvWidget!.activeChart().setSymbol(currentMarket.id, () => {
-                print('Symbol set', currentMarket.id);
+            this.tvWidget.onChartReady(() => {
+                this.tvWidget!.activeChart().setSymbol(currentMarket.id, () => {
+                    print('Symbol set', currentMarket.id);
+                });
             });
         }
     }
