@@ -301,8 +301,8 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     {/* <Route loading={userLoading} isLogged={isLoggedIn} path={buildPath('/referral', currentLanguage)} component={ReferralScreen} /> */}
                     <Route loading={userLoading} isLogged={isLoggedIn} path={'/ru/referral'} component={ReferralScreen} />
                     <Route loading={userLoading} isLogged={isLoggedIn} path={'/referral'} component={ReferralScreen} />
-                    <Route exact={true} path={'/trading/:market?'} component={TradingScreen} />
-                    <Route exact={true} path={'/ru/trading/:market?'} component={TradingScreen} />
+                    <Route path={'/trading/:market?'} component={TradingScreen} />
+                    <Route path={'/ru/trading/:market?'} component={TradingScreen} />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
@@ -459,7 +459,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         currentLanguage={currentLanguage}
                     />
                     <Route loading={userLoading} isLogged={isLoggedIn} path={'/zh/referral'} component={ReferralScreen} />
-                    <Route exact={true} path={'/zh/trading/:market?'} component={TradingScreen} />
+                    <Route path={'/zh/trading/:market?'} component={TradingScreen} />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
