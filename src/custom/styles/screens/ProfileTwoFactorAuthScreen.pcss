@@ -20,6 +20,7 @@
     position: relative;
     font-weight: bold;
     text-transform: uppercase;
+    font-size: 14px;
   }
 
   .mfa-popup-close-button {
@@ -36,6 +37,7 @@
     background-color: #FFD567;
     color: #141717;
     font-family: Roboto !important;
+    font-weight: normal !important;
 
     &:hover,
     &:focus {
@@ -45,6 +47,7 @@
 
   .auth2fa-mfa-footer {
     text-align: center;
+    padding-bottom: 15px;
   }
 
   .popup-content-item {
@@ -65,7 +68,7 @@
   .popup-content {
     &__spacer {
       position: relative;
-      margin-bottom: 21px;
+      padding-bottom: 21px;
     }
   }
 
@@ -74,7 +77,11 @@
     padding: 0 calc(var(--gap) * 10.23) !important;
   }
 
-   .cr-modal__container {
-      width: calc(var(--gap) * 89.3);
-   }
+  .cr-modal__container {
+    width: calc(var(--gap) * 89.3);
+  }
+
+  .cr-modal__container-header {
+    border-bottom: 1px solid #54b489;
+  }
 }
