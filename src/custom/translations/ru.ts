@@ -548,6 +548,8 @@ export const ru: LangType = {
     'page.header.language.zh': '中文简体',
     'page.header.language.ae': 'Arabic',
 
+    'page.header.soon': 'скоро',
+
     'page.header.currency.usd': 'USD',
     'page.header.currency.eur': 'EUR',
     'page.header.currency.rub': 'RUB',

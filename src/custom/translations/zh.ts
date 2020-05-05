@@ -374,6 +374,8 @@ export const zh = {
     'page.header.language.zh': '中文简体',
     'page.header.language.ae': 'Arabic',
 
+    'page.header.soon': '不久',
+
     'page.header.currency.usd': '美金',
     'page.header.currency.eur': '欧元',
     'page.header.currency.rub': '卢布',

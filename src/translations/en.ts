@@ -430,6 +430,8 @@ export const en = {
     'page.header.language.zh': '中文简体',
     'page.header.language.ae': 'Arabic',
 
+    'page.header.soon': 'soon',
+
     'page.header.currency.usd': 'USD',
     'page.header.currency.eur': 'EUR',
     'page.header.currency.rub': 'RUB',

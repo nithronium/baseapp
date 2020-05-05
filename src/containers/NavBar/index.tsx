@@ -255,9 +255,12 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                             <FormattedMessage id={'page.header.language.zh'}/>
                                             {lang === 'zh' && <CheckIcon />}
                                         </li>
-                                        <li className={`${lang === 'ae' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('ea')}>
+                                        <li className={`${lang === 'ae' ? 'active-menu' : ''} soon`}>
                                             <FormattedMessage id={'page.header.language.ae'}/>
                                             {lang === 'ae' && <CheckIcon />}
+                                            <span className="soon">
+                                                (<FormattedMessage id={'page.header.soon'}/>)
+                                            </span>
                                         </li>
                                     </ul>
                                 </div>
