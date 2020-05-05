@@ -409,19 +409,39 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             {options.map(option => (
                 <li className={`${option.border ? 'border' : ''}`}>
                     {!option.logout
-                        ?
-                        !isMainSite
-                            ? <Link to={`${option.href}`} onClick={() => this.openDropdown('')}>
+                        ? !option.soon
+                            ? !isMainSite
+                                ? !option.extLink
+                                    ? <Link to={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}${option.href}`} onClick={() => this.openDropdown('')}>
+                                          {option.label && <div className="label">
+                                              <FormattedMessage id={option.label}/>
+                                          </div>}
+                                          {option.description && <div className="description">
+                                              <FormattedMessage id={option.description}/>
+                                          </div>}
+                                      </Link>
+                                    : <a href={option.href} onClick={() => this.openDropdown('')}>
+                                        {option.label && <div className="label">
+                                            <FormattedMessage id={option.label}/>
+                                        </div>}
+                                        {option.description && <div className="description">
+                                            <FormattedMessage id={option.description}/>
+                                        </div>}
+                                    </a>
+                                : <a href={`${path}${currentLanguage === 'en' ? '' : `/${currentLanguage}`}${option.href}`} onClick={() => this.openDropdown('')}>
+                                    {option.label && <div className="label">
+                                        <FormattedMessage id={option.label}/>
+                                    </div>}
+                                    {option.description && <div className="description">
+                                        <FormattedMessage id={option.description}/>
+                                    </div>}
+                                </a>
+                            : <a>
                                 {option.label && <div className="label">
                                     <FormattedMessage id={option.label}/>
-                                </div>}
-                                {option.description && <div className="description">
-                                    <FormattedMessage id={option.description}/>
-                                </div>}
-                            </Link>
-                            : <a href={`${path}${currentLanguage === 'en' ? '' : `/${currentLanguage}`}${option.href}`} onClick={() => this.openDropdown('')}>
-                                {option.label && <div className="label">
-                                    <FormattedMessage id={option.label}/>
+                                    <span className="soon">
+                                        (<FormattedMessage id={'page.header.soon'}/>)
+                                    </span>
                                 </div>}
                                 {option.description && <div className="description">
                                     <FormattedMessage id={option.description}/>
@@ -467,6 +487,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     };
     private renderAssets = (balance, crypto, currency) => {
         const { openMenuType, openMobileMenu } = this.state;
+        const { currentLanguage } = this.props;
         const isMobileOpen = openMenuType === 'assets' && openMobileMenu === 'right';
 
         return (<div className={`dropdown-block${isMobileOpen ? ' mobile-background' : '' } assets`}>
@@ -481,16 +502,16 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <div className="header">
                         <FormattedMessage id={'page.header.current_balance'}/>
                     </div>
-                    <div className="balance">
+                    <Link to={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/wallets`} className="balance">
                         <span className="currency left-cur">{balance[crypto.toUpperCase()].toFixed(2)}</span>
                         <span className="type-currency">{crypto.toUpperCase()}</span>
                         <span className="sym">≈</span>
                         <span className="currency right-cur">{balance[currency.toUpperCase()].toFixed(2)}</span>
                         <span className="type-currency">{currency.toUpperCase()}</span>
-                    </div>
+                    </Link>
                 </li>
                 <li>
-                    <Link to={'/wallets'} onClick={() => this.openDropdown('')}>
+                    <Link to={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/wallets`} onClick={() => this.openDropdown('')}>
                         <FormattedMessage id={'page.header.deposit_withdraw'}/>
                     </Link>
                 </li>

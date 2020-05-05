@@ -149,7 +149,7 @@ const linkBlock = {
         header: 'footer_headers_products',
         body: [
             { key: '', href: '/trading/btcusdt', label: 'footer_headers_spot_trade' },
-            { key: '', href: '/spot', label: 'footer_headers_ieo' },
+            { key: '', href: '/ieo', label: 'footer_headers_ieo' },
             { key: '', href: '/referral', label: 'footer_headers_referral_program' },
         ].map((link, index) => {
             link.key = `footer-link-${index}-${link.href}-${link.label}`;
