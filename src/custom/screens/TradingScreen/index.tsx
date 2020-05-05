@@ -153,6 +153,8 @@ class Trading extends React.Component<Props, StateProps> {
             this.props.rangerConnect({ withAuth: userLoggedIn });
         }
         if (!userLoggedIn && currentMarket) {
+            // tslint:disable-next-line:no-console
+            console.log('...........test this place');
             this.props.history.replace(buildPath(`/trading/${currentMarket.id}`, currentLanguage));
         }
     }
