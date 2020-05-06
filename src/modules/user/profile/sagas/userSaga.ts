@@ -13,6 +13,8 @@ const userOptions: RequestOptions = {
 export function* userSaga() {
     try {
         const loginMainSite = localStorage.getItem('uil');
+        // tslint:disable-next-line:no-console
+        console.log('...........loginMainSite', loginMainSite);
         if (loginMainSite) {
             const user = yield call(API.get(userOptions), '/resource/users/me');
             const payload = {
