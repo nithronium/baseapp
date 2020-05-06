@@ -12,11 +12,16 @@ const userOptions: RequestOptions = {
 
 export function* userSaga() {
     try {
-        const user = yield call(API.get(userOptions), '/resource/users/me');
-        const payload = {
-            user: user,
-        };
-        yield put(userData(payload));
+        const loginMainSite = localStorage.getItem('uil');
+        if (loginMainSite) {
+            const user = yield call(API.get(userOptions), '/resource/users/me');
+            const payload = {
+                user: user,
+            };
+            yield put(userData(payload));
+        } else {
+            yield call(API.delete(userOptions), '/identity/sessions');
+        }
     } catch (error) {
         yield put(userError(error));
     }

@@ -137,9 +137,9 @@ const linkBlock = {
     links1: {
         header: 'footer_headers_advisory',
         body: [
-            { key: '', href: 'https://advisory.emirex.com/services', label: 'footer_headers_our_services' },
-            { key: '', href: 'https://advisory.emirex.com/commodities', label: 'footer_headers_сommodities' },
-            { key: '', href: 'https://advisory.emirex.com/expertise', label: 'footer_headers_expertise' },
+            { key: '', href: 'https://advisory.emirex.com/services', label: 'footer_headers_our_services', extLink :true },
+            { key: '', href: 'https://advisory.emirex.com/commodities', label: 'footer_headers_сommodities', extLink :true },
+            { key: '', href: 'https://advisory.emirex.com/expertise', label: 'footer_headers_expertise', extLink :true },
         ].map((link, index) => {
             link.key = `footer-link-${index}-${link.href}-${link.label}`;
             return link;
@@ -170,8 +170,8 @@ const linkBlock = {
     links4: {
         header: 'footer_headers_service',
         body: [
-            { key: '', href: 'https://kb.emirex.com/', label: 'footer_headers_knowledge_base' },
-            { key: '', href: 'https://kb.emirex.com/kb-tickets/new', label: 'footer_headers_submit_a_ticket' },
+            { key: '', href: 'https://kb.emirex.com/', label: 'footer_headers_knowledge_base', extLink :true },
+            { key: '', href: 'https://kb.emirex.com/kb-tickets/new', label: 'footer_headers_submit_a_ticket', extLink :true },
         ].map((link, index) => {
             link.key = `footer-link-${index}-${link.href}-${link.label}`;
             return link;
@@ -181,7 +181,7 @@ const linkBlock = {
         header: 'footer_headers_contact_us',
         body: [
             { key: '', href: '/about', label: 'footer_headers_about' },
-            { key: '', href: 'https://blog.emirex.com/', label: 'footer_headers_emirex_blog' },
+            { key: '', href: 'https://blog.emirex.com/', label: 'footer_headers_emirex_blog', extLink :true },
         ].map((link, index) => {
             link.key = `footer-link-${index}-${link.href}-${link.label}`;
             return link;
@@ -192,16 +192,16 @@ const linkBlock = {
 const LinksList = ({ links, intl }) => {
     return (
         <ul className="footer-link-list">
-            {links.map(({ key, href, label, className, ext }) =>
-                ext ? (
+            {links.map(({ key, href, label, className, extLink }) =>
+                extLink ? (
                     <li key={key}>
-                        <a className={className} href={href} target="_blank" rel="nofollow noopener">
+                        <a className={className} href={`href`} target="_blank" rel="nofollow noopener">
                             {intl.formatMessage({ id: label })}
                         </a>
                     </li>
                 ) : (
                     <li key={key}>
-                        <a className={className} href={href}>
+                        <a className={className} href={`/${intl.locale}${href}`}>
                             {intl.formatMessage({ id: label })}
                         </a>
                     </li>
