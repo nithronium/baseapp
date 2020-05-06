@@ -156,10 +156,6 @@ class ReferralCommission extends React.Component<Props, State> {
                 // user.cryptoCurrency !== nextProps.user.cryptoCurrency
             )
         ) {
-            const totalReferrals = balances.participants.reduce((acc, item) => {
-                return Number(acc) + Number(item.total);
-            }, 0);
-
             const currencies = this.getCurrencies();
             const currenciesArray = [currencies.crypto, currencies.emrx, this.getUser(nextProps).activeCurrency || currencies.fiat];
 
@@ -173,12 +169,9 @@ class ReferralCommission extends React.Component<Props, State> {
             const ieoConverted = await getExchangeRates(
                 'USD', nextProps.balances.earned.ieo, currenciesArray,
             );
-            let referralConverted = this.state.referralConverted;
-            if (totalReferrals) {
-                referralConverted = await getExchangeRates(
-                    'USD', nextProps.balances.earned.trade / totalReferrals, currenciesArray,
-                );
-            }
+            const referralConverted = await getExchangeRates(
+                'USD', nextProps.balances.earned.trade, currenciesArray,
+            );
             this.setState({
                 tradeConverted,
                 ieoConverted,
@@ -196,14 +189,10 @@ class ReferralCommission extends React.Component<Props, State> {
                 balances.participants.length !== nextProps.balances.participants.length
             )
         ) {
-            const totalReferrals = nextProps.balances.participants.reduce((acc, item) => {
-                return Number(acc) + Number(item.total);
-            }, 0);
-
             const currencies = this.getCurrencies();
             const currenciesArray = [currencies.crypto, currencies.emrx, user.activeCurrency || currencies.fiat];
             const referralConverted = await getExchangeRates(
-                'USD', nextProps.balances.earned.trade / totalReferrals, currenciesArray,
+                'USD', nextProps.balances.earned.trade, currenciesArray,
             );
             this.setState({
                 referralConverted,
@@ -291,7 +280,7 @@ class ReferralCommission extends React.Component<Props, State> {
             };
         });
 
-        const tradeMaxCommission = Math.floor(balances.commission.trade.reduce((acc, item) => {
+        const tradeMaxCommission = Math.round(balances.commission.trade.reduce((acc, item) => {
             return Number(acc) + Number(item);
         }, 0) * 1000) / 10;
 
@@ -309,7 +298,7 @@ class ReferralCommission extends React.Component<Props, State> {
             };
         });
 
-        const ieoMaxCommission = Math.floor(balances.commission.ieo.reduce((acc, item) => {
+        const ieoMaxCommission = Math.round(balances.commission.ieo.reduce((acc, item) => {
             return Number(acc) + Number(item);
         }, 0) * 1000) / 10;
 
@@ -579,7 +568,7 @@ class ReferralCommission extends React.Component<Props, State> {
                             />
                             <InfoCard
                                 iconName="profit"
-                                title="Profit per referral"
+                                title="Profit"
                                 text={`${this.trimNumber(this.getCoverteValue(referralConverted, currencies.crypto))} ${currencies.crypto}`}
                                 emrxConverted={`${this.trimNumber(this.getCoverteValue(referralConverted, currencies.emrx))} ${currencies.emrx}`}
                                 usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(referralConverted, activeCurrency))} ${activeCurrency}`}
