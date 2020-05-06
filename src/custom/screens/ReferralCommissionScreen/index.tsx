@@ -145,38 +145,57 @@ class ReferralCommission extends React.Component<Props, State> {
         };
     };
 
+    public getIeoCurrencies = (props?) => {
+        const realProps = props || this.props;
+        const { ieo } = realProps;
+        const res = new Set();
+        for (const item of ieo.referrals) {
+            res.add(item.investment_currency_id.toUpperCase());
+        }
+        return Array.from(res);
+    };
+
+    public isSameCurrencies = (arr1, arr2) => {
+        return [...arr1].sort().join(',') === [...arr2].sort().join(',');
+    };
+
     public loadConvertedValues = async nextProps => {
-        const { balances } = this.props;
+        const { balances, ieo } = this.props;
+        console.log('ieo', ieo);
         const user = this.getUser();
         if (
             balances.earned && (
                 balances.earned.trade !== nextProps.balances.earned.trade ||
                 balances.earned.ieo !== nextProps.balances.earned.ieo ||
-                user.activeCurrency !== this.getUser(nextProps).activeCurrency
+                user.activeCurrency !== this.getUser(nextProps).activeCurrency ||
+                !this.isSameCurrencies(this.getIeoCurrencies(), this.getIeoCurrencies(nextProps))
                 // user.cryptoCurrency !== nextProps.user.cryptoCurrency
             )
         ) {
             const totalReferrals = balances.participants.reduce((acc, item) => {
                 return Number(acc) + Number(item.total);
             }, 0);
-
+            const ieoCurrencies = this.getIeoCurrencies(nextProps);
             const currencies = this.getCurrencies();
-            const currenciesArray = [currencies.crypto, currencies.emrx, this.getUser(nextProps).activeCurrency || currencies.fiat];
+            const defaultCurrencies = [currencies.crypto, currencies.emrx, this.getUser(nextProps).activeCurrency || currencies.fiat];
+            const currenciesArray = Array.from(new Set([...defaultCurrencies, ...ieoCurrencies]));
+
+            console.log('currenciesArray', currenciesArray);
 
             const ratio = await getExchangeRates(
                 'USD', 1, currenciesArray,
             );
 
             const tradeConverted = await getExchangeRates(
-                'USD', nextProps.balances.earned.trade, currenciesArray,
+                'USD', nextProps.balances.earned.trade, defaultCurrencies,
             );
             const ieoConverted = await getExchangeRates(
-                'USD', nextProps.balances.earned.ieo, currenciesArray,
+                'USD', nextProps.balances.earned.ieo, defaultCurrencies,
             );
             let referralConverted = this.state.referralConverted;
             if (totalReferrals) {
                 referralConverted = await getExchangeRates(
-                    'USD', nextProps.balances.earned.trade / totalReferrals, currenciesArray,
+                    'USD', nextProps.balances.earned.trade / totalReferrals, defaultCurrencies,
                 );
             }
             this.setState({
@@ -222,24 +241,24 @@ class ReferralCommission extends React.Component<Props, State> {
         return value.price;
     };
 
-    public changeCurrentCurrency = currencyId => {
-        // const currencyIdFormatted = currencyId.toLowerCase();
+    // public changeCurrentCurrency = currencyId => {
+    //     // const currencyIdFormatted = currencyId.toLowerCase();
 
-        const { tradingPage, ieoPage, referralsPage, pageSize } = this.state;
-        this.props.fetchCurrencies();
-        this.props.fetchReferralCommissionBalances({currencyId: this.props.commissionsInfo.currencyId});
-        this.props.fetchReferralCommissionParticipants({ limit: pageSize, skip: (referralsPage - 1) * pageSize });
-        this.props.fetchReferralCommissionReferrals({
-            currencyId: this.props.commissionsInfo.currencyId, type:'trade',
-            limit: pageSize,
-            skip: (tradingPage - 1) * pageSize,
-        });
-        this.props.fetchReferralCommissionReferrals({
-            currencyId: this.props.commissionsInfo.currencyId, type:'ieo',
-            limit: pageSize,
-            skip: (ieoPage - 1) * pageSize,
-        });
-    }
+    //     const { tradingPage, ieoPage, referralsPage, pageSize } = this.state;
+    //     this.props.fetchCurrencies();
+    //     this.props.fetchReferralCommissionBalances({currencyId: this.props.commissionsInfo.currencyId});
+    //     this.props.fetchReferralCommissionParticipants({ limit: pageSize, skip: (referralsPage - 1) * pageSize });
+    //     this.props.fetchReferralCommissionReferrals({
+    //         currencyId: this.props.commissionsInfo.currencyId, type:'trade',
+    //         limit: pageSize,
+    //         skip: (tradingPage - 1) * pageSize,
+    //     });
+    //     this.props.fetchReferralCommissionReferrals({
+    //         currencyId: this.props.commissionsInfo.currencyId, type:'ieo',
+    //         limit: pageSize,
+    //         skip: (ieoPage - 1) * pageSize,
+    //     });
+    // }
 
     public changePage = (currencyId, type, skip, limit) => {
         this.props.fetchReferralCommissionReferrals({currencyId, type, skip, limit});
@@ -263,6 +282,21 @@ class ReferralCommission extends React.Component<Props, State> {
             })[0];
             return this.trimNumber(value * btc.price);
         }
+    };
+
+    public convert = (name: string, value: number) => {
+        const { ratio } = this.state;
+        if (!ratio) {
+            return value;
+        }
+
+        const curr = ratio.quote.filter(item => {
+            return item.symbol.toLowerCase() === name.toLowerCase();
+        })[0];
+        if (!curr) {
+            return value;
+        }
+        return this.trimNumber(value * curr.price);
     };
 
     public trimNumber = value => {
