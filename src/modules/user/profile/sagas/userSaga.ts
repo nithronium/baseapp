@@ -22,6 +22,11 @@ export function* userSaga() {
         } else {
             yield call(API.delete(userOptions), '/identity/sessions');
             yield put(userReset());
+            const user = yield call(API.get(userOptions), '/resource/users/me');
+            const payload = {
+                user: user,
+            };
+            yield put(userData(payload));
         }
     } catch (error) {
         yield put(userError(error));
