@@ -25,9 +25,6 @@ export function* userSaga() {
         } else {
             yield call(API.delete(userOptions), '/identity/sessions');
             yield put(userReset());
-            yield put(userOpenOrdersReset());
-            yield put(signInRequire2FA({ require2fa: false }));
-            yield put(resetHistory());
         }
     } catch (error) {
         yield put(userError(error));
