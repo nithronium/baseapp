@@ -404,7 +404,7 @@ class ReferralCommission extends React.Component<Props, State> {
         let ieoData = ieo.referrals.map(row => {
             return this.ieoFields.map((key, index) => {
                 if ([3, 5].includes(index)) {
-                    return this.convertToBtc(row[key]);
+                    return this.convert(row.investment_currency_id, row[key]);
                 }
                 return row[key];
             });
@@ -702,13 +702,18 @@ class ReferralCommission extends React.Component<Props, State> {
     };
 
     private addIeoTotal = list => {
-        const totalCommission = list.reduce((acc, row) => Number(acc) + Number(row[3]), 0);
-        const totalCommissionL2 = list.reduce((acc, row) => Number(acc) + Number(row[5]), 0);
+        const { ieo } = this.props;
+        const totalCommission = ieo.referrals.reduce((acc, row) => {
+            return Number(acc) + Number(row.commission);
+        }, 0);
+        const totalCommissionL2 = ieo.referrals.reduce((acc, row) => {
+            return Number(acc) + Number(row.commissionUnder);
+        }, 0);
 
         const totalRow: Array<string|number> = [
             'Total amount', '', '',
-            `${this.trimNumber(totalCommission)} BTC`, '',
-            `${this.trimNumber(totalCommissionL2)} BTC`,
+            `${this.convertToBtc(totalCommission)} BTC`, '',
+            `${this.convertToBtc(totalCommissionL2)} BTC`,
         ];
         return [...list, totalRow];
     };
@@ -716,10 +721,10 @@ class ReferralCommission extends React.Component<Props, State> {
     private addIeoText = list => {
         const map = [
             x => x, x => (x || '').toUpperCase(),
-            (x, curr) => `${x} ${(curr || '').toUpperCase()}`,
-            x => `${x} BTC`,
-            (x, curr) => `${x} ${(curr || '').toUpperCase()}`,
-            x => `${x} BTC`,
+            (x, curr) => `${x} ${curr}`,
+            (x, curr) => `${x}  ${curr}`,
+            (x, curr) => `${x} ${curr}`,
+            (x, curr) => `${x} ${curr}`,
         ];
         const { ieo } = this.props;
 
@@ -729,12 +734,7 @@ class ReferralCommission extends React.Component<Props, State> {
             }
             return row.map((item, colIndex) => {
                 const originalRow = ieo.referrals[rowIndex];
-
-                if ([2, 4].includes(colIndex)) {
-                    return map[colIndex](item, originalRow.investment_currency_id);
-                } else {
-                    return map[colIndex](item, '');
-                }
+                return map[colIndex](item, (originalRow.investment_currency_id || '').toUpperCase());
             });
         });
     };
