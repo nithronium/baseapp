@@ -1,9 +1,6 @@
 // tslint:disable-next-line
 import { call, put } from 'redux-saga/effects';
 import { API, RequestOptions } from '../../../../api';
-import {signInRequire2FA} from '../../auth';
-import {resetHistory} from '../../history';
-import {userOpenOrdersReset} from '../../openOrders';
 import {
     userData,
     userError, userReset,
