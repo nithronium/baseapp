@@ -446,7 +446,7 @@ class ReferralCommission extends React.Component<Props, State> {
                         </div>
                     </div>
 
-                    <div className="section--transparent" style={{ flexWrap: 'wrap' }}>
+                    <div className="section--transparent section--levels">
                         {levelTrade.map((item, index) => {
                             return <LevelCard
                                 level={Number(index) + 1}
@@ -520,7 +520,7 @@ class ReferralCommission extends React.Component<Props, State> {
                         </div>
                     </div>
 
-                    <div className="section--transparent" style={{ flexWrap: 'wrap' }}>
+                    <div className="section--transparent section--levels">
                         {levelIeo.map((item, index) => {
                             return <LevelCard
                                 level={Number(index) + 1}
@@ -600,7 +600,7 @@ class ReferralCommission extends React.Component<Props, State> {
                         </div>
                     </div>
 
-                    <div className="section--transparent" style={{ flexWrap: 'wrap' }}>
+                    <div className="section--transparent section--levels">
                         {levelPart.map((item, index) => {
                             return <LevelCard
                                 level={Number(index) + 1}
