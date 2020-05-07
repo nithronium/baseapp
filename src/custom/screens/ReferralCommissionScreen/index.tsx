@@ -362,9 +362,9 @@ class ReferralCommission extends React.Component<Props, State> {
             'Email',
             'IEO',
             'Invested L1',
-            'Commission (BTC)',
+            'Commission',
             'Invested L2-L3',
-            'Commission (BTC) L2-L3',
+            'Commission L2-L3',
         ];
 
         let ieoData = ieo.referrals.map(row => {
