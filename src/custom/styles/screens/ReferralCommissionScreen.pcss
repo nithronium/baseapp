@@ -1,686 +1,351 @@
 .pg-referral-commission {
-    background: white;
     color: black;
     font-size: 16px;
     margin: 0;
-    a{
-        color: black;
-        text-decoration: none;
+    padding-bottom: 30px;
 
-        &:hover{
-            text-decoration: underline;
+    .cr-table-container {
+        max-width: 960px;
+        overflow-x: auto;
+
+        .cr-table thead th {
+            top: 0;
         }
     }
 
-    button{
-        color: #fff;
-        background: #00732F;
-        padding: 10px 20px;
-        border-radius: 20px;
-        border: 0;
-        cursor: pointer;
-
-        &:focus{
-            outline: none;
-        }
+    &__level-card {
+        background: #263434;
+        border-radius: 4px;
     }
 
-    .container{
-        width: 1140px;
-        margin: auto;
+    .info-card {
         display: flex;
 
-        &.column{
-            flex-direction: column;
-        }
-    }
-
-    .round-button{
-        border: 1px solid green;
-        color: green;
-        padding: 6px 16px;
-        border-radius: 16px;
-        transition: background .4s, color .4s, box-shadow .4s;
-
-        &:after{
-            display: none !important;
+        &:not(:last-child) {
+            margin-right: 30px;
         }
 
-        &:hover{
-            color: #fff;
-            background: green;
-            text-decoration: none;
-            box-shadow: 0 2px 4px rgba(0,0,0, .5);
-        }
+        &__icon {
+            background: #FFD567;
+            width: 41px;
+            height: 40px;
+            border-radius: 50%;
+            margin: 0 12px;
+            position: relative;
 
-        &.default{
-            background: green url(./custom/assets/images/referral-commission/arrow-right-white.svg) right 15px center no-repeat;
-            color: #fff;
-            padding-right: 30px;
-
-            .hidden{
-                display: block;
-                background: green;
+            div {
+                height: 25px;
+                width: 25px;
+                background-size: contain;
+                background-repeat: no-repeat;
                 position: absolute;
-                width: 300px;
-                column-count: 3;
-                top: 30px;
-                border-radius: 8px;
-                padding: 20px;
-                box-sizing: border-box;
-                max-height: 0;
-                padding: 0;
-                border: 0;
-                opacity: 0;
-                pointer-events: none;
-                transition: max-height .4s, padding .4s, opacity .4s, border .4s;
-                
-                .selector{
-                    display: block;
-                    padding-bottom: 10px;
-                    
-                    &:hover{
-                        text-decoration: underline;
-                    }
-                }
-                
-                &.opened{
-                    .round-button.default{
-                        position: relative;
-        
-                        .hidden{
-                            display: block;
-                            border: 1px solid green;
-                            background: green;
-                            position: absolute;
-                            width: 300px;
-                            column-count: 3;
-                            top: 30px;
-                            border-radius: 8px;
-                            padding: 20px;
-                            box-sizing: border-box;
-        
-                            .selector{
-                                border: 1px solid green;
-                                display: block;
-                                padding-bottom: 10px;
-        
-                                &:hover{
-                                    text-decoration: underline;
-                                }
-                            }
-                        }
-                    }
-                }
+                background-position: left top;
+                left: 8px;
+                top: 8px;
+            }
+
+            &--commission {
+                background-image: url(./assets/images/referral-commission-icon.svg);
+                top: 9px;
+            }
+
+            &--referrals {
+                background-image: url(./assets/images/referrals-icon.svg);
+                left: 9px;
+            }
+
+            &--fee {
+                background-image: url(./assets/images/trade-fee-icon.svg);
+                left: 9px;
+            }
+
+            &--profit {
+                background-image: url(./assets/images/referral-profit-icon.svg);
+            }
+
+            &--total-referrals {
+                background-image: url(./assets/images/total-referrals-icon.svg);
+            }
+
+            &--active-referrals {
+                background-image: url(./assets/images/active-referrals-icon.svg);
+            }
+
+            &--active-ratio {
+                background-image: url(./assets/images/active-ration-icon.svg);
             }
         }
-    }
 
-    .trading-commission-details{
-        width: 100%;
-    }
-
-    h1{
-        width: 180px;
-        font-weight: 400;
-        text-transform: capitalize;
-    }
-
-    h2{
-        font-weight: 800;
-        padding-left: 30px;
-        border-left: 3px solid;
-    }
-    section{
-        margin: 46px 0;
-    }
-
-    .total-summary{
-        width: 368px;
-        margin-left: auto;
-        margin-top: 40px;
-        margin-bottom: 60px;
-        margin-right: 147px;
-
-        .value, .header{
-            padding:  10px 0;
+        &__title {
+            font-weight: normal;
+            color: #648280;
+            font-size: 12px;
+            white-space: nowrap;
         }
 
-        .header{
-            color: #ccc;
+        &__text {
+            font-weight: 600;
+            font-size: 20px;
+            color: #E5E6EF;
+            white-space: nowrap;
+        }
+
+        &__emrx {
             font-size: 14px;
-            border-bottom: 1px solid #ccc;
+            color: #E5E6EF;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        &__usd {
+            font-size: 14px;
+            color: #7D9794;
+            position: relative;
+            top: 22px;
+            left: 8px;
+            white-space: nowrap;
+        }
+
+        &__wrap {
+            display: flex;
+            padding: 15px 30px;
         }
     }
 
-    .top-holder{
-        background: #f0f0f0;
+
+    .copyable-text-field {
+        border: none;
+        color: var(--table-text-color);
         position: relative;
-        padding-bottom: 40px;
+        z-index: 1;
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
 
-        &:before{
-            content: '';
-            display: block;
-            width: 20px;
-            height: 20px;
-            background: #fff;
-            position: absolute;
-            bottom: -10px;
-            transform: rotate(45deg);
-            right:20vw;
+    .copyable-title {
+        background: #222627;
+        position: relative;
+        left: 6px;
+        top: 2px;
+        padding: 0 6px;
+    }
+
+    #copy_referral_link {
+        height: 50px;
+        text-indent: 12px;
+    }
+
+    .cr-copyable-text-field__button {
+        position: relative;
+        left: -5px;
+        top: 5px;
+    }
+
+    .level-card {
+        background: #171e1e;
+        border-radius: 4px;
+        display: flex;
+        flex: 1;
+        padding: 28px;
+
+        &:not(:last-child) {
+            margin-right: 20px;
         }
 
-        &:after{
-            content: '';
-            display: block;
-            width: 100px;
-            height: 100px;
-            position: absolute;
-            bottom: -50px;
-            right: 30vw;
-            background: url(./custom/assets/images/referral-commission/cube.svg) center center no-repeat;
+        &__content {
+            padding-left: 25px;
         }
 
-        .contexter{
-            
-            margin-top: 12px;
-            flex-grow: 1;
+        &__level {
+            background-image: url(./assets/images/referral-level-bg.png);
+            width: 68px;
+            height: 68px;
+            background-position: center center;
+            background-repeat: no-repeat;
+            font-size: 12px;
+            line-height: 14px;
+            text-align: center;
+            color: #141717;
 
-            .cards-wrapper{
-
-                display: flex;
-                flex-grow: 1;
-                justify-content: flex-end;
-
-                .Card{
-                    margin-left: 30px;
-                    width: 26%;
-                    box-sizing: border-box;
-                    padding: 20px;
-                    display: flex;
-                    flex-direction: column;
-                    border-radius: 14px;
-                    box-shadow: 0 0 12px rgba(0,0,0, .03);
-                    background: #fff;
-                    transition: box-shadow .4s;
-                    position: relative;
-
-                    &:nth-child(2){
-                        background: #FFD541;
-                    }
-
-                    &:nth-child(3){
-                        background: #00C620;
-                    }
-                    
-                    &:hover{
-                        box-shadow: 0 6px 12px rgba(0,0,0, .3);
-                    }
-                    
-                    .card-top{
-
-                        font-size: 18px;
-                        font-weight: 500;
-
-                        p{
-                            margin: 0;
-                        }
-                    }
-
-                    .card-middle{
-
-                        .card-earned-header{
-                            font-size: 18px;
-                            font-weight: 500;
-                        }
-
-                        flex-grow: 1;
-                        margin: 10px 0;
-
-                        .card-details-row{
-                            display: flex;
-                            font-size: 14px;
-                            margin-top: 12px;
-
-                            .card-details-row__left{
-                                flex-grow: 1;
-                            }
-
-                            .card-details-row__right{
-                                font-weight: 500;
-                                font-size: 16px;
-                            }
-                        }
-                    }
-
-                    .card-bottom{
-                        text-decoration: none;
-                        margin-top: 10px;
-                    }
-
-                    &:after{
-                        content: '';
-                        display: block;
-                        width: 40px;
-                        bottom: 40px;
-                        left: 0px;
-                        position: absolute;
-                        border-top: 1px solid rgba(0,0,0, .3);
-                    }
-                }
-            }
-
-            .summary{
-
-                padding-left: 30px;
-                box-sizing: border-box;
-                padding-top: 20px;
-
-                .details-link{
-
-                    &:before{
-                        content: '';
-                        display: block;
-                        position: absolute;
-                        width: 50vw;
-                        bottom: -20px;
-                        left: 0;
-                        border-bottom: 1px solid #ccc;
-                    }
-                }
-                
-
-                .title{
-                    font-size: 18px;
-                    font-weight: 500;
-                }
-
-                .summary-container{
-
-                    margin-top: 20px;
-
-                    & > *{
-                        margin: 16px 0;
-                    }
-
-                    .referral-code{
-                        margin-top: 36px;
-                    }
-                }
+            div {
+                text-align: center;
+                color: #141717;
+                font-size: 24px;
+                line-height: 28px;
+                padding-top: 9px;
             }
         }
 
-        .direct-ticket-details{
-            
-            position: relative;
-
-            &:before{
-                content: '';
-                display: block;
-                position: absolute;
-                background: url(./custom/assets/images/referral-commission/1.svg)  center center no-repeat;
-                width: 110px;
-                height: 110px;
-                left: 18vw;
-                top: 0;
-            }
-
-            &:after{
-                content: '';
-                display: block;
-                position: absolute;
-                background: url(./custom/assets/images/referral-commission/2.svg) center center no-repeat;
-                width: 110px;
-                height: 110px;
-                right: 5vw;
-                top: 0;
-            }
-            
-            .container{
-
-                position: relative;
-                justify-content: flex-end;
-
-            }
-
-            .container-wrapper{
-                width: calc(69% + 56px);
-            }
-
-            h2{
-                border-color: transparent;
-            }
+        &__header {
+            font-weight: 600;
+            font-size: 1.2em;
+            line-height: 23px;
+            color: #E5E6EF;
         }
 
-        .details-link{
-                            
+        &__subheader {
+            font-weight: normal;
+            font-size: 0.9em;
+            line-height: 16px;
+            color: #7D9794;
+        }
+
+        &__caption {
+            font-weight: 600;
             font-size: 14px;
-            color: #000;
-            text-decoration: none;
+            line-height: 16px;
+            color: #E8AF59;
             position: relative;
-            
-            &:after{
-                content: '';
-                display: inline-block;
-                height: 12px;
-                width: 12px;
-                transform: translateX(6px) translateY(2px);
-                background: url(./custom/assets/images/referral-commission/right-arrow.svg) center center no-repeat;
-            }
+            top: 13px;
         }
     }
 
-    table{
-        border-spacing: 0;
-        margin-left: 30px;
-        table-layout: fixed;
-        width: 100%;
+    &__container {
+        max-width: 940px;
+        margin: 0 auto;
+    }
 
-        .explanation{
-            display: inline-block;
-        }
+    .section {
+        border-radius: 3px;
+        background: #222627;
+        margin-top: 20px;
 
-        th,
-        td{
+        &__header {
+            background: #263434;
+            color: #9ECFC3;
             font-size: 14px;
-            width: 20%;
-        }
-
-        thead{
-            
-
-            td{
-                padding: 20px 8px 20px 0;
-                color:  #ccc;
-
-                &:last-of-type{
-                    text-align: right;
-                }
-            }
-        }
-
-        tbody{
-
-            transition: background-color .4s;
-            
-            tr{
-            
-
-                transition: background-color .2s;
-
-                &:hover{
-                    background: rgba(204,204,204, .2);
-                }
-
-                td{
-                    padding: 20px 8px 20px 0;
-                    border-top: 1px solid #ccc;
-                    border-collapse: collapse;
-
-                    .mobile-card-header{
-                        display: none;
-                    }
-
-                    .mobile-value{
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-                        overflow: hidden;
-                    }
-        
-                    &:last-of-type{
-                        text-align: right;
-                    }
-
-                    span.count{
-                        font-size: 18px;
-                        font-weight: 500;
-                    }
-                }
-
-                .email-cell{
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                }
-            }
-
-            &.summary-row{
-
-                tr{
-                    &:first-of-type{
-
-                        td{
-                            border: 0;
-                            border-top: 1px solid #ccc;
-                            padding-bottom: 5px;
-                        }
-                    }
-
-                    &:last-of-type{
-                        
-                        td{
-                            border: 0;
-                            color: green;
-                            padding-top: 5px;
-                        }
-                    }
-
-                    &:hover{
-                        background: transparent;
-                    }
-                }
-
-                &:hover{
-                    background: rgba(204,204,204, .2);
-                }
-            }
-
-        }
-
-        tfoot{
-
-            tr{
-
-                &:first-of-type{
-
-                    td{
-                        padding-top: 20px;
-                    }
-                }
-                    
-                td[colspan]{
-                    padding-bottom: 22px;
-
-                    a{
-                        position: relative;
-                        display: inline-block;
-                        font-weight: 600;
-                        &:after{
-                            content: '';
-                            display: block;
-                            width: 20px;
-                            height: 20px;
-                            position: absolute;
-                            top: 0px;
-                            right: -23px;
-                            background: url(./custom/assets/images/referral-commission/right-arrow.svg) center center no-repeat;
-                        }
-                    }
-                }
-
-                td{
-                    .table-summary-header{
-                        display: block;
-                        border-bottom: 1px solid #ccc;
-                        width: 80px;
-                        padding-bottom: 10px;
-                        font-weight: bold;
-                    }
-
-                    &.footer-header{
-
-                        color: #ccc;
-
-                        &:last-of-type{
-                            text-align: right;
-                        }
-                    }
-
-                    &:last-of-type{
-                        text-align: right;
-                    }
-                }
-
-                &:last-of-type{
-
-                    td{
-            
-                        padding: 0 8px 20px 0;
-            
-                        &:last-of-type{
-            
-                            text-align: right;
-                        }
-                    }
-                }
-            }
+            padding-left: 14px;
+            height: 32px;
+            line-height: 32px;
+            border-radius: 5px 5px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
     }
 
-    #ieo {
-        h2 {
-            border-left-color: #FFD541;
-        }
+    .section-margin {
+        margin-top: 40px;
     }
 
-    #summary {
-        h2 {
-            border-left-color: #F0F0F0;
-        }
+    .section--transparent {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
     }
 
-    @media (max-width: 700px){
-        .container{
-            .container{
-                margin: 0;
-                padding: 0;
-            }
+    .table {
+        font-size: 12px;
+        white-space: nowrap;
 
-            .column {
-                width: 100% !important;
-                max-width: 100%;
-            }
-        }
+        tr {
+            background-color: #222627;
+            border-bottom: 1px solid var(--header-border);
+            height: 47px;
 
-        .explanation{
-            display: none;
-        }
+            &:last-child {
+                td {
+                    background-color: #141717;
+                    color: #fff;
+                    font-weight: 600;
 
-        #trading, #ieo, #summary{
-            & > .container{
-                margin: 0;
-                max-width: calc(100vw - 20px);
-            }
-        }
+                    &:first-child {
+                        color: #FFD567;
+                        font-weight: normal;
+                    }
 
-        .top-holder{
-
-            #top{
-
-                .container.recalculate{
-
-                    .contexter{
-                        
-                        .cards-wrapper{
-                
-                            flex-direction: column;
-                    
-                            .Card, .summary{
-                                margin: 0;
-                                width: 100%;
-                                margin-bottom: 20px;
-                            }
-                        }
+                    &:nth-child(2),
+                    &:nth-child(4),
+                    &:nth-child(5) {
+                        font-weight: normal;
                     }
                 }
             }
         }
 
-
-        div{
-
-            &:before, &:after{
-                background: none !important;
+        .cr-table__head-row {
+            th {
+                background-color: #1f2223;
             }
         }
 
-        .footer-middle .container{
-            flex-direction: column !important;
-
-            div{
-                width: 100% !important;
-                column-count: 3;
+        .pg-history-elem__pagination {
+            p {
+                color: #648280;
             }
-        }
-
-        table{
-            width: 1000px;
-
         }
     }
-
-    @media(max-width: 1200px){
-
-        .container{
-            width: 100vw;
-            max-width: calc(100% - 40px);
-            padding: 0 20px;
-            box-sizing: border-box;
-
-            .container{
-                padding-left: 0;
-                width: calc(100vw - 40px);
-            }
-
-            .column {
-                overflow: auto;
-            }
-        }
-
-        .top{
+}
 
 
-            .container{
-                
-                .contexter{
 
-                    .cards-wrapper{
-
-                        .Card{
-                            margin-left: 0;
-                            width: 33%;
-                            margin: 0 20px;
-                        }
-
-                        .summary{
-                            margin: 0;
-                            width: 33%;
-                        }
-                    }
-                }
-            }
-        }
-
-        .recalculate{
+@media (max-width: 767px) {
+    .pg-referral-commission {
+        .info-card {
+            flex: 0 0 50%;
+            margin-right: 0 !important;
             flex-direction: column;
-            justify-items: center;
-            margin: auto;
-            max-width: 100%;
-            
-            & > div{
-                margin: auto;
-                width: 100%;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
 
+            &__wrap {
+                flex-wrap: wrap;
+                align-items: flex-start;
+                justify-content: center;
+            }
+
+            &__title {
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            &__text {
+                position: relative;
+                text-align: center;
+            }
+
+            &__emrx {
+                text-align: left;
+                left: -27px;
+                position: relative;
+            }
+
+            &__usd {
+                position: relative;
+                top: -18px;
+                left: 56px;
+            }
+        }
+
+        .level-card {
+            flex: 0 0 100%;
+            margin-bottom: 10px;
+            margin-right: 0 !important;
+        }
+
+        .section--transparent {
+            flex-wrap: wrap;
+        }
+
+        .section {
+            margin-top: 10px;
+        }
+
+        .section--transparent {
+            margin-top: 10px;
+        }
+
+        .cr-table-container {
+            overflow: scroll;
+
+            tr {
+                font-size: 12px;
+                
+            }
+
+            .cr-table__head tr th {
+                top: 0;
             }
         }
     }

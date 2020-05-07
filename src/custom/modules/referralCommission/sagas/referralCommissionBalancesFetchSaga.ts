@@ -12,11 +12,12 @@ const referralCommissionOptions: RequestOptions = {
 };
 
 export function* referralCommissionBalancesFetchSaga(action: ReferralCommissionBalancesFetch) {
-    const {currencyId} = action.payload;
     try {
-        const balances = yield call(API.get(referralCommissionOptions), `/private/balances?currency_id=${currencyId}`);
+        const balances = yield call(API.get(referralCommissionOptions), `/private/balances`);
         yield put(referralCommissionBalancesData(balances));
     } catch (error) {
+        // tslint:disable-next-line:no-console
+        console.log('error', error);
         yield put(referralCommissionError(error));
     }
 }

@@ -120,7 +120,7 @@ export const zh = {
     'page.body.wallets.whitelist.addAddressModal.body.coinBeneficiaryName': '收款人姓名',
     'page.body.wallets.whitelist.addAddressModal.body.coinDescription': '描述（可选）',
     'page.body.wallets.whitelist.addAddressModal.body.fiatName': '描述',
-    'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': '全名',
+    'page.body.wallets.whitelist.addAddressModal.body.fiatFullName': '全名 (必须与您的个人资料中指定的名称匹配)',
     'page.body.wallets.whitelist.addAddressModal.body.fiatAccountNumber': '帐号',
     'page.body.wallets.whitelist.addAddressModal.body.fiatBankName': '银行名称',
     'page.body.wallets.whitelist.addAddressModal.body.fiatBankSwiftCode': '银行代码',
@@ -1023,6 +1023,7 @@ export const zh = {
     'referralCommission.tradingDetails.next': '下一个',
     'referralCommission.tradingDetails.exportToCsv': '导出为CSV',
     'referralCommission.tradingDetails.total': '总计',
+    'referralCommission.copied': 'Copied to clipboard',
 
     'cardDeposit.errorMessage.first_name': '名字为必填项',
     'cardDeposit.errorMessage.last_name': '姓氏为必填项',

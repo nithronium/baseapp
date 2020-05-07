@@ -67,10 +67,10 @@ export class TradingChartComponent extends React.PureComponent<Props> {
         if (next.currentMarket && next.colorTheme && next.colorTheme !== this.props.colorTheme) {
             this.setChart(next.markets, next.currentMarket, next.colorTheme);
         }
-
         if (next.currentMarket && (!this.props.currentMarket || next.currentMarket.id !== this.props.currentMarket.id)) {
             if (this.props.currentMarket && (this.props.currentMarket.id && this.tvWidget)) {
-                this.updateChart(next.currentMarket);
+                // this.tvWidget.remove();
+                this.setChart(next.markets, next.currentMarket, next.colorTheme);
             } else {
                 this.setChart(next.markets, next.currentMarket, next.colorTheme);
             }
@@ -87,7 +87,6 @@ export class TradingChartComponent extends React.PureComponent<Props> {
             currentMarket,
             markets,
         } = this.props;
-
         if (currentMarket) {
             this.setChart(markets, currentMarket, colorTheme);
         }
@@ -163,15 +162,15 @@ export class TradingChartComponent extends React.PureComponent<Props> {
         });
     };
 
-    private updateChart = (currentMarket: Market) => {
-        if (this.tvWidget) {
-            this.tvWidget.onChartReady(() => {
-                this.tvWidget!.activeChart().setSymbol(currentMarket.id, () => {
-                    print('Symbol set', currentMarket.id);
-                });
-            });
-        }
-    }
+    // private updateChart = (currentMarket: Market) => {
+    //     if (this.tvWidget) {
+    //         this.tvWidget.onChartReady(() => {
+    //             this.tvWidget!.activeChart().setSymbol(currentMarket.id, () => {
+    //                 print('Symbol set', currentMarket.id);
+    //             });
+    //         });
+    //     }
+    // }
 }
 
 const reduxProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
