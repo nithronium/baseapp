@@ -183,7 +183,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <span className="pg-navbar__mobile-icon pg-navbar__left-icon" onClick={() => this.openMobileMenu('left')}>
                         <LeftMenuIcon />
                     </span>
-                    { (!isMobileWith || openMobileMenu === 'left') && <div ref={this.mobileDropdownMenu} className={`pg-navbar__mobile-menu${openMobileMenu === 'left' ? ' pg-navbar__mobile-open' : ''}`}>
+                    { (!isMobileWith || openMobileMenu === 'left') && <div ref={this.mobileDropdownMenu} className={`pg-navbar__mobile-menu${openMobileMenu === 'left' ? ' pg-navbar__mobile-open' : ''} pg-navbar__mobile-menu_left`}>
                         <div className="item">
                             <a href={currentLanguage === 'en' ? `${baseURL}/markets` : `${baseURL}/${currentLanguage}/markets`}>
                                 <FormattedMessage id={'page.body.trade.header.markets'} />
@@ -198,7 +198,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <span className="pg-navbar__mobile-icon pg-navbar__right-icon" onClick={() => this.openMobileMenu('right')}>
                         {isLoggedIn ? <RightMenuIcon /> : <NotLoginIcon /> }
                     </span>
-                    {(!isMobileWith || openMobileMenu === 'right') && <div ref={this.mobileDropdownMenu} className={`pg-navbar__mobile-menu${openMobileMenu === 'right' ? ' pg-navbar__mobile-open' : ''}`}>
+                    {(!isMobileWith || openMobileMenu === 'right') && <div ref={this.mobileDropdownMenu} className={`pg-navbar__mobile-menu${openMobileMenu === 'right' ? ' pg-navbar__mobile-open' : ''} pg-navbar__mobile-menu_right`}>
                         {isLoggedIn
                             ? <React.Fragment>
                                 {this.renderOrders()}
@@ -366,7 +366,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <OpenUserMenu/>
                 </span>
             </div>
-            {openMenuType === 'buyWithCard' && this.renderDropdownMenu(options, true)}
+            {openMenuType === 'buyWithCard' && this.renderDropdownMenu(options, true, 'buyWithCard')}
         </div>);
     };
 
@@ -382,7 +382,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <OpenUserMenu/>
                 </span>
             </div>
-            {openMenuType === 'trade' && this.renderDropdownMenu(options, false)}
+            {openMenuType === 'trade' && this.renderDropdownMenu(options, false, 'trade')}
         </div>);
     };
 
@@ -398,14 +398,14 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <OpenUserMenu/>
                 </span>
             </div>
-            {openMenuType === 'earn' && this.renderDropdownMenu(options, false)}
+            {openMenuType === 'earn' && this.renderDropdownMenu(options, false, 'earn')}
         </div>);
     };
 
-    private renderDropdownMenu = (options, isMainSite) => {
+    private renderDropdownMenu = (options, isMainSite, type) => {
         const path = window.document.location.origin;
         const { currentLanguage } = this.props;
-        return (<ul ref={this.dropdownMenu} className={`dropdown-menu`}>
+        return (<ul ref={this.dropdownMenu} className={`dropdown-menu dropdown-menu__${type}`}>
             {options.map(option => (
                 <li className={`${option.border ? 'border' : ''}`}>
                     {!option.logout
@@ -465,7 +465,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     {isLoggedIn ? <UserIcon /> : <NotLoginIcon /> }
                 </span> }
             </div>
-            {(openMenuType === 'user' || isMobileOpen) && this.renderDropdownMenu(options, false)}
+            {(openMenuType === 'user' || isMobileOpen) && this.renderDropdownMenu(options, false, 'user')}
 
         </div>)
     };
@@ -481,7 +481,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <OpenUserMenu/>
                 </span>
             </div>
-            {openMenuType === 'orders' && this.renderDropdownMenu(options, false)}
+            {openMenuType === 'orders' && this.renderDropdownMenu(options, false, 'orders')}
 
         </div>)
     };

@@ -47,7 +47,7 @@ class Head extends React.Component<any, HeaderState> {
             <React.Fragment>
                 {!['/confirm'].some(r => location.pathname.includes(r)) && (
                     <header className={`pg-header ${isActive ? 'pg-header--active' : ''}`}>
-                        <div className="pg-container pg-header__content">
+                        <div className="pg-header__content">
                             <div className="pg-header__navbar">
                                 <NavBar onLinkChange={this.closeMenu} />
                             </div>
