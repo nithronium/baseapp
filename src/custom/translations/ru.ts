@@ -545,7 +545,7 @@ export const ru: LangType = {
     'page.header.signUp.referalCode': 'Промо-код',
     'page.header.signUp.corporateLink': 'Нужен корпоративный аккаунт? Жмите сюда!',
     'page.header.signUp.terms':
-        'Я подтверждаю, что мне исполнился как минимум 21 год, а также то, что я прочитал и согласен с: Правилами использования',
+        'Я подтверждаю, что мне исполнился как минимум 18 год, а также то, что я прочитал и согласен с: Правилами использования',
     'page.header.signUp.modal.header': 'ПРОВЕРЬТЕ СВОЙ АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ',
     'page.header.signUp.modal.body':
         'Чтобы завершить регистрацию, найдите в своем' +
@@ -601,7 +601,7 @@ export const ru: LangType = {
     'resource.user.no_activity': 'Активность не записана или неправильная тема',
     'resource.profile.not_exist': 'У пользователя нет профиля',
     'resource.profile.exist': 'Профиль уже существует',
-    'resource.profile.dateOfBirth': 'Пользователь должен быть старше 21 года',
+    'resource.profile.dateOfBirth': 'Пользователь должен быть старше 18 года',
     'resource.api_key.2fa_disabled': 'Разрешены только аккаунты с включенным 2FA',
     'resource.api_key.missing_otp': 'Отсутствует код 2FA',
     'resource.api_key.invalid_otp': 'Код 2FA недействителен',

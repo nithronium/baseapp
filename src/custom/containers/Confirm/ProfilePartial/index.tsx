@@ -346,7 +346,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
 
         if (e.target.value.length === fieldMaxLength) {
             const currentDate = new Date();
-            const dateToCompare = currentDate.setFullYear(currentDate.getFullYear() - 21);
+            const dateToCompare = currentDate.setFullYear(currentDate.getFullYear() - 18);
 
             if (!isValidDate(formatDate(e.target.value), dateToCompare) && !isDateInFuture(formatDate(e.target.value))) {
                 this.setState({

@@ -471,7 +471,7 @@ export const en = {
         'Due to international and local financial/cryptocurrency regulations we do not currently provide services to citizens of the selected country. Thank you for understanding.',
     'page.body.modal.blockNationality.button': 'I understand',
 
-    'resource.profile.dateOfBirth': 'User must be over 21 years old',
+    'resource.profile.dateOfBirth': 'User must be over 18 years old',
 
     'resource.documents.expirationDate': 'Date of emission is invalid',
     'resource.document.empty_doc_expire': 'Date of emission is invalid',

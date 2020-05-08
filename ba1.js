@@ -389,7 +389,7 @@ export const en1 = {
     'page.header.signUp.confirmPassword': 'Confirm Password',
     'page.header.signUp.confirmPassword.message.error': "Passwords don't match",
     'page.header.signUp.referalCode': 'Referral Code',
-    'page.header.signUp.terms': 'I hereby confirm that I am 21 years old and have read & agreed to the: Terms of Use',
+    'page.header.signUp.terms': 'I hereby confirm that I am 18 years old and have read & agreed to the: Terms of Use',
     'page.header.signUp.modal.header': 'VERIFY YOUR EMAIL ADDRESS',
     'page.header.signUp.modal.body':
         'To complete registration, check for an ' +
