@@ -348,7 +348,7 @@ export const zh = {
     'page.header.signUp.confirmPassword.message.error': '密码不匹配',
     'page.header.signUp.referalCode': '推荐代码',
     'page.header.signUp.corporateLink': '想要建立公司账号吗？ 点击此处！',
-    'page.header.signUp.terms': '我特此确认我今年21岁以上，并已阅读并同意以下条款：使用条款',
+    'page.header.signUp.terms': '我特此确认我今年18岁以上，并已阅读并同意以下条款：使用条款',
     'page.header.signUp.modal.header': '验证您的邮箱',
     'page.header.signUp.modal.body':
         '要完成注册，请在收件箱中查看电子邮件，以获取进一步的操作说明。 如果找不到邮件，请检查您的垃圾邮件文件夹',
@@ -980,7 +980,7 @@ export const zh = {
     'page.body.modal.blockNationality.message':
         '根据国际和当地金融/加密货币法规，我们目前不向所选国家/地区的公民提供服务。 感谢您的理解。',
     'page.body.modal.blockNationality.button': '我了解',
-    'resource.profile.dateOfBirth': '用户必须年满21岁',
+    'resource.profile.dateOfBirth': '用户必须年满18岁',
     'resource.documents.expirationDate': '发放日期无效',
     'resource.profile.email': '邮箱正在审查中',
     'resource.profile.profile': '个人资料正在审查中',
