@@ -66,6 +66,7 @@ export interface ReferralCommissionBalancesPayload {
         trading: number;
         ieo: number;
     };
+    traders: [];
     investors: [];
     participants: [];
     loading: boolean;

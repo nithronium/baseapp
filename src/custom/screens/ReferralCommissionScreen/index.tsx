@@ -282,8 +282,8 @@ class ReferralCommission extends React.Component<Props, State> {
         const currencies = this.getCurrencies();
 
         const levelTrade = balances.commission.trade.map((val, index) => {
-            const participant = balances.participants[index] || { total: 0 };
-            const refs = participant.total;
+            const trader = balances.traders[index] || { total: 0 };
+            const refs = trader.total;
             return {
                 header: `Commission: ${val * 100}%`,
                 subheader: `≈ ${val / 10}% from each trade!`,
@@ -295,7 +295,12 @@ class ReferralCommission extends React.Component<Props, State> {
             return Number(acc) + Number(item);
         }, 0) * 1000) / 10;
 
-        const tradeRefs = balances.participants.reduce((acc, item) => {
+        // const tradeRefs = balances.participants.reduce((acc, item) => {
+        //     return Number(acc) + Number(item.total);
+        // }, 0);
+
+        // console.log('balances.traders', balances.traders);
+        const tradeRefs = balances.traders.reduce((acc, item) => {
             return Number(acc) + Number(item.total);
         }, 0);
 
