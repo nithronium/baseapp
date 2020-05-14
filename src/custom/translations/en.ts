@@ -556,6 +556,14 @@ export const en = {
     'referralCommission.tradingDetails.exportToCsv': 'Export to CSV',
     'referralCommission.tradingDetails.total': 'total',
     'referralCommission.copied': 'Copied to clipboard',
+
+    'buyWithCard.form.header': 'Buy with Credit Card',
+    'buyWithCard.form.title': 'Buy Cryptocurrencies with Credit/Debit Card',
+    'buyWithCard.form.buy': 'Buy',
+    'buyWithCard.form.sell': 'Sell',
+    'buyWithCard.form.fees': 'No hidden fees and commission*',
+    'buyWithCard.form.help': 'Need help?',
+
     'page.wallets.coin.notice':
         'By making a deposit, I confirm that Emirex is not responsible for any coins sent to the wrong address.',
 };

@@ -1044,6 +1044,13 @@ export const zh = {
     'referralCommission.tradingDetails.total': '总计',
     'referralCommission.copied': 'Copied to clipboard',
 
+    'buyWithCard.form.header': 'Buy with Credit Card',
+    'buyWithCard.form.title': 'Buy Cryptocurrencies with Credit/Debit Card',
+    'buyWithCard.form.buy': '购买',
+    'buyWithCard.form.sell': '出售',
+    'buyWithCard.form.fees': 'No hidden fees and commission*',
+    'buyWithCard.form.help': 'Need help?',
+
     'cardDeposit.errorMessage.first_name': '名字为必填项',
     'cardDeposit.errorMessage.last_name': '姓氏为必填项',
     'cardDeposit.errorMessage.address': '地址为必填项',

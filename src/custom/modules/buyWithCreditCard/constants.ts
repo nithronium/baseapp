@@ -1,0 +1,2 @@
+
+export const CREDIT_CARD_ERROR = 'CREDIT_CARD_ERROR';

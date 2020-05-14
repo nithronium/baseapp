@@ -8,7 +8,13 @@ import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { minutesUntilAutoLogout } from '../../api';
 import { buildPath } from '../../custom/helpers';
-import { ReferralCommissionScreen, ReferralScreen, ReferralTicketsScreen, TradingScreen } from '../../custom/screens';
+import {
+    BuyWithCreditCardScreen,
+    ReferralCommissionScreen,
+    ReferralScreen,
+    ReferralTicketsScreen,
+    TradingScreen
+} from '../../custom/screens';
 import { LoginModal } from '../../custom/components/KYCLoginModal';
 import { ConfirmScreen } from '../../custom/screens';
 import { toggleColorTheme } from '../../helpers';
@@ -413,6 +419,27 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         isLogged={isLoggedIn}
                         path={'/ru/referral-commission'}
                         component={ReferralCommissionScreen}
+                        currentLanguage={currentLanguage}
+                    />
+                    <PrivateRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/buy-with-credit-card'}
+                        component={BuyWithCreditCardScreen}
+                        currentLanguage={currentLanguage}
+                    />
+                    <PrivateRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/ru/buy-with-credit-card'}
+                        component={BuyWithCreditCardScreen}
+                        currentLanguage={currentLanguage}
+                    />
+                    <PrivateRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/zh/buy-with-credit-card'}
+                        component={BuyWithCreditCardScreen}
                         currentLanguage={currentLanguage}
                     />
 

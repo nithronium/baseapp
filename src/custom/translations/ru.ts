@@ -1194,6 +1194,13 @@ export const ru: LangType = {
     'referralCommission.tradingDetails.total': 'Итого',
     'referralCommission.copied': 'Copied to clipboard',
 
+    'buyWithCard.form.header': 'Buy with Credit Card',
+    'buyWithCard.form.title': 'Buy Cryptocurrencies with Credit/Debit Card',
+    'buyWithCard.form.buy': 'Купить',
+    'buyWithCard.form.sell': 'Продать',
+    'buyWithCard.form.fees': 'No hidden fees and commission*',
+    'buyWithCard.form.help': 'Need help?',
+
     'cardDeposit.errorMessage.first_name': 'Заполните имя',
     'cardDeposit.errorMessage.last_name': 'LЗаполните фамилию',
     'cardDeposit.errorMessage.address': 'Заполните адрес',
