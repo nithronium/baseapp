@@ -637,7 +637,7 @@ class ReferralCommission extends React.Component<Props, State> {
                         })}
                     </div>
 
-                    {partData.length && <div className="section table">
+                    {partData.length && <div className="section table table--referral">
                         <div className="section__header">
                             <span>Your Referrals</span>
                             {/* <span>Export to CSV</span> */}
