@@ -26,6 +26,7 @@ export interface ReferralCommissionBalancesInterface {
     investors: object;
     participants: object;
     loading: boolean;
+    traders: object;
 }
 
 export interface ReferralCommissionParticipantsInterface {
@@ -81,6 +82,7 @@ const initialState: ReferralCommissionState = {
             },
             participants: [],
             investors: [],
+            traders: [],
             loading: true,
         },
     },
