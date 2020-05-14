@@ -389,8 +389,8 @@ export const zh = {
     "nav_referral_program": "推荐计划",
     "nav_api_setting": "API设置",
     "nav_logout": "退出",
-    "nav_language": "Language",
-    "nav_currency": "Currency",
+    "nav_language": "语言",
+    "nav_currency": "货币",
 
     "page.header.orders": "订单",
     "page.header.assets": "资产",
