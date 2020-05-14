@@ -715,14 +715,14 @@ class ReferralCommission extends React.Component<Props, State> {
     };
 
     private onClickNextTrade = () => {
-        // const { trade } = this.props;
-        // const { count, limit } = trade;
+        const { trade } = this.props;
+        const { count, limit } = trade;
         const { tradingPage } = this.state;
-        // const totalPages = Math.ceil(count / limit);
+        const totalPages = Math.ceil(count / limit);
 
-        // if (tradingPage >= totalPages) {
-        //     return;
-        // }
+        if (tradingPage >= totalPages) {
+            return;
+        }
         this.setState({
             tradingPage: tradingPage + 1,
         }, this.fetchTrade);
