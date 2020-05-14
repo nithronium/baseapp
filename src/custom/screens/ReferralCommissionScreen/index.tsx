@@ -190,7 +190,7 @@ class ReferralCommission extends React.Component<Props, State> {
                 'USD', nextProps.balances.earned.ieo, defaultCurrencies,
             );
             const referralConverted = await getExchangeRates(
-                'USD', nextProps.balances.earned.trade, currenciesArray,
+                'USD', Number(nextProps.balances.earned.trade) + Number(nextProps.balances.earned.ieo), defaultCurrencies,
             );
             this.setState({
                 tradeConverted,
