@@ -28,4 +28,5 @@ export interface Config {
     sessionCheckInterval: string;
     balancesFetchInterval: string;
     showLanding: boolean;
+    kycSteps?: string[];
 }

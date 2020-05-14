@@ -1,27 +1,13 @@
-.pg-wrapper {
-  background: url(assets/images/background.svg);
-  background-size: cover;
-  height: 100vh;
-
-  .pg-logo {
-    display: flex;
-    justify-content: center;
-    padding-top: calc(var(--big-gap) * 2.5);
-
-    &__img {
-      height: calc(var(--big-gap) * 1.08);
-    }
-  }
-}
-
 .pg-confirm {
   align-items: center;
+  background: var(--body-background-color);
   display: flex;
   justify-content: center;
   margin-top: calc(var(--big-gap) * 1);
 
   &__loader {
     align-items: center;
+    color: var(--primary-text-color);
     display: flex;
     justify-content: center;
     left: 0;
@@ -60,36 +46,74 @@
     text-align: center;
   }
 
-  &__error {
-    color: var(--system-red);
-  }
+  &__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-bottom: 100px;
 
-  &__success {
-    color: var(--system-green);
-  }
+    &-phone,
+    &-identity,
+    &-documents,
+    &-address {
+      &__row,
+      &__forms__row {
+        align-items: flex-start;
+        display: flex;
+        flex-direction: row;
+        height: max-content;
+        justify-content: space-between;
+        width: 100%;
 
-  &__title {
-    color: var(--primary-text-color);
-    text-align: center;
+        &__content {
+          width: 100%;
 
-    &-text {
-      color: var(--secondaty-contrast-cta-color);
-      display: block;
-      font-size: 14px;
-      left: -24px;
-      line-height: calc(var(--gap) * 2.5);
-      position: absolute;
-      text-align: center;
-      top: 36px;
+          &--focused {
+            border: 1px solid var(--primary-cta-color) !important;
+            color: var(--primary-cta-color) !important;
+
+            label {
+              color: var(--primary-cta-color) !important;
+            }
+          }
+
+          &--wrong {
+            border: 1px solid var(--asks) !important;
+            color: var(--asks) !important;
+
+            label {
+              color: var(--asks) !important;
+            }
+          }
+
+          &-label {
+            background: var(--input-background-color);
+            color: var(--secondary-contrast-cta-color);
+            font-size: 11px;
+            line-height: 15px;
+            margin-left: 9px;
+            margin-top: 17px;
+            padding: 0 5px;
+            position: absolute;
+            z-index: 1;
+          }
+        }
+      }
+
+      &__row.input-group > fieldset,
+      &__forms__row.input-group > fieldset {
+        width: calc(50% - 6px);
+
+        &:first-child {
+          margin-right: 6px;
+        }
+
+        &:last-child {
+          margin-left: 6px;
+        }
+      }
     }
-  }
-
-  &__progress {
-    background: var(--subheader-background-color);
-    border-bottom: 1px solid var(--divider-color-level-2);
-    border-radius: 4px 4px 0 0;
-    height: 100px;
-    margin: 0 auto;
 
     &-circle {
       &-0,
@@ -106,12 +130,9 @@
         top: -2px;
         width: 25px;
 
-        &::after {
+        .input-group {
           align-items: center;
-          color: var(--cta-layer-color);
           display: flex;
-          font-size: 12px;
-          font-weight: bold;
           height: 100%;
           justify-content: center;
           margin-top: 2px;
@@ -231,46 +252,47 @@
       .pg-confirm__title-text {
         color: #fff;
       }
-    }
-  }
 
-  .custom-input {
-    height: 39px;
-    position: relative;
-    width: 100%;
+      .dropdown {
+        button {
+          align-items: center;
+          display: flex;
+          flex-direction: row;
+          font-size: 14px;
+          font-weight: 500;
+          height: 49px;
+          justify-content: space-between;
+          letter-spacing: 0.1px;
+          margin-top: 24px;
+          outline: none;
+          overflow-x: auto;
+          width: 100%;
 
-    label {
-      left: 0;
-      margin-top: -13px;
-    }
+          &::-webkit-scrollbar {
+            height: 0;
+          }
 
-    .input-group {
-      height: 100%;
+          &::after {
+            margin-right: 5px;
+          }
+        }
 
-      input {
-        border: none;
-        height: 100%;
-        margin-top: 0;
-        padding: 0;
-
-        &:focus {
-          box-shadow: none;
+        &-menu {
+          max-height: 98vh;
+          overflow-x: hidden;
+          overflow-y: auto;
         }
       }
     }
   }
 
-  .input-group {
-    .custom-input {
-      width: 73%;
-    }
-  }
+  &__content-deep {
+    margin: 0;
+    margin-top: 24px;
+    max-width: 380px;
+    padding: 0;
+    width: 100vw;
 
-  &__content {
-    margin: 0 auto;
-    width: 100%;
-
-    input,
     button {
       outline: none;
     }

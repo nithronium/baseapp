@@ -53,7 +53,9 @@ class DropdownComponent extends React.Component<DropdownComponentProps & {}, Dro
     public render() {
         const { selected } = this.state;
         const { list } = this.props;
-        const cx = classnames('cr-dropdown', this.props.className);
+        const cx = classnames('cr-dropdown', this.props.className, {
+            'cr-dropdown--default': selected === this.props.placeholder,
+        });
 
         return (
             <div className={cx}>

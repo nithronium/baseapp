@@ -30,4 +30,11 @@ window.env = {
     sessionCheckInterval: '15000',
     balancesFetchInterval: '3000',
     showLanding: true,
+    kycSteps: [
+        'email',
+        'phone',
+        'profile',
+        'document',
+        'address',
+    ],
 };
