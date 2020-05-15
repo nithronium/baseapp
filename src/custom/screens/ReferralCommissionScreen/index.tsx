@@ -145,40 +145,53 @@ class ReferralCommission extends React.Component<Props, State> {
         };
     };
 
+    public getIeoCurrencies = (props?) => {
+        const realProps = props || this.props;
+        const { ieo } = realProps;
+        const res = new Set();
+        for (const item of ieo.referrals) {
+            res.add(item.investment_currency_id.toUpperCase());
+        }
+        return Array.from(res);
+    };
+
+    public isSameCurrencies = (arr1, arr2) => {
+        return [...arr1].sort().join(',') === [...arr2].sort().join(',');
+    };
+
     public loadConvertedValues = async nextProps => {
-        const { balances } = this.props;
+        const { balances, ieo } = this.props;
+        console.log('ieo', ieo);
         const user = this.getUser();
         if (
             balances.earned && (
                 balances.earned.trade !== nextProps.balances.earned.trade ||
                 balances.earned.ieo !== nextProps.balances.earned.ieo ||
-                user.activeCurrency !== this.getUser(nextProps).activeCurrency
+                user.activeCurrency !== this.getUser(nextProps).activeCurrency ||
+                !this.isSameCurrencies(this.getIeoCurrencies(), this.getIeoCurrencies(nextProps))
                 // user.cryptoCurrency !== nextProps.user.cryptoCurrency
             )
         ) {
-            const totalReferrals = balances.participants.reduce((acc, item) => {
-                return Number(acc) + Number(item.total);
-            }, 0);
-
+            const ieoCurrencies = this.getIeoCurrencies(nextProps);
             const currencies = this.getCurrencies();
-            const currenciesArray = [currencies.crypto, currencies.emrx, this.getUser(nextProps).activeCurrency || currencies.fiat];
+            const defaultCurrencies = [currencies.crypto, currencies.emrx, this.getUser(nextProps).activeCurrency || currencies.fiat];
+            const currenciesArray = Array.from(new Set([...defaultCurrencies, ...ieoCurrencies]));
+
+            console.log('currenciesArray', currenciesArray);
 
             const ratio = await getExchangeRates(
                 'USD', 1, currenciesArray,
             );
 
             const tradeConverted = await getExchangeRates(
-                'USD', nextProps.balances.earned.trade, currenciesArray,
+                'USD', nextProps.balances.earned.trade, defaultCurrencies,
             );
             const ieoConverted = await getExchangeRates(
-                'USD', nextProps.balances.earned.ieo, currenciesArray,
+                'USD', nextProps.balances.earned.ieo, defaultCurrencies,
             );
-            let referralConverted = this.state.referralConverted;
-            if (totalReferrals) {
-                referralConverted = await getExchangeRates(
-                    'USD', nextProps.balances.earned.trade / totalReferrals, currenciesArray,
-                );
-            }
+            const referralConverted = await getExchangeRates(
+                'USD', Number(nextProps.balances.earned.trade) + Number(nextProps.balances.earned.ieo), defaultCurrencies,
+            );
             this.setState({
                 tradeConverted,
                 ieoConverted,
@@ -196,14 +209,10 @@ class ReferralCommission extends React.Component<Props, State> {
                 balances.participants.length !== nextProps.balances.participants.length
             )
         ) {
-            const totalReferrals = nextProps.balances.participants.reduce((acc, item) => {
-                return Number(acc) + Number(item.total);
-            }, 0);
-
             const currencies = this.getCurrencies();
             const currenciesArray = [currencies.crypto, currencies.emrx, user.activeCurrency || currencies.fiat];
             const referralConverted = await getExchangeRates(
-                'USD', nextProps.balances.earned.trade / totalReferrals, currenciesArray,
+                'USD', nextProps.balances.earned.trade, currenciesArray,
             );
             this.setState({
                 referralConverted,
@@ -222,24 +231,24 @@ class ReferralCommission extends React.Component<Props, State> {
         return value.price;
     };
 
-    public changeCurrentCurrency = currencyId => {
-        // const currencyIdFormatted = currencyId.toLowerCase();
+    // public changeCurrentCurrency = currencyId => {
+    //     // const currencyIdFormatted = currencyId.toLowerCase();
 
-        const { tradingPage, ieoPage, referralsPage, pageSize } = this.state;
-        this.props.fetchCurrencies();
-        this.props.fetchReferralCommissionBalances({currencyId: this.props.commissionsInfo.currencyId});
-        this.props.fetchReferralCommissionParticipants({ limit: pageSize, skip: (referralsPage - 1) * pageSize });
-        this.props.fetchReferralCommissionReferrals({
-            currencyId: this.props.commissionsInfo.currencyId, type:'trade',
-            limit: pageSize,
-            skip: (tradingPage - 1) * pageSize,
-        });
-        this.props.fetchReferralCommissionReferrals({
-            currencyId: this.props.commissionsInfo.currencyId, type:'ieo',
-            limit: pageSize,
-            skip: (ieoPage - 1) * pageSize,
-        });
-    }
+    //     const { tradingPage, ieoPage, referralsPage, pageSize } = this.state;
+    //     this.props.fetchCurrencies();
+    //     this.props.fetchReferralCommissionBalances({currencyId: this.props.commissionsInfo.currencyId});
+    //     this.props.fetchReferralCommissionParticipants({ limit: pageSize, skip: (referralsPage - 1) * pageSize });
+    //     this.props.fetchReferralCommissionReferrals({
+    //         currencyId: this.props.commissionsInfo.currencyId, type:'trade',
+    //         limit: pageSize,
+    //         skip: (tradingPage - 1) * pageSize,
+    //     });
+    //     this.props.fetchReferralCommissionReferrals({
+    //         currencyId: this.props.commissionsInfo.currencyId, type:'ieo',
+    //         limit: pageSize,
+    //         skip: (ieoPage - 1) * pageSize,
+    //     });
+    // }
 
     public changePage = (currencyId, type, skip, limit) => {
         this.props.fetchReferralCommissionReferrals({currencyId, type, skip, limit});
@@ -265,6 +274,21 @@ class ReferralCommission extends React.Component<Props, State> {
         }
     };
 
+    public convert = (name: string, value: number) => {
+        const { ratio } = this.state;
+        if (!ratio) {
+            return value;
+        }
+
+        const curr = ratio.quote.filter(item => {
+            return item.symbol.toLowerCase() === name.toLowerCase();
+        })[0];
+        if (!curr) {
+            return value;
+        }
+        return this.trimNumber(value * curr.price);
+    };
+
     public trimNumber = value => {
         const res = (Number(value) || 0).toFixed(8);
         const resNumber = Number(res);
@@ -282,8 +306,8 @@ class ReferralCommission extends React.Component<Props, State> {
         const currencies = this.getCurrencies();
 
         const levelTrade = balances.commission.trade.map((val, index) => {
-            const participant = balances.participants[index] || { total: 0 };
-            const refs = participant.total;
+            const trader = balances.traders[index] || { total: 0 };
+            const refs = trader.total;
             return {
                 header: `Commission: ${val * 100}%`,
                 subheader: `≈ ${val / 10}% from each trade!`,
@@ -291,11 +315,16 @@ class ReferralCommission extends React.Component<Props, State> {
             };
         });
 
-        const tradeMaxCommission = Math.floor(balances.commission.trade.reduce((acc, item) => {
+        const tradeMaxCommission = Math.round(balances.commission.trade.reduce((acc, item) => {
             return Number(acc) + Number(item);
         }, 0) * 1000) / 10;
 
-        const tradeRefs = balances.participants.reduce((acc, item) => {
+        // const tradeRefs = balances.participants.reduce((acc, item) => {
+        //     return Number(acc) + Number(item.total);
+        // }, 0);
+
+        // console.log('balances.traders', balances.traders);
+        const tradeRefs = balances.traders.reduce((acc, item) => {
             return Number(acc) + Number(item.total);
         }, 0);
 
@@ -309,7 +338,7 @@ class ReferralCommission extends React.Component<Props, State> {
             };
         });
 
-        const ieoMaxCommission = Math.floor(balances.commission.ieo.reduce((acc, item) => {
+        const ieoMaxCommission = Math.round(balances.commission.ieo.reduce((acc, item) => {
             return Number(acc) + Number(item);
         }, 0) * 1000) / 10;
 
@@ -362,15 +391,15 @@ class ReferralCommission extends React.Component<Props, State> {
             'Email',
             'IEO',
             'Invested L1',
-            'Commission (BTC)',
-            'Invested L2-L5',
-            'Commission (BTC) L2-L5',
+            'Commission',
+            'Invested L2-L3',
+            'Commission L2-L3',
         ];
 
         let ieoData = ieo.referrals.map(row => {
             return this.ieoFields.map((key, index) => {
                 if ([3, 5].includes(index)) {
-                    return this.convertToBtc(row[key]);
+                    return this.convert(row.investment_currency_id, row[key]);
                 }
                 return row[key];
             });
@@ -446,7 +475,7 @@ class ReferralCommission extends React.Component<Props, State> {
                         </div>
                     </div>
 
-                    <div className="section--transparent" style={{ flexWrap: 'wrap' }}>
+                    <div className="section--transparent section--levels">
                         {levelTrade.map((item, index) => {
                             return <LevelCard
                                 level={Number(index) + 1}
@@ -520,7 +549,7 @@ class ReferralCommission extends React.Component<Props, State> {
                         </div>
                     </div>
 
-                    <div className="section--transparent" style={{ flexWrap: 'wrap' }}>
+                    <div className="section--transparent section--levels">
                         {levelIeo.map((item, index) => {
                             return <LevelCard
                                 level={Number(index) + 1}
@@ -579,7 +608,7 @@ class ReferralCommission extends React.Component<Props, State> {
                             />
                             <InfoCard
                                 iconName="profit"
-                                title="Profit per referral"
+                                title="Profit"
                                 text={`${this.trimNumber(this.getCoverteValue(referralConverted, currencies.crypto))} ${currencies.crypto}`}
                                 emrxConverted={`${this.trimNumber(this.getCoverteValue(referralConverted, currencies.emrx))} ${currencies.emrx}`}
                                 usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(referralConverted, activeCurrency))} ${activeCurrency}`}
@@ -600,7 +629,7 @@ class ReferralCommission extends React.Component<Props, State> {
                         </div>
                     </div>
 
-                    <div className="section--transparent" style={{ flexWrap: 'wrap' }}>
+                    <div className="section--transparent section--levels">
                         {levelPart.map((item, index) => {
                             return <LevelCard
                                 level={Number(index) + 1}
@@ -613,7 +642,7 @@ class ReferralCommission extends React.Component<Props, State> {
                         })}
                     </div>
 
-                    {partData.length && <div className="section table">
+                    {partData.length && <div className="section table table--referral">
                         <div className="section__header">
                             <span>Your Referrals</span>
                             {/* <span>Export to CSV</span> */}
@@ -668,13 +697,18 @@ class ReferralCommission extends React.Component<Props, State> {
     };
 
     private addIeoTotal = list => {
-        const totalCommission = list.reduce((acc, row) => Number(acc) + Number(row[3]), 0);
-        const totalCommissionL2 = list.reduce((acc, row) => Number(acc) + Number(row[5]), 0);
+        const { ieo } = this.props;
+        const totalCommission = ieo.referrals.reduce((acc, row) => {
+            return Number(acc) + Number(row.commission);
+        }, 0);
+        const totalCommissionL2 = ieo.referrals.reduce((acc, row) => {
+            return Number(acc) + Number(row.commissionUnder);
+        }, 0);
 
         const totalRow: Array<string|number> = [
             'Total amount', '', '',
-            `${this.trimNumber(totalCommission)} BTC`, '',
-            `${this.trimNumber(totalCommissionL2)} BTC`,
+            `${this.convertToBtc(totalCommission)} BTC`, '',
+            `${this.convertToBtc(totalCommissionL2)} BTC`,
         ];
         return [...list, totalRow];
     };
@@ -682,10 +716,10 @@ class ReferralCommission extends React.Component<Props, State> {
     private addIeoText = list => {
         const map = [
             x => x, x => (x || '').toUpperCase(),
-            (x, curr) => `${x} ${(curr || '').toUpperCase()}`,
-            x => `${x} BTC`,
-            (x, curr) => `${x} ${(curr || '').toUpperCase()}`,
-            x => `${x} BTC`,
+            (x, curr) => `${x} ${curr}`,
+            (x, curr) => `${x}  ${curr}`,
+            (x, curr) => `${x} ${curr}`,
+            (x, curr) => `${x} ${curr}`,
         ];
         const { ieo } = this.props;
 
@@ -695,12 +729,7 @@ class ReferralCommission extends React.Component<Props, State> {
             }
             return row.map((item, colIndex) => {
                 const originalRow = ieo.referrals[rowIndex];
-
-                if ([2, 4].includes(colIndex)) {
-                    return map[colIndex](item, originalRow.investment_currency_id);
-                } else {
-                    return map[colIndex](item, '');
-                }
+                return map[colIndex](item, (originalRow.investment_currency_id || '').toUpperCase());
             });
         });
     };
@@ -726,14 +755,14 @@ class ReferralCommission extends React.Component<Props, State> {
     };
 
     private onClickNextTrade = () => {
-        // const { trade } = this.props;
-        // const { count, limit } = trade;
+        const { trade } = this.props;
+        const { count, limit } = trade;
         const { tradingPage } = this.state;
-        // const totalPages = Math.ceil(count / limit);
+        const totalPages = Math.ceil(count / limit);
 
-        // if (tradingPage >= totalPages) {
-        //     return;
-        // }
+        if (tradingPage >= totalPages) {
+            return;
+        }
         this.setState({
             tradingPage: tradingPage + 1,
         }, this.fetchTrade);

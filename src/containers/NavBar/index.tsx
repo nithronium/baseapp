@@ -225,7 +225,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 >
                     <FormattedMessage id={'page.header.navbar.refprogram'} />
                 </Link> */}
-                {/* <Link
+                {/*<Link
                     className="pg-navbar__admin-logout"
                     to={buildPath('/referral-tickets', lang)}
                     onClick={this.handleRouteChange(buildPath('/referral-tickets', lang))}

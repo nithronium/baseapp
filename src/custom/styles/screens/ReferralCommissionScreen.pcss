@@ -8,6 +8,10 @@
         max-width: 960px;
         overflow-x: auto;
 
+        &::-webkit-scrollbar-thumb {
+            background-color: #141717;
+        }
+
         .cr-table thead th {
             top: 0;
         }
@@ -147,6 +151,7 @@
         display: flex;
         flex: 1;
         padding: 28px;
+        max-width: 50%;
 
         &:not(:last-child) {
             margin-right: 20px;
@@ -222,6 +227,11 @@
             justify-content: space-between;
             align-items: center;
         }
+
+        &--levels {
+            flex-wrap: wrap;
+            justify-content: center;
+        }
     }
 
     .section-margin {
@@ -231,12 +241,19 @@
     .section--transparent {
         margin-top: 20px;
         display: flex;
-        justify-content: space-between;
     }
 
     .table {
         font-size: 12px;
         white-space: nowrap;
+
+        &--referral {
+            td:first-child,
+            th:first-child {
+                position: relative;
+                min-width: 240px;
+            }
+        }
 
         tr {
             background-color: #222627;
@@ -279,7 +296,7 @@
 
 
 
-@media (max-width: 767px) {
+@media (max-width: 840px) {
     .pg-referral-commission {
         .info-card {
             flex: 0 0 50%;
@@ -349,4 +366,20 @@
             }
         }
     }
+}
+
+
+@media (max-width: 500px) {
+    .pg-referral-commission {
+        .level-card {
+            margin-bottom: 10px;
+            margin-right: 0 !important;
+            flex: 0 0 100% !important;
+            min-width: 100%;
+        }
+    }
+}
+
+.cr-table-container::-webkit-scrollbar-thumb {
+    background-color: #141717;
 }
