@@ -19,6 +19,7 @@
     "moment": "^2.23.0",
     "moment-timezone": "^0.5.23",
     "react": "^16.4.2",
+    "react-collapsible": "^2.8.0",
     "react-cookie-consent": "^2.5.0",
     "react-copy-to-clipboard": "^5.0.2",
     "react-date-picker": "^7.0.0",

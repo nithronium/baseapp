@@ -7,6 +7,8 @@ import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redu
 import {
     currenciesFetch,
     Currency,
+    Market,
+    orderBookFetch,
     RootState,
     selectCurrencies,
 } from '../../../../modules';
@@ -62,15 +64,20 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
         this.setState({ crypto: e.toLowerCase() });
     };
 
+    public onSubmit = () => {
+        console.log('onSubmit');
+    };
+
     public componentDidMount() {
         this.props.fetchCurrencies();
     }
 
     public render() {
         const { currencies } = this.props;
-        const { fiat, crypto } = this.props;
+        const { fiat, crypto } = this.state;
         const fiatList = currencies.filter(item => item.type === 'fiat').map(({ id }) => id);
         const cryptoList = currencies.filter(item => item.type === 'coin').map(({ id }) => id);
+        console.log('fiat, crypto', fiat, crypto);
         return (
             <div className="buy-form">
                 <div className="section">
@@ -117,7 +124,49 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
 
                         <div className="buy-form__bottom-text">
                             <p>{this.translate('buyWithCard.form.fees')}</p>
-                            <p className="buy-form__bottom-text--help">{this.translate('buyWithCard.form.help')}</p>
+                            <p className="buy-form__bottom-text--help">
+                                {this.translate('buyWithCard.form.help')}
+                            </p>
+                        </div>
+                        <button
+                            className="buy-form__button-continue"
+                            onClick={this.onSubmit}
+                        >
+                            {this.translate('buyWithCard.form.buttonContinue')}
+                        </button>
+
+                        <div className="buy-form__bottom-text-mobile">
+                            <p className="buy-form__bottom-text--help-mobile">
+                                {this.translate('buyWithCard.form.help')}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="buy-form__limits">
+                        <div>
+                            <div className="buy-form__limits-item">
+                                <div>
+                                    <div className="icon-arrow" />
+                                    <p>{this.translate('buyWithCard.form.paymentLimit')}:</p>
+                                    <span>{' '}$50 – $50,000</span>
+                                </div>
+                            </div>
+
+                            <div className="buy-form__limits-item">
+                                <div>
+                                    <div className="icon-clock" />
+                                    <p>{this.translate('buyWithCard.form.dailyLimit')}:</p>
+                                    <span>{' '}$50 – $50,000</span>
+                                </div>
+                            </div>
+
+                            <div className="buy-form__limits-item">
+                                <div>
+                                    <div className="icon-calendar" />
+                                    <p>{this.translate('buyWithCard.form.monthlyLimit')}:</p>
+                                    <span>{' '}$50 – $50,000</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -132,6 +181,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
     fetchCurrencies: () => dispatch(currenciesFetch()),
+    fetchOrderBook: (market: Market) => dispatch(orderBookFetch(market)),
 });
 
 export const CreditCardBuyForm = injectIntl(connect(mapStateToProps, mapDispatchToProps)(CreditCardBuyFormComponent));

@@ -9585,6 +9585,11 @@ react-calendar@^2.18.0:
     prop-types "^15.6.0"
     react-lifecycles-compat "^3.0.4"
 
+react-collapsible@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/react-collapsible/-/react-collapsible-2.8.0.tgz#dce2ff7703d4456c5bb70cc1b53d3f80acf76526"
+  integrity sha512-QTxGyp4iL8N57FcU1RGt4wD7vqOTRYAHNukxtSeVMkZ+/d1WNWXRIakzhYhC/5TDERihPdp1IvKIJlrLLPyQ/A==
+
 react-cookie-consent@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-cookie-consent/-/react-cookie-consent-2.5.0.tgz#9da66368473c43a5c25042639ce3158d45d5016f"

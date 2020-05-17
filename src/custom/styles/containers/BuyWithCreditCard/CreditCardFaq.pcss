@@ -1,0 +1,79 @@
+
+.pg-buy-with-credit-card {
+    position: relative;
+
+    .credit-card-faq {
+        position: relative;
+
+        &__wrapper {
+            display: flex;
+            justify-content: center;
+        }
+
+        &__inner {
+            max-width: 810px;
+            padding: 25px 0;
+        }
+
+        &__item {
+            position: relative;
+            padding: 25px 5px;
+            border-bottom: 1px solid var(--color-grey);
+
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+
+        &__header,
+        &__header--opened {
+            font-size: 18px;
+            color: #fff;
+            font-weight: bold;
+            position: relative;
+            cursor: pointer;
+            display: block;
+            padding-right: 38px;
+
+            &:after,
+            &--opened:after {
+                content: ' ';
+                width: 24px;
+                height: 24px;
+                background-size: contain;
+                background-position: center center;
+                background-repeat: no-repeat;
+                position: absolute;
+                right: 15px;
+                top: 0px;
+            }
+
+            &:after {
+                background-image: url(./assets/images/credit-card-faq-closed.png);
+            }
+
+            &--opened:after {
+                background-image: url(./assets/images/credit-card-faq-opened.png);
+            }
+        }
+
+        &__text {
+            font-size: 14px;
+            color: #fff;
+            padding-top: 15px;
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .pg-buy-with-credit-card {
+        position: relative;
+
+        .credit-card-faq {
+            &__inner {
+                padding: 25px 20px;
+            }
+        }
+    }
+}
+

@@ -3,13 +3,20 @@
 .pg-buy-with-credit-card {
     --bg-color-light1: #263434;
     --bg-color-light2: #222627;
+    --bg-color-dark1: #141717;
+    --bg-color-dark2: #171e1e;
     --text-color-header: #9ECFC3;
     --header-border-color: #384847;
     --input-border: #648280;
     --color-green: #11b382;
+    --limits-text-color: #7d9794;
+    --color-yellow: #ffd567;
+    --color-grey: #3a4040;
 }
 
 .pg-buy-with-credit-card {
+    padding-bottom: 100px;
+
     &__container {
         max-width: 940px;
         margin: 0 auto;
@@ -37,13 +44,15 @@
 
     .buy-form {
         &__content {
-            width: 620px;
+            max-width: 620px;
             margin: 0 auto;
 
             h2 {
                 font-size: 18px;
                 font-weight: normal;
                 color: #fff;
+                margin-top: 32px;
+                margin-bottom: 25px;
             }
         }
 
@@ -76,6 +85,7 @@
             left: 9px;
             display: block;
             z-index: 1;
+            font-size: 12px;
         }
 
         .cr-card-select {
@@ -113,14 +123,17 @@
             }
         }
 
-        &__bottom-text {
+        &__bottom-text,
+        &__bottom-text-mobile {
             display: flex;
             justify-content: space-between;
             font-size: 12px;
             color: var(--input-border);
 
-            &--help {
+            &--help,
+            &--help-mobile {
                 color: var(--color-green);
+                cursor: pointer;
                 
                 &:before {
                     content: '?';
@@ -135,6 +148,162 @@
                     position: relative;
                     left: -14px;
                     top: 0px;
+                }
+            }
+        }
+
+        &__bottom-text-mobile {
+            display: none;
+        }
+
+        &__button-continue {
+            background-color: var(--color-green);
+            width: 100%;
+            height: 40px;
+            color: #fff;
+            border-radius: 4px;
+            border: none;
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 32px;
+            margin-top: 18px;
+            cursor: pointer;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        &__limits {
+            background-color: var(--bg-color-dark1);
+            height: 56px;
+            color: var(--limits-text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            & > div {
+                white-space: nowrap;
+            }
+
+            &-item {
+                position: relative;
+                border-right: 1px solid var(--bg-color-light1);
+                display: inline-block;
+                padding-right: 14px;
+                position: relative;
+                left: 2px;
+                font-size: 12px;
+
+                p {
+                    display: inline-block;
+                }
+
+                &:last-child {
+                    border-right: none;
+                    padding-right: 0;
+                }
+            }
+
+            span {
+                color: var(--color-yellow);
+            }
+
+            .icon-arrow,
+            .icon-clock,
+            .icon-calendar {
+                width: 16px;
+                height: 16px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                position: relative;
+                top: 3px;
+                margin: 0 14px;
+                display: inline-block;
+            }
+
+            .icon-arrow {
+                background-image: url(./assets/images/credit-card-arrow.png);
+            }
+
+            .icon-clock {
+                background-image: url(./assets/images/credit-card-clock.png);
+            }
+
+            .icon-calendar {
+                background-image: url(./assets/images/credit-card-calendar.png);
+            }
+            
+        }
+    }
+}
+
+
+
+@media screen and (max-width: 640px) {
+    .pg-buy-with-credit-card {
+        .buy-form {
+            &__content {
+                padding: 0 10px;
+
+                h2 {
+                    text-align: center;
+                }
+            }
+            
+            &__button-continue {
+                margin-top: 7px;
+            }
+
+            &__inputs-wrap {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            &__input-wrap {
+                &:last-child {
+                    margin-top: 24px;
+                }
+                width: 100%;
+            }
+
+            &__input {
+                width: 100%;
+            }
+
+            &__bottom-text {
+                &--help {
+                    display: none;
+                }
+            }
+
+            &__bottom-text-mobile {
+                display: flex;
+                justify-content: center;
+                position: relative;
+                top: -14px;
+            }
+
+            &__limits {
+                height: 85px;
+                padding-top: 18px;
+
+                & > div {
+                    display: flex;
+                    white-space: initial;
+                    justify-content: space-around;
+                    text-align: center;
+                    width: 100%;
+                }
+
+                &-item {
+                    border: none;
+
+                    & > div {
+                        > * {
+                            width: 100%;
+                        }
+                    }
                 }
             }
         }
