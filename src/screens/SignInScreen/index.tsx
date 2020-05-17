@@ -1,4 +1,7 @@
 import cx from 'classnames';
+
+import qs = require('qs');
+
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
@@ -71,10 +74,15 @@ class SignIn extends React.Component<Props, SignInState> {
     }
 
     public componentWillReceiveProps(props: Props) {
-        const { currentLanguage, history } = this.props;
+        const { currentLanguage, history, location } = this.props;
 
         if (props.isLoggedIn) {
-            history.push(buildPath('/profile', currentLanguage));
+            let url = '/profile';
+            const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+            if (parsed.redirect_url) {
+                url = parsed.redirect_url;
+            }
+            history.push(buildPath(url, currentLanguage));
         }
         if (props.requireEmailVerification) {
             props.history.push(buildPath('/email-verification', currentLanguage), { email: this.state.email });
@@ -170,10 +178,20 @@ class SignIn extends React.Component<Props, SignInState> {
 
     private handleSignIn = () => {
         const { email, password } = this.state;
+        const { location, history } = this.props;
         this.props.signIn({
             email,
             password,
         });
+
+        const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        if (parsed.redirect_url) {
+            history.push({
+                pathname: parsed.redirect_url,
+                state: { fromSignIn: true },
+            });
+        }
+
         this.props.history.push({ state: { fromSignIn: true } });
     };
 

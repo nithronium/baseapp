@@ -65,8 +65,6 @@ export const CurrencySelect = ({currencyId, currencies, changeCurrentCurrency}) 
         selectToggle();
     };
 
-    console.log('currencyId', currencyId);
-
     return (
         <div className="cr-card-select">
             <span  className="round-button default arrow" style={{cursor:'pointer'}} onClick={openDropdown}>

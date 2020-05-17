@@ -1225,8 +1225,8 @@ export const ru: LangType = {
     'buyWithCard.faq.text4': 'Deposit any of the supported cryptocurrencies and exchange them for Bitcoin. The process of buying BTC with crypto is the same no matter what kind of crypto you use. To buy your first Bitcoin, you need to take only a few steps:',
     'buyWithCard.faq.header5': 'I have more questions. How can I get additional help?',
     'buyWithCard.faq.text5': 'Deposit any of the supported cryptocurrencies and exchange them for Bitcoin. The process of buying BTC with crypto is the same no matter what kind of crypto you use. To buy your first Bitcoin, you need to take only a few steps:',
-
-    
+    'buyWithCard.form.buttonNotLogged': 'Sign in',
+    'buyWithCard.form.buttonNotVerified': 'Vefify yourself',
 
 
     'cardDeposit.errorMessage.first_name': 'Заполните имя',

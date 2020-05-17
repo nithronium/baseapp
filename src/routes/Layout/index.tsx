@@ -102,12 +102,12 @@ const PrivateRoute: React.FunctionComponent<any> = ({ component: CustomComponent
 };
 
 //tslint:disable-next-line no-any
-const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent, loading, isLogged, ...rest }) => {
+const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent, loading, isLogged, noReditect, ...rest }) => {
     if (loading) {
         return renderLoader();
     }
 
-    if (isLogged) {
+    if (isLogged && !noReditect) {
         return (
             <Route {...rest}>
                 <Redirect to={buildPath('/profile', rest.currentLanguage)} />
@@ -421,23 +421,26 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         component={ReferralCommissionScreen}
                         currentLanguage={currentLanguage}
                     />
-                    <PrivateRoute
+                    <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
+                        noReditect={true}
                         path={'/buy-with-credit-card'}
                         component={BuyWithCreditCardScreen}
                         currentLanguage={currentLanguage}
                     />
-                    <PrivateRoute
+                    <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
+                        noReditect={true}
                         path={'/ru/buy-with-credit-card'}
                         component={BuyWithCreditCardScreen}
                         currentLanguage={currentLanguage}
                     />
-                    <PrivateRoute
+                    <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
+                        noReditect={true}
                         path={'/zh/buy-with-credit-card'}
                         component={BuyWithCreditCardScreen}
                         currentLanguage={currentLanguage}
