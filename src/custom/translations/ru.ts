@@ -1227,6 +1227,16 @@ export const ru: LangType = {
     'buyWithCard.faq.text5': 'Deposit any of the supported cryptocurrencies and exchange them for Bitcoin. The process of buying BTC with crypto is the same no matter what kind of crypto you use. To buy your first Bitcoin, you need to take only a few steps:',
     'buyWithCard.form.buttonNotLogged': 'Sign in',
     'buyWithCard.form.buttonNotVerified': 'Vefify yourself',
+    'buyWithCard.form.modal.header': 'Buy Cryptocurrencies with Credit card',
+    'buyWithCard.form.for': 'for',
+    'buyWithCard.form.modal.pay': 'pay',
+    'buyWithCard.form.modal.get': 'get',
+    'buyWithCard.form.modal.terms.header': 'Rules and Terms',
+    'buyWithCard.form.modal.terms.body': 'Terms and Conditions agreements act as a legal contract between you (the company) who has the website or mobile app and the user who access your website and mobile app. Having a Terms and Conditions agreement is completely optional. No laws require you to have one. Not even the super-strict and wide-reaching General Data Protection Regulation (GDPR). It\'s up to you to set the rules and guidelines that the user must agree to. You can think of your Terms and Conditions agreement as the legal agreement where you maintain your rights to exclude users from your app in the event that they abuse your app, where you maintain your legal rights against potential app abusers, and so on. Terms and Conditions are also known as Terms of Service or Terms of Use. Check out our Terms and Conditions FAQ for more helpful insight into these important agreements.',
+    'buyWithCard.form.modal.buttonBuy': 'Buy now',
+
+    
+
 
 
     'cardDeposit.errorMessage.first_name': 'Заполните имя',

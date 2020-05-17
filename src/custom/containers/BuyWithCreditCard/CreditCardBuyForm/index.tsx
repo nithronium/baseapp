@@ -7,6 +7,10 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 
 import {
+    Modal,
+  } from '../../../../components';
+
+import {
     currenciesFetch,
     Currency,
     Market,
@@ -58,6 +62,7 @@ interface State {
     crypto: string;
     fiatList: string[];
     cryptoList: string[];
+    showModal: boolean;
 }
 
 class CreditCardBuyFormComponent extends React.Component<Props, State> {
@@ -70,6 +75,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
             cryptoValue: '0',
             fiatList: [],
             cryptoList: [],
+            showModal: false,
         };
     }
 
@@ -162,11 +168,17 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     };
 
     public onSubmit = () => {
-        const { userLoggedIn, history } = this.props;
+        const { userLoggedIn, history, user } = this.props;
         if (!userLoggedIn) {
             history.push(`/signin?redirect_url=${encodeURIComponent('/buy-with-credit-card')}`);
+            return;
         }
-        console.log('onSubmit');
+        if (user.level < 2) {
+            history.push('/profile');
+        }
+        this.setState({
+            showModal: true,
+        });
     };
 
     public componentDidMount() {
@@ -278,7 +290,6 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
 
     public render() {
         // const { withdrawLimitData } = this.props;
-        const { fiat, crypto, fiatList, cryptoList, fiatValue, cryptoValue } = this.state;
         return (
             <div className="buy-form">
                 <div className="section">
@@ -288,43 +299,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
 
                     <div className="buy-form__content">
                         <h2>{this.translate('buyWithCard.form.title')}</h2>
-
-                        <div className="buy-form__inputs-wrap">
-                            <div className="buy-form__input-wrap">
-                                <label className="buy-form__label">
-                                    {this.translate('buyWithCard.form.sell')}
-                                </label>
-                                <input
-                                    onChange={this.onFiatValueChange}
-                                    value={fiatValue}
-                                    className="buy-form__input"
-                                    type="number"
-                                />
-                                <CurrencySelect
-                                    currencyId={fiat || 'usd'}
-                                    currencies={fiatList}
-                                    changeCurrentCurrency={this.onFiatChange}
-                                />
-                            </div>
-
-                            <div className="buy-form__input-wrap">
-                                <label className="buy-form__label">
-                                    {this.translate('buyWithCard.form.buy')}
-                                </label>
-                                <input
-                                    onChange={this.onCryptoValueChange}
-                                    value={cryptoValue}
-                                    className="buy-form__input"
-                                    type="number"
-                                />
-                                <CurrencySelect
-                                    currencyId={crypto || 'btc'}
-                                    currencies={cryptoList}
-                                    changeCurrentCurrency={this.onCryptoChange}
-                                />
-                            </div>
-                        </div>
-
+                        {this.currenciesForm()}
                         <div className="buy-form__bottom-text">
                             <p>{this.translate('buyWithCard.form.fees')}</p>
                             <p className="buy-form__bottom-text--help">
@@ -373,9 +348,127 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                         </div>
                     </div>
                 </div>
+                <Modal
+                    show={this.state.showModal}
+                    header={this.renderModalHeader()}
+                    content={this.renderModalBody()}
+                    footer={this.renderModalFooter()}
+                />
             </div>
         );
     }
+
+    public currenciesForm = () => {
+        const { fiat, crypto, fiatList, cryptoList, fiatValue, cryptoValue } = this.state;
+        return (
+            <div className="buy-form__inputs-wrap">
+                <div className="buy-form__input-wrap">
+                    <label className="buy-form__label">
+                        {this.translate('buyWithCard.form.sell')}
+                    </label>
+                    <input
+                        onChange={this.onFiatValueChange}
+                        value={fiatValue}
+                        className="buy-form__input"
+                        type="number"
+                    />
+                    <CurrencySelect
+                        currencyId={fiat || 'usd'}
+                        currencies={fiatList}
+                        changeCurrentCurrency={this.onFiatChange}
+                    />
+                </div>
+
+                <div className="buy-form__input-wrap">
+                    <label className="buy-form__label">
+                        {this.translate('buyWithCard.form.buy')}
+                    </label>
+                    <input
+                        onChange={this.onCryptoValueChange}
+                        value={cryptoValue}
+                        className="buy-form__input"
+                        type="number"
+                    />
+                    <CurrencySelect
+                        currencyId={crypto || 'btc'}
+                        currencies={cryptoList}
+                        changeCurrentCurrency={this.onCryptoChange}
+                    />
+                </div>
+            </div>
+        );
+    };
+
+    public closeModal = () => {
+        this.setState({ showModal: false });
+    };
+
+    public renderModalHeader = () => {
+        return (
+            <div className="buy-form__modal-header">
+                <p>{this.translate('buyWithCard.form.modal.header')}</p>
+                <div
+                    className="buy-form__modal-close"
+                    onClick={this.closeModal}
+                >
+                    x
+                </div>
+            </div>
+        );
+    };
+
+    public renderModalBody = () => {
+        const { fiatValue, cryptoValue, fiat, crypto } = this.state;
+        return (
+            <div>
+                <div className="buy-form__modal-amount">
+                    {this.translate('buyWithCard.form.buy')} {' '}
+                    <span>{cryptoValue} {crypto.toUpperCase()}</span>
+                    {' '}{this.translate('buyWithCard.form.for')}{' '}
+                    <span>{fiatValue} {fiat.toUpperCase()}</span>
+                </div>
+
+                <div className="buy-form__modal-inputs">
+                    {this.currenciesForm()}
+                </div>
+                <div className="buy-form__modal-divider">
+                    <div className="credit-card-promo__divider">
+                        <div className="credit-card-promo__divider-arrow" />
+                    </div>
+                </div>
+
+                <div className="buy-form__modal-table">
+                    <div className="buy-form__modal-table-top">
+                        <span>{this.translate('buyWithCard.form.modal.pay')}</span>
+                        <span>{fiatValue} {fiat.toUpperCase()}</span>
+                    </div>
+                    <div className="buy-form__modal-table-bottom">
+                        <span>{this.translate('buyWithCard.form.modal.get')}</span>
+                        <span>{cryptoValue} {crypto.toUpperCase()}</span>
+                    </div>
+                </div>
+
+                <div className="buy-form__modal-terms">
+                    <div className="buy-form__modal-terms-header">
+                        {this.translate('buyWithCard.form.modal.terms.header')}
+                    </div>
+                    <div className="buy-form__modal-terms-body">
+                        {this.translate('buyWithCard.form.modal.terms.body')}
+                    </div>
+                </div>
+
+                <div className="buy-form__modal-footer">
+                    <div className="buy-form__modal-footer-button">
+                        {this.translate('buyWithCard.form.modal.buttonBuy')}
+                    </div>
+                </div>
+            </div>
+        );
+    };
+
+    public renderModalFooter = () => {
+        return null;
+    };
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
