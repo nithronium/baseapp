@@ -425,7 +425,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         noReditect={true}
-                        path={'/buy-with-credit-card'}
+                        path={'/buycrypto'}
                         component={BuyWithCreditCardScreen}
                         currentLanguage={currentLanguage}
                     />
@@ -433,7 +433,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         noReditect={true}
-                        path={'/ru/buy-with-credit-card'}
+                        path={'/ru/buycrypto'}
                         component={BuyWithCreditCardScreen}
                         currentLanguage={currentLanguage}
                     />
@@ -441,7 +441,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         loading={userLoading}
                         isLogged={isLoggedIn}
                         noReditect={true}
-                        path={'/zh/buy-with-credit-card'}
+                        path={'/zh/buycrypto'}
                         component={BuyWithCreditCardScreen}
                         currentLanguage={currentLanguage}
                     />

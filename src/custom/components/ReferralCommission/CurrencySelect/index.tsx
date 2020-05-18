@@ -59,6 +59,12 @@ export const CurrencySelect = ({currencyId, currencies, changeCurrentCurrency}) 
         };
     });
 
+    React.useEffect(() => {
+        if (currentCurrency !== currencyId) {
+            setCurrentCurrency(currencyId);
+        }
+    }, [currencyId]);
+
     const openDropdown = e => {
         e.nativeEvent.stopImmediatePropagation();
         e.stopPropagation();

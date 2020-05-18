@@ -130,10 +130,12 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
         let { crypto } = this.state;
         const fiat = e.toLowerCase();
         const cryptoList = this.getAvailableCrypto(fiat);
+        console.log('getAvailableCrypto', cryptoList, crypto, cryptoList.includes(crypto));
         if (!cryptoList.includes(crypto)) {
             crypto = cryptoList[0];
         }
-        this.setState({ fiat, cryptoList, crypto }, () => {
+        console.log('new crypto', crypto);
+        this.setState({ fiat, crypto }, () => {
             this.fetchMarket();
         });
     };
@@ -145,7 +147,8 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
         if (!fiatList.includes(fiat)) {
             fiat = fiatList[0];
         }
-        this.setState({ fiat, fiatList, crypto }, () => {
+        console.log('getAvailableFiat', fiatList, fiat);
+        this.setState({ fiat, crypto }, () => {
             this.fetchMarket();
         });
     };
@@ -194,9 +197,10 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
         {
             if (!nextProps.markets.length || !nextProps.currencies.length) { return; }
             const fiatList = this.getAllFiat(nextProps);
+            const cryptoList = this.getAllCrypto(nextProps);
             this.setState({
                 fiatList,
-                cryptoList: this.getAvailableCrypto(fiatList[0], nextProps),
+                cryptoList,
             }, () => {
                 this.fetchMarket();
             });
@@ -247,6 +251,21 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                 res.add(base_unit);
             }
             if (this.isFiat(quote_unit)) {
+                res.add(quote_unit);
+            }
+        }
+        return Array.from(res);
+    };
+
+    public getAllCrypto = (props?): string[] => {
+        const res = new Set<string>();
+        const { markets } = (props || this.props);
+        for (const market of markets) {
+            const { base_unit, quote_unit } = market;
+            if (this.isCrypto(base_unit)) {
+                res.add(base_unit);
+            }
+            if (this.isCrypto(quote_unit)) {
                 res.add(quote_unit);
             }
         }
@@ -360,6 +379,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
 
     public currenciesForm = () => {
         const { fiat, crypto, fiatList, cryptoList, fiatValue, cryptoValue } = this.state;
+        console.log('crypto in render', crypto);
         return (
             <div className="buy-form__inputs-wrap">
                 <div className="buy-form__input-wrap">
@@ -373,7 +393,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                         type="number"
                     />
                     <CurrencySelect
-                        currencyId={fiat || 'usd'}
+                        currencyId={fiat || ''}
                         currencies={fiatList}
                         changeCurrentCurrency={this.onFiatChange}
                     />
@@ -390,7 +410,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                         type="number"
                     />
                     <CurrencySelect
-                        currencyId={crypto || 'btc'}
+                        currencyId={crypto || ''}
                         currencies={cryptoList}
                         changeCurrentCurrency={this.onCryptoChange}
                     />

@@ -23,7 +23,7 @@ class CreditCardFaqComponent extends React.Component<Props> {
 
                     <div className="credit-card-faq__wrapper">
                         <div className="credit-card-faq__inner">
-                            {[1, 2, 3, 4, 5].map(index => (
+                            {[1, 2, 3, 4].map(index => (
                                 <div className="credit-card-faq__item" key={index}>
                                     <Collapsible
                                         trigger={this.translate(`buyWithCard.faq.header${index}`)}
