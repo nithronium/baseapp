@@ -497,7 +497,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <OpenUserMenu/>
                 </span>
             </div>
-            {openMenuType === 'assets' && <ul className={`dropdown-menu assets-menu`}>
+            {openMenuType === 'assets' && <ul ref={this.dropdownMenu} className={`dropdown-menu assets-menu`}>
                 <li className="assets">
                     <div className="header">
                         <FormattedMessage id={'page.header.current_balance'}/>
