@@ -12,6 +12,16 @@ const itemStyle = {
 
 }
 
+// const hasParent = (node, predicate) => {
+//     while (node) {
+//         if (predicate(node)) {
+//             return true;
+//         }
+//         node = node.parentNode;
+//     }
+//     return false;
+// };
+
 const Select = ({currencies, style, handler, currencyId}) => {
 
     return (
@@ -36,7 +46,8 @@ const Select = ({currencies, style, handler, currencyId}) => {
 export const CurrencySelect = ({currencyId, currencies, changeCurrentCurrency}) => {
 
     const [display, setDisplay] = React.useState('none');
-    const [currentCurrency, setCurrentCurrency]=React.useState('');
+    const [currentCurrency, setCurrentCurrency] = React.useState('');
+    const refContainer = React.useRef(null);
 
     const selectToggle = () => {
         const disp = display === 'none' ? 'block' : 'none'; 
@@ -48,8 +59,12 @@ export const CurrencySelect = ({currencyId, currencies, changeCurrentCurrency}) 
         selectToggle();
     }
 
-    const handleClickOutside = () => {
+    const handleClickOutside = (e) => {
         setDisplay('none');
+        // if (refContainer.current) {
+        //     // setTimeout(() => setDisplay('none'));
+        //     setDisplay('none');
+        // }
     };
 
     React.useEffect(() => {
@@ -66,14 +81,14 @@ export const CurrencySelect = ({currencyId, currencies, changeCurrentCurrency}) 
     }, [currencyId]);
 
     const openDropdown = e => {
-        e.nativeEvent.stopImmediatePropagation();
-        e.stopPropagation();
+        // e.nativeEvent.stopImmediatePropagation();
+        // e.stopPropagation();
         selectToggle();
     };
 
     return (
-        <div className="cr-card-select">
-            <span  className="round-button default arrow" style={{cursor:'pointer'}} onClick={openDropdown}>
+        <div className={`cr-card-select`} ref={refContainer} onClick={openDropdown}>
+            <span  className="round-button default arrow" style={{cursor:'pointer'}}>
                 {currentCurrency ? currentCurrency.toUpperCase() : currencyId.toUpperCase()}            
             </span>
             <Select currencies={currencies} style={{display:display, ...style}} handler={handler} currencyId={currencyId} />

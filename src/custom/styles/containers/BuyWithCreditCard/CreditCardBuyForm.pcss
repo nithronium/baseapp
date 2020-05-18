@@ -53,6 +53,38 @@
             }
         }
 
+        .Dropdown-menu {
+            position: absolute;
+            display: block;
+            top: 100%;
+            left: 0;
+        }
+
+        .Dropdown-option {
+            width: 50px;
+            background: var(--bg-color-light2);
+            cursor: pointer;
+            line-height: 30px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .cr-card-select {
+            cursor: pointer;
+        }
+
+        .Dropdown-root {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 50px;
+            width: 50px;
+        }
+
+        .Dropdown-placeholder {
+            text-transform: uppercase;
+        }
+
         &__modal {
             &-header {
                 position: relative;
@@ -204,7 +236,7 @@
             background-color: transparent;
             border: 1px solid var(--input-border);
             height: 49px;
-            width: 300px;
+            width: 290px;
             border-radius: 4px;
             color: #fff;
             font-size: 14px;
@@ -216,8 +248,22 @@
 
             &::-webkit-inner-spin-button, 
             &::-webkit-outer-spin-button { 
-            -webkit-appearance: none; 
-            margin: 0; 
+                -webkit-appearance: none;
+                margin: 0;
+            }
+        }
+
+        &__input-arrow {
+            background-image: url(./assets/images/orientation.svg);
+            width: 20px;
+            height: 20px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            cursor: pointer;
+
+            &-wrap {
+                display: flex;
+                align-items: center;
             }
         }
 

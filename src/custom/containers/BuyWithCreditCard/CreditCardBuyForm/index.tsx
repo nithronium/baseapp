@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 
+import Dropdown from 'react-dropdown';
+
 import { RouteComponentProps, withRouter } from 'react-router';
 
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
@@ -29,10 +31,6 @@ import {
 } from '../../../../modules';
 
 import { WithdrawLimit } from '../../../../modules/user/withdrawLimit';
-
-import {
-    CurrencySelect,
-} from '../../../components/ReferralCommission/CurrencySelect';
 
 
 interface ReduxProps {
@@ -63,6 +61,7 @@ interface State {
     fiatList: string[];
     cryptoList: string[];
     showModal: boolean;
+    swapped: boolean;
 }
 
 class CreditCardBuyFormComponent extends React.Component<Props, State> {
@@ -76,6 +75,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
             fiatList: [],
             cryptoList: [],
             showModal: false,
+            swapped: false,
         };
     }
 
@@ -127,27 +127,24 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     };
 
     public onFiatChange = e => {
-        let { crypto } = this.state;
-        const fiat = e.toLowerCase();
-        const cryptoList = this.getAvailableCrypto(fiat);
-        console.log('getAvailableCrypto', cryptoList, crypto, cryptoList.includes(crypto));
-        if (!cryptoList.includes(crypto)) {
-            crypto = cryptoList[0];
-        }
-        console.log('new crypto', crypto);
+        const { crypto } = this.state;
+        const fiat = e.value.toLowerCase();
+        // const cryptoList = this.getAvailableCrypto(fiat);
+        // if (!cryptoList.includes(crypto)) {
+        //     crypto = cryptoList[0];
+        // }
         this.setState({ fiat, crypto }, () => {
             this.fetchMarket();
         });
     };
 
     public onCryptoChange = e => {
-        let { fiat } = this.state;
-        const crypto = e.toLowerCase();
-        const fiatList = this.getAvailableFiat(crypto);
-        if (!fiatList.includes(fiat)) {
-            fiat = fiatList[0];
-        }
-        console.log('getAvailableFiat', fiatList, fiat);
+        const { fiat } = this.state;
+        const crypto = e.value.toLowerCase();
+        // const fiatList = this.getAvailableFiat(crypto);
+        // if (!fiatList.includes(fiat)) {
+        //     fiat = fiatList[0];
+        // }
         this.setState({ fiat, crypto }, () => {
             this.fetchMarket();
         });
@@ -167,6 +164,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     public fetchMarket = () => {
         const { fiat, crypto } = this.state;
         const market = this.findMarket(fiat, crypto);
+        console.log('market', market);
         this.props.fetchOrderBook(market);
     };
 
@@ -242,7 +240,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
         });
     };
 
-    public getAllFiat = (props?): string[] => {
+    public getAllFiat1 = (props?): string[] => {
         const res = new Set<string>();
         const { markets } = (props || this.props);
         for (const market of markets) {
@@ -257,7 +255,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
         return Array.from(res);
     };
 
-    public getAllCrypto = (props?): string[] => {
+    public getAllCrypto1 = (props?): string[] => {
         const res = new Set<string>();
         const { markets } = (props || this.props);
         for (const market of markets) {
@@ -272,6 +270,16 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
         return Array.from(res);
     };
 
+    public getAllFiat = (props?): string[] => {
+        return this.getCurrenciesByType('fiat', props)
+            .map(item => item.id);
+    };
+
+    public getAllCrypto = (props?): string[] => {
+        return this.getCurrenciesByType('coin', props)
+            .map(item => item.id);
+    };
+
     public isCrypto = (currency: string) => {
         return this.getCurrenciesByType('coin')
             .some(item => item.id === currency);
@@ -282,8 +290,9 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
             .some(item => item.id === currency);
     };
 
-    public getCurrenciesByType = (type: string) => {
-        return this.props.currencies.filter(item => {
+    public getCurrenciesByType = (type: string, props?) => {
+        const { currencies } = (props || this.props);
+        return currencies.filter(item => {
             return item.type === type;
         });
     };
@@ -378,8 +387,12 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     }
 
     public currenciesForm = () => {
-        const { fiat, crypto, fiatList, cryptoList, fiatValue, cryptoValue } = this.state;
-        console.log('crypto in render', crypto);
+        const {
+            fiat, crypto,
+            fiatList, cryptoList,
+            fiatValue, cryptoValue,
+            swapped,
+        } = this.state;
         return (
             <div className="buy-form__inputs-wrap">
                 <div className="buy-form__input-wrap">
@@ -387,16 +400,24 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                         {this.translate('buyWithCard.form.sell')}
                     </label>
                     <input
-                        onChange={this.onFiatValueChange}
-                        value={fiatValue}
+                        onChange={!swapped ? this.onFiatValueChange : this.onCryptoValueChange}
+                        value={!swapped ? fiatValue : cryptoValue}
                         className="buy-form__input"
                         type="number"
                     />
-                    <CurrencySelect
-                        currencyId={fiat || ''}
-                        currencies={fiatList}
-                        changeCurrentCurrency={this.onFiatChange}
+                    <Dropdown
+                        onChange={!swapped ? this.onFiatChange : this.onCryptoChange}
+                        value={!swapped ? fiat : crypto}
+                        options={!swapped ? fiatList : cryptoList}
+                        controlClassName={'cr-card-select'}
                     />
+                </div>
+
+                <div
+                    className="buy-form__input-arrow-wrap"
+                    onClick={this.onSwap}
+                >
+                    <div className="buy-form__input-arrow" />
                 </div>
 
                 <div className="buy-form__input-wrap">
@@ -404,19 +425,26 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                         {this.translate('buyWithCard.form.buy')}
                     </label>
                     <input
-                        onChange={this.onCryptoValueChange}
-                        value={cryptoValue}
+                        onChange={!swapped ? this.onCryptoValueChange : this.onFiatValueChange}
+                        value={!swapped ? cryptoValue : fiatValue}
                         className="buy-form__input"
                         type="number"
                     />
-                    <CurrencySelect
-                        currencyId={crypto || ''}
-                        currencies={cryptoList}
-                        changeCurrentCurrency={this.onCryptoChange}
+
+                    <Dropdown
+                        onChange={!swapped ? this.onCryptoChange : this.onFiatChange}
+                        value={!swapped ? crypto : fiat}
+                        options={!swapped ? cryptoList : fiatList}
+                        controlClassName={'cr-card-select'}
                     />
                 </div>
             </div>
         );
+    };
+
+    public onSwap = () => {
+        this.setState({ swapped: !this.state.swapped });
+        console.log('swapped', this.state.swapped);
     };
 
     public closeModal = () => {
