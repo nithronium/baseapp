@@ -52,9 +52,10 @@ export const userOption = (): object[] => ([
     { key: '', href: '/profile', label: 'nav_account', border: true},
     { key: '', href: '/wallets', label: 'nav_my_assets'},
     { key: '', href: '/orders', label: 'nav_my_orders'},
-    { key: '', href: '/security', label: 'nav_account_security'},
+    { key: '', href: '/bitcoin-halving', label: 'nav_bitcoin_halving', extLink: true, mainsite: true},
+    // { key: '', href: '/security', label: 'nav_account_security'},
     // { key: '', href: '/referral', label: 'nav_referral_program'},
-    { key: '', href: '/api-setting', label: 'nav_api_setting', border: true},
+    // { key: '', href: '/api-setting', label: 'nav_api_setting', border: true},
     { key: '', href: '/', label: 'nav_logout', logout: true},
 ].map((link, index) => {
     link.key = `nav-link-${index}-${link.href}-${link.label}`;

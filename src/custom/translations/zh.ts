@@ -391,6 +391,7 @@ export const zh = {
     "nav_logout": "退出",
     "nav_language": "语言",
     "nav_currency": "货币",
+    "nav_bitcoin_halving": "比特币减半",
 
     "page.header.orders": "订单",
     "page.header.assets": "资产",

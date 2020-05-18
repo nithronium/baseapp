@@ -565,6 +565,7 @@ export const ru: LangType = {
     "nav_logout": "Выйти",
     "nav_language": "Язык",
     "nav_currency": "Валюта",
+    "nav_bitcoin_halving": "Халвинг биткоина",
 
     "page.header.orders": "Ордера",
     "page.header.assets": "Активы",

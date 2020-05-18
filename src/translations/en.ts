@@ -447,6 +447,8 @@ export const en = {
     "nav_logout": "Log Out",
     "nav_language": "Language",
     "nav_currency": "Currency",
+    "nav_bitcoin_halving": "Bitcoin Halving",
+
 
     "page.header.orders": "Orders",
     "page.header.assets": "Assets",

@@ -420,7 +420,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                               <FormattedMessage id={option.description}/>
                                           </div>}
                                       </Link>
-                                    : <a href={option.href} onClick={() => this.openDropdown('')}>
+                                    : <a href={option.mainsite ? `${path}${currentLanguage === 'en' ? '' : "/" + currentLanguage}${option.href}` : option.href} onClick={() => this.openDropdown('')}>
                                         {option.label && <div className="label">
                                             <FormattedMessage id={option.label}/>
                                         </div>}
