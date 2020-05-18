@@ -45,6 +45,8 @@ import checkCircleSvg = require('../../assets/images/check-circle.svg');
 import clockSvg = require('../../assets/images/clock.svg');
 import infoSvg = require('../../assets/images/info.svg');
 
+import { getBalance } from '../../../api';
+
 interface ReduxProps {
     currencies: Currency[];
     depositHistory: WalletHistoryList;
@@ -73,6 +75,7 @@ interface DispatchProps {
 interface State {
     formattedDepositHistory: WalletItemProps[];
     evaluatedDepositsTotal: string;
+    balance: number;
 }
 //tslint:disable
 export type ProfileProps = ReduxProps & DispatchProps & InjectedIntlProps;
@@ -82,6 +85,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         this.state = {
             formattedDepositHistory: [],
             evaluatedDepositsTotal: '',
+            balance: 0,
         };
     }
 
@@ -115,6 +119,16 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         if (!connected) {
             this.props.rangerConnect({ withAuth: userLoggedIn });
         }
+
+        getBalance(['btc', 'usd'])
+            .then(data => {
+                this.setState({
+                    balance: (data.quote || {}).USD || 0,
+                });
+            })
+            .catch(() => {
+                this.setState({ balance: 0 });
+            });
     }
 
     public componentWillReceiveProps(nextProps: ProfileProps) {
@@ -349,7 +363,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                 </div>
                 <hr className="pg-profile-verification__hr" />
                 <div className="pg-profile-verification__know-more">
-                    {userLevel < 6 && this.renderUpgradeLevelLink(this.props.balance)}
+                    {userLevel < 6 && this.renderUpgradeLevelLink(this.state.balance)}
                     {this.renderStatusIcon(label)}
                 </div>
                 {(withdrawLimitDataExists || withdrawLimitMessageExists) && this.renderUserAbilities(userLevel, withdrawLimitData)}
