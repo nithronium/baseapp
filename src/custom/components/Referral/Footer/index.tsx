@@ -150,7 +150,7 @@ const linkBlock = {
         body: [
             { key: '', href: '/trading/btcusdt', label: 'footer_headers_spot_trade' },
             { key: '', href: '/ieo', label: 'footer_headers_ieo' },
-            { key: '', href: '/referral', label: 'footer_headers_referral_program' },
+            { key: '', href: '/referral-commission', label: 'footer_headers_referral_program' },
         ].map((link, index) => {
             link.key = `footer-link-${index}-${link.href}-${link.label}`;
             return link;
@@ -195,7 +195,7 @@ const LinksList = ({ links, intl }) => {
             {links.map(({ key, href, label, className, extLink }) =>
                 extLink ? (
                     <li key={key}>
-                        <a className={className} href={`href`} target="_blank" rel="nofollow noopener">
+                        <a className={className} href={`${href}`} target="_blank" rel="nofollow noopener">
                             {intl.formatMessage({ id: label })}
                         </a>
                     </li>
