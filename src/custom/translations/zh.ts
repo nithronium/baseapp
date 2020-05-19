@@ -90,6 +90,9 @@ export const zh = {
     'page.body.wallets.tabs.withdraw.content.fee': '手续费',
     'page.body.wallets.tabs.withdraw.content.total': '总提款金额',
     'page.body.wallets.tabs.withdraw.content.button': '提款',
+    'page.body.wallets.tabs.withdraw.content.inputError': '最低提款额应为交易费的两倍。',
+
+
     'page.body.wallets.tabs.withdraw.modal.confirmation': '确认',
     'page.body.wallets.tabs.withdraw.modal.message1': '您将收到',
     'page.body.wallets.tabs.withdraw.modal.message2': '地址',

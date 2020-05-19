@@ -106,6 +106,7 @@ export const en = {
     'page.body.wallets.tabs.withdraw.content.fee': 'Fee',
     'page.body.wallets.tabs.withdraw.content.total': 'Total Withdrawal Amount',
     'page.body.wallets.tabs.withdraw.content.button': 'WITHDRAW',
+    'page.body.wallets.tabs.withdraw.content.inputError': 'The minimum withdrawal should be twice as much as the transaction fee.',
 
     'page.body.wallets.tabs.withdraw.modal.confirmation': 'Confirmation',
     'page.body.wallets.tabs.withdraw.modal.message1': 'You will receive ',

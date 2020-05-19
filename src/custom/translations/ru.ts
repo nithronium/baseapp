@@ -125,6 +125,7 @@ export const ru: LangType = {
     'page.body.wallets.tabs.withdraw.content.fee': 'Комиссия',
     'page.body.wallets.tabs.withdraw.content.total': 'Сумма вывода',
     'page.body.wallets.tabs.withdraw.content.button': 'ВЫВЕСТИ',
+    'page.body.wallets.tabs.withdraw.content.inputError': 'Минимальный вывод средств должен быть в два раза больше комиссии за транзакцию.',
 
     'page.body.wallets.tabs.withdraw.modal.confirmation': 'Подтверждение',
     'page.body.wallets.tabs.withdraw.modal.message1': 'Вы получите ',

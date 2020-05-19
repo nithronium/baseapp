@@ -141,7 +141,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         getBalance()
             .then(data => {
                 this.setState({
-                    balance: data.balance || 0,
+                    balance: data.quote || 0,
                 });
             })
             .catch(() => {
@@ -375,15 +375,19 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                         wire={wire}
                     />
                 )}
-                {currency.toLowerCase() === 'usd'}
-                <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
-                {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}
-                {currency.toLowerCase() === 'usd' ? (
-                    <div style={{ textAlign: 'center', fontSize: '18px', padding: '20px' }}>{this.translate('comingsoon')}</div>
-                ) : (
-                    this.renderWithdrawBlock()
-                )}
-                {user.otp && currency && <WalletHistory label="withdraw" type="withdraws" currency={currency} />}
+                { wire && currency === 'eur'
+                    ? <div style={{ fontSize: '18px', paddingTop: '20px', textAlign: 'center' }}>{this.translate('comingsoon')}</div>
+                    : <React.Fragment>
+                        {currency.toLowerCase() === 'usd'}
+                        <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
+                        {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}
+                        {['usd', 'aed'].includes(currency.toLowerCase()) ? (
+                            <div style={{ textAlign: 'center', fontSize: '18px', padding: '20px' }}>{this.translate('comingsoon')}</div>
+                        ) : (
+                            this.renderWithdrawBlock()
+                        )}
+                        {user.otp && currency && <WalletHistory label="withdraw" type="withdraws" currency={currency} />}
+                    </React.Fragment>  }
             </React.Fragment>
         );
     };
@@ -425,6 +429,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
             withdrawFeeLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.fee' }),
             withdrawTotalLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.total' }),
             withdrawButtonLabel: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.button' }),
+            inputErrorText: this.props.intl.formatMessage({ id: 'page.body.wallets.tabs.withdraw.content.inputError' }),
             soon: this.props.intl.formatMessage({ id: 'comingsoon' }),
         };
 
