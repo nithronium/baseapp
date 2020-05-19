@@ -168,11 +168,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
                             </label>
                             <Input
                                 type="text"
-                                value={amount
-                                    ? (+amount - fee) >= 0
-                                        ? (+amount - fee)
-                                        : 0
-                                    : 0}
+                                value={(+amount - fee) > 0 ? (+amount - fee) : 0}
                                 placeholder={withdrawReceiveLabel}
                                 className="cr-withdraw__input"
                                 onFocus={() => {}}
@@ -310,8 +306,8 @@ class Withdraw extends React.Component<Props, WithdrawState> {
 
     private handleChangeInputAmountCoin = (text: string) => {
         const { fixed, fee } = this.props;
-        const value = (text !== '') ? Number(parseFloat(text).toFixed(fixed)) : '';
-        const total = (value !== '') ? value - fee : 0;
+        const value = (text !== '') ? Number(parseFloat(text).toFixed(fixed)) : 0;
+        const total = (value - fee) || 0;
         if (total <= fee && (value < (fee * 2))) {
             this.setTotal(fee);
             this.setState({amount: value, inputError: true});
