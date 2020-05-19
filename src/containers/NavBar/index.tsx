@@ -303,12 +303,15 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                             </span>
                                             {user.activeCurrency.toLowerCase() === 'cny' && <CheckIcon />}
                                         </li>
-                                        <li className={`${user.activeCurrency.toLowerCase() === 'aed' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('aed')}>
+                                        <li className={`${user.activeCurrency.toLowerCase() === 'aed' ? 'active-menu' : ''}`} onClick={() => {}}>
                                             <span className="currency-line">
                                                 <span className="icon">
                                                     <AEDIcon/>
                                                 </span>
                                                 <FormattedMessage id={'page.header.currency.aed'}/>
+                                                <span className="soon">
+                                                    (<FormattedMessage id={'page.header.soon'}/>)
+                                                </span>
                                             </span>
                                             {user.activeCurrency.toLowerCase() === 'aed' && <CheckIcon />}
                                         </li>
