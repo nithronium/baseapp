@@ -63,4 +63,3 @@ The resulting image would be accessible by the `baseapp:obfuscated` tag.
 ```bash
 REACT_APP_BUILD_VERSION=Enterprise yarn start
 ```
-
