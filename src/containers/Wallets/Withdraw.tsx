@@ -146,7 +146,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
                     <div className="cr-withdraw__divider cr-withdraw__divider-one" />
                     <div className={withdrawAmountClass}>
                         <label className="cr-withdraw__label">
-                            {(Number(amount) !== 0 && amount) && withdrawAmountLabel}
+                            {(Number(amount) >= 0) && withdrawAmountLabel}
                         </label>
                         <Input
                             type="number"
@@ -164,7 +164,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
                     { type !== 'fiat' && <React.Fragment>
                         <div className={withdrawReceiveClass}>
                             <label className="cr-withdraw__label">
-                                {(Number(amount) !== 0 && amount) && withdrawReceiveLabel}
+                                {(Number(amount) >= 0) && withdrawReceiveLabel}
                             </label>
                             <Input
                                 type="text"
