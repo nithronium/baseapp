@@ -103,6 +103,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     private openDropdown = (type: string) => {
         const {openMenuType} = this.state;
         if (type) {
+            if (type === 'assets') {
+                this.props.getBalanceFetch(['btc', this.props.user.activeCurrency]);
+            }
             if (type === openMenuType) {
                 this.setState({openMenuType: ''}, () => {
                     document.removeEventListener('click', this.closeMenu);
@@ -142,6 +145,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     private openMobileMenu = (type: string) => {
         const {openMobileMenu} = this.state;
         if (type) {
+            if (type === 'assets') {
+                this.props.getBalanceFetch(['btc', this.props.user.activeCurrency]);
+            }
             if (type === openMobileMenu) {
                 this.setState({openMobileMenu: ''}, () => {
                     document.removeEventListener('click', this.closeMobileMenu);
