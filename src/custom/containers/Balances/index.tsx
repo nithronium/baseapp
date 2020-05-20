@@ -228,7 +228,7 @@ class BalancesComponent extends React.Component<Props, State> {
         if (!item) {
             return 1;
         }
-        return item.price;
+        return item.price || 1;
     };
 
     private convertValation = (wallet: WalletItemProps, valuationCurrency: string): number => {
