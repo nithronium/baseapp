@@ -159,9 +159,9 @@ const linkBlock = {
     links3: {
         header: 'footer_headers_legal',
         body: [
-            { key: '', href: '/terms', label: 'footer_headers_terms_of_use' },
-            { key: '', href: '/privacy', label: 'footer_headers_privacy' },
-            { key: '', href: '/kyc_policy', label: 'footer_headers_KYC_AML_policy' },
+            { key: '', href: '/terms', label: 'footer_headers_terms_of_use', mainsite: true },
+            { key: '', href: '/privacy', label: 'footer_headers_privacy', mainsite: true },
+            { key: '', href: '/kyc_policy', label: 'footer_headers_KYC_AML_policy', mainsite: true },
         ].map((link, index) => {
             link.key = `footer-link-${index}-${link.href}-${link.label}`;
             return link;
@@ -180,7 +180,7 @@ const linkBlock = {
     links5: {
         header: 'footer_headers_contact_us',
         body: [
-            { key: '', href: '/about', label: 'footer_headers_about' },
+            { key: '', href: '/about', label: 'footer_headers_about', mainsite: true },
             { key: '', href: 'https://blog.emirex.com/', label: 'footer_headers_emirex_blog', extLink :true },
         ].map((link, index) => {
             link.key = `footer-link-${index}-${link.href}-${link.label}`;
@@ -189,10 +189,14 @@ const linkBlock = {
     },
 };
 
+const getOriginLink = (intl, href, mainsite) => {
+    return `${mainsite ? location.origin : ''}${intl.locale === 'en' ? '' : '/'+intl.locale}${href}`
+};
+
 const LinksList = ({ links, intl }) => {
     return (
         <ul className="footer-link-list">
-            {links.map(({ key, href, label, className, extLink }) =>
+            {links.map(({ key, href, label, className, extLink, mainsite }) =>
                 extLink ? (
                     <li key={key}>
                         <a className={className} href={`${href}`} target="_blank" rel="nofollow noopener">
@@ -201,7 +205,7 @@ const LinksList = ({ links, intl }) => {
                     </li>
                 ) : (
                     <li key={key}>
-                        <a className={className} href={`/${intl.locale}${href}`}>
+                        <a className={className} href={getOriginLink(intl, href, mainsite)}>
                             {intl.formatMessage({ id: label })}
                         </a>
                     </li>
