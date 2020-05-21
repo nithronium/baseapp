@@ -172,8 +172,6 @@ class LayoutComponent extends React.Component<LayoutProps> {
             localStorage.setItem('uil', 'true');
         } else if (isLoggedIn && siteState === 'false') {
             this.props.logout();
-        } else if (!isLoggedIn) {
-            localStorage.removeItem('uil');
         }
 
         // if (!isLoggedIn && next.isLoggedIn) {
