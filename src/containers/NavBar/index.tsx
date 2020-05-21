@@ -78,6 +78,8 @@ interface NavbarState {
     message: string;
     name: string;
     recaptchaResponse: string;
+    // tslint:disable-next-line:no-any
+    isLogin: any;
     errorModal: boolean;
 }
 
@@ -92,12 +94,24 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         name: '',
         message: '',
         recaptchaResponse: '',
+        isLogin: null,
         errorModal: false,
     };
     private dropdownMenu = React.createRef<HTMLUListElement>();
     private mobileDropdownMenu = React.createRef<HTMLDivElement>();
+    public componentWillMount(): void {
+        this.setState({isLogin: localStorage.getItem('uil') !== null});
+    }
+
     public componentDidMount(): void {
         this.props.getBalanceFetch(['btc', 'usd']);
+    }
+
+    public componentDidUpdate(prevProps: Readonly<NavbarProps>, prevState: Readonly<NavbarState>): void {
+        const isLogin = localStorage.getItem('uil') !== null;
+        if (isLogin !== this.state.isLogin) {
+            this.setState({isLogin: isLogin});
+        }
     }
 
     private openDropdown = (type: string) => {
@@ -131,7 +145,6 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             });
         }
     };
-
 
     private closeMobileMenu = event => {
         // tslint:disable
@@ -172,11 +185,11 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             lang,
             currentLanguage,
             // location,
-            isLoggedIn,
+            // isLoggedIn,
             user,
         } = this.props;
         const baseURL = window.document.location.origin;
-        const {openMenuType, openMobileMenu} = this.state;
+        const {openMenuType, openMobileMenu, isLogin} = this.state;
         const isMobileWith = window.outerWidth < 800;
         return (
             <div className={'pg-navbar'}>
@@ -202,10 +215,10 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 </ul>
                 <div className={"pg-navbar__right"}>
                     <span className="pg-navbar__mobile-icon pg-navbar__right-icon" onClick={() => this.openMobileMenu('right')}>
-                        {isLoggedIn ? <RightMenuIcon /> : <NotLoginIcon /> }
+                        {isLogin ? <RightMenuIcon /> : <NotLoginIcon /> }
                     </span>
                     {(!isMobileWith || openMobileMenu === 'right') && <div ref={this.mobileDropdownMenu} className={`pg-navbar__mobile-menu${openMobileMenu === 'right' ? ' pg-navbar__mobile-open' : ''} pg-navbar__mobile-menu_right`}>
-                        {isLoggedIn
+                        {isLogin
                             ? <React.Fragment>
                                 {this.renderOrders()}
                                 {this.renderAssets(user.balance, user.cryptoCurrency, user.activeCurrency)}
@@ -465,13 +478,13 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     };
     private renderUserBlock = () => {
         const options = userOption();
-        const { isLoggedIn } = this.props;
+        const { isLogin } = this.state;
         const { openMenuType, openMobileMenu } = this.state;
         const isMobileOpen = openMobileMenu === 'right';
         return (<div className="dropdown-block user">
             <div className={`desktop-switcher-button${openMenuType === 'orders' ? ' active-menu' : ''}`} onClick={() => this.openDropdown('user')}>
                 {!isMobileOpen && <span className="icon">
-                    {isLoggedIn ? <UserIcon /> : <NotLoginIcon /> }
+                    {isLogin ? <UserIcon /> : <NotLoginIcon /> }
                 </span> }
             </div>
             {(openMenuType === 'user' || isMobileOpen) && this.renderDropdownMenu(options, false, 'user')}
