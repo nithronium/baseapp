@@ -322,7 +322,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                             </span>
                                             {user.activeCurrency.toLowerCase() === 'cny' && <CheckIcon />}
                                         </li>
-                                        <li className={`${user.activeCurrency.toLowerCase() === 'aed' ? 'active-menu' : ''}`} onClick={() => {}}>
+                                        <li className={`${user.activeCurrency.toLowerCase() === 'aed' ? 'active-menu' : ''} soon`} onClick={() => {}}>
                                             <span className="currency-line">
                                                 <span className="icon">
                                                     <AEDIcon/>
