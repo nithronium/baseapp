@@ -310,11 +310,12 @@ class Withdraw extends React.Component<Props, WithdrawState> {
         const total = (value - fee) || 0;
         if (total <= fee && (value < (fee * 2))) {
             this.setTotal(fee);
-            this.setState({amount: value, inputError: true});
+            this.setState({inputError: true});
         } else {
             this.setTotal(total);
-            this.setState({ amount: value, inputError: false });
+            this.setState({inputError: false});
         }
+        this.setState({ amount: text});
     };
 
     private handleChangeInputAmountFiat = (text: string) => {
