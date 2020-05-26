@@ -5,7 +5,7 @@ import { rootSaga } from '../../..';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
 import { changeLanguage } from '../../../public/i18n';
 import { userData } from '../../profile';
-import { signIn, signInError } from '../actions';
+import { signIn, signInError, signInRequire2FA } from '../actions';
 
 
 describe('SignIn saga', () => {
@@ -57,6 +57,7 @@ describe('SignIn saga', () => {
         signIn(fakeCredentials),
         changeLanguage('en'),
         userData({user: fakeUser}),
+        signInRequire2FA({ require2fa: false }),
     ];
     const expectedActions2FAError = [
         signIn(fakeCredentials),
