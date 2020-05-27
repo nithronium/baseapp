@@ -226,12 +226,12 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                             </React.Fragment>
                             : <React.Fragment>
                                 <div className="log-btn">
-                                    <a href={`${baseURL}/signin`} onClick={() => this.openDropdown('')}>
+                                    <a href={`${baseURL}${currentLanguage === 'en' ? '' : "/" + currentLanguage}/signin`} onClick={() => this.openDropdown('')}>
                                         <FormattedMessage id={'page.header.navbar.signIn'} />
                                     </a>
                                 </div>
                                 <div className="log-btn sign-up">
-                                    <a href={`${baseURL}/signup`} onClick={() => this.openDropdown('')}>
+                                    <a href={`${baseURL}${currentLanguage === 'en' ? '' : "/" + currentLanguage}/signup`} onClick={() => this.openDropdown('')}>
                                         <FormattedMessage id={'page.header.signUp'} />
                                     </a>
                                 </div>
