@@ -24,6 +24,8 @@ import {
 } from './modules';
 import { Layout } from './routes';
 
+import { googleTranslateElementInit } from './helpers/googleTranslate';
+
 interface Locale {
     lang: string;
     messages: object;
@@ -54,6 +56,26 @@ interface DispatchProps {
 type Props = AppProps & ReduxProps & DispatchProps;
 
 class AppLayout extends React.Component<Props, {}, {}> {
+
+    public componentWillReceiveProps(nextProps: Props) {
+        const prevLang = this.props.locale.lang;
+        const nextLang = nextProps.locale.lang;
+
+        if (prevLang !== nextLang) {
+            setTimeout(() => {
+                console.log('locale', nextLang);
+                googleTranslateElementInit(nextLang);
+            }, 0);
+        }
+    }
+
+    public componentDidMount() {
+        setTimeout(() => {
+            const { locale } = this.props;
+            console.log('locale', locale);
+            googleTranslateElementInit(locale.lang);
+        }, 0);
+    }
 
     public render() {
         const {
