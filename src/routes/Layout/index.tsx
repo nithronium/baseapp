@@ -7,7 +7,7 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { minutesUntilAutoLogout } from '../../api';
-import { buildPath } from '../../custom/helpers';
+import { buildPath, saveParametersFromUrl } from '../../custom/helpers';
 import { ReferralCommissionScreen, ReferralScreen, ReferralTicketsScreen, TradingScreen } from '../../custom/screens';
 import { LoginModal } from '../../custom/components/KYCLoginModal';
 import { ConfirmScreen } from '../../custom/screens';
@@ -82,6 +82,7 @@ const PrivateRoute: React.FunctionComponent<any> = ({ component: CustomComponent
     if (loading) {
         return renderLoader();
     }
+    saveParametersFromUrl(rest.location.search);
     const renderCustomerComponent = props => <CustomComponent {...props} />;
 
     if (isLogged) {
@@ -100,6 +101,7 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
     if (loading) {
         return renderLoader();
     }
+    saveParametersFromUrl(rest.location.search);
 
     if (isLogged) {
         return (
