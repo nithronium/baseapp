@@ -7,7 +7,9 @@ import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redu
 
 import { CopyableTextField } from '../../../components/CopyableTextField';
 
-import { Pagination, Table } from '@openware/components';
+import { Table } from '@openware/components';
+
+import { Pagination } from './Pagination';
 
 import { setDocumentTitle } from '../../../helpers';
 import {
@@ -160,8 +162,7 @@ class ReferralCommission extends React.Component<Props, State> {
     };
 
     public loadConvertedValues = async nextProps => {
-        const { balances, ieo } = this.props;
-        console.log('ieo', ieo);
+        const { balances } = this.props;
         const user = this.getUser();
         if (
             balances.earned && (
@@ -176,8 +177,6 @@ class ReferralCommission extends React.Component<Props, State> {
             const currencies = this.getCurrencies();
             const defaultCurrencies = [currencies.crypto, currencies.emrx, this.getUser(nextProps).activeCurrency || currencies.fiat];
             const currenciesArray = Array.from(new Set([...defaultCurrencies, ...ieoCurrencies]));
-
-            console.log('currenciesArray', currenciesArray);
 
             const ratio = await getExchangeRates(
                 'USD', 1, currenciesArray,
@@ -286,11 +285,26 @@ class ReferralCommission extends React.Component<Props, State> {
         if (!curr) {
             return value;
         }
-        return this.trimNumber(value * curr.price);
+        return this.trimNumber(value * curr.price, name);
     };
 
-    public trimNumber = value => {
-        const res = (Number(value) || 0).toFixed(8);
+    public getPrecision = (curr?) => {
+        const { currencies } = this.props;
+        let precision = 8;
+        if (curr) {
+            const currencyObject = currencies.filter(item => {
+                return item.id.toLowerCase() === curr.toLowerCase();
+            })[0];
+            if (currencyObject) {
+                precision = currencyObject.precision;
+            }
+        }
+        return precision;
+    };
+
+    public trimNumber = (value, curr?) => {
+        const precision = this.getPrecision(curr);
+        const res = (Number(value) || 0).toFixed(precision);
         const resNumber = Number(res);
         if (resNumber.toString().includes('e')) {
             return res;
@@ -306,7 +320,9 @@ class ReferralCommission extends React.Component<Props, State> {
         const currencies = this.getCurrencies();
 
         const levelTrade = balances.commission.trade.map((val, index) => {
-            const trader = balances.traders[index] || { total: 0 };
+            const trader = balances.traders.filter(
+                item => item.level === Number(index) + 1,
+            )[0] || { total: 0 };
             const refs = trader.total;
             return {
                 header: `Commission: ${val * 100}%`,
@@ -329,7 +345,10 @@ class ReferralCommission extends React.Component<Props, State> {
         }, 0);
 
         const levelIeo = balances.commission.ieo.map((val, index) => {
-            const inverstor = balances.investors[index] || { total: 0 };
+            // const inverstor = balances.investors[index] || { total: 0 };
+            const inverstor = balances.investors.filter(
+                item => item.level === Number(index) + 1,
+            )[0] || { total: 0 };
             const refs = inverstor.total;
             return {
                 header: `Commission: ${val * 100}%`,
@@ -401,6 +420,9 @@ class ReferralCommission extends React.Component<Props, State> {
                 if ([3, 5].includes(index)) {
                     return this.convert(row.investment_currency_id, row[key]);
                 }
+                if ([2, 4].includes(index)) {
+                    return this.trimNumber(row[key], row.investment_currency_id);
+                }
                 return row[key];
             });
         });
@@ -455,9 +477,9 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="profit"
                                 title="Your Profit"
-                                text={`${this.trimNumber(this.getCoverteValue(tradeConverted, currencies.crypto))} ${currencies.crypto}`}
-                                emrxConverted={`${this.trimNumber(this.getCoverteValue(tradeConverted, currencies.emrx))} ${currencies.emrx}`}
-                                usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(tradeConverted, activeCurrency))} ${activeCurrency}`}
+                                text={`${this.trimNumber(this.getCoverteValue(tradeConverted, currencies.crypto), currencies.crypto)} ${currencies.crypto}`}
+                                emrxConverted={`${this.trimNumber(this.getCoverteValue(tradeConverted, currencies.emrx), currencies.emrx)} ${currencies.emrx}`}
+                                usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(tradeConverted, activeCurrency), activeCurrency)} ${activeCurrency}`}
                             />
                         </div>
                         <div>
@@ -506,6 +528,7 @@ class ReferralCommission extends React.Component<Props, State> {
                             nextPageExists={true}
                             onClickPrevPage={this.onClickPrevTrade}
                             onClickNextPage={this.onClickNextTrade}
+                            caption={'Active referral branches: '}
                         />
                     </div>}
 
@@ -529,9 +552,9 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="profit"
                                 title="Your Profit"
-                                text={`${this.trimNumber(this.getCoverteValue(ieoConverted, currencies.crypto))} ${currencies.crypto}`}
-                                emrxConverted={`${this.trimNumber(this.getCoverteValue(ieoConverted, currencies.emrx))} ${currencies.emrx}`}
-                                usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(ieoConverted, activeCurrency))} ${activeCurrency}`}
+                                text={`${this.trimNumber(this.getCoverteValue(ieoConverted, currencies.crypto), currencies.crypto)} ${currencies.crypto}`}
+                                emrxConverted={`${this.trimNumber(this.getCoverteValue(ieoConverted, currencies.emrx), currencies.emrx)} ${currencies.emrx}`}
+                                usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(ieoConverted, activeCurrency), activeCurrency)} ${activeCurrency}`}
                             />
                         </div>
                         <div>
@@ -581,6 +604,7 @@ class ReferralCommission extends React.Component<Props, State> {
                             nextPageExists={true}
                             onClickPrevPage={this.onClickPrevIeo}
                             onClickNextPage={this.onClickNextIeo}
+                            caption={'Active referral branches: '}
                         />
                     </div>}
 
@@ -609,9 +633,9 @@ class ReferralCommission extends React.Component<Props, State> {
                             <InfoCard
                                 iconName="profit"
                                 title="Profit"
-                                text={`${this.trimNumber(this.getCoverteValue(referralConverted, currencies.crypto))} ${currencies.crypto}`}
-                                emrxConverted={`${this.trimNumber(this.getCoverteValue(referralConverted, currencies.emrx))} ${currencies.emrx}`}
-                                usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(referralConverted, activeCurrency))} ${activeCurrency}`}
+                                text={`${this.trimNumber(this.getCoverteValue(referralConverted, currencies.crypto), currencies.crypto)} ${currencies.crypto}`}
+                                emrxConverted={`${this.trimNumber(this.getCoverteValue(referralConverted, currencies.emrx), currencies.emrx)} ${currencies.emrx}`}
+                                usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(referralConverted, activeCurrency), activeCurrency)} ${activeCurrency}`}
                             />
                         </div>
                         <div>

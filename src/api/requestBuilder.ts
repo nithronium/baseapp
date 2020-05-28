@@ -32,8 +32,8 @@ const getAPI = () => ({
     tenko: `${tenkoUrl()}`,
     nodelogic: `${nodelogicUrl()}`,
     referral: `${referralUrl()}`,
-    referralCommission: `${referralCommissionUrl()}`,
     exchangeRates: `${exchangeRatesUrl()}`,
+    referralCommission: `${referralCommissionUrl()}`,
 });
 
 const buildRequest = (request: Request, configData: RequestOptions) => {
