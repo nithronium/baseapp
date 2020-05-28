@@ -99,6 +99,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
     };
     private dropdownMenu = React.createRef<HTMLUListElement>();
     private mobileDropdownMenu = React.createRef<HTMLDivElement>();
+    private headerRef = React.createRef<HTMLDivElement>();
     public componentWillMount(): void {
         this.setState({isLogin: localStorage.getItem('uil') !== null});
     }
@@ -190,9 +191,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         } = this.props;
         const baseURL = window.document.location.origin;
         const {openMenuType, openMobileMenu, isLogin} = this.state;
-        const isMobileWith = window.outerWidth < 800;
+        const isMobileWith = this.headerRef.current && this.headerRef.current.clientWidth < 800;
         return (
-            <div className={'pg-navbar'}>
+            <div ref={this.headerRef} className={'pg-navbar'}>
                 <a href={currentLanguage === 'en' ? baseURL : `${baseURL}/${currentLanguage}`} className="pg-navbar__logo">
                     <span>
                         <img src={logo} className="pg-logo__img" alt="Logo" />
