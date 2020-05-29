@@ -484,7 +484,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         const isMobileOpen = openMobileMenu === 'right';
         return (<div className="dropdown-block user">
             <div className={`desktop-switcher-button${openMenuType === 'orders' ? ' active-menu' : ''}`} onClick={() => this.openDropdown('user')}>
-                {!isMobileOpen && <span className="icon">
+                {<span className="icon">
                     {isLogin ? <UserIcon /> : <NotLoginIcon /> }
                 </span> }
             </div>
