@@ -389,7 +389,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <OpenUserMenu/>
                 </span>
             </div>
-            {openMenuType === 'buyWithCard' && this.renderDropdownMenu(options, true, 'buyWithCard')}
+            {openMenuType === 'buyWithCard' && this.renderDropdownMenu(options, true, isMobileOpen, 'buyWithCard')}
         </div>);
     };
 
@@ -405,7 +405,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <OpenUserMenu/>
                 </span>
             </div>
-            {openMenuType === 'trade' && this.renderDropdownMenu(options, false, 'trade')}
+            {openMenuType === 'trade' && this.renderDropdownMenu(options, false, isMobileOpen,  'trade')}
         </div>);
     };
 
@@ -421,11 +421,11 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <OpenUserMenu/>
                 </span>
             </div>
-            {openMenuType === 'earn' && this.renderDropdownMenu(options, false, 'earn')}
+            {openMenuType === 'earn' && this.renderDropdownMenu(options, false, isMobileOpen,  'earn')}
         </div>);
     };
 
-    private renderDropdownMenu = (options, isMainSite, type) => {
+    private renderDropdownMenu = (options, isMainSite, isMobileOpen, type) => {
         const path = window.document.location.origin;
         const { currentLanguage } = this.props;
         return (<ul ref={this.dropdownMenu} className={`dropdown-menu dropdown-menu__${type}`}>
@@ -435,7 +435,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         ? !option.soon
                             ? !isMainSite
                                 ? !option.extLink
-                                    ? <Link to={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}${option.href}`} onClick={() => this.openDropdown('')}>
+                                    ? <Link to={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}${option.href}`} onClick={() => isMobileOpen ? this.openMobileMenu('') : this.openDropdown('')}>
                                           {option.label && <div className="label">
                                               <FormattedMessage id={option.label}/>
                                           </div>}
@@ -443,7 +443,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                               <FormattedMessage id={option.description}/>
                                           </div>}
                                       </Link>
-                                    : <a href={option.mainsite ? `${path}${currentLanguage === 'en' ? '' : "/" + currentLanguage}${option.href}` : option.href} onClick={() => this.openDropdown('')}>
+                                    : <a href={option.mainsite ? `${path}${currentLanguage === 'en' ? '' : "/" + currentLanguage}${option.href}` : option.href} onClick={() => isMobileOpen ? this.openMobileMenu('') : this.openDropdown('')}>
                                         {option.label && <div className="label">
                                             <FormattedMessage id={option.label}/>
                                         </div>}
@@ -451,7 +451,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                             <FormattedMessage id={option.description}/>
                                         </div>}
                                     </a>
-                                : <a href={`${path}${currentLanguage === 'en' ? '' : `/${currentLanguage}`}${option.href}`} onClick={() => this.openDropdown('')}>
+                                : <a href={`${path}${currentLanguage === 'en' ? '' : `/${currentLanguage}`}${option.href}`} onClick={() => isMobileOpen ? this.openMobileMenu('') : this.openDropdown('')}>
                                     {option.label && <div className="label">
                                         <FormattedMessage id={option.label}/>
                                     </div>}
@@ -488,7 +488,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     {isLogin ? <UserIcon /> : <NotLoginIcon /> }
                 </span> }
             </div>
-            {(openMenuType === 'user' || isMobileOpen) && this.renderDropdownMenu(options, false, 'user')}
+            {(openMenuType === 'user' || isMobileOpen) && this.renderDropdownMenu(options, false, isMobileOpen,  'user')}
 
         </div>)
     };
@@ -504,7 +504,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <OpenUserMenu/>
                 </span>
             </div>
-            {openMenuType === 'orders' && this.renderDropdownMenu(options, false, 'orders')}
+            {openMenuType === 'orders' && this.renderDropdownMenu(options, false, isMobileOpen,  'orders')}
 
         </div>)
     };
@@ -567,7 +567,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         localStorage.removeItem('uil');
         localStorage.removeItem('refCode');
         localStorage.removeItem('usedCoins');
-        this.setState(
+        this.openMobileMenu('');
+        this.openDropdown('');
+            this.setState(
             {
                 isOpen: false,
             },
