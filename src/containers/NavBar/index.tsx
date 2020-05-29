@@ -525,7 +525,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     <div className="header">
                         <FormattedMessage id={'page.header.current_balance'}/>
                     </div>
-                    <Link to={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/wallets`} className="balance">
+                    <Link to={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/wallets`} className="balance" onClick={() => this.openDropdown('')}>
                         <span className="currency left-cur">{balance[crypto.toUpperCase()].toFixed(2)}</span>
                         <span className="type-currency">{crypto.toUpperCase()}</span>
                         <span className="sym">≈</span>
