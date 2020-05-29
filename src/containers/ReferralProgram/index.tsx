@@ -134,7 +134,6 @@ class ReferralProgramClass extends React.Component<Props> {
                             handleFocusInput={() => {}}
                             classNameLabel=""
                             classNameInput="cr-email-form__input"
-                            autoFocus={true}
                         />
                         <Button
                             type="submit"
