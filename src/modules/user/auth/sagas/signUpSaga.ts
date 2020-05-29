@@ -44,7 +44,7 @@ export function* signUpSaga(action: SignUpFetch) {
                 if (utm_campaign) { data['utm_campaign'] = utm_campaign }
                 if (utm_content) { data['utm_content'] = utm_content }
                 if (utm_term) { data['utm_term'] = utm_term }
-                if (Object.keys(data).length > 0) { query = {...query, data: {...data}} }
+                if (Object.keys(data).length > 0) { query = {...query, data: JSON.stringify(data)} }
                 yield call(API.post(signUpConfig), '/identity/users', query);
                 yield put(signUpRequireVerification({ requireVerification: true }));
                 localStorage.removeItem('utm_source');
