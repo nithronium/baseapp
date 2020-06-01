@@ -3,6 +3,7 @@ window.env = {
         authUrl: 'http://localhost:9002/api/v2/barong',
         tradeUrl: 'http://localhost:9002/api/v2/peatio',
         applogicUrl: 'http://localhost:9002/api/v2/applogic',
+        exchangeRatesUrl: 'http://localhost:9002/api/v2/exchange-rates',
         rangerUrl: '',
         tenkoUrl: 'http://localhost:9002/api/v2/tenko',
         nodelogicUrl: 'http://localhost:9002/api/v2/nodelogic',

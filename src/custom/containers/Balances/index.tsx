@@ -11,7 +11,6 @@ import {
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { WalletItemProps } from '../../../components/WalletItem';
 import { handleCCYPrecision } from '../../../helpers';
-import { estimateUnitValue } from '../../../helpers/estimateValue';
 import {
     currenciesFetch,
     Currency,
@@ -33,7 +32,8 @@ import {
     DEFAULT_WALLET_PRECISION,
     VALUATION_CURRENCY,
 } from '../../constants';
-import { getWalletTotal } from '../../helpers';
+
+import { getExchangeRates } from '../../../api';
 
 interface ReduxProps {
     currencies: Currency[];
@@ -56,7 +56,32 @@ interface DispatchProps {
 
 type Props = ReduxProps & DispatchProps & InjectedIntlProps;
 
-class BalancesComponent extends React.Component<Props> {
+
+interface RatesItem {
+    symbol: string;
+    price: number;
+}
+
+interface State {
+    rates: {
+        symbol: string;
+        amount: number;
+        quote: RatesItem[];
+    };
+}
+
+class BalancesComponent extends React.Component<Props, State> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            rates: {
+                amount: 1,
+                symbol: 'USD',
+                quote: [],
+            },
+        };
+    }
+
     public translate = (id: string) => this.props.intl.formatMessage({ id });
 
     public componentDidMount() {
@@ -82,14 +107,21 @@ class BalancesComponent extends React.Component<Props> {
         if (currencies.length === 0) {
             fetchCurrencies();
         }
+
+
+        if (wallets.length !== 0) {
+            // tslint:disable-next-line
+            this.loadRates(this.props);
+        }
     }
 
-    public componentWillReceiveProps(next: Props) {
+    public async componentWillReceiveProps(next: Props) {
         const {
             currencies,
             fetchCurrencies,
             tickers,
             marketsData,
+            wallets,
         } = this.props;
 
         if (next.marketsData.length === 0 && next.marketsData !== marketsData) {
@@ -98,6 +130,11 @@ class BalancesComponent extends React.Component<Props> {
 
         if (next.currencies.length === 0 && next.currencies !== currencies) {
             fetchCurrencies();
+        }
+
+        if (wallets.length !== next.wallets.length) {
+            // tslint:disable-next-line
+            this.loadRates(next);
         }
     }
 
@@ -113,6 +150,15 @@ class BalancesComponent extends React.Component<Props> {
             </div>
         );
     }
+
+    private loadRates = async (props: Props) => {
+        const currencies = props.wallets.map(item => {
+            return item.currency.toLowerCase();
+        });
+        const rates = await getExchangeRates('USD', 1, currencies);
+        this.setState({ rates });
+        console.log(rates);
+    };
 
     private renderContent = () => {
         return (
@@ -140,22 +186,29 @@ class BalancesComponent extends React.Component<Props> {
         ];
     };
 
-    private getData = () => {
+    private getValuationCurrency = (props?: Props) => {
         const {
-            currencies,
-            marketsData,
-            marketTickers,
             wallets,
-        } = this.props;
+        } = (props || this.props);
 
         const valuationWallet = wallets.find(item => (item.currency === VALUATION_CURRENCY)) || wallets.find(item => (item.type === 'fiat'));
         const valuationCurrency = valuationWallet ? valuationWallet.currency : '';
+        return valuationCurrency;
+    };
+
+    private getData = () => {
+        const {
+            currencies,
+            wallets,
+        } = this.props;
+
+        const valuationCurrency = this.getValuationCurrency();
 
         const formattedWallets = wallets.map((wallet: WalletItemProps) => {
             return ({
                 ...wallet,
                 currency: wallet.currency.toUpperCase(),
-                valuation: estimateUnitValue(valuationCurrency, wallet.currency, getWalletTotal(wallet), currencies, marketsData, marketTickers),
+                valuation: this.convertValation(wallet, valuationCurrency),
                 walletPrecision: handleCCYPrecision(currencies, wallet.currency, DEFAULT_WALLET_PRECISION),
             });
         });
@@ -163,6 +216,28 @@ class BalancesComponent extends React.Component<Props> {
         return [...formattedWallets].length > 0
             ? [...formattedWallets].map(this.renderRow)
             : [[[''], this.translate('page.noDataToShow')]];
+    };
+
+
+    private getCurrencyPrice = (curr: string): number => {
+        const { rates } = this.state;
+        const { quote } = rates;
+        const item = quote.filter(c => {
+            return c.symbol.toLowerCase() === curr.toLowerCase();
+        })[0];
+        if (!item) {
+            return 1;
+        }
+        return item.price || 1;
+    };
+
+    private convertValation = (wallet: WalletItemProps, valuationCurrency: string): number => {
+        const valuationPrice: number = this.getCurrencyPrice(valuationCurrency);
+        const walletPrice = this.getCurrencyPrice(wallet.currency);
+        const valueInWallet = Number(wallet.balance);
+        const valueInUsd = valueInWallet / walletPrice;
+        const valuationValue = valueInUsd * valuationPrice;
+        return valuationValue;
     };
 
     private renderRow = (item, id) => {
@@ -183,7 +258,7 @@ class BalancesComponent extends React.Component<Props> {
             <span key={id}><Decimal fixed={walletPrecision}>{available.toString()}</Decimal></span>,
             <span key={id}><Decimal fixed={walletPrecision}>{locked.toString()}</Decimal></span>,
             <span key={id}>{balance}</span>,
-            <span key={id}>{valuation}</span>,
+            <span key={id}><Decimal fixed={walletPrecision}>{valuation.toString()}</Decimal></span>,
         ];
     }
 }

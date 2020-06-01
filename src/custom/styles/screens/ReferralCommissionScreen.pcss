@@ -5,7 +5,7 @@
     padding-bottom: 30px;
 
     .cr-table-container {
-        max-width: 960px;
+        max-width: 1050px;
         overflow-x: auto;
 
         &::-webkit-scrollbar-thumb {
@@ -17,6 +17,12 @@
         }
     }
 
+    .pg-history-elem__pagination {
+        p {
+            color: var(--table-header-color);
+        }
+    }
+
     &__level-card {
         background: #263434;
         border-radius: 4px;
@@ -24,6 +30,7 @@
 
     .info-card {
         display: flex;
+        position: relative;
 
         &:not(:last-child) {
             margin-right: 30px;
@@ -108,6 +115,14 @@
             top: 22px;
             left: 8px;
             white-space: nowrap;
+
+            @media screen and (min-width: 840px) and (max-width: 910px) {
+                position: absolute;
+                bottom: -21px;
+                right: 0px;
+                left: auto;
+                top: auto;
+            }
         }
 
         &__wrap {
@@ -206,7 +221,7 @@
     }
 
     &__container {
-        max-width: 940px;
+        max-width: 1050px;
         margin: 0 auto;
     }
 
@@ -247,12 +262,12 @@
         font-size: 12px;
         white-space: nowrap;
 
-        &--referral {
-            td:first-child,
-            th:first-child {
-                position: relative;
-                min-width: 240px;
-            }
+        td:first-child,
+        th:first-child {
+            position: relative;
+            width: 2900px;
+            max-width: 290px;
+            text-overflow: ellipsis;
         }
 
         tr {
@@ -279,6 +294,29 @@
                 }
             }
         }
+    }
+
+    #ieo {
+        h2 {
+            border-left-color: #FFD541;
+        }
+    }
+
+    #summary {
+        h2 {
+            border-left-color: #F0F0F0;
+        }
+    }
+
+    @media (max-width: 700px){
+        .container{
+            .container{
+                margin: 0;
+                padding: 0;
+                width: 100% !important;
+                max-width: 100%;
+                overflow: auto;
+            }
 
         .cr-table__head-row {
             th {
@@ -292,6 +330,7 @@
             }
         }
     }
+}
 }
 
 
