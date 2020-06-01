@@ -1128,6 +1128,10 @@ export const ru: LangType = {
     t69usdt_description: 'T69/USDT конвертировать в режиме реального времени ✅ Перевести Tycoon Chain (T69) в Tether (USDT) по актуальному курсу ➤ Цены, графики ➤ Безопасная криптобиржа',
     t69eur_title: 'T69 в EUR. Обмен в Евро. Актуальный Курс | Emirex.com',
     t69eur_description: 'T69/EUR обменять онлайн ✅ Сколько можно получить при конвертации Tycoon Chain (T69) в Евро (EUR) по сегодняшнему курсу ➤ Безопасная криптобиржа Emirex',
+    maticbtc_title: 'MATIC в BTC. Обмен Matic Network | Emirex.com',
+    maticbtc_description: 'MATIC в BTC (Bitcoin): курс обмена ➤ Проверьте цены, информацию о рынке и торговле ➤ Matic Network графики и последние новости ➤ Начните торговать сейчас',
+    maticusdt_title: 'MATIC в USDT. Прайс Matic Network | Emirex.com',
+    maticusdt_description: 'MATIC/USDT цена, графики, объем ➤ Проверить информацию о рынке и торговле ➤ Matic Network конвертировать в Tether (USDT) ➤ Начните торговать сейчас',
     referral_title: 'Получите биткоин. Реферальная крипто-программа | Emirex.com',
     referral_description:
         'Получите биткоины бесплатно. Лучшая реферальная программа. Присоединяйтесь к реферальной программе ✅ WinWithEmirex',

@@ -128,6 +128,8 @@ class Trading extends React.Component<Props, StateProps> {
         usdteur: { title: 'usdteur_title', description: 'usdteur_description' },
         usdcusdt: { title: 'usdcusdt_title', description: 'usdcusdt_description' },
         btcusdc: { title: 'btcusdc_title', description: 'btcusdc_description' },
+        maticbtc: { title: 'maticbtc_title', description: 'maticbtc_description' },
+        maticusdt: { title: 'maticusdt_title', description: 'maticusdt_description' },
     };
 
     public componentDidMount() {
