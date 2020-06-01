@@ -77,6 +77,7 @@ export * from './user/guard';
 export * from '../custom/modules/referralTickets';
 export * from '../custom/modules/referralCommission';
 export * from '../custom/modules/fees';
+export * from '../custom/modules/buyWithCreditCard';
 
 export interface RootState {
     public: {

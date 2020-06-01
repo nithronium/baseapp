@@ -1,7 +1,11 @@
 
 // tslint:disable-next-line
-// import { takeLatest } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
+
+import { CREATE_CREDIT_CARD_ORDER_FETCH } from '../constants';
+
+import { createCreditCardOrderSaga } from './createCreditCardOrderSaga';
 
 export function* rootCreditCardSaga() {
-    console.log('empty saga');
+    yield takeLatest(CREATE_CREDIT_CARD_ORDER_FETCH, createCreditCardOrderSaga);
 }

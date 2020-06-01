@@ -300,6 +300,10 @@
             &:focus {
                 outline: none;
             }
+
+            &--first {
+                z-index: 1;
+            }
         }
 
         .cr-card-option {
@@ -459,6 +463,13 @@
 
             &__input {
                 width: 100%;
+
+                &-arrow {
+                    &-wrap {
+                        position: relative;
+                        top: 10px;
+                    }
+                }
             }
 
             &__bottom-text {
@@ -496,6 +507,16 @@
                     }
                 }
             }
+
+            .buy-form__modal-inputs {
+                .buy-form__input {
+                    width: 100%;
+                }
+            }
+        }
+
+        .cr-modal .cr-modal__container {
+            max-width: calc(100vw - 25px);
         }
     }
 }

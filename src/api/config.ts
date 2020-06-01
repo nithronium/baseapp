@@ -44,6 +44,8 @@ export const referralUrl = () => `${window.document.location.origin}/api/v1/refe
 export const referralCommissionUrl = () => `${window.document.location.origin}/api/v2/referral`;
 // export const referralCommissionUrl = () => `http://localhost:9002/api/v2/referral`;
 // export const referralUrl = () => `https://stage.emirex.com/api/v1/referral-code`;
+export const instexServiceUrl = () => `${window.document.location.origin}/api/v2/instex_service`;
+// export const instexServiceUrl = () => `http://localhost:9002/api/v2/instex_service`;
 export const authUrl = () => Cryptobase.config.api.authUrl;
 export const nodelogicUrl = () => Cryptobase.config.api.nodelogicUrl;
 export const exchangeRatesUrl = () => Cryptobase.config.api.exchangeRatesUrl;
