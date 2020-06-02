@@ -40,6 +40,7 @@ import {
     SignUpScreen,
     VerificationScreen,
     WalletsScreen,
+    PricePackagesScreen
 } from '../../screens';
 
 interface ReduxProps {
@@ -514,6 +515,13 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         isLogged={isLoggedIn}
                         path={'/zh/referral-commission'}
                         component={ReferralCommissionScreen}
+                        currentLanguage={currentLanguage}
+                    />
+                    <PrivateRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/kyc-package'}
+                        component={PricePackagesScreen}
                         currentLanguage={currentLanguage}
                     />
 

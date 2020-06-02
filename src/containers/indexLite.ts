@@ -13,6 +13,8 @@ export * from './Errors';
 export * from './ChangePassword';
 export * from './ProfileVerification';
 export * from './ReferralProgram';
+// @ts-ignore
+export * from '../screens/PricePackages';
 export * from './ProfileAccountActivity';
 export * from './ModalWithdrawSubmit';
 export * from './ModalWithdrawConfirmation';
