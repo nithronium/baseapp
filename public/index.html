@@ -70,6 +70,27 @@
                 style="display:none"
                 src="https://www.facebook.com/tr?id=554619862060487&ev=PageView&noscript=1"
         /></noscript>
+        <script>
+            /**
+             * At the time `componentDidMount` (see src/App.tsx) is called,
+             * the google translate object may not be initialized yet because
+             * scripts haven't loaded yet.
+             * We can't use the default callback 'cause we can't just pass
+             * `componentDidMount` of whatever function as a callback.
+             *
+             * So in the google translate callback we fire an event
+             * `google-translate-loaded` and
+             * also set a global flag `googleTranslateLoaded`, so we can track
+             * the state of google scripts in our components.
+             */
+            function googleTranslateElementInit() {
+                const event = document.createEvent('Event');
+                event.initEvent('google-translate-loaded', true, true);
+                window.dispatchEvent(event);
+                window.googleTranslateLoaded = true;
+            };
+        </script>
+        <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
         <!-- End Facebook Pixel Code -->
     </head>
 
@@ -89,7 +110,6 @@
         ></noscript>
         <!-- End Google Tag Manager (noscript) -->
         <div id="root"></div>
-        <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> 
         <!-- Start of HubSpot Embed Code -->
         <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/6447437.js"></script>
         <!-- End of HubSpot Embed Code -->

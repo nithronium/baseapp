@@ -170,12 +170,13 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                     />
                 </div>
                 <div className="cr-email-form__button-wrapper">
-                    <input
-                        type={'submit'}
-                        value={this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.button.change'})}
+                    <button
+                        type="button"
                         className={this.isValidForm() ? 'cr-email-form__button' : 'cr-email-form__button cr-email-form__button--disabled'}
                         disabled={!this.isValidForm()}
-                    />
+                    >
+                        {this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.button.change'})}
+                    </button>
                 </div>
             </div>
         );
@@ -216,11 +217,12 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                             ************
                         </div>
                     </div>
-                    <Button
-                        className="pg-profile-page__btn-secondary-change"
+                    <button
+                        className="cr-button pg-profile-page__btn-secondary-change"
                         onClick={this.showChangeModal}
-                        label={this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password.button.change'})}
-                    />
+                    >
+                        {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.password.button.change'})}
+                    </button>
                     {modal}
                 </div>
                 {this.renderProfileTwoFactor()}
@@ -298,11 +300,12 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     private renderConfirm2faFooter = () => {
         return (
             <div className="auth2fa-mfa-footer">
-                <Button
+                <button
                     className="pg-profile-page__btn-secondary-change"
                     onClick={this.goTo2fa}
-                    label={this.props.intl.formatMessage({ id: 'page.body.kyc.confirm'})}
-                />
+                >
+                    {this.props.intl.formatMessage({ id: 'page.body.kyc.confirm'})}
+                </button>
             </div>
         );
     };

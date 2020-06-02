@@ -63,19 +63,38 @@ class AppLayout extends React.Component<Props, {}, {}> {
 
         if (prevLang !== nextLang) {
             setTimeout(() => {
-                console.log('locale', nextLang);
+                console.log('componentWillReceiveProps locale', nextLang);
                 googleTranslateElementInit(nextLang);
             }, 0);
         }
     }
 
     public componentDidMount() {
-        setTimeout(() => {
-            const { locale } = this.props;
-            console.log('locale', locale);
-            googleTranslateElementInit(locale.lang);
-        }, 0);
+        /**
+         * At the time `componentDidMount` is called, the google translate
+         * object may not be initialized yet because scripts haven't loaded yet.
+         * We can't use the default callback 'cause we can't just pass
+         * `componentDidMount` of whatever function as a callback.
+         *
+         * So in the google translate callback we fire an event
+         * `google-translate-loaded` (see public/index.html) and
+         * also set a global flag `googleTranslateLoaded`, so we can track
+         * the state of google scripts in our components.
+         */
+        if ('googleTranslateLoaded' in window) {
+            this.initGoogleTranslate();
+        } else {
+            window.addEventListener('google-translate-loaded', () => {
+                this.initGoogleTranslate();
+            });
+        }
     }
+
+    public initGoogleTranslate = () => {
+        const { locale } = this.props;
+        console.log('componentDidMount locale', locale);
+        googleTranslateElementInit(locale.lang);
+    };
 
     public render() {
         const {

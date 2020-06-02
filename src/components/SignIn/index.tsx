@@ -1,6 +1,4 @@
-import {
-    Button,
-} from '@openware/components';
+
 import cr from 'classnames';
 import * as React from 'react';
 import {
@@ -122,13 +120,14 @@ class SignInComponent extends React.Component<SignInProps> {
                             {passwordError && <div className={'cr-sign-in-form__error'}>{passwordError}</div>}
                         </div>
                         <div className="cr-sign-in-form__button-wrapper">
-                            <Button
-                                label={isLoading ? 'Loading...' : (labelSignIn ? labelSignIn : 'Sign in')}
-                                type="submit"
+                            <button
+                                type="button"
                                 className={'cr-sign-in-form__button'}
                                 disabled={isLoading || !email.match(EMAIL_REGEX) || !password}
                                 onClick={this.handleClick}
-                            />
+                            >
+                                {isLoading ? 'Loading...' : (labelSignIn ? labelSignIn : 'Sign in')}
+                            </button>
                         </div>
                         <div className="cr-sign-in-form__bottom-section">
                             <div
@@ -173,7 +172,7 @@ class SignInComponent extends React.Component<SignInProps> {
         this.props.isFormValid();
     };
 
-    private handleClick = (label?: string, e?: React.FormEvent<HTMLInputElement>) => {
+    private handleClick = (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (e) {
             e.preventDefault();
         }
