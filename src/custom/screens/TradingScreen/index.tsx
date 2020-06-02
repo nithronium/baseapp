@@ -130,6 +130,10 @@ class Trading extends React.Component<Props, StateProps> {
         btcusdc: { title: 'btcusdc_title', description: 'btcusdc_description' },
         maticbtc: { title: 'maticbtc_title', description: 'maticbtc_description' },
         maticusdt: { title: 'maticusdt_title', description: 'maticusdt_description' },
+        zpaebtc: { title: 'zpaebtc_title', description: 'zpaebtc_description' },
+        zpaeusdt: { title: 'zpaeusdt_title', description: 'zpaeusdt_description' },
+        chzbtc: { title: 'chzbtc_title', description: 'chzbtc_description' },
+        chzusdt: { title: 'chzusdt_title', description: 'chzusdt_description' },
     };
 
     public componentDidMount() {

@@ -1132,6 +1132,10 @@ export const ru: LangType = {
     maticbtc_description: 'MATIC в BTC (Bitcoin): курс обмена ➤ Проверьте цены, информацию о рынке и торговле ➤ Matic Network графики и последние новости ➤ Начните торговать сейчас',
     maticusdt_title: 'MATIC в USDT. Прайс Matic Network | Emirex.com',
     maticusdt_description: 'MATIC/USDT цена, графики, объем ➤ Проверить информацию о рынке и торговле ➤ Matic Network конвертировать в Tether (USDT) ➤ Начните торговать сейчас',
+    zpaebtc_title: 'ZPAYae в Биткоин (BTC). Быстрый обмен | Emirex.com',
+    zpaebtc_description: 'Обменять ZelaaPay (ZPAYae) на Биткоин (BTC) мгновенно и онлайн ✅ Почему стоит выбрать ZPAYae ➤ Актуальный курс и цены ➤ Получить полную информацию по торгам',
+    chzbtc_title: 'CHZ в BTC. Chiliz График, цена | Emirex.com',
+    chzbtc_description: 'CHZ/BTC график обмена ➤ История торгов, цен ➤ Конвертировать Chiliz (CHZ) в Биткоин (BTC) онлайн ➤ Начните инвестировать сейчас с Emirex',
     referral_title: 'Получите биткоин. Реферальная крипто-программа | Emirex.com',
     referral_description:
         'Получите биткоины бесплатно. Лучшая реферальная программа. Присоединяйтесь к реферальной программе ✅ WinWithEmirex',
