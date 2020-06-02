@@ -177,7 +177,6 @@ class Withdraw extends React.Component<Props, WithdrawState> {
                             />
                             <div className="cr-withdraw__group__close" />
                         </div>
-                        <div className="cr-withdraw__group__code" />
                         <div className={withdrawTransactionClass}>
                             <label className="cr-withdraw__label">
                                 {withdrawTransactionLabel}
@@ -195,7 +194,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
                     </React.Fragment> }
                 </div>
                 
-                <div className="cr-withdraw-column" style={{justifyContent: 'flex-end'}}>
+                <div className="cr-withdraw-column" style={{justifyContent: 'flex-start'}}>
                     
                     {/* <div>
                         <SummaryField
@@ -211,7 +210,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
                             borderItem={borderItem}
                         />
                     </div> */}
-                    <div className="cr-withdraw__deep" style={{maxWidth: '200px'}}>
+                    <div className="cr-withdraw__deep" >
                         <Button
                             className="cr-withdraw__button"
                             label={withdrawButtonLabel ? withdrawButtonLabel : 'WITHDRAW'}
