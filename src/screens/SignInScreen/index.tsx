@@ -211,7 +211,12 @@ class SignIn extends React.Component<Props, SignInState> {
     };
 
     private handleSignUp = () => {
-        this.props.history.push(buildPath('/signup', this.props.currentLanguage));
+        let query = '';
+        const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        if (parsed.redirect_url) {
+            query = `?redirect_url=${parsed.redirect_url}`;
+        }
+        this.props.history.push(buildPath(`/signup${query}`, this.props.currentLanguage));
     };
 
     private forgotPassword = () => {

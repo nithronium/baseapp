@@ -173,11 +173,11 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     public onSubmit = () => {
         const { userLoggedIn, history, user } = this.props;
         if (!userLoggedIn) {
-            history.push(`/signin?redirect_url=${encodeURIComponent('/buy-with-credit-card')}`);
+            history.push(`/signin?redirect_url=${encodeURIComponent('/buycrypto')}`);
             return;
         }
-        if (user.level < 2) {
-            history.push('/profile');
+        if (user.level < 3) {
+            history.push(`/confirm?redirect_url=${encodeURIComponent('/buycrypto')}`);
         }
         this.setState({
             showModal: true,
@@ -308,7 +308,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     public getButtonTextKey = (): string => {
         const { userLoggedIn, user } = this.props;
         if (userLoggedIn) {
-            if (user.level >= 2) {
+            if (user.level >= 3) {
                 return 'buyWithCard.form.buttonContinue';
             } else {
                 return 'buyWithCard.form.buttonNotVerified';

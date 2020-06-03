@@ -29,6 +29,8 @@ import { ProfilePartial } from '../../containers/Confirm/ProfilePartial';
 import { Questionnaire } from '../../containers/Confirm/Questionnaire';
 import { buildPath } from '../../helpers/buildPath';
 
+import { redirectIfSpecified } from '../../helpers';
+
 interface ReduxProps {
     colorTheme: string;
     userData: User;
@@ -317,7 +319,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             return <Questionnaire />;
         }
 
-        history.push('/profile');
+        history.push(redirectIfSpecified('/profile'));
 
         return null;
     };

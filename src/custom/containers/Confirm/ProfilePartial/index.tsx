@@ -34,6 +34,8 @@ import { Dropdown } from '../../../components';
 import { DISALLOWED_COUNTRIES } from '../../../constants';
 import { isValidDate } from '../../../helpers/checkDate';
 
+import { redirectIfSpecified } from '../../../helpers';
+
 interface ReduxProps {
     editData?: IdentityData;
     editSuccess?: string;
@@ -116,7 +118,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             if (sendData) {
                 this.props.changeUserProfileData(sendData);
             }
-            this.props.history.push('/profile');
+            this.props.history.push(redirectIfSpecified('/profile'));
         }
 
         if (!prev.editSuccess && editSuccess) {
@@ -124,7 +126,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             if (editData) {
                 this.props.changeUserProfileData(editData);
             }
-            this.props.history.push('/profile');
+            this.props.history.push(redirectIfSpecified('/profile'));
         }
     }
 //tslint:disable

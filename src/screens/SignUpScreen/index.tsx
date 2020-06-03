@@ -2,6 +2,9 @@ import { Button } from '@openware/components';
 import cx from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
+
+import qs = require('qs');
+
 import {
     InjectedIntlProps,
     injectIntl,
@@ -106,7 +109,13 @@ class SignUp extends React.Component<Props> {
         const { i18n } = this.props;
 
         if (props.requireVerification) {
-            props.history.push(buildPath('/email-verification', i18n), {email: this.state.email});
+
+            let url = '/email-verification';
+            const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+            if (parsed.redirect_url) {
+                url = parsed.redirect_url;
+            }
+            props.history.push(buildPath(url, i18n), {email: this.state.email});
         }
 
         if (props.error) {
@@ -277,7 +286,12 @@ class SignUp extends React.Component<Props> {
     };
 
     private handleSignIn = () => {
-        this.props.history.push(buildPath('/signin', this.props.i18n));
+        let query = '';
+        const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        if (parsed.redirect_url) {
+            query = `?redirect_url=${parsed.redirect_url}`;
+        }
+        this.props.history.push(buildPath(`/signin${query}`, this.props.i18n));
     };
 
     private handleGeetestCaptchaSuccess = value => {
