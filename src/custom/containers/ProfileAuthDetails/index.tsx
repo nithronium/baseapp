@@ -301,7 +301,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
         return (
             <div className="auth2fa-mfa-footer">
                 <button
-                    className="pg-profile-page__btn-secondary-change"
+                    className="cr-button pg-profile-page__btn-secondary-change"
                     onClick={this.goTo2fa}
                 >
                     {this.props.intl.formatMessage({ id: 'page.body.kyc.confirm'})}
