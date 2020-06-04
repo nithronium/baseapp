@@ -1,5 +1,5 @@
 // tslint:disable:jsx-no-lambda
-import { Button ,/*Decimal,*/ Input } from '@openware/components';
+import { /*Decimal,*/ Input } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
 import {
@@ -102,6 +102,9 @@ class Withdraw extends React.Component<Props, WithdrawState> {
         const withdrawAmountClass = classnames('cr-withdraw__group__amount', {
           'cr-withdraw__group__amount--focused': withdrawAmountFocused,
         });
+
+        const buttonDisabled = Number(total) <= 0 || !Boolean(beneficiary.id) || !Boolean(otpCode);
+
 // tslint:disable
         return (
             card ? <div style={{fontSize: '18px', margin: '20px auto', maxWidth: '200px'}}>{soon}</div> :
@@ -150,12 +153,13 @@ class Withdraw extends React.Component<Props, WithdrawState> {
                         />
                     </div> */}
                     <div className="cr-withdraw__deep" style={{maxWidth: '200px'}}>
-                        <Button
-                            className="cr-withdraw__button"
-                            label={withdrawButtonLabel ? withdrawButtonLabel : 'WITHDRAW'}
+                        <button
+                            className={`cr-button cr-withdraw__button ${buttonDisabled ? 'cr-button--disabled' : ''}`}
                             onClick={this.handleClick}
-                            disabled={Number(total) <= 0 || !Boolean(beneficiary.id) || !Boolean(otpCode)}
-                        />
+                            disabled={buttonDisabled}
+                        >
+                            {withdrawButtonLabel ? withdrawButtonLabel : 'WITHDRAW'}
+                        </button>
                     </div>
                 </div>
             </div>

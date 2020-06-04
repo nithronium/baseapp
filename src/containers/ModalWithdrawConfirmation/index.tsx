@@ -1,4 +1,3 @@
-import { Button } from '@openware/components';
 import * as React from 'react';
 import {
     InjectedIntlProps,
@@ -58,16 +57,20 @@ class ModalWithdraw extends React.Component<Props> {
     private renderFooter = () => {
         return (
             <div className="pg-exchange-modal-submit-footer modal-footer__withdraw-confirm">
-                <Button
-                    className="pg-exchange-modal-submit-footer__button-inverse"
-                    label={this.translate('page.body.wallets.tabs.withdraw.modal.button.cancel')}
+                <button
+                    className="cr-button pg-exchange-modal-submit-footer__button-inverse"
                     onClick={this.props.onDismiss}
-                />
-                <Button
-                    className="pg-exchange-modal-submit-footer__button-inverse"
-                    label={this.translate('page.body.wallets.tabs.withdraw.modal.button.withdraw')}
+                    style={{ color: '#fff' }}
+                >
+                    {this.translate('page.body.wallets.tabs.withdraw.modal.button.cancel')}
+                </button>
+                <button
+                    className="cr-button pg-exchange-modal-submit-footer__button-inverse"
                     onClick={this.props.onSubmit}
-                />
+                    style={{ color: '#fff' }}
+                >
+                    {this.translate('page.body.wallets.tabs.withdraw.modal.button.withdraw')}
+                </button>
             </div>
         );
     };

@@ -187,7 +187,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         });
 
         return (
-            <div className="pg-profile-verification__level">
+            <div className="pg-profile-verification__level notranslate">
                 <div className={zeroCircleClassName}>0</div>
                 <div className="pg-profile-verification__level__line" />
                 <div className={firstCircleClassName}>1</div>

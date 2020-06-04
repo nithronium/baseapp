@@ -1,5 +1,4 @@
 import {
-  Button,
   Dropdown,
   Loader,
 } from '@openware/components';
@@ -106,6 +105,8 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
 
         const onSelect = value => this.handleChangeDocumentsType(this.data[value]);
 
+        const buttonDisabled = this.handleCheckButtonDisabled();
+
         return (
             <React.Fragment>
                 <div className="pg-confirm__content-documents">
@@ -189,12 +190,13 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                     </div>
                 </div>
                 <div className="pg-confirm__content-deep">
-                    <Button
-                        className="pg-confirm__content-phone-deep-button"
-                        label={this.translate('page.body.kyc.next')}
+                    <button
+                        className={`cr-button pg-confirm__content-phone-deep-button ${buttonDisabled ? 'cr-button--disabled' : ''}`}
                         onClick={this.sendDocuments}
-                        disabled={this.handleCheckButtonDisabled()}
-                    />
+                        disabled={buttonDisabled}
+                    >
+                        {this.translate('page.body.kyc.next')}
+                    </button>
                 </div>
             </React.Fragment>
         );

@@ -2,6 +2,13 @@ declare var google;
 
 import { langNames } from './googleTranslateLangs';
 
+export const isSameLocale = pageLanguage => {
+    const langs = navigator.languages;
+    return !!langs.filter(item => {
+        return item.toLowerCase() === pageLanguage.toLowerCase();
+    }).length;
+};
+
 export const googleTranslateElementInit = pageLanguage => {
     if ('google' in window) {
 

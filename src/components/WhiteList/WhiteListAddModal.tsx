@@ -1,4 +1,3 @@
-import { Button } from '@openware/components';
 import classnames from 'classnames';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -182,12 +181,14 @@ class WhiteListAddModalComponent extends React.Component<Props, State> {
                 {this.renderAddAddressModalBodyItem('coinBeneficiaryName')}
                 {this.renderAddAddressModalBodyItem('coinDescription', true)}
                 <div className="cr-email-form__button-wrapper">
-                    <Button
-                        label={this.translate('page.body.wallets.whitelist.addAddressModal.body.button')}
+                    <button
                         className={!isDisabled ? 'cr-email-form__button' : 'cr-email-form__button cr-email-form__button--disabled'}
                         disabled={isDisabled}
                         onClick={this.handleSubmitAddAddressCoinModal}
-                    />
+                        style={{ color: '#fff' }}
+                    >
+                        {this.translate('page.body.wallets.whitelist.addAddressModal.body.button')}
+                    </button>
                 </div>
             </div>
         );
@@ -213,12 +214,14 @@ class WhiteListAddModalComponent extends React.Component<Props, State> {
                 {this.renderAddAddressModalBodyItem('fiatIntermediaryBankName', true)}
                 {this.renderAddAddressModalBodyItem('fiatIntermediaryBankSwiftCode', true)}
                 <div className="cr-email-form__button-wrapper">
-                    <Button
-                        label={this.translate('page.body.wallets.whitelist.addAddressModal.body.button')}
+                    <button
                         className={!isDisabled ? 'cr-email-form__button' : 'cr-email-form__button cr-email-form__button--disabled'}
                         disabled={isDisabled}
                         onClick={this.handleSubmitAddAddressFiatModal}
-                    />
+                        style={{ color: '#fff' }}
+                    >
+                        {this.translate('page.body.wallets.whitelist.addAddressModal.body.button')}
+                    </button>
                 </div>
             </div>
         );

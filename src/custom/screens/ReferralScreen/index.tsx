@@ -1,5 +1,4 @@
 //tslint:disable
-import { Button } from '@openware/components';
 import cx from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
@@ -480,7 +479,12 @@ class Referral extends React.Component<Props> {
     private renderModalFooter = () => {
         return (
             <div className="pg-exchange-modal-submit-footer">
-                <Button className="pg-exchange-modal-submit-footer__button-inverse" label="OK" onClick={this.closeModal} />
+                <button
+                    className="cr-button pg-exchange-modal-submit-footer__button-inverse"
+                    onClick={this.closeModal}
+                >
+                    OK
+                </button>
             </div>
         );
     };
