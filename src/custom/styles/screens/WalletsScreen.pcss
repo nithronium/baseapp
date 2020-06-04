@@ -28,6 +28,8 @@
   .cr-withdraw {
     &__group__address--focused,
     &__group__amount--focused,
+    &__group__receive--focused,
+    &__group__transaction--focused,
     &__group__code--focused {
       .cr-withdraw__label {
         color: var(--button-normal) !important;
@@ -35,6 +37,12 @@
   
       input {
         border-color: var(--button-normal) !important;
+      }
+    }
+
+    &__input {
+      input {
+        box-shadow: none;
       }
     }
 
