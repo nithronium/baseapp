@@ -61,6 +61,15 @@ export class GoogleTranslate extends React.Component<{}, State> {
                         return <option value={key} key={key}>{name}</option>;
                     })}
                 </select>
+                <div className="google-translate-widget__bottom">
+                    Powered by
+                    {' '}
+                    <span>
+                        <img src="https://www.gstatic.com/images/branding/googlelogo/1x/googlelogo_color_42x16dp.png" />
+                    </span>
+                    {' '}
+                    Translate
+                </div>
             </div>
         );
     }
