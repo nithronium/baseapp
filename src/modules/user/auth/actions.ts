@@ -46,7 +46,7 @@ export interface SignUpFetch {
     payload: {
         email: string;
         password: string;
-        data?: string;
+        data?: object;
         captcha_response?: string | GeetestCaptchaResponse;
         refid?: string;
     };
