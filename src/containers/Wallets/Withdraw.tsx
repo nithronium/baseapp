@@ -91,7 +91,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
         if (num[num.length - 1] === '0') {
             return this.trueFixed(num.slice(0, -1));
         } else {
-            return num;
+            return num[num.length - 1] === '.' ? num.slice(0, -1) : num;
         }
     };
 
