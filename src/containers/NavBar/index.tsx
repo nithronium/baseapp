@@ -8,6 +8,9 @@ import { Link, RouteProps, withRouter } from 'react-router-dom';
 // import { Moon } from '../../assets/images/Moon';
 import { AvatarIcon, CloseIcon, OpenIcon } from '../../assets/images/NavBarIcons';
 // import { Sun } from '../../assets/images/Sun';
+
+import { GoogleTranslate } from '../../components/GoogleTranslate';
+
 import { colors, pgRoutes } from '../../constants';
 import { buildPath } from '../../custom/helpers';
 import {
@@ -266,6 +269,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 </div>
                 <div className="dropdown-menu-item-lang" onClick={e => this.handleChangeLanguage('cn')}>
                     CN
+                </div>
+                <div className="dropdown-menu-item-lang notranslate">
+                    <GoogleTranslate />
                 </div>
             </div>
         );

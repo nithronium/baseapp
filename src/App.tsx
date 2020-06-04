@@ -24,7 +24,7 @@ import {
 } from './modules';
 import { Layout } from './routes';
 
-import { googleTranslateElementInit } from './helpers/googleTranslate';
+import { googleTranslateElementInit, initLanguageChangeEvent } from './helpers/googleTranslate';
 
 interface Locale {
     lang: string;
@@ -57,13 +57,14 @@ type Props = AppProps & ReduxProps & DispatchProps;
 
 class AppLayout extends React.Component<Props, {}, {}> {
 
+    public googleTranslateUnsubscribe?: () => void;
+
     public componentWillReceiveProps(nextProps: Props) {
         const prevLang = this.props.locale.lang;
         const nextLang = nextProps.locale.lang;
 
         if (prevLang !== nextLang) {
             setTimeout(() => {
-                console.log('componentWillReceiveProps locale', nextLang);
                 googleTranslateElementInit(nextLang);
             }, 0);
         }
@@ -83,18 +84,28 @@ class AppLayout extends React.Component<Props, {}, {}> {
          */
         if ('googleTranslateLoaded' in window) {
             this.initGoogleTranslate();
+            this.initLangChange();
         } else {
             window.addEventListener('google-translate-loaded', () => {
                 this.initGoogleTranslate();
+                this.initLangChange();
             });
         }
     }
 
+    public initLangChange = () => {
+        const unsubscribe = initLanguageChangeEvent();
+        this.googleTranslateUnsubscribe = unsubscribe;
+    };
+
     public initGoogleTranslate = () => {
         const { locale } = this.props;
-        console.log('componentDidMount locale', locale);
         googleTranslateElementInit(locale.lang);
     };
+
+    public componentWillUnmount() {
+        this.googleTranslateUnsubscribe && this.googleTranslateUnsubscribe();
+    }
 
     public render() {
         const {
