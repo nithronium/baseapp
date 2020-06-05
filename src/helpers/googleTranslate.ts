@@ -3,6 +3,7 @@ declare var google;
 import { langNames } from './googleTranslateLangs';
 
 export const isSameLocale = pageLanguage => {
+    return false;
     const langs = navigator.languages;
     return !!langs.filter(item => {
         return item.toLowerCase() === pageLanguage.toLowerCase();
@@ -13,10 +14,8 @@ export const googleTranslateElementInit = pageLanguage => {
     if ('google' in window) {
 
         const init = () => {
-            const langs = navigator.languages;
-            const sameLocale = langs.filter(item => {
-                return item.toLowerCase() === pageLanguage.toLowerCase();
-            }).length;
+            // const langs = navigator.languages;
+            const sameLocale = false;
             try {
                 if (!sameLocale) {
                     const e = document.getElementById('google_translate_element');
