@@ -320,8 +320,11 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
 
     public getLimit = () => {
         const { withdrawLimitData } = this.props;
+        if (withdrawLimitData.limit === 'unlimited_withdraw_level') {
+            return 'unlimited';
+        }
         const withdraw = withdrawLimitData.withdraw;
-        return withdraw ? withdraw.limit : '0';
+        return `$${withdraw ? withdraw.limit : '0'}`;
     };
 
     public render() {
@@ -362,7 +365,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                                 <div>
                                     <div className="icon-arrow" />
                                     <p>{this.translate('buyWithCard.form.paymentLimit')}:</p>
-                                    <span>{' '}${this.getLimit()}</span>
+                                    <span>{' '}{this.getLimit()}</span>
                                 </div>
                             </div>
 
