@@ -215,6 +215,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     };
 
     public getAvailableCrypto = (fiat: string, props?): string[] => {
+        return ['itn', 't69'];
         const { markets } = (props || this.props);
         const toLowerCase = str => (str || '').toLowerCase();
         return markets.filter(({ base_unit, quote_unit }) => {
@@ -263,6 +264,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     };
 
     public getAllCrypto1 = (props?): string[] => {
+        return ['itn', 't69'];
         const res = new Set<string>();
         const { markets } = (props || this.props);
         for (const market of markets) {
