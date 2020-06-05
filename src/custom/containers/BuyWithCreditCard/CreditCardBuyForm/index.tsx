@@ -551,11 +551,11 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
         if (!swapped) {
             outcomeCurrencyId = fiat;
             incomeCurrencyId = crypto;
-            amount = cryptoValue;
+            amount = fiatValue;
         } else {
             outcomeCurrencyId = crypto;
             incomeCurrencyId = fiat;
-            amount = fiatValue;
+            amount = cryptoValue;
         }
 
         createCreditCardOrder({
