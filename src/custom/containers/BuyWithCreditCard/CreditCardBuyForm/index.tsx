@@ -198,7 +198,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
             if (!nextProps.markets.length || !nextProps.currencies.length) { return; }
             // const fiatList = this.getAllFiat(nextProps);
             // const cryptoList = this.getAllCrypto(nextProps);
-            const fiatList = ['eur'];
+            const fiatList = ['eur', 'uds'];
             const cryptoList = this.getAvailableCrypto('eur', nextProps);
             this.setState({
                 fiatList,
@@ -215,7 +215,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     };
 
     public getAvailableCrypto = (fiat: string, props?): string[] => {
-        return ['itn', 't69'];
+        return ['itn', 't69', 'btc'];
         const { markets } = (props || this.props);
         const toLowerCase = str => (str || '').toLowerCase();
         return markets.filter(({ base_unit, quote_unit }) => {
@@ -232,7 +232,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     };
 
     public getAvailableFiat = (crypto: string): string[] => {
-        return ['eur'];
+        return ['eur', 'usd'];
         const { markets } = this.props;
         return markets.filter(({ base_unit, quote_unit }) => {
             return (this.isEqual(base_unit, crypto) &&
@@ -248,7 +248,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     };
 
     public getAllFiat1 = (props?): string[] => {
-        return ['eur'];
+        return ['eur', 'usd'];
         const res = new Set<string>();
         const { markets } = (props || this.props);
         for (const market of markets) {
@@ -264,7 +264,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     };
 
     public getAllCrypto1 = (props?): string[] => {
-        return ['itn', 't69'];
+        return ['itn', 't69', 'btc'];
         const res = new Set<string>();
         const { markets } = (props || this.props);
         for (const market of markets) {
@@ -280,7 +280,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     };
 
     public getAllFiat = (props?): string[] => {
-        return ['eur'];
+        return ['eur', 'usd'];
         return this.getCurrenciesByType('fiat', props)
             .map(item => item.id);
     };
