@@ -86,6 +86,15 @@ class Withdraw extends React.Component<Props, WithdrawState> {
         });
     }
 
+    // @ts-ignore
+    private trueFixed = num => {
+        if (num[num.length - 1] === '0') {
+            return this.trueFixed(num.slice(0, -1));
+        } else {
+            return num[num.length - 1] === '.' ? num.slice(0, -1) : num;
+        }
+    };
+
     public render() {
         const {
             amount,
@@ -111,6 +120,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
             withdrawButtonLabel,
             card,
             soon,
+            fixed,
             inputErrorText,
         } = this.props;
         //tslint:disable-next-line:no-console
@@ -168,7 +178,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
                             </label>
                             <Input
                                 type="text"
-                                value={(+amount - fee) > 0 ? (+amount - fee) : 0}
+                                value={(+amount - fee) > 0 ? this.trueFixed((+amount - fee).toFixed(fixed)) : 0}
                                 placeholder={withdrawReceiveLabel}
                                 className="cr-withdraw__input"
                                 onFocus={() => {}}
