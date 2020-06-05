@@ -203,7 +203,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
             this.setState({
                 fiatList,
                 cryptoList,
-                crypto: cryptoList[0],
+                crypto: cryptoList[0] || 'BTC',
             }, () => {
                 this.fetchMarket();
             });
