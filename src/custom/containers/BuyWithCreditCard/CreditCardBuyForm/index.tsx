@@ -474,7 +474,10 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     };
 
     public renderModalBody = () => {
-        const { fiatValue, cryptoValue, fiat, crypto, swapped } = this.state;
+        let { fiat, crypto } = this.state;
+        const { fiatValue, cryptoValue, swapped } = this.state;
+        fiat = fiat || '';
+        crypto = crypto || '';
         return (
             <div>
                 <div className="buy-form__modal-amount">
