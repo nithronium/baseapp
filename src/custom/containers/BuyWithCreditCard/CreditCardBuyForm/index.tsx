@@ -64,6 +64,7 @@ interface State {
     cryptoList: string[];
     showModal: boolean;
     swapped: boolean;
+    openIframe: boolean;
 }
 
 class CreditCardBuyFormComponent extends React.Component<Props, State> {
@@ -78,6 +79,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
             cryptoList: [],
             showModal: false,
             swapped: false,
+            openIframe: false,
         };
     }
 
@@ -191,6 +193,14 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     }
 
     public componentWillReceiveProps(nextProps) {
+        const { buyWithCreditCard } = this.props;
+        if (nextProps.buyWithCreditCard.data.url !== buyWithCreditCard.data.url) {
+            this.setState({
+                openIframe: true,
+                showModal: false,
+            });
+        }
+        console.log('buyWithCreditCard', buyWithCreditCard);
         const { currencies, markets } = this.props;
         if (currencies.length !== nextProps.currencies.length ||
             markets.length !== nextProps.markets.length)
@@ -330,7 +340,6 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     };
 
     public render() {
-        // const { withdrawLimitData } = this.props;
         return (
             <div className="buy-form">
                 <div className="section">
@@ -395,9 +404,47 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                     content={this.renderModalBody()}
                     footer={this.renderModalFooter()}
                 />
+                <Modal
+                    show={this.state.openIframe}
+                    header={this.renderIframeHeader()}
+                    content={this.renderIframe()}
+                    footer={this.renderIframeFooter()}
+                />
             </div>
         );
     }
+
+    public renderIframe = () => {
+        const { buyWithCreditCard } = this.props;
+        return (
+            <iframe
+                src={buyWithCreditCard.data.url}
+                className="credit-card__iframe"
+            />
+        );
+    };
+
+    public renderIframeHeader = () => {
+        return (
+            <div className="buy-form__modal-header">
+                <p>{this.translate('buyWithCard.form.modal.header')}</p>
+                <div
+                    className="buy-form__modal-close"
+                    onClick={this.closeIframe}
+                >
+                    x
+                </div>
+            </div>
+        );
+    };
+
+    public renderIframeFooter = () => {
+        return null;
+    };
+
+    public closeIframe = () => {
+        this.setState({ openIframe: false });
+    };
 
     public currenciesForm = () => {
         const {
@@ -578,6 +625,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     user: selectUserInfo(state),
     userLoggedIn: selectUserLoggedIn(state),
     withdrawLimitData: selectWithdrawLimit(state),
+    buyWithCreditCard: state.user.buyWithCreditCard,
 });
 
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
