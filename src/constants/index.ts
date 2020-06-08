@@ -29,7 +29,7 @@ export const earnOption = (): object[] => ([
     { key: '', href: '/ieo', label: 'nav.link.ieo', description: 'nav.link.ieo.description'},
     // { key: '', href: '/staking', label: 'nav.link.staking', description: 'nav.link.staking.description'},
     // { key: '', href: '/landing', label: 'nav.link.landing', description: 'nav.link.landing.description'},
-    { key: '', href: '/referral', label: 'nav.link.referral-giveaway', description: 'nav.link.referral-giveaway.description'},
+    // { key: '', href: '/referral', label: 'nav.link.referral-giveaway', description: 'nav.link.referral-giveaway.description'},
     { key: '', href: '/referral-commission', label: 'nav.link.referral-program', description: 'nav.link.referral-program.description'},
 ].map((link, index) => {
     link.key = `nav-link-${index}-${link.href}-${link.label}`;
