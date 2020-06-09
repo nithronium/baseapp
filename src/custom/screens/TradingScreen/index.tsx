@@ -135,6 +135,8 @@ class Trading extends React.Component<Props, StateProps> {
         zpaeusdt: { title: 'zpaeusdt_title', description: 'zpaeusdt_description' },
         chzbtc: { title: 'chzbtc_title', description: 'chzbtc_description' },
         chzusdt: { title: 'chzusdt_title', description: 'chzusdt_description' },
+        ethbusd: { title: 'ethbusd_title', description: 'ethbusd_description' },
+        btcbusd: { title: 'btcbusd_title', description: 'btcbusd_description' },
     };
 
     public componentDidMount() {

@@ -1139,6 +1139,12 @@ export const ru: LangType = {
     zpaebtc_description: 'Обменять ZelaaPay (ZPAYae) на Биткоин (BTC) мгновенно и онлайн ✅ Почему стоит выбрать ZPAYae ➤ Актуальный курс и цены ➤ Получить полную информацию по торгам',
     chzbtc_title: 'CHZ в BTC. Chiliz График, цена | Emirex.com',
     chzbtc_description: 'CHZ/BTC график обмена ➤ История торгов, цен ➤ Конвертировать Chiliz (CHZ) в Биткоин (BTC) онлайн ➤ Начните инвестировать сейчас с Emirex',
+    chzusdt_title: 'CHZ в USDT. Chiliz Обмен | Emirex.com',
+    chzusdt_description: 'CHZ/USDT график обмена ➤ История торгов и цены ➤ Конвертировать Chiliz (CHZ) в Tether (USDT) онлайн ➤ Начните инвестировать сейчас с Emirex',
+    ethbusd_title: 'ETH в BUSD. Эфириум Binance USD Рынок | Emirex.com',
+    ethbusd_description: 'ETH/BUSD рынки. Конвертировать Эфириум в Binance USD ➤ Цены и графики ETH/BUSD в реальном времени ➤ Выберите лучшее предложение и начните торговать сейчас',
+    btcbusd_title: 'BTC в BUSD. Binance USD Рынок | Emirex.com',
+    btcbusd_description: 'BTC/BUSD рынки. Конвертировать Биткойн в Binance USD на Emirex ➤ Цены и графики в реальном времени ➤ Выберите лучшее предложение и начните торговать сейчас',
     referral_title: 'Получите биткоин. Реферальная крипто-программа | Emirex.com',
     referral_description:
         'Получите биткоины бесплатно. Лучшая реферальная программа. Присоединяйтесь к реферальной программе ✅ WinWithEmirex',
