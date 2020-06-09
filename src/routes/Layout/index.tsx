@@ -520,7 +520,21 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
-                        path={'/kyc-package'}
+                        path={'/kyc-levels'}
+                        component={PricePackagesScreen}
+                        currentLanguage={currentLanguage}
+                    />
+                    <PrivateRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/ru/kyc-levels'}
+                        component={PricePackagesScreen}
+                        currentLanguage={currentLanguage}
+                    />
+                    <PrivateRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/zh/kyc-levels'}
                         component={PricePackagesScreen}
                         currentLanguage={currentLanguage}
                     />
