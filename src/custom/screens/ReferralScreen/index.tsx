@@ -43,7 +43,7 @@ import {
     Partners,
 } from '../../components/Referral';
 
-import { buildPath } from '../../helpers';
+import {buildPath, saveParametersFromUrl} from '../../helpers';
 
 import { GeetestCaptcha } from '../../../containers';
 import { WinnersBanner } from '../../components/Referral/WinnersBanner/WinnerBanner';
@@ -100,6 +100,7 @@ class Referral extends React.Component<Props> {
     };
 
     public componentDidMount() {
+        saveParametersFromUrl(this.props.location.search);
         let referralCode = this.extractRefID(this.props.location.search) || '';
         if (localStorage.getItem('refCode')) {
             referralCode = localStorage.getItem('refCode') || '';

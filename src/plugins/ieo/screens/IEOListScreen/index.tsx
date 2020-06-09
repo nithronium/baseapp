@@ -7,6 +7,7 @@ import {
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import {saveParametersFromUrl} from '../../../../custom/helpers';
 import { setDocumentTitle } from '../../../../helpers';
 import {
     currenciesFetch,
@@ -51,6 +52,7 @@ type Props = ReduxProps & DispatchProps & RouterProps & InjectedIntlProps;
 class IEOListContainer extends React.Component<Props> {
     public componentDidMount() {
         setDocumentTitle('IEO');
+        saveParametersFromUrl(this.props.location.search);
         const { userLoggedIn, rangerState: { connected, withAuth }, currencies } = this.props;
 
         this.handleFetchIEO();

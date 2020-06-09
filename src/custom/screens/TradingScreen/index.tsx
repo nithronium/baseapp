@@ -8,6 +8,7 @@ import { OrderComponent } from '../../../containers/Order';
 import { OpenOrdersPanel, OrderBook } from '../../containers';
 
 import { Helmet } from 'react-helmet';
+import { saveParametersFromUrl } from '../../../custom/helpers';
 
 import { getUrlPart } from '../../../helpers';
 import {
@@ -137,6 +138,7 @@ class Trading extends React.Component<Props, StateProps> {
     };
 
     public componentDidMount() {
+        saveParametersFromUrl(this.props.location.search);
         const {
             currentLanguage,
             currentMarket,
