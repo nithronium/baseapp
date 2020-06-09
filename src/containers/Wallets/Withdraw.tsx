@@ -159,10 +159,10 @@ class Withdraw extends React.Component<Props, WithdrawState> {
                     <div className="cr-withdraw__divider cr-withdraw__divider-one" />
                     <div className={withdrawAmountClass}>
                         <label className="cr-withdraw__label">
-                            {(Number(amount) >= 0) && withdrawAmountLabel}
+                            {(amount || Number(amount) >=0) && withdrawAmountLabel}
                         </label>
                         <Input
-                            type="number"
+                            type="text"
                             value={amount}
                             placeholder={withdrawAmountLabel}
                             className="cr-withdraw__input"
@@ -177,7 +177,7 @@ class Withdraw extends React.Component<Props, WithdrawState> {
                     { type !== 'fiat' && <React.Fragment>
                         <div className={withdrawReceiveClass}>
                             <label className="cr-withdraw__label">
-                                {(Number(amount) >= 0) && withdrawReceiveLabel}
+                                {withdrawReceiveLabel}
                             </label>
                             <Input
                                 type="text"
@@ -319,16 +319,20 @@ class Withdraw extends React.Component<Props, WithdrawState> {
 
     private handleChangeInputAmountCoin = (text: string) => {
         const { fixed, fee } = this.props;
-        const value = (text !== '') ? Number(parseFloat(text).toFixed(fixed)) : 0;
-        const total = (value - fee) || 0;
-        if (total <= fee && (value < (fee * 2))) {
-            this.setTotal(fee);
-            this.setState({inputError: true});
-        } else {
-            this.setTotal(total);
-            this.setState({inputError: false});
+        const reg = /^-?\d*[.]?\d*$/;
+        const _text = text.split(',').join('.');
+        if (reg.test(_text)) {
+            const value = (text !== '') ? Number(parseFloat(_text[_text.length - 1] === ',' ? _text.slice(0, -1) : _text).toFixed(fixed)) : 0;
+            const total = (value - fee) || 0;
+            if (total <= fee && (value < (fee * 2))) {
+                this.setTotal(fee);
+                this.setState({inputError: true});
+            } else {
+                this.setTotal(total);
+                this.setState({inputError: false});
+            }
+            this.setState({ amount: _text});
         }
-        this.setState({ amount: text});
     };
 
     private handleChangeInputAmountFiat = (text: string) => {

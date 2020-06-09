@@ -55,6 +55,7 @@ export function* signUpSaga(action: SignUpFetch) {
         localStorage.removeItem('utm_campaign');
         localStorage.removeItem('utm_content');
         localStorage.removeItem('utm_term');
+        localStorage.removeItem('referralCode');
     } catch (error) {
         yield put(signUpError(error));
         yield put(alertPush({ message: error.message, code: error.code, type: 'error' }));
