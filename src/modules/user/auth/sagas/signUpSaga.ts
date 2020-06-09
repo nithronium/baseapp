@@ -47,7 +47,7 @@ export function* signUpSaga(action: SignUpFetch) {
             if (checkCode) {
                 yield call(API.post(signUpConfig), '/identity/users', query);
                 yield put(signUpRequireVerification({ requireVerification: true }));
-                localStorage.removeItem('referralCode');
+                localStorage.removeItem('refid');
             }
         }
         localStorage.removeItem('utm_source');
