@@ -449,10 +449,13 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     public currenciesForm = () => {
         const {
             fiat, crypto,
-            fiatList, cryptoList,
+            // fiatList, cryptoList,
             fiatValue, cryptoValue,
             swapped,
         } = this.state;
+        const fiatList = ['eur', 'usd'];
+        const cryptoList = ['itn', 't69', 'btc'];
+
         return (
             <div className="buy-form__inputs-wrap">
                 <div className="buy-form__input-wrap">
