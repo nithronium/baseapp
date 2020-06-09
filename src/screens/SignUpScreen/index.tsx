@@ -89,7 +89,7 @@ class SignUp extends React.Component<Props> {
 
     public componentDidMount() {
         setDocumentTitle('Sign Up');
-        const localReferralCode = localStorage.getItem('referralCode');
+        const localReferralCode = localStorage.getItem('refid');
         const referralCode = this.extractRefID(this.props.location.search) || '';
         const haventLocalCode = !localReferralCode && referralCode;
         const haveLocalCode = localReferralCode && referralCode;
