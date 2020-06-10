@@ -353,7 +353,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                         <div className="buy-form__bottom-text">
                             <p>{this.translate('buyWithCard.form.fees')}</p>
                             <p className="buy-form__bottom-text--help">
-                                {this.translate('buyWithCard.form.help')}
+                                <a target="_blank" href="https://kb.emirex.com/kb-tickets/new">{this.translate('buyWithCard.form.help')}</a>
                             </p>
                         </div>
                         <button
@@ -365,7 +365,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
 
                         <div className="buy-form__bottom-text-mobile">
                             <p className="buy-form__bottom-text--help-mobile">
-                                {this.translate('buyWithCard.form.help')}
+                                <a target="_blank" href="https://kb.emirex.com/kb-tickets/new">{this.translate('buyWithCard.form.help')}</a>
                             </p>
                         </div>
                     </div>

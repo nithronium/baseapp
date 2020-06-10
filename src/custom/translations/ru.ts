@@ -1240,7 +1240,25 @@ export const ru: LangType = {
     'buyWithCard.title': 'Купить и продать криптовалюту. Инвестиции | Emirex.com',
     'buyWithCard.description': 'Купить или продать криптовалюту с кредитной карты в один миг ✅ Доступны различные способы покупки Visa/Mastercard, через банк (Sepa/Swift) ➤ Быстро и безопасно',
     
-    
+     
+    'buyWithCard.steps.header1': 'Follow next steps to Buy Crypto',
+    'buyWithCard.steps.header2': 'Congratulations,',
+    'buyWithCard.steps.header3': 'Congratulations,',
+    'buyWithCard.steps.header4': 'Congratulations,',
+    'buyWithCard.steps.text2': 'you are successfully registered on the website. The next step is to verify your identity to make a one-click purchase.',
+    'buyWithCard.steps.text3': 'you are get verified. The next step is payment making',
+    'buyWithCard.steps.text4': 'you are successfully make a payment',
+    'buyWithCard.steps.footer1': '<span>Click</span> to start moving to complete the purchase',
+    'buyWithCard.steps.footer2': 'For the next stage, you need to provide you address details, phone number and documents of international standard to confirm your identity.',
+    'buyWithCard.steps.step1': 'Sign Up',
+    'buyWithCard.steps.step2': 'Get Verified',
+    'buyWithCard.steps.step3': 'Make a payment',
+    'buyWithCard.steps.step4': 'Get Target Crypto',
+    'buyWithCard.steps.pair': 'Pair',
+    'buyWithCard.steps.amount': 'Amount',
+    'buyWithCard.steps.price': 'Price (USD)',
+    'buyWithCard.steps.value': 'Value (USD)',
+    'buyWithCard.steps.time': 'Time',
 
 
 

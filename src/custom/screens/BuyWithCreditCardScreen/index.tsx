@@ -6,6 +6,7 @@ import {
     CreditCardBuyForm,
     CreditCardFaq,
     CreditCardPromo,
+    CreditCardSteps,
 } from '../../containers/BuyWithCreditCard';
 
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -66,6 +67,16 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props> {
                     </script>
                 </Helmet>
                 <div className="pg-buy-with-credit-card__container">
+                    <CreditCardSteps
+                        currentStep={4}
+                        paymentData={{
+                            pair: 'pair',
+                            amount: 1,
+                            price: 1,
+                            value: 1,
+                            time: 'time',
+                        }}
+                    />
                     <CreditCardBuyForm />
                     <CreditCardPromo />
                     <CreditCardFaq />
