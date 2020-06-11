@@ -10,6 +10,7 @@ export interface CreateCardOrderRequest {
     incomeCurrencyId: string;
     type: string;
     amount: number;
+    sale_id?: number;
 }
 
 export interface CreateCardOrderResponse {

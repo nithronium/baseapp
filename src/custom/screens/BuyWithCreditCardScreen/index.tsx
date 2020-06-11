@@ -68,7 +68,7 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props> {
                 </Helmet>
                 <div className="pg-buy-with-credit-card__container">
                     <CreditCardSteps
-                        currentStep={4}
+                        currentStep={1}
                         paymentData={{
                             pair: 'pair',
                             amount: 1,

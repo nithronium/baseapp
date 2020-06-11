@@ -1112,6 +1112,43 @@ export const zh = {
     'buyWithCard.steps.value': 'Value (USD)',
     'buyWithCard.steps.time': 'Time',
 
+
+    'chatello.steps.header1': 'Follow next steps to buy Chatello Coins',
+    'chatello.steps.header2': 'Congratulations,',
+    'chatello.steps.header3': 'Congratulations,',
+    'chatello.steps.header4': 'Congratulations,',
+    'chatello.steps.text2': 'you are successfully registered on the website. The next step is to verify your identity to make a one-click purchase.',
+    'chatello.steps.text3': 'you are get verified. The next step is payment making',
+    'chatello.steps.text4-1': 'you are successfully make a payment. Soon you will receive the ',
+    'chatello.steps.text4-2': ' CHA Coins on your wallets',
+    'chatello.steps.footer1': '<span>Click</span> to start moving to complete the purchase',
+    'chatello.steps.footer2': 'For the next stage, you need to provide you address details, phone number and documents of international standard to confirm your identity.',
+    'chatello.steps.footer4-1': 'Within 24 hours, ',
+    'chatello.steps.footer4-2': ' coins will be credited to your Chatello Wallet',
+    'chatello.steps.footer4-3': 'Extra ',
+    'chatello.steps.footer4-4': ' coins you already have on Emirex Wallet',
+    'chatello.steps.step1': 'Sign Up',
+    'chatello.steps.step2': 'Get Verified',
+    'chatello.steps.step3': 'Make a payment',
+    'chatello.steps.step4': 'Get CHA Сoins',
+    'chatello.steps.step4.bottom.text1': 'Coins that you will receive as bonuses are locked for 1 month.',
+    'chatello.steps.step4.bottom.text2': 'Don\'t worry. You can use them after.',
+    'chatello.steps.step4.bottom.button1': 'Emirex Wallet',
+    'chatello.steps.step4.bottom.button2': 'Try Again',
+
+    'chatello.form.convertation': 'Automatic conversion your fiat currency*',
+    'chatello.form.header': 'Buy Chatello Coin with Credit/Debit Card',
+    'chatello.form.title': 'Buy Chatello Coin with Credit/Debit Card',
+
+    'chatello.overlay1.text1': 'Buying Chatello Coins on Emirex gets you',
+    'chatello.overlay1.text2': 'X2 Coin Amount',
+    'chatello.overlay1.button': 'START',
+    'chatello.overlay2.button': 'GET VERIFIED',
+    'chatello.overlay1.footer': 'Registered with the same email address is required',
+    'chatello.overlay2.footer': 'Prepare your passport or driving licence',
+    'chatello.overlay2.header': 'The verification flow is very simple and straightforward.',
+
+
     
 
     'cardDeposit.errorMessage.first_name': '名字为必填项',

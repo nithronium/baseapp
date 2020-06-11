@@ -1,0 +1,238 @@
+.pg-chatello {
+    .pg-chatello__input-currency {
+        position: relative;
+        color: var(--input-border);
+        border: none;
+        border-left: 1px solid var(--input-border);
+        height: 47px;
+        background: var(--bg-color-light2);
+        width: 50px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        text-align: center;
+        text-align-last: center;
+        position: absolute;
+        right: 2px;
+        top: 1px;
+        line-height: 50px;
+        font-size: 14px;
+    }
+
+    &__plus100-icon,
+    &__plus200-icon {
+        width: 36px;
+        height: 36px;
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+        top: 6px;
+        margin-left: -7px;
+        cursor: pointer;
+    }
+
+    &__plus100-icon {
+        background-image: url(./assets/images/chatello-plus-100.png);
+    }
+
+    &__plus200-icon {
+        background-image: url(./assets/images/chatello-plus-100.png);
+        position: relative;
+
+        &:after {
+            content: ' ';
+            width: 36px;
+            height: 36px;
+            display: inline-block;
+            background-image: url(./assets/images/chatello-plus-100.png);
+            position: absolute;
+            margin-left: -6px;
+        }
+    }
+
+    .pg-chatello__buttons {
+        display: flex;
+        width: 300px;
+        justify-content: space-between;
+        line-height: 49px;
+        padding-top: 20px;
+    }
+
+    .pg-chatello__button {
+        background-color: transparent;
+        border: 1px solid var(--input-border);
+        height: 49px;
+        width: 142px;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 14px;
+        text-indent: 13px;
+        color: var(--limits-text-color);
+        line-height: 49px;
+        cursor: pointer;
+
+        &-text {
+            position: relative;
+            left: 5px;
+        }
+    }
+
+    .buy-form__inputs-wrap {
+        display: block;
+    }
+
+    .buy-form__inputs-top {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .buy-form__input {
+        width: 300px;
+    }
+
+    .pg-chatello__footer {
+        height: 76px;
+        line-height: 23px;
+        padding-top: 16px;
+    }
+
+    .credit-card-steps__footer-caption {
+        color: #5a5d5d;
+        font-size: 12px;
+    }
+
+    .pg-chatello-steps__bottom {
+        background-color: var(--bg-color-dark2);
+        text-align: center;
+        font-size: 16px;
+        color: var(--limits-text-color);
+        padding: 40px 0;
+        line-height: 24px;
+
+        &-buttons {
+            display: flex;
+            justify-content: center;
+            padding-top: 30px;
+        }
+
+        &-try,
+        &-wallet {
+            height: 40px;
+            width: 170px;
+            line-height: 40px;
+            font-size: 16px;
+            color: var(--bg-color-dark1);
+            border-radius: 4px;
+            background: var(--color-yellow);
+            text-transform: uppercase;
+            cursor: pointer;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            border: none;
+        }
+
+        &-wallet {
+            background-color: var(--color-green);
+            color: #fff;
+            margin-right: 20px;
+        }
+    }
+
+    .buy-form__limits-item {
+        display: flex;
+    }
+
+    .pg-chatello__overlay {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+        z-index: 1;
+        background: rgba(0, 0, 0, 0.2);
+
+        &-wrap {
+            width: 620px;
+            margin: 0 auto;
+            height: calc(100% - 56px);
+        }
+
+        &-header {
+            font-size: 22px;
+            color: #fff;
+            text-align: center;
+            padding: 55px 0 40px 0;
+        }
+
+        &1 {
+            &-blocks {
+                display: flex;
+                width: 620px;
+                margin: 0 auto;
+            }
+
+            &-block1,
+            &-block2 {
+                width: 50%;
+            }
+
+
+            &-block1 {
+                font-size: 14px;
+                color: #fff;
+                margin-right: 55px;
+                line-height: 28px;
+                display: flex;
+
+                span {
+                    color: var(--color-green);
+                }
+            }
+
+            &-block2 {
+                color: #5d6161;
+                font-size: 14px;
+                line-height: 28px;
+            }
+
+            &-icon {
+                width: 48px;
+                height: 48px;
+                background-image: url(./assets/images/chatello-overlay1-icon.png);
+                min-width: 48px;
+                margin-right: 24px;
+                position: relative;
+                top: 5px;
+            }
+
+            &-button-wrap {
+                margin-top: 50px;
+            }
+        }
+
+        &2 {
+            &-header {
+                width: 340px;
+                margin: 0 auto;
+            }
+        }
+
+        &-footer {
+            height: 56px;
+            background: rgba(0, 0, 0, 0.2);
+            text-align: center;
+            line-height: 56px;
+            color: var(--limits-text-color);
+            font-size: 14px;
+        }
+
+        .buy-form__bottom-text--help {
+            text-align: center;
+            position: relative;
+            top: -22px;
+        }
+    }
+}

@@ -10,6 +10,7 @@ import { minutesUntilAutoLogout } from '../../api';
 import { buildPath } from '../../custom/helpers';
 import {
     BuyWithCreditCardScreen,
+    ChatelloScreen,
     ReferralCommissionScreen,
     ReferralScreen,
     ReferralTicketsScreen,
@@ -490,6 +491,25 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     />
                     <Route loading={userLoading} isLogged={isLoggedIn} path={'/zh/referral'} component={ReferralScreen} />
                     <Route path={'/zh/trading/:market'} component={TradingScreen} />
+
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/chatello'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        exact={true}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/chatello/:amount'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        noReditect={true}
+                    />
+
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
@@ -546,6 +566,8 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         component={ReferralCommissionScreen}
                         currentLanguage={currentLanguage}
                     />
+
+                    ChatelloScreen
 
                     {renderPluginsRoutes()}
                     {/* <Route path="**"><Redirect to={'/trading/'} /></Route> */}
