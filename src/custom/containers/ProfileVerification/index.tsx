@@ -4,11 +4,11 @@ import classnames from 'classnames';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import {Link} from 'react-router-dom';
 // import { Link } from 'react-router-dom';
 
 import { WalletItemProps } from '../../../components/WalletItem';
 import { 
+    MINIMAL_BALANCE,
     VALUATION_PRIMARY_CURRENCY,
 } from '../../../constants';
 import { estimateValue } from '../../../helpers/estimateValue';
@@ -40,6 +40,7 @@ import { rangerConnectFetch, RangerConnectFetch } from '../../../modules/public/
 import { RangerState } from '../../../modules/public/ranger/reducer';
 import { selectRanger } from '../../../modules/public/ranger/selectors';
 import { WithdrawLimit } from '../../../modules/user/withdrawLimit';
+import { buildPath } from '../../helpers';
 import checkCircleSvg = require('../../assets/images/check-circle.svg');
 import clockSvg = require('../../assets/images/clock.svg');
 import infoSvg = require('../../assets/images/info.svg');
@@ -198,13 +199,29 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         );
     }
     //tslint:disable
-    public renderUpgradeLevelLink() {
+    public renderUpgradeLevelLink(balance?) {
+        const _balance = balance ? balance : 0;
+        const gotoConfirm = () => {
+            if (_balance < MINIMAL_BALANCE && this.props.user.level > 1 && this.props.user.level < 4) {
+                this.props.fetchSuccess({ message: ['page.profile.update.balance'], type: 'error' });
+            } else {
+                this.props.history.push(buildPath('/confirm', this.props.currentLanguage));
+            }
+        };
         return (
-            <Link to={'/kyc-levels'} className="pg-profile-verification__upgrade-level">
+            <span onClick={gotoConfirm} className="pg-profile-verification__upgrade-level">
                 <FormattedMessage id="page.body.profile.header.account.profile.upgrade" />
-            </Link>
+            </span>
         );
     }
+    //tslint:disable
+    // public renderUpgradeLevelLink() {
+    //     return (
+    //         <Link to={'/kyc-levels'} className="pg-profile-verification__upgrade-level">
+    //             <FormattedMessage id="page.body.profile.header.account.profile.upgrade" />
+    //         </Link>
+    //     );
+    // }
 
     public renderUserAbilities(level: number, withdrawLimitData: WithdrawLimit) {
         if (level === 6 || !!withdrawLimitData.limit) {
@@ -354,7 +371,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                 </div>
                 <hr className="pg-profile-verification__hr" />
                 <div className="pg-profile-verification__know-more">
-                    {userLevel < 6 && this.renderUpgradeLevelLink()}
+                    {userLevel < 6 && this.renderUpgradeLevelLink(this.state.balance)}
                     {this.renderStatusIcon(label)}
                 </div>
                 {(withdrawLimitDataExists || withdrawLimitMessageExists) && this.renderUserAbilities(userLevel, withdrawLimitData)}
