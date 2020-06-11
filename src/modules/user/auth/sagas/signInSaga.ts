@@ -1,10 +1,26 @@
 // tslint:disable-next-line no-submodule-imports
 import { call, put } from 'redux-saga/effects';
+
+// import qs = require('qs');
+
+// import { buildPath } from '../../../../custom/helpers';
+
 import { API, RequestOptions } from '../../../../api';
 import { alertPush } from '../../../public/alert';
 import { userData } from '../../profile';
 import { signInError, SignInFetch, signInRequire2FA, signUpRequireVerification } from '../actions';
 
+
+// const getCurrentLang = () => {
+//     const path = location.pathname;
+//     const langs = ['ru', 'zh', 'tr'];
+//     for (const lang of langs) {
+//         if (path.includes(`/${lang}`)) {
+//             return lang;
+//         }
+//     }
+//     return 'en';
+// };
 
 const sessionsConfig: RequestOptions = {
     apiVersion: 'barong',
@@ -15,6 +31,15 @@ export function* signInSaga(action: SignInFetch) {
         const user = yield call(API.post(sessionsConfig), '/identity/sessions', action.payload);
         yield put(userData({ user }));
 
+
+        // let url = '/profile';
+        // const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        // if (parsed.redirect_url) {
+        //     url = parsed.redirect_url;
+        // }
+        // console.log('signin', url, location.href);
+        // const currentLanguage = getCurrentLang();
+        // location.pathname = buildPath(url, currentLanguage);
         yield put(signUpRequireVerification({ requireVerification: user.state === 'pending' }));
         yield put(signInRequire2FA({ require2fa: user.otp }));
     } catch (error) {
