@@ -3,6 +3,7 @@ import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import { CurrencyInfo, DepositCrypto } from '../../../components';
 import { WalletHistory } from '../../../containers/Wallets/History';
+import { BlurComponent } from '../../../custom/components/Blur';
 import { formatCCYAddress } from '../../../helpers';
 
 export const CoinFragment = injectIntl(
@@ -48,6 +49,7 @@ export const CoinFragment = injectIntl(
         return (
             <React.Fragment>
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
+                <BlurComponent isBlur={user.level < 4}>
                 {!userAgree ? (
                     <div>
                         <h2 style={{ fontWeight: 400 }}>{format({ id: 'page.wallets.coin.notice' })}</h2>
@@ -81,6 +83,7 @@ export const CoinFragment = injectIntl(
                     />
                 )}
                 {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
+                </BlurComponent>
             </React.Fragment>
         );
     }

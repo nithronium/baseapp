@@ -197,6 +197,8 @@ class HistoryComponent extends React.Component<Props> {
                     wallet && preciseData(amount, wallet.fixed),
                     fee,
                     <span style={{ color: setWithdrawStatusColor(item.state) }} key={txid || rid}>{state}</span>,
+                    <span style={{ color: setWithdrawStatusColor(item.state) }} key={txid || rid}>{state}</span>,
+                    <span style={{ color: setWithdrawStatusColor(item.state) }} key={txid || rid}>{state}</span>,
                 ];
             }
             case 'trades': {

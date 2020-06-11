@@ -3,7 +3,7 @@ import * as React from 'react';
 import { injectIntl } from 'react-intl';
 // import { MINIMAL_BALANCE } from '../../../constants';
 import { WalletHistory } from '../../../containers/Wallets/History';
-import { CardDepositFiat } from '../../../custom/components/CardDepositFiat';
+import { BlurComponent, CardDepositFiat } from '../../../custom/components';
 import { buildPath } from '../../../custom/helpers';
 import { TypeTabs } from '../TypeTabs';
 import { SepaFragment } from './SepaFragment';
@@ -38,7 +38,8 @@ export const FiatFragment = injectIntl(props => {
         //     history.push(buildPath('/confirm', lang));
         // }
     };
-
+    // tslint:disable-next-line:no-console
+    console.log('...........user.level', user.level);
 
     return (
         <React.Fragment >
@@ -46,24 +47,24 @@ export const FiatFragment = injectIntl(props => {
             {<TypeTabs wire={wire} sepa={sepa} card={card} action={action} currency={currency.toLowerCase()} colorTheme={colorTheme}/>}
 
             {/* {card && <div style={styles.card}>{translate('comingsoon')}</div>}   */}
-
-            {card && (user.level > 3 ?
-                <div>
-                    <CardDepositFiat currency={currency.toUpperCase()} translate={translate} colorTheme={colorTheme}/>
-                    <div className="fiat-alert">
-                        {translate('page.wallets.withdraw.fiat')}
+            <BlurComponent isBlur={user.level < 4}>
+                {card && (user.level > 3 ?
+                    <div>
+                        <CardDepositFiat currency={currency.toUpperCase()} translate={translate} colorTheme={colorTheme}/>
+                        <div className="fiat-alert">
+                            {translate('page.wallets.withdraw.fiat')}
+                        </div>
+                        {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
+                    </div> :
+                    <div style={{padding: '10px 20px', color: '#648280', fontSize: '20px'}}>
+                        <p>{levelMessage}</p>
+                        <p><a style={{color: '#FFD567', cursor: 'pointer', textDecoration: 'underline'}} onClick={checkBalace}>{levelLink}</a></p>
                     </div>
-                    {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
-                </div> :
-                <div style={{padding: '10px 20px', color: '#648280', fontSize: '20px'}}>
-                    <p>{levelMessage}</p>
-                    <p><a style={{color: '#FFD567', cursor: 'pointer', textDecoration: 'underline'}} onClick={checkBalace}>{levelLink}</a></p>
-                </div>
-            )}
+                )}
 
-            {sepa && <SepaFragment {...props}/>}
-            {wire && <WireFragment {...props} />}
-
+                {sepa && <SepaFragment {...props}/>}
+                {wire && <WireFragment {...props} />}
+            </BlurComponent>
 
         </React.Fragment>
     );

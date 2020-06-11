@@ -12,6 +12,7 @@ import { EstimatedValue } from '../../containers/Wallets/EstimatedValue';
 import { WalletHistory } from '../../containers/Wallets/History';
 import { Withdraw, WithdrawProps } from '../../containers/Wallets/Withdraw';
 import { WithdrawLite } from '../../containers/Wallets/WithdrawLite';
+import { BlurComponent } from '../../custom/components';
 import { buildPath } from '../../custom/helpers';
 import { VersionGuardWrapper } from '../../decorators';
 import { setDocumentTitle } from '../../helpers';
@@ -364,7 +365,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         const { selectedWalletIndex, sepa, card, wire } = this.state;
         const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
         return (
-           <React.Fragment>
+           <React.Fragment >
                 {wallets[selectedWalletIndex].type === 'fiat' && (
                     <TypeTabs
                         action={this.setState.bind(this)}
@@ -379,13 +380,15 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                    : <React.Fragment>
                 {currency.toLowerCase() === 'usd'}
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
-                {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}
-                {['usd', 'aed'].includes(currency.toLowerCase()) ? (
-                    <div style={{ textAlign: 'center', fontSize: '18px', padding: '20px' }}>{this.translate('comingsoon')}</div>
-                ) : (
-                    this.renderWithdrawBlock()
-                )}
-                {user.otp && currency && <WalletHistory label="withdraw" type="withdraws" currency={currency} />}
+               <BlurComponent isBlur={user < 4}>
+                   {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}
+                    {['usd', 'aed'].includes(currency.toLowerCase()) ? (
+                        <div style={{ textAlign: 'center', fontSize: '18px', padding: '20px' }}>{this.translate('comingsoon')}</div>
+                    ) : (
+                        this.renderWithdrawBlock()
+                    )}
+                    {user.otp && currency && <WalletHistory label="withdraw" type="withdraws" currency={currency} />}
+               </BlurComponent>
                 </React.Fragment>  }
             </React.Fragment>
         );
