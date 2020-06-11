@@ -1,4 +1,7 @@
 //tslint:disable
+
+import qs = require('qs');
+
 import { Loader } from '@openware/components';
 import classnames from 'classnames';
 import { History } from 'history';
@@ -109,9 +112,15 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
     }
 
     if (isLogged && !noReditect) {
+        let url = '/profile';
+        const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        if (parsed.redirect_url) {
+            url = parsed.redirect_url;
+        }
+        console.log('signin', url, location.href);
         return (
             <Route {...rest}>
-                <Redirect to={buildPath('/profile', rest.currentLanguage)} />
+                <Redirect to={buildPath(url, rest.currentLanguage)} />
             </Route>
         );
     }

@@ -65,6 +65,7 @@ const copy = (id: string) => {
         copyText.select();
 
         document.execCommand('copy');
+        // tslint:disable-line
         window.getSelection().removeAllRanges();
     }
 };
