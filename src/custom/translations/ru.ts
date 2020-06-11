@@ -1145,6 +1145,10 @@ export const ru: LangType = {
     ethbusd_description: 'ETH/BUSD рынки. Конвертировать Эфириум в Binance USD ➤ Цены и графики ETH/BUSD в реальном времени ➤ Выберите лучшее предложение и начните торговать сейчас',
     btcbusd_title: 'BTC в BUSD. Binance USD Рынок | Emirex.com',
     btcbusd_description: 'BTC/BUSD рынки. Конвертировать Биткойн в Binance USD на Emirex ➤ Цены и графики в реальном времени ➤ Выберите лучшее предложение и начните торговать сейчас',
+    enjbtc_title: 'Enjin Coin в Биткоин (ENJ/BTC). Обмен | Emirex.com',
+    enjbtc_description: 'ENJ/BTC конвертер. График Enjin Coin (ENJ) в Биткоин (BTC) в реальном времени. Отслеживание цены ➤ Выберите лучшее предложение и начните торговать сейчас',
+    enjusdt_title: 'Enjin Coin в USDT (ENJ/USDT). Обмен | Emirex.com',
+    enjusdt_description: 'ENJ/USDT конвертировать. График Enjin Coin (ENJ) в Tether (USDT) в реальном времени. Цены ➤ Выберите лучшее предложение и начните торговать сейчас',
     referral_title: 'Получите биткоин. Реферальная крипто-программа | Emirex.com',
     referral_description:
         'Получите биткоины бесплатно. Лучшая реферальная программа. Присоединяйтесь к реферальной программе ✅ WinWithEmirex',

@@ -137,6 +137,8 @@ class Trading extends React.Component<Props, StateProps> {
         chzusdt: { title: 'chzusdt_title', description: 'chzusdt_description' },
         ethbusd: { title: 'ethbusd_title', description: 'ethbusd_description' },
         btcbusd: { title: 'btcbusd_title', description: 'btcbusd_description' },
+        enjbtc: { title: 'enjbtc_title', description: 'enjbtc_description' },
+        enjusdt: { title: 'enjusdt_title', description: 'enjusdt_description' },
     };
 
     public componentDidMount() {
