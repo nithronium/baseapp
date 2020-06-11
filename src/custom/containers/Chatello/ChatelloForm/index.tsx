@@ -302,19 +302,6 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                 <div className="buy-form__inputs-top">
                     <div className="buy-form__input-wrap">
                         <label className="buy-form__label">
-                            {this.translate('buyWithCard.form.sell')}
-                        </label>
-                        <input
-                            onChange={this.onUsdValueChange}
-                            value={usdValue}
-                            className="buy-form__input"
-                            type="number"
-                        />
-                        <div className="pg-chatello__input-currency">USD</div>
-                    </div>
-
-                    <div className="buy-form__input-wrap">
-                        <label className="buy-form__label">
                             {this.translate('buyWithCard.form.buy')}
                         </label>
                         <input
@@ -324,6 +311,19 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                             type="number"
                         />
                         <div className="pg-chatello__input-currency">CHA</div>
+                    </div>
+
+                    <div className="buy-form__input-wrap">
+                        <label className="buy-form__label">
+                            {this.translate('buyWithCard.form.sell')}
+                        </label>
+                        <input
+                            onChange={this.onUsdValueChange}
+                            value={usdValue}
+                            className="buy-form__input"
+                            type="number"
+                        />
+                        <div className="pg-chatello__input-currency">USD</div>
                     </div>
                 </div>
                 {!isModal && <div className="pg-chatello__buttons">
