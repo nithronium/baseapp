@@ -53,7 +53,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
         super(props);
         this.state = {
             orderAmount: 0,
-            orderFinished: true,
+            orderFinished: false,
         };
     }
 
