@@ -151,7 +151,13 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     }
 
     public componentWillReceiveProps(nextProps) {
-        console.log('componentWillReceiveProps');
+        const { buyWithCreditCard } = this.props;
+        if (nextProps.buyWithCreditCard.data.url !== buyWithCreditCard.data.url) {
+            this.setState({
+                openIframe: true,
+                showModal: false,
+            });
+        }
     }
 
     public getButtonTextKey = (): string => {
