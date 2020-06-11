@@ -164,7 +164,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
         const { userLoggedIn, user } = this.props;
         if (userLoggedIn) {
             if (user.level >= 4) {
-                return 'buyWithCard.form.buttonContinue';
+                return 'chatello.form.buttonBuy';
             } else {
                 return 'buyWithCard.form.buttonNotVerified';
             }
@@ -312,6 +312,23 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                         />
                         <div className="pg-chatello__input-currency">CHA</div>
                     </div>
+
+                    {!isModal && <div className="pg-chatello__buttons--mobile">
+                        <div
+                            className="pg-chatello__button"
+                            onClick={this.click100}
+                        >
+                            <span className="pg-chatello__plus100-icon" />
+                            + 100 CHA
+                        </div>
+                        <div
+                            className="pg-chatello__button"
+                            onClick={this.click200}
+                        >
+                            <span className="pg-chatello__plus200-icon" />
+                            <span className="pg-chatello__button-text">+ 200 CHA</span>
+                        </div>
+                    </div>}
 
                     <div className="buy-form__input-wrap">
                         <label className="buy-form__label">

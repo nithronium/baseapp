@@ -1,4 +1,6 @@
 .pg-chatello {
+    background: #000;
+
     .pg-chatello__input-currency {
         position: relative;
         color: var(--input-border);
@@ -56,6 +58,10 @@
         justify-content: space-between;
         line-height: 49px;
         padding-top: 20px;
+
+        &--mobile {
+            display: none;
+        }
     }
 
     .pg-chatello__button {
@@ -158,6 +164,7 @@
             width: 620px;
             margin: 0 auto;
             height: calc(100% - 56px);
+            max-width: 100vw;
         }
 
         &-header {
@@ -165,6 +172,27 @@
             color: #fff;
             text-align: center;
             padding: 55px 0 40px 0;
+            position: relative;
+        }
+
+        &-visa {
+            background-image: url(./assets/images/chatello-visa-icon.png);
+            width: 45px;
+            height: 15px;
+            position: absolute;
+            top: 62px;
+            right: 24px;
+
+            &:after {
+                content: '';
+                width: 37px;
+                height: 22px;
+                background-image: url(./assets/images/chatello-visa-icon-logo.png);
+                display: block;
+                position: relative;
+                left: 60px;
+                top: -3px;
+            }
         }
 
         &1 {
@@ -172,6 +200,7 @@
                 display: flex;
                 width: 620px;
                 margin: 0 auto;
+                max-width: 100vw;
             }
 
             &-block1,
@@ -216,6 +245,7 @@
         &2 {
             &-header {
                 width: 340px;
+                max-width: calc(100% - 20px);
                 margin: 0 auto;
             }
         }
@@ -233,6 +263,87 @@
             text-align: center;
             position: relative;
             top: -22px;
+        }
+    }
+}
+
+
+@media screen and (max-width: 640px) {
+    .pg-chatello {
+        .buy-form__input {
+            width: 100%;
+        }
+
+        .buy-form__inputs-top {
+            flex-wrap: wrap;
+        }
+
+        .pg-chatello__buttons {
+            display: none;
+
+            &--mobile {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                padding-top: 8px;
+            }
+        }
+
+        .pg-chatello__button {
+            width: calc(50% - 4px);
+        }
+
+        .pg-chatello__overlay1-blocks {
+            display: block;
+        }
+
+        .pg-chatello__overlay {
+            &-wrap {
+                padding: 0 30px;
+            }
+
+            &-visa {
+                position: relative;
+                margin: 0 auto;
+                margin-top: 34px;
+            }
+        }
+
+        .pg-chatello__overlay1-block2 {
+            text-align: center;
+            width: calc(100% - 60px);
+            position: relative;
+            top: 21px;
+        }
+
+        .pg-chatello__overlay1-block1 {
+            margin: 0 auto;
+            width: 300px;
+            position: relative;
+            left: -10px;
+        }
+
+        .buy-form__bottom-text--help {
+            display: block;
+        }
+
+        .buy-form__limits .icon-calendar,
+        .buy-form__limits .icon-clock {
+
+        }
+
+        .buy-form__limits-item {
+            & > div {
+                line-height: 0.5;
+            }
+        }
+
+        .buy-form__limits {
+            padding-top: 0;
+        }
+
+        .pg-chatello__overlay2-header {
+            padding: 67px 0px;
         }
     }
 }

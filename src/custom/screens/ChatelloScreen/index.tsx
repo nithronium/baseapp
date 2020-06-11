@@ -27,7 +27,9 @@ import { WithdrawLimit } from '../../../modules/user/withdrawLimit';
 
 import {
     ChatelloForm,
+    ChatelloInfo,
     ChatelloSteps,
+    ChatelloTop,
 } from '../../containers/Chatello';
 
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -83,6 +85,8 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
             step = 2;
         }
 
+        step = 2;
+
         return (
             <div className="pg-buy-with-credit-card pg-chatello">
                 <Helmet>
@@ -93,6 +97,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
                     <link rel="alternate" href="https://emirex.com/ru/buycrypto" hrefLang="ru" title="Русский" />
                     <link rel="alternate" href="https://emirex.com/zh/buycrypto" hrefLang="zh" title="中国人" />
                 </Helmet>
+                <ChatelloTop />
                 <div className="pg-buy-with-credit-card__container">
                     <ChatelloSteps
                         currentStep={step}
@@ -111,6 +116,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
                         onOrderAmountChange={this.onOrderAmountChange}
                         step={step}
                     />}
+                    <ChatelloInfo />
                 </div>
             </div>
         );

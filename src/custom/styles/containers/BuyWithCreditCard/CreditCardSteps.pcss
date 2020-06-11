@@ -138,9 +138,15 @@
     &__footer {
         background-color: var(--bg-color-dark1);
         text-align: center;
-        line-height: 56px;
         font-size: 14px;
         color: #fff;
+        display: flex;
+        align-items: center;
+        min-height: 56px;
+
+        & > div {
+            width: 100%;
+        }
 
         span {
             color: var(--color-yellow);

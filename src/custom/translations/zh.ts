@@ -1139,6 +1139,7 @@ export const zh = {
     'chatello.form.convertation': 'Automatic conversion your fiat currency*',
     'chatello.form.header': 'Buy Chatello Coin with Credit/Debit Card',
     'chatello.form.title': 'Buy Chatello Coin with Credit/Debit Card',
+    'chatello.form.buttonBuy': 'BUY CHA',
 
     'chatello.overlay1.text1': 'Buying Chatello Coins on Emirex gets you',
     'chatello.overlay1.text2': 'X2 Coin Amount',
@@ -1148,7 +1149,25 @@ export const zh = {
     'chatello.overlay2.footer': 'Prepare your passport or driving licence',
     'chatello.overlay2.header': 'The verification flow is very simple and straightforward.',
 
+    'chatello.top.header': 'What is Chatello?',
+    'chatello.top.text': 'Chatello Inc. is a social media app allowing influencers with a good base of followers to monetize their social presence anywhere, anytime, by enabling followers to access influencers, seeking advice or consultancy or asking questions in a highly personal and one-on-one way. Chatello app will be available for both platforms Apple iOS and Google Android. The first version will be in English and later in other languages such as Chinese.',
+    'chatello.top.item1': 'Communicate and get inspired',
+    'chatello.top.item2': 'Enage in a personal interaction',
+    'chatello.top.item3': 'Be seen, be heard and be noticed',
+    'chatello.top.app.header': 'How to get x2 Chatello Coins',
+    'chatello.top.app.item1': 'Download Chatello APP',
+    'chatello.top.app.item2': 'Buy Chatello Coins in it on Emirex',
+    'chatello.top.app.item3': 'Get х2 Coins Amount',
 
+    'chatello.info.header1': 'Twice-rewarding Way to Buy Сhatello Coins',
+    'chatello.info.text': 'Get twice as much when buying Chatello Coin on Emirex. Follow the next easy steps and get x2 amount',
+    'chatello.info.header2': 'Bonuses of Buying Chatello Coins on Emirex',
+    'chatello.info.text1': 'Bonus from Emirex Get x2 CHA Coins',
+    'chatello.info.text2': 'Fast, commision-free transaction',
+    'chatello.info.text3': 'Earn with Us Become CHA investor on Emirex',
+    'chatello.info.text4': 'Highest security standards',
+    'chatello.info.text5': 'Easy to Use',
+    'chatello.info.text6': 'Trading-Ready Platform',
     
 
     'cardDeposit.errorMessage.first_name': '名字为必填项',

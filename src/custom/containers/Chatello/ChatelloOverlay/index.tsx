@@ -54,6 +54,7 @@ export class ChatelloOverlayComponent extends React.Component<Props> {
             <div className="pg-chatello__overlay-wrap">
                 <div className="pg-chatello__overlay-header">
                     {this.translate('chatello.form.header')}
+                    <div className="pg-chatello__overlay-visa" />
                 </div>
 
                 <div className="pg-chatello__overlay1-blocks">
