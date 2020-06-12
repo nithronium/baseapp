@@ -463,7 +463,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
             incomeCurrencyId,
             amount: Number(amount),
             type: 'ccPurchase',
-            sale_id: 1,
+            sale_id: CHATELLA_IEO_ID,
         });
     };
 

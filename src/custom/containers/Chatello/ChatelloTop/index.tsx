@@ -81,8 +81,16 @@ export class ChatelloTopComponent extends React.Component<Props> {
                         </div>
 
                         <div className="pg-chatello__top-app-links">
-                            <a href="www.google.com" className="pg-chatello__top-app-link1" target="_blank" />
-                            <a href="www.google.com" className="pg-chatello__top-app-link2" target="_blank" />
+                            <a
+                                href="https://apps.apple.com/us/app/chatello/id1369821031?ls=1"
+                                className="pg-chatello__top-app-link1"
+                                target="_blank"
+                            />
+                            <a
+                                href="https://play.google.com/store/apps/details?id=com.chatello.app"
+                                className="pg-chatello__top-app-link2"
+                                target="_blank"
+                            />
                         </div>
                     </div>
                 </div>
