@@ -22,7 +22,7 @@ export const ru: LangType = {
     "nav.link.margin": "Маржа",
     "nav.link.margin.description": "Увеличьте свою прибыль основываясь на левередже",
     "nav.link.instant-exchange": "Мгновенный обмен",
-    "nav.link.instant-exchange.description": "Поддержка быстрого обмена более десяти популярных криптовалют",
+    "nav.link.instant-exchange.description": "Простой и быстрый торговый терминал с топовыми крипто парами",
     "nav.link.p2p": "P2P",
     "nav.link.p2p.description": "Покупка и продажа криптовалюты на одноранговом рынке",
     "nav.link.emrx-treasure": "EMRX Treasure",
@@ -37,7 +37,8 @@ export const ru: LangType = {
     "nav.link.referral-giveaway.description": "Соблюдайте условия и попробуйте получить приз",
     "nav.link.referral-program": "Реферальная программа",
     "nav.link.referral-program.description": "Приглашайте друзей и зарабатывайте вместе",
-
+    "nav.link.defi-invest": "DeFi invest",
+    "nav.link.defi-invest.description": "Get fixed and flexible income with ability to withdraw funds instantly",
 
     'page.header.navbar.profile': 'Профиль',
     'page.header.navbar.refprogram': 'Реферальная программа',
@@ -555,6 +556,7 @@ export const ru: LangType = {
     'page.header.currency.rub': 'RUB',
     'page.header.currency.cny': 'CNY',
     'page.header.currency.aed': 'AED',
+    'page.header.currency.try': 'TRY',
 
     "nav_account": "Профиль",
     "nav_my_assets": "Мои активы",

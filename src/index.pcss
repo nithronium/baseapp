@@ -383,9 +383,13 @@ input:-webkit-autofill {
       color: white;
     }
   }
-  h5 {
-    color: white;
-    padding-top: 1.4em;
+  h5 span {
+    font-family: IBM Plex Sans;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 24px;
+    color: #FFF;
   }
   & .licenses {
     h5 {
@@ -502,9 +506,22 @@ input:-webkit-autofill {
       }
     }
 
-    @media screen and (max-width: 500px) {
-      & .address {
+    @media screen and (max-width: 800px) {
+      flex-direction: column;
+
+      .left-blocks {
         width: 100%;
+
+        .link-list-column {
+          width: 50%;
+        }
+      }
+
+      .right-block {
+        width: 100%;
+        .address, .social-block, .licenses {
+          width: 100%;
+        }
       }
     }
   }

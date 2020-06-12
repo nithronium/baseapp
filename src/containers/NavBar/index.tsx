@@ -275,13 +275,6 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                             <FormattedMessage id={'page.header.language.zh'}/>
                                             {lang === 'zh' && <CheckIcon />}
                                         </li>
-                                        <li className={`${lang === 'ae' ? 'active-menu' : ''} soon`}>
-                                            <FormattedMessage id={'page.header.language.ae'}/>
-                                            {lang === 'ae' && <CheckIcon />}
-                                            <span className="soon">
-                                                (<FormattedMessage id={'page.header.soon'}/>)
-                                            </span>
-                                        </li>
                                     </ul>
                                 </div>
                                 <div className="right">
@@ -323,12 +316,21 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                             </span>
                                             {user.activeCurrency.toLowerCase() === 'cny' && <CheckIcon />}
                                         </li>
-                                        <li className={`${user.activeCurrency.toLowerCase() === 'aed' ? 'active-menu' : ''} soon`} onClick={() => {}}>
+                                        <li className={`${user.activeCurrency.toLowerCase() === 'aed' ? 'active-menu' : ''}`} onClick={() => this.switchCurrency('aed')}>
                                             <span className="currency-line">
                                                 <span className="icon">
                                                     <AEDIcon/>
                                                 </span>
                                                 <FormattedMessage id={'page.header.currency.aed'}/>
+                                            </span>
+                                            {user.activeCurrency.toLowerCase() === 'aed' && <CheckIcon />}
+                                        </li>
+                                        <li className={`${user.activeCurrency.toLowerCase() === 'try' ? 'active-menu' : ''} soon`} onClick={() => {}}>
+                                            <span className="currency-line">
+                                                <span className="icon">
+                                                    <AEDIcon/>
+                                                </span>
+                                                <FormattedMessage id={'page.header.currency.try'}/>
                                                 <span className="soon">
                                                     (<FormattedMessage id={'page.header.soon'}/>)
                                                 </span>
@@ -526,16 +528,30 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         <FormattedMessage id={'page.header.current_balance'}/>
                     </div>
                     <Link to={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/wallets`} className="balance" onClick={() => this.openDropdown('')}>
-                        <span className="currency left-cur">{balance[crypto.toUpperCase()].toFixed(2)}</span>
-                        <span className="type-currency">{crypto.toUpperCase()}</span>
+                        <div className="currency-group">
+                            <span className="currency left-cur">{balance[crypto.toUpperCase()].toFixed(2)}</span>
+                            <span className="type-currency">{crypto.toUpperCase()}</span>
+                        </div>
                         <span className="sym">≈</span>
-                        <span className="currency right-cur">{balance[currency.toUpperCase()].toFixed(2)}</span>
-                        <span className="type-currency">{currency.toUpperCase()}</span>
+                        <div className="currency-group">
+                            <span className="currency right-cur">{balance[currency.toUpperCase()].toFixed(2)}</span>
+                            <span className="type-currency">{currency.toUpperCase()}</span>
+                        </div>
                     </Link>
                 </li>
                 <li>
                     <Link to={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/wallets`} onClick={() => this.openDropdown('')}>
                         <FormattedMessage id={'page.header.deposit_withdraw'}/>
+                    </Link>
+                </li>
+                <li>
+                    <Link to={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/history/deposits`} onClick={() => this.openDropdown('')}>
+                        <FormattedMessage id={'page.body.history.deposit'}/>
+                    </Link>
+                </li>
+                <li>
+                    <Link to={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/history/withdraws`} onClick={() => this.openDropdown('')}>
+                        <FormattedMessage id={'page.body.history.withdraw'}/>
                     </Link>
                 </li>
                 {/*<li>*/}

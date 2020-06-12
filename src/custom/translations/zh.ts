@@ -22,7 +22,7 @@ export const zh = {
     "nav.link.margin": "杠杆",
     "nav.link.margin.description": "利用杠杆增加利润",
     "nav.link.instant-exchange": "即使交易",
-    "nav.link.instant-exchange.description": "支持全球十多种流行加密货币的交易",
+    "nav.link.instant-exchange.description": "具有顶级加密货币对的简单快速交易终端",
     "nav.link.p2p": "P2P",
     "nav.link.p2p.description": "通过对等交易所即时购买和出售加密货币",
     "nav.link.emrx-treasure": "EMRX宝藏",
@@ -37,6 +37,8 @@ export const zh = {
     "nav.link.referral-giveaway.description": "遵循条件并尝试获得礼品",
     "nav.link.referral-program": "推荐计划",
     "nav.link.referral-program.description": "邀请好友一起赚钱",
+    "nav.link.defi-invest": "DeFi invest",
+    "nav.link.defi-invest.description": "Get fixed and flexible income with ability to withdraw funds instantly",
 
     'page.header.navbar.profile': '个人信息',
     'page.header.navbar.refprogram': '推荐计划',
@@ -381,6 +383,7 @@ export const zh = {
     'page.header.currency.rub': '卢布',
     'page.header.currency.cny': '人民币',
     'page.header.currency.aed': '迪拉姆',
+    'page.header.currency.try': 'TRY',
 
     "nav_account": "账号",
     "nav_my_assets": "我的资产",

@@ -31,7 +31,7 @@ export const en = {
     "nav.link.margin": "Margin",
     "nav.link.margin.description": "Increase your profit with leverage",
     "nav.link.instant-exchange": "Instant Exchange",
-    "nav.link.instant-exchange.description": "Support orders of over ten popular crypto currencies around the world",
+    "nav.link.instant-exchange.description": "Simple and fast trading terminal with top crypto pairs",
     "nav.link.p2p": "P2P",
     "nav.link.p2p.description": "Buy and Sell crypto instantly through the Peer-to-Peer exchange",
     "nav.link.emrx-treasure": "EMRX Treasure",
@@ -46,6 +46,8 @@ export const en = {
     "nav.link.referral-giveaway.description": "Follow the conditions and try to get a prize",
     "nav.link.referral-program": "Referral Program",
     "nav.link.referral-program.description": "Invite friends and earn crypto together",
+    "nav.link.defi-invest": "DeFi invest",
+    "nav.link.defi-invest.description": "Get fixed and flexible income with ability to withdraw funds instantly",
 
     'page.header.navbar.profile': 'Profile',
     'page.header.navbar.refprogram': 'Referral program',
@@ -437,8 +439,9 @@ export const en = {
     'page.header.currency.rub': 'RUB',
     'page.header.currency.cny': 'CNY',
     'page.header.currency.aed': 'AED',
+    'page.header.currency.try': 'TRY',
 
-    "nav_account": "Account",
+    "nav_account": "Profile",
     "nav_my_assets": "My Assets",
     "nav_my_orders": "My Orders",
     "nav_account_security": "Account Security",

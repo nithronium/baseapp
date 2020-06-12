@@ -31,6 +31,7 @@ export const earnOption = (): object[] => ([
     // { key: '', href: '/landing', label: 'nav.link.landing', description: 'nav.link.landing.description'},
     // { key: '', href: '/referral', label: 'nav.link.referral-giveaway', description: 'nav.link.referral-giveaway.description'},
     { key: '', href: '/referral-commission', label: 'nav.link.referral-program', description: 'nav.link.referral-program.description'},
+    { key: '', href: '/', label: 'nav.link.defi-invest', description: 'nav.link.defi-invest.description', soon: true},
 ].map((link, index) => {
     link.key = `nav-link-${index}-${link.href}-${link.label}`;
     return link;
@@ -40,7 +41,7 @@ export const ordersOption = (): object[] => ([
     { key: '', href: '/orders', label: 'page.header.orders_spot'},
     // { key: '', href: '/', label: 'page.header.orders_futures'},
     // { key: '', href: '/', label: 'page.header.orders_margin', border: true},
-    { key: '', href: '/history', label: 'page.header.history_spot'},
+    { key: '', href: '/history/trades', label: 'page.header.history_spot'},
     // { key: '', href: '/', label: 'page.header.history_futures'},
     // { key: '', href: '/', label: 'page.header.history_margin'},
 ].map((link, index) => {
@@ -52,9 +53,9 @@ export const userOption = (): object[] => ([
     { key: '', href: '/profile', label: 'nav_account', border: true},
     { key: '', href: '/wallets', label: 'nav_my_assets'},
     { key: '', href: '/orders', label: 'nav_my_orders'},
-    { key: '', href: '/bitcoin-halving', label: 'nav_bitcoin_halving', extLink: true, mainsite: true},
+    // { key: '', href: '/bitcoin-halving', label: 'nav_bitcoin_halving', extLink: true, mainsite: true},
     // { key: '', href: '/security', label: 'nav_account_security'},
-    // { key: '', href: '/referral', label: 'nav_referral_program'},
+    { key: '', href: '/referral', label: 'nav_referral_program'},
     // { key: '', href: '/api-setting', label: 'nav_api_setting', border: true},
     { key: '', href: '/', label: 'nav_logout', logout: true},
 ].map((link, index) => {

@@ -170,6 +170,7 @@ const linkBlock = {
         body: [
             { key: '', href: '/about', label: 'footer_headers_about', mainsite: true },
             { key: '', href: 'https://blog.emirex.com/', label: 'footer_headers_emirex_blog', extLink :true },
+            { key: '', href: '/bitcoin-halving', label: 'nav_bitcoin_halving', mainsite: true},
         ].map((link, index) => {
             link.key = `footer-link-${index}-${link.href}-${link.label}`;
             return link;
