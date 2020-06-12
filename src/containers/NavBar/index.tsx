@@ -487,6 +487,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             ))}
         </ul>);
     };
+
     private renderUserBlock = () => {
         const options = userOption();
         const { isLogin } = this.state;
