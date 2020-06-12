@@ -380,6 +380,7 @@ export const zh = {
     'page.header.language.ru': 'Русский',
     'page.header.language.zh': '中文简体',
     'page.header.language.ae': 'Arabic',
+    'page.header.language.tr': 'Turkish',
 
     'page.header.soon': '不久',
 
