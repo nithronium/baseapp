@@ -174,8 +174,6 @@ class LayoutComponent extends React.Component<LayoutProps> {
             localStorage.setItem('uil', 'true');
         } else if (isLoggedIn && siteState === 'false') {
             this.props.logout();
-        } else if (!isLoggedIn) {
-            localStorage.removeItem('uil');
         }
 
         // if (!isLoggedIn && next.isLoggedIn) {
@@ -322,14 +320,14 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
-                        path={'/history'}
+                        path={'/history/:history'}
                         component={HistoryScreen}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
-                        path={'/ru/history'}
+                        path={'/ru/history/:history'}
                         component={HistoryScreen}
                         currentLanguage={currentLanguage}
                     />
@@ -472,7 +470,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
-                        path={'/zh/history'}
+                        path={'/zh/history/:history'}
                         component={HistoryScreen}
                         currentLanguage={currentLanguage}
                     />

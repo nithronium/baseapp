@@ -36,7 +36,8 @@ interface State {
 class History extends React.Component<Props, State> {
     public state = {
         tab: 'deposits',
-        currentTabIndex: 0,
+        currentTabIndex: 0
+        ,
     };
 
     public tabMapping = ['deposits', 'withdraws', 'trades', pluginsList().find(item => item.name === 'ieo') && 'ieo'];
@@ -45,6 +46,7 @@ class History extends React.Component<Props, State> {
         setDocumentTitle('History');
         this.props.fetchMarkets();
         this.props.fetchWallets();
+        this.setState({tab: this.props.match.params.history || 'deposits', currentTabIndex: ['deposits', 'withdraws', 'trades', 'ieo'].indexOf(this.props.match.params.history) || 0});
     }
 
     public componentWillUnmount() {

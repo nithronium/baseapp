@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {FormattedMessage} from 'react-intl';
 import facebook = require('../../../assets/images/referral/icons-yellow/facebook.svg');
 import instagram = require('../../../assets/images/referral/icons-yellow/instagram.svg');
 import linkedin = require('../../../assets/images/referral/icons-yellow/linkedin.svg');
@@ -16,12 +17,12 @@ const GetCode = props => {
                     <img src={graphic} alt="" style={{ maxWidth: '100%' }} />
                 </div>
                 <div>
-                    <h2>{props.intl.formatMessage({ id: 'get.get_now' })}</h2>
+                    <h2><FormattedMessage id={'get.get_now'}/></h2>
                     <p>
-                        {props.intl.formatMessage({ id: 'get.watch' })} <b>#WinWithEmirex</b>
+                        <FormattedMessage id={'get.watch'}/> <b>#WinWithEmirex</b>
                     </p>
                     <p>
-                        <b>{props.intl.formatMessage({ id: 'get.follow' })}</b>
+                        <b><FormattedMessage id={'get.follow'}/></b>
                     </p>
                     <div className="social">
                         <div>
@@ -61,11 +62,11 @@ const GetCode = props => {
                 </div>
             </div>
             <div className="terms">
-                <h3>{props.intl.formatMessage({ id: 'get.h3' })}</h3>
-                <p dangerouslySetInnerHTML={{ __html: `${props.intl.formatMessage({ id: 'get.text1' })}` }} />
-                <p>{props.intl.formatMessage({ id: 'get.text2' })}</p>
-                <p>{props.intl.formatMessage({ id: 'get.text3' })} </p>
-                <p dangerouslySetInnerHTML={{ __html: `${props.intl.formatMessage({ id: 'get.text4' })}` }} />
+                <h3><FormattedMessage id={'get.h3'}/></h3>
+                <p dangerouslySetInnerHTML={{ __html: `<FormattedMessage id={'get.text1'}/>` }} />
+                <p><FormattedMessage id={'get.text2'}/></p>
+                <p><FormattedMessage id={'get.text3'}/></p>
+                <p dangerouslySetInnerHTML={{ __html: `<FormattedMessage id={'get.text4'}/>` }} />
             </div>
         </section>
     );

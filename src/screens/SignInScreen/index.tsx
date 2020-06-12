@@ -269,6 +269,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     requireEmailVerification: selectSignUpRequireVerification(state),
 });
 
+
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
     signIn: data => dispatch(signIn(data)),
     signInError: error => dispatch(signInError(error)),
