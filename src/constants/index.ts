@@ -25,7 +25,7 @@ export const tradeOption = (): object[] => ([
 }));
 
 export const earnOption = (): object[] => ([
-    { key: '', href: 'https://ieo.emirex.com/?emirex_referral_code=ID0A9FBA8B3E&utm_source=emirex&utm_medium=main_page&utm_campaign=header', label: 'nav.link.emrx-treasure' , description: 'nav.link.emrx-treasure.description', extLink: true},
+    { key: '', href: 'https://ieo.emirex.com/?emirex_referral_code=ID0A9FBA8B3E&utm_source=emirex&utm_medium=main_page&utm_campaign=header', label: 'nav.link.emrx-treasure' , description: 'nav.link.emrx-treasure.description', extLink: true, newTab: true},
     { key: '', href: '/ieo', label: 'nav.link.ieo', description: 'nav.link.ieo.description'},
     // { key: '', href: '/staking', label: 'nav.link.staking', description: 'nav.link.staking.description'},
     // { key: '', href: '/landing', label: 'nav.link.landing', description: 'nav.link.landing.description'},

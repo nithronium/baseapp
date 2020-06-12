@@ -249,7 +249,8 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                 <div>
                                     <span className="current-language">{
                                         lang === 'zh' ? '中文简体' :
-                                            lang === 'en' ? 'English' : 'Русский'}</span>
+                                            lang === 'en' ? 'English' :
+                                                lang === 'tr' ? 'Turkish' : 'Русский'}</span>
                                     <span className="slash">/</span>
                                     <span className="current-currency">
                                         {user.activeCurrency}
@@ -274,6 +275,13 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                         <li className={`${lang === 'zh' ? 'active-menu' : ''}`} onClick={() => this.handleChangeLanguage('zh')}>
                                             <FormattedMessage id={'page.header.language.zh'}/>
                                             {lang === 'zh' && <CheckIcon />}
+                                        </li>
+                                        <li className={`${lang === 'tr' ? 'active-menu' : ''} soon`} onClick={() => {}}>
+                                            <span className="notranslate"><FormattedMessage id={'page.header.language.tr'}/></span>
+                                            {lang === 'tr' && <CheckIcon />}
+                                            <span className="soon">
+                                                (<FormattedMessage id={'page.header.soon'}/>)
+                                            </span>
                                         </li>
                                     </ul>
                                 </div>
@@ -445,7 +453,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                               <FormattedMessage id={option.description}/>
                                           </div>}
                                       </Link>
-                                    : <a href={option.mainsite ? `${path}${currentLanguage === 'en' ? '' : "/" + currentLanguage}${option.href}` : option.href} onClick={() => isMobileOpen ? this.openMobileMenu('') : this.openDropdown('')}>
+                                    : <a href={option.mainsite ? `${path}${currentLanguage === 'en' ? '' : "/" + currentLanguage}${option.href}` : option.href} onClick={() => isMobileOpen ? this.openMobileMenu('') : this.openDropdown('')} target={option.newTab ? '_blank' : ''}>
                                         {option.label && <div className="label">
                                             <FormattedMessage id={option.label}/>
                                         </div>}
