@@ -855,11 +855,11 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.message.sepa.more': 'Более 800 EUR',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaLess.value': 'EUR',
-    'page.body.wallets.tabs.deposit.fiat.sepaLess.value': 'MT24PHPY270070PHOENIX0000884546',
-    'page.body.wallets.tabs.deposit.fiat.bankName.sepaLess.value': 'PHOENIX PAYMENTS LTD',
+    'page.body.wallets.tabs.deposit.fiat.sepaLess.value': 'LT833080020000000478',
+    'page.body.wallets.tabs.deposit.fiat.bankName.sepaLess.value': 'NexPay, UAB',
     'page.body.wallets.tabs.deposit.fiat.bankAddress.sepaLess.value':
-        'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
-    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepaLess.value': 'PHPYMTM1XXX',
+        'Lvovo g. 105A, Vilnius, Lithuania',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepaLess.value': 'NEUALT21',
     'page.body.wallets.tabs.deposit.fiat.eur.sepa': 'SEPA IBAN',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaMore.value': 'EUR',
@@ -894,8 +894,8 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text': 'Минимальный депозит ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': '50 EUR',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text.sepa': 'Минимальный депозит ',
-    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepa': '10 EUR.',
-    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaLess': 'Комиссия за транзакцию составляет 0.5% (минимально 1 EUR)',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepa': '5 EUR.',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaLess': 'Комиссия за транзакцию не взымается.',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaMore': 'Комиссия за транзакцию составляет 4 EUR',
     'refcode.code_owner_not_found': 'Владелец кода не найден',
     'refcode.inactive_code': 'Код не активирован',
@@ -1182,7 +1182,7 @@ export const ru: LangType = {
     'page.body.trade.header.newOrder.content.tabs.fee': 'Комиссия',
 
     'page.wallets.withdraw.fiat':
-        'Внимание: при внесении на счет сумм, превышающих установленные лимиты, Ваши средства будут возвращены, после вычета комиссий.',
+        'Внимание: при внесении на счет сумм, превышающих установленные лимиты, Ваши средства будут возвращены.',
     activeTickets: 'Ваши активные билеты',
     'page.profile.update.balance': 'Чтобы повысить свой уровень, пожалуйста, пополните свой баланс минимум на $100',
     'cardDepositFiat.mastercard.message1':

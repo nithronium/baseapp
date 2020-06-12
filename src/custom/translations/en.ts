@@ -173,11 +173,11 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.levelLink': 'Please upgrade your verification level',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaLess.value': 'EUR',
-    'page.body.wallets.tabs.deposit.fiat.sepaLess.value': 'MT24PHPY270070PHOENIX0000884546',
-    'page.body.wallets.tabs.deposit.fiat.bankName.sepaLess.value': 'PHOENIX PAYMENTS LTD',
+    'page.body.wallets.tabs.deposit.fiat.sepaLess.value': 'LT833080020000000478',
+    'page.body.wallets.tabs.deposit.fiat.bankName.sepaLess.value': 'NexPay, UAB',
     'page.body.wallets.tabs.deposit.fiat.bankAddress.sepaLess.value':
-        'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
-    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepaLess.value': 'PHPYMTM1XXX',
+        'Lvovo g. 105A, Vilnius, Lithuania',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepaLess.value': 'NEUALT21',
     'page.body.wallets.tabs.deposit.fiat.eur.sepa': 'SEPA IBAN',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaMore.value': 'EUR',
@@ -212,8 +212,8 @@ export const en = {
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text': 'Minimal deposit amount is ',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value': 'EUR 50',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.text.sepa': 'Minimum deposit amount is ',
-    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepa': '10 EUR.',
-    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaLess': 'Fee is 0.5% (min 1 EUR)',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepa': '5 EUR.',
+    'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaLess': 'No transaction fee is charged.',
     'page.body.wallets.tabs.deposit.fiat.minimal.eur.value.sepaMore': 'Fee is 4 EUR',
     'page.body.profile.mfa.button.text': 'COPY',
     'refcode.code_owner_not_found': 'Code Owner not found',
@@ -527,7 +527,7 @@ export const en = {
     'page.body.trade.header.newOrder.content.tabs.fee': 'Fee',
 
     'page.wallets.withdraw.fiat':
-        'Attention: Should you send a larger amount than your limitation, funds shall be returned and fees will be charged.',
+        'Attention: Should you send a larger amount than your limitation, funds shall be returned.',
     activeTickets: 'Your active tickets',
     'page.profile.update.balance': 'To upgrade your level, please top up your balance with $100 or more.',
     'cardDepositFiat.mastercard.message1': 'Kindly note that, currently we accept only',
