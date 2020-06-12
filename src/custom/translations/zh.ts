@@ -1130,7 +1130,7 @@ export const zh = {
     'chatello.steps.step1': 'Sign Up',
     'chatello.steps.step2': 'Get Verified',
     'chatello.steps.step3': 'Make a payment',
-    'chatello.steps.step4': 'Get CHA Сoins',
+    'chatello.steps.step4': 'Get CHA Сoins — and get them doubled!!',
     'chatello.steps.step4.bottom.text1': 'Coins that you will receive as bonuses are locked for 1 month.',
     'chatello.steps.step4.bottom.text2': 'Don\'t worry. You can use them after.',
     'chatello.steps.step4.bottom.button1': 'Emirex Wallet',

@@ -65,6 +65,8 @@
         background-repeat: no-repeat;
         width: 20px;
         height: 20px;
+        min-width: 20px;
+        min-height: 20px;
         position: relative;
         top: 10px;
     }
@@ -145,34 +147,20 @@
 @media screen and (max-width: 920px) {
     .pg-chatello__top {
         &-app {
-            padding-left: 20px;
-            &-items {
-                display: block;
-                z-index: 1;
-                position: relative;
-            }
 
             &-item {
-                display: inline-block;
-                margin-top: 12px;
-
-                &:after {
-                    display: none !important;
-                }
-
-                &-wrap {
-                    
-                }
+                font-size: 13px;
             }
         }
     }
 }
 
-@media screen and (max-width: 750px) {
+
+@media screen and (max-width: 885px) {
     .pg-chatello {
         &__top {
             &-red-bg {
-                height: 466px;   
+                height: 466px;
             }
 
             &-phone {

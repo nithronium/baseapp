@@ -51,6 +51,7 @@ export class ChatelloStepsComponent extends React.Component<Props> {
                     const textClasses = classnames('credit-card-timeline__text', {
                         active: isActive,
                         checked: isChecked,
+                        'credit-card-timeline__text--last': index === 4,
                     });
                     return (
                         <div
