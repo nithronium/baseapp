@@ -85,6 +85,8 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
             step = 2;
         }
 
+        step = 4;
+
         return (
             <div className="pg-buy-with-credit-card pg-chatello">
                 <Helmet>

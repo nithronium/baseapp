@@ -58,15 +58,12 @@ export class ChatelloStepsComponent extends React.Component<Props> {
                             className={classes}
                             key={index}
                         >
-
                             {index === 1 && <div className="hide-line-before" />}
                             <div className={numberClasses}>
                                 {isChecked ? <div className="credit-card-timeline__number-check" /> : index}
                             </div>
                             <div className={textClasses}>
-                                <div>
-                                    {this.translate(`chatello.steps.step${Number(index)}`)}
-                                </div>
+                                <div dangerouslySetInnerHTML={{ __html: this.translate(`chatello.steps.step${Number(index)}`) }} />
                             </div>
                             {index === 4 && <div className="hide-line-after" />}
                         </div>
@@ -142,6 +139,12 @@ export class ChatelloStepsComponent extends React.Component<Props> {
                     {this.translate(`chatello.steps.step4.bottom.text2`)}
 
                     <div className="pg-chatello-steps__bottom-buttons">
+                        <button
+                            onClick={this.onTryAgain}
+                            className="pg-chatello-steps__bottom-done"
+                        >
+                            {this.translate(`chatello.steps.step4.bottom.done`)}
+                        </button>
                         <a
                             className="pg-chatello-steps__bottom-wallet"
                             href="/wallets"
@@ -154,6 +157,32 @@ export class ChatelloStepsComponent extends React.Component<Props> {
                         >
                             {this.translate(`chatello.steps.step4.bottom.button2`)}
                         </button>
+                    </div>
+                </div>
+
+                <div className="pg-chatello-steps__bottom-help">
+                    <div className="pg-chatello-steps__bottom-help-wrap">
+                        <div className="pg-chatello__overlay1-icon--big" />
+                        <div>
+                            <div className="pg-chatello-steps__bottom-help-header">
+                                {this.translate(`chatello.steps.step4.bottom.header`)}
+                            </div>
+                            <div className="pg-chatello-steps__bottom-help-feedback">
+                                {this.translate(`chatello.steps.step4.bottom.feedback`)}{' '}
+                                <a href="https://kb.emirex.com/kb-tickets/new" target="_blank">
+                                    {this.translate(`chatello.steps.step4.bottom.help`)}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="pg-chatello-steps__bottom-help-button-wrap">
+                        <a
+                            className="pg-chatello-steps__bottom-help-button"
+                            target="_blank"
+                            href="www.google.com"
+                        >
+                            {this.translate(`chatello.steps.step4.bottom.feedback.button`)}
+                        </a>
                     </div>
                 </div>
             </div>

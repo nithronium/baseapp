@@ -100,6 +100,14 @@
         height: 76px;
         line-height: 23px;
         padding-top: 16px;
+
+        flex-wrap: wrap;
+        text-align: center;
+        justify-content: center;
+
+        &-caption {
+            min-width: 100%;
+        }
     }
 
     .credit-card-steps__footer-caption {
@@ -122,9 +130,10 @@
         }
 
         &-try,
-        &-wallet {
+        &-wallet,
+        &-done {
             height: 40px;
-            width: 170px;
+            width: 201px;
             line-height: 40px;
             font-size: 16px;
             color: var(--bg-color-dark1);
@@ -142,6 +151,57 @@
             background-color: var(--color-green);
             color: #fff;
             margin-right: 20px;
+        }
+
+        &-done {
+            background: var(--bg-color-dark1);
+            color: #fff;
+            margin-right: 20px;
+        }
+
+        &-help {
+            background: #101212;
+            padding: 40px 100px;
+            display: flex;
+
+            &-wrap {
+                display: flex;
+            }
+
+            &-header {
+                color: #fff;
+                font-size: 22px;
+            }
+
+            &-button {
+                width: 168px;
+                height: 40px;
+                border: 1px solid var(--color-green);
+                color: var(--color-green);
+                font-size: 14px;
+                cursor: pointer;
+                text-align: center;
+                line-height: 40px;
+                border-radius: 4px;
+                text-decoration: none;
+
+                &-wrap {
+                    display: flex;
+                    justify-content: flex-end;
+                    flex-grow: 1;
+                }
+            }
+
+            &-feedback {
+                color: var(--limits-text-color);
+                font-size: 14px;
+                padding-top: 15px;
+
+                a {
+                    color: var(--color-green);
+                    text-decoration: underline;
+                }
+            }
         }
     }
 
@@ -235,6 +295,13 @@
                 margin-right: 24px;
                 position: relative;
                 top: 5px;
+
+                &--big {
+                    background-image: url(./assets/images/chatello-overlay-help-icon.png);
+                    width: 72px;
+                    height: 72px;
+                    margin-right: 30px;
+                }
             }
 
             &-button-wrap {
@@ -348,6 +415,71 @@
 
         .credit-card-timeline {
             height: 130px;
+        }
+
+        .pg-chatello-steps__bottom-done,
+        .pg-chatello-steps__bottom-wallet,
+        .pg-chatello-steps__bottom-try {
+            min-width: 100%;
+            margin-right: 0;
+            margin-top: 10px;
+        }
+
+        .pg-chatello-steps__bottom-wallet {
+            order: 1;
+        }
+
+        .pg-chatello-steps__bottom-try {
+            order: 2;
+        }
+
+        .pg-chatello-steps__bottom-done {
+            order: 3;
+        }
+
+        .pg-chatello-steps__bottom-buttons {
+            flex-wrap: wrap;
+            flex-direction: column;
+        }
+
+        .pg-chatello-steps__bottom {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .pg-chatello__footer {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .pg-chatello-steps__bottom-help {
+            padding: 20px;
+            padding: 20px;
+            display: block;
+
+            &-wrap {
+                display: block;
+            }
+        }
+
+        .pg-chatello__overlay1-icon,
+        .pg-chatello__overlay1-icon--big {
+            margin: 0 auto;
+        }
+
+        .pg-chatello-steps__bottom-help-header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .pg-chatello-steps__bottom-help-feedback {
+            text-align: center;
+            padding-bottom: 20px;
+            padding-top: 0;
+        }
+
+        .pg-chatello-steps__bottom-help-button-wrap {
+            justify-content: center;
         }
     }
 }
