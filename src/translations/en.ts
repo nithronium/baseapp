@@ -446,6 +446,7 @@ export const en = {
     "nav_my_orders": "My Orders",
     "nav_account_security": "Account Security",
     "nav_referral_program": "Referral program",
+    "nav_my_referral": "My referrals",
     "nav_api_setting": "API Setting",
     "nav_logout": "Log Out",
     "nav_language": "Language",

@@ -43,8 +43,6 @@ class History extends React.Component<Props, State> {
     public tabMapping = ['deposits', 'withdraws', 'trades', pluginsList().find(item => item.name === 'ieo') && 'ieo'];
 
     public componentDidMount() {
-        // tslint:disable-next-line:no-console
-        console.log('...........this.props.match.params', this.props.match.params.history);
         setDocumentTitle('History');
         this.props.fetchMarkets();
         this.props.fetchWallets();

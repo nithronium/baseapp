@@ -545,14 +545,14 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                     </Link>
                 </li>
                 <li>
-                    <Link to={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/history/deposits`} onClick={() => this.openDropdown('')}>
+                    <a href={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/history/deposits`} onClick={() => this.openDropdown('')}>
                         <FormattedMessage id={'page.body.history.deposit'}/>
-                    </Link>
+                    </a>
                 </li>
                 <li>
-                    <Link to={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/history/withdraws`} onClick={() => this.openDropdown('')}>
+                    <a href={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/history/withdraws`} onClick={() => this.openDropdown('')}>
                         <FormattedMessage id={'page.body.history.withdraw'}/>
-                    </Link>
+                    </a>
                 </li>
                 {/*<li>*/}
                 {/*    <Link to={'/buycrypto'} onClick={() => this.openDropdown('')}>*/}

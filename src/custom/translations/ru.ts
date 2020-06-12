@@ -563,6 +563,7 @@ export const ru: LangType = {
     "nav_my_orders": "Мои ордера",
     "nav_account_security": "Безопасность",
     "nav_referral_program": "Реферальная программа",
+    "nav_my_referral": "Мои рефералы",
     "nav_api_setting": "Настройки API",
     "nav_logout": "Выйти",
     "nav_language": "Язык",

@@ -390,6 +390,7 @@ export const zh = {
     "nav_my_orders": "我的订单",
     "nav_account_security": "账号安全",
     "nav_referral_program": "推荐计划",
+    "nav_my_referral": "我的推荐",
     "nav_api_setting": "API设置",
     "nav_logout": "退出",
     "nav_language": "语言",
