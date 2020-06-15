@@ -120,8 +120,8 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
 
     public render() {
         const { orderAmount, orderFinished } = this.state;
-        const title = this.props.intl.formatMessage({ id: 'buyWithCard.title' });
-        const description = this.props.intl.formatMessage({ id: 'buyWithCard.description' });
+        const title = this.props.intl.formatMessage({ id: 'chatello.page.title' });
+        const description = this.props.intl.formatMessage({ id: 'chatello.page.description' });
         const { match, user, userLoggedIn } = this.props;
         const amount = match.params.amount;
         let step = 1;

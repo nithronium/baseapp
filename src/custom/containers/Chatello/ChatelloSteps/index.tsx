@@ -124,12 +124,12 @@ export class ChatelloStepsComponent extends React.Component<Props> {
                 {this.renderTimeline()}
                 <div className="credit-card-steps__footer pg-chatello__footer">
                     {this.translate(`chatello.steps.footer4-1`)}
-                    {amount}
+                    {amount / 2}
                     {this.translate(`chatello.steps.footer4-2`)}
 
                     <div className="credit-card-steps__footer-caption">
                         {this.translate(`chatello.steps.footer4-3`)}
-                        {amount}
+                        {amount / 2}
                         {this.translate(`chatello.steps.footer4-4`)}
                     </div>
                 </div>
