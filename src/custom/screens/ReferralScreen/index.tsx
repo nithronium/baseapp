@@ -43,7 +43,7 @@ import {
     Partners,
 } from '../../components/Referral';
 
-import { buildPath } from '../../helpers';
+import {buildPath, saveParametersFromUrl} from '../../helpers';
 
 import { GeetestCaptcha } from '../../../containers';
 import { WinnersBanner } from '../../components/Referral/WinnersBanner/WinnerBanner';
@@ -100,19 +100,12 @@ class Referral extends React.Component<Props> {
     };
 
     public componentDidMount() {
-        let referralCode = this.extractRefID(this.props.location.search) || '';
-        if (localStorage.getItem('refCode')) {
-            referralCode = localStorage.getItem('refCode') || '';
-        }
-        localStorage.setItem('refCode', referralCode);
-        if (localStorage.getItem('refCode')) {
+        saveParametersFromUrl(this.props.location.search);
+         if (localStorage.getItem('refid')) {
             this.setState({
-                refId: localStorage.getItem('refCode'),
+                refId: localStorage.getItem('refid'),
             });
         }
-        this.setState({
-            refId: referralCode,
-        });
         const query = '/tickets/all';
         this.props.fetchReferralTickets(query);
     }
@@ -488,14 +481,6 @@ class Referral extends React.Component<Props> {
     private closeModal = () => {
         this.setState({ showModal: false });
         this.props.history.push('/signin');
-    };
-
-    private extractRefID = (url: string) => {
-        const refId = new URLSearchParams(url).get('refid');
-        if (refId) {
-            return refId!.split('?')[0];
-        }
-        return refId;
     };
 
     private handleValidateForm = () => {

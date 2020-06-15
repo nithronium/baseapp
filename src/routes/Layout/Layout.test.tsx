@@ -14,6 +14,8 @@ const defaults: LayoutProps = {
         role: '',
         state: '',
         uid: '',
+        cryptoCurrency: 'BTC',
+        activeCurrency: 'USD',
     },
     isLoggedIn: false,
     logout: jest.fn(),

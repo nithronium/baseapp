@@ -6,3 +6,5 @@ export * from './getWalletTotal';
 export * from './layout';
 export * from './historyTableUtils';
 export * from './redirectUrl';
+export * from './saveParametersFromUrl';
+

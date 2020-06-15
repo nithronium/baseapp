@@ -151,10 +151,10 @@ export const en2 = {
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepa.value': 'EUR',
     'page.body.wallets.tabs.deposit.fiat.sepa.value': 'MT24PHPY270070PHOENIX0000884546',
-    'page.body.wallets.tabs.deposit.fiat.bankName.sepa.value': 'PHOENIX PAYMENTS LTD',
+    'page.body.wallets.tabs.deposit.fiat.bankName.sepa.value': 'NexPay, UAB',
     'page.body.wallets.tabs.deposit.fiat.bankAddress.sepa.value':
         'Vision Exchange Building, Territorials Street, Mriehel, BKR 3000 - Malta',
-    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepa.value': 'PHPYMTM1XXX',
+    'page.body.wallets.tabs.deposit.fiat.bankSwift.sepa.value': 'NEUALT21',
     'page.body.wallets.tabs.deposit.fiat.eur.sepa': 'SEPA IBAN',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.usd.value': 'USD',

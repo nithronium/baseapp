@@ -10,7 +10,6 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { minutesUntilAutoLogout } from '../../api';
-import { buildPath } from '../../custom/helpers';
 import {
     BuyWithCreditCardScreen,
     ChatelloScreen,
@@ -19,6 +18,7 @@ import {
     ReferralTicketsScreen,
     TradingScreen
 } from '../../custom/screens';
+import { buildPath, saveParametersFromUrl } from '../../custom/helpers';
 import { LoginModal } from '../../custom/components/KYCLoginModal';
 import { ConfirmScreen } from '../../custom/screens';
 import { toggleColorTheme } from '../../helpers';
@@ -92,6 +92,7 @@ const PrivateRoute: React.FunctionComponent<any> = ({ component: CustomComponent
     if (loading) {
         return renderLoader();
     }
+    saveParametersFromUrl(rest.location.search);
     const renderCustomerComponent = props => <CustomComponent {...props} />;
 
     if (isLogged) {
@@ -110,6 +111,7 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
     if (loading) {
         return renderLoader();
     }
+    saveParametersFromUrl(rest.location.search);
 
     if (isLogged && !noReditect) {
         let url = '/profile';
@@ -188,8 +190,6 @@ class LayoutComponent extends React.Component<LayoutProps> {
             localStorage.setItem('uil', 'true');
         } else if (isLoggedIn && siteState === 'false') {
             this.props.logout();
-        } else if (!isLoggedIn) {
-            localStorage.removeItem('uil');
         }
 
         // if (!isLoggedIn && next.isLoggedIn) {
@@ -336,14 +336,14 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
-                        path={'/history'}
+                        path={'/history/:history'}
                         component={HistoryScreen}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
-                        path={'/ru/history'}
+                        path={'/ru/history/:history'}
                         component={HistoryScreen}
                         currentLanguage={currentLanguage}
                     />
@@ -529,7 +529,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
-                        path={'/zh/history'}
+                        path={'/zh/history/:history'}
                         component={HistoryScreen}
                         currentLanguage={currentLanguage}
                     />

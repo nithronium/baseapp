@@ -3,6 +3,7 @@ import { takeEvery } from 'redux-saga/effects';
 import {
     PROFILE_CHANGE_PASSWORD_FETCH,
     PROFILE_GENERATE_2FA_QRCODE_FETCH,
+    PROFILE_GET_BALANCE_FETCH,
     PROFILE_IDENTITY_FETCH,
     PROFILE_TIERS_FETCH,
     PROFILE_TOGGLE_2FA_FETCH,
@@ -10,6 +11,7 @@ import {
 } from '../constants';
 import { changePasswordSaga } from './changePasswordSaga';
 import { generate2faQRSaga } from './generate2faQRSaga';
+import { getBalanceSaga } from './getBalanceSaga';
 import { profileIdentitySaga } from './profileIdentitySaga';
 import { tiersSaga } from './tiersSaga';
 import { toggle2faSaga } from './toggle2faSaga';
@@ -21,5 +23,6 @@ export function* rootProfileSaga() {
     yield takeEvery(PROFILE_TOGGLE_2FA_FETCH, toggle2faSaga);
     yield takeEvery(PROFILE_TIERS_FETCH, tiersSaga);
     yield takeEvery(PROFILE_USER_FETCH, userSaga);
+    yield takeEvery(PROFILE_GET_BALANCE_FETCH, getBalanceSaga);
     yield takeEvery(PROFILE_IDENTITY_FETCH, profileIdentitySaga);
 }

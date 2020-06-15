@@ -8,6 +8,7 @@ import { OrderComponent } from '../../../containers/Order';
 import { OpenOrdersPanel, OrderBook } from '../../containers';
 
 import { Helmet } from 'react-helmet';
+import { saveParametersFromUrl } from '../../../custom/helpers';
 
 import { getUrlPart } from '../../../helpers';
 import {
@@ -128,9 +129,20 @@ class Trading extends React.Component<Props, StateProps> {
         usdteur: { title: 'usdteur_title', description: 'usdteur_description' },
         usdcusdt: { title: 'usdcusdt_title', description: 'usdcusdt_description' },
         btcusdc: { title: 'btcusdc_title', description: 'btcusdc_description' },
+        maticbtc: { title: 'maticbtc_title', description: 'maticbtc_description' },
+        maticusdt: { title: 'maticusdt_title', description: 'maticusdt_description' },
+        zpaebtc: { title: 'zpaebtc_title', description: 'zpaebtc_description' },
+        zpaeusdt: { title: 'zpaeusdt_title', description: 'zpaeusdt_description' },
+        chzbtc: { title: 'chzbtc_title', description: 'chzbtc_description' },
+        chzusdt: { title: 'chzusdt_title', description: 'chzusdt_description' },
+        ethbusd: { title: 'ethbusd_title', description: 'ethbusd_description' },
+        btcbusd: { title: 'btcbusd_title', description: 'btcbusd_description' },
+        enjbtc: { title: 'enjbtc_title', description: 'enjbtc_description' },
+        enjusdt: { title: 'enjusdt_title', description: 'enjusdt_description' },
     };
 
     public componentDidMount() {
+        saveParametersFromUrl(this.props.location.search);
         const {
             currentLanguage,
             currentMarket,

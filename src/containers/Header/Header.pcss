@@ -6,6 +6,8 @@ header {
 .pg-header {
   background-color: var(--header-background-cover);
   margin: 0 auto;
+  display: flex;
+  width: 100%;
 
   .pg-logo__img {
     height: calc(var(--gap) * 3.666);
@@ -29,8 +31,7 @@ header {
   &__navbar {
     background: var(--background-dark);
     padding-top: 3px;
-    margin-left: 30px;
-    display: block;
+    display: flex;
     width: 100%;
   }
 
@@ -38,7 +39,8 @@ header {
     align-items: center;
     box-shadow: 1px 1px 5px rgba(46, 76, 128, 0.2);
     display: flex;
-    height: calc(var(--gap) * 10.67);
+    height: 60px;
+    width: 100%;
   }
 
   &__toggler {
@@ -54,80 +56,6 @@ header {
     justify-content: flex-start;
     padding: 0 2%;
     width: 100%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .pg-header {
-    position: relative;
-    justify-content: none;
-
-    &__logo {
-      display: none;
-    }
-
-    &__location {
-      display: block;
-      font-size: 18px;
-      text-align: center;
-      text-transform: uppercase;
-      color: var(--color-white);
-      text-decoration: none;
-    }
-
-    &--active {
-      position: static;
-      .pg-header__navbar {
-        display: block;
-        position: fixed;
-        left: 0;
-        background: var(--background-dark);
-        -webkit-animation: slide-right .3s ease-out;
-        -moz-animation: slide-right .3s ease-out;
-      }
-    }
-
-    &__navbar {
-      margin-left: 0;
-      min-height: calc(100vh - 56px);
-      top: 0;
-      z-index: 666;
-      max-width: calc(var(--gap) * 33);
-      position: absolute;
-      width: 100%;
-      display: none;
-      transition: all 1s ease;
-      &::after {
-        background: rgba(0, 0, 0, 0.8);
-        width: 100vw;
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 264px;
-      }
-    }
-
-    &__toggler {
-      cursor: pointer;
-      width: 30px;
-      height: 30px;
-      display: block;
-      &-item {
-        background: var(--navbar-text-color);
-        display: block;
-        width: 30px;
-        height: 3px;
-        border-radius: 5px;
-        margin-bottom: 5px;
-        transition: all 0.2s linear;
-      }
-    }
-  }
-
-  .pg-container {
-    height: 46px;
-    justify-content: center !important;
   }
 }
 
