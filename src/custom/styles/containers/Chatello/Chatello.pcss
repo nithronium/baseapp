@@ -99,7 +99,7 @@
     .pg-chatello__footer {
         height: 76px;
         line-height: 23px;
-        padding-top: 16px;
+        padding-top: 1px;
 
         flex-wrap: wrap;
         text-align: center;
@@ -111,8 +111,8 @@
     }
 
     .credit-card-steps__footer-caption {
-        color: #5a5d5d;
-        font-size: 12px;
+        /* color: #5a5d5d;
+        font-size: 12px; */
     }
 
     .pg-chatello-steps__bottom {
@@ -248,7 +248,7 @@
                 font-size: 10px;
                 position: relative;
                 left: -7px;
-                top: 9px;
+                top: 13px;
             }
         }
 
@@ -267,7 +267,7 @@
 
 
             &-block1 {
-                font-size: 14px;
+                font-size: 21px;
                 color: #fff;
                 margin-right: 55px;
                 line-height: 28px;
@@ -279,7 +279,7 @@
             }
 
             &-block2 {
-                color: #5d6161;
+                color: #999;
                 font-size: 14px;
                 line-height: 28px;
             }
@@ -291,7 +291,7 @@
                 min-width: 48px;
                 margin-right: 24px;
                 position: relative;
-                top: 5px;
+                top: 17px;
 
                 &--big {
                     background-image: url(./assets/images/chatello-overlay-help-icon.png);
@@ -327,6 +327,15 @@
             text-align: center;
             position: relative;
             top: -22px;
+
+            a {
+                color: #96fadc;
+            }
+
+            &:before {
+                border-color: #96fadc;
+                color: #96fadc;
+            }
         }
     }
 }
@@ -472,6 +481,11 @@
         .pg-chatello__overlay1-icon,
         .pg-chatello__overlay1-icon--big {
             margin: 0 auto;
+        }
+
+        .pg-chatello__overlay1-icon {
+            position: relative;
+            left: -20px;
         }
 
         .pg-chatello-steps__bottom-help-header {

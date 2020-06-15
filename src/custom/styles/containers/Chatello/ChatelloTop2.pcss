@@ -78,7 +78,7 @@
         top: 59px;
         min-width: 288px;
         z-index: 1;
-        margin: 0 36px;
+        margin: 0 16px;
     }
 
     &-right {
@@ -108,7 +108,7 @@
 
     &-items {
         display: flex;
-        padding-bottom: 70px;
+        padding-bottom: 48px;
     }
 
     &-item {
@@ -117,16 +117,16 @@
         border-radius: 6px;
         color: #222b41;
         position: relative;
-        height: 68px;
+        height: 104px;
         font-size: 14px;
-        width: 186px;
+        width: 199px;
         margin-right: 10px;
+        align-items: center;
 
         &-text {
-            font-size: 14px;
+            font-size: 21px;
             font-weight: bold;
             padding-right: 18px;
-            padding-top: 15px;
         }
 
         &-icon1,
@@ -139,7 +139,6 @@
             background-repeat: no-repeat;
             background-position: center center;
             position: relative;
-            top: 10px;
         }
 
         &-icon1 {
@@ -191,22 +190,26 @@
 
     &-app-store,
     &-google-play {
-        width: 140px;
-        height: 42px;
-        min-width: 140px;
+        width: 93px;
+        height: 28px;
+        min-width: 93px;
         margin-right: 10px;
+        background-size: contain;
+        position: relative;
     }
 
     &-footer {
         display: flex;
+        align-items: center;
+        height: 42px;
+        border-left: 1px solid #fff;
 
         &-text {
             font-size: 16px;
             line-height: 23px;
-            height: 42px;
-            border-left: 1px solid #fff;
             padding-left: 24px;
             color: #fff;
+            padding-right: 20px;
         }
     }
 
