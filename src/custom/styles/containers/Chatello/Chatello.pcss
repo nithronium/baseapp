@@ -218,7 +218,7 @@
         -webkit-backdrop-filter: blur(12px);
         backdrop-filter: blur(12px);
         z-index: 1;
-        background: rgba(0, 0, 0, 0.2);
+        background-color: rgba(34, 38, 39, 0.95);
 
         &-wrap {
             width: 620px;
@@ -332,6 +332,14 @@
             top: -22px;
         }
     }
+}
+
+@supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
+  .pg-chatello .pg-chatello__overlay {  
+    background-color: rgba(34, 38, 39, 0.35);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
 }
 
 

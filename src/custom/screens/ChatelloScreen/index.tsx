@@ -49,6 +49,9 @@ type Props = InjectedIntlProps & RouteProps & ReduxProps;
 export interface State {
     orderAmount: number;
     orderFinished: boolean;
+    orderSubmitTime: number;
+    prevStorageChangeTime: number | null;
+    orderSubmitted: boolean;
 }
 
 class ChatelloScreenComponent extends React.Component<Props, State> {
@@ -57,6 +60,9 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
         this.state = {
             orderAmount: 0,
             orderFinished: false,
+            orderSubmitTime: Date.now() + 1e10,
+            prevStorageChangeTime: null,
+            orderSubmitted: false,
         };
     }
 
@@ -67,7 +73,38 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
     public onTryAgain = () => {
         this.setState({
             orderFinished: false,
+            orderSubmitted: false,
         });
+    };
+
+    public componentDidMount() {
+        window.addEventListener('storage', this.onStorageChange);
+    }
+
+    public componentWillUnmount() {
+        window.removeEventListener('storage', this.onStorageChange);
+    }
+
+    public onStorageChange = () => {
+        const { prevStorageChangeTime, orderSubmitted, orderSubmitTime } = this.state;
+        const status = localStorage.getItem('transation-status');
+        const time = Number(localStorage.getItem('transation-timestamp'));
+
+        if (prevStorageChangeTime !== time) {
+            this.setState({ prevStorageChangeTime: time });
+            console.log('onStorageChange', status, time);
+            if (orderSubmitted && orderSubmitTime < Date.now() && status === 'success') {
+                this.setState({ orderFinished: true });
+            }
+        }
+    };
+
+    public onOrderSubmit = () => {
+        this.setState({
+            orderSubmitTime: Date.now(),
+            orderSubmitted: true,
+        });
+        console.log('onOrderSubmit', Date.now());
     };
 
     public render() {
@@ -86,7 +123,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
             step = 2;
         }
 
-        // step = 4;
+        // step = 1;
 
         return (
             <div className="pg-buy-with-credit-card pg-chatello">
@@ -117,6 +154,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
                         amount={amount}
                         onOrderAmountChange={this.onOrderAmountChange}
                         step={step}
+                        onOrderSubmit={this.onOrderSubmit}
                     />}
                     <ChatelloInfo />
                 </div>

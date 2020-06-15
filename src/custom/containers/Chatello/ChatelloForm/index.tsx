@@ -63,6 +63,7 @@ type Props = InjectedIntlProps & ReduxProps & DispatchProps & RouteComponentProp
     isLoggedIn: boolean;
     amount: number;
     onOrderAmountChange: () => void;
+    onOrderSubmit: () => void;
     step: number;
 };
 
@@ -176,13 +177,13 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     public getMinLimit = () => {
         let { ieo } = this.props;
         ieo = ieo || { min_amount: 0, max_amount: 0 };
-        return ieo.min_amount;
+        return ieo.min_amount * 2;
     };
 
     public getMaxLimit = () => {
         let { ieo } = this.props;
         ieo = ieo || { min_amount: 0, max_amount: 0 };
-        return ieo.max_amount;
+        return ieo.max_amount * 2;
     };
 
     public render() {
@@ -451,13 +452,13 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     };
 
     public submitModal = () => {
-        const { createCreditCardOrder } = this.props;
+        const { createCreditCardOrder, onOrderSubmit } = this.props;
         const { fiat, crypto, usdValue } = this.state;
         const outcomeCurrencyId = fiat;
         const incomeCurrencyId = crypto;
         const amount = usdValue;
 
-
+        onOrderSubmit();
         createCreditCardOrder({
             outcomeCurrencyId,
             incomeCurrencyId,
