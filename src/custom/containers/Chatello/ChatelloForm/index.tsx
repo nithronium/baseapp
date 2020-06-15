@@ -129,13 +129,23 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     };
 
     public onSubmit = () => {
-        const { userLoggedIn, history, user } = this.props;
+        const { userLoggedIn, history, user, amount } = this.props;
+        let url = '/chatello';
+
+
+        if (amount) {
+            url = `${url}/${amount}`;
+        }
+
+
+        console.log('redirect_url', url);
+
         if (!userLoggedIn) {
-            history.push(`/signin?redirect_url=${encodeURIComponent('/chatello')}`);
+            history.push(`/signin?redirect_url=${encodeURIComponent(url)}`);
             return;
         }
         if (user.level < 4) {
-            history.push(`/confirm?redirect_url=${encodeURIComponent('/chatello')}`);
+            history.push(`/confirm?redirect_url=${encodeURIComponent(url)}`);
         }
         this.setState({
             showModal: true,
@@ -207,7 +217,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     };
 
     public render() {
-        const { step, userLoggedIn, user } = this.props;
+        const { step, userLoggedIn, user, amount } = this.props;
         console.log('step', step);
         return (
             <div className="buy-form">
@@ -264,6 +274,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                         step={step}
                         userLoggedIn={userLoggedIn}
                         user={user}
+                        amount={amount}
                     />
                 </div>
                 <Modal
@@ -372,7 +383,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
 
                     <div className="buy-form__input-wrap">
                         <label className="buy-form__label">
-                            {this.translate('buyWithCard.form.sell')}
+                            {this.translate('chatello.form.sell')}
                         </label>
                         <input
                             onChange={this.onUsdValueChange}

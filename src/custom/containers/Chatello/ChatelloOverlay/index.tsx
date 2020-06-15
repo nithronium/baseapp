@@ -12,6 +12,7 @@ type Props = InjectedIntlProps & RouteComponentProps & {
     step: number;
     userLoggedIn: boolean;
     user: User;
+    amount: number;
 };
 
 export class ChatelloOverlayComponent extends React.Component<Props> {
@@ -37,16 +38,21 @@ export class ChatelloOverlayComponent extends React.Component<Props> {
     }
 
     public handleButton = () => {
-        const { history, step } = this.props;
+        const { history, step, amount } = this.props;
+
+        let url = '/chatello';
+
+        if (amount) {
+            url = `${url}/${amount}`;
+        }
 
         if (step === 1) {
-            history.push(`/signin?redirect_url=${encodeURIComponent('/chatello')}`);
+            history.push(`/signin?redirect_url=${encodeURIComponent(url)}`);
             return;
         }
         if (step === 2) {
-            history.push(`/confirm?redirect_url=${encodeURIComponent('/chatello')}`);
+            history.push(`/confirm?redirect_url=${encodeURIComponent(url)}`);
         }
-        console.log('click');
     };
 
     public renderOverlay1 = () => {

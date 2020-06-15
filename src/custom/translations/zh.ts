@@ -1254,6 +1254,7 @@ export const zh = {
     'chatello.form.header': 'Buy Chatello Coin with Credit/Debit Card',
     'chatello.form.title': 'Buy Chatello Coin with Credit/Debit Card',
     'chatello.form.buttonBuy': 'BUY CHA',
+    'chatello.form.sell': 'Pay',
 
     'chatello.overlay1.text1': 'Buying Chatello Coins on Emirex gets you',
     'chatello.overlay1.text2': 'X2 Coin Amount',

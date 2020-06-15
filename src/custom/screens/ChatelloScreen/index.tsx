@@ -99,8 +99,6 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
             });
         }
 
-        console.log('onMessage', event);
-
         if (action === 'instex-success') {
             this.setState({ successIframeLoaded: true });
         }
@@ -111,12 +109,10 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
             orderSubmitTime: Date.now(),
             orderSubmitted: true,
         });
-        console.log('onOrderSubmit', Date.now());
     };
 
     public onIframeClose = () => {
         const { successIframeLoaded } = this.state;
-        console.log('onIframeClose', successIframeLoaded);
         if (successIframeLoaded) {
             this.setState({ orderFinished: true });
         }
