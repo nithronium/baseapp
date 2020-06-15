@@ -38,7 +38,7 @@ import {
 
 import { WithdrawLimit } from '../../../../modules/user/withdrawLimit';
 
-const CHATELLA_IEO_ID = 4;
+const CHATELLA_IEO_ID = 152;
 
 
 interface ReduxProps {
