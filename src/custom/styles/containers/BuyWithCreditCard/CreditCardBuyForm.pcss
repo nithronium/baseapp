@@ -212,6 +212,11 @@
                     cursor: pointer;
                     text-align: center;
                     border: none;
+
+                    &[disabled] {
+                        cursor: not-allowed;
+                        opacity: 0.5;
+                    }
                 }
             }
         }
@@ -380,7 +385,7 @@
             }
 
             &[disabled] {
-                cursor: default;
+                cursor: not-allowed;
                 opacity: 0.5;
             }
         }

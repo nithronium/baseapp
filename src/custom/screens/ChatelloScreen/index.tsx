@@ -89,8 +89,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
         const action = event.data.action;
         // tslint:disable-next-line
         if (action === 'instex-success-ok' ||
-            action === 'instex-success-close' ||
-            action === 'instex-success'
+            action === 'instex-success-close'
         ) {
             this.setState({
                 orderFinished: true,
