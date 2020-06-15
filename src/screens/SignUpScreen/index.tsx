@@ -110,11 +110,13 @@ class SignUp extends React.Component<Props> {
 
         if (props.requireVerification) {
 
-            let url = '/email-verification';
+            const url = '/email-verification';
+            let redirectUrl = '';
             const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
             if (parsed.redirect_url) {
-                url = parsed.redirect_url;
+                redirectUrl = parsed.redirect_url;
             }
+            localStorage.setItem('redirect_url', redirectUrl);
             props.history.push(buildPath(url, i18n), {email: this.state.email});
         }
 

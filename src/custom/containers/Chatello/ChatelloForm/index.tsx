@@ -141,7 +141,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
         console.log('redirect_url', url);
 
         if (!userLoggedIn) {
-            history.push(`/signin?redirect_url=${encodeURIComponent(url)}`);
+            history.push(`/signup?redirect_url=${encodeURIComponent(url)}`);
             return;
         }
         if (user.level < 4) {
@@ -260,12 +260,12 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                                 <div>
                                     <div className="icon-arrow" />
                                     <p>Min amount:</p>
-                                    <span>{' '}{this.getMinLimit()}</span>
+                                    <span>{' '}{this.getMinLimit()} CHA</span>
                                 </div>
                                 <div>
                                     <div className="icon-arrow" />
                                     <p>Max amount:</p>
-                                    <span>{' '}{this.getMaxLimit()}</span>
+                                    <span>{' '}{this.getMaxLimit()} CHA</span>
                                 </div>
                             </div>
                         </div>
