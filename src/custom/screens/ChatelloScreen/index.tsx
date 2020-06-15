@@ -87,8 +87,10 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
         window.addEventListener('message', this.onMessage);
         const visited = localStorage.getItem('visited-chatello');
         if (!visited) {
+            console.log('not visited');
             localStorage.setItem('visited-chatello', 'true');
         } else {
+            console.log('visited');
             this.scrollToMyRef();
         }
     }
@@ -128,9 +130,14 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
     };
 
     public scrollToMyRef = () => {
-        if (this.myRef.current) {
-            window.scrollTo(0, this.myRef.current.offsetTop);
-        }
+        setTimeout(() => {
+            if (this.myRef.current) {
+                console.log('ref offset', this.myRef.current.offsetTop + 60);
+                window.scrollTo(0, this.myRef.current.offsetTop + 60);
+            } else {
+                console.log('no ref');
+            }
+        }, 1500);
     };
 
     public render() {
@@ -152,7 +159,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
         // step = 1;
 
         return (
-            <div className="pg-buy-with-credit-card pg-chatello">
+            <div className="pg-buy-with-credit-card pg-chatello" style={{ overflowAnchor: 'none' }}>
                 <Helmet>
                     <link rel="canonical" href="https://emirex.com/buycrypto" />
                     <title>{title}</title>
@@ -163,7 +170,10 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
                 </Helmet>
                 <ChatelloTop />
                 <ChatelloTop2 />
-                <div className="pg-buy-with-credit-card__container">
+                <div
+                    className="pg-buy-with-credit-card__container"
+                    ref={this.myRef}
+                >
                     <ChatelloSteps
                         currentStep={step}
                         paymentData={{
@@ -177,7 +187,6 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
                         userLoggedIn={userLoggedIn}
                     />
                     {step !== 4 && <ChatelloForm
-                        ref={this.myRef}
                         amount={amount}
                         onOrderAmountChange={this.onOrderAmountChange}
                         step={step}
