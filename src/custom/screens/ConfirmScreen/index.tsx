@@ -29,7 +29,7 @@ import { ProfilePartial } from '../../containers/Confirm/ProfilePartial';
 import { Questionnaire } from '../../containers/Confirm/Questionnaire';
 import { buildPath } from '../../helpers/buildPath';
 
-import { redirectIfSpecified } from '../../helpers';
+import { getRedirectUrl, redirectIfSpecified } from '../../helpers';
 
 interface ReduxProps {
     colorTheme: string;
@@ -283,6 +283,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             history,
             labels,
             userData: { level, profile },
+            currentLanguage,
         } = this.props;
 
         if (!labels.length) {
@@ -312,6 +313,10 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         }
 
         if (level === 4) {
+            const redirectUrl = getRedirectUrl();
+            if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
+                history.push(buildPath(redirectIfSpecified('/profile'), currentLanguage));
+            }
             return this.renderFourthLevel();
         }
 

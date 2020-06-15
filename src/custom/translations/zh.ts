@@ -1267,7 +1267,7 @@ export const zh = {
     'chatello.overlay2.header': 'The verification flow is very simple and straightforward.',
 
     'chatello.top.header': 'What is Chatello?',
-    'chatello.top.text': 'Chatello Inc. is a social media app allowing influencers with a good base of followers to monetize their social presence anywhere, anytime, by enabling followers to access influencers, seeking advice or consultancy or asking questions in a highly personal and one-on-one way. Chatello app will be available for both platforms Apple iOS and Google Android. The first version will be in English and later in other languages such as Chinese.',
+    'chatello.top.text': 'Chatello Inc. is a social media app that allows influencers with solid following to monetize their social presence by letting followers reach for advice, consultancy, or their opinion!',
     'chatello.top.item1': 'Communicate and get inspired',
     'chatello.top.item2': 'Enage in a personal interaction',
     'chatello.top.item3': 'Be seen, be heard and be noticed',
