@@ -149,7 +149,26 @@ class ChatelloFormComponent extends React.Component<Props, State> {
         if (amount) {
             this.onChaValueChange({ target: { value: Number(amount) } });
         }
+
+        window.addEventListener('message', this.onMessage);
     }
+
+    public componentWillUnmount() {
+        window.removeEventListener('message', this.onMessage);
+    }
+
+    public onMessage = event => {
+        const action = event.data.action;
+        // tslint:disable-next-line
+        if (action === 'instex-error-try-again' ||
+            action === 'instex-error-close'
+        ) {
+            this.setState({
+                showModal: false,
+                openIframe: false,
+            });
+        }
+    };
 
     public componentWillReceiveProps(nextProps) {
         const { buyWithCreditCard } = this.props;
@@ -212,6 +231,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                         <button
                             className="buy-form__button-continue"
                             onClick={this.onSubmit}
+                            disabled={this.isButtonDisabled()}
                         >
                             {this.translate(this.getButtonTextKey())}
                         </button>
@@ -291,6 +311,22 @@ class ChatelloFormComponent extends React.Component<Props, State> {
 
     public closeIframe = () => {
         this.setState({ openIframe: false });
+    };
+
+    public isButtonDisabled = () => {
+        const { userLoggedIn, user } = this.props;
+        const { chaValue } = this.state;
+        const chaNumber = Number(chaValue);
+        if (userLoggedIn) {
+            if (user.level >= 4) {
+                const min = Number(this.getMinLimit());
+                const max = Number(this.getMaxLimit());
+                if (chaNumber < min || chaNumber > max) {
+                    return true;
+                }
+            }
+        }
+        return false;
     };
 
     public currenciesForm = (isModal: boolean) => {
@@ -440,12 +476,13 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                 </div>
 
                 <div className="buy-form__modal-footer">
-                    <div
+                    <button
                         className="buy-form__modal-footer-button"
                         onClick={this.submitModal}
+                        disabled={this.isButtonDisabled()}
                     >
                         {this.translate('buyWithCard.form.modal.buttonBuy')}
-                    </div>
+                    </button>
                 </div>
             </div>
         );

@@ -78,24 +78,23 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
     };
 
     public componentDidMount() {
-        window.addEventListener('storage', this.onStorageChange);
+        window.addEventListener('message', this.onMessage);
     }
 
     public componentWillUnmount() {
-        window.removeEventListener('storage', this.onStorageChange);
+        window.removeEventListener('message', this.onMessage);
     }
 
-    public onStorageChange = () => {
-        const { prevStorageChangeTime, orderSubmitted, orderSubmitTime } = this.state;
-        const status = localStorage.getItem('transation-status');
-        const time = Number(localStorage.getItem('transation-timestamp'));
-
-        if (prevStorageChangeTime !== time) {
-            this.setState({ prevStorageChangeTime: time });
-            console.log('onStorageChange', status, time);
-            if (orderSubmitted && orderSubmitTime < Date.now() && status === 'success') {
-                this.setState({ orderFinished: true });
-            }
+    public onMessage = event => {
+        const action = event.data.action;
+        // tslint:disable-next-line
+        if (action === 'instex-success-ok' ||
+            action === 'instex-success-close' ||
+            action === 'instex-success'
+        ) {
+            this.setState({
+                orderFinished: true,
+            });
         }
     };
 

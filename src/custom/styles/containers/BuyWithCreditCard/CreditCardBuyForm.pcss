@@ -211,6 +211,7 @@
                     text-transform: uppercase;
                     cursor: pointer;
                     text-align: center;
+                    border: none;
                 }
             }
         }
@@ -376,6 +377,11 @@
 
             &:focus {
                 outline: none;
+            }
+
+            &[disabled] {
+                cursor: default;
+                opacity: 0.5;
             }
         }
 
