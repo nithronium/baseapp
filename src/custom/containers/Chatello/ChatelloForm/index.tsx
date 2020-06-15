@@ -227,7 +227,10 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                     </div>
 
                     <div className="buy-form__content">
-                        <h2>{this.translate('chatello.form.title')}</h2>
+                        <h2>
+                            {this.translate('chatello.form.title')}
+                            <div className="pg-chatello__overlay-visa" />
+                        </h2>
                         {this.currenciesForm(false)}
                         <div className="buy-form__bottom-text">
                             <p>

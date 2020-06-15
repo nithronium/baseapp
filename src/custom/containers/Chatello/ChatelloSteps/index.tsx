@@ -179,7 +179,7 @@ export class ChatelloStepsComponent extends React.Component<Props> {
                         <a
                             className="pg-chatello-steps__bottom-help-button"
                             target="_blank"
-                            href="tg://resolve?domain=@heywhy003"
+                            href="tg://resolve?domain=heywhy003"
                         >
                             {this.translate(`chatello.steps.step4.bottom.feedback.button`)}
                         </a>

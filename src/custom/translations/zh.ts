@@ -1241,7 +1241,7 @@ export const zh = {
     'chatello.steps.step1': 'Sign Up',
     'chatello.steps.step2': 'Get Verified',
     'chatello.steps.step3': 'Make a payment',
-    'chatello.steps.step4': 'Get CHA Сoins — <span>and get them doubled!!</span>',
+    'chatello.steps.step4': 'Get CHA Сoins — <span>and get \'em doubled!!</span>',
     'chatello.steps.step4.bottom.text1': 'Coins that you will receive as bonuses are locked for 1 month.',
     'chatello.steps.step4.bottom.text2': 'Don\'t worry. You can use them after.',
     'chatello.steps.step4.bottom.button1': 'Go To Emirex Wallet',
@@ -1262,7 +1262,7 @@ export const zh = {
     'chatello.overlay1.text2': 'X2 Coin Amount',
     'chatello.overlay1.button': 'START',
     'chatello.overlay2.button': 'GET VERIFIED',
-    'chatello.overlay1.footer': 'Registered with the same email address is required',
+    'chatello.overlay1.footer': 'Registration with the same email address is required',
     'chatello.overlay2.footer': 'Prepare your passport or driving licence',
     'chatello.overlay2.header': 'The verification flow is very simple and straightforward.',
 
@@ -1283,7 +1283,7 @@ export const zh = {
     'chatello.top2.item2': 'Buy Chatello Coins in it on Emirex',
     'chatello.top2.item3': 'Get x2 Coins Amount',
 
-    'chatello.info.header1': 'Twice-rewarding Way to Buy Сhatello Coins',
+    'chatello.info.header1': 'BUY CHA coins on Emirex once - get double profit',
     'chatello.info.text': 'Get twice as much when buying Chatello Coin on Emirex. Follow the next easy steps and get x2 amount',
     'chatello.info.header2': 'Bonuses of Buying Chatello Coins on Emirex',
     'chatello.info.text1': 'Bonus from Emirex Get x2 CHA Coins',
