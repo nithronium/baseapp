@@ -64,6 +64,7 @@ type Props = InjectedIntlProps & ReduxProps & DispatchProps & RouteComponentProp
     amount: number;
     onOrderAmountChange: () => void;
     onOrderSubmit: () => void;
+    onIframeClose: () => void;
     step: number;
 };
 
@@ -310,6 +311,8 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     };
 
     public closeIframe = () => {
+        console.log('closeIframe');
+        this.props.onIframeClose();
         this.setState({ openIframe: false });
     };
 
@@ -409,6 +412,8 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     };
 
     public closeModal = () => {
+        console.log('closeModal');
+        this.props.onIframeClose();
         this.setState({ showModal: false });
     };
 

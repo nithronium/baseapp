@@ -52,6 +52,7 @@ export interface State {
     orderSubmitTime: number;
     prevStorageChangeTime: number | null;
     orderSubmitted: boolean;
+    successIframeLoaded: boolean;
 }
 
 class ChatelloScreenComponent extends React.Component<Props, State> {
@@ -63,6 +64,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
             orderSubmitTime: Date.now() + 1e10,
             prevStorageChangeTime: null,
             orderSubmitted: false,
+            successIframeLoaded: false,
         };
     }
 
@@ -74,6 +76,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
         this.setState({
             orderFinished: false,
             orderSubmitted: false,
+            successIframeLoaded: false,
         });
     };
 
@@ -95,6 +98,12 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
                 orderFinished: true,
             });
         }
+
+        console.log('onMessage', event);
+
+        if (action === 'instex-success') {
+            this.setState({ successIframeLoaded: true });
+        }
     };
 
     public onOrderSubmit = () => {
@@ -103,6 +112,14 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
             orderSubmitted: true,
         });
         console.log('onOrderSubmit', Date.now());
+    };
+
+    public onIframeClose = () => {
+        const { successIframeLoaded } = this.state;
+        console.log('onIframeClose', successIframeLoaded);
+        if (successIframeLoaded) {
+            this.setState({ orderFinished: true });
+        }
     };
 
     public render() {
@@ -153,6 +170,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
                         onOrderAmountChange={this.onOrderAmountChange}
                         step={step}
                         onOrderSubmit={this.onOrderSubmit}
+                        onIframeClose={this.onIframeClose}
                     />}
                     <ChatelloInfo />
                 </div>
