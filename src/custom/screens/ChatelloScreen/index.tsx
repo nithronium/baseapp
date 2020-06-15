@@ -30,6 +30,7 @@ import {
     ChatelloInfo,
     ChatelloSteps,
     ChatelloTop,
+    ChatelloTop2,
 } from '../../containers/Chatello';
 
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -98,6 +99,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
                     <link rel="alternate" href="https://emirex.com/zh/buycrypto" hrefLang="zh" title="中国人" />
                 </Helmet>
                 <ChatelloTop />
+                <ChatelloTop2 />
                 <div className="pg-buy-with-credit-card__container">
                     <ChatelloSteps
                         currentStep={step}

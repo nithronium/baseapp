@@ -1311,6 +1311,13 @@ export const ru: LangType = {
     'chatello.top.app.item1': 'Download Chatello APP',
     'chatello.top.app.item2': 'Buy Chatello Coins in it on Emirex',
     'chatello.top.app.item3': 'Get х2 Coins Amount',
+
+    'chatello.top2.header': 'What is Chatello?',
+    'chatello.top2.text': 'Chatello Inc. is a social media app that allows influencers with solid following to monetize their social presence by letting followers reach for advice, consultancy, or their opinion!',
+    'chatello.top2.subheader': 'How to get x2 Chatello Coins',
+    'chatello.top2.item1': 'Download Chatello APP',
+    'chatello.top2.item2': 'Buy Chatello Coins in it on Emirex',
+    'chatello.top2.item3': 'Get x2 Coins Amount',
     
     'chatello.info.header1': 'Twice-rewarding Way to Buy Сhatello Coins',
     'chatello.info.text': 'Get twice as much when buying Chatello Coin on Emirex. Follow the next easy steps and get x2 amount',

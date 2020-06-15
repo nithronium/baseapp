@@ -1,8 +1,10 @@
 
 
 .pg-chatello__top {
+    display: none;
     color: #fff;
     padding-bottom: 50px;
+    margin-bottom: 40px;
 
     &-wrap {
         display: flex;
@@ -254,6 +256,15 @@
                     display: flex;
                 }
             }
+        }
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+    .pg-chatello {
+        &__top {
+            display: block;
         }
     }
 }

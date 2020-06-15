@@ -1,0 +1,228 @@
+.pg-chatello__top2 {
+    height: 600px;
+    background-image: url(./assets/images/chatello-bg-2.png);
+    background-size: cover;
+
+    &-wrap {
+        width: 940px;
+        margin: 0 auto;
+        position: relative;
+        display: flex;
+    }
+
+    &-face {
+        &1 { background-image: url(./assets/images/chatello-face-1.png); }
+        &2 { background-image: url(./assets/images/chatello-face-2.png); }
+        &3 { background-image: url(./assets/images/chatello-face-3.png); }
+        &4 { background-image: url(./assets/images/chatello-face-4.png); }
+        &5 { background-image: url(./assets/images/chatello-face-5.png); }
+        &6 { background-image: url(./assets/images/chatello-face-6.png); }
+        &7 { background-image: url(./assets/images/chatello-face-7.png); }
+    }
+
+    &-face1,
+    &-face2,
+    &-face3,
+    &-face4,
+    &-face5,
+    &-face6,
+    &-face7 {
+        position: absolute;
+        background-repeat: no-repeat;
+        background-position: center;
+        width: 122px;
+        height: 125px;
+    }
+
+    &-face1 {
+        left: -130px;
+        top: 105px;
+    }
+
+    &-face2 {
+        top: 244px;
+        left: -127px;
+    }
+
+    &-face3 {
+        top: 371px;
+        left: -200px;
+    }
+    
+    &-face4 {
+        top: 450px;
+        left: -100px;
+    }
+
+    &-face5 {
+        right: -180px;
+        top: 68px;
+    }
+
+    &-face6 {
+        top: 215px;
+        right: -114px;
+    }
+
+    &-face7 {
+        top: 365px;
+        right: -200px;
+    }
+
+    &-phone {
+        background-image: url(./assets/images/chatello-phone.png);
+        width: 288px;
+        height: 544px;
+        position: relative;
+        top: 59px;
+        min-width: 288px;
+        z-index: 1;
+        margin: 0 36px;
+    }
+
+    &-right {
+
+    }
+
+    &-header {
+        font-size: 40px;
+        color: #fff;
+        padding-top: 70px;
+    }
+
+    &-text {
+        color: #fff;
+        font-size: 20px;
+        line-height: 32px;
+        padding-top: 20px;
+        padding-bottom: 30px;
+    }
+
+    &-subheader {
+        font-size: 22px;
+        color: #fff;
+        padding-top: 15px;
+        padding-bottom: 25px;
+    }
+
+    &-items {
+        display: flex;
+        padding-bottom: 70px;
+    }
+
+    &-item {
+        display: flex;
+        background-color: #fff;
+        border-radius: 6px;
+        color: #222b41;
+        position: relative;
+        height: 68px;
+        font-size: 14px;
+        width: 186px;
+        margin-right: 10px;
+
+        &-text {
+            font-size: 14px;
+            font-weight: bold;
+            padding-right: 18px;
+            padding-top: 15px;
+        }
+
+        &-icon1,
+        &-icon2,
+        &-icon3 {
+            width: 45px;
+            height: 45px;
+            min-width: 45px;
+            min-height: 45px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            position: relative;
+            top: 10px;
+        }
+
+        &-icon1 {
+            background-image: url(./assets/images/chatello-icon-red-1.png);
+        }
+
+        &-icon2 {
+            background-image: url(./assets/images/chatello-icon-red-2.png);
+        }
+
+        &-icon3 {
+            background-image: url(./assets/images/chatello-icon-red-3.png);
+        }
+
+        &-triangle1 {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 16px 16px 0 0;
+            border-color: #ffffff transparent transparent transparent;
+            bottom: -16px;
+            left: 45px;
+        }
+
+        &-triangle2 {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 16px 8px 0 8px;
+            border-color: #ffffff transparent transparent transparent;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -16px;
+        }
+
+        &-triangle3 {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 16px 16px 0;
+            border-color: transparent #ffffff transparent transparent;
+            bottom: -16px;
+            right: 45px;
+        }
+    }
+
+    &-app-store,
+    &-google-play {
+        width: 140px;
+        height: 42px;
+        min-width: 140px;
+        margin-right: 10px;
+    }
+
+    &-footer {
+        display: flex;
+
+        &-text {
+            font-size: 16px;
+            line-height: 23px;
+            height: 42px;
+            border-left: 1px solid #fff;
+            padding-left: 24px;
+            color: #fff;
+        }
+    }
+
+    &-app-store {
+        background-image: url(./assets/images/chatello-app-store-2.png);
+    }
+
+    &-google-play {
+        background-image: url(./assets/images/chatello-google-play-2.png);
+    }
+}
+
+
+@media screen and (max-width: 900px) {
+    .pg-chatello {
+        &__top {
+            display: none;
+        }
+    }
+}
