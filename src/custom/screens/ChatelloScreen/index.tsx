@@ -56,6 +56,8 @@ export interface State {
 }
 
 class ChatelloScreenComponent extends React.Component<Props, State> {
+    public myRef: React.RefObject<HTMLDivElement>;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -66,6 +68,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
             orderSubmitted: false,
             successIframeLoaded: false,
         };
+        this.myRef = React.createRef();
     }
 
     public onOrderAmountChange = (orderAmount: number) => {
@@ -82,6 +85,12 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
 
     public componentDidMount() {
         window.addEventListener('message', this.onMessage);
+        const visited = localStorage.getItem('visited-chatello');
+        if (!visited) {
+            localStorage.setItem('visited-chatello', 'true');
+        } else {
+            this.scrollToMyRef();
+        }
     }
 
     public componentWillUnmount() {
@@ -115,6 +124,12 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
         const { successIframeLoaded } = this.state;
         if (successIframeLoaded) {
             this.setState({ orderFinished: true });
+        }
+    };
+
+    public scrollToMyRef = () => {
+        if (this.myRef.current) {
+            window.scrollTo(0, this.myRef.current.offsetTop);
         }
     };
 
@@ -162,6 +177,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
                         userLoggedIn={userLoggedIn}
                     />
                     {step !== 4 && <ChatelloForm
+                        ref={this.myRef}
                         amount={amount}
                         onOrderAmountChange={this.onOrderAmountChange}
                         step={step}
