@@ -121,11 +121,19 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     };
 
     public convertToCha = (usdValue: number): number => {
-        return usdValue / 0.75;
+        return this.trimNumber(usdValue / 0.75, 4);
     };
 
     public convertFromCha = (chaValue): number => {
-        return chaValue * 0.75;
+        return this.trimNumber(chaValue * 0.75, 2);
+    };
+
+    public trimNumber = (value, precision) => {
+        const valueNum = parseFloat(value);
+        if (isNaN(valueNum)) {
+            return value;
+        }
+        return Number(value.toFixed(precision));
     };
 
     public onSubmit = () => {
@@ -286,12 +294,14 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                     content={this.renderModalBody()}
                     footer={this.renderModalFooter()}
                 />
-                <Modal
-                    show={this.state.openIframe}
-                    header={this.renderIframeHeader()}
-                    content={this.renderIframe()}
-                    footer={this.renderIframeFooter()}
-                />
+                <div className="pg-chatello__iframe-modal">
+                    <Modal
+                        show={this.state.openIframe}
+                        header={this.renderIframeHeader()}
+                        content={this.renderIframe()}
+                        footer={this.renderIframeFooter()}
+                    />
+                </div>
             </div>
         );
     }
@@ -370,17 +380,17 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                     {!isModal && <div className="pg-chatello__buttons--mobile">
                         <div
                             className="pg-chatello__button"
-                            onClick={this.click100}
+                            onClick={this.click200}
                         >
                             <span className="pg-chatello__plus100-icon" />
-                            + 100 CHA
+                            + 200 CHA
                         </div>
                         <div
                             className="pg-chatello__button"
-                            onClick={this.click200}
+                            onClick={this.click1000}
                         >
                             <span className="pg-chatello__plus200-icon" />
-                            <span className="pg-chatello__button-text">+ 200 CHA</span>
+                            <span className="pg-chatello__button-text">+ 1000 CHA</span>
                         </div>
                     </div>}
 
@@ -400,29 +410,29 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                 {!isModal && <div className="pg-chatello__buttons">
                     <div
                         className="pg-chatello__button"
-                        onClick={this.click100}
+                        onClick={this.click200}
                     >
                         <span className="pg-chatello__plus100-icon" />
-                        + 100 CHA
+                        + 200 CHA
                     </div>
                     <div
                         className="pg-chatello__button"
-                        onClick={this.click200}
+                        onClick={this.click1000}
                     >
                         <span className="pg-chatello__plus200-icon" />
-                        <span className="pg-chatello__button-text">+ 200 CHA</span>
+                        <span className="pg-chatello__button-text">+ 1000 CHA</span>
                     </div>
                 </div>}
             </div>
         );
     };
 
-    public click100 = () => {
-        this.onChaValueChange({ target: { value: 100 } });
-    };
-
     public click200 = () => {
         this.onChaValueChange({ target: { value: 200 } });
+    };
+
+    public click1000 = () => {
+        this.onChaValueChange({ target: { value: 1000 } });
     };
 
     public closeModal = () => {

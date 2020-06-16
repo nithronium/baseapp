@@ -83,7 +83,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     public goBack = event => {
       const lang = this.props.currentLanguage;
       event.preventDefault();
-      this.props.history.push(buildPath('/profile', lang));
+      this.props.history.push(buildPath(redirectIfSpecified('/profile'), lang));
     };
 
     public renderDoubleProgressBar() {
@@ -241,7 +241,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
 
         if (pendingLabel) {
             fetchAlert({ message: [`resource.profile.${pendingLabel.key}.pending`], type: 'error'});
-            history.push('/profile');
+            history.push(redirectIfSpecified('/profile'));
         }
     }
 

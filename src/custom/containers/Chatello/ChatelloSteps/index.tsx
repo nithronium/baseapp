@@ -122,16 +122,22 @@ export class ChatelloStepsComponent extends React.Component<Props> {
                     </div>
                 </div>
                 {this.renderTimeline()}
-                <div className="credit-card-steps__footer pg-chatello__footer">
-                    {this.translate(`chatello.steps.footer4-1`)}
-                    {amount / 2}
-                    {this.translate(`chatello.steps.footer4-2`)}
-
+                <div className="credit-card-steps__footer pg-chatello__footer pg-chatello__footer--step4">
                     <div className="credit-card-steps__footer-caption">
-                        {this.translate(`chatello.steps.footer4-3`)}
                         {amount / 2}
                         {this.translate(`chatello.steps.footer4-4`)}
                     </div>
+                    <div>
+                    <a
+                        className="pg-chatello-steps__bottom-wallet"
+                        href="/wallets"
+                    >
+                        {this.translate(`chatello.steps.step4.bottom.button1`)}
+                    </a>
+                    </div>
+                    {this.translate(`chatello.steps.footer4-1`)}
+                    {amount / 2}
+                    {this.translate(`chatello.steps.footer4-2`)}
                 </div>
                 <div className="pg-chatello-steps__bottom">
                     {this.translate(`chatello.steps.step4.bottom.text1`)}
@@ -145,12 +151,6 @@ export class ChatelloStepsComponent extends React.Component<Props> {
                         >
                             {this.translate(`chatello.steps.step4.bottom.done`)}
                         </button>
-                        <a
-                            className="pg-chatello-steps__bottom-wallet"
-                            href="/wallets"
-                        >
-                            {this.translate(`chatello.steps.step4.bottom.button1`)}
-                        </a>
                         <button
                             onClick={this.onTryAgain}
                             className="pg-chatello-steps__bottom-try"
