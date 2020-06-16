@@ -6,18 +6,28 @@ import { API, RequestOptions } from '../../../../api';
 import { alertPush } from '../../../public/alert';
 import { userData } from '../../profile';
 import { signInError, SignInFetch, signInRequire2FA, signUpRequireVerification } from '../actions';
+import { getParameters, removeParameters } from '../UTMparameters';
 
 const sessionsConfig: RequestOptions = {
     apiVersion: 'barong',
 };
 
+const UTMParamConfig: RequestOptions = {
+    apiVersion: 'applogic',
+};
+
 export function* signInSaga(action: SignInFetch) {
     try {
+        const data = getParameters();
+
         const user = yield call(API.post(sessionsConfig), '/identity/sessions', action.payload);
         yield put(userData({ user }));
-
         yield put(signUpRequireVerification({ requireVerification: user.state === 'pending' }));
         yield put(signInRequire2FA({ require2fa: user.otp }));
+        if (data) {
+            yield call(API.post(UTMParamConfig), '/private/utm', data);
+            removeParameters();
+        }
     } catch (error) {
         switch (error.code) {
             case 401:
