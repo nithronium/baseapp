@@ -6,6 +6,10 @@ import { getCountdownDate, localeDate } from '../../../../helpers';
 import { Currency } from '../../../../modules';
 import { DataIEOInterface } from '../../modules';
 
+
+const T69_IEO_ID = 2;
+const T69_IEO_AMOUNT = 6508911.65;
+
 interface CardIEOProps {
     ieo: DataIEOInterface;
     onIEOSelect: (ieo: DataIEOInterface) => void;
@@ -120,7 +124,7 @@ class IEOCardComponent extends React.Component<Props, State> {
                 <div className="pg-ieo__card-content">
                     <span className="pg-ieo__card-content__title">{name}</span>
                     <span className="pg-ieo__card-content__text">{cuttedDescription}</span>
-                    {this.getContent(state)}
+                    {this.getContent(state, this.props.ieo)}
                 </div>
             </div>
         );
@@ -132,7 +136,10 @@ class IEOCardComponent extends React.Component<Props, State> {
         this.props.onClick(ieo);
     };
 
-    private getContent = (state: string) => {
+    private getContent = (state: string, ieo) => {
+        if (ieo.id === T69_IEO_ID) {
+            return this.renderInProgress();
+        }
         switch (state) {
             case 'preparing':
                 return this.renderPreparingItem();
@@ -180,11 +187,15 @@ class IEOCardComponent extends React.Component<Props, State> {
     };
 
     private renderInProgress = () => {
-        const { supply, currency_id, metadata, id } = this.props.ieo;
+        const { currency_id, metadata, id, supply } = this.props.ieo;
+
+        if (id === T69_IEO_ID) {
+            // supply = T69_IEO_AMOUNT;
+        }
 
         const isProgressHidden = id.toString() === '3' ||
             id.toString() === '5' ||
-            id.toString() === '2' ||
+            // id.toString() === '2' ||
             id.toString() === '4';
 
         return (
@@ -209,7 +220,7 @@ class IEOCardComponent extends React.Component<Props, State> {
 
         const isProgressHidden = id.toString() === '3' ||
             id.toString() === '5' ||
-            id.toString() === '2' ||
+            // id.toString() === '2' ||
             id.toString() === '4';
 
         return (
@@ -227,7 +238,13 @@ class IEOCardComponent extends React.Component<Props, State> {
 
     private renderProgressBar = () => {
         const { countdownValue } = this.state;
-        const { finishes_at, supply, tokens_ordered, state } = this.props.ieo;
+        const { finishes_at, state, id, supply } = this.props.ieo;
+        let { tokens_ordered } = this.props.ieo;
+
+        if (id === T69_IEO_ID) {
+            tokens_ordered = T69_IEO_AMOUNT;
+            // supply = T69_IEO_AMOUNT;
+        }
 
         const percentage = +supply ? +Decimal.format((+tokens_ordered * 100) / +supply, 2) : 0;
 
