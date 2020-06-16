@@ -121,11 +121,11 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     };
 
     public convertToCha = (usdValue: number): number => {
-        return this.trimNumber(usdValue / 0.75, 4);
+        return this.trimNumber(usdValue / 0.5, 4);
     };
 
     public convertFromCha = (chaValue): number => {
-        return this.trimNumber(chaValue * 0.75, 2);
+        return this.trimNumber(chaValue * 0.5, 2);
     };
 
     public trimNumber = (value, precision) => {
