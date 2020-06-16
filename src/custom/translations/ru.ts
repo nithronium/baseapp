@@ -1068,7 +1068,7 @@ export const ru: LangType = {
     footer_headers_buysell: 'Купить/Продать Криптовалюты',
 
     footer_headers_advisory: "Консультация",
-    footer_headers_products: "Консультация",
+    footer_headers_products: "Услуги",
     footer_headers_service: "Сервисы",
     footer_headers_legal: "Юридическая документация",
     footer_headers_our_services: "Наши услуги",
