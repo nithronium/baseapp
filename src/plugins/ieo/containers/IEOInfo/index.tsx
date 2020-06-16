@@ -237,7 +237,9 @@ class IEOInfoComponent extends React.Component<Props, State> {
         const { id } = ieo;
 
         const hidePregress = id.toString() === '3' ||
-            id.toString() === '5';
+            id.toString() === '5' ||
+            id.toString() === '2' ||
+            id.toString() === '4';
 
         return (
             <div className="ieo-profile-info__main__info__value">
@@ -272,7 +274,9 @@ class IEOInfoComponent extends React.Component<Props, State> {
         const { id } = ieo;
 
         const hidePregress = id.toString() === '3' ||
-            id.toString() === '5';
+            id.toString() === '5' ||
+            id.toString() === '2' ||
+            id.toString() === '4';
 
         return (
             <div className="ieo-profile-info__main__info__value">

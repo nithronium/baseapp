@@ -181,8 +181,11 @@ class IEOCardComponent extends React.Component<Props, State> {
 
     private renderInProgress = () => {
         const { supply, currency_id, metadata, id } = this.props.ieo;
+
         const isProgressHidden = id.toString() === '3' ||
-            id.toString() === '5';
+            id.toString() === '5' ||
+            id.toString() === '2' ||
+            id.toString() === '4';
 
         return (
             <div className="pg-ieo__card-content-block">
@@ -205,7 +208,9 @@ class IEOCardComponent extends React.Component<Props, State> {
         const amountOfQuote = tokens_ordered && quoteCurrency ? Decimal.format(+tokens_ordered * +pairs[0].price, +quoteCurrency.precision) : null;
 
         const isProgressHidden = id.toString() === '3' ||
-            id.toString() === '5';
+            id.toString() === '5' ||
+            id.toString() === '2' ||
+            id.toString() === '4';
 
         return (
             <div className="pg-ieo__card-content-block">
