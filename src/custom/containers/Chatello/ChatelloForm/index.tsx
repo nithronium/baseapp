@@ -120,12 +120,27 @@ class ChatelloFormComponent extends React.Component<Props, State> {
         this.props.onOrderAmountChange(chaValue);
     };
 
-    public convertToCha = (usdValue: number): number => {
-        return this.trimNumber(usdValue / 0.5, 4);
+    public getRate = (props: Props = this.props): number => {
+        let { ieo } = props;
+        const pairs = [{id: 5, sale_id: 5, quote_currency_id: 'usd', price: '1.0' }];
+        ieo = ieo || { pairs };
+        const actualPairs = ieo && ieo.pairs && ieo.pairs.length ? ieo.pairs : pairs;
+        let usdPair = pairs[0];
+
+        for (const pair of actualPairs) {
+            if (pair.quote_currency_id === 'usd') {
+                usdPair = pair;
+            }
+        }
+        return Number(usdPair.price);
     };
 
-    public convertFromCha = (chaValue): number => {
-        return this.trimNumber(chaValue * 0.5, 2);
+    public convertToCha = (usdValue: number, props: Props = this.props): number => {
+        return this.trimNumber(usdValue / this.getRate(props), 4);
+    };
+
+    public convertFromCha = (chaValue, props: Props = this.props): number => {
+        return this.trimNumber(chaValue * this.getRate(props), 2);
     };
 
     public trimNumber = (value, precision) => {
@@ -145,8 +160,6 @@ class ChatelloFormComponent extends React.Component<Props, State> {
             url = `${url}/${amount}`;
         }
 
-
-        console.log('redirect_url', url);
 
         if (!userLoggedIn) {
             history.push(`/signup?redirect_url=${encodeURIComponent(url)}`);
@@ -190,11 +203,16 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     };
 
     public componentWillReceiveProps(nextProps) {
-        const { buyWithCreditCard } = this.props;
+        const { buyWithCreditCard, ieo } = this.props;
         if (nextProps.buyWithCreditCard.data.url !== buyWithCreditCard.data.url) {
             this.setState({
                 openIframe: true,
                 showModal: false,
+            });
+        }
+        if ((!ieo && nextProps.ieo)) {
+            this.setState({
+                usdValue: this.convertFromCha(Number(this.state.chaValue), nextProps).toString(),
             });
         }
     }
@@ -226,7 +244,6 @@ class ChatelloFormComponent extends React.Component<Props, State> {
 
     public render() {
         const { step, userLoggedIn, user, amount } = this.props;
-        console.log('step', step);
         return (
             <div className="buy-form">
                 <div className="section">
@@ -335,7 +352,6 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     };
 
     public closeIframe = () => {
-        console.log('closeIframe');
         this.props.onIframeClose();
         this.setState({ openIframe: false });
     };
@@ -436,7 +452,6 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     };
 
     public closeModal = () => {
-        console.log('closeModal');
         this.props.onIframeClose();
         this.setState({ showModal: false });
     };
