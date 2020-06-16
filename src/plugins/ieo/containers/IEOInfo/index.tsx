@@ -236,7 +236,8 @@ class IEOInfoComponent extends React.Component<Props, State> {
         const { ieo, currency } = this.props;
         const { id } = ieo;
 
-        const hidePregress = id.toString() === '3';
+        const hidePregress = id.toString() === '3' ||
+            id.toString() === '5';
 
         return (
             <div className="ieo-profile-info__main__info__value">
@@ -270,7 +271,8 @@ class IEOInfoComponent extends React.Component<Props, State> {
         const amountOfQuote = ieo.tokens_ordered && Decimal.format(+ieo.tokens_ordered * +ieo.pairs[0].price, +currency.precision);
         const { id } = ieo;
 
-        const hidePregress = id.toString() === '3';
+        const hidePregress = id.toString() === '3' ||
+            id.toString() === '5';
 
         return (
             <div className="ieo-profile-info__main__info__value">
