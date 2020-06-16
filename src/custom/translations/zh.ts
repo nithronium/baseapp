@@ -1090,8 +1090,8 @@ export const zh = {
     ieo_2_description: 'T69 coin的IEO ➤ 处理中 ✅ 获取Tycoon 69的完整信息，包括：IEO详细信息、等级、价格、代币销售策略、分销',
     ieo_3_title: 'Lead代币IEO。 评分，新闻，详细信息| Emirex.com',
     ieo_3_description: 'Lead代币IEO✅详细信息，评分，价格➤Lead代币是可为在Lead钱包上交付的产品和服务提供动力的本币',
-    ieo_4_title: 'CryptoAds Marketplace IEO (CRAD) | Emirex.com',
-    ieo_4_description: 'CryptoAds IEO (CRAD) ✅ We launched IEO listing ➤ Currently, CryptoAds accelerates its growth and looking forward to meeting new clients',
+    ieo_5_title: 'CryptoAds Marketplace IEO (CRAD) | Emirex.com',
+    ieo_5_description: 'CryptoAds IEO (CRAD) ✅ We launched IEO listing ➤ Currently, CryptoAds accelerates its growth and looking forward to meeting new clients',
     'page.body.modal.blockNationality.header': '拒绝访问',
     'page.body.modal.blockNationality.message':
         '根据国际和当地金融/加密货币法规，我们目前不向所选国家/地区的公民提供服务。 感谢您的理解。',

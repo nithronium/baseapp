@@ -1249,8 +1249,8 @@ export const ru: LangType = {
     ieo_2_description: 'T69 coin IEO  ➤ Активный  проект ➤ Рейтинг, цена, стратегия продажи Tycoon 69 IEO ➤ Получи доход  ➤ Инвестируй сейчас',
     ieo_3_title: 'Lead Token IEO. Рейтинг, детали, новости | Emirex.com',
     ieo_3_description: 'Lead token IEO ✅ Рейтинг и детали ➤ Токен LEAD - это токен стандарта ERC-20, который используется для питания продуктов и услуг, предоставляемых в Lead Wallet',
-    ieo_4_title: 'CryptoAds Marketplace IEO (CRAD). Цена, рейтинг | Emirex.com',
-    ieo_4_description: 'CryptoAds IEO (CRAD) ✅ Мы запустили IEO листинг ➤ В настоящее время CryptoAds ускоряет свой рост и с нетерпением ждет новых клиентов',
+    ieo_5_title: 'CryptoAds Marketplace IEO (CRAD). Цена, рейтинг | Emirex.com',
+    ieo_5_description: 'CryptoAds IEO (CRAD) ✅ Мы запустили IEO листинг ➤ В настоящее время CryptoAds ускоряет свой рост и с нетерпением ждет новых клиентов',
     'page.body.modal.blockNationality.header': 'Access denied',
     'page.body.modal.blockNationality.message':
         'Due to international and local financial/cryptocurrency regulations we do not currently provide services to citizens of the selected country. Thank you for understanding.',
