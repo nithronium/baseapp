@@ -19,7 +19,7 @@ import {
 import { buildPath, saveParametersFromUrl } from '../../custom/helpers';
 import { LoginModal } from '../../custom/components/KYCLoginModal';
 import { ConfirmScreen } from '../../custom/screens';
-import { minutesUntilAutoLogout, sessionCheckInterval } from '../../api';
+import { minutesUntilAutoLogout, sessionCheckInterval, showLanding } from '../../api';
 import { toggleColorTheme } from '../../helpers';
 import {
     changeLanguage,
@@ -50,7 +50,8 @@ import {
     SignUpScreen,
     VerificationScreen,
     WalletsScreen,
-    PricePackagesScreen
+    PricePackagesScreen,
+    LandingScreen,
 } from '../../screens';
 import { ExpiredSessionModal } from '../../components';
 
@@ -664,12 +665,8 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
                         component={PricePackagesScreen}
                         currentLanguage={currentLanguage}
                     />
-
-                    ChatelloScreen
-
                     {renderPluginsRoutes()}
-                    {/* <Route path="**"><Redirect to={'/trading/'} /></Route> */}
-                    {/* <Route path="**"><Redirect to={'/ru/trading/'} /></Route> */}
+                    {showLanding() && <Route exact={true} path="/" component={LandingScreen} />}
                     <Route path="**"><Redirect to="/trading/" /></Route>
                 </Switch>
                 <LoginModal

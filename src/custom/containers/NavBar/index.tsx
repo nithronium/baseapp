@@ -3,6 +3,7 @@ import * as React from 'react';
 import {FormattedMessage} from 'react-intl';
 import {connect, MapDispatchToPropsFunction, MapStateToProps} from 'react-redux';
 import {Link, RouteProps, withRouter} from 'react-router-dom';
+import { showLanding } from '../../../api';
 // import { LogoutIcon } from '../../assets/images/LogoutIcon';
 // import { Moon } from '../../assets/images/Moon';
 // import { Sun } from '../../assets/images/Sun';
@@ -187,7 +188,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
 
         return (
             <div ref={this.headerRef} className={'pg-navbar'}>
-                <a href={currentLanguage === 'en' ? baseURL : `${baseURL}/${currentLanguage}`} className="pg-navbar__logo">
+                <a href={currentLanguage === 'en' ? baseURL : `${baseURL}/${currentLanguage}`} className="pg-navbar__logo" onClick={e => this.redirectToLanding()}>
                     <span>
                         <img src={logo} className="pg-logo__img" alt="Logo" />
                     </span>
@@ -350,6 +351,13 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             </div>
         );
     }
+
+    private redirectToLanding = () => {
+        const { currentLanguage } = this.props;
+        const baseURL = window.document.location.origin;
+
+        this.props.history.push(`${showLanding() ? '/' : currentLanguage === 'en' ? baseURL : `${baseURL}/${currentLanguage}`}`);
+    };
 
     private switchCurrency = (type) => {
         this.props.getBalanceFetch(['btc', type]);

@@ -113,7 +113,6 @@ class Head extends React.Component<Props> {
         );
     };
 
-
     private backWallets = () => this.props.setMobileWalletUi('');
 
     private closeMenu = (e: any) => this.props.setMobileWalletUi('');

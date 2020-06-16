@@ -27,4 +27,5 @@ export interface Config {
     languages: string[];
     sessionCheckInterval: string;
     balancesFetchInterval: string;
+    showLanding: boolean;
 }

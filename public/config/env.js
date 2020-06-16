@@ -29,4 +29,5 @@ window.env = {
     languages: ['en', 'ru'],
     sessionCheckInterval: '15000',
     balancesFetchInterval: '3000',
+    showLanding: true,
 };
