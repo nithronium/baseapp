@@ -87,10 +87,8 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
         window.addEventListener('message', this.onMessage);
         const visited = localStorage.getItem('visited-chatello');
         if (!visited) {
-            console.log('not visited');
             localStorage.setItem('visited-chatello', 'true');
         } else {
-            console.log('visited');
             this.scrollToMyRef();
         }
     }
@@ -164,9 +162,11 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
                     <link rel="canonical" href="https://emirex.com/buycrypto" />
                     <title>{title}</title>
                     <meta name="description" content={description} />
-                    <link rel="alternate" href="https://emirex.com/buycrypto" hrefLang="en" title="English" />
-                    <link rel="alternate" href="https://emirex.com/ru/buycrypto" hrefLang="ru" title="Русский" />
-                    <link rel="alternate" href="https://emirex.com/zh/buycrypto" hrefLang="zh" title="中国人" />
+                    <link
+                        rel="canonical"
+                        href={`https://emirex.com/chatello`}
+                        data-react-helmet="true"
+                    />
                 </Helmet>
                 <ChatelloTop />
                 <ChatelloTop2 />

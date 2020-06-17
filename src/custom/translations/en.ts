@@ -504,8 +504,10 @@ export const en = {
     ieo_2_description: 'T69 coin IEO ➤ In progress ✅ Get full information about Tycoon 69 - IEO details, rating, price, token sale strategies, distribution',
     ieo_3_title: 'Lead Token IEO. Rating, News, Details | Emirex.com',
     ieo_3_description: 'Lead token IEO ✅ Details, rating, price ➤ The Lead Token is the native currency that fuels the products and services that are delivered on Lead Wallet',
-    ieo_5_title: 'CryptoAds Marketplace IEO (CRAD) | Emirex.com',
-    ieo_5_description: 'CryptoAds IEO (CRAD) ✅ We launched IEO listing ➤ Currently, CryptoAds accelerates its growth and looking forward to meeting new clients',
+    ieo_4_title: 'CryptoAds Marketplace IEO (CRAD) | Emirex.com',
+    ieo_4_description: 'CryptoAds IEO (CRAD) ✅ We launched IEO listing ➤ Currently, CryptoAds accelerates its growth and looking forward to meeting new clients',
+    ieo_5_title: 'CHA Chatello IEO | Emirex.com',
+    ieo_5_description: 'CHA Chatello IEO ✅ We launched IEO listing ➤ Chatello is a revolutionary application that allows social media presence to be monetized anywhere, anytime.',
     'page.body.modal.blockNationality.header': 'Access denied',
     'page.body.modal.blockNationality.message':
         'Due to international and local financial/cryptocurrency regulations we do not currently provide services to citizens of the selected country. Thank you for understanding.',

@@ -1090,8 +1090,10 @@ export const zh = {
     ieo_2_description: 'T69 coin的IEO ➤ 处理中 ✅ 获取Tycoon 69的完整信息，包括：IEO详细信息、等级、价格、代币销售策略、分销',
     ieo_3_title: 'Lead代币IEO。 评分，新闻，详细信息| Emirex.com',
     ieo_3_description: 'Lead代币IEO✅详细信息，评分，价格➤Lead代币是可为在Lead钱包上交付的产品和服务提供动力的本币',
-    ieo_5_title: 'CryptoAds Marketplace IEO (CRAD) | Emirex.com',
-    ieo_5_description: 'CryptoAds IEO (CRAD) ✅ We launched IEO listing ➤ Currently, CryptoAds accelerates its growth and looking forward to meeting new clients',
+    ieo_4_title: 'CryptoAds商城的IEO（CARD）',
+    ieo_4_description: 'CryptoAds IEO (CRAD). 我们启动了IEO上线. 目前，CryptoAds正在加速增长，并期待结识新客户',
+    ieo_5_title: 'Chatello IEO 立即获取',
+    ieo_5_description: 'CHA Chatello IEO. 我们启动了IEO上线. 目前，',
     'page.body.modal.blockNationality.header': '拒绝访问',
     'page.body.modal.blockNationality.message':
         '根据国际和当地金融/加密货币法规，我们目前不向所选国家/地区的公民提供服务。 感谢您的理解。',
@@ -1293,8 +1295,8 @@ export const zh = {
     'chatello.info.text5': 'Easy to Use',
     'chatello.info.text6': 'Trading-Ready Platform',
 
-    'chatello.page.title': 'Chatello Coin (CAH). Get Now | Emirex.com',
-    'chatello.page.description': 'Buy Chatello Coin (CHA) with Emirex ➤ Connect with the global elite and the influencers that inspire and inform you ➤ You can get Chatello app here',
+    'chatello.page.title': 'Chatello 硬币(CHA). 立即获取',
+    'chatello.page.description': '在Emirex购买Chatello硬币（CHA）与启发和带动您的全球精英和影响者保持联络 您可以在此处获取Chatello应用程序',
     
 
     'cardDeposit.errorMessage.first_name': '名字为必填项',
