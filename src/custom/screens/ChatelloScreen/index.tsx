@@ -159,7 +159,6 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
         return (
             <div className="pg-buy-with-credit-card pg-chatello" style={{ overflowAnchor: 'none' }}>
                 <Helmet>
-                    <link rel="canonical" href="https://emirex.com/buycrypto" />
                     <title>{title}</title>
                     <meta name="description" content={description} />
                     <link
