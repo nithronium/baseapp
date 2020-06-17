@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { applogicUrl, authUrl, exchangeRatesUrl, nodelogicUrl, referralCommissionUrl, referralUrl, tenkoUrl, tradeUrl, withCredentials } from './config';
+import { applogicUrl, authUrl, exchangeRatesUrl, instexServiceUrl, nodelogicUrl, referralCommissionUrl, referralUrl, tenkoUrl, tradeUrl, withCredentials } from './config';
 
 export type HTTPMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';
 
@@ -9,7 +9,7 @@ export interface JsonBody {
 }
 
 export interface RequestOptions {
-    apiVersion: 'applogic' | 'nodelogic' | 'peatio' | 'barong' | 'tenko' | 'referral' | 'referralCommission' | 'exchangeRates';
+    apiVersion: 'applogic' | 'nodelogic' | 'peatio' | 'barong' | 'tenko' | 'referral' | 'referralCommission' | 'exchangeRates' | 'instexService';
     withHeaders?: boolean;
 }
 
@@ -34,6 +34,7 @@ const getAPI = () => ({
     referral: `${referralUrl()}`,
     exchangeRates: `${exchangeRatesUrl()}`,
     referralCommission: `${referralCommissionUrl()}`,
+    instexService: `${instexServiceUrl()}`,
 });
 
 const buildRequest = (request: Request, configData: RequestOptions) => {

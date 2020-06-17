@@ -34,6 +34,8 @@ import { Dropdown } from '../../../components';
 import { DISALLOWED_COUNTRIES } from '../../../constants';
 import { isValidDate } from '../../../helpers/checkDate';
 
+import { buildUrlWithRedirect, getRedirectUrl } from '../../../helpers';
+
 interface ReduxProps {
     editData?: IdentityData;
     editSuccess?: string;
@@ -110,13 +112,19 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             user,
         } = this.props;
 
+        const redirectUrl = getRedirectUrl();
+        let url = '/profile';
+        if (redirectUrl && typeof redirectUrl === 'string' && redirectUrl.indexOf('chatello') !== 0) {
+            url = buildUrlWithRedirect('/confirm');
+        }
+
         if (!prev.sendSuccess && sendSuccess) {
             this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
             if (sendData) {
                 this.props.changeUserProfileData(sendData);
             }
-            this.props.history.push('/profile');
+            this.props.history.push(url);
         }
 
         if (!prev.editSuccess && editSuccess) {
@@ -124,7 +132,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             if (editData) {
                 this.props.changeUserProfileData(editData);
             }
-            this.props.history.push('/profile');
+            this.props.history.push(url);
         }
     }
 //tslint:disable

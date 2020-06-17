@@ -8,6 +8,7 @@ import {
 import { connect, MapDispatchToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import {saveParametersFromUrl} from '../../../../custom/helpers';
 import { getUrlPart, setDocumentTitle } from '../../../../helpers';
 import {
     currenciesFetch,
@@ -62,6 +63,7 @@ class IEODetailsContainer extends React.Component<Props, State> {
 
     public componentDidMount() {
         setDocumentTitle('IEO Details');
+        saveParametersFromUrl(this.props.location.search);
         const { history, currencies, rangerState: { connected, withAuth }, userLoggedIn } = this.props;
         if (history.location.pathname) {
             const urlIEOId = getUrlPart(2, this.props.history.location.pathname);

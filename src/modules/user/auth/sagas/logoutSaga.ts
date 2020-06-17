@@ -15,6 +15,7 @@ const requestOptions: RequestOptions = {
 export function* logoutSaga(action: LogoutFetch) {
     try {
         yield call(API.delete(requestOptions), '/identity/sessions');
+        localStorage.removeItem('visited-chatello');
         yield put(userReset());
         yield put(userOpenOrdersReset());
         yield put(signInRequire2FA({ require2fa: false }));

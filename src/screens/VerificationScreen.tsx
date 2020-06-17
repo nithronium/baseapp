@@ -52,8 +52,15 @@ class Verification extends React.Component<Props> {
     public render() {
         const { currentLanguage } =this.props;
 
+        let url = '/signin';
+        const redirectUrl = localStorage.getItem('redirect_url');
+        if (redirectUrl) {
+            url = `/signin?redirect_url=${redirectUrl}`;
+        }
+        localStorage.removeItem('redirect_url');
+
         return (
-            <Redirect to={buildPath('/signin', currentLanguage)} />
+            <Redirect to={buildPath(url, currentLanguage)} />
         );
     }
 }

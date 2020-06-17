@@ -29,6 +29,8 @@ import { ProfilePartial } from '../../containers/Confirm/ProfilePartial';
 import { Questionnaire } from '../../containers/Confirm/Questionnaire';
 import { buildPath } from '../../helpers/buildPath';
 
+import { getRedirectUrl, redirectIfSpecified } from '../../helpers';
+
 interface ReduxProps {
     colorTheme: string;
     userData: User;
@@ -81,7 +83,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     public goBack = event => {
       const lang = this.props.currentLanguage;
       event.preventDefault();
-      this.props.history.push(buildPath('/profile', lang));
+      this.props.history.push(buildPath(redirectIfSpecified('/profile'), lang));
     };
 
     public renderDoubleProgressBar() {
@@ -239,7 +241,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
 
         if (pendingLabel) {
             fetchAlert({ message: [`resource.profile.${pendingLabel.key}.pending`], type: 'error'});
-            history.push('/profile');
+            history.push(redirectIfSpecified('/profile'));
         }
     }
 
@@ -281,6 +283,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             history,
             labels,
             userData: { level, profile },
+            currentLanguage,
         } = this.props;
 
         if (!labels.length) {
@@ -310,6 +313,10 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         }
 
         if (level === 4) {
+            const redirectUrl = getRedirectUrl();
+            if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
+                history.push(buildPath(redirectIfSpecified('/profile'), currentLanguage));
+            }
             return this.renderFourthLevel();
         }
 
@@ -317,7 +324,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             return <Questionnaire />;
         }
 
-        history.push('/profile');
+        history.push(redirectIfSpecified('/profile'));
 
         return null;
     };

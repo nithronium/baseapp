@@ -35,6 +35,7 @@ import { rootUserActivitySaga, UserActivityState } from './user/userActivity';
 import { rootWalletsSaga, WalletsState } from './user/wallets';
 import { rootWithdrawLimitSaga, WithdrawLimitState } from './user/withdrawLimit';
 
+import { CreaditCardState, rootCreditCardSaga } from '../custom/modules/buyWithCreditCard';
 import { ReferralCommissionState, rootReferralCommissionSaga } from '../custom/modules/referralCommission';
 import { ReferralOverallState, rootReferralTicketsSaga } from '../custom/modules/referralTickets';
 
@@ -76,6 +77,7 @@ export * from './user/guard';
 export * from '../custom/modules/referralTickets';
 export * from '../custom/modules/referralCommission';
 export * from '../custom/modules/fees';
+export * from '../custom/modules/buyWithCreditCard';
 
 export interface RootState {
     public: {
@@ -115,6 +117,7 @@ export interface RootState {
         guard: GuardState;
         referralTickets: ReferralOverallState;
         referralCommission: ReferralCommissionState;
+        buyWithCreditCard: CreaditCardState;
         ieo: OrderIEOState,
     };
     customUser: {
@@ -158,6 +161,7 @@ export function* rootSaga() {
         call(rootGuardSaga),
         call(rootReferralTicketsSaga),
         call(rootReferralCommissionSaga),
+        call(rootCreditCardSaga),
         // call(rootFeesSaga),
         call(rootDataStorageSaga),
         call(rootKycAuthSaga),

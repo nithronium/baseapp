@@ -34,6 +34,12 @@ describe('SignIn saga', () => {
         level: 3,
         otp: false,
         state: 'active',
+        balance: {
+            USD: 0,
+            BTC: 0,
+        },
+        cryptoCurrency: 'BTC',
+        activeCurrency: 'USD',
     };
 
     const mockSignIn = () => {

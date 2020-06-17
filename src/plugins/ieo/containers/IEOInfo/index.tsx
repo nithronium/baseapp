@@ -10,6 +10,9 @@ import { Currency } from '../../../../modules';
 import { Blur, LoginBlur } from '../../components';
 import { DataIEOInterface, OrderIEOData } from '../../modules';
 
+const T69_IEO_ID = 2;
+const T69_IEO_AMOUNT = 6508911.65;
+
 interface OwnProps {
     currency: Currency;
     ieo: DataIEOInterface;
@@ -121,7 +124,7 @@ class IEOInfoComponent extends React.Component<Props, State> {
                                 {ieo.name}
                             </div>
                         </div>
-                        {this.renderContent(ieo.state)}
+                        {this.renderContent(ieo.state, ieo)}
                     </div>
                     <div className="ieo-profile-info__main__description">
                         {ieo.description}
@@ -171,7 +174,11 @@ class IEOInfoComponent extends React.Component<Props, State> {
         }
     };
 
-    private renderContent = (state: string) => {
+    private renderContent = (state: string, ieo) => {
+        if (ieo.id === T69_IEO_ID) {
+            return this.renderInProgress();
+        }
+
         switch (state) {
             case 'preparing':
                 return this.renderPreparing();
@@ -236,7 +243,10 @@ class IEOInfoComponent extends React.Component<Props, State> {
         const { ieo, currency } = this.props;
         const { id } = ieo;
 
-        const hidePregress = id.toString() === '3';
+        const hidePregress = id.toString() === '3' ||
+            id.toString() === '5' ||
+            // id.toString() === '2' ||
+            id.toString() === '4';
 
         return (
             <div className="ieo-profile-info__main__info__value">
@@ -270,7 +280,10 @@ class IEOInfoComponent extends React.Component<Props, State> {
         const amountOfQuote = ieo.tokens_ordered && Decimal.format(+ieo.tokens_ordered * +ieo.pairs[0].price, +currency.precision);
         const { id } = ieo;
 
-        const hidePregress = id.toString() === '3';
+        const hidePregress = id.toString() === '3' ||
+            id.toString() === '5' ||
+            // id.toString() === '2' ||
+            id.toString() === '4';
 
         return (
             <div className="ieo-profile-info__main__info__value">
@@ -299,7 +312,15 @@ class IEOInfoComponent extends React.Component<Props, State> {
 
     private renderProgressBar = () => {
         const { ieo } = this.props;
-        const percentage = +ieo.supply ? +Decimal.format((+ieo.tokens_ordered * 100) / +ieo.supply, 2) : 0;
+        const { id, supply } = ieo;
+        let { tokens_ordered } = ieo;
+
+        if (id === T69_IEO_ID) {
+            tokens_ordered = T69_IEO_AMOUNT;
+            // supply = T69_IEO_AMOUNT;
+        }
+
+        const percentage = +ieo.supply ? +Decimal.format((+tokens_ordered * 100) / +supply, 2) : 0;
 
         const percentageClass = classnames('filler', {
             'filler--zero': percentage < 5,
@@ -313,7 +334,7 @@ class IEOInfoComponent extends React.Component<Props, State> {
         return (
             <div className="curent-progress-block">
                 <div className="curent-progress-block__price">
-                    {ieo.metadata && Decimal.format(ieo.tokens_ordered, +ieo.metadata.precision)}&nbsp;/&nbsp;{Decimal.format(ieo.supply, +ieo.metadata.precision)}&nbsp;{ieo.currency_id && ieo.currency_id.toUpperCase()}
+                    {ieo.metadata && Decimal.format(tokens_ordered, +ieo.metadata.precision)}&nbsp;/&nbsp;{Decimal.format(supply, +ieo.metadata.precision)}&nbsp;{ieo.currency_id && ieo.currency_id.toUpperCase()}
                 </div>
                 <div className="progress-bar">
                     <div className={percentageClass} style={{ width: `${percentage}%` }} />
