@@ -75,6 +75,7 @@ describe('Orderbook/MarketDepth actions', () => {
                     ord_type: 'limit',
                 },
             ],
+            market: '',
             loading: false,
         };
         const expectedAction = { type: ORDER_BOOK_DATA, payload: fakeOrderBook };

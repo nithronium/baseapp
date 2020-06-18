@@ -54,6 +54,7 @@ describe('orderBook reducer', () => {
         ord_type: 'limit',
       },
     ],
+    market: '',
     loading: true,
   };
 

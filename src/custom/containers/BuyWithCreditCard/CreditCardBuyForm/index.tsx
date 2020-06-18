@@ -2,11 +2,13 @@ import * as React from 'react';
 
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 
-import Dropdown from 'react-dropdown';
-
 import { RouteComponentProps, withRouter } from 'react-router';
 
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
+
+import { CreditCardForm } from '../CreditCardForm';
+
+import { CreditCardModal } from '../CreditCardModal';
 
 import {
     Modal,
@@ -67,7 +69,7 @@ interface State {
     openIframe: boolean;
 }
 
-class CreditCardBuyFormComponent extends React.Component<Props, State> {
+class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     constructor(props) {
         super(props);
         this.state = {
@@ -111,12 +113,12 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
         return this.convert(cryptoValue, 'fiat');
     };
 
-    public convertToCrypto = (fiatValue: number): number => {
-        return this.convert(fiatValue, 'crypto');
+    public convertToCrypto = (fiatValue: number, props: Props = this.props): number => {
+        return this.convert(fiatValue, 'crypto', props);
     };
 
-    public convert = (value: number, target: string): number => {
-        const { orderBook } = this.props;
+    public convert = (value: number, target: string, props: Props = this.props): number => {
+        const { orderBook } = props;
         const { asks } = orderBook;
         const totalPrice = asks.reduce((sum: number, { price, remaining_volume }) => {
             return sum + price * remaining_volume;
@@ -168,7 +170,6 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     public fetchMarket = () => {
         const { fiat, crypto } = this.state;
         const market = this.findMarket(fiat, crypto);
-        console.log('market', market);
         this.props.fetchOrderBook(market);
     };
 
@@ -200,7 +201,6 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                 showModal: false,
             });
         }
-        console.log('buyWithCreditCard', buyWithCreditCard);
         const { currencies, markets } = this.props;
         if (currencies.length !== nextProps.currencies.length ||
             markets.length !== nextProps.markets.length)
@@ -216,6 +216,15 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                 crypto: cryptoList[0] || 'BTC',
             }, () => {
                 this.fetchMarket();
+            });
+        }
+
+        if (this.props.orderBook.market !== nextProps.orderBook.market) {
+            this.setState({
+                cryptoValue: this.convertToCrypto(
+                    Number(this.state.fiatValue),
+                    nextProps,
+                ).toString(),
             });
         }
     }
@@ -255,38 +264,6 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                 quote_unit.toLowerCase() :
                 base_unit.toLowerCase();
         });
-    };
-
-    public getAllFiat1 = (props?): string[] => {
-        return ['eur', 'usd'];
-        const res = new Set<string>();
-        const { markets } = (props || this.props);
-        for (const market of markets) {
-            const { base_unit, quote_unit } = market;
-            if (this.isFiat(base_unit)) {
-                res.add(base_unit);
-            }
-            if (this.isFiat(quote_unit)) {
-                res.add(quote_unit);
-            }
-        }
-        return Array.from(res);
-    };
-
-    public getAllCrypto1 = (props?): string[] => {
-        return ['itn', 't69', 'btc'];
-        const res = new Set<string>();
-        const { markets } = (props || this.props);
-        for (const market of markets) {
-            const { base_unit, quote_unit } = market;
-            if (this.isCrypto(base_unit)) {
-                res.add(base_unit);
-            }
-            if (this.isCrypto(quote_unit)) {
-                res.add(quote_unit);
-            }
-        }
-        return Array.from(res);
     };
 
     public getAllFiat = (props?): string[] => {
@@ -339,7 +316,22 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
         return `$${withdraw ? withdraw.limit : '0'}`;
     };
 
+    public isButtonDisabled = (): boolean => {
+        const { fiatValue } = this.state;
+        console.log('isButtonDisabled', fiatValue, Number(fiatValue));
+        return !(Number(fiatValue) > 0);
+    };
+
     public render() {
+        const {
+            fiat, crypto,
+            // fiatList, cryptoList,
+            fiatValue, cryptoValue,
+            swapped,
+            showModal,
+        } = this.state;
+        const fiatList = ['eur', 'usd'];
+        const cryptoList = ['itn', 't69', 'btc'];
         return (
             <div className="buy-form">
                 <div className="section">
@@ -359,6 +351,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                         <button
                             className="buy-form__button-continue"
                             onClick={this.onSubmit}
+                            disabled={this.isButtonDisabled()}
                         >
                             {this.translate(this.getButtonTextKey())}
                         </button>
@@ -398,11 +391,22 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                         </div>
                     </div>
                 </div>
-                <Modal
-                    show={this.state.showModal}
-                    header={this.renderModalHeader()}
-                    content={this.renderModalBody()}
-                    footer={this.renderModalFooter()}
+                <CreditCardModal
+                    showModal={showModal}
+                    closeModal={this.closeModal}
+                    fiat={fiat}
+                    crypto={crypto}
+                    fiatValue={fiatValue}
+                    cryptoValue={cryptoValue}
+                    swapped={swapped}
+                    onSwap={this.onSwap}
+                    fiatList={fiatList}
+                    cryptoList={cryptoList}
+                    onFiatValueChange={this.onFiatValueChange}
+                    onFiatChange={this.onFiatChange}
+                    onCryptoValueChange={this.onCryptoValueChange}
+                    onCryptoChange={this.onCryptoChange}
+                    isButtonDisabled={this.isButtonDisabled()}
                 />
                 <Modal
                     show={this.state.openIframe}
@@ -457,156 +461,41 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
         const cryptoList = ['itn', 't69', 'btc'];
 
         return (
-            <div className="buy-form__inputs-wrap">
-                <div className="buy-form__input-wrap">
-                    <label className="buy-form__label">
-                        {this.translate('buyWithCard.form.sell')}
-                    </label>
-                    <input
-                        onChange={!swapped ? this.onFiatValueChange : this.onCryptoValueChange}
-                        value={!swapped ? fiatValue : cryptoValue}
-                        className="buy-form__input"
-                        type="number"
-                    />
-                    <Dropdown
-                        onChange={!swapped ? this.onFiatChange : this.onCryptoChange}
-                        value={!swapped ? fiat : crypto}
-                        options={!swapped ? fiatList : cryptoList}
-                        controlClassName={'cr-card-select cr-card-select--first'}
-                    />
-                </div>
-
-                <div
-                    className="buy-form__input-arrow-wrap"
-                    onClick={this.onSwap}
-                >
-                    <div className="buy-form__input-arrow" />
-                </div>
-
-                <div className="buy-form__input-wrap">
-                    <label className="buy-form__label">
-                        {this.translate('buyWithCard.form.buy')}
-                    </label>
-                    <input
-                        onChange={!swapped ? this.onCryptoValueChange : this.onFiatValueChange}
-                        value={!swapped ? cryptoValue : fiatValue}
-                        className="buy-form__input"
-                        type="number"
-                    />
-
-                    <Dropdown
-                        onChange={!swapped ? this.onCryptoChange : this.onFiatChange}
-                        value={!swapped ? crypto : fiat}
-                        options={!swapped ? cryptoList : fiatList}
-                        controlClassName={'cr-card-select'}
-                    />
-                </div>
-            </div>
+            <CreditCardForm
+                fiat={fiat}
+                crypto={crypto}
+                fiatValue={fiatValue}
+                cryptoValue={cryptoValue}
+                swapped={swapped}
+                onSwap={this.onSwap}
+                fiatList={fiatList}
+                cryptoList={cryptoList}
+                onFiatValueChange={this.onFiatValueChange}
+                onFiatChange={this.onFiatChange}
+                onCryptoValueChange={this.onCryptoValueChange}
+                onCryptoChange={this.onCryptoChange}
+            />
         );
     };
 
     public onSwap = () => {
         this.setState({ swapped: !this.state.swapped });
-        console.log('swapped', this.state.swapped);
     };
 
     public closeModal = () => {
         this.setState({ showModal: false });
     };
 
-    public renderModalHeader = () => {
-        return (
-            <div className="buy-form__modal-header">
-                <p>{this.translate('buyWithCard.form.modal.header')}</p>
-                <div
-                    className="buy-form__modal-close"
-                    onClick={this.closeModal}
-                >
-                    x
-                </div>
-            </div>
-        );
-    };
-
-    public renderModalBody = () => {
-        let { fiat, crypto } = this.state;
-        const { fiatValue, cryptoValue, swapped } = this.state;
-        fiat = fiat || '';
-        crypto = crypto || '';
-        return (
-            <div>
-                <div className="buy-form__modal-amount">
-                    {this.translate('buyWithCard.form.buy')} {' '}
-                    <span>{!swapped ? cryptoValue : fiatValue}
-                    {' '}
-                    {!swapped ? crypto.toUpperCase() : fiat.toUpperCase()}</span>
-                    {' '}{this.translate('buyWithCard.form.for')}{' '}
-                    <span>{!swapped ? fiatValue : cryptoValue} {fiat.toUpperCase()}</span>
-                </div>
-
-                <div className="buy-form__modal-inputs">
-                    {this.currenciesForm()}
-                </div>
-                <div className="buy-form__modal-divider">
-                    <div className="credit-card-promo__divider">
-                        <div className="credit-card-promo__divider-arrow" />
-                    </div>
-                </div>
-
-                <div className="buy-form__modal-table">
-                    <div className="buy-form__modal-table-top">
-                        <span>{this.translate('buyWithCard.form.modal.pay')}</span>
-                        <span>{!swapped ? fiatValue : cryptoValue}
-                        {' '}
-                        {!swapped ? fiat.toUpperCase() : crypto.toUpperCase()}</span>
-                    </div>
-                    <div className="buy-form__modal-table-bottom">
-                        <span>{this.translate('buyWithCard.form.modal.get')}</span>
-                        <span>{!swapped ? cryptoValue : fiatValue}
-                        {' '}
-                        {!swapped ? crypto.toUpperCase() : fiat.toUpperCase()}</span>
-                    </div>
-                </div>
-
-                <div className="buy-form__modal-terms">
-                    <div className="buy-form__modal-terms-header">
-                        {this.translate('buyWithCard.form.modal.terms.header')}
-                    </div>
-                    <div className="buy-form__modal-terms-body">
-                        {this.translate('buyWithCard.form.modal.terms.body')}
-                    </div>
-                </div>
-
-                <div className="buy-form__modal-footer">
-                    <div
-                        className="buy-form__modal-footer-button"
-                        onClick={this.submitModal}
-                    >
-                        {this.translate('buyWithCard.form.modal.buttonBuy')}
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
     public submitModal = () => {
         const { createCreditCardOrder } = this.props;
-        const { fiat, crypto, fiatValue, cryptoValue, swapped } = this.state;
+        const { fiat, crypto, fiatValue } = this.state;
         let outcomeCurrencyId;
         let incomeCurrencyId;
         let amount;
 
-        console.log('submit modal');
-
-        if (!swapped) {
-            outcomeCurrencyId = fiat;
-            incomeCurrencyId = crypto;
-            amount = fiatValue;
-        } else {
-            outcomeCurrencyId = crypto;
-            incomeCurrencyId = fiat;
-            amount = cryptoValue;
-        }
+        outcomeCurrencyId = fiat;
+        incomeCurrencyId = crypto;
+        amount = fiatValue;
 
         createCreditCardOrder({
             outcomeCurrencyId,
@@ -614,10 +503,6 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
             amount: Number(amount),
             type: 'ccPurchase',
         });
-    };
-
-    public renderModalFooter = () => {
-        return null;
     };
 }
 
@@ -639,4 +524,4 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
     createCreditCardOrder: payload => dispatch(creditCardOrderFetch(payload)),
 });
 
-export const CreditCardBuyForm = injectIntl(connect(mapStateToProps, mapDispatchToProps)(withRouter(CreditCardBuyFormComponent)));
+export const CreditCardBuyForm = injectIntl(connect(mapStateToProps, mapDispatchToProps)(withRouter(CreditCardBuyFormWrapComponent)));

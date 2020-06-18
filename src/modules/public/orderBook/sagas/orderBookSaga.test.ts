@@ -74,6 +74,7 @@ describe('Saga: OrderBook', () => {
                 ord_type: 'limit',
             },
         ],
+        market: '',
         loading: false,
     };
 
