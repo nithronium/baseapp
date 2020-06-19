@@ -12,7 +12,7 @@ import { CreditCardModal } from '../CreditCardModal';
 
 import {
     Modal,
-  } from '../../../../components';
+} from '../../../../components';
 
 import {
     creditCardOrderFetch,
@@ -55,6 +55,8 @@ interface DispatchProps {
 
 type Props = InjectedIntlProps & ReduxProps & DispatchProps & RouteComponentProps & {
     isLoggedIn: boolean;
+    onIframeClose: () => void;
+    onPaymentDataChange: () => void;
 };
 
 interface State {
@@ -192,6 +194,19 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         this.props.fetchCurrencies();
         this.props.fetchMarkets();
         this.props.fetchWithdrawLimit();
+    }
+
+    public componentDidUpdate() {
+        const { fiatValue, cryptoValue, fiat, crypto } = this.state;
+        // if (prevState.fiatValue !== fiatValue ||
+        //     prevState.cryptoValue !== cryptoValue ||
+        //     prevState.fiat !== )
+        this.props.onPaymentDataChange({
+            fiat,
+            crypto,
+            amount: cryptoValue,
+            value: fiatValue,
+        });
     }
 
     public componentWillReceiveProps(nextProps) {
@@ -456,6 +471,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     };
 
     public closeIframe = () => {
+        this.props.onIframeClose();
         this.setState({ openIframe: false });
     };
 

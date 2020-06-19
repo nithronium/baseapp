@@ -66,8 +66,8 @@ interface State {
     successIframeLoaded: boolean;
     paymentData: {
         amount: number;
-        pair: string;
-        price: number;
+        fiat: string;
+        crypto: string;
         value: number;
         time: string;
     };
@@ -83,8 +83,8 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
             successIframeLoaded: false,
             paymentData: {
                 amount: 0,
-                pair: '',
-                price: 0,
+                fiat: '',
+                crypto: '',
                 value: 0,
                 time: '',
             },
