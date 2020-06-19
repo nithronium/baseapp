@@ -12,7 +12,6 @@ type Props = InjectedIntlProps & RouteComponentProps & {
     step: number;
     userLoggedIn: boolean;
     user: User;
-    amount: number;
 };
 
 export class CreditCardOverlayComponent extends React.Component<Props> {
@@ -38,13 +37,9 @@ export class CreditCardOverlayComponent extends React.Component<Props> {
     }
 
     public handleButton = () => {
-        const { history, step, amount } = this.props;
+        const { history, step } = this.props;
 
-        let url = '/chatello';
-
-        if (amount) {
-            url = `${url}/${amount}`;
-        }
+        const url = '/buycrypto';
 
         if (step === 1) {
             history.push(`/signup?redirect_url=${encodeURIComponent(url)}`);

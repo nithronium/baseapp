@@ -10,6 +10,8 @@ import { CreditCardForm } from '../CreditCardForm';
 
 import { CreditCardModal } from '../CreditCardModal';
 
+import { CreditCardOverlay } from '../CreditCardOverlay';
+
 import {
     Modal,
 } from '../../../../components';
@@ -356,6 +358,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         } = this.state;
         const fiatList = ['eur', 'usd'];
         const cryptoList = ['itn', 't69', 'btc'];
+        const { step, user, userLoggedIn } = this.props;
         return (
             <div className="buy-form">
                 <div className="section">
@@ -414,6 +417,13 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
                             </div> */}
                         </div>
                     </div>}
+                    <div className="buy-form__credit-card-overlay">
+                        <CreditCardOverlay
+                            step={step}
+                            user={user}
+                            userLoggedIn={userLoggedIn}
+                        />
+                    </div>
                 </div>
                 <CreditCardModal
                     showModal={showModal}
