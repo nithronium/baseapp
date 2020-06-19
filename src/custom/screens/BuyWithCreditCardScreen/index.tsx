@@ -2,14 +2,23 @@ import * as React from 'react';
 
 import { Helmet } from 'react-helmet';
 
+import { InjectedIntlProps, injectIntl } from 'react-intl';
+
+import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
+
+import {
+    RootState,
+    selectUserInfo,
+    selectUserLoggedIn,
+    User,
+} from '../../../modules';
+
 import {
     CreditCardBuyForm,
     CreditCardFaq,
     CreditCardPromo,
     CreditCardSteps,
 } from '../../containers/BuyWithCreditCard';
-
-import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 
 const jsonLd = {
@@ -47,12 +56,97 @@ const jsonLd = {
     }],
 };
 
+interface ReduxProps {
+    user: User;
+    userLoggedIn: boolean;
+}
+
+interface State {
+    orderFinished: boolean;
+    successIframeLoaded: boolean;
+    paymentData: {
+        amount: number;
+        pair: string;
+        price: number;
+        value: number;
+        time: string;
+    };
+}
+
 type Props = InjectedIntlProps;
 
-class BuyWithCreditCardScreenComponent extends React.Component<Props> {
+class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
+    constructor(props) {
+        super(props);
+        this.state = {
+            orderFinished: false,
+            successIframeLoaded: false,
+            paymentData: {
+                amount: 0,
+                pair: '',
+                price: 0,
+                value: 0,
+                time: '',
+            },
+        };
+    }
+
+    public componentDidMount() {
+        window.addEventListener('message', this.onMessage);
+    }
+
+    public componentWillUnmount() {
+        window.removeEventListener('message', this.onMessage);
+    }
+
+    public onMessage = event => {
+        const action = event.data.action;
+        // tslint:disable-next-line
+        if (action === 'instex-success-ok' ||
+            action === 'instex-success-close'
+        ) {
+            this.setState({
+                orderFinished: true,
+            });
+        }
+
+        if (action === 'instex-success') {
+            this.setState({ successIframeLoaded: true });
+        }
+    };
+
+    public onTryAgain = () => {
+        this.setState({
+            orderFinished: false,
+            successIframeLoaded: false,
+        });
+    };
+
+    public onIframeClose = () => {
+        const { successIframeLoaded } = this.state;
+        if (successIframeLoaded) {
+            this.setState({ orderFinished: true });
+        }
+    };
+
+    public onPaymentDataChange = paymentData => {
+        this.setState({ paymentData });
+    };
+
     public render() {
         const title = this.props.intl.formatMessage({ id: 'buyWithCard.title' });
         const description = this.props.intl.formatMessage({ id: 'buyWithCard.description' });
+        const { userLoggedIn, user } = this.props;
+        const { orderFinished, paymentData } = this.state;
+        let step = 1;
+
+        if (orderFinished) {
+            step = 4;
+        } else if (user.level >= 4) {
+            step = 3;
+        } else if (userLoggedIn) {
+            step = 2;
+        }
         return (
             <div className="pg-buy-with-credit-card">
                 <Helmet>
@@ -68,16 +162,14 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props> {
                 </Helmet>
                 <div className="pg-buy-with-credit-card__container">
                     <CreditCardSteps
-                        currentStep={1}
-                        paymentData={{
-                            pair: 'pair',
-                            amount: 1,
-                            price: 1,
-                            value: 1,
-                            time: 'time',
-                        }}
+                        currentStep={step}
+                        paymentData={paymentData}
                     />
-                    <CreditCardBuyForm />
+                    <CreditCardBuyForm
+                        onPaymentDataChange={this.onPaymentDataChange}
+                        step={step}
+                        onIframeClose={this.onIframeClose}
+                    />
                     <CreditCardPromo />
                     <CreditCardFaq />
                 </div>
@@ -86,4 +178,12 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props> {
     }
 }
 
-export const BuyWithCreditCardScreen = injectIntl(BuyWithCreditCardScreenComponent);
+const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
+    user: selectUserInfo(state),
+    userLoggedIn: selectUserLoggedIn(state),
+});
+
+const mapDispatchToProps: MapDispatchToPropsFunction<{}, {}> = () => ({
+});
+
+export const BuyWithCreditCardScreen = injectIntl(connect(mapStateToProps, mapDispatchToProps)(BuyWithCreditCardScreenComponent));
