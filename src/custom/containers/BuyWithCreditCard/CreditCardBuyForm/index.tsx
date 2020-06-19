@@ -179,8 +179,9 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
             history.push(`/signin?redirect_url=${encodeURIComponent('/buycrypto')}`);
             return;
         }
-        if (user.level < 3) {
+        if (user.level < 4) {
             history.push(`/confirm?redirect_url=${encodeURIComponent('/buycrypto')}`);
+            return;
         }
         this.setState({
             showModal: true,
@@ -297,7 +298,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     public getButtonTextKey = (): string => {
         const { userLoggedIn, user } = this.props;
         if (userLoggedIn) {
-            if (user.level >= 3) {
+            if (user.level >= 4) {
                 return 'buyWithCard.form.buttonContinue';
             } else {
                 return 'buyWithCard.form.buttonNotVerified';
@@ -317,9 +318,17 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     };
 
     public isButtonDisabled = (): boolean => {
+        const { userLoggedIn, user } = this.props;
+        if (!userLoggedIn || user.level < 4) {
+            return false;
+        }
         const { fiatValue } = this.state;
-        console.log('isButtonDisabled', fiatValue, Number(fiatValue));
         return !(Number(fiatValue) > 0);
+    };
+
+    public ableToBuy = () => {
+        const { userLoggedIn, user } = this.props;
+        return userLoggedIn && user.level >= 4;
     };
 
     public render() {
@@ -363,7 +372,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
                         </div>
                     </div>
 
-                    <div className="buy-form__limits">
+                    {this.ableToBuy() && <div className="buy-form__limits">
                         <div>
                             <div className="buy-form__limits-item">
                                 <div>
@@ -389,7 +398,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
                                 </div>
                             </div> */}
                         </div>
-                    </div>
+                    </div>}
                 </div>
                 <CreditCardModal
                     showModal={showModal}
