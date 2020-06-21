@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import * as moment from 'moment';
+
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 import { RouteComponentProps, withRouter } from 'react-router';
@@ -192,10 +194,22 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         });
     };
 
+    public formatTime = () => {
+        return moment().format('HH:mm:SS DD.MM.YYYY');
+    };
+
     public componentDidMount() {
+        const { fiatValue, cryptoValue, fiat, crypto } = this.state;
         this.props.fetchCurrencies();
         this.props.fetchMarkets();
         this.props.fetchWithdrawLimit();
+        this.props.onPaymentDataChange({
+            fiat,
+            crypto,
+            amount: cryptoValue,
+            value: fiatValue,
+            time: this.formatTime(),
+        });
     }
 
     public componentDidUpdate() {
@@ -208,6 +222,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
             crypto,
             amount: cryptoValue,
             value: fiatValue,
+            time: this.formatTime(),
         });
     }
 
@@ -367,10 +382,19 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
                     </div>
 
                     <div className="buy-form__content">
-                        <h2>{this.translate('buyWithCard.form.title')}</h2>
+                        <h2>
+                            {this.translate('buyWithCard.form.title')}
+                            <div className="buy-form__mastercard" />
+                        </h2>
                         {this.currenciesForm()}
                         <div className="buy-form__bottom-text">
-                            <p>{this.translate('buyWithCard.form.fees')}</p>
+                            <div>
+                                <p>
+                                    {this.translate('buyWithCard.form.fees')}
+                                    <br />
+                                    {this.translate('buyWithCard.overlay1.text1')}
+                                </p>
+                            </div>
                             <p className="buy-form__bottom-text--help">
                                 <a target="_blank" href="https://kb.emirex.com/kb-tickets/new">{this.translate('buyWithCard.form.help')}</a>
                             </p>
@@ -428,6 +452,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
                 <CreditCardModal
                     showModal={showModal}
                     closeModal={this.closeModal}
+                    submitModal={this.submitModal}
                     fiat={fiat}
                     crypto={crypto}
                     fiatValue={fiatValue}

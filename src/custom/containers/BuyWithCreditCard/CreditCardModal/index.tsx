@@ -91,7 +91,7 @@ export class CreditCardModalComponent extends React.Component<Props> {
         return (
             <div>
                 <div className="buy-form__modal-amount">
-                    {this.translate('buyWithCard.form.buy')} {' '}
+                    {this.translate(!swapped ? 'buyWithCard.form.buy' : 'buyWithCard.form.sell')} {' '}
                     <span>{!swapped ? cryptoValue : fiatValue}
                     {' '}
                     {!swapped ? crypto.toUpperCase() : fiat.toUpperCase()}</span>

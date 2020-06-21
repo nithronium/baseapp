@@ -1171,7 +1171,7 @@ export const zh = {
     'buyWithCard.form.paymentLimit': 'Payment value limit',
     'buyWithCard.form.dailyLimit': 'Daily Limit',
     'buyWithCard.form.monthlyLimit': 'Monthly Limit',
-    'buyWithCard.form.buttonContinue': 'Continue',
+    'buyWithCard.form.buttonContinue': 'Buy',
     'buyWithCard.promo1': 'Get USD to Cryptocurrency Rate',
     'buyWithCard.promo2': 'Enter billing and Payment info',
     'buyWithCard.promo3': 'Receive instantly',
@@ -1212,7 +1212,7 @@ export const zh = {
     'buyWithCard.steps.header4': 'Congratulations,',
     'buyWithCard.steps.text2': 'you are successfully registered on the website. The next step is to verify your identity to make a one-click purchase.',
     'buyWithCard.steps.text3': 'you are get verified. The next step is payment making',
-    'buyWithCard.steps.text4': 'you are successfully make a payment',
+    'buyWithCard.steps.text4': 'you successfully made a payment',
     'buyWithCard.steps.footer1': '<span>Click</span> to start moving to complete the purchase',
     'buyWithCard.steps.footer2': 'For the next stage, you need to provide you address details, phone number and documents of international standard to confirm your identity.',
     'buyWithCard.steps.step1': 'Sign Up',
@@ -1224,6 +1224,33 @@ export const zh = {
     'buyWithCard.steps.price': 'Price (USD)',
     'buyWithCard.steps.value': 'Value (USD)',
     'buyWithCard.steps.time': 'Time',
+
+
+    'buyWithCard.overlay1.header': 'Buy Crypto with Credit/Debit Card',
+    'buyWithCard.overlay1.text1': 'Automatic conversion your fiat currency*',
+    'buyWithCard.overlay1.text2': 'No hidden fees and commission*',
+    'buyWithCard.overlay1.button': 'Get Crypto',
+    'buyWithCard.overlay2.footer': 'Prepare your passport or driving licence',
+
+    'buyWithCard.header.title': 'Buy Cryptocurrencies with Credit/Debit Card',
+    'buyWithCard.header.text': 'The Infrastructure for the New Digital Economy',
+
+
+    'buyWithCard.info.header1': 'Buy Cryptocurrencies on the Middle East Crypto Exchange',
+    'buyWithCard.info.text1': 'With Emirex you can buy Crypto with Cash very easy and cheap. Just use your credit card to directly purchase Bitcoin, Ethereum, Litecoin, and Tether with USD, EUR, or AED. At our exchange also, you can make a deposit and receive USD or other fiat currencies , and after that make any trading activities. Once you buy a crypto on this platform, you can use it for all Emirex services including crypto exchange.',
+    'buyWithCard.info.button1': 'Buy Cryptocurrencies',
+    'buyWithCard.info.header2': 'Buy crypto with card or bank transfer',
+    'buyWithCard.info.text2': 'People who would like to buy some Bitcoin always look for the most convenient way. At Emirex, you can use any card to make transactions. The system will automatically convert your currency into the one supported by the platform. You can be sure that your card information will stay secure. Emirex accepts:  Visa/Mastercard, SEPA, and SWIFT.',
+    'buyWithCard.info.text3': 'Buying cryptos with credit or debit cards is especially useful to those seeking ways how to get Bitcoins for a small amount of money. And for those who are ready to spend a large amount of money to buy BTC, you may prefer the option of funding your account via a bank transfer. It might take a little longer than card purchases. And you will have to pass the complete verification process to be able to use this payment option. With Emirex you will not only be able to easily pay for the services but you will also get high-security standards and fast speed of order processing with no hidden fees and commissions.',
+    'buyWithCard.info.header3': 'Join and grow with Emirex',
+    'buyWithCard.info.text4': 'Use Emirex fully! Our platform is designed for people and we take into account each of your wishes and every day we become better and better. Buy/sell crypto, earn, invest, invite your friends, and use our unique referral program.',
+    'buyWithCard.info.item1': 'Trade',
+    'buyWithCard.info.item2': 'Earn',
+    'buyWithCard.info.item3': 'Hold',
+    'buyWithCard.info.item4': 'Exchange',
+    'buyWithCard.info.item5': 'Invite Friends',
+    'buyWithCard.info.text5': 'Start work with your Crypto on the Middle East: Turkey, Egypt, Saudi Arabia, Kuwait, Bahrain, UAE and etc.',
+    'buyWithCard.info.button2': 'Join & Earn',
 
 
     'chatello.steps.header1': 'Follow next steps to buy Chatello Coins',

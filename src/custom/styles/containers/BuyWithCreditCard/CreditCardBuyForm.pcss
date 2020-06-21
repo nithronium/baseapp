@@ -16,6 +16,7 @@
 
 .pg-buy-with-credit-card {
     padding-bottom: 100px;
+    background-color: #000;
 
     &__container {
         max-width: 940px;
@@ -45,6 +46,15 @@
     }
 
     .buy-form {
+        &__mastercard {
+            width: 36px;
+            height: 30px;
+            background: url(./assets/images/credit-card-mastercard.png);
+            right: 0;
+            position: absolute;
+            top: 5px;
+        }
+
         .cr-modal .cr-modal__container {
             width: calc(var(--big-gap) * 10);
 

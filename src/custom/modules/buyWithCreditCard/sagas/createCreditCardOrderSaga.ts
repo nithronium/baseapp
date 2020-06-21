@@ -22,7 +22,7 @@ export function* createCreditCardOrderSaga(action: CreditCardOrderFetch) {
     } catch (error) {
         // tslint:disable-next-line:no-console
         console.log('error', error);
-        // yield put(creditCardOrderData({ url: 'https://www.html.com' }));
+        yield put(creditCardOrderData({ url: 'https://www.html.com' }));
         yield put(creditCardOrderError(error));
 
         yield put(alertPush({message: error.message, code: error.code, type: 'error'}));

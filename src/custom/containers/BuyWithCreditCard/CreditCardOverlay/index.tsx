@@ -24,14 +24,14 @@ export class CreditCardOverlayComponent extends React.Component<Props> {
         if (step > 2) {
             return null;
         }
-        const footerText = step === 1 ? 'chatello.overlay1.footer' : 'chatello.overlay2.footer';
+        const footerText = step === 1 ? 'buyWithCard.overlay1.footer' : 'buyWithCard.overlay2.footer';
 
         return (
-            <div className="pg-chatello__overlay">
+            <div className="pg-chatello__overlay credit-card-overlay">
                 {step === 1 ? this.renderOverlay1() : this.renderOverlay2()}
-                <div className="pg-chatello__overlay-footer">
+                {step === 2 && <div className="pg-chatello__overlay-footer">
                     {this.translate(footerText)}
-                </div>
+                </div>}
             </div>
         );
     }
@@ -54,26 +54,13 @@ export class CreditCardOverlayComponent extends React.Component<Props> {
         return (
             <div className="pg-chatello__overlay-wrap">
                 <div className="pg-chatello__overlay-header">
-                    {this.translate('chatello.form.header')}
-                    <div className="pg-chatello__overlay-visa" />
+                    {this.translate('buyWithCard.overlay1.header')}
+                    <div className="credit-card-overlay__mastercard" />
                 </div>
 
-                <div className="pg-chatello__overlay1-blocks">
-
-                    <div className="pg-chatello__overlay1-block1">
-                        <div className="pg-chatello__overlay1-icon" />
-                        <div>
-                            {this.translate('chatello.overlay1.text1')}{' '}
-                            <span>{this.translate('chatello.overlay1.text2')}</span>
-                        </div>
-                    </div>
-                    <div className="pg-chatello__overlay1-block2">
-                        <div>
-                            {this.translate('chatello.form.convertation')}
-                            <br />
-                            {this.translate('buyWithCard.form.fees')}
-                        </div>
-                    </div>
+                <div className="credit-card-overlay__text">
+                    <p>{this.translate('buyWithCard.overlay1.text1')}</p>
+                    <p>{this.translate('buyWithCard.overlay1.text2')}</p>
                 </div>
 
                 <div className="pg-chatello__overlay1-button-wrap">
@@ -81,7 +68,7 @@ export class CreditCardOverlayComponent extends React.Component<Props> {
                         className="buy-form__button-continue"
                         onClick={this.handleButton}
                     >
-                        {this.translate('chatello.overlay1.button')}
+                        {this.translate('buyWithCard.overlay1.button')}
                     </button>
                 </div>
 
@@ -93,6 +80,7 @@ export class CreditCardOverlayComponent extends React.Component<Props> {
             </div>
         );
     };
+
 
     public renderOverlay2 = () => {
         return (

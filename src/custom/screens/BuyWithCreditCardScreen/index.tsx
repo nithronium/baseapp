@@ -16,6 +16,7 @@ import {
 import {
     CreditCardBuyForm,
     CreditCardFaq,
+    CreditCardHeader,
     CreditCardPromo,
     CreditCardSteps,
 } from '../../containers/BuyWithCreditCard';
@@ -147,6 +148,7 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
         } else if (userLoggedIn) {
             step = 2;
         }
+        // step = 4;
         return (
             <div className="pg-buy-with-credit-card">
                 <Helmet>
@@ -160,16 +162,18 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
                         {JSON.stringify(jsonLd)}
                     </script>
                 </Helmet>
+                <CreditCardHeader />
                 <div className="pg-buy-with-credit-card__container">
                     <CreditCardSteps
                         currentStep={step}
                         paymentData={paymentData}
+                        onTryAgain={this.onTryAgain}
                     />
-                    <CreditCardBuyForm
+                    {step !== 4 && <CreditCardBuyForm
                         onPaymentDataChange={this.onPaymentDataChange}
                         step={step}
                         onIframeClose={this.onIframeClose}
-                    />
+                    />}
                     <CreditCardPromo />
                     <CreditCardFaq />
                 </div>
