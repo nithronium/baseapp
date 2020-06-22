@@ -29,7 +29,7 @@ import { ProfilePartial } from '../../containers/Confirm/ProfilePartial';
 import { Questionnaire } from '../../containers/Confirm/Questionnaire';
 import { buildPath } from '../../helpers/buildPath';
 
-import { getRedirectUrl, redirectIfSpecified } from '../../helpers';
+import { getRedirectUrl, redirect, redirectIfSpecified } from '../../helpers';
 
 interface ReduxProps {
     colorTheme: string;
@@ -83,7 +83,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     public goBack = event => {
       const lang = this.props.currentLanguage;
       event.preventDefault();
-      this.props.history.push(buildPath(redirectIfSpecified('/profile'), lang));
+      redirect(() => this.props.history.push(buildPath(redirectIfSpecified('/profile'), lang)));
     };
 
     public renderDoubleProgressBar() {
@@ -315,7 +315,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         if (level === 4) {
             const redirectUrl = getRedirectUrl();
             if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
-                history.push(buildPath(redirectIfSpecified('/profile'), currentLanguage));
+                redirect(() => history.push(buildPath(redirectIfSpecified('/profile'), currentLanguage)));
             }
             return this.renderFourthLevel();
         }
@@ -324,7 +324,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             return <Questionnaire />;
         }
 
-        history.push(redirectIfSpecified('/profile'));
+        redirect(() => history.push(redirectIfSpecified('/profile')));
 
         return null;
     };
