@@ -31,7 +31,7 @@ class CreditCardFormComponent extends React.Component<Props> {
             onSwap,
          } = this.props;
         return (
-            <div className="buy-form__inputs-wrap">
+            <form className="buy-form__inputs-wrap" noValidate={true}>
                 {!swapped ? this.renderFiat() : this.renderCrypto()}
                 <div
                     className="buy-form__input-arrow-wrap"
@@ -40,7 +40,7 @@ class CreditCardFormComponent extends React.Component<Props> {
                     <div className="buy-form__input-arrow" />
                 </div>
                 {!swapped ? this.renderCrypto() : this.renderFiat()}
-            </div>
+            </form>
         );
     }
 

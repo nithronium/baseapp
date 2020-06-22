@@ -260,12 +260,16 @@
         .credit-card-promo {
             padding-bottom: 0;
             &__top {
-                flex-wrap: wrap;
+                display: block;
                 padding: 15px 0;
 
                 &-item {
                     width: 100%;
-                    padding: 0 0px 16px 54px;
+                    padding: 0 10px 25px;
+                }
+
+                &-inner {
+                    display: block;
                 }
             }
 
@@ -285,12 +289,26 @@
 
 
             &__bottom,
-            &__top,
             &__middle {
                 padding-left: 10px;
                 padding-right: 10px;
                 flex-wrap: wrap;
             }
+        }
+
+        .credit-card-promo__map {
+            display: block;
+            text-align: center;
+        }
+
+        .credit-card-promo__button1 {
+            margin: 0 auto;
+        }
+
+        .credit-card-promo__map-image {
+            margin: 0 auto;
+            margin-bottom: 23px;
+            top: 0; 
         }
     }
 }

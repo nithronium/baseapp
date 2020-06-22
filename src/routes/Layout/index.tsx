@@ -120,6 +120,10 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
             url = parsed.redirect_url;
         }
         console.log('signin', url, location.href);
+        if (url === '/') {
+            location.replace('/');
+            return null;
+        }
         return (
             <Route {...rest}>
                 <Redirect to={buildPath(url, rest.currentLanguage)} />
