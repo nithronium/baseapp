@@ -110,7 +110,8 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         const cryptoValueNumber = Number(cryptoValue);
         let fiatValue = this.state.fiatValue;
         if (!Number.isNaN(cryptoValueNumber)) {
-            fiatValue = this.convertToFiat(cryptoValueNumber).toString();
+            const fiatNumber = Math.round(this.convertToFiat(cryptoValueNumber) * 100) / 100;
+            fiatValue = fiatNumber.toString();
         }
         this.setState({ fiatValue, cryptoValue });
     };
