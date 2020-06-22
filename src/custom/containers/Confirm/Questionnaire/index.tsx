@@ -19,6 +19,8 @@ import {
 } from '../../../modules/user/dataStorage';
 import { DataStorageItemInterface } from '../../../modules/user/dataStorage/types';
 
+import { redirectIfSpecified } from '../../../helpers';
+
 interface ReduxProps {
     dataStoragePushSuccess: boolean;
     user: User;
@@ -130,7 +132,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
         if (nextProps.dataStoragePushSuccess && !dataStoragePushSuccess) {
             this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
-            this.props.history.push('/profile');
+            this.props.history.push(redirectIfSpecified('/profile'));
         }
     }
 

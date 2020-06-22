@@ -1,0 +1,186 @@
+
+
+.credit-card-steps {
+    background-color: var(--bg-color-dark2);
+    overflow: hidden;
+
+    padding-top: 20px;
+
+    &__check {
+        display: flex;
+        justify-content: center;
+
+        div {
+            background-image: url(./assets/images/credit-card-big-check.png);
+            width: 64px;
+            height: 64px;
+        }
+    }
+
+    &__title {
+        color: #fff;
+        text-align: center;
+        font-size: 22px;
+        padding-top: 20px;
+    }
+
+    &__text {
+        display: flex;
+        justify-content: center;
+        
+        div {
+            max-width: 450px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--limits-text-color);
+            padding-top: 12px;
+            line-height: 21px;
+        }
+    }
+
+    .credit-card-timeline {
+        position: relative;
+        display: flex;
+        justify-content: space-around;
+        height: 93px;
+        margin-top: 32px;
+
+
+        &__line {
+            position: absolute;
+            height: 1px;
+            width: 100%;
+            background-color: var(--header-border-color);
+            top: 18px;
+        }
+
+
+        .hide-line-before,
+        .hide-line-after {
+            background-color: var(--bg-color-dark2);
+            position: absolute;
+            height: 10px;
+            width: 500px;
+        }
+
+        .hide-line-before {
+            right: 35px;
+            top: 14px;
+        }
+
+        .hide-line-after {
+            top: 14px;
+            left: 38px;
+        }
+
+        &__item {
+            position: relative;
+            z-index: 1;
+            transition: transform .3s ease;
+
+            &:hover {
+                transform: scale(1.2);
+            }
+        }
+
+        &__number {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            line-height: 24px;
+            border-radius: 50%;
+            background-color: var(--color-green);
+            color: #fff;
+            position: relative;
+            border: 8px solid var(--bg-color-dark2);
+
+            &.active {
+                background-color: var(--color-yellow);
+                color: var(--bg-color-dark1);
+            }
+
+            &.checked {
+                background-color: var(--color-green);
+            }
+
+            &-check {
+                background-image: url(./assets/images/credit-card-icon-complete.png);
+                width: 14px;
+                height: 10px;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        &__text {
+            color: #999;
+            font-size: 14px;
+            position: absolute;
+            width: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            justify-content: center;
+            margin-top: 5px;
+
+            div {
+                max-width: 90px;
+                text-align: center;
+            }
+
+
+            &--last {
+                div {
+                    max-width: 140px;
+                }
+
+                &.active {
+                    span {
+                        color: var(--color-yellow);
+                    }
+                }
+            }
+
+            &.active {
+                color: #fff;
+            }
+        }
+    }
+
+    &__amount {
+        color: var(--color-green);
+    }
+
+    &__footer {
+        background-color: var(--bg-color-dark1);
+        text-align: center;
+        font-size: 14px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        min-height: 56px;
+
+        & > div {
+            width: 100%;
+        }
+
+        span {
+            color: var(--color-yellow);
+        }
+    }
+}
+
+
+@media screen and (max-width: 650px) {
+    .pg-buy-with-credit-card {
+        .credit-card-timeline__item {
+            .credit-card-timeline__text {
+                div {
+                    max-width: 90px;
+                }
+            }
+        }
+    }
+}

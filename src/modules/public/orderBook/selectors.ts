@@ -1,8 +1,12 @@
 import { RootState } from '../../index';
-import { DepthState } from './types';
+import { DepthState, OrderBookState } from './types';
 
 export const selectOrderBookLoading = (state: RootState): boolean =>
   state.public.orderBook.loading;
+
+
+export const selectOrderBook = (state: RootState): OrderBookState =>
+  state.public.orderBook;
 
 export const selectDepthAsks =
   (state: RootState): DepthState['asks'] => state.public.depth.asks;

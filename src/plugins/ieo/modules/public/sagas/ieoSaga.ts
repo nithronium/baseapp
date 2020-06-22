@@ -19,7 +19,7 @@ export function* ieoSaga(action: FetchIEO) {
         let endPoint = '/public/ieo/sales';
 
         if (action.payload) {
-            endPoint = `${endPoint}?limit=100&${buildQueryStringArray(action.payload, 'state')}`;
+            endPoint = `${endPoint}?limit=1000&${buildQueryStringArray(action.payload, 'state')}`;
         }
 
         const payload = yield call(API.get(ieoOptions), endPoint);

@@ -1,4 +1,4 @@
-import { CommonError } from '../../types';
+import {CommonError} from '../../types';
 import {
     PROFILE_CHANGE_PASSWORD_DATA,
     PROFILE_CHANGE_PASSWORD_ERROR,
@@ -9,10 +9,12 @@ import {
     PROFILE_GENERATE_2FA_QRCODE_DATA,
     PROFILE_GENERATE_2FA_QRCODE_ERROR,
     PROFILE_GENERATE_2FA_QRCODE_FETCH,
+    PROFILE_GET_BALANCE_FETCH,
     PROFILE_IDENTITY_DATA,
     PROFILE_IDENTITY_ERROR,
     PROFILE_IDENTITY_FETCH,
     PROFILE_RESET_USER,
+    PROFILE_SET_BALANCE,
     PROFILE_TEST_STATE,
     PROFILE_TIERS_DATA,
     PROFILE_TIERS_DISABLE,
@@ -40,6 +42,9 @@ export interface User {
     role: string;
     state: string;
     uid: string;
+    balance?: object;
+    cryptoCurrency: string;
+    activeCurrency: string;
     referral_uid?: string;
     profile?: ProfileIdentity;
 }
@@ -183,6 +188,19 @@ export interface EnableUser2fa {
     type: typeof PROFILE_ENABLE_USER_2FA;
 }
 
+export interface GetBalanceFetch {
+    type: typeof PROFILE_GET_BALANCE_FETCH;
+    payload: string[];
+}
+
+export interface SetBalance {
+    type: typeof PROFILE_SET_BALANCE;
+    payload: {
+        symbol: string[],
+        quote: object,
+    };
+}
+
 export type ProfileAction =
     | ChangePasswordFetch
     | ChangePasswordData
@@ -207,6 +225,8 @@ export type ProfileAction =
     | EnableUser2fa
     | ProfileIdentityFetch
     | ProfileIdentityInfo
+    | GetBalanceFetch
+    | SetBalance
     | ProfileIdentityError;
 
 export const changePasswordFetch = (payload: ChangePasswordFetch['payload']): ChangePasswordFetch => ({
@@ -315,5 +335,15 @@ export const profileIdentityData = (payload: ProfileIdentityInfo['payload']): Pr
 
 export const profileIdentityError = (payload: ProfileIdentityError['payload']): ProfileIdentityError => ({
     type: PROFILE_IDENTITY_ERROR,
+    payload,
+});
+
+export const getBalanceFetch = (payload: GetBalanceFetch['payload']): GetBalanceFetch => ({
+    type: PROFILE_GET_BALANCE_FETCH,
+    payload,
+});
+
+export const setBalance = (payload: SetBalance['payload']): SetBalance => ({
+    type: PROFILE_SET_BALANCE,
     payload,
 });

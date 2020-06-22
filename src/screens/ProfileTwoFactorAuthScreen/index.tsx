@@ -2,6 +2,9 @@
 import {
     Input,
 } from '@openware/components';
+
+import qs = require('qs');
+
 import { History } from 'history';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -61,6 +64,7 @@ const copy = (id: string) => {
         copyText.select();
 
         document.execCommand('copy');
+        // tslint:disable-line
         window.getSelection().removeAllRanges();
     }
 };
@@ -84,6 +88,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
     public componentWillReceiveProps(next: Props) {
         if (!this.props.success && next.success) {
             this.handleNavigateToProfile();
+            console.log('handleNavigateToProfile');
         }
     }
 
@@ -239,7 +244,14 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
     }
 
     private handleNavigateToProfile = () => {
-        this.props.history.push(buildPath('/profile', this.props.currentLanguage));
+        let url = '/profile';
+        const parsed = qs.parse(this.props.history.location.search, { ignoreQueryPrefix: true });
+        if (parsed.redirect_url) {
+            url = parsed.redirect_url;
+        }
+        console.log('2fa', url, location.search);
+        this.props.history.push(buildPath(url, this.props.currentLanguage));
+        // this.props.history.push(buildPath('/profile', this.props.currentLanguage));
     }
 
     private get2faAction = () => {

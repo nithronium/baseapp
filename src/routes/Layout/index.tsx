@@ -1,4 +1,7 @@
 //tslint:disable
+
+import qs = require('qs');
+
 import { Loader } from '@openware/components';
 import classnames from 'classnames';
 import { History } from 'history';
@@ -7,8 +10,15 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import { minutesUntilAutoLogout } from '../../api';
+import {
+    BuyWithCreditCardScreen,
+    ChatelloScreen,
+    ReferralCommissionScreen,
+    ReferralScreen,
+    ReferralTicketsScreen,
+    TradingScreen
+} from '../../custom/screens';
 import { buildPath, saveParametersFromUrl } from '../../custom/helpers';
-import { ReferralCommissionScreen, ReferralScreen, ReferralTicketsScreen, TradingScreen } from '../../custom/screens';
 import { LoginModal } from '../../custom/components/KYCLoginModal';
 import { ConfirmScreen } from '../../custom/screens';
 import { toggleColorTheme } from '../../helpers';
@@ -97,16 +107,22 @@ const PrivateRoute: React.FunctionComponent<any> = ({ component: CustomComponent
 };
 
 //tslint:disable-next-line no-any
-const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent, loading, isLogged, ...rest }) => {
+const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent, loading, isLogged, noReditect, ...rest }) => {
     if (loading) {
         return renderLoader();
     }
     saveParametersFromUrl(rest.location.search);
 
-    if (isLogged) {
+    if (isLogged && !noReditect) {
+        let url = '/profile';
+        const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        if (parsed.redirect_url) {
+            url = parsed.redirect_url;
+        }
+        console.log('signin', url, location.href);
         return (
             <Route {...rest}>
-                <Redirect to={buildPath('/profile', rest.currentLanguage)} />
+                <Redirect to={buildPath(url, rest.currentLanguage)} />
             </Route>
         );
     }
@@ -174,8 +190,6 @@ class LayoutComponent extends React.Component<LayoutProps> {
             localStorage.setItem('uil', 'true');
         } else if (isLoggedIn && siteState === 'false') {
             this.props.logout();
-        } else if (!isLoggedIn) {
-            localStorage.removeItem('uil');
         }
 
         // if (!isLoggedIn && next.isLoggedIn) {
@@ -322,14 +336,14 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
-                        path={'/history'}
+                        path={'/history/:history'}
                         component={HistoryScreen}
                         currentLanguage={currentLanguage}
                     />
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
-                        path={'/ru/history'}
+                        path={'/ru/history/:history'}
                         component={HistoryScreen}
                         currentLanguage={currentLanguage}
                     />
@@ -417,6 +431,30 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         component={ReferralCommissionScreen}
                         currentLanguage={currentLanguage}
                     />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        noReditect={true}
+                        path={'/buycrypto'}
+                        component={BuyWithCreditCardScreen}
+                        currentLanguage={currentLanguage}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        noReditect={true}
+                        path={'/ru/buycrypto'}
+                        component={BuyWithCreditCardScreen}
+                        currentLanguage={currentLanguage}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        noReditect={true}
+                        path={'/zh/buycrypto'}
+                        component={BuyWithCreditCardScreen}
+                        currentLanguage={currentLanguage}
+                    />
 
                     <PublicRoute
                         loading={userLoading}
@@ -462,6 +500,76 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     />
                     <Route loading={userLoading} isLogged={isLoggedIn} path={'/zh/referral'} component={ReferralScreen} />
                     <Route path={'/zh/trading/:market'} component={TradingScreen} />
+
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/chatello'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        exact={true}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/ru/chatello'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        exact={true}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/zh/chatello'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        exact={true}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/tr/chatello'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        exact={true}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/chatello/:amount'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/ru/chatello/:amount'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/zh/chatello/:amount'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/tr/chatello/:amount'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        noReditect={true}
+                    />
+
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
@@ -472,7 +580,7 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PrivateRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
-                        path={'/zh/history'}
+                        path={'/zh/history/:history'}
                         component={HistoryScreen}
                         currentLanguage={currentLanguage}
                     />
@@ -518,6 +626,8 @@ class LayoutComponent extends React.Component<LayoutProps> {
                         component={ReferralCommissionScreen}
                         currentLanguage={currentLanguage}
                     />
+
+                    ChatelloScreen
 
                     {renderPluginsRoutes()}
                     {/* <Route path="**"><Redirect to={'/trading/'} /></Route> */}

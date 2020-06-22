@@ -287,7 +287,7 @@ class ProfileAddressComponent extends React.Component<Props, State> {
                 const residentialAddressRegex = /^[a-zA-Z0-9\-,.;:"'&()\\\/#\s]+$/gi;
                 return residentialAddressRegex.test(value);
             case 'city':
-                const cityRegex = new RegExp(`^[a-zA-Z]+$`);
+                const cityRegex = /^[\s\-a-zA-Z]+$/;
                 return cityRegex.test(value);
             case 'postcode':
                 const postcodeRegex = new RegExp(`^[0-9\-]{1,12}$`);

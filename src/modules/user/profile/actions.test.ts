@@ -22,6 +22,8 @@ describe('Profile actions', () => {
                     level: 3,
                     otp: false,
                     state: 'active',
+                    cryptoCurrency: 'BTC',
+                    activeCurrency: 'USD',
                 },
             };
             const expectedAction = { type: 'profile/GET_USER_DATA', payload };

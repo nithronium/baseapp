@@ -37,8 +37,31 @@ interface State {
     lang: string;
 }
 
+
+// export const LangSelect = ({ onChange, lang }) => {
+//     let languages = languagesArray;
+//     if (lang === '') {
+//         languages = [{ key: '', name: 'Select language' }, ...languagesArray];
+//     }
+//     return (
+//         <div>
+//             {languages.map(({ key, name }) => {
+//                 return (
+//                     <div
+//                         onClick={onChange({ target: { value: key } })}
+//                         key={key}
+//                     >
+//                         {name}
+//                     </div>
+//                 );
+//             })}
+//         </div>
+//     );
+// };
+
 export class GoogleTranslateComponent extends React.Component<Props, State> {
     public unsubscribe?: () => void;
+    public select = React.createRef<HTMLSelectElement>();
 
     constructor(props) {
         super(props);
@@ -81,6 +104,18 @@ export class GoogleTranslateComponent extends React.Component<Props, State> {
         this.unsubscribe && this.unsubscribe();
     }
 
+    public onClick = e => {
+        // if (e.target.);
+        console.log('onClick', e.target);
+        // if (e.target.tagName === 'LABEL')
+        e.stopPropagation();
+        e.nativeEvent.stopImmediatePropagation();
+        if (this.select.current) {
+            const event = new Event('click');
+            this.select.current.dispatchEvent(event);
+        }
+    };
+
     public render() {
         const { lang } = this.state;
         const { locale } = this.props;
@@ -94,13 +129,32 @@ export class GoogleTranslateComponent extends React.Component<Props, State> {
         }
 
         return (
-            <div className="google-translate-widget">
-                <select onChange={this.onChange} value={lang}>
+            <div
+                className="google-translate-widget"
+            >
+                <select
+                    onChange={this.onChange}
+                    value={lang}
+                >
                     {languages.map(({ key, name }) => {
                         return <option value={key} key={key}>{name}</option>;
                     })}
                 </select>
-                <div className="google-translate-widget__bottom">
+                {/* <LangSelect
+                    onChange={this.onChange}
+                    lang={lang}
+                /> */}
+                {/* <label
+                    style={{
+                        position: 'absolute',
+                        left: 0,
+                        top: 0,
+                        right: 0,
+                        bottom: 0,
+                    }}
+                    onClick={this.onClick}
+                /> */}
+                {/* <div className="google-translate-widget__bottom">
                     Powered by
                     {' '}
                     <span>
@@ -108,7 +162,7 @@ export class GoogleTranslateComponent extends React.Component<Props, State> {
                     </span>
                     {' '}
                     Translate
-                </div>
+                </div> */}
             </div>
         );
     }

@@ -5,7 +5,7 @@ import { IntlProvider } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { Router } from 'react-router';
 import { GuardModal } from './components';
-import { Alerts, ErrorWrapper, Header } from './containers';
+import { Alerts, ErrorWrapper, Footer, Header } from './containers';
 import { GuardWrapper } from './containers/Guard';
 import {
     closeGuardModal,
@@ -143,6 +143,7 @@ class AppLayout extends React.Component<Props, {}, {}> {
                             <Header/>
                             <Alerts/>
                             <Layout/>
+                            <Footer intl={lang} />
                         </ErrorWrapper>
                     </Router>
                     {guardModal && <GuardModal onClose={this.props.closeGuardModal}/>}

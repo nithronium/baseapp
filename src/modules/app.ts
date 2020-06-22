@@ -28,6 +28,7 @@ import { userActivityReducer } from './user/userActivity';
 import { walletsReducer } from './user/wallets';
 import { withdrawLimitReducer } from './user/withdrawLimit';
 
+import { buyWithCreditCardReducer } from '../custom/modules/buyWithCreditCard';
 import { referralCommissionReducer } from '../custom/modules/referralCommission';
 import { referralTicketsReducer } from '../custom/modules/referralTickets';
 
@@ -71,5 +72,6 @@ export const userReducer = combineReducers({
     guard: guardReducer,
     referralTickets: referralTicketsReducer,
     referralCommission: referralCommissionReducer,
+    buyWithCreditCard: buyWithCreditCardReducer,
     ieo: ieoOrderReducer,
 });
