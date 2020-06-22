@@ -97,7 +97,7 @@ export class GoogleTranslateComponent extends React.Component<Props, State> {
         const { locale } = this.props;
         let languages = languagesArray;
         if (lang === '') {
-            languages = [{ key: '', name: 'Select language' }, ...languagesArray];
+            languages = [{ key: '', name: 'Translate' }, ...languagesArray];
         }
 
         if (isSameLocale(locale.lang)) {
