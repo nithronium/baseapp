@@ -30,9 +30,6 @@ const Header = () => {
 const Copyright = props => {
     return (
         <div className="copyright">
-            <div style={{ color: 'white' }} className="text">
-                <FormattedMessage id={'footer_demo'}/>
-            </div>
             <div style={{ color: 'white' }}><FormattedMessage id={'footer_copyright'}/></div>
         </div>
     );
