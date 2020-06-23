@@ -8,11 +8,14 @@ import { RouteComponentProps, withRouter } from 'react-router';
 
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 
+import { Decimal } from '@openware/components';
+
 import { CreditCardForm } from '../CreditCardForm';
 
 import { CreditCardModal } from '../CreditCardModal';
 
 import { CreditCardOverlay } from '../CreditCardOverlay';
+
 
 import {
     Modal,
@@ -96,24 +99,39 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     };
 
     public onFiatValueChange = e => {
+        const { crypto } = this.state;
         const fiatValue = e.target.value;
         const fiatValueNumber = Number(fiatValue);
         let cryptoValue = this.state.cryptoValue;
         if (!Number.isNaN(fiatValueNumber)) {
-            cryptoValue = this.convertToCrypto(fiatValueNumber).toString();
+            const cryptoNumber = this.convertToCrypto(fiatValueNumber);
+            const cryptoFormatted = Decimal.format(cryptoNumber, this.getPrecision(crypto));
+            cryptoValue = cryptoFormatted.toString();
         }
         this.setState({ fiatValue, cryptoValue });
     };
 
     public onCryptoValueChange = e => {
+        const { fiat } = this.state;
         const cryptoValue = e.target.value;
         const cryptoValueNumber = Number(cryptoValue);
         let fiatValue = this.state.fiatValue;
         if (!Number.isNaN(cryptoValueNumber)) {
-            const fiatNumber = Math.round(this.convertToFiat(cryptoValueNumber) * 100) / 100;
-            fiatValue = fiatNumber.toString();
+            const fiatNumber = this.convertToCrypto(cryptoValueNumber);
+            const cryptoFormatted = Decimal.format(fiatNumber, this.getPrecision(fiat));
+            fiatValue = cryptoFormatted.toString();
         }
         this.setState({ fiatValue, cryptoValue });
+    };
+
+    public getPrecision = (currency: string) => {
+        const { currencies } = this.props;
+        for (const item of currencies) {
+            if (item.id.toLowerCase() === currency.toLowerCase()) {
+                return item.precision;
+            }
+        }
+        return 2;
     };
 
     public convertToFiat = (cryptoValue: number): number => {
