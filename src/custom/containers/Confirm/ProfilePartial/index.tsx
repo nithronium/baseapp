@@ -112,11 +112,11 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             user,
         } = this.props;
 
-        const redirectUrl = getRedirectUrl();
-        let url = '/kys-levels';
-        if (redirectUrl && typeof redirectUrl === 'string' && redirectUrl.indexOf('chatello') !== 0) {
-            url = buildUrlWithRedirect('/confirm');
-        }
+        // const redirectUrl = getRedirectUrl();
+        // let url = '/kys-levels';
+        // if (redirectUrl && typeof redirectUrl === 'string' && redirectUrl.indexOf('chatello') !== 0) {
+        //     url = buildUrlWithRedirect('/confirm');
+        // }
 
         if (!prev.sendSuccess && sendSuccess) {
             this.props.changeUserLevel({ level: +user.level + 1 });
@@ -128,11 +128,12 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         }
 
         if (!prev.editSuccess && editSuccess) {
+            this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
             if (editData) {
                 this.props.changeUserProfileData(editData);
             }
-            this.props.history.push(url);
+            // this.props.history.push(url);
         }
     }
 //tslint:disable
