@@ -34,7 +34,6 @@ import { Dropdown } from '../../../components';
 import { DISALLOWED_COUNTRIES } from '../../../constants';
 import { isValidDate } from '../../../helpers/checkDate';
 
-import { buildUrlWithRedirect, getRedirectUrl } from '../../../helpers';
 
 interface ReduxProps {
     editData?: IdentityData;
@@ -127,6 +126,10 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             // this.props.history.push(url);
         }
 
+        // tslint:disable-next-line:no-console
+        console.log('...........editSuccess', editSuccess);
+        // tslint:disable-next-line:no-console
+        console.log('...........user.level', user.level);
         if (!prev.editSuccess && editSuccess) {
             this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
