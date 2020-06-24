@@ -488,7 +488,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         // tslint:disable-next-line:no-console
         console.log('...........profileInfo', profileInfo);
         // tslint:disable-next-line: prefer-switch
-        if (user.level === 2 || user.level === 3 || user.level === 4) {
+        if ((user.level === 2 || user.level === 3 || user.level === 4) && user.profile) {
             // tslint:disable-next-line:no-console
             console.log('...........edit');
             this.props.editIdentity(profileInfo);
