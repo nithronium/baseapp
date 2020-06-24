@@ -70,10 +70,6 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
         const {user} = this.props;
         const {phoneNumber} = this.state;
         if (user.phones && user.phones[0].number !== phoneNumber) {
-            // tslint:disable-next-line:no-console
-            console.log('...........user.phones', user.phones);
-            // tslint:disable-next-line:no-console
-            console.log('...........user.phones.number', user.phones.number);
             this.setState({phoneNumber: `+${user.phones[0].number}`});
         }
     }

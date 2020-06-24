@@ -64,8 +64,6 @@ const kycLevels = [
 
 // @ts-ignore
 const PricePackages = props => {
-    // tslint:disable-next-line:no-console
-    console.log('...........props', props);
     const widthPage = React.useRef(null);
     const [clientWidth, setClientWidth] = React.useState(1000);
     React.useEffect(() => {
@@ -163,8 +161,6 @@ const PricePackages = props => {
         </div>
     </div>);
     const isCompletedLevel = index => {
-        // tslint:disable-next-line:no-console
-        console.log('...........userLevel');
         switch (index) {
             case 0: return userLevel >= 4;
             case 1: return userLevel >= 5;

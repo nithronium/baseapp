@@ -126,10 +126,6 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             // this.props.history.push(url);
         }
 
-        // tslint:disable-next-line:no-console
-        console.log('...........editSuccess', editSuccess);
-        // tslint:disable-next-line:no-console
-        console.log('...........user.level', user.level);
         if (!prev.editSuccess && editSuccess) {
             this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
@@ -141,20 +137,14 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     }
 //tslint:disable
     public componentDidMount() {
-        // tslint:disable-next-line:no-console
-        console.log('...........test');
         this.updateUserProfileInfo();
     }
 
     public updateUserProfileInfo = () => {
         const { user } = this.props;
         const { firstName, lastName, dateOfBirth, countryOfBirth, metadata = {nationality: ''} } = this.state;
-        // tslint:disable-next-line:no-console
-        console.log('...........user.profile', user.profile);
         if (user.profile) {
             if (user.profile.first_name && user.profile.first_name !== firstName) {
-                // tslint:disable-next-line:no-console
-                console.log('...........user.profile.first_name', JSON.stringify(user.profile.first_name));
                 this.setState({
                     firstName: user.profile.first_name,
                 });
@@ -411,8 +401,6 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     };
 
     private handleValidateInput = (field: string, value: string): boolean => {
-        // tslint:disable-next-line:no-console
-        console.log('...........value', value);
         switch (field) {
             case 'firstName':
                 const firstNameRegex = new RegExp(`^[a-zA-Z]{1,100}$`);
@@ -487,18 +475,10 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             };
         }
 
-        // tslint:disable-next-line:no-console
-        console.log('...........user.level', user.level);
-        // tslint:disable-next-line:no-console
-        console.log('...........profileInfo', profileInfo);
         // tslint:disable-next-line: prefer-switch
         if ((user.level === 2 || user.level === 3 || user.level === 4) || user.profile) {
-            // tslint:disable-next-line:no-console
-            console.log('...........edit');
             this.props.editIdentity(profileInfo);
         } else {
-            // tslint:disable-next-line:no-console
-            console.log('...........post');
             this.props.sendIdentity(profileInfo);
         }
     }

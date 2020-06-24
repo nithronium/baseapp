@@ -38,8 +38,6 @@ export const FiatFragment = injectIntl(props => {
         //     history.push(buildPath('/confirm', lang));
         // }
     };
-    // tslint:disable-next-line:no-console
-    console.log('...........user.level', user.level);
 
     return (
         <React.Fragment >
