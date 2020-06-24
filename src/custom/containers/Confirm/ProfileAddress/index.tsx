@@ -82,7 +82,6 @@ class ProfileAddressComponent extends React.Component<Props, State> {
             editData,
             editSuccess,
         } = this.props;
-        this.getAddress();
         if (!prev.editSuccess && editSuccess) {
             this.props.labelFetch();
             if (editData) {

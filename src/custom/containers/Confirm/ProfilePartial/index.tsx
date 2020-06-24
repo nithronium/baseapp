@@ -117,7 +117,6 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         if (redirectUrl && typeof redirectUrl === 'string' && redirectUrl.indexOf('chatello') !== 0) {
             url = buildUrlWithRedirect('/confirm');
         }
-        this.updateUserProfileInfo();
 
         if (!prev.sendSuccess && sendSuccess) {
             this.props.changeUserLevel({ level: +user.level + 1 });
@@ -145,7 +144,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
 
     public updateUserProfileInfo = () => {
         const { user } = this.props;
-        const { firstName, lastName, dateOfBirth, countryOfBirth, metadata = {nationality: ""} } = this.state;
+        const { firstName, lastName, dateOfBirth, countryOfBirth, metadata = {nationality: ''} } = this.state;
         // tslint:disable-next-line:no-console
         console.log('...........user.profile', user.profile);
         if (user.profile) {
@@ -183,7 +182,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                 this.setState({
                     metadata: {
                         nationality: currentNationality,
-                    }
+                    },
                 });
             }
         }
@@ -381,9 +380,9 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         } else {
             this.setState({
                 dateOfBirthValid: false,
-            })
+            });
         }
-    }
+    };
 
     private selectNationality = (listOfCountries: countries.LocalizedCountryNames, value: number) => {
         if (DISALLOWED_COUNTRIES.includes(Object.keys(listOfCountries)[value])) {
@@ -473,7 +472,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                     nationality: metadata.nationality,
                     state: currentUserState,
                 }),
-            }
+            };
         } else {
             profileInfo = {
                 first_name: firstName,
@@ -481,7 +480,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                 dob,
                 country: countryOfBirth,
                 metadata: JSON.stringify(metadata),
-            };   
+            };
         }
 
         // tslint:disable-next-line: prefer-switch
