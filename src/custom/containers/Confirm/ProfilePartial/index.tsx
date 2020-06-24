@@ -483,10 +483,18 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             };
         }
 
+        // tslint:disable-next-line:no-console
+        console.log('...........user.level', user.level);
+        // tslint:disable-next-line:no-console
+        console.log('...........profileInfo', profileInfo);
         // tslint:disable-next-line: prefer-switch
         if (user.level === 2 || user.level === 3 || user.level === 4) {
+            // tslint:disable-next-line:no-console
+            console.log('...........edit');
             this.props.editIdentity(profileInfo);
         } else {
+            // tslint:disable-next-line:no-console
+            console.log('...........post');
             this.props.sendIdentity(profileInfo);
         }
     }
