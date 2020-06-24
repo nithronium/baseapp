@@ -1221,8 +1221,8 @@ export const zh = {
     'buyWithCard.steps.step4': 'Get Target Crypto',
     'buyWithCard.steps.pair': 'Pair',
     'buyWithCard.steps.amount': 'Amount',
-    'buyWithCard.steps.price': 'Price (USD)',
-    'buyWithCard.steps.value': 'Value (USD)',
+    'buyWithCard.steps.price': 'Price',
+    'buyWithCard.steps.value': 'Value',
     'buyWithCard.steps.time': 'Time',
 
 
