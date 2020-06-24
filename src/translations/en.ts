@@ -406,6 +406,7 @@ export const en = {
     'page.body.kyc.documentsType': 'Document type',
 
     'page.body.kyc.next': 'Next',
+    'page.body.kyc.back': 'Back',
     'page.body.kyc.submit': 'Submit',
     'page.body.kyc.head.phone': 'Phone Verification',
     'page.body.kyc.head.identity': 'Identity Verification',
@@ -447,6 +448,7 @@ export const en = {
     'page.header.currency.try': 'TRY',
 
     "nav_account": "Profile",
+    "nav_verification": "Verification",
     "nav_my_assets": "My Assets",
     "nav_my_orders": "My Orders",
     "nav_account_security": "Account Security",

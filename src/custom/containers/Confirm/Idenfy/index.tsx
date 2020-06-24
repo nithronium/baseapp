@@ -73,12 +73,14 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
                 statusGet: true,
             });
         }
-    }
+    };
+
+    public backBtn = () => this.props.changeUserLevel({level:2});
 
     private renderContent = () => {
         const { kycAuthData, currentLanguage } = this.props;
         const lang = currentLanguage.toLowerCase() === 'zh' ? 'en' : currentLanguage.toLowerCase();
-        return !this.state.statusGet ? (
+        return this.state.statusGet ? (
             <div className="pg-idenfy">
                 <iframe
                     id="iframe"
@@ -98,11 +100,19 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
                         <p>{this.translate('page.idenfy.if')}</p>
                         <p>{this.translate('page.idenfy.thanks')}</p>
                     </div>
-                    <Button
-                        className="back-button"
-                        onClick={this.onBackButtonClick}
-                        label={this.props.intl.formatMessage({ id: 'page.idenfy.understand' })}
-                    />
+                    <div className="pg-confirm__content-deep">
+                        <Button
+                            className="pg-confirm__content-deep-back"
+                            label={this.props.intl.formatMessage({ id: 'page.body.kyc.back' })}
+                            onClick={this.backBtn}
+                        />
+                        <div className="pg-confirm__content-deep-margin" />
+                        <Button
+                            className="pg-confirm__content-phone-deep-button"
+                            label={this.props.intl.formatMessage({ id: 'page.idenfy.understand' })}
+                            onClick={this.onBackButtonClick}
+                        />
+                    </div>
                 </div>
             </div>
         );

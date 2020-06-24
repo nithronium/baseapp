@@ -170,30 +170,24 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
 
     public renderUserLevel(level: number) {
         const zeroCircleClassName = classnames('pg-profile-verification__level__circle', {
-            'pg-profile-verification__level__circle--active': level === 0 || level === 1,
+            'pg-profile-verification__level__circle--active': level === 4,
         });
 
         const firstCircleClassName = classnames('pg-profile-verification__level__circle', {
-            'pg-profile-verification__level__circle--active': level === 2 || level === 3,
+            'pg-profile-verification__level__circle--active': level === 5,
         });
 
         const secondCircleClassName = classnames('pg-profile-verification__level__circle', {
-            'pg-profile-verification__level__circle--active': level === 4 || level === 5,
-        });
-
-        const thirdCircleClassName = classnames('pg-profile-verification__level__circle', {
-            'pg-profile-verification__level__circle--active': level === 6,
+            'pg-profile-verification__level__circle--active': level > 5,
         });
 
         return (
             <div className="pg-profile-verification__level">
-                <div className={zeroCircleClassName}>0</div>
+                <div className={zeroCircleClassName}>Starter</div>
                 <div className="pg-profile-verification__level__line" />
-                <div className={firstCircleClassName}>1</div>
+                <div className={firstCircleClassName}>Expert</div>
                 <div className="pg-profile-verification__level__line" />
-                <div className={secondCircleClassName}>2</div>
-                <div className="pg-profile-verification__level__line" />
-                <div className={thirdCircleClassName}>3</div>
+                <div className={secondCircleClassName}>Master</div>
             </div>
         );
     }

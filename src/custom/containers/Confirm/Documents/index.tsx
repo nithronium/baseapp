@@ -90,6 +90,8 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         }
     }
 
+    public backBtn = () => this.props.changeUserLevel({level:1});
+
     public render() {
         const {
             documentsType,
@@ -189,6 +191,12 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                     </div>
                 </div>
                 <div className="pg-confirm__content-deep">
+                    <Button
+                        className="pg-confirm__content-deep-back"
+                        label={this.translate('page.body.kyc.back')}
+                        onClick={this.backBtn}
+                    />
+                    <div className="pg-confirm__content-deep-margin" />
                     <Button
                         className="pg-confirm__content-phone-deep-button"
                         label={this.translate('page.body.kyc.next')}

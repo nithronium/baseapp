@@ -354,6 +354,7 @@ export const zh = {
     'page.body.kyc.documents.number': '：号码',
     'page.body.kyc.documentsType': '文件类型',
     'page.body.kyc.next': '下一个',
+    'page.body.kyc.back': 'Back',
     'page.body.kyc.submit': '提交',
     'page.body.kyc.head.phone': '电话验证',
     'page.body.kyc.head.identity': '身份验证',
@@ -397,6 +398,8 @@ export const zh = {
     'page.kyc.levels.block.3.header-info.item3': 'OTC trading (soon)',
     'page.kyc.levels.block.3.requirements.item1': 'Everything in <b>Expert</b>',
     'page.kyc.levels.block.3.requirements.item2': 'AML questionnaire',
+    'page.kyc.levels.block.btn.completed': 'Completed',
+    'page.kyc.levels.block.btn.uncompleted': 'Get verified',
 
 
     'page.body.lock.oops': '糟糕咯！',
@@ -433,6 +436,7 @@ export const zh = {
     'page.header.currency.try': 'TRY',
 
     "nav_account": "账号",
+    "nav_verification": "验证",
     "nav_my_assets": "我的资产",
     "nav_my_orders": "我的订单",
     "nav_account_security": "账号安全",
@@ -732,7 +736,7 @@ export const zh = {
     'page.body.kyc.head.level.first': '邮箱',
     'page.body.kyc.head.level.second': '个人空间',
     'page.body.kyc.head.level.third': '电话号码',
-    'page.body.kyc.head.level.third.address': '地址',
+    'page.body.kyc.head.level.fifth.address': '地址',
     'page.body.kyc.head.level.fourth': '身分识别',
     'page.body.kyc.head.level.fifth': '居住地址',
     'page.body.kyc.head.level.sixth': '问卷调查',

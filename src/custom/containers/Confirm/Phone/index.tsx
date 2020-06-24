@@ -66,6 +66,18 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
         return this.props.intl.formatMessage({ id: e });
     };
 
+    public componentDidMount() {
+        const {user} = this.props;
+        const {phoneNumber} = this.state;
+        if (user.phones && user.phones[0].number !== phoneNumber) {
+            // tslint:disable-next-line:no-console
+            console.log('...........user.phones', user.phones);
+            // tslint:disable-next-line:no-console
+            console.log('...........user.phones.number', user.phones.number);
+            this.setState({phoneNumber: `+${user.phones[0].number}`});
+        }
+    }
+
     public componentDidUpdate(prev: Props) {
         const { user } = this.props;
 
@@ -74,6 +86,8 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
             this.props.labelFetch();
         }
     }
+
+    public backBtn = () => this.props.changeUserLevel({level:1});
 
     public render() {
         const {
@@ -145,6 +159,12 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
                 {verifyPhoneSuccess && <p className="pg-confirm__success">{this.translate(verifyPhoneSuccess)}</p>}
                 <div className="pg-confirm__content-deep">
                     <Button
+                        className="pg-confirm__content-deep-back"
+                        label={this.translate('page.body.kyc.back')}
+                        onClick={this.backBtn}
+                    />
+                    <div className="pg-confirm__content-deep-margin" />
+                    <Button
                         className="pg-confirm__content-phone-deep-button"
                         label={this.translate('page.body.kyc.next')}
                         onClick={this.confirmPhone}
@@ -198,9 +218,9 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
 
     private addPlusSignToPhoneNumber = () => {
         if (this.state.phoneNumber.length === 0) {
-            this.setState({
-                phoneNumber: '+',
-            });
+            // this.setState({
+            //     phoneNumber: '+',
+            // });
         }
     }
 

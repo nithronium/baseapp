@@ -113,10 +113,11 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         } = this.props;
 
         const redirectUrl = getRedirectUrl();
-        let url = '/profile';
+        let url = '/kys-levels';
         if (redirectUrl && typeof redirectUrl === 'string' && redirectUrl.indexOf('chatello') !== 0) {
             url = buildUrlWithRedirect('/confirm');
         }
+        this.updateUserProfileInfo();
 
         if (!prev.sendSuccess && sendSuccess) {
             this.props.changeUserLevel({ level: +user.level + 1 });
@@ -124,7 +125,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             if (sendData) {
                 this.props.changeUserProfileData(sendData);
             }
-            this.props.history.push(url);
+            // this.props.history.push(url);
         }
 
         if (!prev.editSuccess && editSuccess) {
@@ -137,15 +138,26 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     }
 //tslint:disable
     public componentDidMount() {
-        const { user, history } = this.props;
-        if (history.location && history.location.state && history.location.state.profileEdit && user.profile) {
-            if (user.profile.first_name) {
+        // tslint:disable-next-line:no-console
+        console.log('...........test');
+        this.updateUserProfileInfo();
+    }
+
+    public updateUserProfileInfo = () => {
+        const { user } = this.props;
+        const { firstName, lastName, dateOfBirth, countryOfBirth, metadata = {nationality: ""} } = this.state;
+        // tslint:disable-next-line:no-console
+        console.log('...........user.profile', user.profile);
+        if (user.profile) {
+            if (user.profile.first_name && user.profile.first_name !== firstName) {
+                // tslint:disable-next-line:no-console
+                console.log('...........user.profile.first_name', JSON.stringify(user.profile.first_name));
                 this.setState({
                     firstName: user.profile.first_name,
                 });
             }
 
-            if (user.profile.last_name) {
+            if (user.profile.last_name && user.profile.last_name !== lastName) {
                 this.setState({
                     lastName: user.profile.last_name,
                 });
@@ -153,21 +165,21 @@ class ProfilePartialComponent extends React.Component<Props, State> {
 
             if (user.profile.dob) {
                 const tmp = user.profile.dob.split('-').reverse().join('/');
-
-                this.setState({
-                    dateOfBirth: tmp,
-                    dateOfBirthValid: true,
-                });
+                if (tmp !== dateOfBirth) {
+                    this.setState({
+                        dateOfBirth: tmp,
+                        dateOfBirthValid: true,
+                    });
+                }
             }
 
-            if (user.profile.country) {
+            if (user.profile.country && user.profile.country !== countryOfBirth) {
                 this.setState({
                     countryOfBirth: user.profile.country,
                 });
             }
-
             const currentNationality = user.profile.metadata && JSON.parse(user.profile.metadata).nationality;
-            if (currentNationality) {
+            if (currentNationality && currentNationality !== metadata.nationality) {
                 this.setState({
                     metadata: {
                         nationality: currentNationality,
@@ -175,7 +187,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                 });
             }
         }
-    }
+    };
 
     public render() {
         const { lang } = this.props;
@@ -396,6 +408,8 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     };
 
     private handleValidateInput = (field: string, value: string): boolean => {
+        // tslint:disable-next-line:no-console
+        console.log('...........value', value);
         switch (field) {
             case 'firstName':
                 const firstNameRegex = new RegExp(`^[a-zA-Z]{1,100}$`);

@@ -50,7 +50,8 @@ export const ordersOption = (): object[] => ([
 }));
 
 export const userOption = (): object[] => ([
-    { key: '', href: '/profile', label: 'nav_account', border: true},
+    { key: '', href: '/profile', label: 'nav_account'},
+    { key: '', href: '/kyc-levels', label: 'nav_verification', border: true},
     { key: '', href: '/wallets', label: 'nav_my_assets'},
     { key: '', href: '/orders', label: 'nav_my_orders'},
     // { key: '', href: '/bitcoin-halving', label: 'nav_bitcoin_halving', extLink: true, mainsite: true},

@@ -535,6 +535,7 @@ export const ru: LangType = {
     'page.body.kyc.confirm': 'Отправить',
 
     'page.body.kyc.next': 'Дальше',
+    'page.body.kyc.back': 'Back',
     'page.body.kyc.submit': 'Отправить',
     'page.body.kyc.head.phone': 'Верификация телефона',
     'page.body.kyc.head.identity': 'Верификация личности',
@@ -542,7 +543,7 @@ export const ru: LangType = {
     'page.body.kyc.head.level.first': 'Электронная почта',
     'page.body.kyc.head.level.second': 'Профиль',
     'page.body.kyc.head.level.third': 'Номер телефона',
-    'page.body.kyc.head.level.third.address': 'Адрес',
+    'page.body.kyc.head.level.fifth.address': 'Адрес',
     'page.body.kyc.head.level.fourth': 'Личность',
     'page.body.kyc.head.level.fifth': 'Адрес',
     'page.body.kyc.head.level.sixth': 'Анкета',
@@ -585,6 +586,8 @@ export const ru: LangType = {
     'page.kyc.levels.block.3.header-info.item3': 'OTC trading (soon)',
     'page.kyc.levels.block.3.requirements.item1': 'Everything in <b>Expert</b>',
     'page.kyc.levels.block.3.requirements.item2': 'AML questionnaire',
+    'page.kyc.levels.block.btn.completed': 'Completed',
+    'page.kyc.levels.block.btn.uncompleted': 'Get verified',
 
     'page.body.lock.oops': 'Ой!',
     'page.body.lock.expired': 'Похоже, что ваш пробный период истек',
@@ -622,6 +625,7 @@ export const ru: LangType = {
     'page.header.currency.try': 'TRY',
 
     "nav_account": "Профиль",
+    "nav_verification": "Верификация",
     "nav_my_assets": "Мои активы",
     "nav_my_orders": "Мои ордера",
     "nav_account_security": "Безопасность",

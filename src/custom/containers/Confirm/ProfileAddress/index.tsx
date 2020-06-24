@@ -82,45 +82,50 @@ class ProfileAddressComponent extends React.Component<Props, State> {
             editData,
             editSuccess,
         } = this.props;
-
+        this.getAddress();
         if (!prev.editSuccess && editSuccess) {
             this.props.labelFetch();
             if (editData) {
-                this.props.changeUserProfileData(editData);
+                this.props.changeUserProfileData({...editData, addAddress: true});
                 this.props.history.push(buildPath('/confirm', this.props.lang));
             }
         }
     }
 //tslint:disable
     public componentDidMount() {
+       this.getAddress();
+    }
+
+    public getAddress = () => {
         const { user, history } = this.props;
+        const { city, postcode, residentialAddress, state } = this.state;
         if (history.location && history.location.state && history.location.state.addressEdit && user.profile) {
-            if (user.profile.first_name) {
+            if (user.profile.city && user.profile.city !== city) {
                 this.setState({
                     city: user.profile.city,
                 });
             }
 
-            if (user.profile.last_name) {
+            if (user.profile.postcode && user.profile.postcode !== postcode) {
                 this.setState({
                     postcode: user.profile.postcode,
                 });
             }
 
-            if (user.profile.country) {
+            if (user.profile.address && user.profile.address !== residentialAddress) {
                 this.setState({
                     residentialAddress: user.profile.address,
                 });
             }
 
             const currentState = user.profile.metadata && JSON.parse(user.profile.metadata).state;
-            if (currentState) {
+            if (currentState && currentState !== state) {
                 this.setState({
                     state: currentState,
                 });
             }
         }
-    }
+    };
 
     public render() {
         const {

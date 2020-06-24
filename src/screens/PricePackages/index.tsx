@@ -1,7 +1,9 @@
 import Slider from 'infinite-react-carousel';
 import * as React from 'react';
-import {FormattedMessage, injectIntl} from 'react-intl';
-import {withRouter} from 'react-router-dom';
+import {injectIntl} from 'react-intl';
+import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
+import {RootState, selectUserInfo} from '../../modules';
 
 const kycLevels = [
     {
@@ -60,53 +62,58 @@ const kycLevels = [
     },
 ];
 
-export const PricePackagesScreen = withRouter(injectIntl(({intl}) => {
+// @ts-ignore
+const PricePackages = props => {
+    // tslint:disable-next-line:no-console
+    console.log('...........props', props);
     const widthPage = React.useRef(null);
     const [clientWidth, setClientWidth] = React.useState(1000);
     React.useEffect(() => {
         // @ts-ignore
         setClientWidth(widthPage.current.clientWidth);
     }, []);
-    const kycBlock = (info, key) => (
+    const userLevel = props.user.level;
+    const kycBlock = (info, key, isCompleted) => (
         <div key={key} className="carousel-block__block">
         <div className="carousel-block__header">
             <span className="carousel-block__header-text">
-                <FormattedMessage id={info.title}/>
+                {props.intl.formatMessage({id: info.title})}
+                {isCompleted}
             </span>
             <div className="carousel-block__limits-block">
-                <span className="limits-text"> <FormattedMessage id={info.limitPlank}/></span>
+                <span className="limits-text"> {props.intl.formatMessage({id: info.limitPlank})}</span>
                 <img src={require(`./${info.img}`)} alt="StarterIcon"/>
             </div>
         </div>
         <div className="carousel-block__body">
             <div className="carousel-block__description-block">
-                <span className="description-header"><FormattedMessage id={info.headerInfo}/>:</span>
+                <span className="description-header">{props.intl.formatMessage({id: info.headerInfo})}:</span>
                 <ul className="description-list">
-                    {info.headerInfoItems.map((item, index) => (<li key={`description-${key}-${index}`} className="description-list__item"><FormattedMessage id={item}/></li>))}
+                    {info.headerInfoItems.map((item, index) => (<li key={`description-${key}-${index}`} className="description-list__item">{props.intl.formatMessage({id: item})}</li>))}
                 </ul>
             </div>
             <div className="limits-block">
                 <div className="limits-block__header">
-                    <span className="limits-block__white-text"><FormattedMessage id={'page.kyc.levels.block.limits.header'}/></span>
-                    <span className="limits-block__yellow-text"><FormattedMessage id={'page.kyc.levels.block.limits.deposit'}/></span>
+                    <span className="limits-block__white-text">{props.intl.formatMessage({id: 'page.kyc.levels.block.limits.header'})}</span>
+                    <span className="limits-block__yellow-text">{props.intl.formatMessage({id: 'page.kyc.levels.block.limits.deposit'})}</span>
                 </div>
                 <div className="limits-block__table">
                     <div className="limits-block__row limits-block__header-row">
                         <div className="limits-block__cell"/>
-                        <div className="limits-block__cell"><FormattedMessage id={'page.kyc.levels.block.limits.eu'}/></div>
-                        <div className="limits-block__cell"><FormattedMessage id={'page.kyc.levels.block.limits.non-eu'}/></div>
+                        <div className="limits-block__cell">{props.intl.formatMessage({id: 'page.kyc.levels.block.limits.eu'})}</div>
+                        <div className="limits-block__cell">{props.intl.formatMessage({id: 'page.kyc.levels.block.limits.non-eu'})}</div>
                     </div>
                     <div className="limits-block__row">
                         <div className="limits-block__cell">
                             <img src={require('./bitcoin-buy.svg')} alt=""/>
-                            <span className="limits-block__img-text"><FormattedMessage id={'page.kyc.levels.block.limits.crypto'}/></span>
+                            <span className="limits-block__img-text">{props.intl.formatMessage({id: 'page.kyc.levels.block.limits.crypto'})}</span>
                         </div>
                         {info.depositLimits.crypto.map((item, index) => (<div key={`deposit1-${key}-${index}`} className="limits-block__cell">{item}</div>))}
                     </div>
                     <div className="limits-block__row">
                         <div className="limits-block__cell">
                             <img src={require('./dollar-buy.svg')} alt=""/>
-                            <span className="limits-block__img-text"><FormattedMessage id={'page.kyc.levels.block.limits.flat'}/></span>
+                            <span className="limits-block__img-text">{props.intl.formatMessage({id: 'page.kyc.levels.block.limits.flat'})}</span>
                         </div>
                         {info.depositLimits.flat.map((item, index) => (<div key={`withdrawal1-${key}-${index}`} className="limits-block__cell">{item}</div>))}
                     </div>
@@ -120,43 +127,58 @@ export const PricePackagesScreen = withRouter(injectIntl(({intl}) => {
                 <div className="limits-block__table">
                     <div className="limits-block__row limits-block__header-row">
                         <div className="limits-block__cell"/>
-                        <div className="limits-block__cell"><FormattedMessage id={'page.kyc.levels.block.limits.eu'}/></div>
-                        <div className="limits-block__cell"><FormattedMessage id={'page.kyc.levels.block.limits.non-eu'}/></div>
+                        <div className="limits-block__cell">{props.intl.formatMessage({id: 'page.kyc.levels.block.limits.eu'})}</div>
+                        <div className="limits-block__cell">{props.intl.formatMessage({id: 'page.kyc.levels.block.limits.non-eu'})}</div>
                     </div>
                     <div className="limits-block__row">
                         <div className="limits-block__cell">
                             <img src={require('./bitcoin-sell.svg')} alt=""/>
-                            <span className="limits-block__img-text"><FormattedMessage id={'page.kyc.levels.block.limits.crypto'}/></span>
+                            <span className="limits-block__img-text">{props.intl.formatMessage({id: 'page.kyc.levels.block.limits.crypto'})}</span>
                         </div>
                         {info.withdrawalLimits.crypto.map((item, index) => (<div key={`deposit2-${key}-${index}`} className="limits-block__cell">{item}</div>))}
                     </div>
                     <div className="limits-block__row">
                         <div className="limits-block__cell">
                             <img src={require('./dollar-sell.svg')} alt=""/>
-                            <span className="limits-block__img-text"><FormattedMessage id={'page.kyc.levels.block.limits.flat'}/></span>
+                            <span className="limits-block__img-text">{props.intl.formatMessage({id: 'page.kyc.levels.block.limits.flat'})}</span>
                         </div>
                         {info.withdrawalLimits.flat.map((item, index) => (<div key={`withdrawal2-${key}-${index}`} className="limits-block__cell">{item}</div>))}
                     </div>
                 </div>
             </div>
             <div className="carousel-block__description-block">
-                <div className="description-header requirement"><FormattedMessage id={'page.kyc.levels.block.requirements.title'}/></div>
+                <div className="description-header requirement">{props.intl.formatMessage({id: 'page.kyc.levels.block.requirements.title'})}</div>
                 <ul className="description-list">
-                    {info.requirementsItems.map((item, index) => (<li key={`requirements-${key}-${index}`} className="description-list__item"><FormattedMessage id={item}/></li>))}
+                    {info.requirementsItems.map((item, index) => (<li key={`requirements-${key}-${index}`} className="description-list__item"><div dangerouslySetInnerHTML={{__html: `${props.intl.formatMessage({id: item})}`}}/></li>))}
                 </ul>
             </div>
-            <div className="carousel-block__btn-block yellow">
-                COMPLETED
-            </div>
+            {!isCompleted
+                ? <Link to={'/confirm'} className={`carousel-block__btn-block green`}>
+                    {props.intl.formatMessage({id: 'page.kyc.levels.block.btn.uncompleted'})}
+                </Link>
+                : <div className={`carousel-block__btn-block yellow`}>
+                    {props.intl.formatMessage({id: 'page.kyc.levels.block.btn.completed'})}
+                </div>
+            }
         </div>
     </div>);
+    const isCompletedLevel = index => {
+        // tslint:disable-next-line:no-console
+        console.log('...........userLevel');
+        switch (index) {
+            case 0: return userLevel >= 4;
+            case 1: return userLevel >= 5;
+            case 2: return userLevel > 5;
+            default: return true;
+        }
+    };
     return (
         <div ref={widthPage} className="price-package">
             <span className="price-package__title">KYC Levels</span>
             <div className="carousel-block">
                 {clientWidth > 980
                     ? <React.Fragment>
-                       {kycLevels.map((item, index) => kycBlock(item, `block-${index}`))}
+                       {kycLevels.map((item, index) => kycBlock(item, `block-${index}`, isCompletedLevel(index)))}
                     </React.Fragment>
                     :
                     <Slider
@@ -169,9 +191,11 @@ export const PricePackagesScreen = withRouter(injectIntl(({intl}) => {
                         centerPadding={0}
                         pauseOnHover={false}
                     >
-                        {kycLevels.map((item, index) => kycBlock(item, `block-${index}`))}
+                        {kycLevels.map((item, index) => kycBlock(item, `block-${index}`, isCompletedLevel(index)))}
                     </Slider>
                 }
             </div>
         </div>);
-}));
+};
+
+export const PricePackagesScreen = injectIntl(connect((state: RootState) => ({user: selectUserInfo(state)}), null)(PricePackages));
