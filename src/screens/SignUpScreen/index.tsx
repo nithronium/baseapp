@@ -18,7 +18,7 @@ import { withRouter } from 'react-router-dom';
 import { captchaType, siteKey } from '../../api';
 import logo = require('../../assets/images/logo.svg');
 import { Modal, SignUpForm } from '../../components';
-import { buildPath, redirect } from '../../custom/helpers';
+import { buildPath } from '../../custom/helpers';
 import {
     EMAIL_REGEX,
     ERROR_INVALID_EMAIL,
@@ -117,7 +117,7 @@ class SignUp extends React.Component<Props> {
                 redirectUrl = parsed.redirect_url;
             }
             localStorage.setItem('redirect_url', redirectUrl);
-            redirect(() => props.history.push(buildPath(url, i18n), {email: this.state.email}));
+            props.history.push(buildPath(url, i18n), {email: this.state.email});
         }
 
         if (props.error) {
