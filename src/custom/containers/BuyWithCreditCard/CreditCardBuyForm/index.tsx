@@ -291,12 +291,11 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         }
 
         if (this.props.orderBook.market !== nextProps.orderBook.market) {
-            this.setState({
-                cryptoValue: this.convertToCrypto(
-                    Number(this.state.fiatValue),
-                    nextProps,
-                ).toString(),
-            });
+            const { fiatValue, crypto } = this.state;
+            const cryptoNumber = this.convertToCrypto(+fiatValue, nextProps);
+            const cryptoFormatted = cryptoNumber.toFixed(this.getPrecision(crypto));
+            const cryptoValue = cryptoFormatted.toString();
+            this.setState({ cryptoValue });
         }
     }
 
