@@ -383,6 +383,9 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
 
     public getLimit = () => {
         const { withdrawLimitData } = this.props;
+        if (!withdrawLimitData) {
+            return 0;
+        }
         if (withdrawLimitData.limit === 'unlimited_withdraw_level') {
             return 'unlimited';
         }
