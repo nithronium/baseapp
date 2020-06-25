@@ -261,7 +261,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         }
 
         if (history.location && history.location.state && history.location.state.addressEdit) {
-            return ['page.body.kyc.head.level.third.address', 'page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
+            return ['page.body.kyc.head.level.first.address', 'page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
         }
         switch (currentProfileLevel) {
             case 0:
