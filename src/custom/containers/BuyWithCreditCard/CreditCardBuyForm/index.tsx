@@ -251,7 +251,25 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
             });
         }
 
+        window.addEventListener('message', this.onMessage);
     }
+
+    public componentWillUnmount() {
+        window.removeEventListener('message', this.onMessage);
+    }
+
+    public onMessage = event => {
+        const action = event.data.action;
+        // tslint:disable-next-line
+        if (action === 'instex-error-try-again' ||
+            action === 'instex-error-close'
+        ) {
+            this.setState({
+                showModal: false,
+                openIframe: false,
+            });
+        }
+    };
 
     public componentDidUpdate() {
         const { fiatValue, cryptoValue, fiat, crypto } = this.state;
