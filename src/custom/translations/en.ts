@@ -84,6 +84,11 @@ export const en = {
     'page.body.kyc.questionnaire.question3.answer2': '>250 and <1K per month',
     'page.body.kyc.questionnaire.question3.answer3': '>1K trades per month',
 
+    'page.body.kyc.questionnaire.question3.1': 'What is your professional background?',
+    'page.body.kyc.questionnaire.question3.2': 'What industry are you currently working in (what is your field of activity)',
+    'page.body.kyc.questionnaire.question3.3': 'How long have you been working in this field of activity and in the position mentioned in you previous answer?',
+    'page.body.kyc.questionnaire.question3.4': 'Is there any publicly available information that might confirm your field of activity, position, and background?',
+
     'page.body.kyc.questionnaire.question4': 'Employer (If self-employed, please describe your self-employment)',
     'page.body.kyc.questionnaire.question4.input1': 'Employer',
     'page.body.kyc.questionnaire.question4.input2': 'Position',
@@ -122,6 +127,8 @@ export const en = {
     'page.body.kyc.questionnaire.question10.answer2': 'Employment income',
     'page.body.kyc.questionnaire.question10.answer3': 'Inheritance',
     'page.body.kyc.questionnaire.question10.answer4': 'Other',
+
+    'page.body.kyc.questionnaire.question10.1': 'What kind of documents can you provide as evidence of the source of your income which you have mentioned in the answer to the previous question?',
 
     'page.body.kyc.questionnaire.question11': 'Are you or your relatives are politically exposed persons? ',
     'page.body.kyc.questionnaire.question11.answer1': 'Yes',

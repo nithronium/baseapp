@@ -481,6 +481,11 @@ export const ru: LangType = {
     'page.body.kyc.questionnaire.question3.answer2': '250 - 1K торговых операций за месяц',
     'page.body.kyc.questionnaire.question3.answer3': 'больше 1K торговых операций за месяц',
 
+    'page.body.kyc.questionnaire.question3.1': 'What is your professional background?',
+    'page.body.kyc.questionnaire.question3.2': 'What industry are you currently working in (what is your field of activity)',
+    'page.body.kyc.questionnaire.question3.3': 'How long have you been working in this field of activity and in the position mentioned in you previous answer?',
+    'page.body.kyc.questionnaire.question3.4': 'Is there any publicly available information that might confirm your field of activity, position, and background?',
+
     'page.body.kyc.questionnaire.question4': 'Работодатель (если Вы самозанятый, опишите род Вашей деятельности)',
     'page.body.kyc.questionnaire.question4.input1': 'Работодатель',
     'page.body.kyc.questionnaire.question4.input2': 'Должность',
@@ -518,6 +523,8 @@ export const ru: LangType = {
     'page.body.kyc.questionnaire.question10.answer2': 'Заработная плата',
     'page.body.kyc.questionnaire.question10.answer3': 'Наследство',
     'page.body.kyc.questionnaire.question10.answer4': 'Другое',
+
+    'page.body.kyc.questionnaire.question10.1': 'What kind of documents can you provide as evidence of the source of your income which you have mentioned in the answer to the previous question?',
 
     'page.body.kyc.questionnaire.question11': 'Являетесь ли Вы или Ваши родственники политическими деятелями? ',
     'page.body.kyc.questionnaire.question11.answer1': 'Да',

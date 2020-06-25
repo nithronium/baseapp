@@ -762,6 +762,12 @@ export const zh = {
     'page.body.kyc.questionnaire.question3.answer1': '每月0-250笔交易',
     'page.body.kyc.questionnaire.question3.answer2': '每月超过250亿计少于1千笔',
     'page.body.kyc.questionnaire.question3.answer3': '每月超过1千笔交易',
+
+    'page.body.kyc.questionnaire.question3.1': 'What is your professional background?',
+    'page.body.kyc.questionnaire.question3.2': 'What industry are you currently working in (what is your field of activity)',
+    'page.body.kyc.questionnaire.question3.3': 'How long have you been working in this field of activity and in the position mentioned in you previous answer?',
+    'page.body.kyc.questionnaire.question3.4': 'Is there any publicly available information that might confirm your field of activity, position, and background?',
+
     'page.body.kyc.questionnaire.question4': '雇主（如果是自雇人士，请描述您的自雇人士）',
     'page.body.kyc.questionnaire.question4.input1': '雇主',
     'page.body.kyc.questionnaire.question4.input2': '位置',
@@ -793,6 +799,9 @@ export const zh = {
     'page.body.kyc.questionnaire.question10.answer2': '就业收入',
     'page.body.kyc.questionnaire.question10.answer3': '遗产',
     'page.body.kyc.questionnaire.question10.answer4': '其他',
+
+    'page.body.kyc.questionnaire.question10.1': 'What kind of documents can you provide as evidence of the source of your income which you have mentioned in the answer to the previous question?',
+
     'page.body.kyc.questionnaire.question11': '您或您的亲戚是否政治人物？',
     'page.body.kyc.questionnaire.question11.answer1': '是',
     'page.body.kyc.questionnaire.question11.answer2': '否',

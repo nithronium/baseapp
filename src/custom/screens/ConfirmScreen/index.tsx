@@ -90,35 +90,16 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const { userData } = this.props;
         const currentProfileLevel = userData.level;
         const stepLabels = this.handleGetStepLabels(currentProfileLevel);
-        const cx = classnames('pg-confirm__progress-items', {
+        const cx = classnames('pg-confirm__progress-items pg-confirm__center', {
             'pg-confirm__progress-first': currentProfileLevel === 1 || currentProfileLevel === 4,
             'pg-confirm__progress-second': [1,2,3,5].includes(currentProfileLevel),
         });
-
         return (
             <div className="pg-confirm__progress">
             <div className={cx}>
-                <div className={`pg-confirm__progress-circle-1${currentProfileLevel === 0 ? ' active-circle' : ''}`}>
+                <div className={`pg-confirm__progress-circle-1${currentProfileLevel === 5 ? ' active-circle' : ''}`}>
                     <span className="pg-confirm__title-text pg-confirm__active-1">
                     <FormattedMessage id={stepLabels[0]}/>
-                    </span>
-                </div>
-                <div className="pg-confirm__progress-line-1" />
-                <div className={`pg-confirm__progress-circle-2${currentProfileLevel === 2 ? ' active-circle' : ''}`}>
-                    <span className="pg-confirm__title-text pg-confirm__active-2">
-                    <FormattedMessage id={stepLabels[1]}/>
-                    </span>
-                </div>
-                <div className="pg-confirm__progress-line-2" />
-                <div className={`pg-confirm__progress-circle-3${currentProfileLevel === 3 ? ' active-circle' : ''}`}>
-                    <span className="pg-confirm__title-text pg-confirm__active-3">
-                    <FormattedMessage id={stepLabels[2]}/>
-                    </span>
-                </div>
-                <div className="pg-confirm__progress-line-3" />
-                <div className={`pg-confirm__progress-circle-4${currentProfileLevel === 4 ? ' active-circle' : ''}`}>
-                    <span className="pg-confirm__title-text pg-confirm__active-4">
-                    <FormattedMessage id={stepLabels[3]}/>
                     </span>
                 </div>
             </div>
@@ -272,7 +253,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             case 4:
                 return ['page.body.kyc.head.level.fifth.address', 'page.body.kyc.head.level.fifth'];
             case 5:
-                return ['page.body.kyc.head.level.fifth', 'page.body.kyc.head.level.sixth'];
+                return ['page.body.kyc.head.level.sixth'];
             default:
                 return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
         }
