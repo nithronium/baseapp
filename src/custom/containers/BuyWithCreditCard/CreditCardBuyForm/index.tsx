@@ -88,8 +88,8 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         this.state = {
             fiat: 'eur',
             crypto: 'btc',
-            fiatValue: '0',
-            cryptoValue: '0',
+            fiatValue: '',
+            cryptoValue: '',
             fiatList: [],
             cryptoList: [],
             showModal: false,

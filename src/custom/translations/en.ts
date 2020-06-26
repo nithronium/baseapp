@@ -603,7 +603,7 @@ export const en = {
     'buyWithCard.form.title': 'Buy Cryptocurrencies with Credit/Debit Card',
     'buyWithCard.form.buy': 'Buy',
     'buyWithCard.form.sell': 'Sell',
-    'buyWithCard.form.fees': 'No hidden fees and commission*',
+    'buyWithCard.form.fees': 'Credit/debit card deposit fee included*',
     'buyWithCard.form.help': 'Need help?',
     'buyWithCard.form.paymentLimit': 'Payment value limit',
     'buyWithCard.form.dailyLimit': 'Daily Limit',
