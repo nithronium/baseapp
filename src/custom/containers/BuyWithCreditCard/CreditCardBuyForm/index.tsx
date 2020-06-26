@@ -2,6 +2,8 @@ import * as React from 'react';
 
 import * as moment from 'moment';
 
+import qs = require('qs');
+
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 import { RouteComponentProps, withRouter } from 'react-router';
@@ -254,6 +256,17 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         window.addEventListener('message', this.onMessage);
     }
 
+    public getFiatForCrypto = (crypto, props = this.props) => {
+        const marketsWithCrypto = this.getCryptoFiatMarkets(props)
+            .filter(({ base_unit }) => {
+                return base_unit === crypto;
+            });
+        if (!marketsWithCrypto.length) {
+            return '';
+        }
+        return marketsWithCrypto[0].quote_unit;
+    };
+
     public componentWillUnmount() {
         window.removeEventListener('message', this.onMessage);
     }
@@ -296,13 +309,23 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         {
             if (!nextProps.markets.length || !nextProps.currencies.length) { return; }
 
-            const { fiat } = this.state;
+            const query = qs.parse(location.search, { ignoreQueryPrefix: true });
+            let crypto = query.curr;
+
+            let { fiat } = this.state;
             const fiatList = this.getAvailableFiat(nextProps);
             const cryptoList = this.getAvailableCrypto(fiat, nextProps);
+            if (!this.getAllCrypto(nextProps).includes(crypto)) {
+                crypto = cryptoList[0] || 'btc';
+            }
+            if (query.curr) {
+                fiat = this.getFiatForCrypto(crypto, nextProps);
+            }
             this.setState({
                 fiatList,
                 cryptoList,
-                crypto: cryptoList[0] || 'btc',
+                crypto,
+                fiat,
             }, () => {
                 this.fetchMarket();
             });
@@ -331,6 +354,11 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         return Array.from(res);
     };
 
+    public getAllCrypto = (props = this.props) => {
+        const cryptoMarkets = this.getCryptoFiatMarkets(props);
+        return cryptoMarkets.map(({ base_unit }) => base_unit);
+    };
+
     public getAvailableFiat = (props = this.props): string[] => {
         const { markets } = props;
         const enbledMarkets = markets.filter(({ state }) => {
@@ -355,17 +383,6 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         }).filter(({ quote_unit }) => {
             return this.isFiat(quote_unit, props);
         });
-    };
-
-    public getAllFiat = (props?): string[] => {
-        // return ['eur', 'usd'];
-        return this.getCurrenciesByType('fiat', props)
-            .map(item => item.id);
-    };
-
-    public getAllCrypto = (props?): string[] => {
-        return this.getCurrenciesByType('coin', props)
-            .map(item => item.id);
     };
 
     public isCrypto = (currency: string, props = this.props) => {
