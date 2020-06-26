@@ -113,7 +113,7 @@ const Address = props => {
     return (
         <div className="address">
             <h5><FormattedMessage id={'footer_addresses_title'}/></h5>
-            <p><FormattedMessage id={'footer_addresses_first'}/></p>
+            <p className="notranslate"><FormattedMessage id={'footer_addresses_first'}/></p>
         </div>
     );
 };
