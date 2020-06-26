@@ -412,11 +412,16 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
 
     public isButtonDisabled = (): boolean => {
         const { userLoggedIn, user } = this.props;
+        const { fiat } = this.state;
         if (!userLoggedIn || user.level < 4) {
             return false;
         }
         const { fiatValue } = this.state;
-        return !(Number(fiatValue) > 0);
+        const fiatNumber = Number(fiatValue);
+        if (fiat.toLowerCase() === 'aed') {
+            return fiatNumber < 30;
+        }
+        return fiatNumber < 1;
     };
 
     public ableToBuy = () => {
