@@ -81,6 +81,8 @@ class ProfileAddressComponent extends React.Component<Props, State> {
         const {
             editData,
             editSuccess,
+            user,
+            history,
         } = this.props;
         if (!prev.editSuccess && editSuccess) {
             this.props.labelFetch();
@@ -89,40 +91,44 @@ class ProfileAddressComponent extends React.Component<Props, State> {
                 this.props.history.push(buildPath('/confirm', this.props.lang));
             }
         }
+        if (history.location && history.location.state && history.location.state.addressEdit && user.profile) {
+            const { city, postcode, residentialAddress, state } = this.state;
+            this.getAddress(user, city, postcode, residentialAddress, state);
+        }
     }
 //tslint:disable
     public componentDidMount() {
-       this.getAddress();
+        const { user } = this.props;
+        if (user.profile) {
+            const { city, postcode, residentialAddress, state } = this.state;
+            this.getAddress(user, city, postcode, residentialAddress, state);
+        }
     }
 
-    public getAddress = () => {
-        const { user, history } = this.props;
-        const { city, postcode, residentialAddress, state } = this.state;
-        if (history.location && history.location.state && history.location.state.addressEdit && user.profile) {
-            if (user.profile.city && user.profile.city !== city) {
-                this.setState({
-                    city: user.profile.city,
-                });
-            }
+    public getAddress = (user, city, postcode, residentialAddress, state ) => {
+        if (user.profile.city && user.profile.city !== city) {
+            this.setState({
+                city: user.profile.city,
+            });
+        }
 
-            if (user.profile.postcode && user.profile.postcode !== postcode) {
-                this.setState({
-                    postcode: user.profile.postcode,
-                });
-            }
+        if (user.profile.postcode && user.profile.postcode !== postcode) {
+            this.setState({
+                postcode: user.profile.postcode,
+            });
+        }
 
-            if (user.profile.address && user.profile.address !== residentialAddress) {
-                this.setState({
-                    residentialAddress: user.profile.address,
-                });
-            }
+        if (user.profile.address && user.profile.address !== residentialAddress) {
+            this.setState({
+                residentialAddress: user.profile.address,
+            });
+        }
 
-            const currentState = user.profile.metadata && JSON.parse(user.profile.metadata).state;
-            if (currentState && currentState !== state) {
-                this.setState({
-                    state: currentState,
-                });
-            }
+        const currentState = user.profile.metadata && JSON.parse(user.profile.metadata).state;
+        if (currentState && currentState !== state) {
+            this.setState({
+                state: currentState,
+            });
         }
     };
 

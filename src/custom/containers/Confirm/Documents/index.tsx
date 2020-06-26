@@ -4,6 +4,7 @@ import {
   Loader,
 } from '@openware/components';
 import cr from 'classnames';
+import { History } from 'history';
 import * as React from 'react';
 import {
     InjectedIntlProps,
@@ -14,6 +15,7 @@ import {
   connect,
   MapDispatchToPropsFunction,
 } from 'react-redux';
+import {withRouter} from 'react-router';
 import close = require('../../../../assets/images/close.svg');
 import { formatDate } from '../../../../helpers';
 import { isDateInFuture } from '../../../../helpers/checkDate';
@@ -29,8 +31,9 @@ import {
     selectSendDocumentsSuccess,
     sendDocuments,
 } from '../../../../modules/user/kyc/documents';
-import { changeUserLevel } from '../../../../modules/user/profile';
-import { isValidDate } from '../../../helpers/checkDate';
+import {changeUserLevel} from '../../../../modules/user/profile';
+import {handleRedirectToConfirm} from '../../../helpers';
+import {isValidDate} from '../../../helpers/checkDate';
 
 interface ReduxProps {
     success?: string;
@@ -50,6 +53,10 @@ interface OnChangeEvent {
     };
 }
 
+interface HistoryProps {
+    history: History;
+}
+
 interface DocumentsState {
     documentsType: string;
     expiration: string;
@@ -58,7 +65,7 @@ interface DocumentsState {
     scans: File[];
 }
 
-type Props = ReduxProps & DispatchProps & InjectedIntlProps;
+type Props = ReduxProps & DispatchProps & InjectedIntlProps & HistoryProps;
 
 // tslint:disable:member-ordering
 class DocumentsComponent extends React.Component<Props, DocumentsState> {
@@ -90,7 +97,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         }
     }
 
-    public backBtn = () => this.props.changeUserLevel({level:1});
+    public backBtn = () => handleRedirectToConfirm('addressStep', this.props.history);
 
     public render() {
         const {
@@ -356,4 +363,4 @@ const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     });
 
 // tslint:disable-next-line:no-any
-export const Documents = injectIntl(connect(mapStateToProps, mapDispatchProps)(DocumentsComponent) as any);
+export const Documents = injectIntl(withRouter(connect(mapStateToProps, mapDispatchProps)(DocumentsComponent) as any));

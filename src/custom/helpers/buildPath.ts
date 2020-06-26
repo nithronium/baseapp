@@ -30,6 +30,9 @@ export const handleRedirectToConfirm = (editParam: string, history) => {
     case 'addressStep':
       history.push(buildPath('/confirm', lang), { addressStep: true });
       break;
+    case 'profAddressStep':
+      history.push(buildPath('/confirm', lang), { addressStep: true });
+      break;
     default:
       break;
   }

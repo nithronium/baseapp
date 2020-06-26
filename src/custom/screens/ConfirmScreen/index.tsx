@@ -159,24 +159,19 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const { history, userData } = this.props;
         const currentProfileLevel = userData.level;
         const stepLabels = this.handleGetStepLabels(currentProfileLevel);
-        const isAddressEdit = history.location && history.location.state && history.location.state.addressEdit;
-
-        const cx = classnames('pg-confirm__progress-items pg-confirm__progress-items--long', {
-            'pg-confirm__progress-first': currentProfileLevel === 2 && (userData.profile && !userData.profile.address) || isAddressEdit,
-            'pg-confirm__progress-second': currentProfileLevel === 2 && (userData.profile && userData.profile.address) && !isAddressEdit,
-            'pg-confirm__progress-third': currentProfileLevel === 3 && !isAddressEdit,
-        });
+        const addressStep = history.location && history.location.state && history.location.state.addressStep;
+        const profAddressStep = history.location && history.location.state && history.location.state.profAddressStep;
 
         return (
             <div className="pg-confirm__progress">
-            <div className={cx}>
-                <div className={`pg-confirm__progress-circle-1${userData.profile && !userData.profile.address && currentProfileLevel === 4 ? ' active-circle' : ''}`}>
+            <div className="pg-confirm__progress-items pg-confirm__progress-items--long">
+                <div className={`pg-confirm__progress-circle-1${addressStep ? ' active-circle' : ''}`}>
                     <span className="pg-confirm__title-text pg-confirm__active-1">
                     <FormattedMessage id={stepLabels[0]}/>
                     </span>
                 </div>
                 <div className="pg-confirm__progress-line-1" />
-                <div className={`pg-confirm__progress-circle-2${userData.profile && userData.profile.address && currentProfileLevel === 4 ? ' active-circle' : ''}`}>
+                <div className={`pg-confirm__progress-circle-2${profAddressStep ? ' active-circle' : ''}`}>
                     <span className="pg-confirm__title-text pg-confirm__active-2">
                     <FormattedMessage id={stepLabels[1]}/>
                     </span>
@@ -311,7 +306,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const {
             labels,
             fetchAlert,
-            userData,
+            history,
         } = this.props;
 
 
@@ -324,11 +319,14 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             });
         }
 
-        if (userData.profile && userData.profile.address) {
+        if (history.location && history.location.state && history.location.state.profAddressStep) {
             return <Documents />;
-        } else {
+        }
+        if (history.location && history.location.state && history.location.state.addressStep) {
             return <ProfileAddress />;
         }
+
+        return null;
     }
 
     private renderContent = () => {
