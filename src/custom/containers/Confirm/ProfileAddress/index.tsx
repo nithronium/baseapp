@@ -22,7 +22,7 @@ import {
 } from '../../../../modules';
 import { IdentityData } from '../../../../modules/user/kyc/identity/types';
 import { changeUserProfileData } from '../../../../modules/user/profile';
-import { buildPath } from '../../../helpers/buildPath';
+import { handleRedirectToConfirm } from '../../../helpers';
 
 interface ReduxProps {
     editData?: IdentityData;
@@ -88,7 +88,7 @@ class ProfileAddressComponent extends React.Component<Props, State> {
             this.props.labelFetch();
             if (editData) {
                 this.props.changeUserProfileData({...editData, addAddress: true});
-                this.props.history.push(buildPath('/confirm', this.props.lang));
+                handleRedirectToConfirm('profAddressStep', this.props.history);
             }
         }
         if (history.location && history.location.state && history.location.state.addressEdit && user.profile) {
