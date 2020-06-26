@@ -664,7 +664,7 @@ export const en = {
 
     'buyWithCard.overlay1.header': 'Buy Crypto with Credit/Debit Card',
     'buyWithCard.overlay1.text1': 'Automatic conversion your fiat currency*',
-    'buyWithCard.overlay1.text2': 'No hidden fees and commission*',
+    'buyWithCard.overlay1.text2': 'Credit/debit card deposit fee included*',
     'buyWithCard.overlay1.button': 'Get Crypto',
     'buyWithCard.overlay2.footer': 'Prepare your passport or driving licence',
 
