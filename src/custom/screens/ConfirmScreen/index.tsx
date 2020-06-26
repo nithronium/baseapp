@@ -364,7 +364,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             return this.renderThirdLevel();
         }
 
-        if (locationState === 'addressStep') {
+        if (locationState === 'addressStep' || locationState === 'profAddressStep') {
             const redirectUrl = getRedirectUrl();
             if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
                 history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage));
