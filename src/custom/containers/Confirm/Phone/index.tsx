@@ -214,12 +214,18 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
     }
 
     private confirmPhone = () => {
+        const { phoneNumber, confirmationCode } = this.state;
+        const { user, history } = this.props;
         const requestProps = {
-            phone_number: String(this.state.phoneNumber),
-            verification_code: String(this.state.confirmationCode),
+            phone_number: String(phoneNumber),
+            verification_code: String(confirmationCode),
         };
-        this.props.verifyPhone(requestProps);
-    }
+        if (user.phones && user.phones[0] && `+${user.phones[0].number}` === phoneNumber) {
+            handleRedirectToConfirm('identifyStep', history);
+        } else {
+            this.props.verifyPhone(requestProps);
+        }
+    };
 
     private addPlusSignToPhoneNumber = () => {
         if (this.state.phoneNumber.length === 0) {

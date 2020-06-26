@@ -29,7 +29,7 @@ import { ProfilePartial } from '../../containers/Confirm/ProfilePartial';
 import { Questionnaire } from '../../containers/Confirm/Questionnaire';
 import { buildPath } from '../../helpers/buildPath';
 
-import { getRedirectUrl, redirectIfSpecified } from '../../helpers';
+import { getRedirectUrl, handleRedirectToConfirm, redirectIfSpecified } from '../../helpers';
 
 interface ReduxProps {
     colorTheme: string;
@@ -74,10 +74,17 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     public componentDidMount() {
         setDocumentTitle('Confirm');
         this.props.labelFetch();
-        const { userData } = this.props;
+        const { userData, history } = this.props;
         this.setState({
             level: userData.level,
         });
+        switch (userData.level) {
+            case 1: handleRedirectToConfirm('profilePartialStep', history);break;
+            case 2: handleRedirectToConfirm('phoneStep', history);break;
+            case 3: handleRedirectToConfirm('identifyStep', history);break;
+            case 4: handleRedirectToConfirm('addressStep', history);break;
+            default: handleRedirectToConfirm('profilePartialStep', history);break;
+        }
     }
 
     public goBack = event => {
@@ -328,7 +335,6 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const {
             history,
             labels,
-            userData: { level },
             currentLanguage,
         } = this.props;
         if (!labels.length) {
@@ -342,10 +348,9 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             if (history.location.state.identifyStep) { locationState = 'identifyStep'; }
             if (history.location.state.addressStep) { locationState = 'addressStep'; }
         }
-
         this.handleCheckPendingLabels(labels);
 
-        if (level === 1 || locationState === 'profilePartialStep') {
+        if (locationState === 'profilePartialStep') {
             return <ProfilePartial toggleBlockNationalityModal={this.handleToggleBlockNationalityModal} />;
         }
 
@@ -353,15 +358,15 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             return <ProfileAddress />;
         }
 
-        if (level === 2 || locationState === 'phoneStep') {
+        if (locationState === 'phoneStep') {
             return <Phone />;
         }
 
-        if (level === 3 || locationState === 'identifyStep') {
+        if (locationState === 'identifyStep') {
             return this.renderThirdLevel();
         }
 
-        if (level === 4 || locationState === 'addressStep') {
+        if (locationState === 'addressStep') {
             const redirectUrl = getRedirectUrl();
             if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
                 history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage));
