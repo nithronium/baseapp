@@ -109,39 +109,36 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
 
     public renderStarterProgressBar() {
         const {
-            // history,
+            history,
             userData } = this.props;
         const currentProfileLevel = userData.level;
         const stepLabels = this.handleGetStepLabels(currentProfileLevel);
-        // const isAddressEdit = history.location && history.location.state && history.location.state.addressEdit;
-        // const cx = classnames('', {
-        //     'pg-confirm__progress-first': currentProfileLevel === 2 && (userData.profile && !userData.profile.address) || isAddressEdit,
-        //     'pg-confirm__progress-second': currentProfileLevel === 2 && (userData.profile && userData.profile.address) && !isAddressEdit,
-        //     'pg-confirm__progress-third': currentProfileLevel === 3 && !isAddressEdit,
-        // });
+        const profilePartialStep = history.location && history.location.state && history.location.state.profilePartialStep;
+        const phoneStep = history.location && history.location.state && history.location.state.phoneStep;
+        const identifyStep = history.location && history.location.state && history.location.state.identifyStep;
 
         return (
             <div className="pg-confirm__progress">
                 <div className="pg-confirm__progress-items pg-confirm__progress-items--long">
-                    <div className={`pg-confirm__progress-circle-0${currentProfileLevel === 0 ? ' active-circle' : ''}`}>
+                    <div className={`pg-confirm__progress-circle-0`}>
                         <span className="pg-confirm__title-text pg-confirm__active-0">
                             <FormattedMessage id={stepLabels[0]}/>
                         </span>
                     </div>
                     <div className="pg-confirm__progress-line-1" />
-                    <div className={`pg-confirm__progress-circle-1${currentProfileLevel === 1 ? ' active-circle' : ''}`}>
+                    <div className={`pg-confirm__progress-circle-1${profilePartialStep ? ' active-circle' : ''}`}>
                         <span className="pg-confirm__title-text pg-confirm__active-1">
                             <FormattedMessage id={stepLabels[1]}/>
                         </span>
                     </div>
                     <div className="pg-confirm__progress-line-2" />
-                    <div className={`pg-confirm__progress-circle-2${currentProfileLevel === 2 ? ' active-circle' : ''}`}>
+                    <div className={`pg-confirm__progress-circle-2${phoneStep ? ' active-circle' : ''}`}>
                         <span className="pg-confirm__title-text pg-confirm__active-2">
                             <FormattedMessage id={stepLabels[2]}/>
                         </span>
                     </div>
                     <div className="pg-confirm__progress-line-3" />
-                    <div className={`pg-confirm__progress-circle-3${currentProfileLevel === 3 ? ' active-circle' : ''}`}>
+                    <div className={`pg-confirm__progress-circle-3${identifyStep ? ' active-circle' : ''}`}>
                         <span className="pg-confirm__title-text pg-confirm__active-3">
                             <FormattedMessage id={stepLabels[3]}/>
                         </span>
@@ -237,13 +234,24 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
 
     private handleGetStepLabels = (currentProfileLevel: number): string[] => {
         const { history } = this.props;
-        if (history.location && history.location.state && history.location.state.profileEdit) {
-            return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
+        if (history.location && history.location.state) {
+            if (history.location.state.profileEdit) {
+                return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
+            }
+
+            if (history.location.state.addressEdit) {
+                return ['page.body.kyc.head.level.first.address', 'page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
+            }
+
+            if (history.location.state.profilePartialStep || history.location.state.phoneStep || history.location.state.identifyStep) {
+                return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second', 'page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
+            }
+
+            if (history.location.state.addressStep) {
+                return ['page.body.kyc.head.level.fifth.address', 'page.body.kyc.head.level.fifth'];
+            }
         }
 
-        if (history.location && history.location.state && history.location.state.addressEdit) {
-            return ['page.body.kyc.head.level.first.address', 'page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
-        }
         switch (currentProfileLevel) {
             case 0:
             case 1:
@@ -326,26 +334,34 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         if (!labels.length) {
             return null;
         }
+        let locationState = '';
+        if (history.location && history.location.state) {
+            if (history.location.state.profilePartialStep) { locationState = 'profilePartialStep'; }
+            if (history.location.state.addressEdit) { locationState = 'addressEdit'; }
+            if (history.location.state.phoneStep) { locationState = 'phoneStep'; }
+            if (history.location.state.identifyStep) { locationState = 'identifyStep'; }
+            if (history.location.state.addressStep) { locationState = 'addressStep'; }
+        }
 
         this.handleCheckPendingLabels(labels);
 
-        if (level === 1 || (history.location && history.location.state && history.location.state.profileEdit)) {
+        if (level === 1 || locationState === 'profilePartialStep') {
             return <ProfilePartial toggleBlockNationalityModal={this.handleToggleBlockNationalityModal} />;
         }
 
-        if (history.location && history.location.state && history.location.state.addressEdit) {
+        if (locationState === 'addressEdit') {
             return <ProfileAddress />;
         }
 
-        if (level === 2) {
-                return <Phone />;
+        if (level === 2 || locationState === 'phoneStep') {
+            return <Phone />;
         }
 
-        if (level === 3) {
+        if (level === 3 || locationState === 'identifyStep') {
             return this.renderThirdLevel();
         }
 
-        if (level === 4) {
+        if (level === 4 || locationState === 'addressStep') {
             const redirectUrl = getRedirectUrl();
             if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
                 history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage));
@@ -353,13 +369,9 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             return this.renderFourthLevel();
         }
 
-        if (level === 5) {
-            return <Questionnaire />;
-        }
+        return <Questionnaire />;
 
         // history.push(redirectIfSpecified('/profile'));
-
-        return null;
     };
 }
 

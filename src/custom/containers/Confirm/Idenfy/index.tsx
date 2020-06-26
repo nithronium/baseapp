@@ -16,7 +16,7 @@ import { changeUserLevel } from '../../../../modules/user/profile';
 import { kycAuthFetch, selectKycAuthData } from '../../../modules';
 import { KycAuthDataInterface } from '../../../modules/user/kycAuth/types';
 
-import { redirectIfSpecified } from '../../../helpers';
+import { handleRedirectToConfirm, redirectIfSpecified } from '../../../helpers';
 
 interface ReduxProps {
     kycAuthData?: KycAuthDataInterface;
@@ -75,7 +75,7 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
         }
     };
 
-    public backBtn = () => this.props.changeUserLevel({level:2});
+    public backBtn = () => handleRedirectToConfirm('phoneStep', this.props.history);
 
     private renderContent = () => {
         const { kycAuthData, currentLanguage } = this.props;

@@ -32,6 +32,7 @@ import { IdentityData } from '../../../../modules/user/kyc/identity/types';
 import { changeUserLevel, changeUserProfileData } from '../../../../modules/user/profile';
 import { Dropdown } from '../../../components';
 import { DISALLOWED_COUNTRIES } from '../../../constants';
+import { handleRedirectToConfirm } from '../../../helpers';
 import { isValidDate } from '../../../helpers/checkDate';
 
 
@@ -109,6 +110,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             sendData,
             sendSuccess,
             user,
+            history,
         } = this.props;
 
         // const redirectUrl = getRedirectUrl();
@@ -123,7 +125,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             if (sendData) {
                 this.props.changeUserProfileData(sendData);
             }
-            // this.props.history.push(url);
+            handleRedirectToConfirm('phoneStep', history);
         }
 
         if (!prev.editSuccess && editSuccess) {
@@ -132,7 +134,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             if (editData) {
                 this.props.changeUserProfileData(editData);
             }
-            // this.props.history.push(url);
+            handleRedirectToConfirm('phoneStep', history);
         }
     }
 //tslint:disable

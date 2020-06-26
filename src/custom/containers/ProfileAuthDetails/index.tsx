@@ -28,7 +28,7 @@ import {
     selectChangePasswordSuccess,
 } from '../../../modules/user/profile';
 import { PencilIcon } from '../../assets/images/PencilIcon';
-import { buildPath } from '../../helpers';
+import { buildPath, handleRedirectToConfirm } from '../../helpers';
 
 
 interface ReduxProps {
@@ -309,7 +309,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
 
     private renderEditProfileLink() {
         return (
-            <span onClick={() => this.handleRedirectToConfirm('profile')}>
+            <span onClick={() => handleRedirectToConfirm('profile', this.props.history)}>
                 {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.profile.edit'})}
                 <PencilIcon />
             </span>
@@ -318,7 +318,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
 
     private renderEditAddressLink() {
         return (
-            <span onClick={() => this.handleRedirectToConfirm('address')}>
+            <span onClick={() => handleRedirectToConfirm('address', this.props.history)}>
                 {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.address.edit'})}
                 <PencilIcon />
             </span>
@@ -397,20 +397,6 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
         this.setState({
             showChangeModal: true,
         });
-    }
-
-    private handleRedirectToConfirm = (editParam: string) => {
-        const lang = localStorage.getItem('lang_code') || 'en';
-        switch (editParam) {
-            case 'profile':
-                this.props.history.push(buildPath('/confirm', lang), { profileEdit: true });
-                break;
-            case 'address':
-                this.props.history.push(buildPath('/confirm', lang), { addressEdit: true });
-                break;
-            default:
-                break;
-        }
     }
 
     private cancel2fa = () => {

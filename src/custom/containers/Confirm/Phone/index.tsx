@@ -1,11 +1,14 @@
 import { Button } from '@openware/components';
 import cr from 'classnames';
+import { History } from 'history';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import {
     connect,
     MapDispatchToPropsFunction,
 } from 'react-redux';
+import {withRouter} from 'react-router';
+import { handleRedirectToConfirm } from '../../../../custom/helpers';
 import {
     labelFetch,
     RootState,
@@ -31,6 +34,10 @@ interface OnChangeEvent {
     };
 }
 
+interface HistoryProps {
+    history: History;
+}
+
 interface PhoneState {
     phoneNumber: string;
     phoneNumberFocused: boolean;
@@ -47,12 +54,11 @@ interface DispatchProps {
     verifyPhone: typeof verifyPhone;
 }
 
-type Props = ReduxProps & DispatchProps & InjectedIntlProps;
+type Props = ReduxProps & DispatchProps & InjectedIntlProps & HistoryProps;
 
 class PhoneComponent extends React.Component<Props, PhoneState> {
     constructor(props: Props) {
         super(props);
-
         this.state = {
             phoneNumber: '',
             phoneNumberFocused: false,
@@ -75,15 +81,18 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
     }
 
     public componentDidUpdate(prev: Props) {
-        const { user } = this.props;
+        const { user, history } = this.props;
 
         if (!prev.verifyPhoneSuccess && this.props.verifyPhoneSuccess) {
             this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
+            handleRedirectToConfirm('identifyStep', history);
         }
     }
 
-    public backBtn = () => this.props.changeUserLevel({level:1});
+    public backBtn = () => {
+        handleRedirectToConfirm('profilePartialStep', this.props.history);
+    };
 
     public render() {
         const {
@@ -279,4 +288,4 @@ const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     });
 
 // tslint:disable-next-line
-export const Phone = injectIntl(connect(mapStateToProps, mapDispatchProps)(PhoneComponent) as any);
+export const Phone = injectIntl(withRouter(connect(mapStateToProps, mapDispatchProps)(PhoneComponent) as any));
