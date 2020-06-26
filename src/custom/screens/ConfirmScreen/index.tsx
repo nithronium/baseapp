@@ -82,7 +82,13 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             case 1: handleRedirectToConfirm('profilePartialStep', history);break;
             case 2: handleRedirectToConfirm('phoneStep', history);break;
             case 3: handleRedirectToConfirm('identifyStep', history);break;
-            case 4: handleRedirectToConfirm('addressStep', history);break;
+            case 4: {
+                if (userData.profile && userData.profile.address) {
+                    handleRedirectToConfirm('profAddressStep', history)
+                } else {
+                    handleRedirectToConfirm('addressStep', history)
+                }
+            };break;
             default: handleRedirectToConfirm('profilePartialStep', history);break;
         }
     }
