@@ -345,6 +345,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             if (history.location.state.phoneStep) { locationState = 'phoneStep'; }
             if (history.location.state.identifyStep) { locationState = 'identifyStep'; }
             if (history.location.state.addressStep) { locationState = 'addressStep'; }
+            if (history.location.state.profAddressStep) { locationState = 'profAddressStep'; }
         }
         this.handleCheckPendingLabels(labels);
 
