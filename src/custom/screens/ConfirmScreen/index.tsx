@@ -84,11 +84,12 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             case 3: handleRedirectToConfirm('identifyStep', history);break;
             case 4: {
                 if (userData.profile && userData.profile.address) {
-                    handleRedirectToConfirm('profAddressStep', history)
+                    handleRedirectToConfirm('profAddressStep', history);
                 } else {
-                    handleRedirectToConfirm('addressStep', history)
+                    handleRedirectToConfirm('addressStep', history);
                 }
-            };break;
+            // tslint:disable-next-line
+            } break;
             default: handleRedirectToConfirm('profilePartialStep', history);break;
         }
     }
@@ -354,7 +355,6 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             if (history.location.state.profAddressStep) { locationState = 'profAddressStep'; }
         }
         this.handleCheckPendingLabels(labels);
-
         if (locationState === 'profilePartialStep') {
             return <ProfilePartial toggleBlockNationalityModal={this.handleToggleBlockNationalityModal} />;
         }
