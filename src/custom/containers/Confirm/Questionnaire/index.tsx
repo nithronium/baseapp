@@ -64,6 +64,7 @@ const answersForQuestion6 = translate => [
     translate('page.body.kyc.questionnaire.question6.answer3'),
     translate('page.body.kyc.questionnaire.question6.answer4'),
     translate('page.body.kyc.questionnaire.question6.answer5'),
+    translate('page.body.kyc.questionnaire.question6.answer6'),
 ];
 
 const answersForQuestion7 = translate => [
@@ -94,10 +95,12 @@ const answersForQuestion10 = translate => [
 ];
 
 const answersForQuestion11 = translate => [
+    translate('page.body.kyc.questionnaire.question11.answer1'),
     translate('page.body.kyc.questionnaire.question11.answer2'),
 ];
 
 const answersForQuestion12 = translate => [
+    translate('page.body.kyc.questionnaire.question12.answer1'),
     translate('page.body.kyc.questionnaire.question12.answer2'),
 ];
 
@@ -127,10 +130,9 @@ class QuestionnaireContainer extends React.Component<Props, State> {
     }
 
     public componentWillReceiveProps(nextProps: Props) {
-        const { dataStoragePushSuccess, user } = this.props;
+        const { dataStoragePushSuccess } = this.props;
 
         if (nextProps.dataStoragePushSuccess && !dataStoragePushSuccess) {
-            this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
             this.props.history.push(redirectIfSpecified('/profile'));
         }
@@ -279,15 +281,17 @@ class QuestionnaireContainer extends React.Component<Props, State> {
 
         return (
             <div className="pg-questionnaire">
-                <span className="pg-questionnaire__title">{this.translate('page.body.kyc.questionnaire.title')}</span>
-                {this.renderQuestions()}
-                <div className="pg-questionnaire__button">
-                    <Button
-                        className="pg-questionnaire__button__item"
-                        label={this.translate('page.body.kyc.confirm')}
-                        onClick={this.handleClickConfirm}
-                        disabled={questionnaire.length !== 17 || !this.handleValidateQuestionnaire(questionnaire)}
-                    />
+                <div>
+                    <span className="pg-questionnaire__title">{this.translate('page.body.kyc.questionnaire.title')}</span>
+                    {this.renderQuestions()}
+                    <div className="pg-questionnaire__button">
+                        <Button
+                            className="pg-questionnaire__button__item"
+                            label={this.translate('page.body.kyc.confirm')}
+                            onClick={this.handleClickConfirm}
+                            disabled={questionnaire.length !== 17 || !this.handleValidateQuestionnaire(questionnaire)}
+                        />
+                    </div>
                 </div>
             </div>
         );

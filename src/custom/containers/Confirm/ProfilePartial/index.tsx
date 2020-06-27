@@ -405,10 +405,10 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     private handleValidateInput = (field: string, value: string): boolean => {
         switch (field) {
             case 'firstName':
-                const firstNameRegex = new RegExp(`^[a-zA-Z]{1,100}$`);
+                const firstNameRegex = new RegExp(`^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$`);
                 return value.match(firstNameRegex) ? true : false;
             case 'lastName':
-                const lastNameRegex = new RegExp(`^[a-zA-Z]{1,100}$`);
+                const lastNameRegex = new RegExp(`^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$`);
                 return value.match(lastNameRegex) ? true : false;
             default:
                 return true;

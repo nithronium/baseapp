@@ -170,7 +170,7 @@ const PricePackages = props => {
     };
     return (
         <div ref={widthPage} className="price-package">
-            <span className="price-package__title">KYC Levels</span>
+            <span className="price-package__title">{props.intl.formatMessage({id: 'page.kyc.levels.title'})}</span>
             <div className="carousel-block">
                 {clientWidth > 980
                     ? <React.Fragment>

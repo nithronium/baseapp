@@ -90,7 +90,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                 }
             // tslint:disable-next-line
             } break;
-            default: handleRedirectToConfirm('profilePartialStep', history);break;
+            default: handleRedirectToConfirm('', history);break;
         }
     }
 

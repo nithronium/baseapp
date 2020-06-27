@@ -500,6 +500,7 @@ export const ru: LangType = {
     'page.body.kyc.questionnaire.question6.answer3': 'CAD',
     'page.body.kyc.questionnaire.question6.answer4': 'JPY',
     'page.body.kyc.questionnaire.question6.answer5': 'GBP',
+    'page.body.kyc.questionnaire.question6.answer6': 'AED',
 
     'page.body.kyc.questionnaire.question7': 'Стоимость чистых активов',
     'page.body.kyc.questionnaire.question7.answer1': '0 to 500,000',
@@ -552,10 +553,10 @@ export const ru: LangType = {
     'page.body.kyc.head.level.third': 'Номер телефона',
     'page.body.kyc.head.level.fifth.address': 'Адрес',
     'page.body.kyc.head.level.fourth': 'Личность',
-    'page.body.kyc.head.level.fifth': 'Адрес',
+    'page.body.kyc.head.level.fifth': 'Подтверждение адреса',
     'page.body.kyc.head.level.sixth': 'Анкета',
 
-    'page.kyc.levels.title': 'KYC Levels',
+    'page.kyc.levels.title': 'Verification Levels',
     'page.kyc.levels.block.1.title': 'Starter',
     'page.kyc.levels.block.1.limit-plank': 'Basic limits',
     'page.kyc.levels.block.1.header-info': 'Includes',

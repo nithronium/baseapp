@@ -51,7 +51,7 @@ export const en = {
     'page.body.kyc.head.level.third': 'Phone number',
     'page.body.kyc.head.level.fifth.address': 'Address',
     'page.body.kyc.head.level.fourth': 'Identity',
-    'page.body.kyc.head.level.fifth': 'Residential address',
+    'page.body.kyc.head.level.fifth': 'Address proof',
     'page.body.kyc.head.level.sixth': 'Questionnaire',
 
     'page.body.trade.header.upcoming': 'Up coming',
@@ -104,6 +104,7 @@ export const en = {
     'page.body.kyc.questionnaire.question6.answer3': 'CAD',
     'page.body.kyc.questionnaire.question6.answer4': 'JPY',
     'page.body.kyc.questionnaire.question6.answer5': 'GBP',
+    'page.body.kyc.questionnaire.question6.answer6': 'AED',
 
     'page.body.kyc.questionnaire.question7': 'Net worth',
     'page.body.kyc.questionnaire.question7.answer1': '0 to 500,000',
@@ -144,7 +145,7 @@ export const en = {
 
     'page.body.kyc.confirm': 'Confirm',
 
-    'page.kyc.levels.title': 'KYC Levels',
+    'page.kyc.levels.title': 'Verification Levels',
     'page.kyc.levels.block.1.title': 'Starter',
     'page.kyc.levels.block.1.limit-plank': 'Basic limits',
     'page.kyc.levels.block.1.header-info': 'Includes',
