@@ -77,14 +77,16 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
         const {phoneNumber} = this.state;
         if (user.phones && user.phones[0] && user.phones[0].number !== phoneNumber) {
             this.setState({phoneNumber: `+${user.phones[0].number}`});
+        } else {
+            this.setState({phoneNumber: `+`});
         }
     }
 
     public componentDidUpdate(prev: Props) {
-        const { user, history } = this.props;
+        const { history } = this.props;
 
         if (!prev.verifyPhoneSuccess && this.props.verifyPhoneSuccess) {
-            this.props.changeUserLevel({ level: +user.level + 1 });
+            this.props.changeUserLevel({ level: 3 });
             this.props.labelFetch();
             handleRedirectToConfirm('identifyStep', history);
         }

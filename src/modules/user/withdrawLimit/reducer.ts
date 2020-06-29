@@ -19,11 +19,12 @@ export const initialWithdrawLimitState: WithdrawLimitState = {
         withdraw:{
             limit:'15000.0',
             period:30,
-            withdrawal_amount:'0.0',
+            amount: '0.0',
             currency:'eur',
         },
         deposit:{
             limit:'15000.0',
+            amount: '0.0',
             period:30,
         },
 },

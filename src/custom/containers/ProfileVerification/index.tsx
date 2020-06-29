@@ -260,7 +260,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
             return <div className="pg-profile-verification__withdraw-limit" />;
         }
 
-        const percentage = Math.round((+withdrawLimitData.withdraw.withdrawal_amount / +withdrawLimitData.withdraw.limit) * 100);
+        const percentage = Math.round((+withdrawLimitData.withdraw.amount / +withdrawLimitData.withdraw.limit) * 100);
         const withdrawalLimitCurrency = withdrawLimitData.withdraw.currency.toLocaleLowerCase().includes('usd')
             ? '$'
             : ` ${withdrawLimitData.withdraw.currency.toUpperCase()}`;
@@ -279,7 +279,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                     </div>
                     <span className="pg-profile-verification__withdraw-limit__wrap__text">
                         <FormattedMessage id="page.body.profile.header.account.profile.withdraw" />
-                        &nbsp;{Decimal.format(withdrawLimitData.withdraw.withdrawal_amount, currencyPrecision)} /{' '}
+                        &nbsp;{Decimal.format(withdrawLimitData.withdraw.amount, currencyPrecision)} /{' '}
                         {Decimal.format(withdrawLimitData.withdraw.limit, currencyPrecision)}
                         {withdrawalLimitCurrency}
                     </span>
@@ -299,7 +299,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                 </div>
             );
         }
-        const percentage = Math.round((+evaluatedDepositsTotal / +withdrawLimitData.deposit.limit) * 100);
+        const percentage = Math.round((+withdrawLimitData.deposit.amount / +withdrawLimitData.deposit.limit) * 100);
         const currentCurrency = 'USD';
         const withdrawalLimitCurrency = currentCurrency.toLocaleLowerCase().includes('usd')
             ? '$'
@@ -332,7 +332,6 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
 
         const withdrawLimitDataExists = withdrawLimitData && withdrawLimitData.withdraw && withdrawLimitData.deposit;
         const withdrawLimitMessageExists = withdrawLimitData && withdrawLimitData.limit;
-
         return (
             <div className="pg-profile-verification">
                 <div className="pg-profile-verification__title">

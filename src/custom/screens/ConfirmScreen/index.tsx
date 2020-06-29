@@ -188,6 +188,26 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         );
     }
 
+    public progressBarRender = userLvl => {
+        const { history } = this.props;
+        const editAddress = history.location && history.location.state && history.location.state.editAddress;
+        const editProfile = history.location && history.location.state && history.location.state.editProfile;
+        if (editAddress || editProfile) {
+            return editProfile ? this.renderStarterProgressBar() : this.renderMasterProgressBar();
+        } else {
+            switch (userLvl) {
+                case 0:
+                case 1:
+                case 2:
+                case 3: return this.renderStarterProgressBar();
+                case 4: return this.renderMasterProgressBar();
+                case 5: return this.renderExpertProgressBar();
+                default: return this.renderExpertProgressBar();
+            }
+        }
+
+    };
+
     // tslint:disable:jsx-no-multiline-js
     public render() {
         const {
@@ -215,10 +235,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                             onClick={this.goBack}
                             className="pg-confirm-box-close"
                         />
-                        {[0,1,2,3].includes(currentProfileLevel)
-                            ? this.renderStarterProgressBar()
-                            : currentProfileLevel === 4 ? this.renderMasterProgressBar() : this.renderExpertProgressBar()
-                        }
+                        {this.progressBarRender(currentProfileLevel)}
                         <div className="pg-confirm__content">
                             {VersionGuardWrapper(this.renderContent, Phone)}
                         </div>
@@ -244,19 +261,11 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     private handleGetStepLabels = (currentProfileLevel: number): string[] => {
         const { history } = this.props;
         if (history.location && history.location.state) {
-            if (history.location.state.profileEdit) {
-                return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
-            }
-
-            if (history.location.state.addressEdit) {
-                return ['page.body.kyc.head.level.first.address', 'page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
-            }
-
-            if (history.location.state.profilePartialStep || history.location.state.phoneStep || history.location.state.identifyStep) {
+            if (history.location.state.profilePartialStep || history.location.state.phoneStep || history.location.state.identifyStep || history.location.state.profileEdit) {
                 return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second', 'page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
             }
 
-            if (history.location.state.addressStep) {
+            if (history.location.state.addressStep || history.location.state.addressEdit) {
                 return ['page.body.kyc.head.level.fifth.address', 'page.body.kyc.head.level.fifth'];
             }
         }

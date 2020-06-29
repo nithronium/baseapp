@@ -109,7 +109,6 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             editSuccess,
             sendData,
             sendSuccess,
-            user,
             history,
         } = this.props;
 
@@ -120,7 +119,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         // }
 
         if (!prev.sendSuccess && sendSuccess) {
-            this.props.changeUserLevel({ level: +user.level + 1 });
+            this.props.changeUserLevel({ level: 2 });
             this.props.labelFetch();
             if (sendData) {
                 this.props.changeUserProfileData(sendData);
@@ -129,7 +128,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         }
 
         if (!prev.editSuccess && editSuccess) {
-            this.props.changeUserLevel({ level: +user.level + 1 });
+            this.props.changeUserLevel({ level: 2 });
             this.props.labelFetch();
             if (editData) {
                 this.props.changeUserProfileData(editData);
