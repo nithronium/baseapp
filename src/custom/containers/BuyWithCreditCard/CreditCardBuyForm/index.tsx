@@ -456,7 +456,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         } = this.state;
         const { step, user, userLoggedIn } = this.props;
         return (
-            <div className="buy-form">
+            <div className="buy-form" id="bru-crypro-form">
                 <div className="section">
                     <div className="section__header">
                         {this.translate('buyWithCard.form.header')}

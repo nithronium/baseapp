@@ -174,7 +174,7 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
                         step={step}
                         onIframeClose={this.onIframeClose}
                     />}
-                    <CreditCardPromo />
+                    <CreditCardPromo userLoggedIn={userLoggedIn} />
                     <CreditCardFaq />
                 </div>
             </div>

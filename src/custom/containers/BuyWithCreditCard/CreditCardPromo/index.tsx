@@ -2,12 +2,31 @@ import * as React from 'react';
 
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 
+import { RouteComponentProps, withRouter } from 'react-router';
 
-type Props = InjectedIntlProps;
+type Props = InjectedIntlProps & RouteComponentProps & {
+    userLoggedIn: boolean;
+};
 
 class CreditCardPromoComponent extends React.Component<Props> {
     public translate = id => {
         return this.props.intl.formatMessage({ id });
+    };
+
+    public scrollToForm = () => {
+        const form = document.getElementById('bru-crypro-form');
+        if (form) {
+            form.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
+    public goToCommissions = () => {
+        const { userLoggedIn } = this.props;
+        if (userLoggedIn) {
+            location.assign('referral-commission');
+        } else {
+            location.assign(`/signin?redirect_url=${encodeURIComponent('/referral-commission')}`);
+        }
     };
 
     public render() {
@@ -42,6 +61,7 @@ class CreditCardPromoComponent extends React.Component<Props> {
                             <div className="credit-card-promo__button1">
                                 <button
                                     className="buy-form__button-continue"
+                                    onClick={this.scrollToForm}
                                 >
                                     {this.translate('buyWithCard.info.button1')}
                                 </button>
@@ -95,7 +115,10 @@ class CreditCardPromoComponent extends React.Component<Props> {
                         {this.translate('buyWithCard.info.text5')}
                     </p>
                     <div className="credit-card-promo__bottom-button">
-                        <button className="buy-form__modal-footer-button">
+                        <button
+                            className="buy-form__modal-footer-button"
+                            onClick={this.goToCommissions}
+                        >
                             {this.translate('buyWithCard.info.button2')}
                         </button>
                     </div>
@@ -106,4 +129,4 @@ class CreditCardPromoComponent extends React.Component<Props> {
     }
 }
 
-export const CreditCardPromo = injectIntl(CreditCardPromoComponent);
+export const CreditCardPromo = injectIntl(withRouter(CreditCardPromoComponent));
