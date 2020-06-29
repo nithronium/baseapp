@@ -290,8 +290,6 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
     }
 
     public renderDepositLimit(userLevel: number, withdrawLimitData: WithdrawLimit) {
-        const { evaluatedDepositsTotal } = this.state;
-
         if (!userLevel || userLevel === 1 || userLevel === 6) {
             return (
                 <div className="pg-profile-verification__deposit-limit">
@@ -300,9 +298,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
             );
         }
         const percentage = Math.round((+withdrawLimitData.deposit.amount / +withdrawLimitData.deposit.limit) * 100);
-        const withdrawalLimitCurrency = withdrawLimitData.deposit.currency.toLocaleLowerCase().includes('usd')
-            ? '$'
-            : ` ${withdrawLimitData.deposit.currency.toUpperCase()}`;
+        const withdrawalLimitCurrency = withdrawLimitData.deposit.currency.toUpperCase();
         const currencyPrecision = 2;
 
         return (
@@ -316,7 +312,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                     </div>
                     <span className="pg-profile-verification__deposit-limit__wrap__text">
                         <FormattedMessage id="page.body.profile.header.account.profile.deposit" />
-                        &nbsp;{Decimal.format(evaluatedDepositsTotal, currencyPrecision)} /{' '}
+                        &nbsp;{Decimal.format(withdrawLimitData.deposit.amount, currencyPrecision)} /{' '}
                         {Decimal.format(withdrawLimitData.deposit.limit, currencyPrecision)}
                         {withdrawalLimitCurrency}
                     </span>
@@ -330,7 +326,6 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
         const userLevel = user.level;
 
         const withdrawLimitDataExists = withdrawLimitData && withdrawLimitData.withdraw && withdrawLimitData.deposit;
-        const withdrawLimitMessageExists = withdrawLimitData && withdrawLimitData.limit;
         return (
             <div className="pg-profile-verification">
                 <div className="pg-profile-verification__title">
@@ -349,9 +344,9 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                     {userLevel < 6 && this.renderUpgradeLevelLink()}
                     {this.renderStatusIcon(label)}
                 </div>
-                {(withdrawLimitDataExists || withdrawLimitMessageExists) && this.renderUserAbilities(userLevel, withdrawLimitData)}
-                {withdrawLimitDataExists && this.renderWithdrawLimit(userLevel, withdrawLimitData)}
-                {withdrawLimitDataExists && this.renderDepositLimit(userLevel, withdrawLimitData)}
+                {/*{(withdrawLimitDataExists || withdrawLimitMessageExists) && this.renderUserAbilities(userLevel, withdrawLimitData)}*/}
+                {withdrawLimitDataExists && [4,5].includes(userLevel) && this.renderWithdrawLimit(userLevel, withdrawLimitData)}
+                {withdrawLimitDataExists && [4,5].includes(userLevel) && this.renderDepositLimit(userLevel, withdrawLimitData)}
             </div>
         );
     }
