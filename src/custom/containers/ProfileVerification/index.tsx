@@ -300,10 +300,9 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
             );
         }
         const percentage = Math.round((+withdrawLimitData.deposit.amount / +withdrawLimitData.deposit.limit) * 100);
-        const currentCurrency = 'USD';
-        const withdrawalLimitCurrency = currentCurrency.toLocaleLowerCase().includes('usd')
+        const withdrawalLimitCurrency = withdrawLimitData.deposit.currency.toLocaleLowerCase().includes('usd')
             ? '$'
-            : ` ${currentCurrency.toUpperCase()}`;
+            : ` ${withdrawLimitData.deposit.currency.toUpperCase()}`;
         const currencyPrecision = 2;
 
         return (

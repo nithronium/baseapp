@@ -19,6 +19,7 @@ describe('withdrawLimitList reducer', () => {
                 limit: '10',
                 amount: '0.0',
                 period: 24,
+                currency: 'btc',
             },
         };
 
@@ -42,6 +43,7 @@ describe('withdrawLimitList reducer', () => {
                     limit: '10',
                     amount: '0.0',
                     period: 24,
+                    currency: 'btc',
                 },
             },
             loading: true,
@@ -74,6 +76,7 @@ describe('withdrawLimitList reducer', () => {
                     limit: '10',
                     amount: '0.0',
                     period: 24,
+                    currency: 'btc',
                 },
             },
             loading: false,

@@ -43,6 +43,7 @@ describe('Module: WithdrawLimit', () => {
             limit: '10',
             amount: '0.0',
             period: 24,
+            currency: 'btc',
         },
     };
 

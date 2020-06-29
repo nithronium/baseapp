@@ -9,6 +9,7 @@ export interface WithdrawLimit {
         limit: number | string,
         amount: number | string,
         period: number,
+        currency: string,
     };
     limit?: string;
 }
