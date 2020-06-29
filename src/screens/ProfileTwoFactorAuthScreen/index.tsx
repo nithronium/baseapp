@@ -1,6 +1,5 @@
 // tslint:disable
 import {
-    Button,
     Input,
 } from '@openware/components';
 
@@ -187,11 +186,12 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
                 </div>
                 <div className="row p-5">
                     <div className="col-12 m-0">
-                        <Button
-                            className="p-3 m-0"
-                            label={this.translate('page.body.profile.header.account.content.twoFactorAuthentication.enable')}
+                        <button
+                            className="cr-button p-3 m-0"
                             onClick={submitHandler}
-                        />
+                        >
+                            {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.enable')}
+                        </button>
                     </div>
                 </div>
             </div>

@@ -41,6 +41,9 @@ import {
     walletsReset,
 } from '../../modules';
 
+
+import { GoogleTranslate } from '../../components/GoogleTranslate';
+
 export interface ReduxProps {
     colorTheme: string;
     currentMarket: Market | undefined;
@@ -282,6 +285,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                             <span className="soon">
                                                 (<FormattedMessage id={'page.header.soon'}/>)
                                             </span>
+                                        </li>
+                                        <li className={`notranslate`}>
+                                            <GoogleTranslate />
                                         </li>
                                     </ul>
                                 </div>

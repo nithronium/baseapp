@@ -122,7 +122,7 @@ class OrderHistoryComponent extends React.PureComponent<Props, OrdersState>  {
 
         return [
             <span key={id}><span style={{ color: '#FFFFFF' }}>{fullDate[0]}</span> {fullDate[1]}</span>,
-            <span style={{ color: setTradeColor(side).color }} key={id}>{orderType}</span>,
+            <span className="notranslate" style={{ color: setTradeColor(side).color }} key={id}>{orderType}</span>,
             marketName,
             <Decimal key={id} fixed={currentMarket.price_precision}>{actualPrice}</Decimal>,
             <Decimal key={id} fixed={currentMarket.amount_precision}>{origin_volume}</Decimal>,

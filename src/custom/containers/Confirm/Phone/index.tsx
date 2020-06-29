@@ -1,4 +1,3 @@
-import { Button } from '@openware/components';
 import cr from 'classnames';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
@@ -144,11 +143,13 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
                 </div>
                 {verifyPhoneSuccess && <p className="pg-confirm__success">{this.translate(verifyPhoneSuccess)}</p>}
                 <div className="pg-confirm__content-deep">
-                    <Button
-                        className="pg-confirm__content-phone-deep-button"
-                        label={this.translate('page.body.kyc.next')}
+                    <button
+                        className={`cr-button pg-confirm__content-phone-deep-button`}
                         onClick={this.confirmPhone}
-                    />
+                        style={{ color: '#fff' }}
+                    >
+                        {this.translate('page.body.kyc.next')}
+                    </button>
                 </div>
             </div>
         );

@@ -1,4 +1,4 @@
-import { Button, Checkbox } from '@openware/components';
+import { Checkbox } from '@openware/components';
 import cr from 'classnames';
 import { CustomInput } from '../';
 
@@ -204,13 +204,14 @@ class SignUpForm extends React.Component<SignUpFormProps> {
                         </div>
                         {this.renderCaptcha()}
                         <div className="cr-sign-up-form__button-wrapper">
-                            <Button
+                            <button
                                 type="submit"
                                 className="cr-sign-up-form__button"
-                                label={isLoading ? 'Loading...' : labelSignUp ? labelSignUp : 'Sign up'}
                                 disabled={this.disableButton()}
                                 onClick={this.handleClick}
-                            />
+                            >
+                                {isLoading ? 'Loading...' : labelSignUp ? labelSignUp : 'Sign up'}
+                            </button>
                             <a className="cr-sign-up-form__corporate-link" key="ru" rel="alternate" href={'https://kb.emirex.com/corporate_account_verification'} hrefLang="ru" title={corporateTextLink} target="_blank">{corporateTextLink}</a>
                         </div>
                     </div>
@@ -281,7 +282,7 @@ class SignUpForm extends React.Component<SignUpFormProps> {
         return email && isEmailValid && (password && isPasswordValid) && (confirmPassword && isConfirmPasswordValid);
     }
 
-    private handleClick = (label?: string, e?: React.FormEvent<HTMLInputElement>) => {
+    private handleClick = (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if (e) {
             e.preventDefault();
         }

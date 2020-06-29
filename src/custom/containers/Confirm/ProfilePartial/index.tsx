@@ -1,4 +1,3 @@
-import { Button } from '@openware/components';
 import cr from 'classnames';
 import { History } from 'history';
 import countries = require('i18n-iso-countries');
@@ -214,6 +213,8 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         const chosenCountry = countries.getName(countryOfBirth, lang);
         const chosenNationality = countries.getName(metadata.nationality, lang);
 
+        const buttonDisabled = this.handleCheckButtonDisabled();
+
         return (
             <div className="pg-confirm__content-profile-partial">
               <div className="pg-confirm__content-profile-partial-forms">
@@ -291,13 +292,15 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                       <div className="pg-confirm__content-profile-partial-col-row" />
                   </div>
                 </div>
+                 
                 <div className="pg-confirm__content-deep">
-                    <Button
-                        className="pg-confirm__content-phone-deep-button"
-                        label={this.translate('page.body.kyc.next')}
+                    <button
+                        className={`cr-button pg-confirm__content-phone-deep-button ${buttonDisabled ? 'cr-button--disabled' : ''}`}
                         onClick={this.sendData}
-                        disabled={this.handleCheckButtonDisabled()}
-                    />
+                        disabled={buttonDisabled}
+                    >
+                        {this.translate('page.body.kyc.next')}
+                    </button>
                 </div>
             </div>
         );

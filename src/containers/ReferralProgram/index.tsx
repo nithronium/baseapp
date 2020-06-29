@@ -1,4 +1,3 @@
-import { Button } from '@openware/components';
 import axios from 'axios';
 import * as React from 'react';
 import { FormattedMessage, InjectedIntlProps, injectIntl, intlShape } from 'react-intl';
@@ -135,14 +134,15 @@ class ReferralProgramClass extends React.Component<Props> {
                             classNameLabel=""
                             classNameInput="cr-email-form__input"
                         />
-                        <Button
+                        <button
                             type="submit"
-                            className="ref-code-button"
-                            label={this.translate('profile.save_code')}
+                            className="ref-code-button cr-button"
                             onClick={() => {
                                 this.sendRefCode();
                             }}
-                        />
+                        >
+                            {this.translate('profile.save_code')}
+                        </button>
                     </div>
                 )}
             </div>
