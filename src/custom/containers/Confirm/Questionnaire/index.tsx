@@ -289,7 +289,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
                             className="pg-questionnaire__button__item"
                             label={this.translate('page.body.kyc.confirm')}
                             onClick={this.handleClickConfirm}
-                            disabled={questionnaire.length !== 17 || !this.handleValidateQuestionnaire(questionnaire)}
+                            disabled={questionnaire.length !== 18 || !this.handleValidateQuestionnaire(questionnaire)}
                         />
                     </div>
                 </div>
