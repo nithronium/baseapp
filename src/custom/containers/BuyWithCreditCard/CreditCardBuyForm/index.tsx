@@ -44,6 +44,8 @@ import {
 
 import { WithdrawLimit } from '../../../../modules/user/withdrawLimit';
 
+import { getTotalPrice } from '../../../../helpers';
+
 
 // const availableFiat = ['eur'];
 
@@ -159,16 +161,25 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     public convert = (value: number, target: string, props: Props = this.props): number => {
         const { orderBook } = props;
         const { asks } = orderBook;
+        const depth = asks.map(({ avg_price, remaining_volume }) => [avg_price, remaining_volume]);
+
         const totalPrice = asks.reduce((sum: number, { price, remaining_volume }) => {
             return sum + price * remaining_volume;
         }, 0);
         const totalVolume = asks.reduce((sum: number, { remaining_volume }) => {
             return Number(sum) + Number(remaining_volume);
         }, 0);
+
+        const totalPrice2 = getTotalPrice(value.toString(), depth);
+        const totalVolume2 = value;
         const weightedAverage = totalPrice / totalVolume;
+        const weightedAverage2 = totalPrice2 / totalVolume2;
+        console.log('depth', depth);
+        console.log('weightedAverage', weightedAverage);
+        console.log('weightedAverage1', weightedAverage2);
         return target === 'fiat' ?
-            value * weightedAverage :
-            value / weightedAverage;
+            value * weightedAverage2 :
+            value / weightedAverage2;
     };
 
     public onFiatChange = e => {
