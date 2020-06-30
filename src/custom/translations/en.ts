@@ -188,6 +188,7 @@ export const en = {
 
 
     'page.body.trade.header.openOrders.content.date': 'Time',
+    'page.body.wallet.blur': 'Please verify your account to deposit funds',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Deposit currency :',
     'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN :',

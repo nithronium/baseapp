@@ -375,6 +375,8 @@ export const ru: LangType = {
     'page.body.profile.apiKeys.show': 'Показать',
     'page.body.profile.apiKeys.noKeys': 'У Вас нет API ключей',
 
+    'page.body.wallet.blur': 'Для внесения средств на Ваш аккаунт, пожалуйста, пройдите верификацию',
+
     'page.body.profile.apiKeys.modal.btn.show': 'Показать',
     'page.body.profile.apiKeys.modal.btn.create': 'Подтвердить',
     'page.body.profile.apiKeys.modal.btn.copy': 'Копировать',

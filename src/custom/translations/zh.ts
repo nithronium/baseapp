@@ -702,6 +702,8 @@ export const zh = {
     'page.body.profile.header.account.profile.knowMore': '进一步了解验证级别',
     'page.body.profile.header.account.content.profile.edit': '编辑个人信息',
 
+    'page.body.wallet.blur': '请验证您的帐户以存入资金',
+
 
     'page.body.profile.header.account.auth2fa.mfa.header': 'MFA代码',
     'page.body.profile.header.account.auth2fa.mfa.text1': '尊敬的用户',
