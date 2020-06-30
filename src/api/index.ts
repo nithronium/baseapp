@@ -60,10 +60,11 @@ export const API: ApiWrapper = {
             config,
         ),
 
-    delete: (config: RequestOptions) => async (url: string) =>
+    delete: (config: RequestOptions) => async (url: string, body?: JsonBody) =>
         makeRequest(
             {
                 method: 'delete',
+                body,
                 url,
             },
             config,
