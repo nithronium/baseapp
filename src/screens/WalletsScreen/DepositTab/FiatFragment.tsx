@@ -46,7 +46,7 @@ export const FiatFragment = injectIntl(props => {
 
             {/* {card && <div style={styles.card}>{translate('comingsoon')}</div>}   */}
             <BlurComponent isBlur={user.level < 4}>
-                {card && (user.level > 3 ?
+                {card && (user.level > 4 ?
                     <div>
                         <CardDepositFiat currency={currency.toUpperCase()} translate={translate} colorTheme={colorTheme}/>
                         <div className="fiat-alert">
