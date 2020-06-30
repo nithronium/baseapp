@@ -959,7 +959,7 @@ export const ru: LangType = {
     'cardDepositFiat.fee': 'Комиссия',
 
     'page.body.wallets.tabs.deposit.fiat.levelMessage':
-        'Для пополнения баланса кредитной или дебитной картой, необходимо иметь Уровень Верификации 2',
+        'Для пополнения баланса кредитной или дебитной картой, необходимо иметь Уровень ЭКСПЕРТ',
     'page.body.wallets.tabs.deposit.fiat.levelLink': 'Пожалуйста, повысьте свой Уровень Верификации.',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Валюта депозита :',

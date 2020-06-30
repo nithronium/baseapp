@@ -834,7 +834,7 @@ export const zh = {
     'cardDepositFiat.button.payment': '处理支付',
     'cardDepositFiat.button.cancel': '取消',
     'cardDepositFiat.fee': '手续费',
-    'page.body.wallets.tabs.deposit.fiat.levelMessage': '为了能使用信用卡或借记卡充值余额选项，需要通过2级验证。',
+    'page.body.wallets.tabs.deposit.fiat.levelMessage': '要求验证专家通过信用卡或借记卡访问其余的充值选项。',
     'page.body.wallets.tabs.deposit.fiat.levelLink': '请升级您的验证级别',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaLess.value': '欧元',
