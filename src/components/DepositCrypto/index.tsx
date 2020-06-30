@@ -61,8 +61,10 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
         <div className={className}>
             <div className={'cr-deposit-crypto'}>
                 <div>
-                    <p className={'cr-deposit-info'}>{text} </p>
-                    <p className={'cr-deposit-info'}>{textLimit} </p>
+                    <div className={'cr-deposit-info'}>
+                        <p className={'cr-deposit-info-block'}>{text} </p>
+                        <p className={'cr-deposit-info-block'}>{textLimit} </p>
+                    </div>
                     {data ? (
                         <div className="d-none d-md-block qr-code-wrapper">
                             <QRCode dimensions={size} data={data} />
