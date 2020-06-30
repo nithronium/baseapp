@@ -697,8 +697,8 @@ export const zh = {
     'page.body.profile.header.account.profile.abilities.second.message1': '-每年可充值/提取高达{amount} {currency}等值货币',
     'page.body.profile.header.account.profile.abilities.second.message2': '-能使用信用卡/借记卡进行存款/提款',
     'page.body.profile.header.account.profile.abilities.third': '-没有充值/提款限制',
-    'page.body.profile.header.account.profile.withdraw': '您的提款限额：',
-    'page.body.profile.header.account.profile.deposit': '您的存款限额: ',
+    'page.body.profile.header.account.profile.withdraw': '您每个月的提款限额：',
+    'page.body.profile.header.account.profile.deposit': '您每个月的存款限额: ',
     'page.body.profile.header.account.profile.knowMore': '进一步了解验证级别',
     'page.body.profile.header.account.content.profile.edit': '编辑个人信息',
 

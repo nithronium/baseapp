@@ -360,8 +360,8 @@ export const ru: LangType = {
     'page.body.profile.header.account.profile.abilities.second.message2':
         '- Возможность пополнять / выводить фиат используя кредитную / дебетовую карту',
     'page.body.profile.header.account.profile.abilities.third': '- Нет ограничений для депозита / вывода',
-    'page.body.profile.header.account.profile.withdraw': 'Лимит вывода: ',
-    'page.body.profile.header.account.profile.deposit': 'Лимит пополнения: ',
+    'page.body.profile.header.account.profile.withdraw': 'Ваш лимит вывода на месяц: ',
+    'page.body.profile.header.account.profile.deposit': 'Ваш лимит пополнения на месяц: ',
     'page.body.profile.header.account.profile.knowMore': 'Узнать больше об уровнях верификации',
 
     'page.body.profile.header.referralProgram': 'Реферальная программа',
