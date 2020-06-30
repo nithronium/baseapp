@@ -119,7 +119,7 @@ export const en = {
     'page.body.wallets.tabs.deposit': 'Deposit',
     'page.body.wallets.tabs.deposit.ccy.message.submit':
         'Submit a deposit using the following address or QR code. Your deposit will be reflected in your account after 6 confirmations',
-    'page.body.wallets.tabs.deposit.ccy.message.limits1': 'Your deposit shouldn\'t be more than',
+    'page.body.wallets.tabs.deposit.ccy.message.limits1': 'Your deposit shouldn\'t be more than equivalent of',
     'page.body.wallets.tabs.deposit.ccy.message.limits2': ' to comply monthly limit.',
     'page.body.wallets.tabs.deposit.ccy.message.address': 'Deposit Address',
     'page.body.wallets.tabs.deposit.ccy.message.button': 'COPY',

@@ -28,7 +28,7 @@ export const CoinFragment = injectIntl(
         const getLimitDeposit = () => {
             return withdrawLimitData && withdrawLimitData.deposit ? (+withdrawLimitData.deposit.limit - +withdrawLimitData.deposit.amount) || 0 : 0;
         }
-        const textLimit = `${format({ id: 'page.body.wallets.tabs.deposit.ccy.message.limits1' })} ${getLimitDeposit()} ${format({ id: 'page.body.wallets.tabs.deposit.ccy.message.limits2' })}`;
+        const textLimit = `${format({ id: 'page.body.wallets.tabs.deposit.ccy.message.limits1' })} ${getLimitDeposit()} EUR ${format({ id: 'page.body.wallets.tabs.deposit.ccy.message.limits2' })}`;
         let walletAddress = formatCCYAddress(currency, selectedWalletAddress);
         const error = addressDepositError
             ? format({ id: addressDepositError.message })
