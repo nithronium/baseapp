@@ -45,6 +45,7 @@ interface DepositCryptoProps {
      * If true, Button in CopyableTextField will be disabled.
      */
     disabled?: boolean;
+    disabledLimit?: boolean;
 }
 
 /**
@@ -52,7 +53,7 @@ interface DepositCryptoProps {
  */
 const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: DepositCryptoProps) => {
     const QR_SIZE = 118;
-    const { data, dimensions, error, text, textLimit, copiableTextFieldText, copyButtonText, handleOnCopy, disabled, notice } = props;
+    const { data, dimensions, error, text, textLimit, copiableTextFieldText, copyButtonText, handleOnCopy, disabled, disabledLimit, notice } = props;
     const size = dimensions || QR_SIZE;
     const onCopy = !disabled ? handleOnCopy : undefined;
     const className = classnames({ 'cr-copyable-text-field__disabled': data === '' });
@@ -63,7 +64,7 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
                 <div>
                     <div className={'cr-deposit-info'}>
                         <p className={'cr-deposit-info-block'}>{text} </p>
-                        <p className={'cr-deposit-info-block'}>{textLimit} </p>
+                        {disabledLimit ? '' : <p className={'cr-deposit-info-block'}>{textLimit} </p>}
                     </div>
                     {data ? (
                         <div className="d-none d-md-block qr-code-wrapper">

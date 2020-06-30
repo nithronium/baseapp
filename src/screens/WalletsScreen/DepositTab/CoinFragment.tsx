@@ -26,7 +26,7 @@ export const CoinFragment = injectIntl(
         const format = intl.formatMessage;
         const text = format({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' });
         const getLimitDeposit = () => {
-            return withdrawLimitData && withdrawLimitData.deposit ? +withdrawLimitData.deposit.limit - +withdrawLimitData.deposit.amount : 0;
+            return withdrawLimitData && withdrawLimitData.deposit ? (+withdrawLimitData.deposit.limit - +withdrawLimitData.deposit.amount) || 0 : 0;
         }
         const textLimit = `${format({ id: 'page.body.wallets.tabs.deposit.ccy.message.limits1' })} ${getLimitDeposit()} ${format({ id: 'page.body.wallets.tabs.deposit.ccy.message.limits2' })}`;
         let walletAddress = formatCCYAddress(currency, selectedWalletAddress);
@@ -84,6 +84,7 @@ export const CoinFragment = injectIntl(
                         textLimit={textLimit}
                         notice={notice}
                         disabled={walletAddress === '' || user.level < 2}
+                        disabledLimit={user.level > 5}
                         copiableTextFieldText={format({ id: 'page.body.wallets.tabs.deposit.ccy.message.address' })}
                         copyButtonText={format({ id: 'page.body.wallets.tabs.deposit.ccy.message.button' })}
                     />
