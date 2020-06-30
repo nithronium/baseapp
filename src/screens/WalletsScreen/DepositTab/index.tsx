@@ -18,6 +18,7 @@ export const DepositTab = ({
     message,
     history,
     lang,
+    onError,
 }) => {
     const coins = localStorage.getItem('usedCoins') ? JSON.parse(localStorage.getItem('usedCoins') || '') : [];
 
@@ -57,6 +58,7 @@ export const DepositTab = ({
                 message={message}
                 history={history}
                 lang={lang}
+                onError={onError}
             />
         );
     }

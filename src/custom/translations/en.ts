@@ -1,5 +1,7 @@
 //tslint:disable
 export const en = {
+    'applogic.deposits.limit_reached': 'Deposit limit exceeded',
+
     'page.body.profile.header.account.profile.upgrade': 'Upgrade your level now',
     'page.body.profile.header.account.profile.abilities.first.message1':
         '- Ability to deposit / withdraw up to {amount}{currency} equivalent per year',

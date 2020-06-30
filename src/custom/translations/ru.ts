@@ -3,6 +3,7 @@ import { LangType } from '../../translations';
 import { nationalitiesNames } from '../../translations/nationalities';
 //tslint:disable
 export const ru: LangType = {
+    'applogic.deposits.limit_reached': 'Deposit limit exceeded',
     'page.header.navbar.signIn': 'Войти',
     'page.header.navbar.trade': 'Биржа',
     'page.header.navbar.wallets': 'Кошельки',

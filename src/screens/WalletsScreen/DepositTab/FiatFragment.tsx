@@ -23,6 +23,7 @@ export const FiatFragment = injectIntl(props => {
         // message,
         history,
         lang,
+        onError,
     } = props;
 
     const translate =id => intl.formatMessage({ id });
@@ -48,7 +49,13 @@ export const FiatFragment = injectIntl(props => {
             <BlurComponent isBlur={user.level < 4}>
                 {card && (user.level > 4 ?
                     <div>
-                        <CardDepositFiat currency={currency.toUpperCase()} translate={translate} colorTheme={colorTheme}/>
+                        <CardDepositFiat
+                            currency={currency.toUpperCase()}
+                            translate={translate}
+                            colorTheme={colorTheme}
+                            user={user}
+                            onError={onError}
+                        />
                         <div className="fiat-alert">
                             {translate('page.wallets.withdraw.fiat')}
                         </div>

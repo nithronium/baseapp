@@ -3,6 +3,7 @@ import { zh as pluginsTranslations } from '../../plugins/translations/zh';
 import { nationalitiesNames } from '../../translations/nationalities';
 //tslint:disable
 export const zh = {
+    'applogic.deposits.limit_reached': 'Deposit limit exceeded',
     'page.header.navbar.signIn': '登录',
     'page.header.navbar.trade': '交易',
     'page.header.navbar.wallets': '钱包',

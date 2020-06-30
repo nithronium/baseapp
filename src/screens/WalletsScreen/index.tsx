@@ -336,6 +336,10 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         this.props.fetchSuccess({ message: ['page.body.wallets.tabs.deposit.ccy.message.success'], type: 'success' });
     };
 
+    private onError = (data) => {
+        this.props.paymentError(data);
+    };
+
     private renderDeposit = () => {
         const { addressDepositError, wallets, user, selectedWalletAddress, colorTheme } = this.props;
         const { selectedWalletIndex, card, sepa, wire } = this.state;
@@ -356,6 +360,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 message={this.message}
                 history={this.props.history}
                 lang={this.props.currentLanguage}
+                onError={this.onError}
             />
         );
     };
@@ -503,6 +508,7 @@ const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
     fetchSuccess: payload => dispatch(alertPush(payload)),
     setMobileWalletUi: payload => dispatch(setMobileWalletUi(payload)),
     openGuardModal: () => dispatch(openGuardModal()),
+    paymentError: payload => dispatch(alertPush(payload)),
 });
 
 // tslint:disable-next-line:no-any

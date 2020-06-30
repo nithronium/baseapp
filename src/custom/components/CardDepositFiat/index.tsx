@@ -1,12 +1,10 @@
 import * as React from 'react';
 
-import { initPayin } from '../../../api';
+import { checkDepositLimit, initPayin } from '../../../api';
 
 
 // import Iframe from 'react-iframe';
 //tslint:disable
-
-
 
 // interface CardDepositFiatProps {
 //     currency: string;
@@ -18,6 +16,8 @@ const CardDepositFiat = (props) => {
         currency,
         translate,
         colorTheme,
+        user,
+        onError,
     } = props;
     const defaultAmount = currency.toLowerCase() === 'aed' ? '30' : '';
     const [amount, setAmount] = React.useState(defaultAmount);
@@ -86,8 +86,17 @@ const CardDepositFiat = (props) => {
             setInitForm(!initForm);
             setErrorMessage(error.response.data.errors[0]);
         });
-        
     }
+
+    const tryToMakePayment = () => {
+        // getPaytoolsForm();
+        // return;
+        checkDepositLimit({
+            amount, currency, uid: user.uid,
+        }).then(() => getPaytoolsForm()).catch((error) => {
+            onError({message: ['applogic.deposits.limit_reached'], type: 'error'});
+        });
+    };
 
     const rootStyles = {  
         
@@ -235,7 +244,7 @@ const CardDepositFiat = (props) => {
                     <a  style={rootStyles.cancel} onClick={clearInput}>{translate('cardDepositFiat.button.cancel')}</a>
                     <input 
                     disabled={(currency.toLowerCase() === 'aed' && parseInt(amount) < 30) || amount === '' ? true : false} 
-                    onClick={getPaytoolsForm} 
+                    onClick={tryToMakePayment} 
                     type="submit" 
                     style={(currency.toLowerCase() === 'aed' && parseInt(amount) < 30) || amount === '' ? rootStyles.buttonDisabled : rootStyles.button} 
                     value={translate('cardDepositFiat.button.payment')}
