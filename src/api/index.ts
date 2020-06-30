@@ -60,11 +60,10 @@ export const API: ApiWrapper = {
             config,
         ),
 
-    delete: (config: RequestOptions) => async (url: string, body?: JsonBody) =>
+    delete: (config: RequestOptions) => async (url: string) =>
         makeRequest(
             {
                 method: 'delete',
-                body,
                 url,
             },
             config,
@@ -126,7 +125,7 @@ export const checkDepositLimit = async body => {
     });
 };
 export const removeQuestionnaire = async body => {
-    const res = await axios.delete(`${applogicUrl}/public/labels/questionnaire`, body);
+    const res = await axios.delete(`${applogicUrl}/public/labels/questionnaire?uid=${body.uid}`);
     return res.data;
 };
 export const getBalance = async (data?: string[]) => {
