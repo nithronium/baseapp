@@ -99,6 +99,8 @@ export const zh = {
     'page.body.wallets.balance': '余额',
     'page.body.wallets.tabs.deposit': '存款',
     'page.body.wallets.tabs.deposit.ccy.message.submit': '使用以下地址或二维码进行存款。 经过6次确认，您的存款将显示在您的账号中',
+    'page.body.wallets.tabs.deposit.ccy.message.limits1': '您的存款不得超过',
+    'page.body.wallets.tabs.deposit.ccy.message.limits2': '以符合每月限额。',
     'page.body.wallets.tabs.deposit.ccy.message.address': '存款地址',
     'page.body.wallets.tabs.deposit.ccy.message.button': '复制',
     'page.body.wallets.tabs.deposit.ccy.message.success': '地址已被复制',

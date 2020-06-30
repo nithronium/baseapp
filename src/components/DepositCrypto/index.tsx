@@ -21,6 +21,7 @@ interface DepositCryptoProps {
      *  Renders text of a component
      */
     text?: string;
+    textLimit?: string;
     /**
      * @default 'Deposit by Wallet Address'
      * Renders text of the label of CopyableTextField component
@@ -51,7 +52,7 @@ interface DepositCryptoProps {
  */
 const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: DepositCryptoProps) => {
     const QR_SIZE = 118;
-    const { data, dimensions, error, text, copiableTextFieldText, copyButtonText, handleOnCopy, disabled, notice } = props;
+    const { data, dimensions, error, text, textLimit, copiableTextFieldText, copyButtonText, handleOnCopy, disabled, notice } = props;
     const size = dimensions || QR_SIZE;
     const onCopy = !disabled ? handleOnCopy : undefined;
     const className = classnames({ 'cr-copyable-text-field__disabled': data === '' });
@@ -61,6 +62,7 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
             <div className={'cr-deposit-crypto'}>
                 <div>
                     <p className={'cr-deposit-info'}>{text} </p>
+                    <p className={'cr-deposit-info'}>{textLimit} </p>
                     {data ? (
                         <div className="d-none d-md-block qr-code-wrapper">
                             <QRCode dimensions={size} data={data} />

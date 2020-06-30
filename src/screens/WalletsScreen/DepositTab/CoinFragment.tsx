@@ -20,10 +20,15 @@ export const CoinFragment = injectIntl(
         usedCoins,
         setUsedCoins,
         user,
-    }) => {
+        withdrawLimitData,
+     }) => {
         const usedCoinsLocal = usedCoins.slice();
         const format = intl.formatMessage;
         const text = format({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' });
+        const getLimitDeposit = () => {
+            return withdrawLimitData && withdrawLimitData.deposit ? +withdrawLimitData.deposit.limit - +withdrawLimitData.deposit.amount : 0;
+        }
+        const textLimit = `${format({ id: 'page.body.wallets.tabs.deposit.ccy.message.limits1' })} ${getLimitDeposit()} ${format({ id: 'page.body.wallets.tabs.deposit.ccy.message.limits2' })}`;
         let walletAddress = formatCCYAddress(currency, selectedWalletAddress);
         const error = addressDepositError
             ? format({ id: addressDepositError.message })
@@ -76,6 +81,7 @@ export const CoinFragment = injectIntl(
                         handleOnCopy={handleOnCopy}
                         error={error}
                         text={text}
+                        textLimit={textLimit}
                         notice={notice}
                         disabled={walletAddress === '' || user.level < 2}
                         copiableTextFieldText={format({ id: 'page.body.wallets.tabs.deposit.ccy.message.address' })}
