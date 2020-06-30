@@ -288,6 +288,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             case 4:
                 return ['page.body.kyc.head.level.fifth.address', 'page.body.kyc.head.level.fifth'];
             case 5:
+            case 6:
                 return ['page.body.kyc.head.level.sixth'];
             default:
                 return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
