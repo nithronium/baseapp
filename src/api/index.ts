@@ -124,8 +124,8 @@ export const checkDepositLimit = async body => {
             });
     });
 };
-export const removeQuestionnaire = async () => {
-    const res = await axios.delete(`${applogicUrl}/public/labels/questionnaire`);
+export const removeQuestionnaire = async body => {
+    const res = await axios.delete(`${applogicUrl}/public/labels/questionnaire`, body);
     return res.data;
 };
 export const getBalance = async (data?: string[]) => {

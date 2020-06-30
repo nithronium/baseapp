@@ -132,12 +132,12 @@ class QuestionnaireContainer extends React.Component<Props, State> {
     }
 
     public componentWillReceiveProps(nextProps: Props) {
-        const { dataStoragePushSuccess } = this.props;
+        const { dataStoragePushSuccess, user } = this.props;
 
         if (nextProps.dataStoragePushSuccess && !dataStoragePushSuccess) {
             this.props.labelFetch();
             // tslint:disable-next-line
-            removeQuestionnaire();
+            removeQuestionnaire({ uid: user.uid });
             this.props.history.push(redirectIfSpecified('/profile'));
         }
     }
