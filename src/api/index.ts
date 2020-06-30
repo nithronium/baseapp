@@ -116,7 +116,7 @@ export const initPayin = async body => {
 };
 export const checkDepositLimit = async body => {
     return new Promise(async (resolve, reject) => {
-        await axios.get(`${applogicUrl}/private/limits/deposits/check`, body)
+        await axios.post(`${applogicUrl}/private/limits/deposits/check`, body)
             .then(res => resolve(res.data))
             .catch(error => {
                 console.log('error', error);
