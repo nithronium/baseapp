@@ -116,7 +116,7 @@ export const initPayin = async body => {
 };
 export const checkDepositLimit = async body => {
     return new Promise(async (resolve, reject) => {
-        await axios.post(`${applogicUrl}/private/limits/deposits/check`, body)
+        await axios.post(`${applogicUrl}/public/limits/deposits/check`, body)
             .then(res => resolve(res.data))
             .catch(error => {
                 console.log('error', error);
@@ -125,7 +125,7 @@ export const checkDepositLimit = async body => {
     });
 };
 export const removeQuestionnaire = async () => {
-    const res = await axios.delete(`${applogicUrl}/private/labels/questionnaire`);
+    const res = await axios.delete(`${applogicUrl}/public/labels/questionnaire`);
     return res.data;
 };
 export const getBalance = async (data?: string[]) => {
