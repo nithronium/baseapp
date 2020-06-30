@@ -589,7 +589,7 @@ export const ru: LangType = {
     'page.kyc.levels.block.2.requirements.item1': 'Everything in <b>Starter</b>',
     'page.kyc.levels.block.2.requirements.item2': 'Proof of residential address',
     'page.kyc.levels.block.3.title': 'Master',
-    'page.kyc.levels.block.3.limit-plank': 'Higher limits',
+    'page.kyc.levels.block.3.limit-plank': 'Highest limits',
     'page.kyc.levels.block.3.header-info': 'Everything in Expert, plus',
     'page.kyc.levels.block.3.header-info.item1': 'Personalized funding limits',
     'page.kyc.levels.block.3.header-info.item2': 'Deposit & withdrawal flat using a credit/debit card without monthly limits',
