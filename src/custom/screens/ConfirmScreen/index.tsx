@@ -78,19 +78,28 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         this.setState({
             level: userData.level,
         });
-        switch (userData.level) {
-            case 1: handleRedirectToConfirm('profilePartialStep', history);break;
-            case 2: handleRedirectToConfirm('phoneStep', history);break;
-            case 3: handleRedirectToConfirm('identifyStep', history);break;
-            case 4: {
-                if (userData.profile && userData.profile.address) {
-                    handleRedirectToConfirm('profAddressStep', history);
-                } else {
-                    handleRedirectToConfirm('addressStep', history);
-                }
-            // tslint:disable-next-line
-            } break;
-            default: handleRedirectToConfirm('', history);break;
+        if (history.location && history.location.state) {
+            if (history.location.state.profileEdit) {
+                handleRedirectToConfirm('profile', history);
+            }
+            if (history.location.state.addressEdit) {
+                handleRedirectToConfirm('address', history);
+            }
+        } else {
+            switch (userData.level) {
+                case 1: handleRedirectToConfirm('profilePartialStep', history);break;
+                case 2: handleRedirectToConfirm('phoneStep', history);break;
+                case 3: handleRedirectToConfirm('identifyStep', history);break;
+                case 4: {
+                    if (userData.profile && userData.profile.address) {
+                        handleRedirectToConfirm('profAddressStep', history);
+                    } else {
+                        handleRedirectToConfirm('addressStep', history);
+                    }
+                    // tslint:disable-next-line
+                } break;
+                default: handleRedirectToConfirm('', history);break;
+            }
         }
     }
 
@@ -130,6 +139,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const profilePartialStep = history.location && history.location.state && history.location.state.profilePartialStep;
         const phoneStep = history.location && history.location.state && history.location.state.phoneStep;
         const identifyStep = history.location && history.location.state && history.location.state.identifyStep;
+        const profileEdit = history.location && history.location.state && history.location.state.profileEdit;
 
         return (
             <div className="pg-confirm__progress">
@@ -140,7 +150,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                         </span>
                     </div>
                     <div className="pg-confirm__progress-line-1" />
-                    <div className={`pg-confirm__progress-circle-1${profilePartialStep ? ' active-circle' : ''}`}>
+                    <div className={`pg-confirm__progress-circle-1${(profilePartialStep || profileEdit) ? ' active-circle' : ''}`}>
                         <span className="pg-confirm__title-text pg-confirm__active-1">
                             <FormattedMessage id={stepLabels[1]}/>
                         </span>
@@ -161,7 +171,6 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             </div>
         );
     }
-
     public renderMasterProgressBar() {
         const { history, userData } = this.props;
         const currentProfileLevel = userData.level;
@@ -358,6 +367,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         if (history.location && history.location.state) {
             if (history.location.state.profilePartialStep) { locationState = 'profilePartialStep'; }
             if (history.location.state.addressEdit) { locationState = 'addressEdit'; }
+            if (history.location.state.profileEdit) { locationState = 'profileEdit'; }
             if (history.location.state.phoneStep) { locationState = 'phoneStep'; }
             if (history.location.state.identifyStep) { locationState = 'identifyStep'; }
             if (history.location.state.addressStep) { locationState = 'addressStep'; }
@@ -369,6 +379,14 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         }
 
         if (locationState === 'addressEdit') {
+            return <ProfileAddress />;
+        }
+
+        if (locationState === 'profileEdit') {
+            return <ProfilePartial toggleBlockNationalityModal={this.handleToggleBlockNationalityModal}  />;
+        }
+
+        if (locationState === 'profAddressEdit') {
             return <ProfileAddress />;
         }
 

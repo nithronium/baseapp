@@ -203,7 +203,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                         </div>
                         <div className="pg-profile-page__details-user__edit">
                             {user.level === 2 || user.level === 3 ? this.renderEditProfileLink() : null}
-                            {(user.level === 2 && user.profile && user.profile.address) || user.level === 3 || user.level === 4 ? this.renderEditAddressLink() : null}
+                            {user.level === 4 ? this.renderEditAddressLink() : null}
                         </div>
                     </div>
                 </div>
@@ -309,7 +309,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
 
     private renderEditProfileLink() {
         return (
-            <span onClick={() => handleRedirectToConfirm('profile', this.props.history)}>
+            <span onClick={() => handleRedirectToConfirm('profilePartialStep', this.props.history)}>
                 {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.profile.edit'})}
                 <PencilIcon />
             </span>
@@ -318,7 +318,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
 
     private renderEditAddressLink() {
         return (
-            <span onClick={() => handleRedirectToConfirm('address', this.props.history)}>
+            <span onClick={() => handleRedirectToConfirm('addressStep', this.props.history)}>
                 {this.props.intl.formatMessage({ id: 'page.body.profile.header.account.content.address.edit'})}
                 <PencilIcon />
             </span>
