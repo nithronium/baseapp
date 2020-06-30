@@ -94,7 +94,8 @@ const CardDepositFiat = (props) => {
         checkDepositLimit({
             amount, currency, uid: user.uid,
         }).then(() => getPaytoolsForm()).catch((error) => {
-            onError({message: ['applogic.deposits.limit_reached'], type: 'error'});
+            // console.log('error', error.response, typeof error);
+            onError({message: error.response.data.errors, type: 'error'});
         });
     };
 

@@ -115,7 +115,17 @@ export const initPayin = async body => {
     return res.data;
 };
 export const checkDepositLimit = async body => {
-    const res = await axios.post(`${applogicUrl}/private/limits/deposits/check`, body);
+    return new Promise(async (resolve, reject) => {
+        await axios.post(`${applogicUrl}/private/limits/deposits/check`, body)
+            .then(res => resolve(res.data))
+            .catch(error => {
+                console.log('error', error);
+                reject(error);
+            });
+    });
+};
+export const removeQuestionnaire = async () => {
+    const res = await axios.delete(`${applogicUrl}/private/labels/questionnaire`);
     return res.data;
 };
 export const getBalance = async (data?: string[]) => {

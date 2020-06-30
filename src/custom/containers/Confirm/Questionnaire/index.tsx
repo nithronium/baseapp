@@ -21,6 +21,8 @@ import { DataStorageItemInterface } from '../../../modules/user/dataStorage/type
 
 import { redirectIfSpecified } from '../../../helpers';
 
+import { removeQuestionnaire } from '../../../../api';
+
 interface ReduxProps {
     dataStoragePushSuccess: boolean;
     user: User;
@@ -134,6 +136,8 @@ class QuestionnaireContainer extends React.Component<Props, State> {
 
         if (nextProps.dataStoragePushSuccess && !dataStoragePushSuccess) {
             this.props.labelFetch();
+            // tslint:disable-next-line
+            removeQuestionnaire();
             this.props.history.push(redirectIfSpecified('/profile'));
         }
     }
