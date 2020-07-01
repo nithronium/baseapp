@@ -403,6 +403,7 @@ export const zh = {
     'page.kyc.levels.block.3.requirements.item2': 'AML questionnaire',
     'page.kyc.levels.block.btn.completed': 'Completed',
     'page.kyc.levels.block.btn.uncompleted': 'Get verified',
+    'page.kyc.levels.block.btn.inprogress': 'In progress',
 
 
     'page.body.lock.oops': '糟糕咯！',
