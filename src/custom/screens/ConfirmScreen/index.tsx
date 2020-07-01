@@ -367,6 +367,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const {
             history,
             labels,
+            currentLanguage,
         } = this.props;
         if (!labels.length) {
             return null;
@@ -399,6 +400,11 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         }
 
         if (locationState === 'phoneStep') {
+            const redirectUrl = getRedirectUrl();
+            if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
+                redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
+                return;
+            }
             return <Phone />;
         }
 
