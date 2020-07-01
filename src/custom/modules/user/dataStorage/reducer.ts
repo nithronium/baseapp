@@ -1,6 +1,7 @@
 import { CommonError } from '../../../../modules/types';
 import { DataStorageAction } from './actions';
 import {
+    DATA_STORAGE_ALREADY,
     DATA_STORAGE_DATA,
     DATA_STORAGE_ERROR,
     DATA_STORAGE_FETCH,
@@ -22,6 +23,7 @@ export interface DataStorageState {
         loading: boolean;
         error?: CommonError;
     };
+    already: boolean;
 }
 
 export const initialDataStorageState: DataStorageState = {
@@ -33,6 +35,7 @@ export const initialDataStorageState: DataStorageState = {
         success: false,
         loading: false,
     },
+    already: false,
 };
 
 export const dataStorageFetchReducer = (state: DataStorageState['fetch'], action: DataStorageAction) => {
@@ -105,6 +108,11 @@ export const dataStorageReducer = (state = initialDataStorageState, action: Data
             return {
                 ...state,
                 push: dataStoragePushReducer(dataStoragePushState, action),
+            };
+        case DATA_STORAGE_ALREADY:
+            return {
+                ...state,
+                already: action.payload,
             };
         default:
             return state;
