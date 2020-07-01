@@ -15,7 +15,7 @@ const dataStorageConfig: RequestOptions = {
 export function* dataStorageGetSaga(action: DataStorageGetData) {
     try {
         const payload = yield call(API.get(dataStorageConfig), `/resource/profiles/me `);
-        if (payload.data_storages.length) {
+        if (payload.data_storages && payload.data_storages.length) {
             yield put(alertPush({ message: ['success.questionnaire.under'], type: 'success'}));
             yield put(dataStorageSetAlready('true'));
         } else {
