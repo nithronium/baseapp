@@ -21,7 +21,9 @@ import {
 } from '../../../../modules';
 import { IdentityData } from '../../../../modules/user/kyc/identity/types';
 import { changeUserProfileData } from '../../../../modules/user/profile';
-import { handleRedirectToConfirm } from '../../../helpers';
+
+import { buildPath, getRedirectUrl, handleRedirectToConfirm, redirect, redirectIfSpecified } from '../../../helpers';
+
 
 interface ReduxProps {
     editData?: IdentityData;
@@ -82,11 +84,18 @@ class ProfileAddressComponent extends React.Component<Props, State> {
             editSuccess,
             user,
             history,
+            lang,
         } = this.props;
         if (!prev.editSuccess && editSuccess) {
             this.props.labelFetch();
             if (editData) {
                 this.props.changeUserProfileData({...editData, addAddress: true});
+
+                const redirectUrl = getRedirectUrl();
+                if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
+                    redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), lang)));
+                    return;
+                }
                 handleRedirectToConfirm('profAddressStep', this.props.history);
             }
         }
