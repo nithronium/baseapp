@@ -716,6 +716,7 @@ export const ru: LangType = {
     'success.order.cancelling.all': 'Все запросы отменяются',
     'success.order.created': 'Запрос успешно создан',
     'success.phone.verification.send': 'Код верификации был отправлен на ваш телефон',
+    'success.questionnaire.under': 'Ваша анкета находится на рассмотрении',
     'success.phone.confirmed': 'Ваш телефон подтвержден',
     'success.phone.confirmation.message': 'Успех!',
     'success.message.sent': 'Письмо было успешно отправлено',
