@@ -15,7 +15,7 @@ import { estimateValue } from '../../../helpers/estimateValue';
 import {
     alertPush,
     currenciesFetch,
-    Currency,
+    Currency, dataStorageGetData,
     Deposit,
     fetchHistory,
     Label,
@@ -23,7 +23,7 @@ import {
     marketsFetch,
     marketsTickersFetch,
     selectCurrencies,
-    selectCurrentLanguage,
+    selectCurrentLanguage, selectDataStorageAlready,
     selectHistory,
     selectLabelData,
     selectMarkets,
@@ -45,6 +45,7 @@ import clockSvg = require('../../assets/images/clock.svg');
 import infoSvg = require('../../assets/images/info.svg');
 
 import { getBalance } from '../../../api';
+import {handleRedirectToConfirm} from '../../helpers';
 
 interface ReduxProps {
     currencies: Currency[];
@@ -70,6 +71,7 @@ interface DispatchProps {
     fetchWithdrawLimit: typeof withdrawLimitFetch;
     rangerConnect: typeof rangerConnectFetch;
     fetchSuccess: typeof alertPush;
+    dataStorageGet: typeof dataStorageGetData;
 }
 interface State {
     formattedDepositHistory: WalletItemProps[];
@@ -147,7 +149,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
     }
 
     public componentDidUpdate(prevProps: ProfileProps, prevState: State) {
-        const { currencies, markets, tickers } = this.props;
+        const { currencies, markets, tickers, selectDataStorageAlready } = this.props;
         const { formattedDepositHistory } = this.state;
         if (
             formattedDepositHistory.length &&
@@ -165,6 +167,10 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                     tickers
                 ),
             });
+        }
+
+        if ((prevProps.selectDataStorageAlready !== selectDataStorageAlready) && !selectDataStorageAlready) {
+            handleRedirectToConfirm('', this.props.history)
         }
     }
 
@@ -191,13 +197,19 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
             </div>
         );
     }
-    //tslint:disable
+    // @ts-ignore
     public renderUpgradeLevelLink() {
-        return (
-            <Link to={'/kyc-levels'} className="pg-profile-verification__upgrade-level">
+        if (this.props.user.level === 5) {
+            return <div onClick={this.props.dataStorageGet} className="pg-profile-verification__upgrade-level">
                 <FormattedMessage id="page.body.profile.header.account.profile.upgrade" />
-            </Link>
-        );
+            </div>
+        } else {
+            return (
+                <Link to={'/kyc-levels'} className="pg-profile-verification__upgrade-level">
+                    <FormattedMessage id="page.body.profile.header.account.profile.upgrade" />
+                </Link>
+            );
+        }
     }
 
     public renderUserAbilities(level: number, withdrawLimitData: WithdrawLimit) {
@@ -458,6 +470,7 @@ const mapStateToProps = state => ({
     tickers: selectMarketTickers(state),
     rangerState: selectRanger(state),
     withdrawLimitData: selectWithdrawLimit(state),
+    selectDataStorageAlready: selectDataStorageAlready(state),
     user: selectUserInfo(state),
     userLoggedIn: selectUserLoggedIn(state),
     currentLanguage: selectCurrentLanguage(state),
@@ -470,6 +483,7 @@ const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch
     fetchMarkets: () => dispatch(marketsFetch()),
     fetchTickers: () => dispatch(marketsTickersFetch()),
     fetchWithdrawLimit: () => dispatch(withdrawLimitFetch()),
+    dataStorageGet: () => dispatch(dataStorageGetData()),
     rangerConnect: (payload: RangerConnectFetch['payload']) => dispatch(rangerConnectFetch(payload)),
     fetchSuccess: payload => dispatch(alertPush(payload)),
 });
