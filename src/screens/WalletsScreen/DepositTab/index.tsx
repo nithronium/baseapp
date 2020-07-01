@@ -19,6 +19,7 @@ export const DepositTab = ({
     history,
     lang,
     onError,
+    withdrawLimitData,
 }) => {
     const coins = localStorage.getItem('usedCoins') ? JSON.parse(localStorage.getItem('usedCoins') || '') : [];
 
@@ -40,6 +41,7 @@ export const DepositTab = ({
                 usedCoins={usedCoins}
                 setUsedCoins={setUsedCoins}
                 user={user}
+                withdrawLimitData={withdrawLimitData}
             />
         );
     } else {

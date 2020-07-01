@@ -33,6 +33,7 @@ import {
     selectWallets,
     selectWalletsAddressError,
     selectWalletsLoading,
+    selectWithdrawLimit,
     selectWithdrawSuccess,
     setMobileWalletUi,
     User,
@@ -40,7 +41,8 @@ import {
     walletsAddressFetch,
     walletsData,
     walletsFetch,
-    walletsWithdrawCcyFetch,
+    walletsWithdrawCcyFetch, WithdrawLimit,
+    withdrawLimitFetch,
 } from '../../modules';
 import { CommonError } from '../../modules/types';
 import { DepositTab } from './DepositTab';
@@ -65,6 +67,7 @@ interface ReduxProps {
     selectedWalletAddress: string;
     whitelistActivateSuccess: boolean;
     whitelistDeleteSuccess: boolean;
+    withdrawLimitData: WithdrawLimit;
 }
 
 interface DispatchProps {
@@ -76,6 +79,7 @@ interface DispatchProps {
     fetchSuccess: typeof alertPush;
     setMobileWalletUi: typeof setMobileWalletUi;
     openGuardModal: typeof openGuardModal;
+    fetchWithdrawLimit: typeof withdrawLimitFetch;
 }
 
 const defaultBeneficiary: Beneficiary = {
@@ -136,9 +140,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 
     public componentDidMount() {
         setDocumentTitle('Wallets');
-        const { wallets, fetchAddress } = this.props;
+        const { wallets, fetchAddress, fetchWithdrawLimit } = this.props;
         const { selectedWalletIndex } = this.state;
-
+        fetchWithdrawLimit();
         getBalance()
             .then(data => {
                 this.setState({
@@ -341,7 +345,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     };
 
     private renderDeposit = () => {
-        const { addressDepositError, wallets, user, selectedWalletAddress, colorTheme } = this.props;
+        const { addressDepositError, wallets, user, selectedWalletAddress, colorTheme, withdrawLimitData } = this.props;
         const { selectedWalletIndex, card, sepa, wire } = this.state;
         return (
             <DepositTab
@@ -359,6 +363,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 balance={this.state.balance}
                 message={this.message}
                 history={this.props.history}
+                withdrawLimitData={withdrawLimitData}
                 lang={this.props.currentLanguage}
                 onError={this.onError}
             />
@@ -495,6 +500,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     historyList: selectHistory(state),
     mobileWalletChosen: selectMobileWalletUi(state),
     selectedWalletAddress: selectWalletAddress(state),
+    withdrawLimitData: selectWithdrawLimit(state),
     whitelistActivateSuccess: selectBeneficiariesActivateSuccess(state),
     whitelistDeleteSuccess: selectBeneficiariesDeleteSuccess(state),
 });
@@ -506,6 +512,7 @@ const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
     walletsWithdrawCcy: params => dispatch(walletsWithdrawCcyFetch(params)),
     clearWallets: () => dispatch(walletsData([])),
     fetchSuccess: payload => dispatch(alertPush(payload)),
+    fetchWithdrawLimit: () => dispatch(withdrawLimitFetch()),
     setMobileWalletUi: payload => dispatch(setMobileWalletUi(payload)),
     openGuardModal: () => dispatch(openGuardModal()),
     paymentError: payload => dispatch(alertPush(payload)),

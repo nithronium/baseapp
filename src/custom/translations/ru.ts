@@ -129,6 +129,8 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit': 'Пополнить',
     'page.body.wallets.tabs.deposit.ccy.message.submit':
         'Пожалуйста, внесите депозитный платеж. Ваш депозит будет доступен после 6 подтверждений',
+    'page.body.wallets.tabs.deposit.ccy.message.limits1': 'Ваш депозит не должен быть больше эквивалента',
+    'page.body.wallets.tabs.deposit.ccy.message.limits2': ' для соблюдения месячного лимита.',
     'page.body.wallets.tabs.deposit.ccy.message.address': 'Пополнить кошелек',
     'page.body.wallets.tabs.deposit.ccy.message.button': 'Копир.',
     'page.body.wallets.tabs.deposit.ccy.message.success': 'Адрес скопирован',
