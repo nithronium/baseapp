@@ -74,7 +74,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     public componentDidMount() {
         setDocumentTitle('Confirm');
         this.props.labelFetch();
-        const { userData, history } = this.props;
+        const { userData, history, currentLanguage } = this.props;
         this.setState({
             level: userData.level,
         });
@@ -88,7 +88,15 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         } else {
             switch (userData.level) {
                 case 1: handleRedirectToConfirm('profilePartialStep', history);break;
-                case 2: handleRedirectToConfirm('phoneStep', history);break;
+                case 2: {
+                    const redirectUrl = getRedirectUrl();
+                    if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
+                        redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
+                        return;
+                    }
+                    handleRedirectToConfirm('phoneStep', history);
+                    break;
+                }
                 case 3: handleRedirectToConfirm('identifyStep', history);break;
                 case 4: {
                     if (userData.profile && userData.profile.address) {
@@ -359,7 +367,6 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const {
             history,
             labels,
-            currentLanguage,
         } = this.props;
         if (!labels.length) {
             return null;
@@ -400,10 +407,6 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         }
 
         if (['addressStep', 'profAddressStep'].includes(locationState)) {
-            const redirectUrl = getRedirectUrl();
-            if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
-                redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
-            }
             return this.renderFourthLevel();
         }
 
