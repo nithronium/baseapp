@@ -148,7 +148,7 @@ class ChatelloScreenComponent extends React.Component<Props, State> {
 
         if (orderFinished) {
             step = 4;
-        } else if (user.level >= 4) {
+        } else if (user.level >= 2) {
             step = 3;
         } else if (userLoggedIn) {
             step = 2;
