@@ -222,7 +222,7 @@ export const en = {
     'cardDepositFiat.fee': 'Fee',
 
     'page.body.wallets.tabs.deposit.fiat.levelMessage':
-        'Verification EXPERT is required in order to access the option of balance top up via credit or debit card.',
+        'EXPERT verification level is required in order to access the option of balance top up via credit or debit card.',
     'page.body.wallets.tabs.deposit.fiat.levelLink': 'Please upgrade your verification level',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaLess.value': 'EUR',
