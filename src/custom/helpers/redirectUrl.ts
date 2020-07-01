@@ -21,3 +21,11 @@ export const redirectIfSpecified = url => {
     }
     return url;
 };
+
+export const redirect = callback => {
+    if (getRedirectUrl() === '/') {
+        location.replace('/');
+        return;
+    }
+    callback();
+};

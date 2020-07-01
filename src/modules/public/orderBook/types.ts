@@ -18,6 +18,7 @@ export interface OrderBookOrder {
 export interface OrderBookState extends CommonState {
     asks: OrderBookOrder[];
     bids: OrderBookOrder[];
+    market: string;
     loading: boolean;
 }
 

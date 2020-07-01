@@ -121,6 +121,10 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
             url = parsed.redirect_url;
         }
         console.log('signin', url, location.href);
+        if (url === '/') {
+            location.replace('/');
+            return null;
+        }
         return (
             <Route {...rest}>
                 <Redirect to={buildPath(url, rest.currentLanguage)} />
@@ -514,7 +518,58 @@ class LayoutComponent extends React.Component<LayoutProps> {
                     <PublicRoute
                         loading={userLoading}
                         isLogged={isLoggedIn}
+                        path={'/ru/chatello'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        exact={true}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/zh/chatello'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        exact={true}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/tr/chatello'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        exact={true}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
                         path={'/chatello/:amount'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/ru/chatello/:amount'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/zh/chatello/:amount'}
+                        component={ChatelloScreen}
+                        currentLanguage={currentLanguage}
+                        noReditect={true}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        path={'/tr/chatello/:amount'}
                         component={ChatelloScreen}
                         currentLanguage={currentLanguage}
                         noReditect={true}

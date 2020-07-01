@@ -1,4 +1,3 @@
-import { Button } from '@openware/components';
 import cr from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
@@ -164,6 +163,8 @@ class ProfileAddressComponent extends React.Component<Props, State> {
             'pg-confirm__content-profile-address-col-row-content--wrong': state && !this.handleValidateInput('state', state),
         });
 
+        const buttonDisabled = this.handleCheckButtonDisabled();
+
         return (
             <div className="pg-confirm__content-profile-address">
                 <div className="pg-confirm__content-profile-address-forms">
@@ -229,12 +230,14 @@ class ProfileAddressComponent extends React.Component<Props, State> {
                   </div>
                 </div>
                 <div className="pg-confirm__content-deep">
-                    <Button
-                        className="pg-confirm__content-phone-deep-button"
-                        label={this.translate('page.body.kyc.next')}
+                    <button
+                        className={`cr-button pg-confirm__content-phone-deep-button ${buttonDisabled ? 'cr-button--disabled' : ''}`}
                         onClick={this.sendData}
-                        disabled={this.handleCheckButtonDisabled()}
-                    />
+                        disabled={buttonDisabled}
+                        style={{ color: '#fff' }}
+                    >
+                        {this.translate('page.body.kyc.next')}
+                    </button>
                 </div>
             </div>
         );
@@ -294,7 +297,7 @@ class ProfileAddressComponent extends React.Component<Props, State> {
                 const residentialAddressRegex = /^[a-zA-Z0-9\-,.;:"'&()\\\/#\s]+$/gi;
                 return residentialAddressRegex.test(value);
             case 'city':
-                const cityRegex = new RegExp(`^[a-zA-Z]+$`);
+                const cityRegex = /^[\s\-a-zA-Z]+$/;
                 return cityRegex.test(value);
             case 'postcode':
                 const postcodeRegex = new RegExp(`^[0-9\-]{1,12}$`);

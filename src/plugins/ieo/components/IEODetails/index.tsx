@@ -133,7 +133,7 @@ class IEODetailsComponent extends React.Component<Props> {
         const links = Object.keys(metadata).filter(key => !drop.includes(key));
 
         return links.map(link => (
-            <div className="ieo-profile-details__body__right__row">
+            <div className="ieo-profile-details__body__right__row notranslate">
                 <div className="ieo-profile-details__body__right__row__first-column">
                     {link.replace(/^\w/, c => c.toUpperCase())}
                 </div>

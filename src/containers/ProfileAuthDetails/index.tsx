@@ -169,16 +169,17 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                     />
                 </div>
                 <div className="cr-email-form__button-wrapper">
-                    <input
+                    <button
                         type={'submit'}
-                        value={this.props.intl.formatMessage({
-                            id: 'page.body.profile.header.account.content.password.button.change',
-                        })}
                         className={
                             this.isValidForm() ? 'cr-email-form__button' : 'cr-email-form__button cr-email-form__button--disabled'
                         }
                         disabled={!this.isValidForm()}
-                    />
+                    >
+                        {this.props.intl.formatMessage({
+                            id: 'page.body.profile.header.account.content.password.button.change',
+                        })}
+                    </button>
                 </div>
             </div>
         );
@@ -214,13 +215,14 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                         </div>
                         <div>************</div>
                     </div>
-                    <Button
-                        className="pg-profile-page__btn-secondary-change"
+                    <button
+                        className="cr-button pg-profile-page__btn-secondary-change"
                         onClick={this.showChangeModal}
-                        label={this.props.intl.formatMessage({
+                    >
+                        {this.props.intl.formatMessage({
                             id: 'page.body.profile.header.account.content.password.button.change',
                         })}
-                    />
+                    </button>
                     {modal}
                 </div>
                 {VersionGuardWrapper(this.renderProfileTwoFactor, this.renderProfileTwoFactorLite)}

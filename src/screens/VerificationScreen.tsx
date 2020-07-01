@@ -4,7 +4,6 @@ import {
     MapDispatchToPropsFunction,
     MapStateToProps,
 } from 'react-redux';
-import { Redirect } from 'react-router';
 import { buildPath } from '../custom/helpers';
 import {
     changeLanguage,
@@ -58,9 +57,9 @@ class Verification extends React.Component<Props> {
             url = `/signin?redirect_url=${redirectUrl}`;
         }
         localStorage.removeItem('redirect_url');
-
+        location.replace(buildPath(url, currentLanguage));
         return (
-            <Redirect to={buildPath(url, currentLanguage)} />
+            null
         );
     }
 }

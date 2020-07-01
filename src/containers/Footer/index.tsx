@@ -30,9 +30,6 @@ const Header = () => {
 const Copyright = props => {
     return (
         <div className="copyright">
-            <div style={{ color: 'white' }} className="text">
-                <FormattedMessage id={'footer_demo'}/>
-            </div>
             <div style={{ color: 'white' }}><FormattedMessage id={'footer_copyright'}/></div>
         </div>
     );
@@ -116,7 +113,7 @@ const Address = props => {
     return (
         <div className="address">
             <h5><FormattedMessage id={'footer_addresses_title'}/></h5>
-            <p><FormattedMessage id={'footer_addresses_first'}/></p>
+            <p className="notranslate"><FormattedMessage id={'footer_addresses_first'}/></p>
         </div>
     );
 };
@@ -139,6 +136,7 @@ const linkBlock = {
             { key: '', href: '/trading/btcusdt', label: 'footer_headers_spot_trade' },
             { key: '', href: '/ieo', label: 'footer_headers_ieo' },
             { key: '', href: '/referral-commission', label: 'footer_headers_referral_program' },
+            { key: '', href: '/buycrypto', label: 'page.header.buy_crypto' },
         ].map((link, index) => {
             link.key = `footer-link-${index}-${link.href}-${link.label}`;
             return link;

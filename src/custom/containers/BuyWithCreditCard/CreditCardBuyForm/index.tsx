@@ -1,16 +1,27 @@
 import * as React from 'react';
 
-import { InjectedIntlProps, injectIntl } from 'react-intl';
+import * as moment from 'moment';
 
-import Dropdown from 'react-dropdown';
+import qs = require('qs');
+
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 import { RouteComponentProps, withRouter } from 'react-router';
 
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 
+import { Decimal } from '@openware/components';
+
+import { CreditCardForm } from '../CreditCardForm';
+
+import { CreditCardModal } from '../CreditCardModal';
+
+import { CreditCardOverlay } from '../CreditCardOverlay';
+
+
 import {
     Modal,
-  } from '../../../../components';
+} from '../../../../components';
 
 import {
     creditCardOrderFetch,
@@ -33,6 +44,10 @@ import {
 
 import { WithdrawLimit } from '../../../../modules/user/withdrawLimit';
 
+import { getTotalPrice } from '../../../../helpers';
+
+
+// const availableFiat = ['eur'];
 
 interface ReduxProps {
     currencies: Currency[];
@@ -53,6 +68,8 @@ interface DispatchProps {
 
 type Props = InjectedIntlProps & ReduxProps & DispatchProps & RouteComponentProps & {
     isLoggedIn: boolean;
+    onIframeClose: () => void;
+    onPaymentDataChange: () => void;
 };
 
 interface State {
@@ -67,14 +84,14 @@ interface State {
     openIframe: boolean;
 }
 
-class CreditCardBuyFormComponent extends React.Component<Props, State> {
+class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     constructor(props) {
         super(props);
         this.state = {
             fiat: 'eur',
             crypto: 'btc',
-            fiatValue: '0',
-            cryptoValue: '0',
+            fiatValue: '',
+            cryptoValue: '',
             fiatList: [],
             cryptoList: [],
             showModal: false,
@@ -88,56 +105,91 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     };
 
     public onFiatValueChange = e => {
+        const { crypto } = this.state;
         const fiatValue = e.target.value;
         const fiatValueNumber = Number(fiatValue);
         let cryptoValue = this.state.cryptoValue;
         if (!Number.isNaN(fiatValueNumber)) {
-            cryptoValue = this.convertToCrypto(fiatValueNumber).toString();
+            const cryptoNumber = this.convertToCrypto(fiatValueNumber);
+            const cryptoFormatted = Decimal.format(cryptoNumber, this.getPrecision(crypto));
+            cryptoValue = cryptoFormatted.toString();
         }
         this.setState({ fiatValue, cryptoValue });
     };
 
     public onCryptoValueChange = e => {
+        const { fiat } = this.state;
         const cryptoValue = e.target.value;
         const cryptoValueNumber = Number(cryptoValue);
         let fiatValue = this.state.fiatValue;
         if (!Number.isNaN(cryptoValueNumber)) {
-            fiatValue = this.convertToFiat(cryptoValueNumber).toString();
+            const fiatNumber = this.convertToFiat(cryptoValueNumber);
+            const cryptoFormatted = Decimal.format(fiatNumber, this.getPrecision(fiat));
+            fiatValue = cryptoFormatted.toString();
         }
         this.setState({ fiatValue, cryptoValue });
     };
 
+    public getPrecision = (currency: string) => {
+        const { currencies } = this.props;
+        for (const item of currencies) {
+            if (item.id.toLowerCase() === currency.toLowerCase()) {
+                return item.precision;
+            }
+        }
+        return 2;
+    };
+
     public convertToFiat = (cryptoValue: number): number => {
-        return this.convert(cryptoValue, 'fiat');
+        if (!cryptoValue) {
+            return 0;
+        }
+        const fiatNoFee = this.convert(cryptoValue, 'fiat');
+        const fee = fiatNoFee * 4.5 / 100 + 0.1;
+        return fiatNoFee + fee;
     };
 
-    public convertToCrypto = (fiatValue: number): number => {
-        return this.convert(fiatValue, 'crypto');
+    public convertToCrypto = (fiatValue: number, props: Props = this.props): number => {
+        const fee = fiatValue * 4.5 / 100 + 0.1;
+        const res = fiatValue - fee;
+        if (res < 0) {
+            return 0;
+        }
+        return this.convert(res, 'crypto', props);
     };
 
-    public convert = (value: number, target: string): number => {
-        const { orderBook } = this.props;
+    public convert = (value: number, target: string, props: Props = this.props): number => {
+        const { orderBook } = props;
         const { asks } = orderBook;
+        const depth = asks.map(({ avg_price, remaining_volume }) => [avg_price, remaining_volume]);
+
         const totalPrice = asks.reduce((sum: number, { price, remaining_volume }) => {
             return sum + price * remaining_volume;
         }, 0);
         const totalVolume = asks.reduce((sum: number, { remaining_volume }) => {
             return Number(sum) + Number(remaining_volume);
         }, 0);
+
+        const totalPrice2 = getTotalPrice(value.toString(), depth);
+        const totalVolume2 = value;
         const weightedAverage = totalPrice / totalVolume;
+        const weightedAverage2 = totalPrice2 / totalVolume2;
+        console.log('depth', depth);
+        console.log('weightedAverage', weightedAverage);
+        console.log('weightedAverage1', weightedAverage2);
         return target === 'fiat' ?
-            value * weightedAverage :
-            value / weightedAverage;
+            value * weightedAverage2 :
+            value / weightedAverage2;
     };
 
     public onFiatChange = e => {
-        const { crypto } = this.state;
+        let { crypto } = this.state;
         const fiat = e.value.toLowerCase();
-        // const cryptoList = this.getAvailableCrypto(fiat);
-        // if (!cryptoList.includes(crypto)) {
-        //     crypto = cryptoList[0];
-        // }
-        this.setState({ fiat, crypto }, () => {
+        const cryptoList = this.getAvailableCrypto(fiat);
+        if (!cryptoList.includes(crypto)) {
+            crypto = cryptoList[0];
+        }
+        this.setState({ fiat, crypto, cryptoList }, () => {
             this.fetchMarket();
         });
     };
@@ -145,10 +197,6 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     public onCryptoChange = e => {
         const { fiat } = this.state;
         const crypto = e.value.toLowerCase();
-        // const fiatList = this.getAvailableFiat(crypto);
-        // if (!fiatList.includes(fiat)) {
-        //     fiat = fiatList[0];
-        // }
         this.setState({ fiat, crypto }, () => {
             this.fetchMarket();
         });
@@ -168,7 +216,6 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     public fetchMarket = () => {
         const { fiat, crypto } = this.state;
         const market = this.findMarket(fiat, crypto);
-        console.log('market', market);
         this.props.fetchOrderBook(market);
     };
 
@@ -178,18 +225,85 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
             history.push(`/signin?redirect_url=${encodeURIComponent('/buycrypto')}`);
             return;
         }
-        if (user.level < 3) {
+        if (user.level < 4) {
             history.push(`/confirm?redirect_url=${encodeURIComponent('/buycrypto')}`);
+            return;
         }
         this.setState({
             showModal: true,
         });
     };
 
+    public formatTime = () => {
+        return moment().format('HH:mm:SS DD.MM.YYYY');
+    };
+
     public componentDidMount() {
+        const { fiatValue, cryptoValue, fiat, crypto } = this.state;
         this.props.fetchCurrencies();
         this.props.fetchMarkets();
         this.props.fetchWithdrawLimit();
+        this.props.onPaymentDataChange({
+            fiat,
+            crypto,
+            amount: cryptoValue,
+            value: fiatValue,
+            time: this.formatTime(),
+        });
+
+        const { currencies, markets } = this.props;
+
+        if (currencies.length && markets.length) {
+            const fiatList = this.getAvailableFiat(this.props);
+            const cryptoList = this.getAvailableCrypto(fiat, this.props);
+            this.setState({
+                fiatList,
+                cryptoList,
+            }, () => {
+                this.fetchMarket();
+            });
+        }
+
+        window.addEventListener('message', this.onMessage);
+    }
+
+    public getFiatForCrypto = (crypto, props = this.props) => {
+        const marketsWithCrypto = this.getCryptoFiatMarkets(props)
+            .filter(({ base_unit }) => {
+                return base_unit === crypto;
+            });
+        if (!marketsWithCrypto.length) {
+            return '';
+        }
+        return marketsWithCrypto[0].quote_unit;
+    };
+
+    public componentWillUnmount() {
+        window.removeEventListener('message', this.onMessage);
+    }
+
+    public onMessage = event => {
+        const action = event.data.action;
+        // tslint:disable-next-line
+        if (action === 'instex-error-try-again' ||
+            action === 'instex-error-close'
+        ) {
+            this.setState({
+                showModal: false,
+                openIframe: false,
+            });
+        }
+    };
+
+    public componentDidUpdate() {
+        const { fiatValue, cryptoValue, fiat, crypto } = this.state;
+        this.props.onPaymentDataChange({
+            fiat,
+            crypto,
+            amount: cryptoValue,
+            value: fiatValue,
+            time: this.formatTime(),
+        });
     }
 
     public componentWillReceiveProps(nextProps) {
@@ -200,114 +314,96 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                 showModal: false,
             });
         }
-        console.log('buyWithCreditCard', buyWithCreditCard);
         const { currencies, markets } = this.props;
         if (currencies.length !== nextProps.currencies.length ||
             markets.length !== nextProps.markets.length)
         {
             if (!nextProps.markets.length || !nextProps.currencies.length) { return; }
-            // const fiatList = this.getAllFiat(nextProps);
-            // const cryptoList = this.getAllCrypto(nextProps);
-            const fiatList = ['eur', 'uds'];
-            const cryptoList = this.getAvailableCrypto('eur', nextProps);
+
+            const query = qs.parse(location.search, { ignoreQueryPrefix: true });
+            let crypto = query.curr;
+
+            let { fiat } = this.state;
+            const fiatList = this.getAvailableFiat(nextProps);
+            const cryptoList = this.getAvailableCrypto(fiat, nextProps);
+            if (!this.getAllCrypto(nextProps).includes(crypto)) {
+                crypto = cryptoList[0] || 'btc';
+            }
+            if (query.curr) {
+                fiat = this.getFiatForCrypto(crypto, nextProps);
+            }
             this.setState({
                 fiatList,
                 cryptoList,
-                crypto: cryptoList[0] || 'BTC',
+                crypto,
+                fiat,
             }, () => {
                 this.fetchMarket();
             });
         }
+
+        if (this.props.orderBook.market !== nextProps.orderBook.market) {
+            const { fiatValue, crypto } = this.state;
+            const cryptoNumber = this.convertToCrypto(+fiatValue, nextProps);
+            const cryptoFormatted = cryptoNumber.toFixed(this.getPrecision(crypto));
+            const cryptoValue = cryptoFormatted.toString();
+            this.setState({ cryptoValue });
+        }
     }
 
-    public isEqual = (curr1: string, curr2: string): boolean => {
-        return (curr1 || '').toLowerCase() === (curr2 || '').toLowerCase();
-    };
-
-    public getAvailableCrypto = (fiat: string, props?): string[] => {
-        return ['itn', 't69', 'btc'];
-        const { markets } = (props || this.props);
-        const toLowerCase = str => (str || '').toLowerCase();
-        return markets.filter(({ base_unit, quote_unit }) => {
-            return (this.isEqual(base_unit, fiat) &&
-                this.isCrypto(toLowerCase(quote_unit))) ||
-
-                (this.isEqual(quote_unit, fiat) &&
-                this.isCrypto(toLowerCase(base_unit)));
-        }).map(({ base_unit, quote_unit }) => {
-            return this.isEqual(base_unit, fiat) ?
-                toLowerCase(quote_unit) :
-                toLowerCase(base_unit);
+    public getAvailableCrypto = (fiat: string, props = this.props): string[] => {
+        const cryptoMarkets = this.getCryptoFiatMarkets(props);
+        const marketsWithAvailableFiat = cryptoMarkets.filter(({ state }) => {
+            return state === 'enabled';
+        }).filter(({ quote_unit }) => {
+            return quote_unit === fiat;
         });
-    };
-
-    public getAvailableFiat = (crypto: string): string[] => {
-        return ['eur', 'usd'];
-        const { markets } = this.props;
-        return markets.filter(({ base_unit, quote_unit }) => {
-            return (this.isEqual(base_unit, crypto) &&
-                this.isFiat(quote_unit.toLowerCase())) ||
-
-                (this.isEqual(quote_unit, crypto) &&
-                this.isFiat(base_unit.toLowerCase()));
-        }).map(({ base_unit, quote_unit }) => {
-            return this.isEqual(base_unit, crypto) ?
-                quote_unit.toLowerCase() :
-                base_unit.toLowerCase();
-        });
-    };
-
-    public getAllFiat1 = (props?): string[] => {
-        return ['eur', 'usd'];
         const res = new Set<string>();
-        const { markets } = (props || this.props);
-        for (const market of markets) {
-            const { base_unit, quote_unit } = market;
-            if (this.isFiat(base_unit)) {
-                res.add(base_unit);
-            }
-            if (this.isFiat(quote_unit)) {
-                res.add(quote_unit);
-            }
+        for (const item of marketsWithAvailableFiat) {
+            res.add(item.base_unit);
         }
         return Array.from(res);
     };
 
-    public getAllCrypto1 = (props?): string[] => {
-        return ['itn', 't69', 'btc'];
+    public getAllCrypto = (props = this.props) => {
+        const cryptoMarkets = this.getCryptoFiatMarkets(props);
+        return cryptoMarkets.map(({ base_unit }) => base_unit);
+    };
+
+    public getAvailableFiat = (props = this.props): string[] => {
+        const { markets } = props;
+        const enbledMarkets = markets.filter(({ state }) => {
+            return state === 'enabled';
+        });
+        const marketsWithFiat = enbledMarkets.filter(({ quote_unit }) => {
+            return this.isFiat(quote_unit, props);
+        });
         const res = new Set<string>();
-        const { markets } = (props || this.props);
-        for (const market of markets) {
-            const { base_unit, quote_unit } = market;
-            if (this.isCrypto(base_unit)) {
-                res.add(base_unit);
-            }
-            if (this.isCrypto(quote_unit)) {
-                res.add(quote_unit);
-            }
+        for (const item of marketsWithFiat) {
+            res.add(item.quote_unit);
         }
         return Array.from(res);
     };
 
-    public getAllFiat = (props?): string[] => {
-        return ['eur', 'usd'];
-        return this.getCurrenciesByType('fiat', props)
-            .map(item => item.id);
+    public getCryptoFiatMarkets = (props: Props = this.props) => {
+        const { markets } = props;
+        return markets.filter(({ state }) => {
+            return state === 'enabled';
+        }).filter(({ base_unit }) => {
+            return this.isCrypto(base_unit, props);
+        }).filter(({ quote_unit }) => {
+            return this.isFiat(quote_unit, props);
+        });
     };
 
-    public getAllCrypto = (props?): string[] => {
+    public isCrypto = (currency: string, props = this.props) => {
         return this.getCurrenciesByType('coin', props)
-            .map(item => item.id);
-    };
-
-    public isCrypto = (currency: string) => {
-        return this.getCurrenciesByType('coin')
             .some(item => item.id === currency);
     };
 
-    public isFiat = (currency: string) => {
-        return this.getCurrenciesByType('fiat')
-            .some(item => item.id === currency);
+    public isFiat = (currency: string, props = this.props) => {
+        return this.getCurrenciesByType('fiat', props)
+            .some(item => item.id.toLowerCase() === currency.toLowerCase());
     };
 
     public getCurrenciesByType = (type: string, props?) => {
@@ -320,7 +416,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     public getButtonTextKey = (): string => {
         const { userLoggedIn, user } = this.props;
         if (userLoggedIn) {
-            if (user.level >= 3) {
+            if (user.level >= 4) {
                 return 'buyWithCard.form.buttonContinue';
             } else {
                 return 'buyWithCard.form.buttonNotVerified';
@@ -332,6 +428,9 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
 
     public getLimit = () => {
         const { withdrawLimitData } = this.props;
+        if (!withdrawLimitData) {
+            return 0;
+        }
         if (withdrawLimitData.limit === 'unlimited_withdraw_level') {
             return 'unlimited';
         }
@@ -339,19 +438,55 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
         return `$${withdraw ? withdraw.limit : '0'}`;
     };
 
+    public isButtonDisabled = (): boolean => {
+        const { userLoggedIn, user } = this.props;
+        const { fiat } = this.state;
+        if (!userLoggedIn || user.level < 4) {
+            return false;
+        }
+        const { fiatValue } = this.state;
+        const fiatNumber = Number(fiatValue);
+        if (fiat.toLowerCase() === 'aed') {
+            return fiatNumber < 30;
+        }
+        return fiatNumber < 1;
+    };
+
+    public ableToBuy = () => {
+        const { userLoggedIn, user } = this.props;
+        return userLoggedIn && user.level >= 4;
+    };
+
     public render() {
+        const {
+            fiat, crypto,
+            fiatList, cryptoList,
+            fiatValue, cryptoValue,
+            swapped,
+            showModal,
+        } = this.state;
+        const { step, user, userLoggedIn } = this.props;
         return (
-            <div className="buy-form">
+            <div className="buy-form" id="bru-crypro-form">
                 <div className="section">
                     <div className="section__header">
                         {this.translate('buyWithCard.form.header')}
                     </div>
 
                     <div className="buy-form__content">
-                        <h2>{this.translate('buyWithCard.form.title')}</h2>
+                        <h2>
+                            {this.translate('buyWithCard.form.title')}
+                            <div className="buy-form__mastercard" />
+                        </h2>
                         {this.currenciesForm()}
                         <div className="buy-form__bottom-text">
-                            <p>{this.translate('buyWithCard.form.fees')}</p>
+                            <div>
+                                <p>
+                                    {this.translate('buyWithCard.form.fees')}
+                                    <br />
+                                    {this.translate('buyWithCard.overlay1.text1')}
+                                </p>
+                            </div>
                             <p className="buy-form__bottom-text--help">
                                 <a target="_blank" href="https://kb.emirex.com/kb-tickets/new">{this.translate('buyWithCard.form.help')}</a>
                             </p>
@@ -359,6 +494,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                         <button
                             className="buy-form__button-continue"
                             onClick={this.onSubmit}
+                            disabled={this.isButtonDisabled()}
                         >
                             {this.translate(this.getButtonTextKey())}
                         </button>
@@ -370,7 +506,7 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                         </div>
                     </div>
 
-                    <div className="buy-form__limits">
+                    {this.ableToBuy() && <div className="buy-form__limits">
                         <div>
                             <div className="buy-form__limits-item">
                                 <div>
@@ -379,30 +515,33 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
                                     <span>{' '}{this.getLimit()}</span>
                                 </div>
                             </div>
-
-                            {/* <div className="buy-form__limits-item">
-                                <div>
-                                    <div className="icon-clock" />
-                                    <p>{this.translate('buyWithCard.form.dailyLimit')}:</p>
-                                    <span>{' '}$50 – $50,000</span>
-                                </div>
-                            </div>
-
-                            <div className="buy-form__limits-item">
-                                <div>
-                                    <div className="icon-calendar" />
-                                    <p>{this.translate('buyWithCard.form.monthlyLimit')}:</p>
-                                    <span>{' '}$50 – $50,000</span>
-                                </div>
-                            </div> */}
                         </div>
+                    </div>}
+                    <div className="buy-form__credit-card-overlay">
+                        <CreditCardOverlay
+                            step={step}
+                            user={user}
+                            userLoggedIn={userLoggedIn}
+                        />
                     </div>
                 </div>
-                <Modal
-                    show={this.state.showModal}
-                    header={this.renderModalHeader()}
-                    content={this.renderModalBody()}
-                    footer={this.renderModalFooter()}
+                <CreditCardModal
+                    showModal={showModal}
+                    closeModal={this.closeModal}
+                    submitModal={this.submitModal}
+                    fiat={fiat}
+                    crypto={crypto}
+                    fiatValue={fiatValue}
+                    cryptoValue={cryptoValue}
+                    swapped={swapped}
+                    onSwap={this.onSwap}
+                    fiatList={fiatList}
+                    cryptoList={cryptoList}
+                    onFiatValueChange={this.onFiatValueChange}
+                    onFiatChange={this.onFiatChange}
+                    onCryptoValueChange={this.onCryptoValueChange}
+                    onCryptoChange={this.onCryptoChange}
+                    isButtonDisabled={this.isButtonDisabled()}
                 />
                 <Modal
                     show={this.state.openIframe}
@@ -443,170 +582,56 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
     };
 
     public closeIframe = () => {
+        this.props.onIframeClose();
         this.setState({ openIframe: false });
     };
 
     public currenciesForm = () => {
         const {
             fiat, crypto,
-            // fiatList, cryptoList,
+            fiatList, cryptoList,
             fiatValue, cryptoValue,
             swapped,
         } = this.state;
-        const fiatList = ['eur', 'usd'];
-        const cryptoList = ['itn', 't69', 'btc'];
+        // const fiatList = ['eur', 'usd'];
+        // const cryptoList = ['itn', 't69', 'btc'];
 
         return (
-            <div className="buy-form__inputs-wrap">
-                <div className="buy-form__input-wrap">
-                    <label className="buy-form__label">
-                        {this.translate('buyWithCard.form.sell')}
-                    </label>
-                    <input
-                        onChange={!swapped ? this.onFiatValueChange : this.onCryptoValueChange}
-                        value={!swapped ? fiatValue : cryptoValue}
-                        className="buy-form__input"
-                        type="number"
-                    />
-                    <Dropdown
-                        onChange={!swapped ? this.onFiatChange : this.onCryptoChange}
-                        value={!swapped ? fiat : crypto}
-                        options={!swapped ? fiatList : cryptoList}
-                        controlClassName={'cr-card-select cr-card-select--first'}
-                    />
-                </div>
-
-                <div
-                    className="buy-form__input-arrow-wrap"
-                    onClick={this.onSwap}
-                >
-                    <div className="buy-form__input-arrow" />
-                </div>
-
-                <div className="buy-form__input-wrap">
-                    <label className="buy-form__label">
-                        {this.translate('buyWithCard.form.buy')}
-                    </label>
-                    <input
-                        onChange={!swapped ? this.onCryptoValueChange : this.onFiatValueChange}
-                        value={!swapped ? cryptoValue : fiatValue}
-                        className="buy-form__input"
-                        type="number"
-                    />
-
-                    <Dropdown
-                        onChange={!swapped ? this.onCryptoChange : this.onFiatChange}
-                        value={!swapped ? crypto : fiat}
-                        options={!swapped ? cryptoList : fiatList}
-                        controlClassName={'cr-card-select'}
-                    />
-                </div>
-            </div>
+            <CreditCardForm
+                fiat={fiat}
+                crypto={crypto}
+                fiatValue={fiatValue}
+                cryptoValue={cryptoValue}
+                swapped={swapped}
+                onSwap={this.onSwap}
+                fiatList={fiatList}
+                cryptoList={cryptoList}
+                onFiatValueChange={this.onFiatValueChange}
+                onFiatChange={this.onFiatChange}
+                onCryptoValueChange={this.onCryptoValueChange}
+                onCryptoChange={this.onCryptoChange}
+            />
         );
     };
 
     public onSwap = () => {
         this.setState({ swapped: !this.state.swapped });
-        console.log('swapped', this.state.swapped);
     };
 
     public closeModal = () => {
         this.setState({ showModal: false });
     };
 
-    public renderModalHeader = () => {
-        return (
-            <div className="buy-form__modal-header">
-                <p>{this.translate('buyWithCard.form.modal.header')}</p>
-                <div
-                    className="buy-form__modal-close"
-                    onClick={this.closeModal}
-                >
-                    x
-                </div>
-            </div>
-        );
-    };
-
-    public renderModalBody = () => {
-        let { fiat, crypto } = this.state;
-        const { fiatValue, cryptoValue, swapped } = this.state;
-        fiat = fiat || '';
-        crypto = crypto || '';
-        return (
-            <div>
-                <div className="buy-form__modal-amount">
-                    {this.translate('buyWithCard.form.buy')} {' '}
-                    <span>{!swapped ? cryptoValue : fiatValue}
-                    {' '}
-                    {!swapped ? crypto.toUpperCase() : fiat.toUpperCase()}</span>
-                    {' '}{this.translate('buyWithCard.form.for')}{' '}
-                    <span>{!swapped ? fiatValue : cryptoValue} {fiat.toUpperCase()}</span>
-                </div>
-
-                <div className="buy-form__modal-inputs">
-                    {this.currenciesForm()}
-                </div>
-                <div className="buy-form__modal-divider">
-                    <div className="credit-card-promo__divider">
-                        <div className="credit-card-promo__divider-arrow" />
-                    </div>
-                </div>
-
-                <div className="buy-form__modal-table">
-                    <div className="buy-form__modal-table-top">
-                        <span>{this.translate('buyWithCard.form.modal.pay')}</span>
-                        <span>{!swapped ? fiatValue : cryptoValue}
-                        {' '}
-                        {!swapped ? fiat.toUpperCase() : crypto.toUpperCase()}</span>
-                    </div>
-                    <div className="buy-form__modal-table-bottom">
-                        <span>{this.translate('buyWithCard.form.modal.get')}</span>
-                        <span>{!swapped ? cryptoValue : fiatValue}
-                        {' '}
-                        {!swapped ? crypto.toUpperCase() : fiat.toUpperCase()}</span>
-                    </div>
-                </div>
-
-                <div className="buy-form__modal-terms">
-                    <div className="buy-form__modal-terms-header">
-                        {this.translate('buyWithCard.form.modal.terms.header')}
-                    </div>
-                    <div className="buy-form__modal-terms-body">
-                        {this.translate('buyWithCard.form.modal.terms.body')}
-                    </div>
-                </div>
-
-                <div className="buy-form__modal-footer">
-                    <div
-                        className="buy-form__modal-footer-button"
-                        onClick={this.submitModal}
-                    >
-                        {this.translate('buyWithCard.form.modal.buttonBuy')}
-                    </div>
-                </div>
-            </div>
-        );
-    };
-
     public submitModal = () => {
         const { createCreditCardOrder } = this.props;
-        const { fiat, crypto, fiatValue, cryptoValue, swapped } = this.state;
+        const { fiat, crypto, fiatValue } = this.state;
         let outcomeCurrencyId;
         let incomeCurrencyId;
         let amount;
 
-        console.log('submit modal');
-
-        if (!swapped) {
-            outcomeCurrencyId = fiat;
-            incomeCurrencyId = crypto;
-            amount = fiatValue;
-        } else {
-            outcomeCurrencyId = crypto;
-            incomeCurrencyId = fiat;
-            amount = cryptoValue;
-        }
+        outcomeCurrencyId = fiat;
+        incomeCurrencyId = crypto;
+        amount = fiatValue;
 
         createCreditCardOrder({
             outcomeCurrencyId,
@@ -614,10 +639,6 @@ class CreditCardBuyFormComponent extends React.Component<Props, State> {
             amount: Number(amount),
             type: 'ccPurchase',
         });
-    };
-
-    public renderModalFooter = () => {
-        return null;
     };
 }
 
@@ -639,4 +660,4 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispat
     createCreditCardOrder: payload => dispatch(creditCardOrderFetch(payload)),
 });
 
-export const CreditCardBuyForm = injectIntl(connect(mapStateToProps, mapDispatchToProps)(withRouter(CreditCardBuyFormComponent)));
+export const CreditCardBuyForm = injectIntl(connect(mapStateToProps, mapDispatchToProps)(withRouter(CreditCardBuyFormWrapComponent)));

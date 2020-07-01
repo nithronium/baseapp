@@ -7,12 +7,14 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 export interface ReduxProps {
     currentStep: number;
     paymentData: {
-        pair: string;
+        fiat: string;
+        crypto: string;
         price: number;
         amount: number;
         value: number;
         time: string;
     };
+    onTryAgain: () => void;
 }
 
 type Props = ReduxProps & InjectedIntlProps;
@@ -103,7 +105,7 @@ export class CreditCardStepsComponent extends React.Component<Props> {
 
     public renderStep4 = () => {
         const { paymentData } = this.props;
-        const { pair, amount, price, value, time } = paymentData;
+        const { crypto, fiat, amount, value, time } = paymentData;
 
         return (
             <div className="credit-card-steps__item">
@@ -123,27 +125,45 @@ export class CreditCardStepsComponent extends React.Component<Props> {
                     <table>
                         <tbody>
                             <tr>
-                                <td>{this.translate(`buyWithCard.steps.pair`)}</td>
-                                <td>{pair}</td>
+                                <td>{this.translate(`buyWithCard.steps.pair`)}:</td>
+                                <td>
+                                    <span>{crypto.toUpperCase()}</span>/{fiat.toUpperCase()}
+                                </td>
                             </tr>
                             <tr>
-                                <td>{this.translate(`buyWithCard.steps.amount`)}</td>
-                                <td>{amount}</td>
+                                <td>{this.translate(`buyWithCard.steps.amount`)}:</td>
+                                <td>
+                                    <span>{amount}</span> {crypto.toUpperCase()}
+                                </td>
                             </tr>
                             <tr>
-                                <td>{this.translate(`buyWithCard.steps.price`)}</td>
-                                <td>{price}</td>
+                                <td>{this.translate(`buyWithCard.steps.value`)}:</td>
+                                <td>
+                                    <span>{value}</span> {fiat.toUpperCase()}
+                                </td>
                             </tr>
                             <tr>
-                                <td>{this.translate(`buyWithCard.steps.value`)}</td>
-                                <td>{value}</td>
-                            </tr>
-                            <tr>
-                                <td>{this.translate(`buyWithCard.steps.time`)}</td>
+                                <td>{this.translate(`buyWithCard.steps.time`)}:</td>
                                 <td>{time}</td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+
+                <div className="pg-chatello-steps__bottom-buttons">
+                    <a
+                        className="pg-chatello-steps__bottom-wallet"
+                        href="/wallets"
+                    >
+                        {this.translate(`chatello.steps.step4.bottom.button1`)}
+                    </a>
+                    <button
+                        onClick={this.props.onTryAgain}
+                        className="pg-chatello-steps__bottom-try"
+                    >
+                        {this.translate(`chatello.steps.step4.bottom.button2`)}
+                    </button>
                 </div>
                 {this.renderTimeline()}
             </div>

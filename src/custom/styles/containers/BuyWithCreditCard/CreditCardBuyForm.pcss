@@ -16,6 +16,7 @@
 
 .pg-buy-with-credit-card {
     padding-bottom: 100px;
+    background-color: #000;
 
     &__container {
         max-width: 940px;
@@ -45,6 +46,15 @@
     }
 
     .buy-form {
+        &__mastercard {
+            width: 36px;
+            height: 30px;
+            background: url(./assets/images/credit-card-mastercard.png);
+            right: 0;
+            position: absolute;
+            top: 5px;
+        }
+
         .cr-modal .cr-modal__container {
             width: calc(var(--big-gap) * 10);
 
@@ -247,6 +257,14 @@
 
         &__input-wrap {
             position: relative;
+
+            &:first-child {
+                z-index: 2;
+            }
+
+            &:last-child {
+                z-index: 1;
+            }
         }
 
         &__input {
@@ -464,7 +482,7 @@
         max-width: 100vw;
         position: relative;
         border: none;
-        height: 435px;
+        height: 460px;
     }
 }
 
@@ -533,7 +551,7 @@
 
             &__limits {
                 height: 85px;
-                padding-top: 18px;
+                padding-top: 0;
 
                 & > div {
                     display: flex;
@@ -563,6 +581,15 @@
 
         .cr-modal .cr-modal__container {
             max-width: calc(100vw - 25px);
+
+            &-content {
+                padding: 10px !important;
+            }
+        }
+
+        .cr-modal {
+            width: 100%;
+
         }
     }
 }

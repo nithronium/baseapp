@@ -1,4 +1,4 @@
-import { Button } from '@openware/components';
+import {Button} from '@openware/components';
 import cr from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
@@ -175,7 +175,9 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
                         className="pg-confirm__content-phone-deep-button"
                         label={this.translate('page.body.kyc.next')}
                         onClick={this.confirmPhone}
-                    />
+                    >
+                        {this.translate('page.body.kyc.next')}
+                    </Button>
                 </div>
             </div>
         );

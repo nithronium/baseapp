@@ -41,6 +41,9 @@ import {
     walletsReset,
 } from '../../modules';
 
+
+import { GoogleTranslate } from '../../components/GoogleTranslate';
+
 export interface ReduxProps {
     colorTheme: string;
     currentMarket: Market | undefined;
@@ -282,6 +285,9 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                                             <span className="soon">
                                                 (<FormattedMessage id={'page.header.soon'}/>)
                                             </span>
+                                        </li>
+                                        <li className={`notranslate`}>
+                                            <GoogleTranslate />
                                         </li>
                                     </ul>
                                 </div>
@@ -561,6 +567,11 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                 <li>
                     <a href={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/history/withdraws`} onClick={() => this.openDropdown('')}>
                         <FormattedMessage id={'page.body.history.withdraw'}/>
+                    </a>
+                </li>
+                <li>
+                    <a href={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/buycrypto`} onClick={() => this.openDropdown('')}>
+                        <FormattedMessage id={'page.header.buy_crypto'}/>
                     </a>
                 </li>
                 {/*<li>*/}

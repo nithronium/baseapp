@@ -19,7 +19,7 @@ import {
 } from '../../../modules/user/dataStorage';
 import { DataStorageItemInterface } from '../../../modules/user/dataStorage/types';
 
-import { redirectIfSpecified } from '../../../helpers';
+import { redirect, redirectIfSpecified } from '../../../helpers';
 
 import { removeQuestionnaire } from '../../../../api';
 
@@ -138,7 +138,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
             this.props.labelFetch();
             // tslint:disable-next-line
             removeQuestionnaire({ uid: user.uid });
-            this.props.history.push(redirectIfSpecified('/profile'));
+            redirect(() => this.props.history.push(redirectIfSpecified('/profile')));
         }
     }
 

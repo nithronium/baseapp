@@ -9,7 +9,7 @@ import { connect, MapDispatchToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import {saveParametersFromUrl} from '../../../../custom/helpers';
-import { getUrlPart, setDocumentTitle } from '../../../../helpers';
+import { setDocumentTitle } from '../../../../helpers';
 import {
     currenciesFetch,
     Currency,
@@ -66,7 +66,7 @@ class IEODetailsContainer extends React.Component<Props, State> {
         saveParametersFromUrl(this.props.location.search);
         const { history, currencies, rangerState: { connected, withAuth }, userLoggedIn } = this.props;
         if (history.location.pathname) {
-            const urlIEOId = getUrlPart(2, this.props.history.location.pathname);
+            const urlIEOId = this.props.match.params.id;
             this.props.fetchItemIEO(urlIEOId);
         }
 
@@ -91,7 +91,7 @@ class IEODetailsContainer extends React.Component<Props, State> {
         }
 
         if (history.location.pathname !== nextProps.history.location.pathname) {
-            const urlIEOId = getUrlPart(2, nextProps.history.location.pathname);
+            const urlIEOId = this.props.match.params.id;
             this.props.fetchItemIEO(urlIEOId);
         }
 
@@ -101,19 +101,16 @@ class IEODetailsContainer extends React.Component<Props, State> {
     }
 
     public render() {
-        const { currentIEO, loading, match, intl } = this.props;
+        const { currentIEO, loading, match } = this.props;
         const { showOrderExecuteModal } = this.state;
-        const { locale } = intl;
+        // const { locale } = intl;
         const ieoDetailsClass = classnames('container pg-currentIEO-page', {
             'pg-currentIEO-page--bounded': showOrderExecuteModal,
         });
         return (
             <div className={ieoDetailsClass}>
                 <Helmet>
-                    <link rel="canonical" href={`https://emirex.com/${locale === 'en' ? 'ieo' : `${locale}/ieo`}/${this.props.match.params.id}`} />
-                    <link key="en" rel="alternate" href={`https://emirex.com/ieo/${this.props.match.params.id}`} hrefLang="en" title="English" />
-                    <link key="ru" rel="alternate" href={`https://emirex.com/ru/ieo/${this.props.match.params.id}`} hrefLang="ru" title="Русский" />
-                    <link key="zh" rel="alternate" href={`https://emirex.com/zh/ieo/${this.props.match.params.id}`} hrefLang="zh" title="中国人" />
+                    <link rel="canonical" href={`https://emirex.com/ieo/${this.props.match.params.id}`} data-react-helmet="true" />
                     <title>{this.props.intl.formatMessage({ id: `ieo_${match.params.id}_title` })}</title>
                     <meta name="og:title" content={this.props.intl.formatMessage({ id: `ieo_${match.params.id}_title` })} />
                     <meta name="og:description" content={this.props.intl.formatMessage({ id: `ieo_${match.params.id}_description` })} />

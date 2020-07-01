@@ -29,7 +29,7 @@ import { ProfilePartial } from '../../containers/Confirm/ProfilePartial';
 import { Questionnaire } from '../../containers/Confirm/Questionnaire';
 import { buildPath } from '../../helpers/buildPath';
 
-import { getRedirectUrl, handleRedirectToConfirm, redirectIfSpecified } from '../../helpers';
+import { getRedirectUrl, handleRedirectToConfirm, redirect, redirectIfSpecified } from '../../helpers';
 
 interface ReduxProps {
     colorTheme: string;
@@ -106,7 +106,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     public goBack = event => {
       const lang = this.props.currentLanguage;
       event.preventDefault();
-      this.props.history.push(buildPath(redirectIfSpecified('/kyc-levels'), lang));
+      redirect(() => this.props.history.push(buildPath(redirectIfSpecified('/kyc-levels'), lang)));
     };
 
     public renderExpertProgressBar() {
@@ -402,7 +402,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         if (['addressStep', 'profAddressStep'].includes(locationState)) {
             const redirectUrl = getRedirectUrl();
             if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
-                history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage));
+                redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
             }
             return this.renderFourthLevel();
         }

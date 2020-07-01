@@ -14,6 +14,7 @@ import { DepthState, OrderBookState } from './types';
 export const initialOrderBook: OrderBookState = {
   asks: [],
   bids: [],
+  market: '',
   loading: false,
 };
 
@@ -32,11 +33,12 @@ export const orderBookReducer = (state = initialOrderBook, action: OrderBookActi
         error: undefined,
       };
     case ORDER_BOOK_DATA:
-      const { asks, bids } = action.payload;
+      const { asks, bids, market } = action.payload;
       return {
         ...state,
         asks,
         bids,
+        market,
         loading: false,
         error: undefined,
       };
