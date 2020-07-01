@@ -1,8 +1,10 @@
 import {
-  Dropdown,
-  Loader,
+    Button,
+    Dropdown,
+    Loader,
 } from '@openware/components';
 import cr from 'classnames';
+import { History } from 'history';
 import * as React from 'react';
 import {
     InjectedIntlProps,
@@ -13,6 +15,7 @@ import {
   connect,
   MapDispatchToPropsFunction,
 } from 'react-redux';
+import {withRouter} from 'react-router';
 import close = require('../../../../assets/images/close.svg');
 import { formatDate } from '../../../../helpers';
 import { isDateInFuture } from '../../../../helpers/checkDate';
@@ -28,8 +31,9 @@ import {
     selectSendDocumentsSuccess,
     sendDocuments,
 } from '../../../../modules/user/kyc/documents';
-import { changeUserLevel } from '../../../../modules/user/profile';
-import { isValidDate } from '../../../helpers/checkDate';
+import {changeUserLevel} from '../../../../modules/user/profile';
+import {handleRedirectToConfirm} from '../../../helpers';
+import {isValidDate} from '../../../helpers/checkDate';
 
 interface ReduxProps {
     success?: string;
@@ -49,6 +53,10 @@ interface OnChangeEvent {
     };
 }
 
+interface HistoryProps {
+    history: History;
+}
+
 interface DocumentsState {
     documentsType: string;
     expiration: string;
@@ -57,7 +65,7 @@ interface DocumentsState {
     scans: File[];
 }
 
-type Props = ReduxProps & DispatchProps & InjectedIntlProps;
+type Props = ReduxProps & DispatchProps & InjectedIntlProps & HistoryProps;
 
 // tslint:disable:member-ordering
 class DocumentsComponent extends React.Component<Props, DocumentsState> {
@@ -88,6 +96,8 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
             this.props.labelFetch();
         }
     }
+
+    public backBtn = () => handleRedirectToConfirm('addressStep', this.props.history);
 
     public render() {
         const {
@@ -190,13 +200,20 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                     </div>
                 </div>
                 <div className="pg-confirm__content-deep">
-                    <button
-                        className={`cr-button pg-confirm__content-phone-deep-button ${buttonDisabled ? 'cr-button--disabled' : ''}`}
+                    <Button
+                        className="pg-confirm__content-deep-back"
+                        label={this.translate('page.body.kyc.back')}
+                        onClick={this.backBtn}
+                    />
+                    <div className="pg-confirm__content-deep-margin" />
+                    <Button
+                        className="pg-confirm__content-phone-deep-button"
+                        label={this.translate('page.body.kyc.next')}
                         onClick={this.sendDocuments}
                         disabled={buttonDisabled}
                     >
                         {this.translate('page.body.kyc.next')}
-                    </button>
+                    </Button>
                 </div>
             </React.Fragment>
         );
@@ -350,4 +367,4 @@ const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     });
 
 // tslint:disable-next-line:no-any
-export const Documents = injectIntl(connect(mapStateToProps, mapDispatchProps)(DocumentsComponent) as any);
+export const Documents = injectIntl(withRouter(connect(mapStateToProps, mapDispatchProps)(DocumentsComponent) as any));

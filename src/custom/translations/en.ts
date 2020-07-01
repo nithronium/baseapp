@@ -9,8 +9,8 @@ export const en = {
     'page.body.profile.header.account.profile.abilities.second.message2':
         '- Ability to deposit / withdraw using a Credit / Debit card ',
     'page.body.profile.header.account.profile.abilities.third': '- No limit of deposit / withdrawals',
-    'page.body.profile.header.account.profile.withdraw': 'Your WITHDRAW limit: ',
-    'page.body.profile.header.account.profile.deposit': 'Your DEPOSIT limit: ',
+    'page.body.profile.header.account.profile.withdraw': 'Your WITHDRAWAL limit per month: ',
+    'page.body.profile.header.account.profile.deposit': 'Your DEPOSIT limit per month: ',
     'page.body.profile.header.account.profile.knowMore': 'Know more about verification levels',
     'page.body.profile.header.account.content.profile.edit': 'Edit profile',
     'page.body.profile.header.account.content.address.edit': 'Edit address',
@@ -49,9 +49,9 @@ export const en = {
     'page.body.kyc.head.level.first': 'Email',
     'page.body.kyc.head.level.second': 'Profile',
     'page.body.kyc.head.level.third': 'Phone number',
-    'page.body.kyc.head.level.third.address': 'Address',
+    'page.body.kyc.head.level.fifth.address': 'Address',
     'page.body.kyc.head.level.fourth': 'Identity',
-    'page.body.kyc.head.level.fifth': 'Residential address',
+    'page.body.kyc.head.level.fifth': 'Address proof',
     'page.body.kyc.head.level.sixth': 'Questionnaire',
 
     'page.body.trade.header.upcoming': 'Up coming',
@@ -84,6 +84,11 @@ export const en = {
     'page.body.kyc.questionnaire.question3.answer2': '>250 and <1K per month',
     'page.body.kyc.questionnaire.question3.answer3': '>1K trades per month',
 
+    'page.body.kyc.questionnaire.question3.1': 'What is your professional background?',
+    'page.body.kyc.questionnaire.question3.2': 'What industry are you currently working in (what is your field of activity)',
+    'page.body.kyc.questionnaire.question3.3': 'How long have you been working in this field of activity and in the position mentioned in you previous answer?',
+    'page.body.kyc.questionnaire.question3.4': 'Is there any publicly available information that might confirm your field of activity, position, and background?',
+
     'page.body.kyc.questionnaire.question4': 'Employer (If self-employed, please describe your self-employment)',
     'page.body.kyc.questionnaire.question4.input1': 'Employer',
     'page.body.kyc.questionnaire.question4.input2': 'Position',
@@ -99,6 +104,7 @@ export const en = {
     'page.body.kyc.questionnaire.question6.answer3': 'CAD',
     'page.body.kyc.questionnaire.question6.answer4': 'JPY',
     'page.body.kyc.questionnaire.question6.answer5': 'GBP',
+    'page.body.kyc.questionnaire.question6.answer6': 'AED',
 
     'page.body.kyc.questionnaire.question7': 'Net worth',
     'page.body.kyc.questionnaire.question7.answer1': '0 to 500,000',
@@ -123,6 +129,8 @@ export const en = {
     'page.body.kyc.questionnaire.question10.answer3': 'Inheritance',
     'page.body.kyc.questionnaire.question10.answer4': 'Other',
 
+    'page.body.kyc.questionnaire.question10.1': 'What kind of documents can you provide as evidence of the source of your income which you have mentioned in the answer to the previous question?',
+
     'page.body.kyc.questionnaire.question11': 'Are you or your relatives are politically exposed persons? ',
     'page.body.kyc.questionnaire.question11.answer1': 'Yes',
     'page.body.kyc.questionnaire.question11.answer2': 'No',
@@ -137,7 +145,50 @@ export const en = {
 
     'page.body.kyc.confirm': 'Confirm',
 
+    'page.kyc.levels.title': 'Verification Levels',
+    'page.kyc.levels.block.1.title': 'Starter',
+    'page.kyc.levels.block.1.limit-plank': 'Basic limits',
+    'page.kyc.levels.block.1.header-info': 'Includes',
+    'page.kyc.levels.block.1.header-info.item1': 'Deposit & withdraw digital assets and flat',
+    'page.kyc.levels.block.1.header-info.item2': 'Buy/sell/trade digital assets and flat',
+    'page.kyc.levels.block.limits.header': 'Monthly',
+    'page.kyc.levels.block.limits.deposit': 'Deposit Limits',
+    'page.kyc.levels.block.limits.withdrawal': 'Withdrawal Limits',
+    'page.kyc.levels.block.limits.crypto': 'Crypto',
+    'page.kyc.levels.block.limits.flat': 'Flat',
+    'page.kyc.levels.block.limits.eu': 'Europe',
+    'page.kyc.levels.block.limits.non-eu': 'non-Europe',
+    'page.kyc.levels.block.requirements.title': 'Requirements',
+    'page.kyc.levels.block.1.requirements.item1': 'Email address',
+    'page.kyc.levels.block.1.requirements.item2': 'Full name',
+    'page.kyc.levels.block.1.requirements.item3': 'Citizenship',
+    'page.kyc.levels.block.1.requirements.item4': 'Country of residence',
+    'page.kyc.levels.block.1.requirements.item5': 'Phone number',
+    'page.kyc.levels.block.1.requirements.item6': 'Valid ID',
+    'page.kyc.levels.block.completed': 'Completed',
+    'page.kyc.levels.block.get-verified': 'Get Verified',
+    'page.kyc.levels.block.2.title': 'Expert',
+    'page.kyc.levels.block.2.limit-plank': 'Higher limits',
+    'page.kyc.levels.block.2.header-info': 'Everything in Starter, plus',
+    'page.kyc.levels.block.2.header-info.item1': 'Higher funding & withdrawal limits',
+    'page.kyc.levels.block.2.header-info.item2': 'Deposit & withdrawal flat using a credit/debit card up to €15000/month',
+    'page.kyc.levels.block.2.header-info.item3': 'Margin trading (soon)',
+    'page.kyc.levels.block.2.requirements.item1': 'Everything in <b>Starter</b>',
+    'page.kyc.levels.block.2.requirements.item2': 'Proof of residential address',
+    'page.kyc.levels.block.3.title': 'Master',
+    'page.kyc.levels.block.3.limit-plank': 'Highest limits',
+    'page.kyc.levels.block.3.header-info': 'Everything in Expert, plus',
+    'page.kyc.levels.block.3.header-info.item1': 'Personalized funding limits',
+    'page.kyc.levels.block.3.header-info.item2': 'Deposit & withdrawal flat using a credit/debit card without monthly limits',
+    'page.kyc.levels.block.3.header-info.item3': 'OTC trading (soon)',
+    'page.kyc.levels.block.3.requirements.item1': 'Everything in <b>Expert</b>',
+    'page.kyc.levels.block.3.requirements.item2': 'AML questionnaire',
+    'page.kyc.levels.block.btn.completed': 'Completed',
+    'page.kyc.levels.block.btn.uncompleted': 'Get verified',
+
+
     'page.body.trade.header.openOrders.content.date': 'Time',
+    'page.body.wallet.blur': 'Please verify your account to deposit funds',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Deposit currency :',
     'page.body.wallets.tabs.deposit.fiat.iban': 'IBAN :',
@@ -169,7 +220,7 @@ export const en = {
     'cardDepositFiat.fee': 'Fee',
 
     'page.body.wallets.tabs.deposit.fiat.levelMessage':
-        'Verification level 2 is required in order to access the option of balance top up via credit or debit card.',
+        'Verification EXPERT is required in order to access the option of balance top up via credit or debit card.',
     'page.body.wallets.tabs.deposit.fiat.levelLink': 'Please upgrade your verification level',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency.sepaLess.value': 'EUR',

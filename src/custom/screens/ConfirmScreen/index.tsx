@@ -29,7 +29,7 @@ import { ProfilePartial } from '../../containers/Confirm/ProfilePartial';
 import { Questionnaire } from '../../containers/Confirm/Questionnaire';
 import { buildPath } from '../../helpers/buildPath';
 
-import { getRedirectUrl, redirect, redirectIfSpecified } from '../../helpers';
+import { getRedirectUrl, handleRedirectToConfirm, redirect, redirectIfSpecified } from '../../helpers';
 
 interface ReduxProps {
     colorTheme: string;
@@ -74,40 +74,55 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     public componentDidMount() {
         setDocumentTitle('Confirm');
         this.props.labelFetch();
-        const { userData } = this.props;
+        const { userData, history } = this.props;
         this.setState({
             level: userData.level,
         });
+        if (history.location && history.location.state) {
+            if (history.location.state.profileEdit) {
+                handleRedirectToConfirm('profile', history);
+            }
+            if (history.location.state.addressEdit) {
+                handleRedirectToConfirm('address', history);
+            }
+        } else {
+            switch (userData.level) {
+                case 1: handleRedirectToConfirm('profilePartialStep', history);break;
+                case 2: handleRedirectToConfirm('phoneStep', history);break;
+                case 3: handleRedirectToConfirm('identifyStep', history);break;
+                case 4: {
+                    if (userData.profile && userData.profile.address) {
+                        handleRedirectToConfirm('profAddressStep', history);
+                    } else {
+                        handleRedirectToConfirm('addressStep', history);
+                    }
+                    // tslint:disable-next-line
+                } break;
+                default: handleRedirectToConfirm('', history);break;
+            }
+        }
     }
 
     public goBack = event => {
       const lang = this.props.currentLanguage;
       event.preventDefault();
-      redirect(() => this.props.history.push(buildPath(redirectIfSpecified('/profile'), lang)));
+      redirect(() => this.props.history.push(buildPath(redirectIfSpecified('/kyc-levels'), lang)));
     };
 
-    public renderDoubleProgressBar() {
+    public renderExpertProgressBar() {
         const { userData } = this.props;
         const currentProfileLevel = userData.level;
         const stepLabels = this.handleGetStepLabels(currentProfileLevel);
-
-        const cx = classnames('pg-confirm__progress-items', {
-            'pg-confirm__progress-first': currentProfileLevel === 0 || currentProfileLevel === 4,
+        const cx = classnames('pg-confirm__progress-items pg-confirm__center', {
+            'pg-confirm__progress-first': currentProfileLevel === 1 || currentProfileLevel === 4,
             'pg-confirm__progress-second': [1,2,3,5].includes(currentProfileLevel),
         });
-
         return (
             <div className="pg-confirm__progress">
             <div className={cx}>
-                <div className="pg-confirm__progress-circle-1">
+                <div className={`pg-confirm__progress-circle-1${currentProfileLevel === 5 ? ' active-circle' : ''}`}>
                     <span className="pg-confirm__title-text pg-confirm__active-1">
                     <FormattedMessage id={stepLabels[0]}/>
-                    </span>
-                </div>
-                <div className="pg-confirm__progress-line-1" />
-                <div className="pg-confirm__progress-circle-2">
-                    <span className="pg-confirm__title-text pg-confirm__active-2">
-                    <FormattedMessage id={stepLabels[1]}/>
                     </span>
                 </div>
             </div>
@@ -115,36 +130,66 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         );
     }
 
-    public renderTripleProgressBar() {
+    public renderStarterProgressBar() {
+        const {
+            history,
+            userData } = this.props;
+        const currentProfileLevel = userData.level;
+        const stepLabels = this.handleGetStepLabels(currentProfileLevel);
+        const profilePartialStep = history.location && history.location.state && history.location.state.profilePartialStep;
+        const phoneStep = history.location && history.location.state && history.location.state.phoneStep;
+        const identifyStep = history.location && history.location.state && history.location.state.identifyStep;
+        const profileEdit = history.location && history.location.state && history.location.state.profileEdit;
+
+        return (
+            <div className="pg-confirm__progress">
+                <div className="pg-confirm__progress-items pg-confirm__progress-items--long">
+                    <div className={`pg-confirm__progress-circle-0`}>
+                        <span className="pg-confirm__title-text pg-confirm__active-0">
+                            <FormattedMessage id={stepLabels[0]}/>
+                        </span>
+                    </div>
+                    <div className="pg-confirm__progress-line-1" />
+                    <div className={`pg-confirm__progress-circle-1${(profilePartialStep || profileEdit) ? ' active-circle' : ''}`}>
+                        <span className="pg-confirm__title-text pg-confirm__active-1">
+                            <FormattedMessage id={stepLabels[1]}/>
+                        </span>
+                    </div>
+                    <div className="pg-confirm__progress-line-2" />
+                    <div className={`pg-confirm__progress-circle-2${phoneStep ? ' active-circle' : ''}`}>
+                        <span className="pg-confirm__title-text pg-confirm__active-2">
+                            <FormattedMessage id={stepLabels[2]}/>
+                        </span>
+                    </div>
+                    <div className="pg-confirm__progress-line-3" />
+                    <div className={`pg-confirm__progress-circle-3${identifyStep ? ' active-circle' : ''}`}>
+                        <span className="pg-confirm__title-text pg-confirm__active-3">
+                            <FormattedMessage id={stepLabels[3]}/>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+    public renderMasterProgressBar() {
         const { history, userData } = this.props;
         const currentProfileLevel = userData.level;
         const stepLabels = this.handleGetStepLabels(currentProfileLevel);
-        const isAddressEdit = history.location && history.location.state && history.location.state.addressEdit;
-
-        const cx = classnames('pg-confirm__progress-items pg-confirm__progress-items--long', {
-            'pg-confirm__progress-first': currentProfileLevel === 2 && (userData.profile && !userData.profile.address) || isAddressEdit,
-            'pg-confirm__progress-second': currentProfileLevel === 2 && (userData.profile && userData.profile.address) && !isAddressEdit,
-            'pg-confirm__progress-third': currentProfileLevel === 3 && !isAddressEdit,
-        });
+        const addressStep = history.location && history.location.state && history.location.state.addressStep;
+        const profAddressStep = history.location && history.location.state && history.location.state.profAddressStep;
 
         return (
             <div className="pg-confirm__progress">
-            <div className={cx}>
-                <div className="pg-confirm__progress-circle-1">
+            <div className="pg-confirm__progress-items pg-confirm__progress-items--long">
+                <div className={`pg-confirm__progress-circle-1${addressStep ? ' active-circle' : ''}`}>
                     <span className="pg-confirm__title-text pg-confirm__active-1">
                     <FormattedMessage id={stepLabels[0]}/>
                     </span>
                 </div>
                 <div className="pg-confirm__progress-line-1" />
-                <div className="pg-confirm__progress-circle-2">
+                <div className={`pg-confirm__progress-circle-2${profAddressStep ? ' active-circle' : ''}`}>
                     <span className="pg-confirm__title-text pg-confirm__active-2">
                     <FormattedMessage id={stepLabels[1]}/>
-                    </span>
-                </div>
-                <div className="pg-confirm__progress-line-2" />
-                <div className="pg-confirm__progress-circle-3">
-                    <span className="pg-confirm__title-text pg-confirm__active-3">
-                    <FormattedMessage id={stepLabels[2]}/>
                     </span>
                 </div>
             </div>
@@ -152,15 +197,36 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         );
     }
 
+    public progressBarRender = userLvl => {
+        const { history } = this.props;
+        const editAddress = history.location && history.location.state && history.location.state.editAddress;
+        const editProfile = history.location && history.location.state && history.location.state.editProfile;
+        if (editAddress || editProfile) {
+            return editProfile ? this.renderStarterProgressBar() : this.renderMasterProgressBar();
+        } else {
+            switch (userLvl) {
+                case 0:
+                case 1:
+                case 2:
+                case 3: return this.renderStarterProgressBar();
+                case 4: return this.renderMasterProgressBar();
+                case 5: return this.renderExpertProgressBar();
+                default: return this.renderExpertProgressBar();
+            }
+        }
+
+    };
+
     // tslint:disable:jsx-no-multiline-js
     public render() {
-        const { colorTheme, history, userData } = this.props;
+        const {
+            colorTheme,
+            // history,
+            userData } = this.props;
         const { showNationalityBlockModal } = this.state;
 
         const currentProfileLevel = userData.level;
-        const isProfileEdit = history.location && history.location.state && history.location.state.profileEdit;
-        const isTripleProgressBar = (!isProfileEdit && currentProfileLevel === 2) ||
-            (!isProfileEdit && currentProfileLevel === 3);
+        // const isProfileEdit = history.location && history.location.state && history.location.state.profileEdit;
 
         return (
             <div className="pg-wrapper">
@@ -178,7 +244,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                             onClick={this.goBack}
                             className="pg-confirm-box-close"
                         />
-                        {isTripleProgressBar ? this.renderTripleProgressBar() : this.renderDoubleProgressBar()}
+                        {this.progressBarRender(currentProfileLevel)}
                         <div className="pg-confirm__content">
                             {VersionGuardWrapper(this.renderContent, Phone)}
                         </div>
@@ -203,24 +269,27 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
 
     private handleGetStepLabels = (currentProfileLevel: number): string[] => {
         const { history } = this.props;
-        if (history.location && history.location.state && history.location.state.profileEdit) {
-            return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
-        }
+        if (history.location && history.location.state) {
+            if (history.location.state.profilePartialStep || history.location.state.phoneStep || history.location.state.identifyStep || history.location.state.profileEdit) {
+                return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second', 'page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
+            }
 
-        if (history.location && history.location.state && history.location.state.addressEdit) {
-            return ['page.body.kyc.head.level.third.address', 'page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
+            if (history.location.state.addressStep || history.location.state.addressEdit) {
+                return ['page.body.kyc.head.level.fifth.address', 'page.body.kyc.head.level.fifth'];
+            }
         }
 
         switch (currentProfileLevel) {
             case 0:
             case 1:
-                return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
             case 2:
             case 3:
-                return ['page.body.kyc.head.level.third.address', 'page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
+                return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second', 'page.body.kyc.head.level.third', 'page.body.kyc.head.level.fourth'];
             case 4:
+                return ['page.body.kyc.head.level.fifth.address', 'page.body.kyc.head.level.fifth'];
             case 5:
-                return ['page.body.kyc.head.level.fifth', 'page.body.kyc.head.level.sixth'];
+            case 6:
+                return ['page.body.kyc.head.level.sixth'];
             default:
                 return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
         }
@@ -241,7 +310,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
 
         if (pendingLabel) {
             fetchAlert({ message: [`resource.profile.${pendingLabel.key}.pending`], type: 'error'});
-            history.push(redirectIfSpecified('/profile'));
+            history.push(redirectIfSpecified('/kyc-levels'));
         }
     }
 
@@ -263,6 +332,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const {
             labels,
             fetchAlert,
+            history,
         } = this.props;
 
 
@@ -275,58 +345,71 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             });
         }
 
-        return <Documents />;
+        if (history.location && history.location.state && history.location.state.profAddressStep) {
+            return <Documents />;
+        }
+        if (history.location && history.location.state && history.location.state.addressStep) {
+            return <ProfileAddress />;
+        }
+
+        return null;
     }
 
     private renderContent = () => {
         const {
             history,
             labels,
-            userData: { level, profile },
             currentLanguage,
         } = this.props;
-
         if (!labels.length) {
             return null;
         }
-
+        let locationState = '';
+        if (history.location && history.location.state) {
+            if (history.location.state.profilePartialStep) { locationState = 'profilePartialStep'; }
+            if (history.location.state.addressEdit) { locationState = 'addressEdit'; }
+            if (history.location.state.profileEdit) { locationState = 'profileEdit'; }
+            if (history.location.state.phoneStep) { locationState = 'phoneStep'; }
+            if (history.location.state.identifyStep) { locationState = 'identifyStep'; }
+            if (history.location.state.addressStep) { locationState = 'addressStep'; }
+            if (history.location.state.profAddressStep) { locationState = 'profAddressStep'; }
+        }
         this.handleCheckPendingLabels(labels);
-
-        if (level === 1 || (history.location && history.location.state && history.location.state.profileEdit)) {
+        if (locationState === 'profilePartialStep') {
             return <ProfilePartial toggleBlockNationalityModal={this.handleToggleBlockNationalityModal} />;
         }
 
-        if (history.location && history.location.state && history.location.state.addressEdit) {
+        if (locationState === 'addressEdit') {
             return <ProfileAddress />;
         }
 
-        if (level === 2) {
-            if ((profile && profile.address)) {
-                return <Phone />;
-            } else {
-                return <ProfileAddress />;
-            }
+        if (locationState === 'profileEdit') {
+            return <ProfilePartial toggleBlockNationalityModal={this.handleToggleBlockNationalityModal}  />;
         }
 
-        if (level === 3) {
+        if (locationState === 'profAddressEdit') {
+            return <ProfileAddress />;
+        }
+
+        if (locationState === 'phoneStep') {
+            return <Phone />;
+        }
+
+        if (locationState === 'identifyStep') {
             return this.renderThirdLevel();
         }
 
-        if (level === 4) {
+        if (['addressStep', 'profAddressStep'].includes(locationState)) {
             const redirectUrl = getRedirectUrl();
             if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
-                redirect(() => history.push(buildPath(redirectIfSpecified('/profile'), currentLanguage)));
+                redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
             }
             return this.renderFourthLevel();
         }
 
-        if (level === 5) {
-            return <Questionnaire />;
-        }
+        return <Questionnaire />;
 
-        redirect(() => history.push(redirectIfSpecified('/profile')));
-
-        return null;
+        // history.push(redirectIfSpecified('/profile'));
     };
 }
 

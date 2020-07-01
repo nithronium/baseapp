@@ -230,7 +230,7 @@ const FooterBody = props => {
 
 const Footer = props => {
     return (
-        <div>
+        <div style={{marginTop: '20px'}}>
             <section id="footer">
                 <div>
                     {/* <MobileStartTrading /> */}

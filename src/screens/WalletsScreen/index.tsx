@@ -12,6 +12,7 @@ import { EstimatedValue } from '../../containers/Wallets/EstimatedValue';
 import { WalletHistory } from '../../containers/Wallets/History';
 import { Withdraw, WithdrawProps } from '../../containers/Wallets/Withdraw';
 import { WithdrawLite } from '../../containers/Wallets/WithdrawLite';
+import { BlurComponent } from '../../custom/components';
 import { buildPath } from '../../custom/helpers';
 import { VersionGuardWrapper } from '../../decorators';
 import { setDocumentTitle } from '../../helpers';
@@ -32,6 +33,7 @@ import {
     selectWallets,
     selectWalletsAddressError,
     selectWalletsLoading,
+    selectWithdrawLimit,
     selectWithdrawSuccess,
     setMobileWalletUi,
     User,
@@ -39,7 +41,8 @@ import {
     walletsAddressFetch,
     walletsData,
     walletsFetch,
-    walletsWithdrawCcyFetch,
+    walletsWithdrawCcyFetch, WithdrawLimit,
+    withdrawLimitFetch,
 } from '../../modules';
 import { CommonError } from '../../modules/types';
 import { DepositTab } from './DepositTab';
@@ -64,6 +67,7 @@ interface ReduxProps {
     selectedWalletAddress: string;
     whitelistActivateSuccess: boolean;
     whitelistDeleteSuccess: boolean;
+    withdrawLimitData: WithdrawLimit;
 }
 
 interface DispatchProps {
@@ -75,6 +79,7 @@ interface DispatchProps {
     fetchSuccess: typeof alertPush;
     setMobileWalletUi: typeof setMobileWalletUi;
     openGuardModal: typeof openGuardModal;
+    fetchWithdrawLimit: typeof withdrawLimitFetch;
 }
 
 const defaultBeneficiary: Beneficiary = {
@@ -135,9 +140,9 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
 
     public componentDidMount() {
         setDocumentTitle('Wallets');
-        const { wallets, fetchAddress } = this.props;
+        const { wallets, fetchAddress, fetchWithdrawLimit } = this.props;
         const { selectedWalletIndex } = this.state;
-
+        fetchWithdrawLimit();
         getBalance()
             .then(data => {
                 this.setState({
@@ -336,7 +341,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
     };
 
     private renderDeposit = () => {
-        const { addressDepositError, wallets, user, selectedWalletAddress, colorTheme } = this.props;
+        const { addressDepositError, wallets, user, selectedWalletAddress, colorTheme, withdrawLimitData } = this.props;
         const { selectedWalletIndex, card, sepa, wire } = this.state;
         return (
             <DepositTab
@@ -354,6 +359,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                 balance={this.state.balance}
                 message={this.message}
                 history={this.props.history}
+                withdrawLimitData={withdrawLimitData}
                 lang={this.props.currentLanguage}
             />
         );
@@ -364,7 +370,7 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
         const { selectedWalletIndex, sepa, card, wire } = this.state;
         const currency = (wallets[selectedWalletIndex] || { currency: '' }).currency;
         return (
-           <React.Fragment>
+           <React.Fragment >
                 {wallets[selectedWalletIndex].type === 'fiat' && (
                     <TypeTabs
                         action={this.setState.bind(this)}
@@ -379,13 +385,15 @@ class WalletsComponent extends React.Component<Props, WalletsState> {
                    : <React.Fragment>
                 {currency.toLowerCase() === 'usd'}
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
-                {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}
-                {['usd', 'aed'].includes(currency.toLowerCase()) ? (
-                    <div style={{ textAlign: 'center', fontSize: '18px', padding: '20px' }}>{this.translate('comingsoon')}</div>
-                ) : (
-                    this.renderWithdrawBlock()
-                )}
-                {user.otp && currency && <WalletHistory label="withdraw" type="withdraws" currency={currency} />}
+               <BlurComponent isBlur={user < 4}>
+                   {walletsError && <p className="pg-wallet__error">{walletsError.message}</p>}
+                    {['usd', 'aed'].includes(currency.toLowerCase()) ? (
+                        <div style={{ textAlign: 'center', fontSize: '18px', padding: '20px' }}>{this.translate('comingsoon')}</div>
+                    ) : (
+                        this.renderWithdrawBlock()
+                    )}
+                    {user.otp && currency && <WalletHistory label="withdraw" type="withdraws" currency={currency} />}
+               </BlurComponent>
                 </React.Fragment>  }
             </React.Fragment>
         );
@@ -487,6 +495,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
     historyList: selectHistory(state),
     mobileWalletChosen: selectMobileWalletUi(state),
     selectedWalletAddress: selectWalletAddress(state),
+    withdrawLimitData: selectWithdrawLimit(state),
     whitelistActivateSuccess: selectBeneficiariesActivateSuccess(state),
     whitelistDeleteSuccess: selectBeneficiariesDeleteSuccess(state),
 });
@@ -498,6 +507,7 @@ const mapDispatchToProps: MapDispatchToProps<DispatchProps, {}> = dispatch => ({
     walletsWithdrawCcy: params => dispatch(walletsWithdrawCcyFetch(params)),
     clearWallets: () => dispatch(walletsData([])),
     fetchSuccess: payload => dispatch(alertPush(payload)),
+    fetchWithdrawLimit: () => dispatch(withdrawLimitFetch()),
     setMobileWalletUi: payload => dispatch(setMobileWalletUi(payload)),
     openGuardModal: () => dispatch(openGuardModal()),
 });

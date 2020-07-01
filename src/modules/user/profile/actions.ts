@@ -58,6 +58,7 @@ export interface ProfileIdentity {
   city: string;
   country: string;
   number: string;
+  addAddress?: boolean;
 }
 
 export interface ChangePasswordFetch {

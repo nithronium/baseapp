@@ -3,6 +3,7 @@ import * as React from 'react';
 import { injectIntl } from 'react-intl';
 import { CurrencyInfo, DepositCrypto } from '../../../components';
 import { WalletHistory } from '../../../containers/Wallets/History';
+import { BlurComponent } from '../../../custom/components/Blur';
 import { formatCCYAddress } from '../../../helpers';
 
 export const CoinFragment = injectIntl(
@@ -19,10 +20,15 @@ export const CoinFragment = injectIntl(
         usedCoins,
         setUsedCoins,
         user,
-    }) => {
+        withdrawLimitData,
+     }) => {
         const usedCoinsLocal = usedCoins.slice();
         const format = intl.formatMessage;
         const text = format({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' });
+        const getLimitDeposit = () => {
+            return withdrawLimitData && withdrawLimitData.deposit ? (+withdrawLimitData.deposit.limit - +withdrawLimitData.deposit.amount).toFixed(currency[selectedWalletIndex].fixed) || 0 : 0;
+        };
+        const textLimit = `${format({ id: 'page.body.wallets.tabs.deposit.ccy.message.limits1' })} ${getLimitDeposit()} EUR ${format({ id: 'page.body.wallets.tabs.deposit.ccy.message.limits2' })}`;
         let walletAddress = formatCCYAddress(currency, selectedWalletAddress);
         const error = addressDepositError
             ? format({ id: addressDepositError.message })
@@ -48,6 +54,7 @@ export const CoinFragment = injectIntl(
         return (
             <React.Fragment>
                 <CurrencyInfo wallet={wallets[selectedWalletIndex]} />
+                <BlurComponent isBlur={user.level < 4}>
                 {!userAgree ? (
                     <div>
                         <h2 style={{ fontWeight: 400 }}>{format({ id: 'page.wallets.coin.notice' })}</h2>
@@ -74,13 +81,16 @@ export const CoinFragment = injectIntl(
                         handleOnCopy={handleOnCopy}
                         error={error}
                         text={text}
+                        textLimit={textLimit}
                         notice={notice}
                         disabled={walletAddress === '' || user.level < 2}
+                        disabledLimit={user.level > 5}
                         copiableTextFieldText={format({ id: 'page.body.wallets.tabs.deposit.ccy.message.address' })}
                         copyButtonText={format({ id: 'page.body.wallets.tabs.deposit.ccy.message.button' })}
                     />
                 )}
                 {currency && <WalletHistory label="deposit" type="deposits" currency={currency} />}
+                </BlurComponent>
             </React.Fragment>
         );
     }

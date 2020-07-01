@@ -1,10 +1,14 @@
+import {Button} from '@openware/components';
 import cr from 'classnames';
+import { History } from 'history';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import {
     connect,
     MapDispatchToPropsFunction,
 } from 'react-redux';
+import {withRouter} from 'react-router';
+import { handleRedirectToConfirm } from '../../../../custom/helpers';
 import {
     labelFetch,
     RootState,
@@ -30,6 +34,10 @@ interface OnChangeEvent {
     };
 }
 
+interface HistoryProps {
+    history: History;
+}
+
 interface PhoneState {
     phoneNumber: string;
     phoneNumberFocused: boolean;
@@ -46,12 +54,11 @@ interface DispatchProps {
     verifyPhone: typeof verifyPhone;
 }
 
-type Props = ReduxProps & DispatchProps & InjectedIntlProps;
+type Props = ReduxProps & DispatchProps & InjectedIntlProps & HistoryProps;
 
 class PhoneComponent extends React.Component<Props, PhoneState> {
     constructor(props: Props) {
         super(props);
-
         this.state = {
             phoneNumber: '',
             phoneNumberFocused: false,
@@ -65,14 +72,29 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
         return this.props.intl.formatMessage({ id: e });
     };
 
-    public componentDidUpdate(prev: Props) {
-        const { user } = this.props;
-
-        if (!prev.verifyPhoneSuccess && this.props.verifyPhoneSuccess) {
-            this.props.changeUserLevel({ level: +user.level + 1 });
-            this.props.labelFetch();
+    public componentDidMount() {
+        const {user} = this.props;
+        const {phoneNumber} = this.state;
+        if (user.phones && user.phones[0] && user.phones[0].number !== phoneNumber) {
+            this.setState({phoneNumber: `+${user.phones[0].number}`});
+        } else {
+            this.setState({phoneNumber: `+`});
         }
     }
+
+    public componentDidUpdate(prev: Props) {
+        const { history } = this.props;
+
+        if (!prev.verifyPhoneSuccess && this.props.verifyPhoneSuccess) {
+            this.props.changeUserLevel({ level: 3 });
+            this.props.labelFetch();
+            handleRedirectToConfirm('identifyStep', history);
+        }
+    }
+
+    public backBtn = () => {
+        handleRedirectToConfirm('profilePartialStep', this.props.history);
+    };
 
     public render() {
         const {
@@ -143,13 +165,19 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
                 </div>
                 {verifyPhoneSuccess && <p className="pg-confirm__success">{this.translate(verifyPhoneSuccess)}</p>}
                 <div className="pg-confirm__content-deep">
-                    <button
-                        className={`cr-button pg-confirm__content-phone-deep-button`}
+                    <Button
+                        className="pg-confirm__content-deep-back"
+                        label={this.translate('page.body.kyc.back')}
+                        onClick={this.backBtn}
+                    />
+                    <div className="pg-confirm__content-deep-margin" />
+                    <Button
+                        className="pg-confirm__content-phone-deep-button"
+                        label={this.translate('page.body.kyc.next')}
                         onClick={this.confirmPhone}
-                        style={{ color: '#fff' }}
                     >
                         {this.translate('page.body.kyc.next')}
-                    </button>
+                    </Button>
                 </div>
             </div>
         );
@@ -190,18 +218,24 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
     }
 
     private confirmPhone = () => {
+        const { phoneNumber, confirmationCode } = this.state;
+        const { user, history } = this.props;
         const requestProps = {
-            phone_number: String(this.state.phoneNumber),
-            verification_code: String(this.state.confirmationCode),
+            phone_number: String(phoneNumber),
+            verification_code: String(confirmationCode),
         };
-        this.props.verifyPhone(requestProps);
-    }
+        if (user.phones && user.phones[0] && `+${user.phones[0].number}` === phoneNumber) {
+            handleRedirectToConfirm('identifyStep', history);
+        } else {
+            this.props.verifyPhone(requestProps);
+        }
+    };
 
     private addPlusSignToPhoneNumber = () => {
         if (this.state.phoneNumber.length === 0) {
-            this.setState({
-                phoneNumber: '+',
-            });
+            // this.setState({
+            //     phoneNumber: '+',
+            // });
         }
     }
 
@@ -264,4 +298,4 @@ const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
     });
 
 // tslint:disable-next-line
-export const Phone = injectIntl(connect(mapStateToProps, mapDispatchProps)(PhoneComponent) as any);
+export const Phone = injectIntl(withRouter(connect(mapStateToProps, mapDispatchProps)(PhoneComponent) as any));

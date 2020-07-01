@@ -128,6 +128,8 @@ export const ru: LangType = {
     'page.body.wallets.tabs.deposit': 'Пополнить',
     'page.body.wallets.tabs.deposit.ccy.message.submit':
         'Пожалуйста, внесите депозитный платеж. Ваш депозит будет доступен после 6 подтверждений',
+    'page.body.wallets.tabs.deposit.ccy.message.limits1': 'Ваш депозит не должен быть больше эквивалента',
+    'page.body.wallets.tabs.deposit.ccy.message.limits2': ' для соблюдения месячного лимита.',
     'page.body.wallets.tabs.deposit.ccy.message.address': 'Пополнить кошелек',
     'page.body.wallets.tabs.deposit.ccy.message.button': 'Копир.',
     'page.body.wallets.tabs.deposit.ccy.message.success': 'Адрес скопирован',
@@ -360,8 +362,8 @@ export const ru: LangType = {
     'page.body.profile.header.account.profile.abilities.second.message2':
         '- Возможность пополнять / выводить фиат используя кредитную / дебетовую карту',
     'page.body.profile.header.account.profile.abilities.third': '- Нет ограничений для депозита / вывода',
-    'page.body.profile.header.account.profile.withdraw': 'Лимит вывода: ',
-    'page.body.profile.header.account.profile.deposit': 'Лимит пополнения: ',
+    'page.body.profile.header.account.profile.withdraw': 'Ваш лимит вывода на месяц: ',
+    'page.body.profile.header.account.profile.deposit': 'Ваш лимит пополнения на месяц: ',
     'page.body.profile.header.account.profile.knowMore': 'Узнать больше об уровнях верификации',
 
     'page.body.profile.header.referralProgram': 'Реферальная программа',
@@ -374,6 +376,8 @@ export const ru: LangType = {
     'page.body.profile.apiKeys.noOtp': 'Пожалуйста, включите двухфакторную аутентификацию',
     'page.body.profile.apiKeys.show': 'Показать',
     'page.body.profile.apiKeys.noKeys': 'У Вас нет API ключей',
+
+    'page.body.wallet.blur': 'Для внесения средств на Ваш аккаунт, пожалуйста, пройдите верификацию',
 
     'page.body.profile.apiKeys.modal.btn.show': 'Показать',
     'page.body.profile.apiKeys.modal.btn.create': 'Подтвердить',
@@ -481,6 +485,11 @@ export const ru: LangType = {
     'page.body.kyc.questionnaire.question3.answer2': '250 - 1K торговых операций за месяц',
     'page.body.kyc.questionnaire.question3.answer3': 'больше 1K торговых операций за месяц',
 
+    'page.body.kyc.questionnaire.question3.1': 'What is your professional background?',
+    'page.body.kyc.questionnaire.question3.2': 'What industry are you currently working in (what is your field of activity)',
+    'page.body.kyc.questionnaire.question3.3': 'How long have you been working in this field of activity and in the position mentioned in you previous answer?',
+    'page.body.kyc.questionnaire.question3.4': 'Is there any publicly available information that might confirm your field of activity, position, and background?',
+
     'page.body.kyc.questionnaire.question4': 'Работодатель (если Вы самозанятый, опишите род Вашей деятельности)',
     'page.body.kyc.questionnaire.question4.input1': 'Работодатель',
     'page.body.kyc.questionnaire.question4.input2': 'Должность',
@@ -495,6 +504,7 @@ export const ru: LangType = {
     'page.body.kyc.questionnaire.question6.answer3': 'CAD',
     'page.body.kyc.questionnaire.question6.answer4': 'JPY',
     'page.body.kyc.questionnaire.question6.answer5': 'GBP',
+    'page.body.kyc.questionnaire.question6.answer6': 'AED',
 
     'page.body.kyc.questionnaire.question7': 'Стоимость чистых активов',
     'page.body.kyc.questionnaire.question7.answer1': '0 to 500,000',
@@ -519,6 +529,8 @@ export const ru: LangType = {
     'page.body.kyc.questionnaire.question10.answer3': 'Наследство',
     'page.body.kyc.questionnaire.question10.answer4': 'Другое',
 
+    'page.body.kyc.questionnaire.question10.1': 'What kind of documents can you provide as evidence of the source of your income which you have mentioned in the answer to the previous question?',
+
     'page.body.kyc.questionnaire.question11': 'Являетесь ли Вы или Ваши родственники политическими деятелями? ',
     'page.body.kyc.questionnaire.question11.answer1': 'Да',
     'page.body.kyc.questionnaire.question11.answer2': 'Нет',
@@ -535,6 +547,7 @@ export const ru: LangType = {
     'page.body.kyc.confirm': 'Отправить',
 
     'page.body.kyc.next': 'Дальше',
+    'page.body.kyc.back': 'Back',
     'page.body.kyc.submit': 'Отправить',
     'page.body.kyc.head.phone': 'Верификация телефона',
     'page.body.kyc.head.identity': 'Верификация личности',
@@ -542,10 +555,51 @@ export const ru: LangType = {
     'page.body.kyc.head.level.first': 'Электронная почта',
     'page.body.kyc.head.level.second': 'Профиль',
     'page.body.kyc.head.level.third': 'Номер телефона',
-    'page.body.kyc.head.level.third.address': 'Адрес',
+    'page.body.kyc.head.level.fifth.address': 'Адрес',
     'page.body.kyc.head.level.fourth': 'Личность',
-    'page.body.kyc.head.level.fifth': 'Адрес',
+    'page.body.kyc.head.level.fifth': 'Подтверждение адреса',
     'page.body.kyc.head.level.sixth': 'Анкета',
+
+    'page.kyc.levels.title': 'Verification Levels',
+    'page.kyc.levels.block.1.title': 'Starter',
+    'page.kyc.levels.block.1.limit-plank': 'Basic limits',
+    'page.kyc.levels.block.1.header-info': 'Includes',
+    'page.kyc.levels.block.1.header-info.item1': 'Deposit & withdraw digital assets and flat',
+    'page.kyc.levels.block.1.header-info.item2': 'Buy/sell/trade digital assets and flat',
+    'page.kyc.levels.block.limits.header': 'Monthly',
+    'page.kyc.levels.block.limits.deposit': 'Deposit Limits',
+    'page.kyc.levels.block.limits.withdrawal': 'Withdrawal Limits',
+    'page.kyc.levels.block.limits.crypto': 'Crypto',
+    'page.kyc.levels.block.limits.flat': 'Flat',
+    'page.kyc.levels.block.limits.eu': 'Europe',
+    'page.kyc.levels.block.limits.non-eu': 'non-Europe',
+    'page.kyc.levels.block.requirements.title': 'Requirements',
+    'page.kyc.levels.block.1.requirements.item1': 'Email address',
+    'page.kyc.levels.block.1.requirements.item2': 'Full name',
+    'page.kyc.levels.block.1.requirements.item3': 'Citizenship',
+    'page.kyc.levels.block.1.requirements.item4': 'Country of residence',
+    'page.kyc.levels.block.1.requirements.item5': 'Phone number',
+    'page.kyc.levels.block.1.requirements.item6': 'Valid ID',
+    'page.kyc.levels.block.completed': 'Completed',
+    'page.kyc.levels.block.get-verified': 'Get Verified',
+    'page.kyc.levels.block.2.title': 'Expert',
+    'page.kyc.levels.block.2.limit-plank': 'Higher limits',
+    'page.kyc.levels.block.2.header-info': 'Everything in Starter, plus',
+    'page.kyc.levels.block.2.header-info.item1': 'Higher funding & withdrawal limits',
+    'page.kyc.levels.block.2.header-info.item2': 'Deposit & withdrawal flat using a credit/debit card up to €15000/month',
+    'page.kyc.levels.block.2.header-info.item3': 'Margin trading (soon)',
+    'page.kyc.levels.block.2.requirements.item1': 'Everything in <b>Starter</b>',
+    'page.kyc.levels.block.2.requirements.item2': 'Proof of residential address',
+    'page.kyc.levels.block.3.title': 'Master',
+    'page.kyc.levels.block.3.limit-plank': 'Highest limits',
+    'page.kyc.levels.block.3.header-info': 'Everything in Expert, plus',
+    'page.kyc.levels.block.3.header-info.item1': 'Personalized funding limits',
+    'page.kyc.levels.block.3.header-info.item2': 'Deposit & withdrawal flat using a credit/debit card without monthly limits',
+    'page.kyc.levels.block.3.header-info.item3': 'OTC trading (soon)',
+    'page.kyc.levels.block.3.requirements.item1': 'Everything in <b>Expert</b>',
+    'page.kyc.levels.block.3.requirements.item2': 'AML questionnaire',
+    'page.kyc.levels.block.btn.completed': 'Completed',
+    'page.kyc.levels.block.btn.uncompleted': 'Get verified',
 
     'page.body.lock.oops': 'Ой!',
     'page.body.lock.expired': 'Похоже, что ваш пробный период истек',
@@ -583,6 +637,7 @@ export const ru: LangType = {
     'page.header.currency.try': 'TRY',
 
     "nav_account": "Профиль",
+    "nav_verification": "Верификация",
     "nav_my_assets": "Мои активы",
     "nav_my_orders": "Мои ордера",
     "nav_account_security": "Безопасность",
@@ -906,7 +961,7 @@ export const ru: LangType = {
     'cardDepositFiat.fee': 'Комиссия',
 
     'page.body.wallets.tabs.deposit.fiat.levelMessage':
-        'Для пополнения баланса кредитной или дебитной картой, необходимо иметь Уровень Верификации 2',
+        'Для пополнения баланса кредитной или дебитной картой, необходимо иметь Уровень ЭКСПЕРТ',
     'page.body.wallets.tabs.deposit.fiat.levelLink': 'Пожалуйста, повысьте свой Уровень Верификации.',
 
     'page.body.wallets.tabs.deposit.fiat.depositCurrency': 'Валюта депозита :',

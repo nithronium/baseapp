@@ -119,6 +119,8 @@ export const en = {
     'page.body.wallets.tabs.deposit': 'Deposit',
     'page.body.wallets.tabs.deposit.ccy.message.submit':
         'Submit a deposit using the following address or QR code. Your deposit will be reflected in your account after 6 confirmations',
+    'page.body.wallets.tabs.deposit.ccy.message.limits1': 'Your deposit shouldn\'t be more than equivalent of',
+    'page.body.wallets.tabs.deposit.ccy.message.limits2': ' to comply monthly limit.',
     'page.body.wallets.tabs.deposit.ccy.message.address': 'Deposit Address',
     'page.body.wallets.tabs.deposit.ccy.message.button': 'COPY',
     'page.body.wallets.tabs.deposit.ccy.message.success': 'Address copied',
@@ -406,6 +408,7 @@ export const en = {
     'page.body.kyc.documentsType': 'Document type',
 
     'page.body.kyc.next': 'Next',
+    'page.body.kyc.back': 'Back',
     'page.body.kyc.submit': 'Submit',
     'page.body.kyc.head.phone': 'Phone Verification',
     'page.body.kyc.head.identity': 'Identity Verification',
@@ -447,6 +450,7 @@ export const en = {
     'page.header.currency.try': 'TRY',
 
     "nav_account": "Profile",
+    "nav_verification": "Verification",
     "nav_my_assets": "My Assets",
     "nav_my_orders": "My Orders",
     "nav_account_security": "Account Security",

@@ -31,9 +31,9 @@ import { IdentityData } from '../../../../modules/user/kyc/identity/types';
 import { changeUserLevel, changeUserProfileData } from '../../../../modules/user/profile';
 import { Dropdown } from '../../../components';
 import { DISALLOWED_COUNTRIES } from '../../../constants';
+import { handleRedirectToConfirm } from '../../../helpers';
 import { isValidDate } from '../../../helpers/checkDate';
 
-import { buildUrlWithRedirect, getRedirectUrl } from '../../../helpers';
 
 interface ReduxProps {
     editData?: IdentityData;
@@ -108,43 +108,49 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             editSuccess,
             sendData,
             sendSuccess,
-            user,
+            history,
         } = this.props;
 
-        const redirectUrl = getRedirectUrl();
-        let url = '/profile';
-        if (redirectUrl && typeof redirectUrl === 'string' && redirectUrl.indexOf('chatello') !== 0) {
-            url = buildUrlWithRedirect('/confirm');
-        }
+        // const redirectUrl = getRedirectUrl();
+        // let url = '/kys-levels';
+        // if (redirectUrl && typeof redirectUrl === 'string' && redirectUrl.indexOf('chatello') !== 0) {
+        //     url = buildUrlWithRedirect('/confirm');
+        // }
 
         if (!prev.sendSuccess && sendSuccess) {
-            this.props.changeUserLevel({ level: +user.level + 1 });
+            this.props.changeUserLevel({ level: 2 });
             this.props.labelFetch();
             if (sendData) {
                 this.props.changeUserProfileData(sendData);
             }
-            this.props.history.push(url);
+            handleRedirectToConfirm('phoneStep', history);
         }
 
         if (!prev.editSuccess && editSuccess) {
+            this.props.changeUserLevel({ level: 2 });
             this.props.labelFetch();
             if (editData) {
                 this.props.changeUserProfileData(editData);
             }
-            this.props.history.push(url);
+            handleRedirectToConfirm('phoneStep', history);
         }
     }
 //tslint:disable
     public componentDidMount() {
-        const { user, history } = this.props;
-        if (history.location && history.location.state && history.location.state.profileEdit && user.profile) {
-            if (user.profile.first_name) {
+        this.updateUserProfileInfo();
+    }
+
+    public updateUserProfileInfo = () => {
+        const { user } = this.props;
+        const { firstName, lastName, dateOfBirth, countryOfBirth, metadata = {nationality: ''} } = this.state;
+        if (user.profile) {
+            if (user.profile.first_name && user.profile.first_name !== firstName) {
                 this.setState({
                     firstName: user.profile.first_name,
                 });
             }
 
-            if (user.profile.last_name) {
+            if (user.profile.last_name && user.profile.last_name !== lastName) {
                 this.setState({
                     lastName: user.profile.last_name,
                 });
@@ -152,29 +158,29 @@ class ProfilePartialComponent extends React.Component<Props, State> {
 
             if (user.profile.dob) {
                 const tmp = user.profile.dob.split('-').reverse().join('/');
-
-                this.setState({
-                    dateOfBirth: tmp,
-                    dateOfBirthValid: true,
-                });
+                if (tmp !== dateOfBirth) {
+                    this.setState({
+                        dateOfBirth: tmp,
+                        dateOfBirthValid: true,
+                    });
+                }
             }
 
-            if (user.profile.country) {
+            if (user.profile.country && user.profile.country !== countryOfBirth) {
                 this.setState({
                     countryOfBirth: user.profile.country,
                 });
             }
-
             const currentNationality = user.profile.metadata && JSON.parse(user.profile.metadata).nationality;
-            if (currentNationality) {
+            if (currentNationality && currentNationality !== metadata.nationality) {
                 this.setState({
                     metadata: {
                         nationality: currentNationality,
-                    }
+                    },
                 });
             }
         }
-    }
+    };
 
     public render() {
         const { lang } = this.props;
@@ -372,9 +378,9 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         } else {
             this.setState({
                 dateOfBirthValid: false,
-            })
+            });
         }
-    }
+    };
 
     private selectNationality = (listOfCountries: countries.LocalizedCountryNames, value: number) => {
         if (DISALLOWED_COUNTRIES.includes(Object.keys(listOfCountries)[value])) {
@@ -401,10 +407,10 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     private handleValidateInput = (field: string, value: string): boolean => {
         switch (field) {
             case 'firstName':
-                const firstNameRegex = new RegExp(`^[a-zA-Z]{1,100}$`);
+                const firstNameRegex = new RegExp(`^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$`);
                 return value.match(firstNameRegex) ? true : false;
             case 'lastName':
-                const lastNameRegex = new RegExp(`^[a-zA-Z]{1,100}$`);
+                const lastNameRegex = new RegExp(`^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$`);
                 return value.match(lastNameRegex) ? true : false;
             default:
                 return true;
@@ -462,7 +468,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                     nationality: metadata.nationality,
                     state: currentUserState,
                 }),
-            }
+            };
         } else {
             profileInfo = {
                 first_name: firstName,
@@ -470,11 +476,11 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                 dob,
                 country: countryOfBirth,
                 metadata: JSON.stringify(metadata),
-            };   
+            };
         }
 
         // tslint:disable-next-line: prefer-switch
-        if (user.level === 2 || user.level === 3 || user.level === 4) {
+        if ((user.level === 2 || user.level === 3 || user.level === 4) || user.profile) {
             this.props.editIdentity(profileInfo);
         } else {
             this.props.sendIdentity(profileInfo);

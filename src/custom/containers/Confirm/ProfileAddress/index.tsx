@@ -21,7 +21,7 @@ import {
 } from '../../../../modules';
 import { IdentityData } from '../../../../modules/user/kyc/identity/types';
 import { changeUserProfileData } from '../../../../modules/user/profile';
-import { buildPath } from '../../../helpers/buildPath';
+import { handleRedirectToConfirm } from '../../../helpers';
 
 interface ReduxProps {
     editData?: IdentityData;
@@ -80,46 +80,56 @@ class ProfileAddressComponent extends React.Component<Props, State> {
         const {
             editData,
             editSuccess,
+            user,
+            history,
         } = this.props;
-
         if (!prev.editSuccess && editSuccess) {
             this.props.labelFetch();
             if (editData) {
-                this.props.changeUserProfileData(editData);
-                this.props.history.push(buildPath('/confirm', this.props.lang));
+                this.props.changeUserProfileData({...editData, addAddress: true});
+                handleRedirectToConfirm('profAddressStep', this.props.history);
             }
+        }
+        if (history.location && history.location.state && history.location.state.addressEdit && user.profile) {
+            const { city, postcode, residentialAddress, state } = this.state;
+            this.getAddress(user, city, postcode, residentialAddress, state);
         }
     }
 //tslint:disable
     public componentDidMount() {
-        const { user, history } = this.props;
-        if (history.location && history.location.state && history.location.state.addressEdit && user.profile) {
-            if (user.profile.first_name) {
-                this.setState({
-                    city: user.profile.city,
-                });
-            }
-
-            if (user.profile.last_name) {
-                this.setState({
-                    postcode: user.profile.postcode,
-                });
-            }
-
-            if (user.profile.country) {
-                this.setState({
-                    residentialAddress: user.profile.address,
-                });
-            }
-
-            const currentState = user.profile.metadata && JSON.parse(user.profile.metadata).state;
-            if (currentState) {
-                this.setState({
-                    state: currentState,
-                });
-            }
+        const { user } = this.props;
+        if (user.profile) {
+            const { city, postcode, residentialAddress, state } = this.state;
+            this.getAddress(user, city, postcode, residentialAddress, state);
         }
     }
+
+    public getAddress = (user, city, postcode, residentialAddress, state ) => {
+        if (user.profile.city && user.profile.city !== city) {
+            this.setState({
+                city: user.profile.city,
+            });
+        }
+
+        if (user.profile.postcode && user.profile.postcode !== postcode) {
+            this.setState({
+                postcode: user.profile.postcode,
+            });
+        }
+
+        if (user.profile.address && user.profile.address !== residentialAddress) {
+            this.setState({
+                residentialAddress: user.profile.address,
+            });
+        }
+
+        const currentState = user.profile.metadata && JSON.parse(user.profile.metadata).state;
+        if (currentState && currentState !== state) {
+            this.setState({
+                state: currentState,
+            });
+        }
+    };
 
     public render() {
         const {

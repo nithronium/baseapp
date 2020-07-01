@@ -32,21 +32,23 @@
     &__circle {
       align-items: center;
       background: var(--button-normal);
-      border-radius: 50%;
+      border-radius: 16px;
       color: var(--white);
       display: flex;
       font-family: Roboto;
-      font-size: 14px;
+      font-size: 16px;
       font-style: normal;
       font-weight: 500;
+      line-height: 19px;
       height: 24px;
       justify-content: center;
       letter-spacing: 0.1px;
-      width: 24px;
+      padding: 0 10px;
+      width: 89px;
 
       &--active {
-        color: var(--back-bg);
-        background: var(--accent);
+        color: #222627;
+        background: #FFD567;
       }
     }
 
@@ -252,9 +254,27 @@
   }
 }
 
+@media screen and (max-width: 991px) {
+  .pg-profile-verification {
+    &__level {
+      justify-content: space-between;
+      width: 100%;
+      padding-right: 20px;
+
+      &__circle {
+        width: auto;
+      }
+
+      &__line {
+        width: 100%;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .pg-profile-verification {
-    margin: 38px;
+    margin: 5px;
 
     &__abilities > span {
       height: auto;

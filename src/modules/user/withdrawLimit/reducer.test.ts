@@ -11,13 +11,15 @@ describe('withdrawLimitList reducer', () => {
             {
                 limit: '10.0',
                 period: 24,
-                withdrawal_amount: '0.0',
+                amount: '0.0',
                 currency: 'btc',
             },
             deposit:
             {
                 limit: '10',
+                amount: '0.0',
                 period: 24,
+                currency: 'btc',
             },
         };
 
@@ -33,13 +35,15 @@ describe('withdrawLimitList reducer', () => {
                 {
                     limit: '10.0',
                     period: 24,
-                    withdrawal_amount: '0.0',
+                    amount: '0.0',
                     currency: 'btc',
                 },
                 deposit:
                 {
                     limit: '10',
+                    amount: '0.0',
                     period: 24,
+                    currency: 'btc',
                 },
             },
             loading: true,
@@ -64,13 +68,15 @@ describe('withdrawLimitList reducer', () => {
                 {
                     limit: '10.0',
                     period: 24,
-                    withdrawal_amount: '0.0',
+                    amount: '0.0',
                     currency: 'btc',
                 },
                 deposit:
                 {
                     limit: '10',
+                    amount: '0.0',
                     period: 24,
+                    currency: 'btc',
                 },
             },
             loading: false,

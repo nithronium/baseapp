@@ -64,6 +64,7 @@ const answersForQuestion6 = translate => [
     translate('page.body.kyc.questionnaire.question6.answer3'),
     translate('page.body.kyc.questionnaire.question6.answer4'),
     translate('page.body.kyc.questionnaire.question6.answer5'),
+    translate('page.body.kyc.questionnaire.question6.answer6'),
 ];
 
 const answersForQuestion7 = translate => [
@@ -94,10 +95,12 @@ const answersForQuestion10 = translate => [
 ];
 
 const answersForQuestion11 = translate => [
+    translate('page.body.kyc.questionnaire.question11.answer1'),
     translate('page.body.kyc.questionnaire.question11.answer2'),
 ];
 
 const answersForQuestion12 = translate => [
+    translate('page.body.kyc.questionnaire.question12.answer1'),
     translate('page.body.kyc.questionnaire.question12.answer2'),
 ];
 
@@ -127,10 +130,9 @@ class QuestionnaireContainer extends React.Component<Props, State> {
     }
 
     public componentWillReceiveProps(nextProps: Props) {
-        const { dataStoragePushSuccess, user } = this.props;
+        const { dataStoragePushSuccess } = this.props;
 
         if (nextProps.dataStoragePushSuccess && !dataStoragePushSuccess) {
-            this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
             redirect(() => this.props.history.push(redirectIfSpecified('/profile')));
         }
@@ -214,9 +216,8 @@ class QuestionnaireContainer extends React.Component<Props, State> {
         );
     }
 
-    public renderTextareaItem(question: string) {
+    public renderTextareaItem(question: string, key: string) {
         const {
-            inputCommentFocused,
             questionnaire,
         } = this.state;
 
@@ -228,7 +229,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
         }
 
         const inputTextareaItemClass = cr('pg-questionnaire__list__textarea-item', {
-            'pg-questionnaire__list__textarea-item--focused': inputCommentFocused,
+            'pg-questionnaire__list__textarea-item--focused': this.state[`inputCommentFocused-${key}`],
             'pg-questionnaire__list__textarea-item--wrong':
                 targetQuestionValue &&
                 !this.handleValidateInput('textarea', targetQuestionValue),
@@ -243,8 +244,8 @@ class QuestionnaireContainer extends React.Component<Props, State> {
                     placeholder={this.translate('page.body.kyc.questionnaire.question13.textarea')}
                     value={targetQuestionValue || ''}
                     onChange={event => this.handleSetQuestionnaireItem(question, event.target.value)}
-                    onFocus={() => this.handleChangeFieldFocus(`inputCommentFocused`)}
-                    onBlur={() => this.handleChangeFieldFocus(`inputCommentFocused`)}
+                    onFocus={() => this.handleChangeFieldFocus(`inputCommentFocused-${key}`)}
+                    onBlur={() => this.handleChangeFieldFocus(`inputCommentFocused-${key}`)}
                 />
             </div>
         );
@@ -256,6 +257,10 @@ class QuestionnaireContainer extends React.Component<Props, State> {
                 {this.renderDropdownItem(this.translate('page.body.kyc.questionnaire.question1'), answersForQuestion1(this.translate))}
                 {this.renderDropdownItem(this.translate('page.body.kyc.questionnaire.question2'), answersForQuestion2(this.translate))}
                 {this.renderDropdownItem(this.translate('page.body.kyc.questionnaire.question3'), answersForQuestion3(this.translate))}
+                {this.renderTextareaItem(this.translate('page.body.kyc.questionnaire.question3.1'), '3.1')}
+                {this.renderTextareaItem(this.translate('page.body.kyc.questionnaire.question3.2'), '3.2')}
+                {this.renderTextareaItem(this.translate('page.body.kyc.questionnaire.question3.3'), '3.3')}
+                {this.renderTextareaItem(this.translate('page.body.kyc.questionnaire.question3.4'), '3.4')}
                 {this.renderDoubleInputItem(this.translate('page.body.kyc.questionnaire.question4'))}
                 {this.renderDropdownItem(this.translate('page.body.kyc.questionnaire.question5'), answersForQuestion5(this.translate))}
                 {this.renderDropdownItem(this.translate('page.body.kyc.questionnaire.question6'), answersForQuestion6(this.translate))}
@@ -263,9 +268,10 @@ class QuestionnaireContainer extends React.Component<Props, State> {
                 {this.renderDropdownItem(this.translate('page.body.kyc.questionnaire.question8'), answersForQuestion8(this.translate))}
                 {this.renderDropdownItem(this.translate('page.body.kyc.questionnaire.question9'), answersForQuestion9(this.translate))}
                 {this.renderDropdownItem(this.translate('page.body.kyc.questionnaire.question10'), answersForQuestion10(this.translate))}
+                {this.renderTextareaItem(this.translate('page.body.kyc.questionnaire.question10.1'), '10.1')}
                 {this.renderDropdownItem(this.translate('page.body.kyc.questionnaire.question11'), answersForQuestion11(this.translate))}
                 {this.renderDropdownItem(this.translate('page.body.kyc.questionnaire.question12'), answersForQuestion12(this.translate))}
-                {this.renderTextareaItem(this.translate('page.body.kyc.questionnaire.question13'))}
+                {this.renderTextareaItem(this.translate('page.body.kyc.questionnaire.question13'), '13')}
             </div>
         );
     }
@@ -275,15 +281,17 @@ class QuestionnaireContainer extends React.Component<Props, State> {
 
         return (
             <div className="pg-questionnaire">
-                <span className="pg-questionnaire__title">{this.translate('page.body.kyc.questionnaire.title')}</span>
-                {this.renderQuestions()}
-                <div className="pg-questionnaire__button">
-                    <Button
-                        className="pg-questionnaire__button__item"
-                        label={this.translate('page.body.kyc.confirm')}
-                        onClick={this.handleClickConfirm}
-                        disabled={questionnaire.length !== 13 || !this.handleValidateQuestionnaire(questionnaire)}
-                    />
+                <div>
+                    <span className="pg-questionnaire__title">{this.translate('page.body.kyc.questionnaire.title')}</span>
+                    {this.renderQuestions()}
+                    <div className="pg-questionnaire__button">
+                        <Button
+                            className="pg-questionnaire__button__item"
+                            label={this.translate('page.body.kyc.confirm')}
+                            onClick={this.handleClickConfirm}
+                            disabled={questionnaire.length !== 18 || !this.handleValidateQuestionnaire(questionnaire)}
+                        />
+                    </div>
                 </div>
             </div>
         );
