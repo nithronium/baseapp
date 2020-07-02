@@ -42,7 +42,7 @@ type Props = ReduxProps & DispatchProps & InjectedIntlProps & RouterProps & Hist
 
 class IdenfyContainer extends React.Component<Props, IdenfyState> {
     public state = {
-        statusGet: true,
+        statusGet: false,
     };
 
     public componentDidMount() {

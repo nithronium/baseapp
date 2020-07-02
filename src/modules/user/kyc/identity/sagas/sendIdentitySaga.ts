@@ -13,7 +13,7 @@ export function* sendIdentitySaga(action: SendIdentityFetch) {
         const response = yield call(API.post(sessionsConfig), '/resource/profiles', action.payload);
         const defaultMessage = 'success.identity.accepted';
         yield put(sendIdentityData({ data: response, message: defaultMessage }));
-        // yield put(alertPush({message: [defaultMessage], type: 'success'}));
+        yield put(alertPush({message: [defaultMessage], type: 'success'}));
     } catch (error) {
         yield put(sendIdentityError(error));
         yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
