@@ -402,6 +402,7 @@ export const zh = {
     'page.kyc.levels.block.3.requirements.item2': 'AML questionnaire',
     'page.kyc.levels.block.btn.completed': 'Completed',
     'page.kyc.levels.block.btn.uncompleted': 'Get verified',
+    'page.kyc.levels.block.btn.inprogress': 'In progress',
 
 
     'page.body.lock.oops': '糟糕咯！',
@@ -500,6 +501,7 @@ export const zh = {
     'success.order.canceled': '订单已取消',
     'success.order.canceled.all': '全部订单已取消',
     'success.order.cancelling.all': '全部订单都被取消',
+    'success.questionnaire.under.review': '您的问卷正在审查中',
     'success.order.created': '订单已创建',
     'success.phone.verification.send': '验证码已发送到您的手机',
     'success.phone.confirmed': '您的电话已确认',

@@ -15,7 +15,7 @@ const dataStoragePushConfig: RequestOptions = {
 export function* dataStoragePushSaga(action: DataStoragePush) {
     try {
         yield call(API.post(dataStoragePushConfig), '/resource/data_storage', action.payload);
-        yield call(API.post(dataStoragePushConfig), '/resource/labels', {key:'questionnaire', value: 'public'});
+        yield call(API.post(dataStoragePushConfig), '/resource/labels', {key:'questionnaireForm', value: 'created'});
         yield put(dataStoragePushData());
         yield put(alertPush({ message: ['success.dataStorage.pushed'], type: 'success'}));
     } catch (error) {
