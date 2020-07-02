@@ -411,7 +411,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             if (history.location.state.profAddressStep) { locationState = 'profAddressStep'; }
             if (history.location.state.questionnaireStep) { locationState = 'questionnaireStep'; }
         } else {
-            this.redirectByUserLevel()
+            this.redirectByUserLevel();
         }
         this.handleCheckPendingLabels(labels);
         if (locationState === 'profilePartialStep') {
