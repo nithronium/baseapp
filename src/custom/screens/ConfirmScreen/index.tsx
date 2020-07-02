@@ -86,24 +86,39 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                 handleRedirectToConfirm('address', history);
             }
         } else {
-            switch (userData.level) {
-                case 1: handleRedirectToConfirm('profilePartialStep', history);break;
-                case 2: handleRedirectToConfirm('phoneStep', history);break;
-                case 3: handleRedirectToConfirm('identifyStep', history);break;
-                case 4: {
-                    if (userData.profile && userData.profile.address) {
-                        handleRedirectToConfirm('profAddressStep', history);
-                    } else {
-                        handleRedirectToConfirm('addressStep', history);
-                    }
-                    // tslint:disable-next-line
-                } break;
-                case 5: handleRedirectToConfirm('questionnaireStep', history);break;
-
-                default: handleRedirectToConfirm('', history);break;
-            }
+            this.redirectByUserLevel()
         }
     }
+
+    public redirectByUserLevel = () => {
+        const { userData, history, currentLanguage } = this.props;
+
+        switch (userData.level) {
+            case 1: handleRedirectToConfirm('profilePartialStep', history);break;
+            case 2: {
+                handleRedirectToConfirm('phoneStep', history);
+                break;
+            }
+            case 3: handleRedirectToConfirm('identifyStep', history);break;
+            case 4: {
+                if (userData.profile && userData.profile.address) {
+                    const redirectUrl = getRedirectUrl();
+                    if (redirectUrl && hasUrlForRedirect(redirectUrl)) {
+                        console.log('ConfirmComponent redirect');
+                        redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
+                        return;
+                    }
+                    handleRedirectToConfirm('profAddressStep', history);
+                } else {
+                    handleRedirectToConfirm('addressStep', history);
+                }
+                // tslint:disable-next-line
+            } break;
+            case 5: handleRedirectToConfirm('questionnaireStep', history);break;
+
+            default: handleRedirectToConfirm('', history);break;
+        }
+    };
 
     public goBack = event => {
       const lang = this.props.currentLanguage;
@@ -377,6 +392,8 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             if (history.location.state.addressStep) { locationState = 'addressStep'; }
             if (history.location.state.profAddressStep) { locationState = 'profAddressStep'; }
             if (history.location.state.questionnaireStep) { locationState = 'questionnaireStep'; }
+        } else {
+            this.redirectByUserLevel()
         }
         this.handleCheckPendingLabels(labels);
         if (locationState === 'profilePartialStep') {
