@@ -98,7 +98,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                 handleRedirectToConfirm('address', history);
             }
         } else {
-            this.redirectByUserLevel()
+            this.redirectByUserLevel();
         }
     }
 
