@@ -3,7 +3,7 @@ import * as React from 'react';
 import {injectIntl} from 'react-intl';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {dataStorageGetData, RootState, selectDataStorageAlready, selectUserInfo} from '../../modules';
+import {RootState, selectUserInfo} from '../../modules';
 
 const kycLevels = [
     {
@@ -69,7 +69,6 @@ const PricePackages = props => {
     React.useEffect(() => {
         // @ts-ignore
         setClientWidth(widthPage.current.clientWidth);
-        props.dataStorageGet();
     }, []);
     const userLevel = props.user.level;
     const kycBlock = (info, key, isCompleted) => (
@@ -152,13 +151,9 @@ const PricePackages = props => {
                 </ul>
             </div>
             {!isCompleted
-                ? userLevel === 5
-                 ?  <Link to={props.selectDataStorageAlready === 'true' ? '/profile' : '/confirm'} className={`carousel-block__btn-block green`}>
-                        {props.intl.formatMessage({id: props.selectDataStorageAlready === 'false' ? 'page.kyc.levels.block.btn.uncompleted' : 'page.kyc.levels.block.btn.inprogress'})}
-                    </Link>
-                    : <Link to={'/confirm'} className={`carousel-block__btn-block green`}>
-                        {props.intl.formatMessage({id: 'page.kyc.levels.block.btn.uncompleted'})}
-                    </Link>
+                ? <Link to={'/confirm'} className={`carousel-block__btn-block green`}>
+                    {props.intl.formatMessage({id: 'page.kyc.levels.block.btn.uncompleted'})}
+                </Link>
                 : <div className={`carousel-block__btn-block yellow`}>
                     {props.intl.formatMessage({id: 'page.kyc.levels.block.btn.completed'})}
                 </div>
@@ -199,10 +194,4 @@ const PricePackages = props => {
         </div>);
 };
 
-export const PricePackagesScreen = injectIntl(connect(
-    (state: RootState) => ({
-        user: selectUserInfo(state),
-        selectDataStorageAlready: selectDataStorageAlready(state),
-    }),
-    dispatch => ({dataStorageGet: () => dispatch(dataStorageGetData())}),
-    )(PricePackages));
+export const PricePackagesScreen = injectIntl(connect((state: RootState) => ({user: selectUserInfo(state)}), null)(PricePackages));

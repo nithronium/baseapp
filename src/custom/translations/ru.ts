@@ -601,7 +601,6 @@ export const ru: LangType = {
     'page.kyc.levels.block.3.requirements.item2': 'AML questionnaire',
     'page.kyc.levels.block.btn.completed': 'Completed',
     'page.kyc.levels.block.btn.uncompleted': 'Get verified',
-    'page.kyc.levels.block.btn.inprogress': 'In progress',
 
     'page.body.lock.oops': 'Ой!',
     'page.body.lock.expired': 'Похоже, что ваш пробный период истек',
@@ -718,7 +717,6 @@ export const ru: LangType = {
     'success.order.cancelling.all': 'Все запросы отменяются',
     'success.order.created': 'Запрос успешно создан',
     'success.phone.verification.send': 'Код верификации был отправлен на ваш телефон',
-    'success.questionnaire.under': 'Ваша анкета находится на рассмотрении',
     'success.phone.confirmed': 'Ваш телефон подтвержден',
     'success.phone.confirmation.message': 'Успех!',
     'success.message.sent': 'Письмо было успешно отправлено',
