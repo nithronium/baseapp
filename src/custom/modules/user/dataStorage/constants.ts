@@ -4,5 +4,4 @@ export const DATA_STORAGE_FETCH = 'data/STORAGE_FETCH';
 
 export const DATA_STORAGE_PUSH = 'data/STORAGE_PUSH';
 export const DATA_STORAGE_PUSH_DATA = 'data/STORAGE_PUSH_DATA';
-export const DATA_STORAGE_GET_DATA = 'data/DATA_STORAGE_GET_DATA';
 export const DATA_STORAGE_PUSH_ERROR = 'data/STORAGE_PUSH_ERROR';

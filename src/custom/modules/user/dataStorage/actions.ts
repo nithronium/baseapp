@@ -3,7 +3,6 @@ import {
     DATA_STORAGE_DATA,
     DATA_STORAGE_ERROR,
     DATA_STORAGE_FETCH,
-    DATA_STORAGE_GET_DATA,
     DATA_STORAGE_PUSH,
     DATA_STORAGE_PUSH_DATA,
     DATA_STORAGE_PUSH_ERROR,
@@ -37,10 +36,6 @@ export interface DataStoragePush {
 
 export interface DataStoragePushData {
     type: typeof DATA_STORAGE_PUSH_DATA;
-}
-
-export interface DataStorageGetData {
-    type: typeof DATA_STORAGE_GET_DATA;
 }
 
 export interface DataStoragePushError {
@@ -78,10 +73,6 @@ export const dataStoragePush = (payload: DataStoragePush['payload']): DataStorag
 
 export const dataStoragePushData = (): DataStoragePushData => ({
     type: DATA_STORAGE_PUSH_DATA,
-});
-
-export const DataStorageGetData = (): DataStorageGetData => ({
-    type: DATA_STORAGE_GET_DATA,
 });
 
 export const dataStoragePushError = (payload: DataStoragePushError['payload']): DataStoragePushError => ({

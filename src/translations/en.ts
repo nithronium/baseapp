@@ -120,7 +120,7 @@ export const en = {
     'page.body.wallets.tabs.deposit.ccy.message.submit':
         'Submit a deposit using the following address or QR code. Your deposit will be reflected in your account after 6 confirmations',
     'page.body.wallets.tabs.deposit.ccy.message.limits1': 'Your deposit shouldn\'t be more than equivalent of',
-    'page.body.wallets.tabs.deposit.ccy.message.limits2': ' to comply your monthly limit.',
+    'page.body.wallets.tabs.deposit.ccy.message.limits2': ' to comply monthly limit.',
     'page.body.wallets.tabs.deposit.ccy.message.address': 'Deposit Address',
     'page.body.wallets.tabs.deposit.ccy.message.button': 'COPY',
     'page.body.wallets.tabs.deposit.ccy.message.success': 'Address copied',
@@ -529,7 +529,6 @@ export const en = {
     'success.phone.confirmation.message': 'Success!',
     'success.message.sent': 'Message was sent',
     'success.email.confirmed': 'Your email address has been successfully confirmed',
-    'success.questionnaire.under': 'Your Questionnaire is under review',
 
     // error messages
     // barong
