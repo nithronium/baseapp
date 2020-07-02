@@ -98,6 +98,8 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                     }
                     // tslint:disable-next-line
                 } break;
+                case 5: handleRedirectToConfirm('questionnaireStep', history);break;
+
                 default: handleRedirectToConfirm('', history);break;
             }
         }
@@ -355,6 +357,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         return null;
     }
 
+    // @ts-ignore
     private renderContent = () => {
         const {
             history,
@@ -373,6 +376,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             if (history.location.state.identifyStep) { locationState = 'identifyStep'; }
             if (history.location.state.addressStep) { locationState = 'addressStep'; }
             if (history.location.state.profAddressStep) { locationState = 'profAddressStep'; }
+            if (history.location.state.questionnaireStep) { locationState = 'questionnaireStep'; }
         }
         this.handleCheckPendingLabels(labels);
         if (locationState === 'profilePartialStep') {
@@ -406,9 +410,9 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             }
             return this.renderFourthLevel();
         }
-
-        return <Questionnaire />;
-
+        if (locationState ===  'questionnaireStep') {
+            return <Questionnaire />;
+        }
         // history.push(redirectIfSpecified('/profile'));
     };
 }
