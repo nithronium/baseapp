@@ -193,6 +193,8 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
     }
     //tslint:disable
     public renderUpgradeLevelLink() {
+        // tslint:disable-next-line:no-console
+        console.log('...........label', this.props.label);
         return (
             <Link to={'/kyc-levels'} className="pg-profile-verification__upgrade-level">
                 <FormattedMessage id="page.body.profile.header.account.profile.upgrade" />
