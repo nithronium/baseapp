@@ -158,8 +158,8 @@ const PricePackages = props => {
             </div>
             {!isCompleted
                 ? userLevel === 5
-                 ?  <Link to={checkQuestionnaire(props.labels) ? '/profile' : '/confirm'} className={`carousel-block__btn-block green`}>
-                        {props.intl.formatMessage({id: props.selectDataStorageAlready === 'false' ? 'page.kyc.levels.block.btn.uncompleted' : 'page.kyc.levels.block.btn.inprogress'})}
+                 ?  <Link to={checkQuestionnaire(props.label) ? '/profile' : '/confirm'} className={`carousel-block__btn-block green`}>
+                        {props.intl.formatMessage({id: checkQuestionnaire(props.label) ? 'page.kyc.levels.block.btn.inprogress' : 'page.kyc.levels.block.btn.uncompleted'})}
                     </Link>
                     : <Link to={'/confirm'} className={`carousel-block__btn-block green`}>
                         {props.intl.formatMessage({id: 'page.kyc.levels.block.btn.uncompleted'})}
