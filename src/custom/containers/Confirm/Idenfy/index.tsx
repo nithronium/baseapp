@@ -120,6 +120,7 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
 
     private onBackButtonClick = () => {
         const { history } = this.props;
+        this.props.changeUserLevel({ level: 4 });
         handleRedirectToConfirm('addressStep', history);
     }
 }
