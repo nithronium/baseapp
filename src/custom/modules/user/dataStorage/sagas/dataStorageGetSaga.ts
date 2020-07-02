@@ -16,10 +16,10 @@ export function* dataStorageGetSaga(action: DataStorageGetData) {
     try {
         const payload = yield call(API.get(dataStorageConfig), `/resource/profiles/me `);
         if (payload.data_storages.length) {
-            yield put(alertPush({ message: ['success.questionnaire.under'], type: 'success'}));
-            yield put(dataStorageSetAlready('true'));
+            yield put(alertPush({message: ['success.questionnaire.under'], type: 'success'}));
+            yield put(dataStorageSetAlready(true));
         } else {
-            yield put(dataStorageSetAlready('false'));
+            yield put(dataStorageSetAlready(false));
         }
     } catch (error) {
         yield put(dataStorageError(error));

@@ -600,7 +600,6 @@ export const ru: LangType = {
     'page.kyc.levels.block.3.requirements.item2': 'AML questionnaire',
     'page.kyc.levels.block.btn.completed': 'Completed',
     'page.kyc.levels.block.btn.uncompleted': 'Get verified',
-    'page.kyc.levels.block.btn.inprogress': 'In progress',
 
     'page.body.lock.oops': 'Ой!',
     'page.body.lock.expired': 'Похоже, что ваш пробный период истек',

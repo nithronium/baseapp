@@ -169,7 +169,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
             });
         }
 
-        if ((prevProps.selectDataStorageAlready !== selectDataStorageAlready) && selectDataStorageAlready === 'false') {
+        if ((prevProps.selectDataStorageAlready !== selectDataStorageAlready) && !selectDataStorageAlready) {
             handleRedirectToConfirm('', this.props.history)
         }
     }

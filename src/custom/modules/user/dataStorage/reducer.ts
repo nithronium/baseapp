@@ -23,7 +23,7 @@ export interface DataStorageState {
         loading: boolean;
         error?: CommonError;
     };
-    already: string;
+    already: boolean;
 }
 
 export const initialDataStorageState: DataStorageState = {
@@ -35,7 +35,7 @@ export const initialDataStorageState: DataStorageState = {
         success: false,
         loading: false,
     },
-    already: '',
+    already: false,
 };
 
 export const dataStorageFetchReducer = (state: DataStorageState['fetch'], action: DataStorageAction) => {

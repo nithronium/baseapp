@@ -46,7 +46,7 @@ export interface DataStorageGetData {
 
 export interface DataStorageSetAlready {
     type: typeof DATA_STORAGE_ALREADY;
-    payload: string;
+    payload: boolean;
 }
 
 export interface DataStoragePushError {

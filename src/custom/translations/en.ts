@@ -185,7 +185,6 @@ export const en = {
     'page.kyc.levels.block.3.requirements.item2': 'AML questionnaire',
     'page.kyc.levels.block.btn.completed': 'Completed',
     'page.kyc.levels.block.btn.uncompleted': 'Get verified',
-    'page.kyc.levels.block.btn.inprogress': 'In progress',
 
 
     'page.body.trade.header.openOrders.content.date': 'Time',
