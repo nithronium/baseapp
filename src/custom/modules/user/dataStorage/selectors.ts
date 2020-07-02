@@ -20,9 +20,6 @@ export const selectDataStorageFetchError = (state: RootState): CommonError | und
 export const selectDataStoragePushSuccess = (state: RootState): boolean =>
     state.customUser.dataStorage.push.success;
 
-export const selectDataStorageAlready = (state: RootState): boolean =>
-    state.customUser.dataStorage.already;
-
 export const selectDataStoragePushLoading = (state: RootState): boolean =>
     state.customUser.dataStorage.push.loading;
 

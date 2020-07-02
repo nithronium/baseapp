@@ -1,6 +1,5 @@
 import { CommonError } from '../../../../modules/types';
 import {
-    DATA_STORAGE_ALREADY,
     DATA_STORAGE_DATA,
     DATA_STORAGE_ERROR,
     DATA_STORAGE_FETCH,
@@ -44,11 +43,6 @@ export interface DataStorageGetData {
     type: typeof DATA_STORAGE_GET_DATA;
 }
 
-export interface DataStorageSetAlready {
-    type: typeof DATA_STORAGE_ALREADY;
-    payload: boolean;
-}
-
 export interface DataStoragePushError {
     type: typeof DATA_STORAGE_PUSH_ERROR;
     payload: CommonError;
@@ -60,7 +54,6 @@ export type DataStorageAction = DataStorageFetch
     | DataStorageError
     | DataStoragePush
     | DataStoragePushData
-    | DataStorageSetAlready
     | DataStoragePushError;
 
 export const dataStorageFetch = (payload: DataStorageFetch['payload']): DataStorageFetch => ({
@@ -87,13 +80,8 @@ export const dataStoragePushData = (): DataStoragePushData => ({
     type: DATA_STORAGE_PUSH_DATA,
 });
 
-export const dataStorageGetData = (): DataStorageGetData => ({
+export const DataStorageGetData = (): DataStorageGetData => ({
     type: DATA_STORAGE_GET_DATA,
-});
-
-export const dataStorageSetAlready = (payload: DataStorageSetAlready['payload']): DataStorageSetAlready => ({
-    type: DATA_STORAGE_ALREADY,
-    payload,
 });
 
 export const dataStoragePushError = (payload: DataStoragePushError['payload']): DataStoragePushError => ({
