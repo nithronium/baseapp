@@ -393,8 +393,10 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             if (history.location.state.profAddressStep) { locationState = 'profAddressStep'; }
             if (history.location.state.questionnaireStep) { locationState = 'questionnaireStep'; }
         } else {
-            this.redirectByUserLevel()
+            this.redirectByUserLevel();
         }
+        // tslint:disable-next-line:no-console
+        console.log('...........locationState', locationState);
         this.handleCheckPendingLabels(labels);
         if (locationState === 'profilePartialStep') {
             return <ProfilePartial toggleBlockNationalityModal={this.handleToggleBlockNationalityModal} />;
@@ -430,6 +432,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         if (locationState ===  'questionnaireStep') {
             return <Questionnaire />;
         }
+        return null;
         // history.push(redirectIfSpecified('/profile'));
     };
 }
