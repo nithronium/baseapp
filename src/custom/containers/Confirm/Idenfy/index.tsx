@@ -16,7 +16,7 @@ import { changeUserLevel } from '../../../../modules/user/profile';
 import { kycAuthFetch, selectKycAuthData } from '../../../modules';
 import { KycAuthDataInterface } from '../../../modules/user/kycAuth/types';
 
-import { handleRedirectToConfirm, redirect, redirectIfSpecified } from '../../../helpers';
+import { handleRedirectToConfirm } from '../../../helpers';
 
 interface ReduxProps {
     kycAuthData?: KycAuthDataInterface;
@@ -120,8 +120,7 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
 
     private onBackButtonClick = () => {
         const { history } = this.props;
-
-        redirect(() => history.push(redirectIfSpecified('/profile')));
+        handleRedirectToConfirm('addressStep', history);
     }
 }
 
