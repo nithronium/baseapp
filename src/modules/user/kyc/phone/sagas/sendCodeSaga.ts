@@ -14,7 +14,21 @@ export function* sendCodeSaga(action: SendCodeFetch) {
         yield put(sendCodeData());
         yield put(alertPush({message: ['success.phone.verification.send'], type: 'success'}));
     } catch (error) {
-        yield put(sendCodeError(error));
-        yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+        // tslint:disable-next-line:no-console
+        console.log('...........error', error);
+        if (error.code === 'resource.phone.exists') {
+            try {
+                yield call(API.post(sessionsConfig), '/resource/phones/send_code', action.payload);
+                yield put(sendCodeData());
+                yield put(alertPush({message: ['success.phone.verification.send'], type: 'success'}));
+            } catch (err) {
+                yield put(sendCodeError(error));
+                yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+            }
+        } else {
+            yield put(sendCodeError(error));
+            yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+        }
+
     }
 }
