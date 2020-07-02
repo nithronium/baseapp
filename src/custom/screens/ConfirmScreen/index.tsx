@@ -395,8 +395,6 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         } else {
             this.redirectByUserLevel();
         }
-        // tslint:disable-next-line:no-console
-        console.log('...........locationState', locationState);
         this.handleCheckPendingLabels(labels);
         if (locationState === 'profilePartialStep') {
             return <ProfilePartial toggleBlockNationalityModal={this.handleToggleBlockNationalityModal} />;
