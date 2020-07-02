@@ -11,6 +11,7 @@ import { WalletItemProps } from '../../../components/WalletItem';
 import { 
     VALUATION_PRIMARY_CURRENCY,
 } from '../../../constants';
+import { checkQuestionnaire } from '../../../helpers';
 import { estimateValue } from '../../../helpers/estimateValue';
 import {
     alertPush,
@@ -70,6 +71,7 @@ interface DispatchProps {
     fetchWithdrawLimit: typeof withdrawLimitFetch;
     rangerConnect: typeof rangerConnectFetch;
     fetchSuccess: typeof alertPush;
+    fetchWaitingQuestionnaire: typeof alertPush;
 }
 interface State {
     formattedDepositHistory: WalletItemProps[];
@@ -193,13 +195,20 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
     }
     //tslint:disable
     public renderUpgradeLevelLink() {
-        // tslint:disable-next-line:no-console
-        console.log('...........label', this.props.label);
-        return (
-            <Link to={'/kyc-levels'} className="pg-profile-verification__upgrade-level">
-                <FormattedMessage id="page.body.profile.header.account.profile.upgrade" />
-            </Link>
-        );
+        if (checkQuestionnaire(this.props.label)) {
+            return (
+                <div onClick={() => this.props.fetchWaitingQuestionnaire({ message: ['success.questionnaire.under.review'], type: 'success'})} className="pg-profile-verification__upgrade-level">
+                    <FormattedMessage id="page.body.profile.header.account.profile.upgrade" />
+                </div>
+            );
+        } else {
+            return (
+                <Link to={'/kyc-levels'} className="pg-profile-verification__upgrade-level">
+                    <FormattedMessage id="page.body.profile.header.account.profile.upgrade" />
+                </Link>
+            );
+        }
+
     }
 
     public renderUserAbilities(level: number, withdrawLimitData: WithdrawLimit) {
@@ -474,6 +483,7 @@ const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch
     fetchWithdrawLimit: () => dispatch(withdrawLimitFetch()),
     rangerConnect: (payload: RangerConnectFetch['payload']) => dispatch(rangerConnectFetch(payload)),
     fetchSuccess: payload => dispatch(alertPush(payload)),
+    fetchWaitingQuestionnaire: payload => dispatch(alertPush(payload)),
 });
 
 const ProfileVerification = injectIntl(connect(mapStateToProps, mapDispatchProps)(ProfileVerificationComponent));

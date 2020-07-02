@@ -523,6 +523,7 @@ export const en = {
     'success.order.canceled': 'Order was cancelled',
     'success.order.canceled.all': 'All orders were cancelled',
     'success.order.cancelling.all': 'All orders are being canceled',
+    'success.questionnaire.under.review': 'Your Questionnaire is under review.',
     'success.order.created': 'Order was created',
     'success.phone.verification.send': 'Verification code was sent to your phone',
     'success.phone.confirmed': 'Your phone was confirmed',
