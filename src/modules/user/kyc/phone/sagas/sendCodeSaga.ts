@@ -14,7 +14,7 @@ export function* sendCodeSaga(action: SendCodeFetch) {
         yield put(sendCodeData());
         yield put(alertPush({message: ['success.phone.verification.send'], type: 'success'}));
     } catch (error) {
-        if (error.code === 400 && error.message[0] === 'resource.phone.number_exist') {
+        if (error.code === 400 && error.message[0] === 'resource.phone.exists') {
             try {
                 yield call(API.post(sessionsConfig), '/resource/phones/send_code', action.payload);
                 yield put(sendCodeData());
