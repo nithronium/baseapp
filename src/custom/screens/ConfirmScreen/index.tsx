@@ -58,6 +58,18 @@ interface ConfirmState {
 
 type Props = ReduxProps & HistoryProps & DispatchProps;
 
+const urlsForRedirect = ['chatello', 'buycrypto'];
+
+const hasUrlForRedirect = redirectUrl => {
+    for (const url of urlsForRedirect) {
+        if (redirectUrl.indexOf(url) !== -1) {
+            return true;
+        }
+    }
+
+    return false;
+};
+
 class ConfirmComponent extends React.Component<Props, ConfirmState> {
     constructor(props: Props) {
         super(props);
@@ -89,11 +101,6 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             switch (userData.level) {
                 case 1: handleRedirectToConfirm('profilePartialStep', history);break;
                 case 2: {
-                    const redirectUrl = getRedirectUrl();
-                    if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
-                        redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
-                        return;
-                    }
                     handleRedirectToConfirm('phoneStep', history);
                     break;
                 }
@@ -102,6 +109,11 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                     if (userData.profile && userData.profile.address) {
                         handleRedirectToConfirm('profAddressStep', history);
                     } else {
+                        const redirectUrl = getRedirectUrl();
+                        if (redirectUrl && hasUrlForRedirect(redirectUrl)) {
+                            redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
+                            return;
+                        }
                         handleRedirectToConfirm('addressStep', history);
                     }
                     // tslint:disable-next-line
@@ -341,6 +353,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             labels,
             fetchAlert,
             history,
+            currentLanguage,
         } = this.props;
 
 
@@ -357,6 +370,11 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             return <Documents />;
         }
         if (history.location && history.location.state && history.location.state.addressStep) {
+            const redirectUrl = getRedirectUrl();
+            if (redirectUrl && hasUrlForRedirect(redirectUrl)) {
+                redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
+                return;
+            }
             return <ProfileAddress />;
         }
 
@@ -367,7 +385,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const {
             history,
             labels,
-            currentLanguage,
+            // currentLanguage,
         } = this.props;
         if (!labels.length) {
             return null;
@@ -400,11 +418,6 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         }
 
         if (locationState === 'phoneStep') {
-            const redirectUrl = getRedirectUrl();
-            if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
-                redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
-                return;
-            }
             return <Phone />;
         }
 

@@ -165,7 +165,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
             history.push(`/signup?redirect_url=${encodeURIComponent(url)}`);
             return;
         }
-        if (user.level < 2) {
+        if (user.level < 4) {
             history.push(`/confirm?redirect_url=${encodeURIComponent(url)}`);
         }
         this.setState({
@@ -220,7 +220,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     public getButtonTextKey = (): string => {
         const { userLoggedIn, user } = this.props;
         if (userLoggedIn) {
-            if (user.level >= 2) {
+            if (user.level >= 4) {
                 return 'chatello.form.buttonBuy';
             } else {
                 return 'buyWithCard.form.buttonNotVerified';
@@ -361,7 +361,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
         const { chaValue } = this.state;
         const chaNumber = Number(chaValue);
         if (userLoggedIn) {
-            if (user.level >= 2) {
+            if (user.level >= 4) {
                 const min = Number(this.getMinLimit());
                 const max = Number(this.getMaxLimit());
                 if (chaNumber < min || chaNumber > max) {
