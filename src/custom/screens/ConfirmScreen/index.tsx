@@ -107,13 +107,14 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                 case 3: handleRedirectToConfirm('identifyStep', history);break;
                 case 4: {
                     if (userData.profile && userData.profile.address) {
-                        handleRedirectToConfirm('profAddressStep', history);
-                    } else {
                         const redirectUrl = getRedirectUrl();
                         if (redirectUrl && hasUrlForRedirect(redirectUrl)) {
+                            console.log('ConfirmComponent redirect');
                             redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
                             return;
                         }
+                        handleRedirectToConfirm('profAddressStep', history);
+                    } else {
                         handleRedirectToConfirm('addressStep', history);
                     }
                     // tslint:disable-next-line
@@ -353,7 +354,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             labels,
             fetchAlert,
             history,
-            currentLanguage,
+            // currentLanguage,
         } = this.props;
 
 
@@ -370,11 +371,11 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             return <Documents />;
         }
         if (history.location && history.location.state && history.location.state.addressStep) {
-            const redirectUrl = getRedirectUrl();
-            if (redirectUrl && hasUrlForRedirect(redirectUrl)) {
-                redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
-                return;
-            }
+            // const redirectUrl = getRedirectUrl();
+            // if (redirectUrl && hasUrlForRedirect(redirectUrl)) {
+            //     redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
+            //     return;
+            // }
             return <ProfileAddress />;
         }
 
