@@ -36,7 +36,7 @@ export const handleRedirectToConfirm = (editParam: string, history) => {
       history.push(buildPath(buildUrlWithRedirect('/confirm'), lang), { profAddressStep: true });
       break;
     case 'questionnaireStep':
-      history.push(buildPath(buildUrlWithRedirect('/confirm'), lang), { questionnaireStep: true });
+      history.push(buildPath('/confirm', lang), { questionnaireStep: true });
       break;
     default:
       break;

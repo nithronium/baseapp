@@ -350,7 +350,7 @@ class ProfileVerificationComponent extends React.Component<ProfileProps, State> 
                     {userLevel < 6 && this.renderUpgradeLevelLink()}
                     {this.renderStatusIcon(label)}
                 </div>
-                {/*{(withdrawLimitDataExists || withdrawLimitMessageExists) && this.renderUserAbilities(userLevel, withdrawLimitData)}*/}
+                {userLevel >= 6 && this.renderUserAbilities(userLevel, withdrawLimitData)}
                 {withdrawLimitDataExists && [4,5].includes(userLevel) && this.renderWithdrawLimit(userLevel, withdrawLimitData)}
                 {withdrawLimitDataExists && [4,5].includes(userLevel) && this.renderDepositLimit(userLevel, withdrawLimitData)}
             </div>
