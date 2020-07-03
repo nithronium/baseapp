@@ -10,7 +10,7 @@ export const en = {
         '- Ability to deposit / withdraw up to {amount}{currency} equivalent per year',
     'page.body.profile.header.account.profile.abilities.second.message2':
         '- Ability to deposit / withdraw using a Credit / Debit card ',
-    'page.body.profile.header.account.profile.abilities.third': '- No limit of deposit / withdrawals',
+    'page.body.profile.header.account.profile.abilities.third': 'No limits for deposit / withdrawals',
     'page.body.profile.header.account.profile.withdraw': 'Your WITHDRAWAL limit per month: ',
     'page.body.profile.header.account.profile.deposit': 'Your DEPOSIT limit per month: ',
     'page.body.profile.header.account.profile.knowMore': 'Know more about verification levels',

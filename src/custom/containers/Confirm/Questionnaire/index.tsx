@@ -6,9 +6,12 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import {checkQuestionnaire} from '../../../../helpers';
 import {
+    Label,
     labelFetch,
     RootState,
+    selectLabelData,
     selectUserInfo,
     User,
 } from '../../../../modules';
@@ -26,6 +29,7 @@ import { removeQuestionnaire } from '../../../../api';
 interface ReduxProps {
     dataStoragePushSuccess: boolean;
     user: User;
+    label: Label[];
 }
 
 interface HistoryProps {
@@ -131,9 +135,15 @@ class QuestionnaireContainer extends React.Component<Props, State> {
         };
     }
 
+    public componentDidMount() {
+        this.props.labelFetch();
+    }
+
     public componentWillReceiveProps(nextProps: Props) {
         const { dataStoragePushSuccess, user } = this.props;
-
+        if (nextProps.label && checkQuestionnaire(nextProps.label)) {
+            redirect(() => this.props.history.push(redirectIfSpecified('/profile')));
+        }
         if (nextProps.dataStoragePushSuccess && !dataStoragePushSuccess) {
             this.props.labelFetch();
             // tslint:disable-next-line
@@ -415,6 +425,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
 const mapStateToProps = (state: RootState): ReduxProps => ({
     dataStoragePushSuccess: selectDataStoragePushSuccess(state),
     user: selectUserInfo(state),
+    label: selectLabelData(state),
 });
 
 const mapDispatchProps: MapDispatchToPropsFunction<DispatchProps, {}> =
