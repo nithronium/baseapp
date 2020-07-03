@@ -136,6 +136,8 @@ class QuestionnaireContainer extends React.Component<Props, State> {
     }
 
     public componentDidMount() {
+        // tslint:disable-next-line:no-console
+        console.log('...........render questionaire');
         this.props.labelFetch();
     }
 
@@ -144,10 +146,8 @@ class QuestionnaireContainer extends React.Component<Props, State> {
         if (nextProps.label && checkQuestionnaire(nextProps.label)) {
             redirect(() => this.props.history.push(redirectIfSpecified('/profile')));
         }
-        // tslint:disable-next-line:no-console
-        console.log('...........nextProps.dataStoragePushSuccess && !dataStoragePushSuccess', nextProps.dataStoragePushSuccess, !dataStoragePushSuccess);
         if (nextProps.dataStoragePushSuccess && !dataStoragePushSuccess) {
-            // this.props.labelFetch();
+            this.props.labelFetch();
             // tslint:disable-next-line
             removeQuestionnaire({ uid: user.uid });
             redirect(() => this.props.history.push(redirectIfSpecified('/profile')));

@@ -84,6 +84,8 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     }
 
     public componentDidMount() {
+        // tslint:disable-next-line:no-console
+        console.log('...........render confirm');
         setDocumentTitle('Confirm');
         this.props.labelFetch();
         const { userData, history } = this.props;
