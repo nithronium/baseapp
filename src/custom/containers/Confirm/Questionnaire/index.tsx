@@ -147,7 +147,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
         // tslint:disable-next-line:no-console
         console.log('...........nextProps.dataStoragePushSuccess && !dataStoragePushSuccess', nextProps.dataStoragePushSuccess, !dataStoragePushSuccess);
         if (nextProps.dataStoragePushSuccess && !dataStoragePushSuccess) {
-            this.props.labelFetch();
+            // this.props.labelFetch();
             // tslint:disable-next-line
             removeQuestionnaire({ uid: user.uid });
             redirect(() => this.props.history.push(redirectIfSpecified('/profile')));
