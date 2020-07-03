@@ -144,6 +144,8 @@ class QuestionnaireContainer extends React.Component<Props, State> {
         if (nextProps.label && checkQuestionnaire(nextProps.label)) {
             redirect(() => this.props.history.push(redirectIfSpecified('/profile')));
         }
+        // tslint:disable-next-line:no-console
+        console.log('...........nextProps.dataStoragePushSuccess && !dataStoragePushSuccess', nextProps.dataStoragePushSuccess, !dataStoragePushSuccess);
         if (nextProps.dataStoragePushSuccess && !dataStoragePushSuccess) {
             this.props.labelFetch();
             // tslint:disable-next-line
@@ -374,7 +376,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
             updatedQuestionnaire.push({ key: question, value: answerToSet });
             this.setState({ questionnaire: updatedQuestionnaire });
         }
-    }
+    };
 
     private handleValidateInput = (field: string, value: string): boolean => {
         switch (field) {
@@ -387,7 +389,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
             default:
                 return true;
         }
-    }
+    };
 
     private translate = (e: string) => {
         return this.props.intl.formatMessage({id: e});
