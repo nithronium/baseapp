@@ -157,6 +157,7 @@ const initRanger = (
             emitter(rangerDisconnectData());
         };
     });
+    // @ts-ignore
     return [channel, ws];
 };
 

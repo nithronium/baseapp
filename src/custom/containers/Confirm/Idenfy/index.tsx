@@ -16,7 +16,7 @@ import { changeUserLevel } from '../../../../modules/user/profile';
 import { kycAuthFetch, selectKycAuthData } from '../../../modules';
 import { KycAuthDataInterface } from '../../../modules/user/kycAuth/types';
 
-import { handleRedirectToConfirm } from '../../../helpers';
+import { buildPath, getRedirectUrl, handleRedirectToConfirm } from '../../../helpers';
 
 interface ReduxProps {
     kycAuthData?: KycAuthDataInterface;
@@ -39,6 +39,8 @@ interface IdenfyState {
 }
 
 type Props = ReduxProps & DispatchProps & InjectedIntlProps & RouterProps & HistoryProps;
+
+const urlsForRedirect = ['chatello', 'buycrypto'];
 
 class IdenfyContainer extends React.Component<Props, IdenfyState> {
     public state = {
@@ -119,9 +121,14 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
     };
 
     private onBackButtonClick = () => {
-        const { history } = this.props;
-        this.props.changeUserLevel({ level: 4 });
-        handleRedirectToConfirm('addressStep', history);
+        const { history, currentLanguage } = this.props;
+        const redirectUrl = getRedirectUrl();
+        if (urlsForRedirect.some(url => redirectUrl.indexOf(url) !== -1)) {
+            this.props.changeUserLevel({ level: 4 });
+            handleRedirectToConfirm('addressStep', history);
+        } else {
+            history.push(buildPath('/kyc-levels', currentLanguage));
+        }
     }
 }
 

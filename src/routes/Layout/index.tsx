@@ -70,7 +70,7 @@ interface DispatchProps {
 }
 
 interface OwnProps {
-    history: History;
+    history: History<{ fromSignIn }>;
 }
 
 // interface State {

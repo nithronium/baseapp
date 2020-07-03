@@ -39,7 +39,18 @@ interface ReduxProps {
 }
 
 interface HistoryProps {
-    history: History;
+    history: History<{
+        profilePartialStep,
+        addressEdit,
+        profileEdit,
+        phoneStep,
+        identifyStep,
+        addressStep,
+        profAddressStep,
+        questionnaireStep,
+        editAddress,
+        editProfile,
+    }>;
 }
 
 interface DispatchProps {

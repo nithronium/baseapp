@@ -23,7 +23,10 @@ const copy = (id: string) => {
         copyText.select();
 
         document.execCommand('copy');
-        window.getSelection().removeAllRanges();
+        const selection = window.getSelection();
+        if (selection) {
+            selection.removeAllRanges();
+        }
     }
 };
 

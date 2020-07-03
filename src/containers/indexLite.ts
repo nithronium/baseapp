@@ -11,7 +11,7 @@ export * from './Markets';
 export * from './MarketDepth';
 export * from './Errors';
 export * from './ChangePassword';
-export * from './ProfileVerification';
+// export * from './ProfileVerification';
 export * from './ReferralProgram';
 // @ts-ignore
 export * from '../screens/PricePackages';

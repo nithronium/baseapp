@@ -15,14 +15,14 @@ export const en = {
     'page.header.navbar.download_mobile': 'Download app',
     'page.header.navbar.download': 'App',
 
-    "footer_links_buyBitcoin": "Buy Bitcoin",
-    "footer_links_buyEthereum": "Buy Ethereum",
-    "footer_links_buyTether": "Buy Tether",
-    "footer_links_buyUSDCoin": "Buy USD Coin",
-    "footer_links_buyBlockburn": "Buy Blockburn token",
-    "footer_links_buyEmirex": "Buy Emirex Token",
-    "footer_links_buyBitcoinCash": "Buy Bitcoin cash",
-    "footer_links_buyT69Coin": "Buy T69 coin",
+    // "footer_links_buyBitcoin": "Buy Bitcoin",
+    // "footer_links_buyEthereum": "Buy Ethereum",
+    // "footer_links_buyTether": "Buy Tether",
+    // "footer_links_buyUSDCoin": "Buy USD Coin",
+    // "footer_links_buyBlockburn": "Buy Blockburn token",
+    // "footer_links_buyEmirex": "Buy Emirex Token",
+    // "footer_links_buyBitcoinCash": "Buy Bitcoin cash",
+    // "footer_links_buyT69Coin": "Buy T69 coin",
 
     "nav.link.spot": "Spot",
     "nav.link.spot.description": "Trading among crypto currencies",
@@ -105,7 +105,7 @@ export const en = {
     'page.body.trade.header.recentTrades.content.amount': 'Amount',
 
     'page.body.trade.header.openOrders': 'Open Orders',
-    'page.body.trade.header.openOrders.content.date': 'Date',
+    // 'page.body.trade.header.openOrders.content.date': 'Date',
     'page.body.trade.header.openOrders.content.state': 'State',
     'page.body.trade.header.openOrders.content.price': 'Price',
     'page.body.trade.header.openOrders.content.amount': 'Amount',
@@ -133,8 +133,8 @@ export const en = {
         'Please use the following credentials to initiate your bank transfer. Your deposit will be reflected in your account within 5 business days.',
     'page.body.wallets.tabs.deposit.fiat.message2.sepa':
         'Please use the following credentials to initiate your bank transfer. Your deposit will be reflected in your account within 24hours.',
-    'page.body.wallets.tabs.deposit.fiat.message.accountName':
-        'Make sure that the name on the bank account from which you are making a deposit matches the name on your Emirex account',
+    // 'page.body.wallets.tabs.deposit.fiat.message.accountName':
+    //     'Make sure that the name on the bank account from which you are making a deposit matches the name on your Emirex account',
     'page.body.wallets.tabs.deposit.fiat.bankName': 'Bank Name',
     'page.body.wallets.tabs.deposit.fiat.accountNumber': 'Account number',
     'page.body.wallets.tabs.deposit.fiat.accountName': 'Account name',
@@ -179,7 +179,7 @@ export const en = {
     'page.body.wallets.whitelist.dropdown.fiat.fullName': 'Full Name',
 
     'page.body.wallets.whitelist.addAddress': 'Add Address',
-    'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
+    // 'page.body.wallets.whitelist.addAddressModal.header': 'Add new withdrawal address',
 
     'page.body.wallets.whitelist.addAddressModal.body.coinAddress': 'Blockchain Address',
     'page.body.wallets.whitelist.addAddressModal.body.coinBeneficiaryName': 'Beneficiary Name',
@@ -395,11 +395,11 @@ export const en = {
     'page.body.kyc.identity.nationality': 'Citizenship',
     'page.body.kyc.identity.CoR': 'Country of Residence',
     'page.body.kyc.identity.state': 'State',
-    'page.body.kyc.documents.expiryDate': 'Expiration Date DD/MM/YYYY',
+    // 'page.body.kyc.documents.expiryDate': 'Expiration Date DD/MM/YYYY',
     'page.body.kyc.documents.drag': 'Drag and drop or browse files',
     'page.body.kyc.documents.maxFile': 'Maximum file size is 10MB',
     'page.body.kyc.documents.maxNum': 'Maximum number of files is 5',
-    'page.body.kyc.documents.upload': 'Please upload your selfie and a copy of your ID/passport',
+    // 'page.body.kyc.documents.upload': 'Please upload your selfie and a copy of your ID/passport',
     'page.body.kyc.documents.select.passport': 'Passport',
     'page.body.kyc.documents.select.identityCard': 'Identity Card',
     'page.body.kyc.documents.select.driverLicense': 'Driver License',
@@ -552,7 +552,7 @@ export const en = {
     'resource.password.doesnt_match': "New passwords don't match",
     'resource.password.prev_pass_not_correct': 'Previous password is not correct',
     'resource.password.no_change_provided': 'New password cant be the same, as old one',
-    'resource.document.empty_doc_expire': 'Expiration Date is invalid',
+    // 'resource.document.empty_doc_expire': 'Expiration Date is invalid',
     'password.requirements': 'Password does not meet the minimum requirements',
     'password.password.password_strength': 'Password is too weak',
 
@@ -628,7 +628,7 @@ export const en = {
     'resource.labels.empty_value': 'Value is missing or empty',
 
     'resource.documents.missing_doc_expire': 'Documents expiration date is missing',
-    'resource.documents.empty_doc_expire': 'Documents expiration date is missing or empty',
+    // 'resource.documents.empty_doc_expire': 'Documents expiration date is missing or empty',
     'resource.documents.missing_doc_type': 'Documents type is missing',
     'resource.documents.empty_doc_type': 'Documents type is missing or empty',
     'resource.documents.missing_doc_number': 'Documents number is missing',
