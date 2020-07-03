@@ -89,10 +89,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
     };
 
     public componentWillReceiveProps(next: Props) {
-        const { user } = this.props;
-
         if (next.success) {
-            this.props.changeUserLevel({ level: +user.level + 1 });
             this.props.labelFetch();
         }
     }
