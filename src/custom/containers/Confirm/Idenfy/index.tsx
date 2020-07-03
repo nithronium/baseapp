@@ -80,6 +80,8 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
     private renderContent = () => {
         const { kycAuthData, currentLanguage } = this.props;
         const lang = currentLanguage.toLowerCase() === 'zh' ? 'en' : currentLanguage.toLowerCase();
+        // tslint:disable-next-line:no-console
+        console.log('...........this.state.statusGet', this.state.statusGet);
         return this.state.statusGet ? (
             <div className="pg-idenfy">
                 <iframe
