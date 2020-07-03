@@ -57,6 +57,8 @@ export const createEchoServer = (port: number, debug: boolean) => {
             });
         }
         ws.on('message', (message: string) => {
+            // tslint:disable-next-line:no-console
+            console.log('...........message', message);
             if (debug) {
                 console.log(`Ping Server: sending back ${message}`);
             }
