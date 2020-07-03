@@ -106,12 +106,15 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         const { userData, history, currentLanguage } = this.props;
 
         switch (userData.level) {
-            case 1: handleRedirectToConfirm('profilePartialStep', history);break;
-            case 2: {
-                handleRedirectToConfirm('phoneStep', history);
-                break;
-            }
-            case 3: handleRedirectToConfirm('identifyStep', history);break;
+            // case 1: handleRedirectToConfirm('profilePartialStep', history);break;
+            // case 2: {
+            //     handleRedirectToConfirm('phoneStep', history);
+            //     break;
+            // }
+            // case 3: handleRedirectToConfirm('identifyStep', history);break;
+            case 1:
+            case 2:
+            case 3: handleRedirectToConfirm('profilePartialStep', history);break;
             case 4: {
                 if (userData.profile && userData.profile.address) {
                     const redirectUrl = getRedirectUrl();
