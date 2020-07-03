@@ -135,12 +135,6 @@ class QuestionnaireContainer extends React.Component<Props, State> {
         };
     }
 
-    public componentDidMount() {
-        // tslint:disable-next-line:no-console
-        console.log('...........render questionaire');
-        this.props.labelFetch();
-    }
-
     public componentWillReceiveProps(nextProps: Props) {
         const { dataStoragePushSuccess, user } = this.props;
         if (nextProps.label && checkQuestionnaire(nextProps.label)) {
@@ -376,7 +370,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
             updatedQuestionnaire.push({ key: question, value: answerToSet });
             this.setState({ questionnaire: updatedQuestionnaire });
         }
-    };
+    }
 
     private handleValidateInput = (field: string, value: string): boolean => {
         switch (field) {
@@ -389,7 +383,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
             default:
                 return true;
         }
-    };
+    }
 
     private translate = (e: string) => {
         return this.props.intl.formatMessage({id: e});
