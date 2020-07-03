@@ -123,7 +123,7 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
     private onBackButtonClick = () => {
         const { history, currentLanguage } = this.props;
         const redirectUrl = getRedirectUrl();
-        if (urlsForRedirect.some(url => redirectUrl.indexOf(url) !== -1)) {
+        if (redirectUrl && urlsForRedirect.some(url => redirectUrl.indexOf(url) !== -1)) {
             this.props.changeUserLevel({ level: 4 });
             handleRedirectToConfirm('addressStep', history);
         } else {
