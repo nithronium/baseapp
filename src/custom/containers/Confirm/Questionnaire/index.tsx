@@ -135,6 +135,12 @@ class QuestionnaireContainer extends React.Component<Props, State> {
         };
     }
 
+    public componentDidMount() {
+        if (this.props.label && checkQuestionnaire(this.props.label)) {
+            redirect(() => this.props.history.push(redirectIfSpecified('/profile')));
+        }
+    }
+
     public componentWillReceiveProps(nextProps: Props) {
         const { dataStoragePushSuccess, user } = this.props;
         if (nextProps.label && checkQuestionnaire(nextProps.label)) {
