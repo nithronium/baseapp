@@ -110,6 +110,7 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
         }
 
     }
+
     public async componentWillReceiveProps(nextProps) {
         const { currencies, markets, crypto, onChange } = this.props;
         let { fiat } = this.props;
@@ -119,17 +120,11 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
             if (!nextProps.markets.length || !nextProps.currencies.length) { return; }
             const query = qs.parse(location.search, { ignoreQueryPrefix: true });
             let newCrypto = query.curr;
+
             const fiatList = this.getAvailableFiat(nextProps);
             const cryptoList = this.getAvailableCrypto(fiat, nextProps);
-            this.props.fetchOrderBook(nextProps.markets.reduce((market, item) => {
-                if (item.name === `${nextProps.crypto.toUpperCase()}/${nextProps.fiat.toUpperCase()}`) {
-                    return item;
-                }
-
-                return market;
-            }, {}));
             if (!this.getAllCrypto(nextProps).includes(newCrypto)) {
-                newCrypto = cryptoList[0] || 'usdt';
+                newCrypto = cryptoList[0] || 'btc';
             }
             if (query.curr) {
                 fiat = this.getFiatForCrypto(newCrypto, nextProps);
@@ -143,20 +138,22 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
                 cryptoValue: '',
                 // converted: {} as ConvertedResponse,
             };
+
             if (query.fiat) {
                 partialState.fiat = query.fiat;
                 partialState.crypto = query.crypto;
             }
-            if (query.fiatValue) {
+            if (query.fiatValue || query.cryptoValue) {
                 partialState.fiatValue = query.fiatValue;
-                // @ts-ignore
-                partialState.cryptoValue = null;
+                partialState.cryptoValue = query.cryptoValue;
             }
+
             const marketCurrencies = this.getAllCurrencies(nextProps);
             const converted = await getExchangeRates(
                 'USD', 1, marketCurrencies,
             );
             this.setState({ converted });
+
             onChange({
                 ...partialState,
                 converted,
@@ -174,7 +171,6 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
         if (fiat !== nextProps.fiat || crypto !== nextProps.crypto) {
             this.fetchMarket(nextProps);
         }
-
 
         // change in the parent
         if (nextProps.cryptoValue === null) {
@@ -406,6 +402,7 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
 
         return Array.from(res);
     };
+
     public getFiatPlaceholder = () => {
         const { fiat, crypto } = this.props;
         const market = this.findMarket(fiat, crypto);
