@@ -1,0 +1,181 @@
+
+.instant-exchange {
+  &__info {
+    background: #171e1e;
+    border-radius: 4px;
+    margin: 20px 0;
+    padding: 30px;
+
+    &-top {
+      display: flex;
+
+      &-item {
+        align-items: center;
+        color: #fff;
+        display: flex;
+        font-size: 13px;
+        line-height: 19px;
+        margin-right: 25px;
+        padding-bottom: 30px;
+        width: 25%;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+
+      &-number {
+        background-image: url(./assets/images/instant-exchange-number-polygon.png);
+        color: #171e1e;
+        font-size: 18px;
+        font-weight: bold;
+        height: 38px;
+        line-height: 38px;
+        margin-right: 20px;
+        min-width: 36px;
+        text-align: center;
+        width: 36px;
+      }
+
+      &-text {
+        /* font-weight: bold; */
+      }
+    }
+
+    &-middle {
+      display: flex;
+      padding-bottom: 40px;
+      padding-top: 40px;
+
+      &-image {
+        background-image: url(./assets/images/instant-exchange-info-image.png);
+        height: 218px;
+        width: 218px;
+      }
+
+      h2 {
+        color: #fff;
+        font-size: 22px;
+        font-weight: bold;
+      }
+
+      p {
+        color: var(--limits-text-color);
+        font-size: 14px;
+        line-height: 21px;
+        padding-right: 30px;
+      }
+    }
+
+    &-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      padding-bottom: 20px;
+
+      &-item {
+        padding-right: 22px;
+        padding-top: 45px;
+        width: 33%;
+      }
+
+      &-header {
+        color: #fff;
+        font-size: 14px;
+        padding: 15px 0;
+      }
+
+      &-text {
+        color: var(--limits-text-color);
+        font-size: 12px;
+      }
+
+      &-icon1,
+      &-icon2,
+      &-icon3,
+      &-icon4,
+      &-icon5 {
+        height: 27px;
+        min-width: 27px;
+        width: 27px;
+      }
+
+      &-icon1 {
+        background-image: url(./assets/images/instant-exchange-info-icon1.svg);
+      }
+
+      &-icon2 {
+        background-image: url(./assets/images/instant-exchange-info-icon2.svg);
+      }
+
+      &-icon3 {
+        background-image: url(./assets/images/instant-exchange-info-icon3.svg);
+      }
+
+      &-icon4 {
+        background-image: url(./assets/images/instant-exchange-info-icon4.svg);
+      }
+
+      &-icon5 {
+        background-image: url(./assets/images/instant-exchange-info-icon5.svg);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .instant-exchange {
+    &__info {
+      &-top {
+        flex-wrap: wrap;
+
+        &-item {
+          width: 100%;
+        }
+      }
+
+      &-middle {
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        &-right {
+          order: 1;
+        }
+
+        &-left {
+          order: 2;
+          text-align: center;
+        }
+
+        &-image {
+          margin: 0 auto;
+        }
+
+        h2 {
+          padding: 25px 0;
+        }
+
+        p {
+          padding-right: 0;
+        }
+      }
+
+      &-bottom {
+        &-item {
+          display: flex;
+          padding-top: 15px;
+          width: 100%;
+        }
+
+        &-icon1,
+        &-icon2,
+        &-icon3,
+        &-icon4,
+        &-icon5 {
+          margin-right: 25px;
+          position: relative;
+          top: 14px;
+        }
+      }
+    }
+  }
+}
