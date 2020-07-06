@@ -14,3 +14,4 @@ export * from './ProfileVerification';
 export * from './Header';
 export * from './NavBar';
 export * from './ToolBar';
+export * from './InstantExchange';

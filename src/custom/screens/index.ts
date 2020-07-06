@@ -5,4 +5,4 @@ export * from './ConfirmScreen';
 export * from './TradingScreen';
 export * from './BuyWithCreditCardScreen';
 export * from './ChatelloScreen';
-
+export * from './InstantExchangeScreen';

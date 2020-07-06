@@ -11,6 +11,7 @@ import { Redirect, withRouter } from 'react-router-dom';
 import {
     BuyWithCreditCardScreen,
     ChatelloScreen,
+    InstantExchangeScreen,
     ReferralCommissionScreen,
     ReferralScreen,
     ReferralTicketsScreen,
@@ -471,6 +472,31 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
                         noReditect={true}
                         path={'/zh/buycrypto'}
                         component={BuyWithCreditCardScreen}
+                        currentLanguage={currentLanguage}
+                    />
+
+                    <PrivateRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        noReditect={true}
+                        path={'/instant-exchange'}
+                        component={InstantExchangeScreen}
+                        currentLanguage={currentLanguage}
+                    />
+                    <PrivateRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        noReditect={true}
+                        path={'/ru/instant-exchange'}
+                        component={InstantExchangeScreen}
+                        currentLanguage={currentLanguage}
+                    />
+                    <PrivateRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        noReditect={true}
+                        path={'/zh/instant-exchange'}
+                        component={InstantExchangeScreen}
                         currentLanguage={currentLanguage}
                     />
 
