@@ -26,8 +26,16 @@ export const CoinFragment = injectIntl(
         const format = intl.formatMessage;
         const text = format({ id: 'page.body.wallets.tabs.deposit.ccy.message.submit' });
         const fixedNum = currency[selectedWalletIndex] ? currency[selectedWalletIndex].fixed : 8;
+        // @ts-ignore
+        const trueFixed = num => {
+            if (num[num.length - 1] === '0') {
+                return trueFixed(num.slice(0, -1));
+            } else {
+                return num[num.length - 1] === '.' ? num.slice(0, -1) : num;
+            }
+        };
         const getLimitDeposit = () => {
-            return withdrawLimitData && withdrawLimitData.deposit ? (+withdrawLimitData.deposit.limit - +withdrawLimitData.deposit.amount).toFixed(fixedNum) || 0 : 0;
+            return withdrawLimitData && withdrawLimitData.deposit ? trueFixed((+withdrawLimitData.deposit.limit - +withdrawLimitData.deposit.amount).toFixed(fixedNum)) || 0 : 0;
         };
         const textLimit = `${format({ id: 'page.body.wallets.tabs.deposit.ccy.message.limits1' })} ${getLimitDeposit()} EUR ${format({ id: 'page.body.wallets.tabs.deposit.ccy.message.limits2' })}`;
         let walletAddress = formatCCYAddress(currency, selectedWalletAddress);
