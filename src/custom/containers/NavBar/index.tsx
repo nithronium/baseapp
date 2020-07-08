@@ -206,6 +206,11 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         {this.renderBuyWithCard()}
                         {this.renderTrade()}
                         {this.renderEarn()}
+                        <div className="item">
+                            <a href="http://emiswap.emirex.com">
+                                <FormattedMessage id={'page.body.trade.header.EmiSwap.join.now'} />
+                            </a>
+                        </div>
                     </div>}
                 </ul>
                 <div className={"pg-navbar__right"}>

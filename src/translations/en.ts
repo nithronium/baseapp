@@ -69,6 +69,7 @@ export const en = {
     'page.body.trade.header.markets.content.change': 'Change',
     'page.body.trade.header.markets.content.search': 'Search',
     'page.body.trade.header.markets.content.volume': 'Volume',
+    'page.body.trade.header.EmiSwap.join.now': 'EmiSwap join now',
 
     'page.body.trade.header.newOrder': 'Order Form',
     'page.body.trade.header.newOrder.content.tabs.buy': 'Buy',

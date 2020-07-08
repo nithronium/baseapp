@@ -56,6 +56,7 @@ export const zh = {
     'page.body.trade.header.markets.content.change': '更改',
     'page.body.trade.header.markets.content.search': '搜索',
     'page.body.trade.header.markets.content.volume': '量',
+    'page.body.trade.header.EmiSwap.join.now': 'EmiSwap join now',
     'page.body.trade.header.newOrder': '订单',
     'page.body.trade.header.newOrder.content.tabs.buy': '购买',
     'page.body.trade.header.newOrder.content.tabs.sell': '出售',
