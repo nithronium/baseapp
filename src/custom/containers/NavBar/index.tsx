@@ -207,7 +207,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         {this.renderTrade()}
                         {this.renderEarn()}
                         <div className="item">
-                            <a href="http://emiswap.com" className="blink_me" target="_blank" rel="noopener noreferrer">
+                            <a href="http://emiswap.emirex.com" className="blink_me" target="_blank" rel="noopener noreferrer">
                                 <FormattedMessage id={'page.body.trade.header.EmiSwap.join.now'} />
                             </a>
                         </div>
