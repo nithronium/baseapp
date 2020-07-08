@@ -141,6 +141,11 @@
         letter-spacing: 0.2px;
         text-decoration: none;
       }
+
+      .blink_me {
+        animation: blinker 1s linear infinite;
+        color: yellow;
+      }
     }
   }
 
@@ -1104,5 +1109,11 @@
     .cr-modal__container-footer {
       padding: calc(var(--gap) * 1);
     }
+  }
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0.1;
   }
 }
