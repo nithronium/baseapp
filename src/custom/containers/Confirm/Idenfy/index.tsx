@@ -80,8 +80,7 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
     public backBtn = () => handleRedirectToConfirm('phoneStep', this.props.history);
 
     private renderContent = () => {
-        // tslint:disable-next-line:no-console
-        console.log('...........test render idenfy contetn');
+
         const { kycAuthData, currentLanguage } = this.props;
         const lang = currentLanguage.toLowerCase() === 'zh' ? 'en' : currentLanguage.toLowerCase();
 

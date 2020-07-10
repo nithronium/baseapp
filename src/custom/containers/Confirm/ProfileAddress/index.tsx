@@ -92,8 +92,7 @@ class ProfileAddressComponent extends React.Component<Props, State> {
 
                 const redirectUrl = getRedirectUrl();
                 if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
-                    // tslint:disable-next-line:no-console
-                    console.log('...........test redirect 2');
+
                     redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), lang)));
 
                     return;

@@ -136,8 +136,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
 
     public componentDidMount() {
         if (this.props.label && checkQuestionnaire(this.props.label)) {
-            // tslint:disable-next-line:no-console
-            console.log('...........test redirect 3');
+
             redirect(() => this.props.history.push(redirectIfSpecified('/profile')));
         }
     }
