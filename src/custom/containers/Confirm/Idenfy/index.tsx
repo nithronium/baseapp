@@ -72,7 +72,7 @@ class IdenfyContainer extends React.Component<Props, IdenfyState> {
 
         if (event.data.status && event.data.status.toLowerCase() !== 'failed') {
             this.setState({
-                statusGet: true,
+                statusGet: false,
             });
         }
     };
