@@ -5,25 +5,19 @@ services:
 stages:
   - build
   - test
-  - release
   - deploy
   - cleanup
  
 compile:
   stage: build
   script:
-          - docker build -t eu.gcr.io/emirex-preprod/ci-test/baseapp:feature-CE-3422-"$CI_COMMIT_SHORT_SHA" --build-arg REACT_APP_BUILD_VERSION=Enterprise --build-arg NPM_AUTH_TOKEN="$NPM_AUTH_TOKEN" --build-arg BUILD_DOMAIN=emirex.com .
+    - docker build -t eu.gcr.io/emirex-preprod/ci-test/baseapp:"$CI_COMMIT_BRANCH"-"$CI_COMMIT_SHORT_SHA" --build-arg REACT_APP_BUILD_VERSION=Enterprise --build-arg NPM_AUTH_TOKEN="$NPM_AUTH_TOKEN" --build-arg BUILD_DOMAIN=emirex.com .
+    - docker push eu.gcr.io/emirex-preprod/ci-test/baseapp:"$CI_COMMIT_BRANCH"-"$CI_COMMIT_SHORT_SHA"
  
 testing:
   stage: test
   script:
     - echo "Testing"
- 
-release-image:
-  stage: release
-  script:
-    - echo "push eu.gcr.io/emirex-preprod/ci-test/baseapp:feature-CE-3422-$CI_COMMIT_SHORT_SHA"
-    - docker push eu.gcr.io/emirex-preprod/ci-test/baseapp:feature-CE-3422-"$CI_COMMIT_SHORT_SHA"
  
 deploy-to-review:
   stage: deploy
@@ -31,7 +25,7 @@ deploy-to-review:
     - echo "Deploy docker-image with sources to rewiew"
     - apk add git
     - git clone git@gitlab.com:emirex-exchange/emirex-exchange-core-components/server-configs/hetzner-cfg.git
-    - ./hetzner-cfg/emirex-apps/ansible-playbook deploy.yaml --tags app -e env=feature-CE-3422 -e charts=baseapp -e '{"extra-vars":{"baseapp":{"push eu.gcr.io/emirex-preprod/ci-test/baseapp":{"tag":"feature-CE-3422-$CI_COMMIT_SHORT_SHA"}}}}' 
+    - ./hetzner-cfg/emirex-apps/ansible-playbook deploy.yaml --tags app -e env=feature-CE-3422 -e charts=baseapp -e '{"extra-vars":{"baseapp":{"push eu.gcr.io/emirex-preprod/ci-test/baseapp":{"tag":"'"$CI_COMMIT_BRANCH"'-'"$CI_COMMIT_SHORT_SHA"'"}}}}'
   when: manual
  
 deploy-to-prod:
