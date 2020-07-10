@@ -160,7 +160,6 @@ export type ProfileAction =
     | UserReset
     | ChangeUserLevel
     | ChangeUserProfileData
-    | ToggleUser2fa
     | GetBalanceFetch
     | SetBalance
     | ToggleUser2fa
