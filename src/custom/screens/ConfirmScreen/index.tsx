@@ -114,7 +114,8 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
 
     public redirectByUserLevel = () => {
         const { userData, history, currentLanguage } = this.props;
-
+        // tslint:disable-next-line:no-console
+        console.log('...........test redirect by user level');
         switch (userData.level) {
             // case 1: handleRedirectToConfirm('profilePartialStep', history);break;
             // case 2: {
