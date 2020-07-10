@@ -128,16 +128,11 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             case 4:
                 if (userData.profiles && userData.profiles.length) {
                     const redirectUrl = getRedirectUrl();
-                    // tslint:disable-next-line:no-console
-                    console.log('...........redirectUrl', redirectUrl);
-                    // tslint:disable-next-line:no-console
-                    console.log('...........hasUrlForRedirect(redirectUrl)', redirectUrl && hasUrlForRedirect(redirectUrl));
-                    // if (redirectUrl && hasUrlForRedirect(redirectUrl)) {
-                    // redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
-                    redirect(() => history.push(buildPath('/kyc-levels', currentLanguage)));
+                    if (redirectUrl && hasUrlForRedirect(redirectUrl)) {
+                        redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
 
-                    return;
-                    // }
+                        return;
+                    }
                     handleRedirectToConfirm('profAddressStep', history);
                 } else {
                     handleRedirectToConfirm('addressStep', history);

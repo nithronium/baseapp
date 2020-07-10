@@ -216,7 +216,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
 
             return;
         }
-        if (user.level < 4) {
+        if (user.level < 4 && user.profile && user.profile.address) {
             history.push(`/confirm?redirect_url=${encodeURIComponent('/buycrypto')}`);
 
             return;
