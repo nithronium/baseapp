@@ -147,11 +147,11 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
     };
 
     public goBack = event => {
-      const lang = this.props.currentLanguage;
-      event.preventDefault();
+        const lang = this.props.currentLanguage;
+        event.preventDefault();
         // tslint:disable-next-line:no-console
         console.log('...........test redirect 4');
-      redirect(() => this.props.history.push(buildPath(redirectIfSpecified('/kyc-levels'), lang)));
+        redirect(() => this.props.history.push(buildPath(redirectIfSpecified('/kyc-levels'), lang)));
     };
 
     public renderExpertProgressBar() {
