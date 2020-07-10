@@ -135,7 +135,7 @@ const linkBlock = {
             { key: '', href: '/trading/btcusdt', label: 'footer_headers_spot_trade' },
             { key: '', href: '/ieo', label: 'footer_headers_ieo' },
             { key: '', href: '/referral-commission', label: 'footer_headers_referral_program' },
-            { key: '', href: '/buycrypto', label: 'page.header.buy_crypto' },
+            // { key: '', href: '/buycrypto', label: 'page.header.buy_crypto' },
         ].map((link, index) => {
             link.key = `footer-link-${index}-${link.href}-${link.label}`;
             return link;
