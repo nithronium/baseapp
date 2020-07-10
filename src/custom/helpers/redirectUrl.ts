@@ -18,6 +18,8 @@ export const buildUrlWithRedirect = url => {
 
 export const redirectIfSpecified = url => {
     const redirectUrl = getRedirectUrl();
+    // tslint:disable-next-line:no-console
+    console.log('...........redirectUrl', redirectUrl);
     if (redirectUrl) {
         return redirectUrl;
     }
