@@ -43,6 +43,7 @@ class TwoFactorAuthComponent extends React.Component<TwoFactorAuthProps> {
         const buttonWrapperClass = cr('cr-email-form__button-wrapper', {
             'cr-email-form__button-wrapper--empty': !errors,
         });
+
         const emailGroupClass = cr('cr-email-form__group', {
             'cr-email-form__group--focused': codeFocused,
         });
