@@ -44,7 +44,7 @@ const urlsForRedirect = ['chatello', 'buycrypto'];
 
 class IdenfyContainer extends React.Component<Props, IdenfyState> {
     public state = {
-        statusGet: false,
+        statusGet: true,
     };
 
     public componentDidMount() {
