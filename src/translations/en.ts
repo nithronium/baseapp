@@ -659,6 +659,7 @@ export const en = {
     'success.message.sent': 'Message was sent',
     'success.email.confirmed': 'Your email address has been successfully confirmed',
     'success.order.done': 'Order successfully completed',
+    'success.data.changed.language': 'Language has been changed',
 
     // error messages
     'error.order.rejected': 'Order rejected',

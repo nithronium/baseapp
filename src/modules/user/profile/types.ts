@@ -25,6 +25,7 @@ export interface User {
     referral_uid?: string;
     profiles: UserProfile[];
     csrf_token?: string;
+    data?: string;
 }
 
 export interface ProfileIdentity {

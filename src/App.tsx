@@ -10,18 +10,14 @@ import { Header } from './custom/containers';
 import { googleTranslateElementInit, initLanguageChangeEvent } from './helpers/googleTranslate';
 import { RootState } from './modules';
 import { Layout } from './routes';
-
-interface Locale {
-    lang: string;
-    messages: object;
-}
+import { languageMap } from './translations';
 
 interface AppProps {
     history: History;
 }
 
 interface ReduxProps {
-    locale: Locale;
+    lang: string;
 }
 
 const gaKey = gaTrackerKey();
@@ -42,12 +38,9 @@ class AppLayout extends React.Component<Props, {}, {}> {
     public googleTranslateUnsubscribe?: () => void;
 
     public componentWillReceiveProps(nextProps: Props) {
-        const prevLang = this.props.locale.lang;
-        const nextLang = nextProps.locale.lang;
-
-        if (prevLang !== nextLang) {
+        if (this.props.lang !== nextProps.lang) {
             setTimeout(() => {
-                googleTranslateElementInit(nextLang);
+                googleTranslateElementInit(nextProps.lang);
             }, 0);
         }
     }
@@ -83,8 +76,8 @@ class AppLayout extends React.Component<Props, {}, {}> {
     };
 
     public initGoogleTranslate = () => {
-        const { locale } = this.props;
-        googleTranslateElementInit(locale.lang);
+        const { lang } = this.props;
+        googleTranslateElementInit(lang);
     };
 
     public componentWillUnmount() {
@@ -92,13 +85,10 @@ class AppLayout extends React.Component<Props, {}, {}> {
     }
 
     public render() {
-        const {
-            locale,
-        } = this.props;
-        const { lang, messages } = locale;
+        const { lang } = this.props;
 
         return (
-            <IntlProvider locale={lang} messages={messages} key={lang}>
+            <IntlProvider locale={lang} messages={languageMap[lang]} key={lang}>
                 <Router history={history}>
                     <ErrorWrapper>
                         <Header/>
@@ -115,7 +105,7 @@ class AppLayout extends React.Component<Props, {}, {}> {
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> =
     (state: RootState): ReduxProps => ({
-        locale: state.public.i18n,
+        lang: state.public.i18n.lang,
     });
 
 // tslint:disable-next-line:no-any

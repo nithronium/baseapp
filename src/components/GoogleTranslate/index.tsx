@@ -1,24 +1,19 @@
-
+import { History } from 'history';
 import * as React from 'react';
-
+// import CookieConsent from 'react-cookie-consent';
+import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import {
     getCurrentLang,
     isSameLocale,
     triggerLanguageChange,
 } from '../../helpers/googleTranslate';
-
 import { languagesArray } from '../../helpers/googleTranslateLangs';
-
-import { History } from 'history';
-// import CookieConsent from 'react-cookie-consent';
-import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import {
     RootState,
 } from '../../modules';
 
 interface Locale {
     lang: string;
-    messages: object;
 }
 
 interface AppProps {

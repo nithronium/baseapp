@@ -840,6 +840,7 @@ export const ru: LangType = {
     'success.email.confirmed': 'Email был успешно подтвержден',
     'success.dataStorage.pushed': 'Успех!',
     'success.order.done': 'Запрос успешно завершён',
+    'success.data.changed.language': 'Язык успешно изменен',
 
     // error messages
     'error.order.rejected': 'Запрос отвергнут',
