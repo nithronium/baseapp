@@ -192,19 +192,32 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
     };
 
     public onFiatValueChange = e => {
+        // tslint:disable-next-line:no-console
+        console.log('...........test');
         const { crypto, onChange } = this.props;
         let { cryptoValue } = this.props;
         const fiatValue = e.target.value;
         const fiatValueNumber = Number(fiatValue);
         // tslint:disable-next-line:no-console
+        console.log('...........fiatValue', fiatValue);
+        // tslint:disable-next-line:no-console
+        console.log('...........crypto', crypto);
+        // tslint:disable-next-line:no-console
+        console.log('...........fiatValueNumber', fiatValueNumber);
         if (!Number.isNaN(fiatValueNumber)) {
             const cryptoNumber = this.convertToCrypto(fiatValueNumber);
+            // tslint:disable-next-line:no-console
+            console.log('...........cryptoNumber', cryptoNumber);
             const cryptoFormatted = Decimal.format(cryptoNumber, this.getPrecision(crypto));
+            // tslint:disable-next-line:no-console
+            console.log('...........cryptoFormatted', cryptoFormatted);
             cryptoValue = cryptoFormatted.toString();
         }
         if (!fiatValue) {
             cryptoValue = '';
         }
+        // tslint:disable-next-line:no-console
+        console.log('...........fiatValue, cryptoValue', fiatValue, cryptoValue);
         onChange({ fiatValue, cryptoValue });
     };
 
