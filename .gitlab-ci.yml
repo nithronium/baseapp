@@ -25,7 +25,6 @@ deploy-to-review:
   script:
     - echo "Deploy \"$APP\" docker-image \"$CONTAINER_RELEASE_IMAGE\" to \"$ENVIRONMENT\""
     - ansible-playbook ~/hetzner-cfg/emirex-apps/deploy.yaml --tags app -e env=$ENVIRONMENT -e charts=$APP
-  when: manual
   tags:
     - staging
 
