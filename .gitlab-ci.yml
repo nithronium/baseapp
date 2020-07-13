@@ -1,41 +1,31 @@
-image: docker:latest
-services:
-  - docker:dind
+variables:
+  APP: "frontend"
+  ENVIRONMENT: "ce3422"
+  CONTEINER_REPO: "eu.gcr.io/emirex-preprod/ci-test"
+  CONTAINER_BACKUP_IMAGE: $CONTEINER_REPO/$CI_REGISTRY_IMAGE/$CI_BUILD_REF_SLUG:$CI_COMMIT_SHORT_SHA
+  CONTAINER_RELEASE_IMAGE: $CONTEINER_REPO/$CI_REGISTRY_IMAGE/$CI_BUILD_REF_SLUG:latest
 
 stages:
   - build
-  - test
   - deploy
-  - cleanup
- 
+
 compile:
   stage: build
   script:
-    - docker build -t eu.gcr.io/emirex-preprod/ci-test/baseapp:"$CI_COMMIT_SHORT_SHA" --build-arg REACT_APP_BUILD_VERSION=Enterprise --build-arg NPM_AUTH_TOKEN="$NPM_AUTH_TOKEN" --build-arg BUILD_DOMAIN=emirex.com .
-    - docker push eu.gcr.io/emirex-preprod/ci-test/baseapp:"$CI_COMMIT_SHORT_SHA"
- 
-testing:
-  stage: test
-  script:
-    - echo "Testing"
- 
+    - docker build -t $CONTAINER_BACKUP_IMAGE -t $CONTAINER_RELEASE_IMAGE .
+    - echo $CONTAINER_BACKUP_IMAGE
+    - docker push $CONTAINER_BACKUP_IMAGE
+    - echo $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+  tags:
+    - staging
+
 deploy-to-review:
   stage: deploy
   script:
-    - echo "Deploy docker-image with sources to rewiew"
-    - apk add git
-    - git clone git@gitlab.com:emirex-exchange/emirex-exchange-core-components/server-configs/hetzner-cfg.git
-    - ./hetzner-cfg/emirex-apps/ansible-playbook deploy.yaml --tags app -e env=ce3422 -e charts=baseapp -e '{"extra-vars":{"baseapp":{"push eu.gcr.io/emirex-preprod/ci-test/baseapp":{"tag":"'"$CI_COMMIT_SHORT_SHA"'"}}}}'
+    - echo "Deploy \"$APP\" docker-image \"$CONTAINER_RELEASE_IMAGE\" to \"$ENVIRONMENT\""
+    - ansible-playbook ~/hetzner-cfg/emirex-apps/deploy.yaml --tags app -e env=$ENVIRONMENT -e charts=$APP
   when: manual
- 
-deploy-to-prod:
-  stage: deploy
-  script:
-    - echo "Deploy docker-image with sources to production"
-  when: manual
- 
-cleanup:
-  stage: cleanup
-  when: always
-  script:
-    - echo "Stop & remove containers"
+  tags:
+    - staging
+
