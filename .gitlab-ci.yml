@@ -12,7 +12,7 @@ stages:
 compile:
   stage: build
   script:
-    - docker build -t $CONTAINER_BACKUP_IMAGE -t $CONTAINER_RELEASE_IMAGE .
+    - docker build -t $CONTAINER_BACKUP_IMAGE -t $CONTAINER_RELEASE_IMAGE --build-arg REACT_APP_BUILD_VERSION=Enterprise --build-arg NPM_AUTH_TOKEN="$NPM_AUTH_TOKEN" --build-arg BUILD_DOMAIN=emirex.co .
     - echo $CONTAINER_BACKUP_IMAGE
     - docker push $CONTAINER_BACKUP_IMAGE
     - echo $CONTAINER_RELEASE_IMAGE
