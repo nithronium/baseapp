@@ -188,7 +188,6 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
         const safeAmount = Number(amount) || 0;
         const totalPrice = getTotalPrice(amount, proposals);
         const safePrice = totalPrice / Number(amount) || priceMarket;
-
         const total = orderType === 'Market' ? totalPrice : safeAmount * (Number(price) || 0);
         const amountPercentageArray = [0.25, 0.5, 0.75, 1];
 

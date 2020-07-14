@@ -1,43 +1,23 @@
+import { Decimal } from '../../../components';
+import { getTotalPrice } from '../../../helpers';
+
 export const convert = (value: number, target: string, orderBook): number => {
-    const getCumulativeTotal = (amount, proposals) => {
-        if (!proposals.length || (proposals[0].length < 2)) {
-           // tslint:disable-next-line:no-console
-           console.log('Invalid market depth');
-        }
+    const { asks } = orderBook;
+    const depth = asks.map(({ avg_price, remaining_volume }) => [avg_price, remaining_volume]);
 
-        let sum = amount;
-        let total = 0;
+    // const totalPrice = asks.reduce((sum: number, { price, remaining_volume }) => {
+    //     return sum + price * remaining_volume;
+    // }, 0);
+    // const totalVolume = asks.reduce((sum: number, { remaining_volume }) => {
+    //     return Number(sum) + Number(remaining_volume);
+    // }, 0);
 
-        for (const proposal of proposals) {
-            if (!sum) {
-                break;
-            }
-
-            if (sum <= (+proposal[0] * +proposal[1])) {
-                total += sum / (+proposal[0]);
-                sum = 0;
-            } else {
-                total += +proposal[1];
-                sum -= (+proposal[0] * +proposal[1]);
-            }
-        }
-
-        if (sum !== 0) {
-           // tslint:disable-next-line:no-console
-           console.log('Not enough liquidity');
-        }
-
-        return total;
-    };
-
-    const depth = orderBook.asks.map(({ price, remaining_volume }) => [price, remaining_volume]);
-    // tslint:disable-next-line
-    const depthSum = depth.reduce((acc, [price, amount]) => acc += parseFloat(price) * parseFloat(amount), 0);
-    const defaultSum = depthSum >= 100 ? 100 : depthSum;
-    const totalRes = getCumulativeTotal(defaultSum, depth);
-    const weightedAverage = defaultSum / totalRes;
+    const totalPrice2 = getTotalPrice(value.toString(), depth);
+    const totalVolume2 = value;
+    // const weightedAverage = totalPrice / totalVolume;
+    const weightedAverage2 = totalPrice2 / totalVolume2;
 
     return target === 'fiat' ?
-        value * weightedAverage :
-        value / weightedAverage;
+        value * weightedAverage2 :
+        +Decimal.format(totalPrice2, 4);
 };
