@@ -363,6 +363,8 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
     public fetchMarket = (props: Props = this.props) => {
         const { fiat, crypto } = props;
         const market = this.findMarket(fiat, crypto);
+        // tslint:disable-next-line:no-console
+        console.log('...........market', market);
         this.props.fetchOrderBook(market);
     };
 

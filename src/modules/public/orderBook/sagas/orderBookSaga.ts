@@ -18,6 +18,8 @@ export function* orderBookSaga(action: OrderBookFetch) {
             throw new Error(`ERROR: Empty market provided to orderBookSaga`);
         }
         const orderBook = yield call(API.get(orderBookOptions), `/public/markets/${market.id}/order-book`);
+        // tslint:disable-next-line:no-console
+        console.log('...........orderBook', orderBook);
         yield put(orderBookData({ ...orderBook, market: market.id }));
     } catch (error) {
         yield put(orderBookError(error));
