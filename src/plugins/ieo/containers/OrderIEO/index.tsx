@@ -158,6 +158,7 @@ class OrderIEOContainer extends React.PureComponent<Props> {
 
     private getWallet(currency: string, wallets: WalletItemProps[]) {
         const currencyLower = currency.toLowerCase();
+
         return wallets.find(w => w.currency === currencyLower) as Wallet;
     }
 
@@ -167,7 +168,7 @@ class OrderIEOContainer extends React.PureComponent<Props> {
 
     private handleToggleOrderExecuteModal = (data: OrderIEOData) => {
         this.props.toggleOrderExecuteModal(data);
-    }
+    };
 }
 
 const mapStateToProps = (state: RootState) => ({

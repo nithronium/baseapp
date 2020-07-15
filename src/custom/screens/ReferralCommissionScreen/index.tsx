@@ -140,6 +140,7 @@ class ReferralCommission extends React.Component<Props, State> {
 
     public getCurrencies = () => {
         const { user } = this.props;
+
         return {
             fiat: user.activeCurrency || 'USD',
             crypto: user.cryptoCurrency || 'BTC',
@@ -154,6 +155,7 @@ class ReferralCommission extends React.Component<Props, State> {
         for (const item of ieo.referrals) {
             res.add(item.investment_currency_id.toUpperCase());
         }
+
         return Array.from(res);
     };
 
@@ -251,12 +253,13 @@ class ReferralCommission extends React.Component<Props, State> {
 
     public changePage = (currencyId, type, skip, limit) => {
         this.props.fetchReferralCommissionReferrals({currencyId, type, skip, limit});
-    }
+    };
 
     public getUser = (props?) => {
         let { user } = (props || this.props);
         user = user && user.userData;
         user = user && user.user;
+
         return user || {};
     };
 
@@ -269,6 +272,7 @@ class ReferralCommission extends React.Component<Props, State> {
             const btc = ratio.quote.filter(item => {
                 return item.symbol.toLowerCase() === 'btc';
             })[0];
+
             return this.trimNumber(value * btc.price);
         }
     };
@@ -285,6 +289,7 @@ class ReferralCommission extends React.Component<Props, State> {
         if (!curr) {
             return value;
         }
+
         return this.trimNumber(value * curr.price, name);
     };
 
@@ -299,6 +304,7 @@ class ReferralCommission extends React.Component<Props, State> {
                 precision = currencyObject.precision;
             }
         }
+
         return precision;
     };
 
@@ -309,6 +315,7 @@ class ReferralCommission extends React.Component<Props, State> {
         if (resNumber.toString().includes('e')) {
             return res;
         }
+
         return resNumber;
     };
 
@@ -324,6 +331,7 @@ class ReferralCommission extends React.Component<Props, State> {
                 item => item.level === Number(index) + 1,
             )[0] || { total: 0 };
             const refs = trader.total;
+
             return {
                 header: `Commission: ${val * 100}%`,
                 subheader: `≈ ${val / 10}% from each trade!`,
@@ -350,6 +358,7 @@ class ReferralCommission extends React.Component<Props, State> {
                 item => item.level === Number(index) + 1,
             )[0] || { total: 0 };
             const refs = inverstor.total;
+
             return {
                 header: `Commission: ${val * 100}%`,
                 subheader: `= ${val * 100}% from each investment!`,
@@ -386,9 +395,11 @@ class ReferralCommission extends React.Component<Props, State> {
                 if ([2, 5].includes(index)) {
                     return this.convertToBtc(data[key]);
                 }
+
                 return data[key];
             });
             res.push(this.trimNumber(Number(res[2]) + Number(res[5])));
+
             return res;
         });
 
@@ -423,6 +434,7 @@ class ReferralCommission extends React.Component<Props, State> {
                 if ([2, 4].includes(index)) {
                     return this.trimNumber(row[key], row.investment_currency_id);
                 }
+
                 return row[key];
             });
         });
@@ -443,6 +455,7 @@ class ReferralCommission extends React.Component<Props, State> {
             for (const key of ['l2', 'l3', 'l4', 'l5']) {
                 res.push(`${row[`total_${key}`]} / ${row[`active_${key}`]} `);
             }
+
             return res;
         });
 
@@ -705,6 +718,7 @@ class ReferralCommission extends React.Component<Props, State> {
         totalRow.push(this.trimNumber(total));
 
         newList.push(totalRow);
+
         return newList;
     };
 
@@ -713,6 +727,7 @@ class ReferralCommission extends React.Component<Props, State> {
         const curr = x => `${x} BTC`;
         const users = x => `${x} users`;
         const map = [x => x, trades, curr, users, trades, curr, curr];
+
         return list.map(row => {
             return row.map((item, index) => {
                 return map[index](item);
@@ -734,6 +749,7 @@ class ReferralCommission extends React.Component<Props, State> {
             `${this.convertToBtc(totalCommission)} BTC`, '',
             `${this.convertToBtc(totalCommissionL2)} BTC`,
         ];
+
         return [...list, totalRow];
     };
 
@@ -751,8 +767,10 @@ class ReferralCommission extends React.Component<Props, State> {
             if (rowIndex === list.length - 1) {
                 return row;
             }
+
             return row.map((item, colIndex) => {
                 const originalRow = ieo.referrals[rowIndex];
+
                 return map[colIndex](item, (originalRow.investment_currency_id || '').toUpperCase());
             });
         });

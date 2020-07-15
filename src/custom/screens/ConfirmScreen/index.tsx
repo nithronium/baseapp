@@ -24,8 +24,8 @@ import { Phone } from '../../containers/Confirm/Phone';
 import { ProfileAddress } from '../../containers/Confirm/ProfileAddress';
 import { ProfilePartial } from '../../containers/Confirm/ProfilePartial';
 import { Questionnaire } from '../../containers/Confirm/Questionnaire';
-import { buildPath } from '../../helpers/buildPath';
 import { getRedirectUrl, handleRedirectToConfirm, redirect, redirectIfSpecified } from '../../helpers';
+import { buildPath } from '../../helpers/buildPath';
 
 const logo = require('../../../assets/images/logo.svg');
 const logoLight = require('../../../assets/images/logoLight.svg');
@@ -130,6 +130,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
                     const redirectUrl = getRedirectUrl();
                     if (redirectUrl && hasUrlForRedirect(redirectUrl)) {
                         redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), currentLanguage)));
+
                         return;
                     }
                     handleRedirectToConfirm('profAddressStep', history);
@@ -158,6 +159,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             'pg-confirm__progress-first': currentProfileLevel === 1 || currentProfileLevel === 4,
             'pg-confirm__progress-second': [1,2,3,5].includes(currentProfileLevel),
         });
+
         return (
             <div className="pg-confirm__progress">
             <div className={cx}>
@@ -305,7 +307,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         this.setState(prevState => ({
             showNationalityBlockModal: !prevState.showNationalityBlockModal,
         }));
-    }
+    };
 
     private handleGetStepLabels = (currentProfileLevel: number): string[] => {
         const { history } = this.props;
@@ -333,7 +335,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             default:
                 return ['page.body.kyc.head.level.first', 'page.body.kyc.head.level.second'];
         }
-    }
+    };
 
     private handleCheckPendingLabels = (labels: Label[]) => {
         const { history, fetchAlert } = this.props;
@@ -352,7 +354,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
             fetchAlert({ message: [`resource.profile.${pendingLabel.key}.pending`], type: 'error'});
             history.push(redirectIfSpecified('/kyc-levels'));
         }
-    }
+    };
 
     private renderThirdLevel() {
         const {
@@ -362,6 +364,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
 
         if (kycApproved) {
             this.props.changeUserLevel({ level: 4 });
+
             return <Documents />;
         }
 
@@ -455,6 +458,7 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         if (locationState ===  'questionnaireStep') {
             return <Questionnaire />;
         }
+
         return null;
         // history.push(redirectIfSpecified('/profile'));
     };

@@ -51,6 +51,7 @@ class LevelCardComponent extends React.Component<Props>{
                     marginBottom: 15,
                 };
             }
+
             return {
                 flex: '1 1 calc(50% - 20px)',
             };
@@ -84,6 +85,7 @@ class LevelCardComponent extends React.Component<Props>{
 
     public render(){
         const { level, header, subheader, caption, levels } = this.props;
+
         return(
             <div className="level-card" style={this.getStyle(level, levels)}>
                 <div className="level-card__level">

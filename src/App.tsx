@@ -4,12 +4,12 @@ import * as ReactGA from 'react-ga';
 import { IntlProvider } from 'react-intl';
 import { connect, MapStateToProps } from 'react-redux';
 import { Router } from 'react-router';
+import { gaTrackerKey } from '../src/api';
 import { Alerts, ErrorWrapper, Footer, Sidebar } from './containers';
 import { Header } from './custom/containers';
+import { googleTranslateElementInit, initLanguageChangeEvent } from './helpers/googleTranslate';
 import { RootState } from './modules';
 import { Layout } from './routes';
-import { gaTrackerKey } from '../src/api';
-import { googleTranslateElementInit, initLanguageChangeEvent } from './helpers/googleTranslate';
 
 interface Locale {
     lang: string;

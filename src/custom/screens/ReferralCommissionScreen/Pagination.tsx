@@ -26,6 +26,7 @@ interface Props {
 export class Pagination extends React.Component<Props> {
     public render() {
         const { firstElemIndex, lastElemIndex, total, caption } = this.props;
+
         return (
             <div className="pg-history-elem__pagination">
                 <p>{caption}{' '}{firstElemIndex} - {lastElemIndex} of {total}</p>

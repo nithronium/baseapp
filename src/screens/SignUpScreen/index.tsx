@@ -1,9 +1,9 @@
 import cx from 'classnames';
 import { History } from 'history';
-import * as React from 'react';
 import * as qs from 'qs';
-import ReCAPTCHA from 'react-google-recaptcha';
+import * as React from 'react';
 import { Button } from 'react-bootstrap';
+import ReCAPTCHA from 'react-google-recaptcha';
 import {
     InjectedIntlProps,
     injectIntl,
@@ -15,8 +15,8 @@ import {
 } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { Modal, SignUpForm } from '../../components';
-import { buildPath } from '../../custom/helpers';
 import { GeetestCaptcha } from '../../containers';
+import { buildPath } from '../../custom/helpers';
 import {
     EMAIL_REGEX,
     ERROR_INVALID_EMAIL,
@@ -166,6 +166,7 @@ class SignUp extends React.Component<Props> {
         } = this.state;
 
         const className = cx('pg-sign-up-screen__container', { loading });
+
         return (
             <div className="pg-sign-up-screen">
                 <div className={className}>
@@ -251,14 +252,14 @@ class SignUp extends React.Component<Props> {
                 return null;
 
         }
-    }
+    };
 
 
     private handleCheckboxClick = () => {
         this.setState({
             hasConfirmed: !this.state.hasConfirmed,
         });
-    }
+    };
 
     private handleChangeEmail = (value: string) => {
         this.setState({
@@ -344,7 +345,7 @@ class SignUp extends React.Component<Props> {
             captcha_response: value,
             shouldGeetestReset: false,
         });
-    }
+    };
 
     private handleSignUp = () => {
         const { configs, i18n } = this.props;
@@ -478,6 +479,7 @@ class SignUp extends React.Component<Props> {
                 passwordValidationDetails,
                 geetestCaptchaSuccess: false,
             });
+
             return;
         }
 
@@ -489,6 +491,7 @@ class SignUp extends React.Component<Props> {
                 hasConfirmed: false,
                 geetestCaptchaSuccess: false,
             });
+
             return;
         }
 
@@ -501,6 +504,7 @@ class SignUp extends React.Component<Props> {
                 passwordValidationDetails,
                 geetestCaptchaSuccess: false,
             });
+
             return;
         }
 
@@ -512,9 +516,10 @@ class SignUp extends React.Component<Props> {
                 hasConfirmed: false,
                 geetestCaptchaSuccess: false,
             });
+
             return;
         }
-    }
+    };
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({

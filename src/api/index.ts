@@ -87,6 +87,7 @@ const refUrl = `${baseURL}/api/v1/referral-code`;
 
 export const checkReferralCode = async body => {
     const res = await axios.post(refUrl, body);
+
     return res;
 };
 
@@ -95,21 +96,25 @@ const exchangeRatesUrl = `${baseURL}/api/v2/exchange-rates`;
 const applogicUrl = `${baseURL}/api/v2/applogic`;
 export const getReferralTickets = async body => {
     const res = await axios.get(`${nodelogicUrl }${body}`);
+
     return  res.data;
 };
 
 export const getOverall = async () => {
     const res = await axios.get(`${nodelogicUrl}/tickets/all`);
+
     return res.data;
 };
 
 export const getBonusTickets = async () => {
     const res = await axios.get(`${nodelogicUrl}/tickets/bonus`);
+
     return res.data;
 };
 
 export const getActiveTicketsList = async () => {
     const res = await axios.get(`${nodelogicUrl}/tickets/active`);
+
     return res.data;
 };
 
@@ -117,6 +122,7 @@ const paytoolsAPI = `${baseURL}/api/v2/paytools_api/private/initPayin`;
 
 export const initPayin = async body => {
     const res = await axios.post(paytoolsAPI, body);
+
     return res.data;
 };
 export const checkDepositLimit = async body => {
@@ -130,6 +136,7 @@ export const checkDepositLimit = async body => {
 };
 export const removeQuestionnaire = async body => {
     const res = await axios.delete(`${applogicUrl}/public/labels/questionnaire?uid=${body.uid}`);
+
     return res.data;
 };
 export const getBalance = async (data?: string[]) => {
@@ -137,6 +144,7 @@ export const getBalance = async (data?: string[]) => {
     const cryptoCurrency = localStorage.getItem('cryptoCurrency');
     const query = data ? data : [cryptoCurrency, activeCurrency];
     const res = await axios.get(`${exchangeRatesUrl}/user/balance?symbol=%22${query.join(',')}%22`);
+
     return res.data;
 };
 
@@ -144,6 +152,7 @@ export const getBalance = async (data?: string[]) => {
 const referralCommissionServiceUrl = `${baseURL}/api/v2/referral`;
 export const getReferral = async body => {
     const res = await axios.get(`${referralCommissionServiceUrl}${body}`);
+
     return res.data;
 };
 
@@ -151,5 +160,6 @@ export const getExchangeRates = async (currency: string, amount: number, currenc
     const res = await axios.get(
         `${exchangeRatesUrl}/tools/price-conversion?symbol=${currency}&amount=${encodeURIComponent(amount.toString())}&convert=${currencies.join(',')}`,
     );
+
     return res.data;
 };

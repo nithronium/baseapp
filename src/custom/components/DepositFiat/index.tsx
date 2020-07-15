@@ -122,6 +122,7 @@ const DepositFiat: React.FunctionComponent<DepositFiatProps> = (props: DepositFi
 
     const renderDetails = (detail, index: number) => {
         const isRefCodDetail = detail.value === uid;
+
         return (
             <div className="cr-deposit-fiat-detail" key={index}>
                 <p className="cr-deposit-fiat-detail__label">{detail.key}</p>

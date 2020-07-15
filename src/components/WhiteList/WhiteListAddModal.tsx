@@ -165,7 +165,7 @@ class WhiteListAddModalComponent extends React.Component<Props, State> {
                 />
             </div>
         );
-    }
+    };
 
     private renderAddAddressModalCryptoBody = () => {
         const {
@@ -232,7 +232,7 @@ class WhiteListAddModalComponent extends React.Component<Props, State> {
         this.setState({
             [key]: value,
         });
-    }
+    };
 
     private handleChangeFieldFocus = (key: string) => {
         // @ts-ignore
@@ -245,7 +245,7 @@ class WhiteListAddModalComponent extends React.Component<Props, State> {
         this.setState({
             ...defaultState,
         });
-    }
+    };
 
     private handleSubmitAddAddressCoinModal = () => {
         const { currency } = this.props;
@@ -272,7 +272,7 @@ class WhiteListAddModalComponent extends React.Component<Props, State> {
         }
 
         this.props.createAddress(payload);
-    }
+    };
 
     private handleSubmitAddAddressFiatModal = () => {
         const { currency } = this.props;
@@ -320,7 +320,7 @@ class WhiteListAddModalComponent extends React.Component<Props, State> {
         };
 
         this.props.createAddress(payload);
-    }
+    };
 
     private handleClickToggleAddAddressModal = (clear?: boolean) => () => {
         this.props.handleToggleAddAddressModal();
@@ -328,7 +328,7 @@ class WhiteListAddModalComponent extends React.Component<Props, State> {
         if (clear) {
             this.handleClearModalsInputs();
         }
-    }
+    };
 
     private translate = (id: string) => this.props.intl.formatMessage({ id });
 }

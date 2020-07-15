@@ -178,6 +178,7 @@ const PricePackages = props => {
             default: return true;
         }
     };
+
     return (
         <div ref={widthPage} className="price-package">
             <span className="price-package__title">{props.intl.formatMessage({id: 'page.kyc.levels.title'})}</span>

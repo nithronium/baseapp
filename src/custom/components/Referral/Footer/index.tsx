@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { GetCode } from '../GetCode';
-import { BottomBanner } from '../BottomBanner';
 import replaceHLink from '../../../helpers/scripts.js';
+import { BottomBanner } from '../BottomBanner';
+import { GetCode } from '../GetCode';
 
 const bitcoincom = require('../../../../assets/images/bitcoincom.png');
 const blockonomi = require('../../../../assets/images/blockonomi.png');
@@ -24,6 +24,7 @@ const MediaLogo = props => {
     React.useEffect(() => {
         replaceHLink();
     });
+
     return (
         <div className="medialogo">
             <h2>{props.intl.formatMessage({ id: 'medialogo.title' })}</h2>

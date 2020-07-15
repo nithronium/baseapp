@@ -166,6 +166,7 @@ class WinnersBannerComponent extends React.PureComponent<InjectedIntlProps, Winn
         const chevronWidth = 40;
         const {activeItemIndex, winners} = this.state;
         const format = this.props.intl.formatMessage;
+
         return (
             <div id="winners-banner" className="winners-wrapper grab-container">
                 <div className="winners-graz">

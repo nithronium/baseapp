@@ -95,6 +95,7 @@ describe('IEO', () => {
                 });
             });
             store.dispatch(fetchIEO());
+
             return promise;
         });
 
@@ -110,6 +111,7 @@ describe('IEO', () => {
                 });
             });
             store.dispatch(fetchIEO());
+
             return promise;
         });
     });

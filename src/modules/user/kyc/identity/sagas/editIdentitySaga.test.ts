@@ -71,6 +71,7 @@ describe('Edit Identity Saga', () => {
         });
 
         store.dispatch(editIdentity(confirmIdentityPayload));
+
         return promise;
     });
 
@@ -86,6 +87,7 @@ describe('Edit Identity Saga', () => {
             });
         });
         store.dispatch(editIdentity(confirmIdentityPayload));
+
         return promise;
     });
 });

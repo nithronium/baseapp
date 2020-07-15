@@ -94,6 +94,7 @@ describe('Get IEO item', () => {
                 });
             });
             store.dispatch(fetchItemIEO(fakeId));
+
             return promise;
         });
 
@@ -109,6 +110,7 @@ describe('Get IEO item', () => {
                 });
             });
             store.dispatch(fetchItemIEO(fakeId));
+
             return promise;
         });
     });

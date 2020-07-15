@@ -78,6 +78,7 @@ describe('SignIn saga', () => {
         });
 
         store.dispatch(signIn(fakeCredentials));
+
         return promise;
     });
 
@@ -93,6 +94,7 @@ describe('SignIn saga', () => {
             });
         });
         store.dispatch(signIn(fakeCredentials));
+
         return promise;
     });
 
@@ -108,6 +110,7 @@ describe('SignIn saga', () => {
             });
         });
         store.dispatch(signIn(fakeCredentials));
+
         return promise;
     });
 });

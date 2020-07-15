@@ -310,6 +310,7 @@ export const profileReducer = (state = initialStateProfile, action: ProfileActio
         case PROFILE_CHANGE_PASSWORD_DATA:
         case PROFILE_CHANGE_PASSWORD_ERROR:
             const passwordChangeState = { ...state.passwordChange };
+
             return {
                 ...state,
                 passwordChange: passwordChangeReducer(passwordChangeState, action),
@@ -322,6 +323,7 @@ export const profileReducer = (state = initialStateProfile, action: ProfileActio
         case PROFILE_TOGGLE_2FA_DATA:
         case PROFILE_TOGGLE_2FA_ERROR:
             const twoFactorAuthState = { ...state.twoFactorAuth };
+
             return {
                 ...state,
                 twoFactorAuth: twoAuthReducer(twoFactorAuthState, action),
@@ -332,6 +334,7 @@ export const profileReducer = (state = initialStateProfile, action: ProfileActio
         case PROFILE_TIERS_DISABLE:
         case PROFILE_TIERS_ERROR:
             const tiersState = { ...state.tiers };
+
             return {
                 ...state,
                 tiers: tiersReducer(tiersState, action),
@@ -346,6 +349,7 @@ export const profileReducer = (state = initialStateProfile, action: ProfileActio
         case PROFILE_SET_BALANCE:
         case PROFILE_TOGGLE_USER_2FA:
             const userState = { ...state.userData };
+
             return {
                 ...state,
                 userData: userReducer(userState, action),
@@ -355,6 +359,7 @@ export const profileReducer = (state = initialStateProfile, action: ProfileActio
         case PROFILE_IDENTITY_DATA:
         case PROFILE_IDENTITY_ERROR:
             const profileIdentityState = { ...state.identity };
+
             return {
                 ...state,
                 identity: profileIdentityReducer(profileIdentityState, action),

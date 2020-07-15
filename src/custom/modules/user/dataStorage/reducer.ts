@@ -94,6 +94,7 @@ export const dataStorageReducer = (state = initialDataStorageState, action: Data
         case DATA_STORAGE_DATA:
         case DATA_STORAGE_ERROR:
             const dataStorageFetchState = { ...state.fetch };
+
             return {
                 ...state,
                 fetch: dataStorageFetchReducer(dataStorageFetchState, action),
@@ -102,6 +103,7 @@ export const dataStorageReducer = (state = initialDataStorageState, action: Data
         case DATA_STORAGE_PUSH_DATA:
         case DATA_STORAGE_PUSH_ERROR:
             const dataStoragePushState = { ...state.push };
+
             return {
                 ...state,
                 push: dataStoragePushReducer(dataStoragePushState, action),

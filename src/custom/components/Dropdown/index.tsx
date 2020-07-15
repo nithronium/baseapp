@@ -165,13 +165,13 @@ class Dropdown extends React.Component<DropdownProps & {}, DropdownState> {
         this.setState(prevState => ({
             isFocused: true,
         }));
-    }
+    };
 
     private handleBlur = () => {
       this.setState(prevState => ({
           isFocused: false,
       }));
-    }
+    };
 
     /**
      * function that toggles dropdown list
@@ -265,6 +265,7 @@ class Dropdown extends React.Component<DropdownProps & {}, DropdownState> {
             searchValue: '',
             isTimerRunning: false,
         });
+
         return 0;
     };
 
@@ -276,6 +277,7 @@ class Dropdown extends React.Component<DropdownProps & {}, DropdownState> {
         if (elem !== undefined && elem !== null) {
             return elem.toString();
         }
+
         return '';
     };
 
@@ -326,7 +328,7 @@ class Dropdown extends React.Component<DropdownProps & {}, DropdownState> {
                     this.scrollAnchorRef.current.scrollIntoView({ block: 'center', behavior: 'auto' });
                 }
         }
-    }
+    };
 
     private renderPlaceholder = () => {
         if (this.state.isFocused) {
@@ -334,7 +336,7 @@ class Dropdown extends React.Component<DropdownProps & {}, DropdownState> {
         }
 
         return this.state.selected;
-    }
+    };
 }
 
 export {

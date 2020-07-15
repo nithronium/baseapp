@@ -7,8 +7,8 @@ import {
     /*SummaryField,*/
     WhiteList,
 } from '../../components';
-import { Beneficiary } from '../../modules';
 import { cleanPositiveFloatInput } from '../../helpers';
+import { Beneficiary } from '../../modules';
 
 export interface WithdrawProps {
     currency: string;

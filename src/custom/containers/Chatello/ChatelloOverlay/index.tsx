@@ -48,6 +48,7 @@ export class ChatelloOverlayComponent extends React.Component<Props> {
 
         if (step === 1) {
             history.push(`/signup?redirect_url=${encodeURIComponent(url)}`);
+
             return;
         }
         if (step === 2) {

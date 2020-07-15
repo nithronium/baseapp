@@ -73,6 +73,7 @@ describe('Data storage fetch', () => {
                 });
             });
             store.dispatch(dataStorageFetch(fakeFetchPayload));
+
             return promise;
         });
 
@@ -88,6 +89,7 @@ describe('Data storage fetch', () => {
                 });
             });
             store.dispatch(dataStorageFetch(fakeFetchPayload));
+
             return promise;
         });
     });

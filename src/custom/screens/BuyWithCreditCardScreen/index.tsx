@@ -148,6 +148,7 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
         } else if (userLoggedIn) {
             step = 2;
         }
+
         // step = 4;
         return (
             <div className="pg-buy-with-credit-card">

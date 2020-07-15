@@ -8,9 +8,12 @@
     ]
   },
   "rules": {
+    "quotemark": [
+      true,
+      "single",
+      "jsx-double"
+    ],
     "no-magic-numbers": false,
-    "jsx-no-multiline-js": false,
-    "no-debugger": false,
     "jsx-no-lambda": false,
     "no-submodule-imports": false,
     "no-object-literal-type-assertion": false,
@@ -25,11 +28,6 @@
       true,
       "never-prefix"
     ],
-    "quotemark": [
-      true,
-      "single",
-      "jsx-double"
-    ],
     "indent": [
       true,
       "spaces",
@@ -42,7 +40,7 @@
     "semicolon": [
       true,
       "always",
-      "ignore-bound-class-methods"
+      "strict-bound-class-methods"
     ],
     "no-console": true,
     "ban": [
@@ -261,6 +259,8 @@
       "check-typecast"
     ],
     "no-any": false,
-    "no-var-requires": false
+    "no-var-requires": false,
+    "ordered-imports": true,
+    "newline-before-return": true
   }
 }

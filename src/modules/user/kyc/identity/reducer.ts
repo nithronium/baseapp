@@ -81,6 +81,7 @@ export const identityReducer = (state = initialIdentityState, action: IdentityAc
         case SEND_IDENTITY_DATA:
         case SEND_IDENTITY_ERROR:
             const identitySendState = { ...state.send };
+
             return {
                 ...state,
                 send: identitySendReducer(identitySendState, action),
@@ -89,6 +90,7 @@ export const identityReducer = (state = initialIdentityState, action: IdentityAc
         case EDIT_IDENTITY_DATA:
         case EDIT_IDENTITY_ERROR:
             const identityEditState = { ...state.edit };
+
             return {
                 ...state,
                 edit: identityEditReducer(identityEditState, action),

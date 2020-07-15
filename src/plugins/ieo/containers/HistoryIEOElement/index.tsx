@@ -69,6 +69,7 @@ class HistoryComponent extends React.Component<Props> {
 
     public render() {
         const { list, fetching } = this.props;
+
         return (
           <div className={`pg-history-elem ${list.length ? '' : 'pg-history-elem-empty'}`}>
               {fetching && <Loader />}
@@ -120,6 +121,7 @@ class HistoryComponent extends React.Component<Props> {
 
     private retrieveData = () => {
         const { list } = this.props;
+
         return [...list]
             .map(item => this.renderTableRow(item));
     };
@@ -151,7 +153,7 @@ class HistoryComponent extends React.Component<Props> {
             `${fee} ${base_currency && base_currency.toUpperCase()}`,
             <span style={{ color: setIEOStatusColor(state)}} key={id}>{state}</span>,
         ];
-    }
+    };
 
     private getPrecision = name => {
         const { currencies } = this.props;

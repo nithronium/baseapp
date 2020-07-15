@@ -111,7 +111,7 @@ class WhiteListActivateModalComponent extends React.Component<Props, State> {
                 />
             </div>
         );
-    }
+    };
 
     private renderConfirmationModalBody = () => {
         const { confirmationModalCode } = this.state;
@@ -142,7 +142,7 @@ class WhiteListActivateModalComponent extends React.Component<Props, State> {
         this.setState({
             [key]: value,
         });
-    }
+    };
 
     private handleChangeFieldFocus = (key: string) => {
         // @ts-ignore
@@ -155,7 +155,7 @@ class WhiteListActivateModalComponent extends React.Component<Props, State> {
         this.setState({
             ...defaultState,
         });
-    }
+    };
 
     private handleSubmitConfirmationModal = () => {
         const { whitelistAddData } = this.props;
@@ -169,7 +169,7 @@ class WhiteListActivateModalComponent extends React.Component<Props, State> {
 
             this.props.activateAddress(payload);
         }
-    }
+    };
 
     private handleClickToggleConfirmationModal = (clear?: boolean) => () => {
         this.props.handleToggleConfirmationModal();
@@ -177,7 +177,7 @@ class WhiteListActivateModalComponent extends React.Component<Props, State> {
         if (clear) {
             this.handleClearModalsInputs();
         }
-    }
+    };
 
     private translate = (id: string) => this.props.intl.formatMessage({ id });
 }

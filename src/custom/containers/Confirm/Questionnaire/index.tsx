@@ -339,7 +339,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
 
     private handleSelectDropdownAnswer = (question: string, answer: string) => {
         this.handleSetQuestionnaireItem(question, answer);
-    }
+    };
 
     private handleSetQuestionnaireItem = (question: string, answer: string, parts?: number, partToSet?: number) => {
         const { questionnaire } = this.state;
@@ -376,20 +376,22 @@ class QuestionnaireContainer extends React.Component<Props, State> {
             updatedQuestionnaire.push({ key: question, value: answerToSet });
             this.setState({ questionnaire: updatedQuestionnaire });
         }
-    }
+    };
 
     private handleValidateInput = (field: string, value: string): boolean => {
         switch (field) {
             case 'input':
                 const inputRegex = new RegExp(`^[a-zA-Zа-яА-Я]{1,100}$`);
+
                 return value.match(inputRegex) ? true : false;
             case 'textarea':
                 const textareaRegex = new RegExp(`^[a-zA-Zа-яА-Я0-9 ,.;/\\s]+$`);
+
                 return value.match(textareaRegex) ? true : false;
             default:
                 return true;
         }
-    }
+    };
 
     private translate = (e: string) => {
         return this.props.intl.formatMessage({id: e});
@@ -421,7 +423,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
         }
 
         return inputEmployerValid && inputPositionValid && inputCommentValid;
-    }
+    };
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({

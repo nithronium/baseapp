@@ -30,6 +30,7 @@ class CreditCardFormComponent extends React.Component<Props> {
             swapped,
             onSwap,
          } = this.props;
+
         return (
             <form
                 className="buy-form__inputs-wrap"
@@ -55,6 +56,7 @@ class CreditCardFormComponent extends React.Component<Props> {
             fiat,
             fiatList,
          } = this.props;
+
         return (
             <div className="buy-form__input-wrap">
                 <label className="buy-form__label">
@@ -85,6 +87,7 @@ class CreditCardFormComponent extends React.Component<Props> {
             crypto,
             cryptoList,
          } = this.props;
+
         return (
             <div className="buy-form__input-wrap">
                 <label className="buy-form__label">

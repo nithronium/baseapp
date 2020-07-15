@@ -1,12 +1,12 @@
-import * as qs from 'qs';
-import { Button } from 'react-bootstrap';
 import { History } from 'history';
+import * as qs from 'qs';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { CopyableTextField, CustomInput } from '../../components';
 import { buildPath } from '../../custom/helpers';
-import { CustomInput, CopyableTextField } from '../../components';
 import { setDocumentTitle } from '../../helpers';
 import {
     alertPush,
@@ -98,6 +98,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
 
     public render() {
         const enable2fa = this.get2faAction();
+
         return (
             <div className="pg-profile-two-factor-auth">
                 {this.renderToggle2fa(enable2fa)}
@@ -198,8 +199,9 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
 
     private renderTwoFactorAuthQR = (barcode: string) => {
         const src = `data:image/png;base64,${barcode}`;
+
         return barcode.length > 0 && <img  className="pg-profile-two-factor-auth__qr" src={src} alt=""/>;
-    }
+    };
 
     private renderSecret = (secret: string) => {
         return (
@@ -254,10 +256,11 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
         }
         this.props.history.push(buildPath(url, this.props.currentLanguage));
         // this.props.history.push(buildPath('/profile', this.props.currentLanguage));
-    }
+    };
 
     private get2faAction = () => {
         const routingState = this.props.history.location.state;
+
         return routingState ? routingState.enable2fa : false;
     };
 

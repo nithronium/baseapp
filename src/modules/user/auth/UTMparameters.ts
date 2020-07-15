@@ -18,6 +18,7 @@ export const getParameters = () => {
     if (utmTerm) { data['utm_term'] = utmTerm }
     // tslint:disable-next-line
     if (refid) { data['refid'] = refid }
+
     return Object.keys(data).length > 0 ? data : false;
 };
 

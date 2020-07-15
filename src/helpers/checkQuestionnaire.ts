@@ -3,6 +3,7 @@ export const checkQuestionnaire = labels => {
         if (isQuestionnaire || obj.key === 'questionnaireform') {
             return true;
         }
+
         return isQuestionnaire;
     }, false);
 };

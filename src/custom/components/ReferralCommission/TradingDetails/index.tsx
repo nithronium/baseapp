@@ -65,7 +65,7 @@ class TradingDetailsComponent extends React.Component<Props, State>{
             </tbody>
             );
         });
-    }
+    };
 
     public render(){
 
@@ -139,14 +139,14 @@ class TradingDetailsComponent extends React.Component<Props, State>{
         const skip = ((this.props.context.skip as number) || 0) + limit ;
 
         this.props.changePage(this.props.currencyId, this.props.context.type, skip, limit);
-    }
+    };
 
     private previousPage = () => {
         const limit = (this.props.context.limit || 10);
         const skip = (this.props.context.skip || 0) - limit;
 
         this.props.changePage(this.props.currencyId, this.props.context.type, skip, limit);
-    }
+    };
 
     private downloadCsv = async () => {
         const fileName = `Export - ${this.props.entity}.csv`;
@@ -159,7 +159,7 @@ class TradingDetailsComponent extends React.Component<Props, State>{
             rows.push(Object.values(referral));
         }
         exportToCsv(fileName, rows);
-    }
+    };
 
     private getTotal(column, mode = 'default', condition?){
 
@@ -181,6 +181,7 @@ class TradingDetailsComponent extends React.Component<Props, State>{
                     total += value2add;
                 }
             }
+
             return record;
         });
 
@@ -189,6 +190,7 @@ class TradingDetailsComponent extends React.Component<Props, State>{
 
     private formatFloat(float, precision) {
         const basefactor = 1 / (10 ** precision);
+
         return (float > 0 && float < basefactor) ? `< ${basefactor.toFixed(precision)}` : float.toFixed(precision);
     }
 }

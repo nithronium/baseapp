@@ -80,6 +80,7 @@ class History extends React.Component<Props, State> {
 
     private renderTabs = () => {
         const { tab } = this.state;
+
         return [
             {
                 content: tab === 'deposits' ? <HistoryElement type="deposits" /> : null,

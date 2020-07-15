@@ -206,6 +206,7 @@ export const ieoOrderReducer = (state = initialOrderIEOState, action: IEOOrderAc
         case IEO_ORDERS_POP:
         case IEO_ORDERS_PUSH:
             const ieoOrdersFetchState = { ...state.fetch };
+
             return {
                 ...state,
                 fetch: ieoOrdersFetchReducer(ieoOrdersFetchState, action),
@@ -214,6 +215,7 @@ export const ieoOrderReducer = (state = initialOrderIEOState, action: IEOOrderAc
         case IEO_ORDER_CANCEL_DATA:
         case IEO_ORDER_CANCEL_ERROR:
             const ieoOrderCancelState = { ...state.cancel };
+
             return {
                 ...state,
                 cancel: ieoOrderCancelReducer(ieoOrderCancelState, action),
@@ -222,6 +224,7 @@ export const ieoOrderReducer = (state = initialOrderIEOState, action: IEOOrderAc
         case IEO_ORDER_EXECUTE_DATA:
         case IEO_ORDER_EXECUTE_ERROR:
             const ieoOrderExecuteState = { ...state.execute };
+
             return {
                 ...state,
                 execute: ieoOrderExecuteReducer(ieoOrderExecuteState, action),
@@ -230,6 +233,7 @@ export const ieoOrderReducer = (state = initialOrderIEOState, action: IEOOrderAc
         case IEO_HISTORY_DATA:
         case IEO_HISTORY_ERROR:
             const ieoHistoryFetchState = { ...state.history };
+
             return {
                 ...state,
                 history: ieoHistoryFetchReducer(ieoHistoryFetchState, action),

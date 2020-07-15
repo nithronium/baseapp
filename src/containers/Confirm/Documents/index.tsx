@@ -1,14 +1,14 @@
-import { Button, Spinner } from 'react-bootstrap';
 import cr from 'classnames';
 import * as React from 'react';
+import { Button, Spinner } from 'react-bootstrap';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import MaskInput from 'react-maskinput';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
-import { buildPath } from '../../../custom/helpers';
 import { CustomInput } from '../../../components';
 import { DropdownComponent } from '../../../components/Dropdown';
+import { buildPath } from '../../../custom/helpers';
 import { formatDate } from '../../../helpers';
 import { isDateInFuture } from '../../../helpers/checkDate';
 import {
@@ -111,6 +111,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
 
         const onSelect = value => this.handleChangeDocumentsType(this.data[value]);
         const numberType = `${documentsType || this.translate('page.body.kyc.documentsType')}${this.translate('page.body.kyc.documents.number')}`;
+
         return (
             <React.Fragment>
                 <div className="pg-confirm__content-documents">
@@ -227,7 +228,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         this.setState({
             scans: fileList,
         });
-    }
+    };
 
     private renderScan = (scan: File, index: number) => {
         return (
@@ -240,7 +241,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                 <img alt="close" src={close}/>
             </div>
         );
-    }
+    };
 
     private handleChangeIdNumber = (value: string) => {
         this.setState({
@@ -270,7 +271,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                     break;
             }
         };
-    }
+    };
 
     private handleBlur = (field: string) => {
         return () => {
@@ -278,13 +279,13 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                 documentsFocused: false,
             });
         };
-    }
+    };
 
     private handleChangeExpiration = (e: OnChangeEvent) => {
         this.setState({
           expiration: formatDate(e.target.value),
         });
-    }
+    };
 
     private handleUploadScan = uploadEvent => {
         const allFiles: File[] = uploadEvent.target.files;
@@ -297,7 +298,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
             this.setState({ scans: additionalFileList.concat(oldFileList).slice(0,documentsCount) });
             this.props.fetchAlert({ message: ['resource.documents.limit_reached'], type: 'error'});
         }
-    }
+    };
     private handleFileDrop = event => {
       event.preventDefault();
       event.stopPropagation();
@@ -305,12 +306,12 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
           target: event.nativeEvent.dataTransfer,
       };
       this.handleUploadScan(uploadObj);
-    }
+    };
 
     private handleDragOver = event => {
       event.preventDefault();
       event.stopPropagation();
-    }
+    };
 
     private handleCheckButtonDisabled = () => {
         const {
@@ -318,8 +319,9 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
             idNumber,
             scans,
         } = this.state;
+
         return !scans.length || !idNumber || !expiration;
-    }
+    };
 
     private sendDocuments = () => {
         const {

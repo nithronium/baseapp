@@ -120,12 +120,14 @@ const cleanPositiveFloatInput = (text: string) => {
     if (cleanInput[0] === '.') {
         cleanInput = `0${cleanInput}`;
     }
+
     return cleanInput;
 };
 
 const checkButtonIsDisabled = (safeAmount: number, safePrice: number, props: OrderFormProps) => {
     const invalidAmount = safeAmount <= 0;
     const invalidMarketPrice = safePrice <= 0;
+
     return props.disabled || !props.available || invalidAmount || invalidMarketPrice;
 };
 

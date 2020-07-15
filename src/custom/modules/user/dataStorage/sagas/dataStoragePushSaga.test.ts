@@ -61,6 +61,7 @@ describe('Data storage push', () => {
                 });
             });
             store.dispatch(dataStoragePush(fakePushPayload));
+
             return promise;
         });
 
@@ -76,6 +77,7 @@ describe('Data storage push', () => {
                 });
             });
             store.dispatch(dataStoragePush(fakePushPayload));
+
             return promise;
         });
     });

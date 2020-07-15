@@ -24,6 +24,7 @@ export class ChatelloStepsComponent extends React.Component<Props> {
 
     public render() {
         const { currentStep } = this.props;
+
         return (
             <div className="credit-card-steps">
                 {currentStep <= 3 ? this.renderStep1to3(currentStep) : this.renderStep4()}
@@ -53,6 +54,7 @@ export class ChatelloStepsComponent extends React.Component<Props> {
                         checked: isChecked,
                         'credit-card-timeline__text--last': index === 4,
                     });
+
                     return (
                         <div
                             className={classes}

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { RouterProps } from 'react-router';
 import {
     connect,
     MapDispatchToPropsFunction,
     MapStateToProps,
 } from 'react-redux';
+import { RouterProps } from 'react-router';
 import { buildPath } from '../../custom/helpers';
 import {
     changeLanguage,
@@ -60,6 +60,7 @@ class Verification extends React.Component<Props, InjectedIntlProps> {
         }
         localStorage.removeItem('redirect_url');
         history.replace(buildPath(url, currentLanguage));
+
         return (
             null
         );

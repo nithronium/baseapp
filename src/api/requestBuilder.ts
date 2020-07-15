@@ -1,22 +1,22 @@
-import {
-    applogicUrl,
-    authUrl,
-    exchangeRatesUrl,
-    instexServiceUrl,
-    nodelogicUrl,
-    referralCommissionUrl,
-    referralUrl,
-    tradeUrl,
-    finexUrl,
-    withCredentials,
-    arkeUrl,
-} from './config';
 import axios, {
     AxiosError,
     AxiosPromise,
     AxiosRequestConfig,
     AxiosResponse,
 } from 'axios';
+import {
+    applogicUrl,
+    arkeUrl,
+    authUrl,
+    exchangeRatesUrl,
+    finexUrl,
+    instexServiceUrl,
+    nodelogicUrl,
+    referralCommissionUrl,
+    referralUrl,
+    tradeUrl,
+    withCredentials,
+} from './config';
 
 export type HTTPMethod =
     'get'
@@ -96,6 +96,7 @@ export const defaultResponse: Partial<AxiosError['response']> = {
 export const formatError = (responseError: AxiosError) => {
     const response = responseError.response || defaultResponse;
     const errors = (response.data && (response.data.errors || [response.data.error])) || [];
+
     return {
         code: response.status,
         message: errors,

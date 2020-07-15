@@ -241,6 +241,7 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
         if (captchaType === 'geetest' && !geetestCaptchaSuccess) {
             return true;
         }
+
         return false;
     };
 
@@ -275,5 +276,5 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
 
             this.handleClick();
         }
-    }
+    };
 }

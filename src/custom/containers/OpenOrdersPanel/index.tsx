@@ -73,6 +73,7 @@ export class OpenOrdersPanelContainer extends React.Component<Props, State> {
 
     private renderTabs = () => {
         const { tab } = this.state;
+
         return this.props.userLoggedIn ? [
             {
                 content: tab === 'openOrders' ? <OpenOrdersTab /> : null,

@@ -15,6 +15,7 @@ export const exportToCsv = (filename, rows) => {
             }
             finalVal += result;
         }
+
         return `${finalVal}\n`;
     };
 

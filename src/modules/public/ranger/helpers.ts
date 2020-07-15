@@ -1,6 +1,6 @@
-import { DataIEOInterface } from '../../../plugins/ieo/modules/public';
 import { isFinexEnabled } from '../../../api';
 import { DEFAULT_TRADING_VIEW_INTERVAL } from '../../../constants';
+import { DataIEOInterface } from '../../../plugins/ieo/modules/public';
 import { Market, Ticker, TickerEvent } from '../markets';
 import { marketStreams } from './actions';
 
@@ -15,6 +15,7 @@ export const formatTicker = (events: { [pair: string]: TickerEvent }): { [pair: 
             tickers[market] = { open, low, high, last, sell, buy, vol: volume, avg_price, price_change_percent };
         }
     }
+
     return tickers;
 };
 
@@ -46,6 +47,7 @@ export const streamsBuilder = (withAuth: boolean, prevSubscriptions: string[], m
             streams.push(stream);
         }
     }
+
     return streams;
 };
 

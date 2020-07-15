@@ -26,6 +26,7 @@ export class CreditCardStepsComponent extends React.Component<Props> {
 
     public render() {
         const { currentStep } = this.props;
+
         return (
             <div className="credit-card-steps">
                 {currentStep <= 3 ? this.renderStep1to3(currentStep) : this.renderStep4()}
@@ -54,6 +55,7 @@ export class CreditCardStepsComponent extends React.Component<Props> {
                         active: isActive,
                         checked: isChecked,
                     });
+
                     return (
                         <div
                             className={classes}

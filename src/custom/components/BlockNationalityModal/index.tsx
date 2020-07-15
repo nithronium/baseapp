@@ -37,7 +37,7 @@ class DeniedModal extends React.Component<Props> {
 
     private handleClick = () => {
         this.props.toggleModal();
-    }
+    };
 }
 
 export const BlockNationalityModal = injectIntl(DeniedModal);

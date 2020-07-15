@@ -60,6 +60,7 @@ export class OpenOrdersContainer extends React.Component<Props> {
             'pg-open-orders--empty': !list.length,
             'pg-open-orders--loading': fetching,
         });
+
         return (
             <div className={classNames}>
                 {fetching ? <div className="open-order-loading"><Loader /></div> : this.openOrders()}
@@ -81,6 +82,7 @@ export class OpenOrdersContainer extends React.Component<Props> {
     private renderHeaders = () => {
         const currentAskUnit = this.props.currentMarket ? ` (${this.props.currentMarket.base_unit.toUpperCase()})` : null;
         const currentBidUnit = this.props.currentMarket ? ` (${this.props.currentMarket.quote_unit.toUpperCase()})` : null;
+
         return [
             this.translate('page.body.trade.header.openOrders.content.date'),
             this.translate('page.body.trade.header.openOrders.content.price').concat(currentBidUnit),

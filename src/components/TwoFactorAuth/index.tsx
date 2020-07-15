@@ -1,7 +1,7 @@
 import cr from 'classnames';
-import { CustomInput } from '../';
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
+import { CustomInput } from '../';
 
 export interface TwoFactorAuthProps {
     errorMessage?: string;
@@ -46,6 +46,7 @@ class TwoFactorAuthComponent extends React.Component<TwoFactorAuthProps> {
         const emailGroupClass = cr('cr-email-form__group', {
             'cr-email-form__group--focused': codeFocused,
         });
+
         return (
             <div className="pg-2fa___form">
                 <form>
@@ -104,7 +105,7 @@ class TwoFactorAuthComponent extends React.Component<TwoFactorAuthProps> {
 
     private handleCancel = () => {
         this.props.handleClose2fa();
-    }
+    };
 
     private handleSubmit = () => {
         this.props.onSubmit();
@@ -123,7 +124,7 @@ class TwoFactorAuthComponent extends React.Component<TwoFactorAuthProps> {
                 this.handleSubmit();
             }
         }
-    }
+    };
 }
 
 export const TwoFactorAuth = TwoFactorAuthComponent;

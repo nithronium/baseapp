@@ -89,6 +89,7 @@ class MarketComponent extends React.Component<Props> {
                 <span key={id}><Decimal fixed={amountFixed} thousSep=",">{total}</Decimal></span>,
             ];
         };
+
         return (trades.length > 0)
             ? trades.map(renderRow)
             : [[[''], this.props.intl.formatMessage({ id: 'page.noDataToShow' })]];

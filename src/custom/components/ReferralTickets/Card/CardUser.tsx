@@ -43,6 +43,7 @@ class CardUser extends React.Component<CardProps>{
         }else{
             preloader = null;
         }
+
         return(
             <div className="Card">
                 {preloader}

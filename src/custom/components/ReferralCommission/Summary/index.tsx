@@ -21,6 +21,7 @@ class Summary extends React.Component<Props>{
 
             if (!condition){
                 total += value2add;
+
                 return true;
             }else{
 
@@ -28,6 +29,7 @@ class Summary extends React.Component<Props>{
                     total += value2add;
                 }
             }
+
             return true;
         });
 
@@ -46,7 +48,7 @@ class Summary extends React.Component<Props>{
                 <td><div className="mobile-card-header">Date</div><div className="mobile-value">{record.date} </div></td>
             </tr>
             );
-    });}
+    });};
 
     /*public loadMore() {
 

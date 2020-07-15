@@ -4,6 +4,7 @@ import { getTimezone } from './';
 const getFormattedExpirationDate = (date, timezone = getTimezone()) => {
     const isUnix = typeof date === 'number';
     const momentObj = isUnix ? moment.unix(date) : moment(date);
+
     return momentObj.tz(timezone).format('YYYY-MM-DDTHH:mm:ss.SSSSZ');
 };
 

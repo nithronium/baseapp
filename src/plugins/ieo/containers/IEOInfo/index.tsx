@@ -191,7 +191,7 @@ class IEOInfoComponent extends React.Component<Props, State> {
             default:
                 return;
         }
-    }
+    };
 
     private renderPreparing = () => {
         const { ieo, currency } = this.props;
@@ -236,7 +236,7 @@ class IEOInfoComponent extends React.Component<Props, State> {
                 </div>
             </div>
         );
-    }
+    };
 
     private renderInProgress = () => {
         const { countdownValue } = this.state;
@@ -273,7 +273,7 @@ class IEOInfoComponent extends React.Component<Props, State> {
                 {!hidePregress && this.renderProgressBar()}
             </div>
         );
-    }
+    };
 
     private renderFinished = () => {
         const { ieo, currency } = this.props;
@@ -308,7 +308,7 @@ class IEOInfoComponent extends React.Component<Props, State> {
                 {!hidePregress && this.renderProgressBar()}
             </div>
         );
-    }
+    };
 
     private renderProgressBar = () => {
         const { ieo } = this.props;

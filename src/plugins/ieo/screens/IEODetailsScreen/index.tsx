@@ -108,6 +108,7 @@ class IEODetailsContainer extends React.Component<Props, State> {
         const ieoDetailsClass = classnames('container pg-currentIEO-page', {
             'pg-currentIEO-page--bounded': showOrderExecuteModal,
         });
+
         return (
             <div className={ieoDetailsClass}>
                 <Helmet>
@@ -164,7 +165,7 @@ class IEODetailsContainer extends React.Component<Props, State> {
                 toggleModal={() => this.handleToggleOrderExecuteModal()}
             />
         );
-    }
+    };
 
     private handleClickBack = () => {
         this.props.history.push('/ieo');
@@ -173,7 +174,7 @@ class IEODetailsContainer extends React.Component<Props, State> {
     private handleToggleOrderExecuteModal = (data?: OrderIEOData) => {
         this.setState({ orderExecuteModalData: data });
         this.setState(prevState => ({ showOrderExecuteModal: !prevState.showOrderExecuteModal }));
-    }
+    };
 
     private translate = (e: string) => {
         return this.props.intl.formatMessage({ id: e });

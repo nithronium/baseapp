@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TabPanel, OrderForm } from '../';
+import { OrderForm, TabPanel } from '../';
 // import { Fees } from '../../modules';
 
 export type FormType = 'buy' | 'sell';
@@ -214,6 +214,7 @@ class Order extends React.PureComponent<OrderComponentProps, State> {
             listenInputPrice,
             // currentFees,
         } = this.props;
+
         return [
             {
                 content: (
@@ -296,6 +297,7 @@ class Order extends React.PureComponent<OrderComponentProps, State> {
             listenInputPrice,
             // currentFees,
         } = this.props;
+
         return [
             {
                 content: (
@@ -350,6 +352,7 @@ class Order extends React.PureComponent<OrderComponentProps, State> {
             listenInputPrice,
             // currentFees,
         } = this.props;
+
         return [
             {
                 content: (
@@ -389,7 +392,7 @@ class Order extends React.PureComponent<OrderComponentProps, State> {
         this.setState({
             index: index,
         });
-    }
+    };
 }
 
 export { Order };

@@ -132,6 +132,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                 usdPair = pair;
             }
         }
+
         return Number(usdPair.price);
     };
 
@@ -148,6 +149,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
         if (isNaN(valueNum)) {
             return value;
         }
+
         return Number(value.toFixed(precision));
     };
 
@@ -163,6 +165,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
 
         if (!userLoggedIn) {
             history.push(`/signup?redirect_url=${encodeURIComponent(url)}`);
+
             return;
         }
         if (user.level < 4) {
@@ -233,17 +236,20 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     public getMinLimit = () => {
         let { ieo } = this.props;
         ieo = ieo || { min_amount: 0, max_amount: 0 };
+
         return ieo.min_amount * 2;
     };
 
     public getMaxLimit = () => {
         let { ieo } = this.props;
         ieo = ieo || { min_amount: 0, max_amount: 0 };
+
         return ieo.max_amount * 2;
     };
 
     public render() {
         const { step, userLoggedIn, user, amount } = this.props;
+
         return (
             <div className="buy-form">
                 <div className="section">
@@ -325,6 +331,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
 
     public renderIframe = () => {
         const { buyWithCreditCard } = this.props;
+
         return (
             <iframe
                 title="ChatelloFrame"
@@ -370,6 +377,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
                 }
             }
         }
+
         return false;
     };
 
@@ -476,6 +484,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
         const { usdValue, chaValue } = this.state;
         fiat = fiat || '';
         crypto = crypto || '';
+
         return (
             <div>
                 <div className="buy-form__modal-amount">

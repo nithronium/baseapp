@@ -269,6 +269,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
             zh: [3, 9],
         }[locale];
         const hasBreakAfter = (index: number) => breaks.includes(index);
+
         return (
             <div>
                 <div className="popup-content__spacer" />
@@ -279,6 +280,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                 <div className="popup-content__spacer" />
                 {keys.map(key => {
                     const message = this.props.intl.formatMessage({ id: `page.body.profile.header.account.auth2fa.mfa.text${key}`});
+
                     return (
                         <>
                             <div key={key} className="popup-content-item">
@@ -399,7 +401,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
         this.setState({
             showChangeModal: true,
         });
-    }
+    };
 
     private cancel2fa = () => {
         this.setState({ isConfirm2faOpen: false });
@@ -418,25 +420,25 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                 showModal: !this.state.showModal,
             });
         }
-    }
+    };
 
     private handleOldPassword = (value: string) => {
         this.setState({
             oldPassword: value,
         });
-    }
+    };
 
     private handleConfPassword = (value: string) => {
         this.setState({
             confirmationPassword: value,
         });
-    }
+    };
 
     private handleNewPassword = (value: string) => {
         this.setState({
             newPassword: value,
         });
-    }
+    };
 
     private handleCancel = () => {
         this.setState({
@@ -445,7 +447,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
             newPassword: '',
             confirmationPassword: '',
         });
-    }
+    };
 
     private handleFieldFocus = (field: string) => {
         return () => {
@@ -469,7 +471,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                     break;
             }
         };
-    }
+    };
 
     private isValidForm() {
         const {

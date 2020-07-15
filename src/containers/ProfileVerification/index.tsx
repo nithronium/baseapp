@@ -32,6 +32,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
     public render() {
         const { user } = this.props;
         const userLevel = user.level;
+
         return (
             <div className="pg-profile-page__box pg-profile-page__left-col__verification">
                 <div className="pg-profile-page__box-header">
@@ -53,6 +54,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
         const {
             titleClassName,
         } = this.getLevelsClassNames(userLevel, targetLevel);
+
         return (
             <div className="pg-profile-page__row pg-profile-page__level-verification">
                 <div className={titleClassName}>
@@ -68,6 +70,7 @@ class ProfileVerificationComponent extends React.Component<Props> {
         const {
             titleClassName,
         } = this.getLevelsClassNames(userLevel, targetLevel);
+
         return (
             <div className="pg-profile-page__row pg-profile-page__level-verification">
                 <div className={titleClassName}>

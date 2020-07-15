@@ -56,6 +56,7 @@ describe('KycAuth', () => {
                 });
             });
             store.dispatch(kycAuthFetch());
+
             return promise;
         });
 
@@ -71,6 +72,7 @@ describe('KycAuth', () => {
                 });
             });
             store.dispatch(kycAuthFetch());
+
             return promise;
         });
     });

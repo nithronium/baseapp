@@ -1,9 +1,11 @@
-import { Button, Spinner } from 'react-bootstrap';
+import { History } from 'history';
 import * as React from 'react';
+import { Button, Spinner } from 'react-bootstrap';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToProps } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import { getBalance } from '../../api';
 import { CurrencyInfo, TabPanel, WalletItemProps, WalletList } from '../../components';
 import { Withdraw, WithdrawProps } from '../../containers';
 import { ModalWithdrawConfirmation } from '../../containers/ModalWithdrawConfirmation';
@@ -22,9 +24,9 @@ import {
     RootState,
     selectBeneficiariesActivateSuccess,
     selectBeneficiariesDeleteSuccess,
+    selectCurrencies,
     selectCurrentColorTheme,
     selectCurrentLanguage,
-    selectCurrencies,
     selectHistory,
     selectMobileWalletUi,
     selectUserInfo,
@@ -44,11 +46,9 @@ import {
     withdrawLimitFetch,
 } from '../../modules';
 import { CommonError } from '../../modules/types';
-import { TypeTabs } from './TypeTabs';
-import { getBalance } from '../../api';
-import { History } from 'history';
 import { CoinFragment } from './DepositTab/CoinFragment';
 import { FiatFragment } from './DepositTab/FiatFragment';
+import { TypeTabs } from './TypeTabs';
 
 interface HP {
     history: History;

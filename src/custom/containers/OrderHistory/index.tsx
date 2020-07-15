@@ -59,6 +59,7 @@ class OrderHistoryComponent extends React.PureComponent<Props, OrdersState>  {
         const updateList = list;
 
         const emptyMsg = this.props.intl.formatMessage({id: 'page.noDataToShow'});
+
         return (
             <div className={`pg-history-elem ${updateList.length ? '' : 'pg-history-elem-empty'}`}>
                 {fetching && <Loader />}
@@ -136,6 +137,7 @@ class OrderHistoryComponent extends React.PureComponent<Props, OrdersState>  {
         if (!side || !orderType) {
             return '';
         }
+
         return this.props.intl.formatMessage({ id: `page.body.openOrders.header.orderType.${side}.${orderType}` });
     };
 

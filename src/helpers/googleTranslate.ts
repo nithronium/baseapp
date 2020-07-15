@@ -61,6 +61,7 @@ export const getCurrentLang = () => {
     if (select) {
         return select.value;
     }
+
     return '';
 };
 
@@ -73,6 +74,7 @@ export const initLanguageChangeEvent = () => {
         if (select) {
             if (select.hasAttribute('cancel-next-change')) {
                 select.removeAttribute('cancel-next-change');
+
                 return;
             }
             window.dispatchEvent(

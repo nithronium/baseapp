@@ -100,6 +100,7 @@ export const referralCommissionReducer = (state = initialState, action: Referral
                 ...action.payload,
                 loading: false,
             };
+
             return newState;
         }
         case REFERRAL_COMMISSION_REFERRALS_DATA: {
@@ -110,6 +111,7 @@ export const referralCommissionReducer = (state = initialState, action: Referral
                 ...action.payload,
                 loading: false,
             };
+
             return newState;
         }
         case REFERRAL_COMMISSION_ERROR:
@@ -140,6 +142,7 @@ export const referralCommissionReducer = (state = initialState, action: Referral
             tmpState.data.participants = {
                 ...action.payload,
             };
+
             return tmpState;
         case REFERRAL_COMMISSION_PARTICIPANTS_FETCH:
             return {

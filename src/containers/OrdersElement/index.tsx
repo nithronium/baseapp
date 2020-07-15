@@ -1,9 +1,9 @@
-import { CloseButton, Spinner } from 'react-bootstrap';
 import * as React from 'react';
+import { CloseButton, Spinner } from 'react-bootstrap';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction } from 'react-redux';
-import { Decimal } from '../../components/Decimal';
 import { History, Pagination } from '../../components';
+import { Decimal } from '../../components/Decimal';
 import { localeDate, setTradeColor } from '../../helpers';
 import {
     Market,
@@ -12,6 +12,7 @@ import {
     selectCancelAllFetching,
     selectCancelFetching,
     selectCurrentPageIndex,
+    selectHistoryTotal,
     selectMarkets,
     selectOrdersFirstElemIndex,
     selectOrdersHistory,
@@ -19,7 +20,6 @@ import {
     selectOrdersLastElemIndex,
     selectOrdersNextPageExists,
     userOrdersHistoryFetch,
-    selectHistoryTotal,
 } from '../../modules';
 import { OrderCommon } from '../../modules/types';
 
@@ -67,6 +67,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState>  {
         }
 
         const emptyMsg = this.props.intl.formatMessage({id: 'page.noDataToShow'});
+
         return (
             <div className={`pg-history-elem ${updateList.length ? '' : 'pg-history-elem-empty'}`}>
                 {fetching && <div className="text-center"><Spinner animation="border" variant="primary" /></div>}
@@ -167,6 +168,7 @@ class OrdersComponent extends React.PureComponent<Props, OrdersState>  {
         if (!side || !orderType) {
             return '';
         }
+
         return this.props.intl.formatMessage({ id: `page.body.openOrders.header.orderType.${side}.${orderType}` });
     };
 

@@ -1,6 +1,6 @@
-import { Spinner } from 'react-bootstrap';
 import { History } from 'history';
 import * as React from 'react';
+import { Spinner } from 'react-bootstrap';
 import {
     InjectedIntlProps,
     injectIntl,
@@ -58,6 +58,7 @@ class EmailVerificationComponent extends React.Component<Props> {
         const title = this.props.intl.formatMessage({ id: 'page.header.signUp.modal.header' });
         const text = this.props.intl.formatMessage({ id: 'page.header.signUp.modal.body' });
         const button = this.props.intl.formatMessage({ id: 'page.resendConfirmation' });
+
         return (
             <div className="pg-emailverification-container">
                 <div className="cr-logo">
@@ -82,7 +83,7 @@ class EmailVerificationComponent extends React.Component<Props> {
           email: this.props.location.state.email,
           lang: this.props.i18n.toLowerCase(),
         });
-    }
+    };
 }
 
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({

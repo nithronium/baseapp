@@ -10,6 +10,7 @@ export const coinOption = (): object[] =>  ([
     { key: '', href: '/buybtc', label: 'footer_links_other_crypto'},
 ].map((link, index) => {
     link.key = `footer-link-${index}-${link.href}-${link.label}`;
+
     return link;
 }));
 
@@ -21,6 +22,7 @@ export const tradeOption = (): object[] => ([
     // { key: '', href: '/p2p', label: 'nav.link.p2p', description: 'nav.link.p2p.description'},
 ].map((link, index) => {
     link.key = `nav-link-${index}-${link.href}-${link.label}`;
+
     return link;
 }));
 
@@ -34,6 +36,7 @@ export const earnOption = (): object[] => ([
     { key: '', href: '/', label: 'nav.link.defi-invest', description: 'nav.link.defi-invest.description', soon: true},
 ].map((link, index) => {
     link.key = `nav-link-${index}-${link.href}-${link.label}`;
+
     return link;
 }));
 
@@ -46,6 +49,7 @@ export const ordersOption = (): object[] => ([
     // { key: '', href: '/', label: 'page.header.history_margin'},
 ].map((link, index) => {
     link.key = `nav-link-${index}-${link.href}-${link.label}`;
+
     return link;
 }));
 
@@ -61,6 +65,7 @@ export const userOption = (): object[] => ([
     { key: '', href: '/', label: 'nav_logout', logout: true},
 ].map((link, index) => {
     link.key = `nav-link-${index}-${link.href}-${link.label}`;
+
     return link;
 }));
 
@@ -76,6 +81,7 @@ export const pgRoutes = (isLoggedIn: boolean, isLight?: boolean): string[][] => 
         ['page.header.signUp', '/signup', `signup${isLight ? 'Light' : ''}`],
         ['page.header.navbar.trade', '/trading/', `trade${isLight ? 'Light' : ''}`],
     ];
+
     return isLoggedIn ? routes : routesUnloggedIn;
 };
 

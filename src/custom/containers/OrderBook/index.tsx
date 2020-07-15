@@ -78,6 +78,7 @@ class OrderBookContainer extends React.Component<Props, State> {
 
     private orderBook = (bids, asks) => {
         const asksData = asks;
+
         return (
             <React.Fragment>
                 <div className={'cr-table-header__content'}>
@@ -112,6 +113,7 @@ class OrderBookContainer extends React.Component<Props, State> {
             'cr-combined-order-book__market-negative': (marketTickers[currentMarket.id] || defaultTicker).price_change_percent.includes('-'),
             'cr-combined-order-book__market-positive': (marketTickers[currentMarket.id] || defaultTicker).price_change_percent.includes('+'),
           });
+
           return (
               <React.Fragment>
                   <span className={cn}>
@@ -127,6 +129,7 @@ class OrderBookContainer extends React.Component<Props, State> {
 
     private renderHeaders = () => {
         const { intl } = this.props;
+
         return [
             intl.formatMessage({id: 'page.body.trade.orderbook.header.price'}),
             intl.formatMessage({id: 'page.body.trade.orderbook.header.amount'}),
@@ -138,11 +141,13 @@ class OrderBookContainer extends React.Component<Props, State> {
         let total = accumulateVolume(array);
         const priceFixed = currentMarket ? currentMarket.price_precision : 0;
         const amountFixed = currentMarket ? currentMarket.amount_precision : 0;
+
         return (array.length > 0) ? array.map((item, i) => {
             const [price, volume] = item;
             switch (side) {
                 case 'asks':
                     total = accumulateVolume(array);
+
                     return [
                         <span key={i} className="pg-combined-order-book__price-asks"><Decimal fixed={priceFixed}>{price}</Decimal></span>,
                         <Decimal key={i} fixed={amountFixed}>{volume}</Decimal>,
@@ -156,7 +161,7 @@ class OrderBookContainer extends React.Component<Props, State> {
                     ];
             }
         }) : [[[''], message]];
-    }
+    };
 
     private handleOnSelectBids = (index: string) => {
         const { currentPrice, bids } = this.props;

@@ -43,12 +43,12 @@ class KYCLoginModal extends React.Component<Props> {
 
     private handleClickClose = () => {
         this.props.closeModal(false);
-    }
+    };
 
     private handleRedirectToConfirm = () => {
         this.props.history.push('/confirm');
         this.handleClickClose();
-    }
+    };
 
     private translate = (e: string) => {
         return this.props.intl.formatMessage({ id: e });

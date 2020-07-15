@@ -1,16 +1,14 @@
+import { Decimal } from '@openware/components';
+import * as moment from 'moment';
 import * as qs from 'qs';
 import * as React from 'react';
-import * as moment from 'moment';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { RouteComponentProps, withRouter } from 'react-router';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
-import { Decimal } from '@openware/components';
-import { CreditCardForm } from '../CreditCardForm';
-import { CreditCardModal } from '../CreditCardModal';
-import { CreditCardOverlay } from '../CreditCardOverlay';
+import { RouteComponentProps, withRouter } from 'react-router';
 import {
     Modal,
 } from '../../../../components';
+import { getTotalPrice } from '../../../../helpers';
 import {
     creditCardOrderFetch,
     currenciesFetch,
@@ -30,7 +28,9 @@ import {
     withdrawLimitFetch,
 } from '../../../../modules';
 import { WithdrawLimit } from '../../../../modules/user/withdrawLimit';
-import { getTotalPrice } from '../../../../helpers';
+import { CreditCardForm } from '../CreditCardForm';
+import { CreditCardModal } from '../CreditCardModal';
+import { CreditCardOverlay } from '../CreditCardOverlay';
 
 // const availableFiat = ['eur'];
 
@@ -122,6 +122,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
                 return item.precision;
             }
         }
+
         return 2;
     };
 
@@ -131,6 +132,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         }
         const fiatNoFee = this.convert(cryptoValue, 'fiat');
         const fee = fiatNoFee * 4.5 / 100 + 0.1;
+
         return fiatNoFee + fee;
     };
 
@@ -140,6 +142,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         if (res < 0) {
             return 0;
         }
+
         return this.convert(res, 'crypto', props);
     };
 
@@ -159,6 +162,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         const totalVolume2 = value;
         // const weightedAverage = totalPrice / totalVolume;
         const weightedAverage2 = totalPrice2 / totalVolume2;
+
         // console.log('depth', depth);
         // console.log('weightedAverage', weightedAverage);
         // console.log('weightedAverage1', weightedAverage2);
@@ -189,6 +193,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
 
     public findMarket = (fiat: string, crypto: string): Market => {
         const { markets } = this.props;
+
         return markets.filter((market: Market) => {
             return (market.base_unit.toLowerCase() === fiat.toLowerCase() &&
                 market.quote_unit.toLowerCase() === crypto.toLowerCase()) ||
@@ -208,10 +213,12 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         const { userLoggedIn, history, user } = this.props;
         if (!userLoggedIn) {
             history.push(`/signin?redirect_url=${encodeURIComponent('/buycrypto')}`);
+
             return;
         }
         if (user.level < 4) {
             history.push(`/confirm?redirect_url=${encodeURIComponent('/buycrypto')}`);
+
             return;
         }
         this.setState({
@@ -260,6 +267,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         if (!marketsWithCrypto.length) {
             return '';
         }
+
         return marketsWithCrypto[0].quote_unit;
     };
 
@@ -347,11 +355,13 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         for (const item of marketsWithAvailableFiat) {
             res.add(item.base_unit);
         }
+
         return Array.from(res);
     };
 
     public getAllCrypto = (props = this.props) => {
         const cryptoMarkets = this.getCryptoFiatMarkets(props);
+
         return cryptoMarkets.map(({ base_unit }) => base_unit);
     };
 
@@ -367,11 +377,13 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         for (const item of marketsWithFiat) {
             res.add(item.quote_unit);
         }
+
         return Array.from(res);
     };
 
     public getCryptoFiatMarkets = (props: Props = this.props) => {
         const { markets } = props;
+
         return markets.filter(({ state }) => {
             return state === 'enabled';
         }).filter(({ base_unit }) => {
@@ -393,6 +405,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
 
     public getCurrenciesByType = (type: string, props?) => {
         const { currencies } = (props || this.props);
+
         return currencies.filter(item => {
             return item.type === type;
         });
@@ -420,6 +433,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
             return 'unlimited';
         }
         const withdraw = withdrawLimitData.withdraw;
+
         return `$${withdraw ? withdraw.limit : '0'}`;
     };
 
@@ -434,11 +448,13 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         if (fiat.toLowerCase() === 'aed') {
             return fiatNumber < 30;
         }
+
         return fiatNumber < 1;
     };
 
     public ableToBuy = () => {
         const { userLoggedIn, user } = this.props;
+
         return userLoggedIn && user.level >= 4;
     };
 
@@ -451,6 +467,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
             showModal,
         } = this.state;
         const { step, user, userLoggedIn } = this.props;
+
         return (
             <div className="buy-form" id="bru-crypro-form">
                 <div className="section">
@@ -540,6 +557,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
 
     public renderIframe = () => {
         const { buyWithCreditCard } = this.props;
+
         return (
             <iframe
                 src={buyWithCreditCard.data.url}

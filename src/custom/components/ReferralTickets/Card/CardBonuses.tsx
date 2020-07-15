@@ -42,6 +42,7 @@ class CardBonuses extends React.Component<CardProps>{
         }else{
             preloader = null;
         }
+
         return(
 
             <div className="Card">

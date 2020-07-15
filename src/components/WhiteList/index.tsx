@@ -129,7 +129,7 @@ class WhiteListComponent extends React.Component<Props, State> {
                 <img src={require('../../assets/images/PlusIcon.svg')} className="cr-white-list__add__icon" alt="" />
             </div>
         );
-    }
+    };
 
     private renderDropdownItem = (item: Beneficiary, index: number, type: 'fiat' | 'coin') => {
         if (type === 'fiat') {
@@ -161,7 +161,7 @@ class WhiteListComponent extends React.Component<Props, State> {
                 </div>
             </div>
         );
-    }
+    };
 
     private renderDropdownBody = (whitelist: Beneficiary[], type: 'fiat' | 'coin') => {
         const dropdownBodyClassName = classnames('cr-white-list__dropdown__body', {
@@ -177,7 +177,7 @@ class WhiteListComponent extends React.Component<Props, State> {
                 </div>
             </div>
         );
-    }
+    };
 
     private renderDropdownTipCryptoNote = (note: string) => {
         return (
@@ -186,7 +186,7 @@ class WhiteListComponent extends React.Component<Props, State> {
                 <span className="tip__content__block__value">{note}</span>
             </div>
         );
-    }
+    };
 
     private renderDropdownTipCrypto = (currentWithdrawalBeneficiary: Beneficiary) => {
         if (currentWithdrawalBeneficiary) {
@@ -208,7 +208,7 @@ class WhiteListComponent extends React.Component<Props, State> {
         }
 
         return;
-    }
+    };
 
     private renderDropdownTipFiatDescription = (description: string) => {
         return (
@@ -217,7 +217,7 @@ class WhiteListComponent extends React.Component<Props, State> {
                 <span className="tip__content__block__value">{description}</span>
             </div>
         );
-    }
+    };
 
     private renderDropdownTipFiat = (currentWithdrawalBeneficiary: Beneficiary) => {
         if (currentWithdrawalBeneficiary) {
@@ -243,7 +243,7 @@ class WhiteListComponent extends React.Component<Props, State> {
         }
 
         return;
-    }
+    };
 
     private renderAddressDropdown = (whitelist: Beneficiary[], currentWithdrawalBeneficiary: Beneficiary, type: 'fiat' | 'coin') => {
         const { isOpenDropdown, isOpenTip } = this.state;
@@ -291,19 +291,19 @@ class WhiteListComponent extends React.Component<Props, State> {
                 {isOpenTip && this.renderDropdownTipCrypto(currentWithdrawalBeneficiary)}
             </div>
         );
-    }
+    };
 
     private handleClickDeleteAddress = (item: Beneficiary) => () => {
         this.handleDeleteAddress(item);
-    }
+    };
 
     private handleClickSelectAddress = (item: Beneficiary) => () => {
         this.handleSetCurrentAddress(item);
-    }
+    };
 
     private handleClickToggleAddAddressModal = () => () => {
         this.handleToggleAddAddressModal();
-    }
+    };
 
     private handleDeleteAddress = (item: Beneficiary) => {
         const payload = {
@@ -311,7 +311,7 @@ class WhiteListComponent extends React.Component<Props, State> {
         };
 
         this.props.deleteAddress(payload);
-    }
+    };
 
     private handleFilterByCurrency = (whitelist: Beneficiary[], currency: string) => {
         if (whitelist.length && currency) {
@@ -319,14 +319,15 @@ class WhiteListComponent extends React.Component<Props, State> {
         }
 
         return [];
-    }
+    };
 
     private handleFilterByState = (whitelist: Beneficiary[]) => {
         if (whitelist.length) {
             return whitelist.filter(item => item.state.toLowerCase() === 'active');
         }
+
         return [];
-    }
+    };
 
     private handleSetCurrentAddress = (item: Beneficiary) => {
         if (item.data) {
@@ -336,31 +337,31 @@ class WhiteListComponent extends React.Component<Props, State> {
             });
             this.props.onChangeValue(item);
         }
-    }
+    };
 
     private handleToggleAddAddressModal = () => {
         this.setState(prevState => ({
             isOpenAddressModal: !prevState.isOpenAddressModal,
         }));
-    }
+    };
 
     private handleToggleConfirmationModal = () => {
         this.setState(prevState => ({
             isOpenConfirmationModal: !prevState.isOpenConfirmationModal,
         }));
-    }
+    };
 
     private handleToggleDropdown = () => {
         this.setState(prevState => ({
             isOpenDropdown: !prevState.isOpenDropdown,
         }));
-    }
+    };
 
     private handleToggleTip = () => {
         this.setState(prevState => ({
             isOpenTip: !prevState.isOpenTip,
         }));
-    }
+    };
 
     private translate = (id: string) => this.props.intl.formatMessage({ id });
 }

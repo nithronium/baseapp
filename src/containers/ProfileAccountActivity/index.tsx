@@ -63,6 +63,7 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
 
     public renderContent = () => {
         const { total, firstElemIndex, lastElemIndex, page, nextPageExists, userActivity } = this.props;
+
         return (
             <React.Fragment>
                 <Table header={this.getHeaders()} data={this.getActivityData(userActivity)} />
@@ -109,6 +110,7 @@ class ProfileAccountActivityComponent extends React.Component<Props> {
                 result === this.props.intl.formatMessage({ id: 'page.body.profile.content.result.failed' }) ||
                 result === this.props.intl.formatMessage({ id: 'page.body.profile.content.result.denied' }),
         });
+
         return <span className={className}>{result}</span>;
     }
 

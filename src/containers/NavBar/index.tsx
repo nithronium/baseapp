@@ -20,6 +20,7 @@ import {
     USDIcon,
     UserIcon,
 } from '../../assets/images/NavBarIcons';
+import { GoogleTranslate } from '../../components/GoogleTranslate';
 import {coinOption, earnOption, ordersOption, tradeOption, userOption} from '../../constants';
 import {buildPath} from '../../custom/helpers';
 import {
@@ -37,7 +38,6 @@ import {
     User,
     walletsReset,
 } from '../../modules';
-import { GoogleTranslate } from '../../components/GoogleTranslate';
 
 const logo = require('../../assets/images/logo.svg');
 

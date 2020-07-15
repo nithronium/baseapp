@@ -175,6 +175,7 @@ class BalancesComponent extends React.Component<Props, State> {
         const firstWalletFIAT = wallets.find(item => (item.currency === VALUATION_CURRENCY)) || wallets.find(item => (item.type === 'fiat'));
 
         const firstFIAT = firstWalletFIAT ? firstWalletFIAT.currency : '';
+
         return [
             this.translate('page.body.trade.header.funds.content.coin'),
             this.translate('page.body.trade.header.funds.content.name'),
@@ -192,6 +193,7 @@ class BalancesComponent extends React.Component<Props, State> {
 
         const valuationWallet = wallets.find(item => (item.currency === VALUATION_CURRENCY)) || wallets.find(item => (item.type === 'fiat'));
         const valuationCurrency = valuationWallet ? valuationWallet.currency : '';
+
         return valuationCurrency;
     };
 
@@ -227,6 +229,7 @@ class BalancesComponent extends React.Component<Props, State> {
         if (!item) {
             return 1;
         }
+
         return item.price || 1;
     };
 
@@ -236,6 +239,7 @@ class BalancesComponent extends React.Component<Props, State> {
         const valueInWallet = Number(wallet.balance);
         const valueInUsd = valueInWallet / walletPrice;
         const valuationValue = valueInUsd * valuationPrice;
+
         return valuationValue;
     };
 
@@ -259,7 +263,7 @@ class BalancesComponent extends React.Component<Props, State> {
             <span key={id}>{balance}</span>,
             <span key={id}><Decimal fixed={walletPrecision}>{valuation.toString()}</Decimal></span>,
         ];
-    }
+    };
 }
 
 const mapStateToProps = (state: RootState): ReduxProps => ({

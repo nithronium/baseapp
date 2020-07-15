@@ -47,7 +47,7 @@ class IEOListContainer extends React.Component<Props> {
                 onClick={this.handleSelectIEO}
                 currencies={currencies}
             />)) : null;
-    }
+    };
 
     private handleSelectIEO = (ieo: DataIEOInterface) => {
         this.props.setCurrentIEO(ieo);

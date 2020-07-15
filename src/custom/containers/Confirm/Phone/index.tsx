@@ -201,21 +201,21 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
                     break;
             }
         };
-    }
+    };
 
     private handleConfirmEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             event.preventDefault();
             this.confirmPhone();
         }
-    }
+    };
 
     private handleSendEnterPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             event.preventDefault();
             this.handleSendCode();
         }
-    }
+    };
 
     private confirmPhone = () => {
         const { phoneNumber, confirmationCode } = this.state;
@@ -237,7 +237,7 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
             //     phoneNumber: '+',
             // });
         }
-    }
+    };
 
     private handleChangePhoneNumber = (e: OnChangeEvent) => {
         if (this.inputPhoneNumber(e)) {
@@ -246,7 +246,7 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
                 resendCode: false,
             });
         }
-    }
+    };
 
     private handleChangeConfirmationCode = (e: OnChangeEvent) => {
         if (this.inputConfirmationCode(e)) {
@@ -259,14 +259,16 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
     private inputPhoneNumber = (e: OnChangeEvent) => {
         const convertedText = e.target.value.trim();
         const condition = new RegExp('^\\+\\d*?$');
+
         return condition.test(convertedText);
-    }
+    };
 
     private inputConfirmationCode = (e: OnChangeEvent) => {
         const convertedText = e.target.value.trim();
         const condition = new RegExp('^\\d*?$');
+
         return condition.test(convertedText);
-    }
+    };
 
     private handleSendCode = () => {
         const requestProps = {

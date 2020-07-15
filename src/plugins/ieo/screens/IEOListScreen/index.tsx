@@ -93,6 +93,7 @@ class IEOListContainer extends React.Component<Props> {
     public render() {
         const { loading, ieo, intl} = this.props;
         const { locale } = intl;
+
         return (
             <div className="pg-ieo-page container">
                 <Helmet>
@@ -115,6 +116,7 @@ class IEOListContainer extends React.Component<Props> {
         const listPreparing = this.handleFilterIEO(['preparing']);
         const listInProgress = this.handleFilterIEO(['ongoing', 'distributing']);
         const listPast = this.handleFilterIEO(['finished', 'released']);
+
         return (
             <React.Fragment>
                 {this.renderPreparing(listPreparing)}
@@ -122,7 +124,7 @@ class IEOListContainer extends React.Component<Props> {
                 {this.renderFinished(listPast)}
             </React.Fragment>
         );
-    }
+    };
 
     private renderPreparing = listPreparing => (
         listPreparing.length ? (

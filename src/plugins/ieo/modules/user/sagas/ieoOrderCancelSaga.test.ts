@@ -88,6 +88,7 @@ describe('IEO Order Cancel', () => {
                 });
             });
             store.dispatch(ieoOrderCancel(fakePayload));
+
             return promise;
         });
 
@@ -103,6 +104,7 @@ describe('IEO Order Cancel', () => {
                 });
             });
             store.dispatch(ieoOrderCancel(fakePayload));
+
             return promise;
         });
     });

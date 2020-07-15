@@ -106,6 +106,7 @@ describe('IEO Orders Fetch', () => {
                 });
             });
             store.dispatch(ieoOrdersFetch());
+
             return promise;
         });
 
@@ -121,6 +122,7 @@ describe('IEO Orders Fetch', () => {
                 });
             });
             store.dispatch(ieoOrdersFetch());
+
             return promise;
         });
     });

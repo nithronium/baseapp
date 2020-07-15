@@ -229,7 +229,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
         this.setState({
             scans: fileList,
         });
-    }
+    };
 
     private renderScan = (scan: File, index: number) => {
         return (
@@ -242,7 +242,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                 <img src={close} alt="close" />
             </div>
         );
-    }
+    };
 
     private handleFieldFocus = (field: string) => {
         return () => {
@@ -256,7 +256,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                     break;
             }
         };
-    }
+    };
 
     private handleChangeExpiration = (e: OnChangeEvent) => {
         this.setState({
@@ -280,7 +280,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                 });
             }
         }
-    }
+    };
 
     private handleUploadScan = uploadEvent => {
         const allFiles: File[] = uploadEvent.target.files;
@@ -293,7 +293,7 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
             this.setState({ scans: additionalFileList.concat(oldFileList).slice(0,documentsCount) });
             this.props.fetchAlert({ message: ['resource.documents.limit_reached'], type: 'error'});
         }
-    }
+    };
     private handleFileDrop = event => {
       event.preventDefault();
       event.stopPropagation();
@@ -301,18 +301,18 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
           target: event.nativeEvent.dataTransfer,
       };
       this.handleUploadScan(uploadObj);
-    }
+    };
 
     private handleDragOver = event => {
       event.preventDefault();
       event.stopPropagation();
-    }
+    };
 
     private handleCheckButtonDisabled = () => {
         const { expiration, expirationValid, scans } = this.state;
 
         return !scans.length || !expiration || !expirationValid;
-    }
+    };
 
     private sendDocuments = () => {
         const {

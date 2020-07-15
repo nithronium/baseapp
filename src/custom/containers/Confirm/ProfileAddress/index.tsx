@@ -93,6 +93,7 @@ class ProfileAddressComponent extends React.Component<Props, State> {
                 const redirectUrl = getRedirectUrl();
                 if (redirectUrl && redirectUrl.indexOf('chatello') !== -1) {
                     redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), lang)));
+
                     return;
                 }
                 handleRedirectToConfirm('profAddressStep', this.props.history);

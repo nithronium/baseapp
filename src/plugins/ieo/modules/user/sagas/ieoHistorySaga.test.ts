@@ -113,6 +113,7 @@ describe('IEO History Fetch', () => {
                 });
             });
             store.dispatch(ieoHistoryFetch(fakeFetchPayloadFirstPage));
+
             return promise;
         });
 
@@ -128,6 +129,7 @@ describe('IEO History Fetch', () => {
                 });
             });
             store.dispatch(ieoHistoryFetch(fakeFetchPayloadFirstPage));
+
             return promise;
         });
     });
