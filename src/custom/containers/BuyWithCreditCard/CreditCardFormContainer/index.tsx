@@ -238,8 +238,8 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
     };
 
     public convertToCrypto = (fiatValue: number, props: Props = this.props) => {
-        // const fee = fiatValue * 4.5 / 100 + 0.1;
-        const res = fiatValue;
+        const fee = fiatValue * 4.5 / 100 + 0.1;
+        const res = fiatValue - fee;
         if (res < 0) {
             return 0;
         }
