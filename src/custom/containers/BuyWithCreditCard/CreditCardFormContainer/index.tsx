@@ -90,19 +90,13 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
     }
 
     public componentDidMount() {
-        const { fiat, crypto, currencies, markets, onChange } = this.props;
+        const { fiat, currencies, markets, onChange } = this.props;
         this.props.fetchCurrencies();
         this.props.fetchMarkets();
+
         if (currencies.length && markets.length) {
             const fiatList = this.getAvailableFiat(this.props);
             const cryptoList = this.getAvailableCrypto(fiat, this.props);
-            this.props.fetchOrderBook(markets.reduce((market, item) => {
-                if (item.name === `${crypto.toUpperCase()}/${fiat.toUpperCase()}`) {
-                    return item;
-                }
-
-                return market;
-            }, {}));
             onChange({
                 fiatList,
                 cryptoList,
@@ -110,25 +104,35 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
         }
 
     }
-
     public async componentWillReceiveProps(nextProps) {
+        // tslint:disable-next-line:no-console
+        console.log('...........test update props');
         const { currencies, markets, crypto, onChange } = this.props;
         let { fiat } = this.props;
+        // tslint:disable-next-line:no-console
+        console.log('...........currencies.length !== nextProps.currencies.length ||markets.length !== nextProps.markets.length', currencies.length !== nextProps.currencies.length || markets.length !== nextProps.markets.length);
         if (currencies.length !== nextProps.currencies.length ||
             markets.length !== nextProps.markets.length)
         {
+            // tslint:disable-next-line:no-console
+            console.log('...........!nextProps.markets.length || !nextProps.currencies.length', !nextProps.markets.length || !nextProps.currencies.length);
             if (!nextProps.markets.length || !nextProps.currencies.length) { return; }
             const query = qs.parse(location.search, { ignoreQueryPrefix: true });
             let newCrypto = query.curr;
-
+            // tslint:disable-next-line:no-console
+            console.log('...........test 1111');
             const fiatList = this.getAvailableFiat(nextProps);
             const cryptoList = this.getAvailableCrypto(fiat, nextProps);
             if (!this.getAllCrypto(nextProps).includes(newCrypto)) {
-                newCrypto = cryptoList[0] || 'btc';
+                newCrypto = cryptoList[0] || 'usdt';
             }
+            // tslint:disable-next-line:no-console
+            console.log('...........test 222');
             if (query.curr) {
                 fiat = this.getFiatForCrypto(newCrypto, nextProps);
             }
+            // tslint:disable-next-line:no-console
+            console.log('...........test 333');
             const partialState = {
                 fiatList,
                 cryptoList,
@@ -138,22 +142,32 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
                 cryptoValue: '',
                 // converted: {} as ConvertedResponse,
             };
-
+            // tslint:disable-next-line:no-console
+            console.log('...........test 4444');
             if (query.fiat) {
                 partialState.fiat = query.fiat;
                 partialState.crypto = query.crypto;
             }
+            // tslint:disable-next-line:no-console
+            console.log('...........test 5555');
             if (query.fiatValue || query.cryptoValue) {
                 partialState.fiatValue = query.fiatValue;
                 partialState.cryptoValue = query.cryptoValue;
             }
-
+            // tslint:disable-next-line:no-console
+            console.log('...........tesrt 6666');
             const marketCurrencies = this.getAllCurrencies(nextProps);
+            // tslint:disable-next-line:no-console
+            console.log('...........test 777');
             const converted = await getExchangeRates(
                 'USD', 1, marketCurrencies,
             );
+            // tslint:disable-next-line:no-console
+            console.log('...........test 8888');
             this.setState({ converted });
-
+            // tslint:disable-next-line:no-console
+            console.log('...........test fetch order book');
+            this.props.fetchOrderBook(nextProps.markets);
             onChange({
                 ...partialState,
                 converted,
@@ -171,6 +185,7 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
         if (fiat !== nextProps.fiat || crypto !== nextProps.crypto) {
             this.fetchMarket(nextProps);
         }
+
 
         // change in the parent
         if (nextProps.cryptoValue === null) {
@@ -252,6 +267,9 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
         if (res < 0) {
             return 0;
         }
+
+        // tslint:disable-next-line:no-console
+        console.log('...........props.orderBook', props.orderBook);
 
         return convert(res, 'crypto', props.orderBook);
     };
@@ -350,6 +368,8 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
 
     public findMarket = (fiat: string, crypto: string): Market => {
         const { markets } = this.props;
+        // tslint:disable-next-line:no-console
+        console.log('...........markets', markets);
 
         return markets.filter((market: Market) => {
             return (market.base_unit.toLowerCase() === fiat.toLowerCase() &&
@@ -364,7 +384,7 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
         const { fiat, crypto } = props;
         const market = this.findMarket(fiat, crypto);
         // tslint:disable-next-line:no-console
-        console.log('...........market', market);
+        console.log('...........market 123123', market);
         this.props.fetchOrderBook(market);
     };
 
@@ -407,6 +427,8 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
 
     public getFiatPlaceholder = () => {
         const { fiat, crypto } = this.props;
+        // tslint:disable-next-line:no-console
+        console.log('...........fiat, crypto', fiat, crypto);
         const market = this.findMarket(fiat, crypto);
         if (!market) {
             return '';
