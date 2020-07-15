@@ -186,8 +186,6 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
             amountFocused,
         } = this.state;
         const safeAmount = Number(amount) || 0;
-        // tslint:disable-next-line:no-console
-        console.log('...........amount, proposals', amount, proposals);
         const totalPrice = getTotalPrice(amount, proposals);
         const safePrice = totalPrice / Number(amount) || priceMarket;
         const total = orderType === 'Market' ? totalPrice : safeAmount * (Number(price) || 0);
@@ -207,8 +205,8 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
                     <div className="cr-order-item">
                         <OrderInput
                             currency={from}
-                            label={priceText}
-                            placeholder={priceText}
+                            label={`${priceText}234234`}
+                            placeholder={`${priceText}111111111111`}
                             value={handleSetValue(price, '')}
                             isFocused={priceFocused}
                             handleChangeValue={this.handlePriceChange}

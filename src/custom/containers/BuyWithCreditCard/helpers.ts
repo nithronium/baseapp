@@ -1,9 +1,8 @@
-import { Decimal } from '../../../components';
 import { getTotalPrice } from '../../../helpers';
 
 export const convert = (value: number, target: string, orderBook): number => {
     const { asks } = orderBook;
-    const depth = asks.map(({ avg_price, remaining_volume }) => [avg_price, remaining_volume]);
+    const depth = asks.map(({ price, remaining_volume }) => [price, remaining_volume]);
 
     // const totalPrice = asks.reduce((sum: number, { price, remaining_volume }) => {
     //     return sum + price * remaining_volume;
@@ -19,5 +18,5 @@ export const convert = (value: number, target: string, orderBook): number => {
 
     return target === 'fiat' ?
         value * weightedAverage2 :
-        +Decimal.format(totalPrice2, 4);
+        value / weightedAverage2;
 };
