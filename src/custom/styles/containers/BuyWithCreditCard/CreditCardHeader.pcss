@@ -1,58 +1,58 @@
 
 .pg-buy-with-credit-card {
-    .credit-card-header {
-        padding-bottom: 50px;
-        margin-bottom: -50px;
-        background: url(./assets/images/credit-card-header-bg-lb.svg) left bottom no-repeat,
-            url(./assets/images/credit-card-header-bg1.png) top center no-repeat,
-            url(./assets/images/credit-card-header-bg-rt.svg) right top no-repeat;
+  .credit-card-header {
+    background:
+      url(./assets/images/credit-card-header-bg-lb.svg) left bottom no-repeat,
+      url(./assets/images/credit-card-header-bg1.png) top center no-repeat,
+      url(./assets/images/credit-card-header-bg-rt.svg) right top no-repeat;
+    margin-bottom: -50px;
+    padding-bottom: 50px;
 
-        &__wrap {
-            display: flex;
-            justify-content: space-between;
-            padding-top: 50px;
-            padding-bottom: 40px;
-        }
-
-        &__icon {
-            position: relative;
-            width: 183px;
-            height: 187px;
-            background: url(./assets/images/credit-card-header-icon.png);
-        }
-
-        &__left {
-            width: 500px;
-            max-width: 500px;
-        }
-
-        &__title {
-            font-size: 30px;
-            line-height: 48px;
-            color: #fff;
-        }
-
-        &__text {
-            font-size: 20px;
-            color: var(--text-color-header);
-            padding-top: 25px;
-        }
+    &__wrap {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 40px;
+      padding-top: 50px;
     }
+
+    &__icon {
+      background: url(./assets/images/credit-card-header-icon.png);
+      height: 187px;
+      position: relative;
+      width: 183px;
+    }
+
+    &__left {
+      max-width: 500px;
+      width: 500px;
+    }
+
+    &__title {
+      color: #fff;
+      font-size: 30px;
+      line-height: 48px;
+    }
+
+    &__text {
+      color: var(--text-color-header);
+      font-size: 20px;
+      padding-top: 25px;
+    }
+  }
 }
 
-
 @media screen and (max-width: 640px) {
-    .pg-buy-with-credit-card {
-        .credit-card-header__wrap {
-            flex-wrap: wrap;
-            padding: 0 10px;
-            display: flex;
-            justify-content: center;
-            text-align: center;
-        }
-
-        .credit-card-header__icon {
-            margin-top: 30px;
-        }
+  .pg-buy-with-credit-card {
+    .credit-card-header__wrap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 0 10px;
+      text-align: center;
     }
+
+    .credit-card-header__icon {
+      margin-top: 30px;
+    }
+  }
 }

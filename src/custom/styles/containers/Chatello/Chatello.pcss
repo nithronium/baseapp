@@ -1,530 +1,518 @@
 .pg-chatello {
-    background: #000;
+  background: #000;
 
-    .pg-chatello__input-currency {
-        position: relative;
-        color: var(--input-border);
-        border: none;
-        border-left: 1px solid var(--input-border);
-        height: 47px;
-        background: var(--bg-color-light2);
-        width: 50px;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        text-align: center;
-        text-align-last: center;
-        position: absolute;
-        right: 2px;
-        top: 1px;
-        line-height: 50px;
-        font-size: 14px;
+  .pg-chatello__input-currency {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: var(--bg-color-light2);
+    border: none;
+    border-left: 1px solid var(--input-border);
+    color: var(--input-border);
+    font-size: 14px;
+    height: 47px;
+    line-height: 50px;
+    position: relative;
+    position: absolute;
+    right: 2px;
+    text-align: center;
+    text-align-last: center;
+    top: 1px;
+    width: 50px;
+  }
+
+  &__plus100-icon,
+  &__plus200-icon {
+    cursor: pointer;
+    display: inline-block;
+    height: 36px;
+    margin-left: -7px;
+    position: relative;
+    top: 6px;
+    vertical-align: top;
+    width: 36px;
+  }
+
+  &__plus100-icon {
+    background-image: url(./assets/images/chatello-plus-100.png);
+  }
+
+  &__plus200-icon {
+    background-image: url(./assets/images/chatello-plus-100.png);
+    position: relative;
+
+    &::after {
+      background-image: url(./assets/images/chatello-plus-100.png);
+      content: ' ';
+      display: inline-block;
+      height: 36px;
+      margin-left: -6px;
+      position: absolute;
+      width: 36px;
+    }
+  }
+
+  .pg-chatello__buttons {
+    display: flex;
+    justify-content: space-between;
+    line-height: 49px;
+    padding-top: 20px;
+    width: 300px;
+
+    &--mobile {
+      display: none;
+    }
+  }
+
+  .pg-chatello__button {
+    background-color: transparent;
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    color: #fff;
+    color: var(--limits-text-color);
+    cursor: pointer;
+    font-size: 14px;
+    height: 49px;
+    line-height: 49px;
+    text-indent: 13px;
+    width: 142px;
+
+    &-text {
+      left: 5px;
+      position: relative;
+    }
+  }
+
+  .buy-form__inputs-wrap {
+    display: block;
+  }
+
+  .buy-form__inputs-top {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .buy-form__input {
+    width: 300px;
+  }
+
+  .pg-chatello__footer {
+    flex-wrap: wrap;
+    height: 76px;
+    justify-content: center;
+    line-height: 23px;
+    padding-top: 1px;
+    text-align: center;
+
+    &-caption {
+      min-width: 100%;
     }
 
-    &__plus100-icon,
-    &__plus200-icon {
-        width: 36px;
-        height: 36px;
-        display: inline-block;
-        vertical-align: top;
-        position: relative;
-        top: 6px;
-        margin-left: -7px;
-        cursor: pointer;
+    &--step4 {
+      height: 148px;
     }
+  }
 
-    &__plus100-icon {
-        background-image: url(./assets/images/chatello-plus-100.png);
-    }
-
-    &__plus200-icon {
-        background-image: url(./assets/images/chatello-plus-100.png);
-        position: relative;
-
-        &:after {
-            content: ' ';
-            width: 36px;
-            height: 36px;
-            display: inline-block;
-            background-image: url(./assets/images/chatello-plus-100.png);
-            position: absolute;
-            margin-left: -6px;
-        }
-    }
-
-    .pg-chatello__buttons {
-        display: flex;
-        width: 300px;
-        justify-content: space-between;
-        line-height: 49px;
-        padding-top: 20px;
-
-        &--mobile {
-            display: none;
-        }
-    }
-
-    .pg-chatello__button {
-        background-color: transparent;
-        border: 1px solid var(--input-border);
-        height: 49px;
-        width: 142px;
-        border-radius: 4px;
-        color: #fff;
-        font-size: 14px;
-        text-indent: 13px;
-        color: var(--limits-text-color);
-        line-height: 49px;
-        cursor: pointer;
-
-        &-text {
-            position: relative;
-            left: 5px;
-        }
-    }
-
-    .buy-form__inputs-wrap {
-        display: block;
-    }
-
-    .buy-form__inputs-top {
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .buy-form__input {
-        width: 300px;
-    }
-
-    .pg-chatello__footer {
-        height: 76px;
-        line-height: 23px;
-        padding-top: 1px;
-
-        flex-wrap: wrap;
-        text-align: center;
-        justify-content: center;
-
-        &-caption {
-            min-width: 100%;
-        }
-
-        &--step4 {
-            height: 148px;
-        }
-    }
-
-    .credit-card-steps__footer-caption {
-        /* color: #5a5d5d;
+  .credit-card-steps__footer-caption {
+    /* color: #5a5d5d;
         font-size: 12px; */
-    }
+  }
 
-
-    .buy-form__limits-item {
-        display: flex;
-    }
-
+  .buy-form__limits-item {
+    display: flex;
+  }
 }
 
-    .pg-chatello-steps__bottom {
-        background-color: var(--bg-color-dark2);
-        text-align: center;
-        font-size: 16px;
-        color: var(--limits-text-color);
-        padding: 40px 0;
-        line-height: 24px;
+.pg-chatello-steps__bottom {
+  background-color: var(--bg-color-dark2);
+  color: var(--limits-text-color);
+  font-size: 16px;
+  line-height: 24px;
+  padding: 40px 0;
+  text-align: center;
 
-        &-buttons {
-            display: flex;
-            justify-content: center;
-            padding-top: 30px;
-        }
+  &-buttons {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+  }
 
-        &-try,
-        &-wallet,
-        &-done {
-            height: 40px;
-            width: 201px;
-            line-height: 40px;
-            font-size: 16px;
-            color: var(--bg-color-dark1);
-            border-radius: 4px;
-            background: var(--color-yellow);
-            text-transform: uppercase;
-            cursor: pointer;
-            text-align: center;
-            display: inline-block;
-            text-decoration: none;
-            border: none;
-        }
+  &-try,
+  &-wallet,
+  &-done {
+    background: var(--color-yellow);
+    border: none;
+    border-radius: 4px;
+    color: var(--bg-color-dark1);
+    cursor: pointer;
+    display: inline-block;
+    font-size: 16px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    width: 201px;
+  }
 
-        &-wallet {
-            background-color: var(--color-green);
-            color: #fff;
-            margin-right: 20px;
-        }
+  &-wallet {
+    background-color: var(--color-green);
+    color: #fff;
+    margin-right: 20px;
+  }
 
-        &-done {
-            background: var(--bg-color-dark1);
-            color: #fff;
-            margin-right: 20px;
-        }
+  &-done {
+    background: var(--bg-color-dark1);
+    color: #fff;
+    margin-right: 20px;
+  }
 
-        &-help {
-            background: #101212;
-            padding: 40px 100px;
-            display: flex;
-
-            &-wrap {
-                display: flex;
-            }
-
-            &-header {
-                color: #fff;
-                font-size: 22px;
-            }
-
-            &-button {
-                width: 168px;
-                height: 40px;
-                border: 1px solid var(--color-green);
-                color: var(--color-green);
-                font-size: 14px;
-                cursor: pointer;
-                text-align: center;
-                line-height: 40px;
-                border-radius: 4px;
-                text-decoration: none;
-
-                &-wrap {
-                    display: flex;
-                    justify-content: flex-end;
-                    flex-grow: 1;
-                }
-            }
-
-            &-feedback {
-                color: var(--limits-text-color);
-                font-size: 14px;
-                padding-top: 15px;
-
-                a {
-                    color: var(--color-green);
-                    text-decoration: underline;
-                }
-            }
-        }
-    }
-
-
-.pg-chatello__overlay {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
-    z-index: 10;
-    background-color: rgba(34, 38, 39, 0.95);
+  &-help {
+    background: #101212;
+    display: flex;
+    padding: 40px 100px;
 
     &-wrap {
-        width: 620px;
-        margin: 0 auto;
-        height: calc(100% - 56px);
-        max-width: 100vw;
+      display: flex;
     }
 
     &-header {
-        font-size: 22px;
-        color: #fff;
-        text-align: center;
-        padding: 55px 0 40px 0;
-        position: relative;
+      color: #fff;
+      font-size: 22px;
     }
 
-    &-visa {
-        background-image: url(./assets/images/chatello-visa-icon-logo.png);
-        width: 37px;
-        height: 22px;
-        position: absolute;
-        top: 62px;
-        right: 24px;
+    &-button {
+      border: 1px solid var(--color-green);
+      border-radius: 4px;
+      color: var(--color-green);
+      cursor: pointer;
+      font-size: 14px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      text-decoration: none;
+      width: 168px;
 
-        &:after {
-            content: 'mastercard';
-            font-size: 10px;
-            position: relative;
-            left: -7px;
-            top: 13px;
-        }
+      &-wrap {
+        display: flex;
+        flex-grow: 1;
+        justify-content: flex-end;
+      }
     }
 
-    &1 {
-        &-blocks {
-            display: flex;
-            width: 620px;
-            margin: 0 auto;
-            max-width: 100vw;
-        }
+    &-feedback {
+      color: var(--limits-text-color);
+      font-size: 14px;
+      padding-top: 15px;
 
-        &-block1,
-        &-block2 {
-            width: 50%;
-        }
+      a {
+        color: var(--color-green);
+        text-decoration: underline;
+      }
+    }
+  }
+}
 
+.pg-chatello__overlay {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  background-color: rgba(34, 38, 39, 0.95);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 10;
 
-        &-block1 {
-            font-size: 21px;
-            color: #fff;
-            margin-right: 55px;
-            line-height: 28px;
-            display: flex;
+  &-wrap {
+    height: calc(100% - 56px);
+    margin: 0 auto;
+    max-width: 100vw;
+    width: 620px;
+  }
 
-            span {
-                color: var(--color-green);
-            }
-        }
+  &-header {
+    color: #fff;
+    font-size: 22px;
+    padding: 55px 0 40px 0;
+    position: relative;
+    text-align: center;
+  }
 
-        &-block2 {
-            color: #999;
-            font-size: 14px;
-            line-height: 28px;
-        }
+  &-visa {
+    background-image: url(./assets/images/chatello-visa-icon-logo.png);
+    height: 22px;
+    position: absolute;
+    right: 24px;
+    top: 62px;
+    width: 37px;
 
-        &-icon {
-            width: 48px;
-            height: 48px;
-            background-image: url(./assets/images/chatello-overlay1-icon.png);
-            min-width: 48px;
-            margin-right: 24px;
-            position: relative;
-            top: 17px;
+    &::after {
+      content: 'mastercard';
+      font-size: 10px;
+      left: -7px;
+      position: relative;
+      top: 13px;
+    }
+  }
 
-            &--big {
-                background-image: url(./assets/images/chatello-overlay-help-icon.png);
-                width: 72px;
-                height: 72px;
-                margin-right: 30px;
-            }
-        }
-
-        &-button-wrap {
-            margin-top: 50px;
-        }
+  &1 {
+    &-blocks {
+      display: flex;
+      margin: 0 auto;
+      max-width: 100vw;
+      width: 620px;
     }
 
-    &2 {
-        &-header {
-            width: 340px;
-            max-width: calc(100% - 20px);
-            margin: 0 auto;
-        }
+    &-block1,
+    &-block2 {
+      width: 50%;
     }
 
-    &-footer {
-        height: 56px;
-        background: rgba(0, 0, 0, 0.2);
-        text-align: center;
-        line-height: 56px;
-        color: var(--limits-text-color);
-        font-size: 14px;
+    &-block1 {
+      color: #fff;
+      display: flex;
+      font-size: 21px;
+      line-height: 28px;
+      margin-right: 55px;
+
+      span {
+        color: var(--color-green);
+      }
     }
 
-    .buy-form__bottom-text--help {
-        text-align: center;
-        position: relative;
-        top: -22px;
-
-        a {
-            color: #96fadc;
-        }
-
-        &:before {
-            border-color: #96fadc;
-            color: #96fadc;
-        }
+    &-block2 {
+      color: #999;
+      font-size: 14px;
+      line-height: 28px;
     }
+
+    &-icon {
+      background-image: url(./assets/images/chatello-overlay1-icon.png);
+      height: 48px;
+      margin-right: 24px;
+      min-width: 48px;
+      position: relative;
+      top: 17px;
+      width: 48px;
+
+      &--big {
+        background-image: url(./assets/images/chatello-overlay-help-icon.png);
+        height: 72px;
+        margin-right: 30px;
+        width: 72px;
+      }
+    }
+
+    &-button-wrap {
+      margin-top: 50px;
+    }
+  }
+
+  &2 {
+    &-header {
+      margin: 0 auto;
+      max-width: calc(100% - 20px);
+      width: 340px;
+    }
+  }
+
+  &-footer {
+    background: rgba(0, 0, 0, 0.2);
+    color: var(--limits-text-color);
+    font-size: 14px;
+    height: 56px;
+    line-height: 56px;
+    text-align: center;
+  }
+
+  .buy-form__bottom-text--help {
+    position: relative;
+    text-align: center;
+    top: -22px;
+
+    a {
+      color: #96fadc;
+    }
+
+    &::before {
+      border-color: #96fadc;
+      color: #96fadc;
+    }
+  }
 }
 
 @supports ((-webkit-backdrop-filter: blur(2em)) or (backdrop-filter: blur(2em))) {
   .pg-chatello .pg-chatello__overlay,
   .pg-buy-with-credit-card .pg-chatello__overlay {
-    background-color: rgba(34, 38, 39, 0.35);
     -webkit-backdrop-filter: blur(12px);
     backdrop-filter: blur(12px);
+    background-color: rgba(34, 38, 39, 0.35);
   }
 }
 
-
 @media screen and (max-width: 650px) {
-    .pg-chatello {
-        .buy-form__input {
-            width: 100%;
-        }
-
-        .buy-form__inputs-top {
-            flex-wrap: wrap;
-        }
-
-        .pg-chatello__buttons {
-            display: none;
-
-            &--mobile {
-                display: flex;
-                justify-content: space-between;
-                width: 100%;
-                padding-top: 8px;
-            }
-        }
-
-        .pg-chatello__button {
-            width: calc(50% - 4px);
-        }
-
-        .pg-chatello__overlay1-blocks {
-            display: block;
-        }
-
-        .pg-chatello__overlay {
-            &-wrap {
-                padding: 0 30px;
-            }
-
-            &-visa {
-                position: relative;
-                margin: 0 auto;
-                margin-top: 34px;
-                right: auto;
-                top: auto;
-            }
-        }
-
-        .pg-chatello__overlay1-block2 {
-            text-align: center;
-            width: calc(100% - 60px);
-            position: relative;
-            top: 21px;
-        }
-
-        .pg-chatello__overlay1-block1 {
-            margin: 0 auto;
-            width: 300px;
-            position: relative;
-            left: -10px;
-        }
-
-        .buy-form__bottom-text--help {
-            display: block;
-        }
-
-        .buy-form__limits .icon-calendar,
-        .buy-form__limits .icon-clock {
-
-        }
-
-        .buy-form__limits-item {
-            & > div {
-                line-height: 0.5;
-            }
-        }
-
-        .buy-form__limits {
-            padding-top: 0;
-        }
-
-        .pg-chatello__overlay2-header {
-            padding: 67px 0px;
-        }
-
-        .credit-card-timeline {
-            height: 130px;
-        }
-
-        .pg-chatello-steps__bottom-done,
-        .pg-chatello-steps__bottom-wallet,
-        .pg-chatello-steps__bottom-try {
-            min-width: 100%;
-            margin-right: 0;
-            margin-top: 10px;
-        }
-
-        .pg-chatello-steps__bottom-wallet {
-            order: 1;
-        }
-
-        .pg-chatello-steps__bottom-try {
-            order: 2;
-        }
-
-        .pg-chatello-steps__bottom-done {
-            order: 3;
-        }
-
-        .pg-chatello-steps__bottom-buttons {
-            flex-wrap: wrap;
-            flex-direction: column;
-        }
-
-        .pg-chatello-steps__bottom {
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .pg-chatello__footer {
-            padding-left: 20px;
-            padding-right: 20px;
-        }
-
-        .pg-chatello-steps__bottom-help {
-            padding: 20px;
-            padding: 20px;
-            display: block;
-
-            &-wrap {
-                display: block;
-            }
-        }
-
-        .pg-chatello__overlay1-icon,
-        .pg-chatello__overlay1-icon--big {
-            margin: 0 auto;
-        }
-
-        .pg-chatello__overlay1-icon {
-            position: relative;
-            left: -20px;
-        }
-
-        .pg-chatello-steps__bottom-help-header {
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        .pg-chatello-steps__bottom-help-feedback {
-            text-align: center;
-            padding-bottom: 20px;
-            padding-top: 0;
-        }
-
-        .pg-chatello-steps__bottom-help-button-wrap {
-            justify-content: center;
-        }
-
-        .pg-chatello__iframe-modal {
-            .cr-modal {
-                width: 100%;
-                padding: 0;
-
-                &__container {
-                    width: 100%;
-                    max-width: 100%;
-
-                    &-content {
-                        padding: 0 !important;
-                    }
-                }
-            }
-        }
+  .pg-chatello {
+    .buy-form__input {
+      width: 100%;
     }
+
+    .buy-form__inputs-top {
+      flex-wrap: wrap;
+    }
+
+    .pg-chatello__buttons {
+      display: none;
+
+      &--mobile {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 8px;
+        width: 100%;
+      }
+    }
+
+    .pg-chatello__button {
+      width: calc(50% - 4px);
+    }
+
+    .pg-chatello__overlay1-blocks {
+      display: block;
+    }
+
+    .pg-chatello__overlay {
+      &-wrap {
+        padding: 0 30px;
+      }
+
+      &-visa {
+        margin: 0 auto;
+        margin-top: 34px;
+        position: relative;
+        right: auto;
+        top: auto;
+      }
+    }
+
+    .pg-chatello__overlay1-block2 {
+      position: relative;
+      text-align: center;
+      top: 21px;
+      width: calc(100% - 60px);
+    }
+
+    .pg-chatello__overlay1-block1 {
+      left: -10px;
+      margin: 0 auto;
+      position: relative;
+      width: 300px;
+    }
+
+    .buy-form__bottom-text--help {
+      display: block;
+    }
+
+    .buy-form__limits-item {
+      & > div {
+        line-height: 0.5;
+      }
+    }
+
+    .buy-form__limits {
+      padding-top: 0;
+    }
+
+    .pg-chatello__overlay2-header {
+      padding: 67px 0;
+    }
+
+    .credit-card-timeline {
+      height: 130px;
+    }
+
+    .pg-chatello-steps__bottom-done,
+    .pg-chatello-steps__bottom-wallet,
+    .pg-chatello-steps__bottom-try {
+      margin-right: 0;
+      margin-top: 10px;
+      min-width: 100%;
+    }
+
+    .pg-chatello-steps__bottom-wallet {
+      order: 1;
+    }
+
+    .pg-chatello-steps__bottom-try {
+      order: 2;
+    }
+
+    .pg-chatello-steps__bottom-done {
+      order: 3;
+    }
+
+    .pg-chatello-steps__bottom-buttons {
+      flex-direction: column;
+      flex-wrap: wrap;
+    }
+
+    .pg-chatello-steps__bottom {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .pg-chatello__footer {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .pg-chatello-steps__bottom-help {
+      display: block;
+      padding: 20px;
+
+      &-wrap {
+        display: block;
+      }
+    }
+
+    .pg-chatello__overlay1-icon,
+    .pg-chatello__overlay1-icon--big {
+      margin: 0 auto;
+    }
+
+    .pg-chatello__overlay1-icon {
+      left: -20px;
+      position: relative;
+    }
+
+    .pg-chatello-steps__bottom-help-header {
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    .pg-chatello-steps__bottom-help-feedback {
+      padding-bottom: 20px;
+      padding-top: 0;
+      text-align: center;
+    }
+
+    .pg-chatello-steps__bottom-help-button-wrap {
+      justify-content: center;
+    }
+
+    .pg-chatello__iframe-modal {
+      .cr-modal {
+        padding: 0;
+        width: 100%;
+
+        &__container {
+          max-width: 100%;
+          width: 100%;
+
+          &-content {
+            padding: 0 !important;
+          }
+        }
+      }
+    }
+  }
 }

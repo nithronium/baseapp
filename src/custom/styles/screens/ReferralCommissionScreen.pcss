@@ -1,430 +1,422 @@
 .pg-referral-commission {
-    color: black;
-    font-size: 16px;
-    margin: 0;
-    padding-bottom: 30px;
+  color: black;
+  font-size: 16px;
+  margin: 0;
+  padding-bottom: 30px;
 
-    .cr-table-container {
-        max-width: 1050px;
-        overflow-x: auto;
+  .cr-table-container {
+    max-width: 1050px;
+    overflow-x: auto;
 
-        &::-webkit-scrollbar-thumb {
-            background-color: #141717;
-        }
-
-        .cr-table thead th {
-            top: 0;
-        }
+    &::-webkit-scrollbar-thumb {
+      background-color: #141717;
     }
 
-    .pg-history-elem__pagination {
-        p {
-            color: var(--table-header-color);
-        }
+    .cr-table thead th {
+      top: 0;
+    }
+  }
+
+  .pg-history-elem__pagination {
+    p {
+      color: var(--table-header-color);
+    }
+  }
+
+  &__level-card {
+    background: #263434;
+    border-radius: 4px;
+  }
+
+  .info-card {
+    display: flex;
+    position: relative;
+
+    &:not(:last-child) {
+      margin-right: 30px;
     }
 
-    &__level-card {
-        background: #263434;
-        border-radius: 4px;
+    &__icon {
+      background: #ffd567;
+      border-radius: 50%;
+      height: 40px;
+      margin: 0 12px;
+      position: relative;
+      width: 41px;
+
+      div {
+        background-position: left top;
+        background-repeat: no-repeat;
+        background-size: contain;
+        height: 25px;
+        left: 8px;
+        position: absolute;
+        top: 8px;
+        width: 25px;
+      }
+
+      &--commission {
+        background-image: url(./assets/images/referral-commission-icon.svg);
+        top: 9px;
+      }
+
+      &--referrals {
+        background-image: url(./assets/images/referrals-icon.svg);
+        left: 9px;
+      }
+
+      &--fee {
+        background-image: url(./assets/images/trade-fee-icon.svg);
+        left: 9px;
+      }
+
+      &--profit {
+        background-image: url(./assets/images/referral-profit-icon.svg);
+      }
+
+      &--total-referrals {
+        background-image: url(./assets/images/total-referrals-icon.svg);
+      }
+
+      &--active-referrals {
+        background-image: url(./assets/images/active-referrals-icon.svg);
+      }
+
+      &--active-ratio {
+        background-image: url(./assets/images/active-ration-icon.svg);
+      }
     }
 
-    .info-card {
-        display: flex;
-        position: relative;
+    &__title {
+      color: #648280;
+      font-size: 12px;
+      font-weight: normal;
+      white-space: nowrap;
+    }
 
-        &:not(:last-child) {
-            margin-right: 30px;
-        }
+    &__text {
+      color: #e5e6ef;
+      font-size: 20px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
 
-        &__icon {
-            background: #FFD567;
-            width: 41px;
-            height: 40px;
-            border-radius: 50%;
-            margin: 0 12px;
-            position: relative;
+    &__emrx {
+      color: #e5e6ef;
+      font-size: 14px;
+      text-align: right;
+      white-space: nowrap;
+    }
 
-            div {
-                height: 25px;
-                width: 25px;
-                background-size: contain;
-                background-repeat: no-repeat;
-                position: absolute;
-                background-position: left top;
-                left: 8px;
-                top: 8px;
-            }
+    &__usd {
+      color: #7d9794;
+      font-size: 14px;
+      left: 8px;
+      position: relative;
+      top: 22px;
+      white-space: nowrap;
 
-            &--commission {
-                background-image: url(./assets/images/referral-commission-icon.svg);
-                top: 9px;
-            }
+      @media screen and (min-width: 840px) and (max-width: 910px) {
+        bottom: -21px;
+        left: auto;
+        position: absolute;
+        right: 0;
+        top: auto;
+      }
+    }
 
-            &--referrals {
-                background-image: url(./assets/images/referrals-icon.svg);
-                left: 9px;
-            }
+    &__wrap {
+      display: flex;
+      padding: 15px 30px;
+    }
+  }
 
-            &--fee {
-                background-image: url(./assets/images/trade-fee-icon.svg);
-                left: 9px;
-            }
+  .copyable-text-field {
+    border: none;
+    color: var(--table-text-color);
+    font-size: 12px;
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 1;
+  }
 
-            &--profit {
-                background-image: url(./assets/images/referral-profit-icon.svg);
-            }
+  .copyable-title {
+    background: #222627;
+    left: 6px;
+    padding: 0 6px;
+    position: relative;
+    top: 2px;
+  }
 
-            &--total-referrals {
-                background-image: url(./assets/images/total-referrals-icon.svg);
-            }
+  #copy_referral_link {
+    height: 50px;
+    text-indent: 12px;
+  }
 
-            &--active-referrals {
-                background-image: url(./assets/images/active-referrals-icon.svg);
-            }
+  .cr-copyable-text-field__button {
+    left: -5px;
+    position: relative;
+    top: 5px;
+  }
 
-            &--active-ratio {
-                background-image: url(./assets/images/active-ration-icon.svg);
-            }
-        }
+  .level-card {
+    background: #171e1e;
+    border-radius: 4px;
+    display: flex;
+    flex: 1;
+    max-width: 50%;
+    padding: 28px;
 
-        &__title {
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    &__content {
+      padding-left: 25px;
+    }
+
+    &__level {
+      background-image: url(./assets/images/referral-level-bg.png);
+      background-position: center center;
+      background-repeat: no-repeat;
+      color: #141717;
+      font-size: 12px;
+      height: 68px;
+      line-height: 14px;
+      text-align: center;
+      width: 68px;
+
+      div {
+        color: #141717;
+        font-size: 24px;
+        line-height: 28px;
+        padding-top: 9px;
+        text-align: center;
+      }
+    }
+
+    &__header {
+      color: #e5e6ef;
+      font-size: 1.2em;
+      font-weight: 600;
+      line-height: 23px;
+    }
+
+    &__subheader {
+      color: #7d9794;
+      font-size: 0.9em;
+      font-weight: normal;
+      line-height: 16px;
+    }
+
+    &__caption {
+      color: #e8af59;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 16px;
+      position: relative;
+      top: 13px;
+    }
+  }
+
+  &__container {
+    margin: 0 auto;
+    max-width: 1050px;
+  }
+
+  .section {
+    background: #222627;
+    border-radius: 3px;
+    margin-top: 20px;
+
+    &__header {
+      align-items: center;
+      background: #263434;
+      border-radius: 5px 5px 0 0;
+      color: #9ecfc3;
+      display: flex;
+      font-size: 14px;
+      height: 32px;
+      justify-content: space-between;
+      line-height: 32px;
+      padding-left: 14px;
+    }
+
+    &--levels {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  .section-margin {
+    margin-top: 40px;
+  }
+
+  .section--transparent {
+    display: flex;
+    margin-top: 20px;
+  }
+
+  .table {
+    font-size: 12px;
+    white-space: nowrap;
+
+    td:first-child,
+    th:first-child {
+      max-width: 290px;
+      position: relative;
+      text-overflow: ellipsis;
+      width: 2900px;
+    }
+
+    tr {
+      background-color: #222627;
+      border-bottom: 1px solid var(--header-border);
+      height: 47px;
+
+      &:last-child {
+        td {
+          background-color: #141717;
+          color: #fff;
+          font-weight: 600;
+
+          &:first-child {
+            color: #ffd567;
             font-weight: normal;
-            color: #648280;
-            font-size: 12px;
-            white-space: nowrap;
-        }
+          }
 
-        &__text {
-            font-weight: 600;
-            font-size: 20px;
-            color: #E5E6EF;
-            white-space: nowrap;
+          &:nth-child(2),
+          &:nth-child(4),
+          &:nth-child(5) {
+            font-weight: normal;
+          }
         }
-
-        &__emrx {
-            font-size: 14px;
-            color: #E5E6EF;
-            text-align: right;
-            white-space: nowrap;
-        }
-
-        &__usd {
-            font-size: 14px;
-            color: #7D9794;
-            position: relative;
-            top: 22px;
-            left: 8px;
-            white-space: nowrap;
-
-            @media screen and (min-width: 840px) and (max-width: 910px) {
-                position: absolute;
-                bottom: -21px;
-                right: 0px;
-                left: auto;
-                top: auto;
-            }
-        }
-
-        &__wrap {
-            display: flex;
-            padding: 15px 30px;
-        }
+      }
     }
+  }
 
+  #ieo {
+    h2 {
+      border-left-color: #ffd541;
+    }
+  }
 
-    .copyable-text-field {
-        border: none;
-        color: var(--table-text-color);
+  #summary {
+    h2 {
+      border-left-color: #f0f0f0;
+    }
+  }
+
+  @media (max-width: 700px) {
+    .container {
+      .container {
+        margin: 0;
+        max-width: 100%;
+        overflow: auto;
+        padding: 0;
+        width: 100% !important;
+      }
+
+      .column {
+        max-width: 100%;
+        overflow: auto;
+        width: 100% !important;
+      }
+
+      .cr-table__head-row {
+        th {
+          background-color: #1f2223;
+        }
+      }
+
+      .pg-history-elem__pagination {
+        p {
+          color: #648280;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 840px) {
+  .pg-referral-commission {
+    .info-card {
+      align-items: center;
+      flex: 0 0 50%;
+      flex-direction: column;
+      justify-content: center;
+      margin-right: 0 !important;
+      margin-top: 30px;
+
+      &__wrap {
+        align-items: flex-start;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      &__title {
+        margin-top: 10px;
+        text-align: center;
+      }
+
+      &__text {
         position: relative;
-        z-index: 1;
-        font-size: 12px;
-        margin-bottom: 5px;
-    }
+        text-align: center;
+      }
 
-    .copyable-title {
-        background: #222627;
+      &__emrx {
+        left: -27px;
         position: relative;
-        left: 6px;
-        top: 2px;
-        padding: 0 6px;
-    }
+        text-align: left;
+      }
 
-    #copy_referral_link {
-        height: 50px;
-        text-indent: 12px;
-    }
-
-    .cr-copyable-text-field__button {
+      &__usd {
+        left: 56px;
         position: relative;
-        left: -5px;
-        top: 5px;
+        top: -18px;
+      }
     }
 
     .level-card {
-        background: #171e1e;
-        border-radius: 4px;
-        display: flex;
-        flex: 1;
-        padding: 28px;
-        max-width: 50%;
-
-        &:not(:last-child) {
-            margin-right: 20px;
-        }
-
-        &__content {
-            padding-left: 25px;
-        }
-
-        &__level {
-            background-image: url(./assets/images/referral-level-bg.png);
-            width: 68px;
-            height: 68px;
-            background-position: center center;
-            background-repeat: no-repeat;
-            font-size: 12px;
-            line-height: 14px;
-            text-align: center;
-            color: #141717;
-
-            div {
-                text-align: center;
-                color: #141717;
-                font-size: 24px;
-                line-height: 28px;
-                padding-top: 9px;
-            }
-        }
-
-        &__header {
-            font-weight: 600;
-            font-size: 1.2em;
-            line-height: 23px;
-            color: #E5E6EF;
-        }
-
-        &__subheader {
-            font-weight: normal;
-            font-size: 0.9em;
-            line-height: 16px;
-            color: #7D9794;
-        }
-
-        &__caption {
-            font-weight: 600;
-            font-size: 14px;
-            line-height: 16px;
-            color: #E8AF59;
-            position: relative;
-            top: 13px;
-        }
-    }
-
-    &__container {
-        max-width: 1050px;
-        margin: 0 auto;
-    }
-
-    .section {
-        border-radius: 3px;
-        background: #222627;
-        margin-top: 20px;
-
-        &__header {
-            background: #263434;
-            color: #9ECFC3;
-            font-size: 14px;
-            padding-left: 14px;
-            height: 32px;
-            line-height: 32px;
-            border-radius: 5px 5px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        &--levels {
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-    }
-
-    .section-margin {
-        margin-top: 40px;
+      flex: 0 0 100%;
+      margin-bottom: 10px;
+      margin-right: 0 !important;
     }
 
     .section--transparent {
-        margin-top: 20px;
-        display: flex;
+      flex-wrap: wrap;
+      margin-top: 10px;
     }
 
-    .table {
+    .section {
+      margin-top: 10px;
+    }
+
+    .cr-table-container {
+      overflow: scroll;
+
+      tr {
         font-size: 12px;
-        white-space: nowrap;
+      }
 
-        td:first-child,
-        th:first-child {
-            position: relative;
-            width: 2900px;
-            max-width: 290px;
-            text-overflow: ellipsis;
-        }
-
-        tr {
-            background-color: #222627;
-            border-bottom: 1px solid var(--header-border);
-            height: 47px;
-
-            &:last-child {
-                td {
-                    background-color: #141717;
-                    color: #fff;
-                    font-weight: 600;
-
-                    &:first-child {
-                        color: #FFD567;
-                        font-weight: normal;
-                    }
-
-                    &:nth-child(2),
-                    &:nth-child(4),
-                    &:nth-child(5) {
-                        font-weight: normal;
-                    }
-                }
-            }
-        }
+      .cr-table__head tr th {
+        top: 0;
+      }
     }
-
-    #ieo {
-        h2 {
-            border-left-color: #FFD541;
-        }
-    }
-
-    #summary {
-        h2 {
-            border-left-color: #F0F0F0;
-        }
-    }
-
-    @media (max-width: 700px){
-        .container{
-            .container{
-                margin: 0;
-                padding: 0;
-                width: 100% !important;
-                max-width: 100%;
-                overflow: auto;
-            }
-
-            .column {
-                width: 100% !important;
-                max-width: 100%;
-                overflow: auto;
-            }
-
-        .cr-table__head-row {
-            th {
-                background-color: #1f2223;
-            }
-        }
-
-        .pg-history-elem__pagination {
-            p {
-                color: #648280;
-            }
-        }
-    }
+  }
 }
-}
-
-
-
-@media (max-width: 840px) {
-    .pg-referral-commission {
-        .info-card {
-            flex: 0 0 50%;
-            margin-right: 0 !important;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-top: 30px;
-
-            &__wrap {
-                flex-wrap: wrap;
-                align-items: flex-start;
-                justify-content: center;
-            }
-
-            &__title {
-                text-align: center;
-                margin-top: 10px;
-            }
-
-            &__text {
-                position: relative;
-                text-align: center;
-            }
-
-            &__emrx {
-                text-align: left;
-                left: -27px;
-                position: relative;
-            }
-
-            &__usd {
-                position: relative;
-                top: -18px;
-                left: 56px;
-            }
-        }
-
-        .level-card {
-            flex: 0 0 100%;
-            margin-bottom: 10px;
-            margin-right: 0 !important;
-        }
-
-        .section--transparent {
-            flex-wrap: wrap;
-        }
-
-        .section {
-            margin-top: 10px;
-        }
-
-        .section--transparent {
-            margin-top: 10px;
-        }
-
-        .cr-table-container {
-            overflow: scroll;
-
-            tr {
-                font-size: 12px;
-                
-            }
-
-            .cr-table__head tr th {
-                top: 0;
-            }
-        }
-    }
-}
-
 
 @media (max-width: 500px) {
-    .pg-referral-commission {
-        .level-card {
-            margin-bottom: 10px;
-            margin-right: 0 !important;
-            flex: 0 0 100% !important;
-            min-width: 100%;
-        }
+  .pg-referral-commission {
+    .level-card {
+      flex: 0 0 100% !important;
+      margin-bottom: 10px;
+      margin-right: 0 !important;
+      min-width: 100%;
     }
+  }
 }
 
 .cr-table-container::-webkit-scrollbar-thumb {
-    background-color: #141717;
+  background-color: #141717;
 }

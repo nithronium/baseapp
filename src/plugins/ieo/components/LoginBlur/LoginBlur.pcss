@@ -4,29 +4,29 @@
       align-items: center;
       color: var(--color-white);
       display: flex;
+      font-size: 25px;
       font-style: normal;
       font-weight: normal;
+      font-weight: bold;
       justify-content: center;
       letter-spacing: 0.0357143em;
       line-height: 25px;
-      text-align: center;
-      font-size: 25px;  
       line-height: 29px;
-      font-weight: bold;
       margin: 50px;
+      text-align: center;
     }
 
     &__button-wrapper {
       background: transparent;
+      bottom: 0;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: absolute;
-      right: 0;
-      bottom: 0px;
       left: 0;
       margin: 23px;
-      cursor: pointer;
+      position: absolute;
+      right: 0;
 
       .cr-button {
         background: var(--button-normal);
@@ -34,16 +34,16 @@
     }
 
     &__create-account {
-      font-weight: normal;
-      font-size: 12px;
-      line-height: 12px;
+      bottom: 10px;
       color: var(--color-white);
-      text-align: center;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: normal;
+      left: 0;
+      line-height: 12px;
       position: absolute;
       right: 0;
-      bottom: 10px;
-      left: 0;
-      cursor: pointer;
+      text-align: center;
     }
   }
 }

@@ -1,13 +1,14 @@
 .pg-navbar {
   &__content {
-    &-item, &-item:hover {
+    &-item,
+    &-item:hover {
       font-size: 15px;
       letter-spacing: 0.02em;
       margin-right: 0;
-      padding-top: calc(var(--gap) * 1);
+      padding-bottom: calc(var(--gap) * 2.3);
       padding-left: calc(var(--gap) * 5);
       padding-right: calc(var(--gap) * 5);
-      padding-bottom: calc(var(--gap) * 2.3);
+      padding-top: calc(var(--gap) * 1);
       text-align: center;
       text-transform: uppercase;
 
@@ -20,9 +21,7 @@
 
     &-item {
       font-weight: normal;
-    }
 
-    &-item {
       &--active {
         font-weight: bold;
       }
@@ -39,21 +38,22 @@
 
         .dropdown-menu {
           .dropdown-menu-item-lang {
-            color: var(--header-text);
             background-color: var(--header);
+            color: var(--header-text);
 
             &:hover {
-              color: var(--navbar-language-selector-color-hover);
               background-color: var(--navbar-language-selector-background-hover);
+              color: var(--navbar-language-selector-color-hover);
             }
           }
+
           .dropdown-menu-item-user {
-            color: var(--header-text);
             background-color: var(--header);
+            color: var(--header-text);
 
             a {
-              padding-top: calc(var(--gap) * 1.3);
               padding-right: calc(var(--gap) * 2.3);
+              padding-top: calc(var(--gap) * 1.3);
             }
           }
         }
@@ -65,11 +65,11 @@
 @media screen and (max-width: 768px) {
   .pg-navbar {
     &__content {
-      &-item, &-item:hover {
-        padding-top: 0;
+      &-item,
+      &-item:hover {
         padding-bottom: calc(var(--gap) * 3.1);
+        padding-top: 0;
       }
     }
   }
 }
-

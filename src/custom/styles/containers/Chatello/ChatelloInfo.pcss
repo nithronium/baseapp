@@ -1,149 +1,149 @@
 .pg-chatello {
-    &-info {
-        overflow: hidden;
+  &-info {
+    overflow: hidden;
 
-        &__header {
-            color: #fff;
-            font-size: 22px;
-            text-align: center;
-            padding-top: 80px;
-        }
-
-        &__text {
-            color: var(--limits-text-color);
-            font-size: 14px;
-            text-align: center;
-            padding: 15px 0 25px;
-        }
-
-        &__logo {
-            position: relative;
-            background-image: url(./assets/images/chatello-chat-icon.png);
-            width: 78px;
-            height: 35px;
-            margin: 0 auto;
-
-            &:after,
-            &:before {
-                content: '';
-                height: 1px;
-                width: 500px;
-                position: absolute;
-                background: #333;
-                top: 13px;
-            }
-
-            &:after {
-                left: calc(100% + 15px);
-            }
-
-            &:before {
-                right: calc(100% + 15px);
-            }
-        }
-
-        &__items {
-            display: flex;
-            padding: 20px 40px 0 40px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        &__item {
-            width: 250px;
-            min-width: 250px;
-            height: 144px;
-            margin: 15px 15px 0 0;
-            background-color: var(--bg-color-dark1);
-            color: #724747;
-            border-radius: 4px;
-            height: 144px;
-            padding: 25px;
-        }
-
-        &__icon1, 
-        &__icon2, 
-        &__icon3, 
-        &__icon4, 
-        &__icon5, 
-        &__icon6 {
-            width: 50px;
-            height: 61px;
-            background-repeat: no-repeat;
-            background-position: top left;
-            background-size: 110%;
-            margin-top: -8px;
-        }
-
-        &__icon1 {
-            background-image: url(./assets/images/chatello-bonus-icon1.png);
-        }
-        &__icon2 {
-            background-image: url(./assets/images/chatello-bonus-icon2.png);
-        }
-        &__icon3 {
-            background-image: url(./assets/images/chatello-bonus-icon3.png);
-        }
-        &__icon4 {
-            background-image: url(./assets/images/chatello-bonus-icon4.png);
-        }
-        &__icon5 {
-            background-image: url(./assets/images/chatello-bonus-icon5.png);
-        }
-        &__icon6 {
-            background-image: url(./assets/images/chatello-bonus-icon6.png);
-        }
-
-        &__item-text {
-            color: #999;
-            text-align: left;
-            font-size: 14px;
-            margin-top: 15px;
-        }
+    &__header {
+      color: #fff;
+      font-size: 22px;
+      padding-top: 80px;
+      text-align: center;
     }
+
+    &__text {
+      color: var(--limits-text-color);
+      font-size: 14px;
+      padding: 15px 0 25px;
+      text-align: center;
+    }
+
+    &__logo {
+      background-image: url(./assets/images/chatello-chat-icon.png);
+      height: 35px;
+      margin: 0 auto;
+      position: relative;
+      width: 78px;
+
+      &::after,
+      &::before {
+        background: #333;
+        content: '';
+        height: 1px;
+        position: absolute;
+        top: 13px;
+        width: 500px;
+      }
+
+      &::after {
+        left: calc(100% + 15px);
+      }
+
+      &::before {
+        right: calc(100% + 15px);
+      }
+    }
+
+    &__items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px 40px 0 40px;
+    }
+
+    &__item {
+      background-color: var(--bg-color-dark1);
+      border-radius: 4px;
+      color: #724747;
+      height: 144px;
+      margin: 15px 15px 0 0;
+      min-width: 250px;
+      padding: 25px;
+      width: 250px;
+    }
+
+    &__icon1,
+    &__icon2,
+    &__icon3,
+    &__icon4,
+    &__icon5,
+    &__icon6 {
+      background-position: top left;
+      background-repeat: no-repeat;
+      background-size: 110%;
+      height: 61px;
+      margin-top: -8px;
+      width: 50px;
+    }
+
+    &__icon1 {
+      background-image: url(./assets/images/chatello-bonus-icon1.png);
+    }
+
+    &__icon2 {
+      background-image: url(./assets/images/chatello-bonus-icon2.png);
+    }
+
+    &__icon3 {
+      background-image: url(./assets/images/chatello-bonus-icon3.png);
+    }
+
+    &__icon4 {
+      background-image: url(./assets/images/chatello-bonus-icon4.png);
+    }
+
+    &__icon5 {
+      background-image: url(./assets/images/chatello-bonus-icon5.png);
+    }
+
+    &__icon6 {
+      background-image: url(./assets/images/chatello-bonus-icon6.png);
+    }
+
+    &__item-text {
+      color: #999;
+      font-size: 14px;
+      margin-top: 15px;
+      text-align: left;
+    }
+  }
 }
 
-
 @media screen and (max-width: 750px) {
-    .pg-chatello-info__header,
-    .pg-chatello-info__text,
-    .pg-chatello-info__header {
-        padding-left: 45px;
-        padding-right: 45px;
+  .pg-chatello-info__header,
+  .pg-chatello-info__text, {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  .pg-chatello-info__header {
+    padding-top: 40px;
+  }
+
+  .pg-chatello-info__items {
+    padding: 20px 0 0 0;
+  }
+
+  .pg-chatello-info__item {
+    align-items: center;
+    display: flex;
+    height: 84px;
+    width: 100%;
+  }
+
+  .pg-chatello-info__item-text {
+    margin-top: 0;
+  }
+
+  .pg-chatello-info {
+    &__icon1,
+    &__icon2,
+    &__icon3,
+    &__icon4,
+    &__icon5,
+    &__icon6 {
+      left: -5px;
+      margin-top: 0;
+      position: relative;
+      top: 4px;
     }
-
-    .pg-chatello-info__header {
-        padding-top: 40px;
-    }
-
-    .pg-chatello-info__items {
-        padding: 20px 0 0 0;
-    }
-
-    .pg-chatello-info__item {
-        width: 100%;
-        height: 84px;
-        display: flex;
-        align-items: center;
-    }
-
-    .pg-chatello-info__item-text {
-        margin-top: 0;
-    }
-
-
-
-    .pg-chatello-info {
-        &__icon1, 
-        &__icon2, 
-        &__icon3, 
-        &__icon4, 
-        &__icon5, 
-        &__icon6 {
-            margin-top: 0;
-            position: relative;
-            left: -5px;
-            top: 4px;
-        }
-    }
+  }
 }

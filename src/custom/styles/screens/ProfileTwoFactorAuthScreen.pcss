@@ -9,74 +9,68 @@
 }
 
 .profile-2fa-mfa-popup {
-  .popup-content-item {
-    color: #fff;
-    text-align: center;
-    margin: 15px 0;
-    font-size: 14px;
-  }
-
   .mfa-popup-header {
-    position: relative;
-    font-weight: bold;
-    text-transform: uppercase;
     font-size: 14px;
+    font-weight: bold;
+    position: relative;
+    text-transform: uppercase;
   }
 
   .mfa-popup-close-button {
+    color: #999;
+    cursor: pointer;
+    font-size: 21px;
     position: absolute;
     right: -3px;
     top: -6px;
-    color: #999;
-    font-size: 21px;
-    cursor: pointer;
   }
 
   .cr-button {
-    line-height: 0;
-    background-color: #FFD567;
+    background-color: #ffd567;
     color: #141717;
     font-family: Roboto !important;
     font-weight: normal !important;
+    line-height: 0;
 
     &:hover,
     &:focus {
-      background-color: #FFD567;
+      background-color: #ffd567;
     }
   }
 
   .auth2fa-mfa-footer {
-    text-align: center;
     padding-bottom: 15px;
+    text-align: center;
   }
 
   .popup-content-item {
+    color: #7d9794;
     display: inline;
-    color: #7D9794;
+    font-size: 14px;
     line-height: 20px;
+    margin: 15px 0;
+    text-align: center;
 
     span {
       color: #fff;
     }
 
     &--header {
-      color: #FFD567;
+      color: #ffd567;
       font-size: 18px;
     }
   }
 
   .popup-content {
     &__spacer {
-      position: relative;
       padding-bottom: 21px;
+      position: relative;
     }
   }
 
   .cr-modal__container-content {
-    text-align: center;
     padding: 0 calc(var(--gap) * 10.23) !important;
-
-
+    text-align: center;
   }
 
   .cr-modal__container {
@@ -91,7 +85,6 @@
     border-bottom: 1px solid #54b489;
   }
 }
-
 
 @media screen and (max-width: 550px) {
   .profile-2fa-mfa-popup {

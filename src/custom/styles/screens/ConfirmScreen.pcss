@@ -12,11 +12,12 @@
         background: var(--kyc-circle-color);
         display: flex;
         height: 24px;
-        justify-content: center;    
+        justify-content: center;
         margin-top: 15px;
+        top: -1px;
         width: 24px;
 
-        &:after {
+        &::after {
           align-items: center;
           color: var(--color-white);
           display: flex;
@@ -27,14 +28,6 @@
           height: 100%;
           justify-content: center;
         }
-      }
-
-      &-0:after,
-      &-1:after,
-      &-2:after,
-      &-3:after,
-      &-4:after {
-        top: -1px;
       }
     }
 
@@ -56,53 +49,60 @@
 
     &-zero {
       .pg-confirm__progress-circle-1 {
-        &:after {
+        &::after {
           color: var(--main-bg);
         }
       }
-       .pg-confirm__active-1 {
+
+      .pg-confirm__active-1 {
         font-weight: normal;
       }
     }
 
     &-first {
       .pg-confirm__progress-circle-1 {
-        &:after {
+        &::after {
           color: var(--main-bg);
         }
       }
-       .pg-confirm__active-1 {
+
+      .pg-confirm__active-1 {
         font-weight: normal;
       }
     }
 
     &-second {
       .pg-confirm__progress-circle-2 {
-        &:after {
+        &::after {
           color: var(--main-bg);
         }
       }
-       .pg-confirm__active-2 {
+
+      .pg-confirm__active-2 {
         font-weight: normal;
       }
     }
+
     &-third {
       .pg-confirm__progress-circle-3 {
-        &:after {
+        &::after {
           color: var(--main-bg);
         }
       }
-       .pg-confirm__active-3 {
+
+      .pg-confirm__active-3 {
         font-weight: normal;
       }
     }
+
     &-fourth {
       .pg-confirm__progress-circle-4 {
-        &:after {
+        &::after {
           color: var(--main-bg);
         }
       }
-       .pg-confirm__active-4 {
+
+      .pg-confirm__active-4 {
         font-weight: normal;
       }
     }
@@ -110,11 +110,11 @@
 
   &__title-text {
     font-family: "Noto Sans SC";
+    font-size: 12px;
     font-style: normal;
     font-weight: normal;
-    font-size: 12px;
-    top: 33px;
     left: auto;
+    top: 33px;
     width: max-content;
   }
 }
@@ -124,7 +124,7 @@
     background: url(assets/images/background.svg);
     background-size: cover;
     height: 100vh;
-  
+
     .pg-logo {
       padding-top: 50px;
     }
@@ -144,17 +144,13 @@
       height: 105px;
 
       &-items--long {
+        padding-top: 30px;
         width: 80%;
       }
     }
 
     &__progress-items {
       width: 70%;
-
-      &--long {
-        width: 80%;
-        padding-top: 30px;
-      }
     }
 
     &__content-profile-partial-forms {

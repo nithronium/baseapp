@@ -25,10 +25,9 @@
   }
 
   &-col {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
-    display: flex;
     justify-content: space-around;
     width: 100%;
 
@@ -41,17 +40,17 @@
       width: 46%;
 
       &-is-active {
-        margin-top: 0 !important;
-        height: calc(var(--gap) * 10.5)!important;
-        margin-bottom: calc(var(--gap) * 0.5);
         border: 1px solid var(--kyc-active-color) !important;
+        height: calc(var(--gap) * 10.5) !important;
+        margin-bottom: calc(var(--gap) * 0.5);
+        margin-top: 0 !important;
       }
 
       fieldset {
-        color: var(--kyc-grey);
-        border-radius: calc(var(--gap) * 0.6);
         border: 1px solid var(--kyc-grey);
+        border-radius: calc(var(--gap) * 0.6);
         box-sizing: border-box;
+        color: var(--kyc-grey);
         height: 49px;
         margin: 0;
         margin-top: calc(var(--gap) * 1.3);
@@ -73,37 +72,37 @@
         width: 100%;
 
         &-label {
-          position: absolute;
+          background-color: var(--base-bright);
           margin-left: calc(var(--gap) * 1.42);
           padding: 0 calc(var(--gap) * 0.33);
-          background-color: var(--base-bright);
+          position: absolute;
           z-index: 1;
         }
 
         &--focused {
-          color: var(--accent) !important;
           border: 1px solid var(--accent) !important;
+          color: var(--accent) !important;
         }
 
         &--wrong {
-          color: var(--red) !important;
           border: 1px solid var(--red) !important;
+          color: var(--red) !important;
         }
 
         legend {
           background-color: var(--base-bright);
-          position:absolute;
+          position: absolute;
           top: calc(var(--gap) * -1.6);
         }
 
         input {
-          width: 100%;
-          color: var(--color-white);
           background: transparent;
           border: unset;
           bottom: 0;
+          color: var(--color-white);
           font-size: calc(var(--gap) * 2);
           margin-top: 8px;
+          width: 100%;
 
           &::placeholder {
             color: var(--text-muted);
@@ -115,17 +114,18 @@
         }
 
         .cr-dropdown {
-          &__input, &__input--open {
-            display: flex;
-            justify-content: space-between;
+          &__input,
+          &__input--open {
             align-items: center;
             background-color: var(--base-bright);
             border: 1px solid var(--kyc-grey);
             border-radius: 4px;
             color: var(--kyc-grey);
+            display: flex;
             height: 49px;
-            margin-top: calc(var(--gap) * 1.3);
+            justify-content: space-between;
             margin-right: 0;
+            margin-top: calc(var(--gap) * 1.3);
             width: 100%;
 
             &:active {
@@ -135,23 +135,23 @@
 
           &__input {
             &-label {
-              text-shadow: 0 0 0 var(--kyc-grey);
               font-size: calc(var(--gap) * 2);
               font-weight: var(--font-weight);
               line-height: 49px;
               margin-left: 0.75em;
+              text-shadow: 0 0 0 var(--kyc-grey);
             }
 
             &-icon {
               cursor: pointer;
-              position: absolute;
               line-height: 0;
               margin-right: calc(var(--gap) * 3);
+              position: absolute;
             }
 
             &-search-icon {
-              position: relative;
               margin-right: 3px;
+              position: relative;
 
               img {
                 margin-bottom: -3px;
@@ -160,14 +160,15 @@
           }
 
           &__input--open {
-            color: var(--backhround-dropdown-text);
             border-color: var(--color-blue);
+            color: var(--backhround-dropdown-text);
           }
+
           &__list {
             background-color: var(--background-dropdown);
-            border: 0px;
+            border: 0;
             border-radius: 4px;
-            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.24), 0px 2px 8px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.24), 0 2px 8px rgba(0, 0, 0, 0.12);
             color: var(--kyc-grey);
             max-height: calc(var(--big-gap) * 1.6);
             overflow-y: auto;
@@ -192,8 +193,8 @@
 
             &::-webkit-scrollbar-track {
               background-color: transparent;
-              border-top-left-radius: 50%;
               border-bottom-left-radius: 50%;
+              border-top-left-radius: 50%;
             }
 
             &::-webkit-scrollbar-thumb {

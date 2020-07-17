@@ -18,7 +18,8 @@
 
   &__single-balance {
     .cr-wallet-item {
-      &__amount-locked, &__balance {
+      &__amount-locked,
+      &__balance {
         color: var(--header-text) !important;
         font-family: var(--font-family);
         font-size: 12px;
@@ -30,11 +31,12 @@
         padding-top: calc(var(--gap) * 1.2) !important;
       }
 
-      &__balance-locked, &__balance-amount  {
+      &__balance-locked,
+      &__balance-amount {
         font-family: var(--font-family);
+        font-size: 20px;
         font-style: normal;
         font-weight: bold;
-        font-size: 20px;
         line-height: 20px;
       }
     }

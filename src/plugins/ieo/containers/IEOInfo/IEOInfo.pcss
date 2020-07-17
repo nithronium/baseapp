@@ -1,21 +1,20 @@
 .ieo-profile-info {
-  background: var(--main-bg);
+  background: var(--main-background-color);
+  border-radius: calc(var(--gap) * 0.5);
   color: var(--color-white);
-  margin-bottom: calc(var(--gap) * 5);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background: var(--main-bg);
-  border-radius: calc(var(--gap) * 0.5);
+  margin-bottom: calc(var(--gap) * 5);
 
   &__main {
     display: flex;
     flex-direction: column;
+    font-weight: normal;
     justify-content: flex-start;
+    line-height: calc(var(--gap) * 3.2);
     padding: calc(var(--gap) * 6.5) calc(var(--gap) * 3.83);
     width: 70%;
-    font-weight: normal;
-    line-height: calc(var(--gap) * 3.2);
 
     &__info {
       display: flex;
@@ -23,18 +22,18 @@
       justify-content: flex-start;
 
       &__coin-area {
-        text-align: center;
-        width: calc(var(--gap) * 26.66);
         background: var(--ieo-header-bg);
         border-radius: calc(var(--gap) * 0.5);
+        text-align: center;
+        width: calc(var(--gap) * 26.66);
 
         &__coin-logo {
           margin: 0 auto;
 
           img {
-            width: calc(var(--big-gap) * 1.66);
             height: calc(var(--big-gap) * 1.66);
             margin-top: calc(var(--gap) * 3);
+            width: calc(var(--big-gap) * 1.66);
           }
 
           @media (max-width: 991.98px) {
@@ -92,8 +91,8 @@
           &__label {
             font-size: var(--font-size);
             line-height: calc(var(--gap) * 1.7);
-            padding-bottom: calc(var(--gap) * 0.5);
             opacity: 0.6;
+            padding-bottom: calc(var(--gap) * 0.5);
           }
 
           &__value {
@@ -108,8 +107,8 @@
           &__label {
             font-size: var(--font-size);
             line-height: calc(var(--gap) * 1.7);
-            padding-bottom: calc(var(--gap) * 0.5);
             opacity: 0.6;
+            padding-bottom: calc(var(--gap) * 0.5);
           }
 
           &__value {
@@ -120,40 +119,40 @@
 
         .curent-progress-block {
           .progress-bar {
-            margin-top: calc(var(--gap) * 1.5);
-            margin-bottom: calc(var(--gap) * 1.33);
-            height: calc(var(--gap) * 1.66);
-            width: 100%;
-            border-radius: calc(var(--gap) * 0.75);
             background: var(--progress-bar);
+            border-radius: calc(var(--gap) * 0.75);
+            height: calc(var(--gap) * 1.66);
+            margin-bottom: calc(var(--gap) * 1.33);
+            margin-top: calc(var(--gap) * 1.5);
+            width: 100%;
 
             .filler {
-              display: flex;
-              justify-content: center;
               align-items: center;
-              vertical-align: middle;
-              font-weight: bold;
-              text-align: center;
-              font-size: calc(var(--gap) * 3);
               background: var(--progress-green);
-              height: 100%;
               border-radius: calc(var(--gap) * 0.75);
-              transition: width .2s ease-in;
+              display: flex;
+              font-size: calc(var(--gap) * 3);
+              font-weight: bold;
+              height: 100%;
+              justify-content: center;
+              text-align: center;
+              transition: width 0.2s ease-in;
+              vertical-align: middle;
 
               &--zero {
-                color: var(--text);
+                color: var(--primary-text-color);
               }
             }
 
             &__value {
               display: flex;
               flex-direction: row;
-              justify-content: space-between;
               font-size: calc(var(--gap) * 1.7);
+              justify-content: space-between;
               padding: calc(var(--gap) * 1.5) 0;
 
               &__label {
-                color: var(--color-white);
+                color: var(--primary-text-color);
                 opacity: 0.6;
               }
 
@@ -162,16 +161,17 @@
               }
             }
           }
+
           &__progress-bar {
-            height: calc(var(--gap) * 2);
-            width: 100%;
             background: var(--progress-bar);
             border-radius: calc(var(--gap) * 1.25);
+            height: calc(var(--gap) * 2);
+            width: 100%;
 
-          &__current {
-              height: calc(var(--gap) * 2);
+            &__current {
               background: var(--progress-green);
               border-radius: calc(var(--gap) * 1.25);
+              height: calc(var(--gap) * 2);
             }
           }
 
@@ -201,28 +201,27 @@
     }
 
     &__description {
+      border-top: calc(var(--gap) * 0.25) solid var(--border-top);
+      font-size: var(--font-size);
+      font-weight: 300;
+      font-weight: normal;
+      letter-spacing: 0.02em;
+      line-height: calc(var(--gap) * 2.5);
       margin-top: calc(var(--big-gap) * 0.4);
       padding: calc(var(--big-gap) * 0.34) 0;
-      font-size: var(--font-size);
-      line-height: calc(var(--gap) * 2.5);
-      border-top: calc(var(--gap) * 0.25) solid var(--border-top);
-      letter-spacing: 0.02em;
-      font-weight: 300;
       white-space: pre-line;
-      font-weight: normal;
     }
   }
 
   &__order {
     background: var(--ieo-header-bg);
     border-radius: 0 calc(var(--gap) * 1.25) calc(var(--gap) * 1.25) 0;
-    width: 30%;
     position: relative;
+    width: 30%;
 
     .pg-order .cr-order .cr-tab-panel .cr-tab-content .cr-order-item {
-
       .cr-button {
-        background: var(--orders-button-green-normal);
+        background: var(--button-normal);
       }
 
       .cr-order-input__fieldset__label {
@@ -230,7 +229,7 @@
       }
 
       .cr-order-item__total__label {
-        color: var(--color-white);
+        color: var(--primary-text-color);
       }
     }
   }
@@ -248,19 +247,19 @@
 
 @media (max-width: 576px) {
   .ieo-profile-info__main {
-    width: 100%;
     padding: calc(var(--gap) * 2);
+    width: 100%;
 
     &__info {
       &__coin-area {
-        width: 100%;
         justify-content: center;
         padding: 0;
+        width: 100%;
       }
 
       &__value {
-        width: 100%;
         margin: calc(var(--gap) * 2.5) 0 calc(var(--gap) * 2.5) 0;
+        width: 100%;
 
         .expiration-time,
         .ieo-price,

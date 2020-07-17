@@ -1,8 +1,9 @@
 .pg-referral-tickets {
-  margin: 0;
   background: white;
   color: black;
   font-size: 16px;
+  margin: 0;
+
   a {
     color: black;
     text-decoration: none;
@@ -13,12 +14,12 @@
   }
 
   button {
-    color: #fff;
-    background: #00732F;
-    padding: 10px 20px;
-    border-radius: 20px;
+    background: #00732f;
     border: 0;
+    border-radius: 20px;
+    color: #fff;
     cursor: pointer;
+    padding: 10px 20px;
 
     &:focus {
       outline: none;
@@ -26,9 +27,9 @@
   }
 
   .container {
-    width: 1140px;
-    margin: auto;
     display: flex;
+    margin: auto;
+    width: 1140px;
 
     &.column {
       flex-direction: column;
@@ -42,40 +43,38 @@
   .table-margin {
     margin-left: 30px;
   }
+
   .table-wrap {
     margin-left: 30px;
     position: relative;
   }
+
   table {
     border-spacing: 0;
-    
+
     & td {
       font-size: 14px;
     }
 
     & thead {
-
-
       & td {
-        padding: 20px 8px 20px 0;
         color: #ccc;
+        padding: 20px 8px 20px 0;
       }
     }
 
     & tbody {
-
       & tr {
-
-        transition: background-color .2s;
+        transition: background-color 0.2s;
 
         &:hover {
-          background: rgba(204, 204, 204, .2);
+          background: rgba(204, 204, 204, 0.2);
         }
 
         & td {
-          padding: 20px 8px 20px 0;
-          border-top: 1px solid #ccc;
           border-collapse: collapse;
+          border-top: 1px solid #ccc;
+          padding: 20px 8px 20px 0;
 
           & span.count {
             font-size: 18px;
@@ -83,51 +82,44 @@
           }
         }
       }
-
     }
 
     & tfoot {
-
-
       & tr {
-
         & td[colspan] {
           padding-bottom: 22px;
 
           & a {
-            position: relative;
             display: inline-block;
             font-weight: 600;
+            position: relative;
 
-            &:after {
+            &::after {
+              background: url(./custom/assets/images/referral-tickets/right-arrow.svg) center center no-repeat;
               content: '';
               display: block;
-              width: 20px;
               height: 20px;
               position: absolute;
-              top: 0px;
               right: -23px;
-              background: url(./custom/assets/images/referral-tickets/right-arrow.svg) center center no-repeat;
+              top: 0;
+              width: 20px;
             }
           }
         }
 
         & td {
           & .table-summary-header {
-            display: block;
             border-bottom: 1px solid #ccc;
-            width: 80px;
-            padding-bottom: 10px;
+            display: block;
             font-weight: bold;
+            padding-bottom: 10px;
+            width: 80px;
           }
         }
 
         &:last-of-type {
-
           & td {
-
             padding: 0 8px 20px 0;
-
           }
         }
       }
@@ -135,15 +127,15 @@
   }
 
   h1 {
-    width: 180px;
     font-weight: 400;
     text-transform: capitalize;
+    width: 180px;
   }
 
   h2 {
+    border-left: 3px solid;
     font-weight: 800;
     padding-left: 30px;
-    border-left: 3px solid;
   }
 
   section {
@@ -152,68 +144,64 @@
 
   .top-holder {
     background: #f0f0f0;
-    position: relative;
     padding-bottom: 40px;
+    position: relative;
 
-    &:before {
+    &::before {
+      background: #fff;
+      bottom: -10px;
       content: '';
       display: block;
-      width: 20px;
       height: 20px;
-      background: #fff;
       position: absolute;
-      bottom: -10px;
-      transform: rotate(45deg);
       right: 20vw;
-
+      transform: rotate(45deg);
+      width: 20px;
     }
 
     .contexter {
-
       flex-grow: 1;
 
       .cards-wrapper {
-
         display: flex;
         flex-grow: 1;
         justify-content: flex-end;
 
         .Card {
-          margin-left: 30px;
-          width: 26%;
+          background: #fff;
+          border-radius: 14px;
+          box-shadow: 0 0 12px rgba(0, 0, 0, 0.03);
           box-sizing: border-box;
-          padding: 20px;
           display: flex;
           flex-direction: column;
-          border-radius: 14px;
-          box-shadow: 0 0 12px rgba(0, 0, 0, .03);
-          background: #fff;
-          transition: box-shadow .4s;
+          margin-left: 30px;
+          padding: 20px;
           position: relative;
+          transition: box-shadow 0.4s;
+          width: 26%;
 
           &:nth-child(2) {
-            background: #FFD541;
+            background: #ffd541;
           }
 
           &:nth-child(3) {
-            background: #00C620;
+            background: #00c620;
           }
 
           &:hover {
-            box-shadow: 0 6px 12px rgba(0, 0, 0, .3);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
           }
 
           .card-top {
-
             display: flex;
 
             .card-top__left {
               flex-grow: 1;
 
               .card-top__left__header {
-                margin: 0;
                 font-size: 18px;
                 font-weight: 500;
+                margin: 0;
               }
 
               .card-top__left__suffix {
@@ -223,13 +211,12 @@
 
             .card-top__right {
               font-family: Roboto;
-              font-weight: 400;
               font-size: 32px;
+              font-weight: 400;
             }
           }
 
           .card-middle {
-
             flex-grow: 1;
 
             .card-details-row {
@@ -242,53 +229,52 @@
               }
 
               .card-details-row__right {
-                font-weight: 500;
                 font-size: 16px;
+                font-weight: 500;
               }
             }
           }
 
           .card-bottom {
             font-size: 14px;
-            text-decoration: none;
             margin-top: 10px;
+            text-decoration: none;
 
             a {
-
               color: #000;
               text-decoration: none;
 
-              &:after {
+              &::after {
+                background: url(./custom/assets/images/referral-tickets/right-arrow.svg) center center no-repeat;
                 content: '';
                 display: inline-block;
                 height: 12px;
-                width: 12px;
                 transform: translateX(6px) translateY(2px);
-                background: url(./custom/assets/images/referral-tickets/right-arrow.svg) center center no-repeat;
+                width: 12px;
               }
             }
           }
 
-          &:after {
+          &::after {
+            border-top: 1px solid rgba(0, 0, 0, 0.3);
+            bottom: 40px;
             content: '';
             display: block;
-            width: 40px;
-            bottom: 40px;
-            left: 0px;
+            left: 0;
             position: absolute;
-            border-top: 1px solid rgba(0, 0, 0, .3);
+            width: 40px;
           }
         }
       }
 
       .referral-summary {
-        margin-left: auto;
-        width: calc(78% + 60px);
-        display: flex;
         align-items: center;
-        padding: 20px 0;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        display: flex;
+        margin-left: auto;
         margin-top: 40px;
-        border-top: 1px solid rgba(0, 0, 0, .2);
+        padding: 20px 0;
+        width: calc(78% + 60px);
 
         .total-container {
           flex-grow: 1;
@@ -297,36 +283,33 @@
     }
 
     .direct-ticket-details {
-
       position: relative;
 
-      &:before {
+      &::before {
+        background: url(./custom/assets/images/referral-tickets/1.svg) center center no-repeat;
         content: '';
         display: block;
-        position: absolute;
-        background: url(./custom/assets/images/referral-tickets/1.svg) center center no-repeat;
-        width: 110px;
         height: 110px;
         left: 18vw;
+        position: absolute;
         top: 0;
+        width: 110px;
       }
 
-      &:after {
+      &::after {
+        background: url(./custom/assets/images/referral-tickets/2.svg) center center no-repeat;
         content: '';
         display: block;
-        position: absolute;
-        background: url(./custom/assets/images/referral-tickets/2.svg) center center no-repeat;
-        width: 110px;
         height: 110px;
+        position: absolute;
         right: 5vw;
         top: 0;
+        width: 110px;
       }
 
       .container {
-
-        position: relative;
         justify-content: flex-end;
-
+        position: relative;
       }
 
       .container-wrapper {
@@ -336,42 +319,45 @@
       h2 {
         border-color: transparent;
       }
+
       td {
         a {
           color: white;
         }
       }
+
       td:first-child {
-        width: 30%
+        width: 30%;
       }
     }
-
-
   }
 
   .referral-ticket-details {
-
-    position: relative;
     padding-top: 40px;
+    position: relative;
+
     .table-wrap {
       overflow-x: auto;
     }
+
     table {
-      width: 900px;
       white-space: nowrap;
+      width: 900px;
     }
+
     thead td {
       border-bottom: 1px solid #ccc;
     }
-    &:before {
+
+    &::before {
+      background: url(./custom/assets/images/referral-tickets/3.svg) center center no-repeat;
       content: '';
       display: block;
-      position: absolute;
-      background: url(./custom/assets/images/referral-tickets/3.svg) center center no-repeat;
-      width: 110px;
       height: 110px;
       left: 40vw;
+      position: absolute;
       top: -70px;
+      width: 110px;
     }
 
     & .container:first-of-type {
@@ -379,13 +365,14 @@
         width: 750px;
 
         & h2 {
-          border-color: #FFD541;
+          border-color: #ffd541;
         }
       }
+
       @media (max-width: 960px) {
         & .left {
-          width: unset;
           flex-grow: 1;
+          width: unset;
         }
       }
 
@@ -410,43 +397,46 @@
   }
 
   .bonus-ticket-details {
-
     padding-top: 200px;
     position: relative;
 
     & h2 {
-      border-color: #00C620;
+      border-color: #00c620;
     }
+
     .table-wrap {
       overflow-x: auto;
     }
+
     table {
-      width: 640px;
       white-space: nowrap;
+      width: 640px;
     }
+
     thead td {
       border-bottom: 1px solid #ccc;
     }
-    &:before {
+
+    &::before {
+      background: url(./custom/assets/images/referral-tickets/4.svg) center center no-repeat;
       content: '';
       display: block;
-      position: absolute;
-      background: url(./custom/assets/images/referral-tickets/4.svg) center center no-repeat;
-      width: 110px;
       height: 110px;
       left: 0;
+      position: absolute;
       top: 0;
+      width: 110px;
     }
 
-    &:after {
+    &::after {
+      background: url(./custom/assets/images/referral-tickets/5.svg) center center no-repeat;
       content: '';
       display: block;
-      position: absolute;
-      background: url(./custom/assets/images/referral-tickets/5.svg) center center no-repeat;
-      width: 110px;
       height: 110px;
+      position: absolute;
       right: 0;
       top: 0;
+      width: 110px;
     }
   }
 
@@ -456,49 +446,44 @@
     font-size: 14px;
 
     & .footer-top {
-
       padding: 20px;
 
       & .logo {
-        width: 150px;
-        height: 40px;
         background: url(./custom/assets/images/referral-tickets/logo-light.svg) center center no-repeat;
-
+        height: 40px;
+        width: 150px;
       }
     }
 
     & .footer-middle {
-
       margin-bottom: 60px;
 
       & .container {
-
         & div {
-          width: 20px;
           flex-grow: 1;
+          width: 20px;
 
           & p {
-            font-weight: 600;
             font-size: 16px;
+            font-weight: 600;
           }
 
           & a {
+            color: rgba(255, 255, 255, 0.8);
             margin-bottom: 12px;
-            color: rgba(255, 255, 255, .8);
           }
         }
       }
-
     }
 
     & a {
-      display: block;
       color: #fff;
+      display: block;
     }
 
     & .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
       padding: 20px 0;
-      border-top: 1px solid rgba(255, 255, 255, .5);
     }
   }
 }
@@ -506,10 +491,10 @@
 @media screen and (max-width: 1200px) {
   .pg-referral-tickets {
     .container {
-      width: 100vw;
+      box-sizing: border-box;
       max-width: 100%;
       padding: 0 20px;
-      box-sizing: border-box;
+      width: 100vw;
 
       .container {
         padding-left: 0;
@@ -522,14 +507,14 @@
       justify-items: center;
       margin: auto;
 
-      &>div {
+      & > div {
         margin: auto;
         width: 100%;
 
         .Card {
-          width: 33% !important;
-          margin-left: 0 !important;
           margin: 0 20px;
+          margin-left: 0 !important;
+          width: 33% !important;
         }
       }
     }
@@ -537,18 +522,17 @@
 }
 
 @media screen and (max-width: 700px) {
-  
   .pg-referral-tickets {
     table {
       margin-left: 0;
     }
+
     .table-margin {
       margin-left: 0;
     }
+
     nav {
-
       .left {
-
         .mobile {
           display: block;
         }
@@ -560,22 +544,19 @@
     }
 
     .direct-ticket-details {
-
       .container-wrapper {
         width: calc(100vw - 40px) !important;
       }
     }
 
     .contexter {
-
       .cards-wrapper {
-
         flex-direction: column;
 
         .Card {
-          width: calc(100vw - 40px) !important;
           height: 194px;
           margin-bottom: 20px;
+          width: calc(100vw - 40px) !important;
         }
       }
 
@@ -585,9 +566,8 @@
     }
 
     div {
-
-      &:before,
-      &:after {
+      &::before,
+      &::after {
         background: none !important;
       }
     }
@@ -596,36 +576,41 @@
       flex-direction: column !important;
 
       div {
-        width: 100% !important;
         column-count: 3;
+        width: 100% !important;
       }
     }
   }
 }
+
 .loader {
-  width: 100px;
-  position: absolute;
+  animation: loop 3s linear infinite;
   left: 50%;
-  top: 50%;
   margin-left: -50px;
   margin-top: -50px;
-  animation: loop 3s linear infinite;
+  position: absolute;
+  top: 50%;
+  width: 100px;
 }
 
-@keyframes loop {   
-  0% {     
+@keyframes loop {
+  0% {
     transform: rotateY(0deg);
-  }   
-  25% {     
-    transform: rotateY(90deg);  
-  } 
+  }
+
+  25% {
+    transform: rotateY(90deg);
+  }
+
   50% {
     transform: rotateY(180deg);
-   }
-   75% {
+  }
+
+  75% {
     transform: rotateY(270deg);
-   }
-   100% {
+  }
+
+  100% {
     transform: rotateY(360deg);
-   }
+  }
 }

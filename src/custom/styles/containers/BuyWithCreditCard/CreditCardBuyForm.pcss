@@ -1,595 +1,586 @@
 
-
 .pg-buy-with-credit-card {
-    --bg-color-light1: #263434;
-    --bg-color-light2: #222627;
-    --bg-color-dark1: #141717;
-    --bg-color-dark2: #171e1e;
-    --text-color-header: #9ECFC3;
-    --header-border-color: #384847;
-    --input-border: #648280;
-    --color-green: #11b382;
-    --limits-text-color: #7d9794;
-    --color-yellow: #ffd567;
-    --color-grey: #3a4040;
-}
+  --bg-color-light1: #263434;
+  --bg-color-light2: #222627;
+  --bg-color-dark1: #141717;
+  --bg-color-dark2: #171e1e;
+  --text-color-header: #9ecfc3;
+  --header-border-color: #384847;
+  --input-border: #648280;
+  --color-green: #11b382;
+  --limits-text-color: #7d9794;
+  --color-yellow: #ffd567;
+  --color-grey: #3a4040;
 
-.pg-buy-with-credit-card {
-    padding-bottom: 100px;
-    background-color: #000;
+  background-color: #000;
+  padding-bottom: 100px;
 
-    &__container {
-        max-width: 940px;
-        margin: 0 auto;
-        position: relative;
+  &__container {
+    margin: 0 auto;
+    max-width: 940px;
+    position: relative;
+  }
+
+  .section {
+    background: var(--bg-color-light2);
+    border-radius: 3px;
+    margin-top: 20px;
+    position: relative;
+
+    &__header {
+      align-items: center;
+      background: var(--bg-color-light1);
+      border-bottom: 1px solid var(--header-border-color);
+      border-radius: 5px 5px 0 0;
+      color: var(--text-color-header);
+      display: flex;
+      font-size: 14px;
+      height: 32px;
+      justify-content: space-between;
+      line-height: 32px;
+      padding-left: 14px;
+    }
+  }
+
+  .buy-form {
+    &__mastercard {
+      background: url(./assets/images/credit-card-mastercard.png);
+      height: 30px;
+      position: absolute;
+      right: 0;
+      top: 5px;
+      width: 36px;
     }
 
-    .section {
-        border-radius: 3px;
-        background: var(--bg-color-light2);
+    .cr-modal .cr-modal__container {
+      width: calc(var(--big-gap) * 10);
+
+      .cr-modal__container-header {
+        background-color: var(--color-green);
+        height: 60px;
+        padding: 7px;
+      }
+
+      .cr-modal__container-content {
+        padding: 0 calc(var(--gap) * 6.33);
+      }
+    }
+
+    .Dropdown-menu {
+      display: block;
+      left: 0;
+      position: absolute;
+      top: 100%;
+    }
+
+    .Dropdown-option {
+      background: var(--bg-color-light2);
+      cursor: pointer;
+      line-height: 30px;
+      text-align: center;
+      text-transform: uppercase;
+      width: 50px;
+    }
+
+    .Dropdown-root {
+      height: 50px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 50px;
+    }
+
+    .Dropdown-placeholder {
+      text-transform: uppercase;
+    }
+
+    &__modal {
+      &-header {
+        color: #fff;
+        position: relative;
+
+        p {
+          font-size: 14px;
+          font-weight: bold;
+          text-transform: uppercase;
+        }
+      }
+
+      &-close {
+        color: #fff;
+        cursor: pointer;
+        font-size: 28px;
+        position: absolute;
+        right: 11px;
+        top: -12px;
+        transform: scaleY(0.8);
+      }
+
+      &-amount {
+        color: #fff;
+        font-size: 18px;
+        margin: 20px 0 0;
+        text-align: center;
+
+        span {
+          color: #ffd567;
+          font-weight: bold;
+        }
+      }
+
+      &-inputs {
+        margin-top: 25px;
+        position: relative;
+        z-index: 1;
+
+        .buy-form__input {
+          width: 235px;
+        }
+      }
+
+      &-divider {
+        margin-top: 25px;
+        position: relative;
+
+        .credit-card-promo__divider-arrow {
+          background-color: var(--bg-color-light2);
+        }
+      }
+
+      &-table {
+        font-size: 18px;
         margin-top: 20px;
+        text-transform: uppercase;
+
+        span {
+          line-height: 48px;
+        }
+
+        &-top,
+        &-bottom {
+          height: 48px;
+          padding: 0 16px;
+        }
+
+        & > div {
+          display: flex;
+          justify-content: space-between;
+        }
+
+        &-top {
+          color: var(--text-color-header);
+
+          span:first-child {
+            color: var(--input-border);
+          }
+        }
+
+        &-bottom {
+          background-color: var(--bg-color-dark1);
+          color: #fff;
+        }
+      }
+
+      &-terms {
+        margin-top: 20px;
+
+        &-header {
+          color: var(--limits-text-color);
+          font-size: 14px;
+          margin-bottom: 6px;
+        }
+
+        &-body {
+          background-color: var(--bg-color-dark1);
+          color: var(--limits-text-color);
+          font-size: 11px;
+          height: 110px;
+          overflow-y: scroll;
+          padding: 10px 12px;
+        }
+      }
+
+      &-footer {
+        display: flex;
+        justify-content: center;
+        padding: 25px 0 0;
+
+        &-button {
+          background: var(--color-yellow);
+          border: none;
+          border-radius: 4px;
+          color: var(--bg-color-dark1);
+          cursor: pointer;
+          font-size: 16px;
+          height: 40px;
+          line-height: 40px;
+          text-align: center;
+          text-transform: uppercase;
+          width: 170px;
+
+          &[disabled] {
+            cursor: not-allowed;
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+
+    &__content {
+      margin: 0 auto;
+      max-width: 620px;
+
+      h2 {
+        color: #fff;
+        font-size: 18px;
+        font-weight: normal;
+        margin-bottom: 25px;
+        margin-top: 32px;
+        position: relative;
+      }
+
+      .pg-chatello__overlay-visa {
+        right: 7px;
+        top: -1px;
+      }
+    }
+
+    &__inputs-wrap {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &__input-wrap {
+      position: relative;
+
+      &:first-child {
+        z-index: 2;
+      }
+
+      &:last-child {
+        z-index: 1;
+      }
+    }
+
+    &__input {
+      background-color: transparent;
+      border: 1px solid var(--input-border);
+      border-radius: 4px;
+      color: #fff;
+      font-size: 14px;
+      height: 49px;
+      position: relative;
+      text-indent: 13px;
+      width: 290px;
+
+      &:focus {
+        outline: none;
+      }
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+
+    &__input-arrow {
+      background-image: url(./assets/images/orientation.svg);
+      background-repeat: no-repeat;
+      background-size: contain;
+      cursor: pointer;
+      height: 20px;
+      width: 20px;
+
+      &-wrap {
+        align-items: center;
+        display: flex;
+      }
+    }
+
+    &__label {
+      background: var(--bg-color-light2);
+      display: block;
+      font-size: 12px;
+      left: 9px;
+      padding: 2px 5px;
+      position: absolute;
+      top: -11px;
+      z-index: 1;
+    }
+
+    .cr-card-select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: var(--bg-color-light2);
+      border: none;
+      border-left: 1px solid var(--input-border);
+      color: var(--input-border);
+      cursor: pointer;
+      font-size: 14px;
+      height: 47px;
+      line-height: 50px;
+      position: relative;
+      position: absolute;
+      right: 2px;
+      text-align: center;
+      text-align-last: center;
+      top: 1px;
+      width: 50px;
+
+      &:focus {
+        outline: none;
+      }
+
+      &--first {
+        z-index: 1;
+      }
+    }
+
+    .cr-card-option {
+      background: var(--bg-color-light2);
+      cursor: pointer;
+      line-height: 30px;
+      width: 50px;
+
+      &.active {
+        background: var(--bg-color-light1);
+      }
+    }
+
+    &__bottom-text,
+    &__bottom-text-mobile {
+      color: var(--input-border);
+      display: flex;
+      font-size: 12px;
+      justify-content: space-between;
+
+      &--help,
+      &--help-mobile {
+        color: var(--color-green);
+        cursor: pointer;
+
+        a {
+          color: var(--color-green);
+          text-decoration: none;
+        }
+
+        &::before {
+          border: 1px solid var(--color-green);
+          border-radius: 50%;
+          content: '?';
+          display: inline-block;
+          height: 15px;
+          left: -14px;
+          line-height: 1;
+          position: relative;
+          text-align: center;
+          top: 0;
+          width: 15px;
+        }
+      }
+    }
+
+    &__bottom-text-mobile {
+      display: none;
+    }
+
+    &__button-continue {
+      background-color: var(--color-green);
+      border: none;
+      border-radius: 4px;
+      color: #fff;
+      cursor: pointer;
+      font-size: 16px;
+      height: 40px;
+      margin-bottom: 32px;
+      margin-top: 18px;
+      text-transform: uppercase;
+      width: 100%;
+
+      &:focus {
+        outline: none;
+      }
+
+      &[disabled] {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+    }
+
+    &__limits {
+      align-items: center;
+      background-color: var(--bg-color-dark1);
+      color: var(--limits-text-color);
+      display: flex;
+      height: 56px;
+      justify-content: center;
+
+      & > div {
+        white-space: nowrap;
+      }
+
+      &-item {
+        border-right: 1px solid var(--bg-color-light1);
+        display: inline-block;
+        font-size: 12px;
+        left: 2px;
+        padding-right: 14px;
         position: relative;
 
-        &__header {
-            background: var(--bg-color-light1);
-            color: var(--text-color-header);
-            font-size: 14px;
-            padding-left: 14px;
-            height: 32px;
-            line-height: 32px;
-            border-radius: 5px 5px 0 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--header-border-color);
-        }
-    }
-
-    .buy-form {
-        &__mastercard {
-            width: 36px;
-            height: 30px;
-            background: url(./assets/images/credit-card-mastercard.png);
-            right: 0;
-            position: absolute;
-            top: 5px;
+        p {
+          display: inline-block;
         }
 
-        .cr-modal .cr-modal__container {
-            width: calc(var(--big-gap) * 10);
-
-            .cr-modal__container-header {
-                background-color: var(--color-green);
-                height: 60px;
-                padding: 7px;
-            }
-
-            .cr-modal__container-content {
-                padding: 0 calc(var(--gap) * 6.33);
-            }
+        &:last-child {
+          border-right: none;
+          padding-right: 0;
         }
+      }
 
-        .Dropdown-menu {
-            position: absolute;
-            display: block;
-            top: 100%;
-            left: 0;
-        }
+      span {
+        color: var(--color-yellow);
+      }
 
-        .Dropdown-option {
-            width: 50px;
-            background: var(--bg-color-light2);
-            cursor: pointer;
-            line-height: 30px;
-            text-transform: uppercase;
-            text-align: center;
-        }
-
-        .cr-card-select {
-            cursor: pointer;
-        }
-
-        .Dropdown-root {
-            position: absolute;
-            right: 0;
-            top: 0;
-            height: 50px;
-            width: 50px;
-        }
-
-        .Dropdown-placeholder {
-            text-transform: uppercase;
-        }
-
-        &__modal {
-            &-header {
-                position: relative;
-                color: #fff;
-
-                p {
-                    text-transform: uppercase;
-                    font-size: 14px;
-                    font-weight: bold;
-                }
-            }
-
-            &-close {
-                position: absolute;
-                color: #fff;
-                cursor: pointer;
-                right: 11px;
-                top: -12px;
-                font-size: 28px;
-                transform: scaleY(.8);
-            }
-
-            &-amount {
-                text-align: center;
-                color: #fff;
-                font-size: 18px;
-                margin: 20px 0 0;
-                span {
-                    color: #ffd567;
-                    font-weight: bold;
-                }
-            }
-
-            &-inputs {
-                margin-top: 25px;
-                position: relative;
-                z-index: 1;
-
-                .buy-form__input {
-                    width: 235px;
-                }
-            }
-
-            &-divider {
-                position: relative;
-                margin-top: 25px;
-
-                .credit-card-promo__divider-arrow {
-                    background-color: var(--bg-color-light2);
-                }
-            }
-
-            &-table {
-                font-size: 18px;
-                text-transform: uppercase;
-                margin-top: 20px;
-
-                span {
-                    line-height: 48px;
-                }
-
-                &-top,
-                &-bottom {
-                    height: 48px;
-                    padding: 0 16px;
-                }
-
-                & > div {
-                    display: flex;
-                    justify-content: space-between;
-                }
-
-                &-top {
-                    color: var(--text-color-header);
-                    span:first-child {
-                        color: var(--input-border);
-                    }
-                }
-
-                &-bottom {
-                    background-color: var(--bg-color-dark1);
-                    color: #fff;
-                }
-            }
-
-            &-terms {
-                margin-top: 20px;
-
-                &-header {
-                    color: var(--limits-text-color);
-                    font-size: 14px;
-                    margin-bottom: 6px;
-                }
-
-                &-body {
-                    background-color: var(--bg-color-dark1);
-                    color: var(--limits-text-color);
-                    font-size: 11px;
-                    padding: 10px 12px;
-                    height: 110px;
-                    overflow-y: scroll;
-                }
-            }
-
-            &-footer {
-                display: flex;
-                justify-content: center;
-                padding: 25px 0 0;
-
-                &-button {
-                    height: 40px;
-                    width: 170px;
-                    line-height: 40px;
-                    font-size: 16px;
-                    color: var(--bg-color-dark1);
-                    border-radius: 4px;
-                    background: var(--color-yellow);
-                    text-transform: uppercase;
-                    cursor: pointer;
-                    text-align: center;
-                    border: none;
-
-                    &[disabled] {
-                        cursor: not-allowed;
-                        opacity: 0.5;
-                    }
-                }
-            }
-        }
-
-        &__content {
-            max-width: 620px;
-            margin: 0 auto;
-
-            h2 {
-                font-size: 18px;
-                font-weight: normal;
-                color: #fff;
-                margin-top: 32px;
-                margin-bottom: 25px;
-                position: relative;
-            }
-
-            .pg-chatello__overlay-visa {
-                top: -1px;
-                right: 7px;
-            }
-        }
-
-        &__inputs-wrap {
-            display: flex;
-            justify-content: space-between;
-        }
-
-        &__input-wrap {
-            position: relative;
-
-            &:first-child {
-                z-index: 2;
-            }
-
-            &:last-child {
-                z-index: 1;
-            }
-        }
-
-        &__input {
-            position: relative;
-            background-color: transparent;
-            border: 1px solid var(--input-border);
-            height: 49px;
-            width: 290px;
-            border-radius: 4px;
-            color: #fff;
-            font-size: 14px;
-            text-indent: 13px;
-
-            &:focus {
-                outline: none;
-            }
-
-            &::-webkit-inner-spin-button, 
-            &::-webkit-outer-spin-button { 
-                -webkit-appearance: none;
-                margin: 0;
-            }
-        }
-
-        &__input-arrow {
-            background-image: url(./assets/images/orientation.svg);
-            width: 20px;
-            height: 20px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            cursor: pointer;
-
-            &-wrap {
-                display: flex;
-                align-items: center;
-            }
-        }
-
-        &__label {
-            position: absolute;
-            background: var(--bg-color-light2);
-            padding: 2px 5px;
-            top: -11px;
-            left: 9px;
-            display: block;
-            z-index: 1;
-            font-size: 12px;
-        }
-
-        .cr-card-select {
-            position: relative;
-            color: var(--input-border);
-            border: none;
-            border-left: 1px solid var(--input-border);
-            height: 47px;
-            background: var(--bg-color-light2);
-            width: 50px;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none; 
-            text-align: center;
-            text-align-last:center;
-            position: absolute;
-            right: 2px;
-            top: 1px;
-            line-height: 50px;
-            font-size: 14px;
-
-            &:focus {
-                outline: none;
-            }
-
-            &--first {
-                z-index: 1;
-            }
-        }
-
-        .cr-card-option {
-            width: 50px;
-            background: var(--bg-color-light2);
-            cursor: pointer;
-            line-height: 30px;
-
-            &.active {
-                background: var(--bg-color-light1);
-            }
-        }
-
-        &__bottom-text,
-        &__bottom-text-mobile {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: var(--input-border);
-
-            &--help,
-            &--help-mobile {
-                color: var(--color-green);
-                cursor: pointer;
-
-                a {
-                    text-decoration: none;
-                    color: var(--color-green);
-                }
-                
-                &:before {
-                    content: '?';
-                    border: 1px solid var(--color-green);
-                    border-radius: 50%;
-                    display: inline-block;
-                    width: 15px;
-                    height: 15px;
-                    position: relative;
-                    text-align: center;
-                    line-height: 1;
-                    position: relative;
-                    left: -14px;
-                    top: 0px;
-                }
-            }
-        }
-
-        &__bottom-text-mobile {
-            display: none;
-        }
-
-        &__button-continue {
-            background-color: var(--color-green);
-            width: 100%;
-            height: 40px;
-            color: #fff;
-            border-radius: 4px;
-            border: none;
-            font-size: 16px;
-            text-transform: uppercase;
-            margin-bottom: 32px;
-            margin-top: 18px;
-            cursor: pointer;
-
-            &:focus {
-                outline: none;
-            }
-
-            &[disabled] {
-                cursor: not-allowed;
-                opacity: 0.5;
-            }
-        }
-
-        &__limits {
-            background-color: var(--bg-color-dark1);
-            height: 56px;
-            color: var(--limits-text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            & > div {
-                white-space: nowrap;
-            }
-
-            &-item {
-                position: relative;
-                border-right: 1px solid var(--bg-color-light1);
-                display: inline-block;
-                padding-right: 14px;
-                position: relative;
-                left: 2px;
-                font-size: 12px;
-
-                p {
-                    display: inline-block;
-                }
-
-                &:last-child {
-                    border-right: none;
-                    padding-right: 0;
-                }
-            }
-
-            span {
-                color: var(--color-yellow);
-            }
-
-            .icon-arrow,
-            .icon-clock,
-            .icon-calendar {
-                width: 16px;
-                height: 16px;
-                background-size: contain;
-                background-repeat: no-repeat;
-                position: relative;
-                top: 3px;
-                margin: 0 14px;
-                display: inline-block;
-            }
-
-            .icon-arrow {
-                background-image: url(./assets/images/credit-card-arrow.png);
-            }
-
-            .icon-clock {
-                background-image: url(./assets/images/credit-card-clock.png);
-            }
-
-            .icon-calendar {
-                background-image: url(./assets/images/credit-card-calendar.png);
-            }
-            
-        }
-    }
-
-    .credit-card__iframe {
-        width: 100%;
-        max-width: 100vw;
+      .icon-arrow,
+      .icon-clock,
+      .icon-calendar {
+        background-repeat: no-repeat;
+        background-size: contain;
+        display: inline-block;
+        height: 16px;
+        margin: 0 14px;
         position: relative;
-        border: none;
-        height: 460px;
+        top: 3px;
+        width: 16px;
+      }
+
+      .icon-arrow {
+        background-image: url(./assets/images/credit-card-arrow.png);
+      }
+
+      .icon-clock {
+        background-image: url(./assets/images/credit-card-clock.png);
+      }
+
+      .icon-calendar {
+        background-image: url(./assets/images/credit-card-calendar.png);
+      }
     }
+  }
+
+  .credit-card__iframe {
+    border: none;
+    height: 460px;
+    max-width: 100vw;
+    position: relative;
+    width: 100%;
+  }
 }
-
-
 
 @media screen and (max-width: 640px) {
-    .pg-buy-with-credit-card {
-        .buy-form {
-            &__content {
-                padding: 0 10px;
+  .pg-buy-with-credit-card {
+    .buy-form {
+      &__content {
+        padding: 0 10px;
 
-                h2 {
-                    padding-right: 57px;
-                    text-align: left;
-                }
-
-                .pg-chatello__overlay-visa {
-                    position: absolute;
-                    top: -26px;
-                }
-            }
-            
-            &__button-continue {
-                margin-top: 7px;
-            }
-
-            &__inputs-wrap {
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
-            &&__inputs-top {
-                flex-wrap: wrap;
-            }
-
-            &__input-wrap {
-                &:last-child {
-                    margin-top: 24px;
-                }
-                width: 100%;
-            }
-
-            &__input {
-                width: 100%;
-
-                &-arrow {
-                    &-wrap {
-                        position: relative;
-                        top: 10px;
-                    }
-                }
-            }
-
-            &__bottom-text {
-                &--help {
-                    display: none;
-                }
-            }
-
-            &__bottom-text-mobile {
-                display: flex;
-                justify-content: center;
-                position: relative;
-                top: -14px;
-            }
-
-            &__limits {
-                height: 85px;
-                padding-top: 0;
-
-                & > div {
-                    display: flex;
-                    white-space: initial;
-                    justify-content: space-around;
-                    text-align: center;
-                    width: 100%;
-                }
-
-                &-item {
-                    border: none;
-
-                    & > div {
-                        > * {
-                            width: 100%;
-                        }
-                    }
-                }
-            }
-
-            .buy-form__modal-inputs {
-                .buy-form__input {
-                    width: 100%;
-                }
-            }
+        h2 {
+          padding-right: 57px;
+          text-align: left;
         }
 
-        .cr-modal .cr-modal__container {
-            max-width: calc(100vw - 25px);
+        .pg-chatello__overlay-visa {
+          position: absolute;
+          top: -26px;
+        }
+      }
 
-            &-content {
-                padding: 10px !important;
+      &__button-continue {
+        margin-top: 7px;
+      }
+
+      &__inputs-wrap {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      &&__inputs-top {
+        flex-wrap: wrap;
+      }
+
+      &__input-wrap {
+        &:last-child {
+          margin-top: 24px;
+        }
+
+        width: 100%;
+      }
+
+      &__input {
+        width: 100%;
+
+        &-arrow {
+          &-wrap {
+            position: relative;
+            top: 10px;
+          }
+        }
+      }
+
+      &__bottom-text {
+        &--help {
+          display: none;
+        }
+      }
+
+      &__bottom-text-mobile {
+        display: flex;
+        justify-content: center;
+        position: relative;
+        top: -14px;
+      }
+
+      &__limits {
+        height: 85px;
+        padding-top: 0;
+
+        & > div {
+          display: flex;
+          justify-content: space-around;
+          text-align: center;
+          white-space: initial;
+          width: 100%;
+        }
+
+        &-item {
+          border: none;
+
+          & > div {
+            > * {
+              width: 100%;
             }
+          }
         }
+      }
 
-        .cr-modal {
-            width: 100%;
-
+      .buy-form__modal-inputs {
+        .buy-form__input {
+          width: 100%;
         }
+      }
     }
+
+    .cr-modal .cr-modal__container {
+      max-width: calc(100vw - 25px);
+
+      &-content {
+        padding: 10px !important;
+      }
+    }
+
+    .cr-modal {
+      width: 100%;
+    }
+  }
 }

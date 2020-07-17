@@ -1,29 +1,31 @@
 .link-block {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    padding-top: 30px;
-    .text {
-        width: calc(var(--big-gap) * 6.3);
-        height: calc(var(--gap) * 4.33);
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: normal;
-        line-height: calc(var(--gap) * 2.66);
-        font-size: calc(var(--gap) * 2.23);
-        color: var(--placeholder-text);
-    }
-    .link {
-        text-decoration: none;
-        cursor: pointer;
-        margin: 5px 0;
-        width: 100%;
-        height: calc(var(--gap) * 4.33);
-        font-family: Roboto;
-        font-style: normal;
-        font-weight: normal;
-        line-height: calc(var(--gap) * 2.66);
-        font-size: calc(var(--gap) * 2.23);
-        color: var(--accent);
-    }
+  display: flex;
+  flex-direction: column;
+  padding-top: 30px;
+  text-align: center;
+
+  .text {
+    color: var(--placeholder-text);
+    font-family: Roboto;
+    font-size: calc(var(--gap) * 2.23);
+    font-style: normal;
+    font-weight: normal;
+    height: calc(var(--gap) * 4.33);
+    line-height: calc(var(--gap) * 2.66);
+    width: calc(var(--big-gap) * 6.3);
+  }
+
+  .link {
+    color: var(--accent);
+    cursor: pointer;
+    font-family: Roboto;
+    font-size: calc(var(--gap) * 2.23);
+    font-style: normal;
+    font-weight: normal;
+    height: calc(var(--gap) * 4.33);
+    line-height: calc(var(--gap) * 2.66);
+    margin: 5px 0;
+    text-decoration: none;
+    width: 100%;
+  }
 }

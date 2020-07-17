@@ -9,33 +9,33 @@
         }
       }
 
-      .custom-control-input:checked~.custom-control-label {
+      .custom-control-input:checked ~ .custom-control-label {
         &::before {
           background-color: var(--primary-cta-color-level-3);
           border: none;
         }
 
         &::after {
-          left: 27px;
           background-color: var(--primary-cta-color);
+          left: 27px;
         }
       }
 
       &-label {
         &::before {
-          left: 21px;
-          width: 33px !important;
-          height: 18px;
-          border-radius: 1rem !important;
           background-color: var(--primary-cta-color-level-3);
           border: none;
+          border-radius: 1rem !important;
+          height: 18px;
+          left: 21px;
+          width: 33px !important;
         }
 
-        &:after {
+        &::after {
+          background-color: var(--primary-cta-color-level-3);
+          height: 14px !important;
           left: 27px !important;
           width: 14px !important;
-          height: 14px !important;
-          background-color: var(--primary-cta-color-level-3);
         }
 
         &:hover {
