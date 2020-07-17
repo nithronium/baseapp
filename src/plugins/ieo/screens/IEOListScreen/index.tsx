@@ -115,7 +115,7 @@ class IEOListContainer extends React.Component<Props> {
     private renderContent = () =>  {
         const listPreparing = this.handleFilterIEO(['preparing']);
         const listInProgress = this.handleFilterIEO(['ongoing', 'distributing']);
-        const listPast = this.handleFilterIEO(['finished', 'released']);
+        const listPast = this.handleFilterIEO(['finished', 'released', 'cancelled_with_refund']);
 
         return (
             <React.Fragment>
