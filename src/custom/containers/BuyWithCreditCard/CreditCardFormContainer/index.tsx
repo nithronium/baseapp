@@ -116,6 +116,7 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
             let newCrypto = query.curr;
             const fiatList = this.getAvailableFiat(nextProps);
             const cryptoList = this.getAvailableCrypto(fiat, nextProps);
+            this.props.fetchOrderBook(nextProps.markets);
             if (!this.getAllCrypto(nextProps).includes(newCrypto)) {
                 newCrypto = cryptoList[0] || 'usdt';
             }
@@ -143,7 +144,6 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
             const converted = await getExchangeRates(
                 'USD', 1, marketCurrencies,
             );
-            this.props.fetchOrderBook(nextProps.markets);
             this.setState({ converted });
             onChange({
                 ...partialState,
