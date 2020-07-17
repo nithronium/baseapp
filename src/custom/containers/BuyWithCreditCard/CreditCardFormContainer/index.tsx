@@ -108,14 +108,20 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
     public async componentWillReceiveProps(nextProps) {
         const { currencies, markets, crypto, onChange } = this.props;
         let { fiat } = this.props;
+        // tslint:disable-next-line:no-console
+        console.log('...........markets.length !== nextProps.markets.length', markets.length !== nextProps.markets.length, markets.length, nextProps.markets.length);
         if (currencies.length !== nextProps.currencies.length ||
             markets.length !== nextProps.markets.length)
         {
+            // tslint:disable-next-line:no-console
+            console.log('...........!nextProps.markets.length || !nextProps.currencies.length', !nextProps.markets.length || !nextProps.currencies.length, !nextProps.markets.length, !nextProps.currencies.length);
             if (!nextProps.markets.length || !nextProps.currencies.length) { return; }
             const query = qs.parse(location.search, { ignoreQueryPrefix: true });
             let newCrypto = query.curr;
             const fiatList = this.getAvailableFiat(nextProps);
             const cryptoList = this.getAvailableCrypto(fiat, nextProps);
+            // tslint:disable-next-line:no-console
+            console.log('...........nextProps.markets', nextProps.markets);
             this.props.fetchOrderBook(nextProps.markets);
             if (!this.getAllCrypto(nextProps).includes(newCrypto)) {
                 newCrypto = cryptoList[0] || 'usdt';
