@@ -90,14 +90,18 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
     }
 
     public componentDidMount() {
-        const { fiat, currencies, markets, onChange } = this.props;
+        const { fiat, crypto, currencies, markets, onChange } = this.props;
         this.props.fetchCurrencies();
         this.props.fetchMarkets();
-
         if (currencies.length && markets.length) {
             const fiatList = this.getAvailableFiat(this.props);
             const cryptoList = this.getAvailableCrypto(fiat, this.props);
-            this.props.fetchOrderBook(markets);
+            this.props.fetchOrderBook(markets.reduce((market, item) => {
+                if (item.name === `${crypto.toUpperCase()}/${fiat.toUpperCase()}`) {
+                    return item;
+                }
+                return market;
+            }, {}));
             onChange({
                 fiatList,
                 cryptoList,
@@ -108,25 +112,20 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
     public async componentWillReceiveProps(nextProps) {
         const { currencies, markets, crypto, onChange } = this.props;
         let { fiat } = this.props;
-        // tslint:disable-next-line:no-console
-        console.log('...........fiat', fiat);
-        // tslint:disable-next-line:no-console
-        console.log('...........currencies.length !== nextProps.currencies.length', currencies.length !== nextProps.currencies.length, currencies.length, " next:", nextProps.currencies.length);
-        // tslint:disable-next-line:no-console
-        console.log('...........markets.length !== nextProps.markets.length', markets.length !== nextProps.markets.length, markets.length, " next:", nextProps.markets.length);
         if (currencies.length !== nextProps.currencies.length ||
             markets.length !== nextProps.markets.length)
         {
-            // tslint:disable-next-line:no-console
-            console.log('...........!nextProps.markets.length || !nextProps.currencies.length', !nextProps.markets.length || !nextProps.currencies.length, !nextProps.markets.length, !nextProps.currencies.length);
             if (!nextProps.markets.length || !nextProps.currencies.length) { return; }
             const query = qs.parse(location.search, { ignoreQueryPrefix: true });
             let newCrypto = query.curr;
             const fiatList = this.getAvailableFiat(nextProps);
             const cryptoList = this.getAvailableCrypto(fiat, nextProps);
-            // tslint:disable-next-line:no-console
-            console.log('...........nextProps.markets', nextProps.markets);
-            this.props.fetchOrderBook(nextProps.markets);
+            this.props.fetchOrderBook(nextProps.markets.reduce((market, item) => {
+                if (item.name === `${nextProps.crypto.toUpperCase()}/${nextProps.fiat.toUpperCase()}`) {
+                    return item;
+                }
+                return market;
+            }, {}));
             if (!this.getAllCrypto(nextProps).includes(newCrypto)) {
                 newCrypto = cryptoList[0] || 'usdt';
             }
