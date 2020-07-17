@@ -159,7 +159,7 @@ class IEOListContainer extends React.Component<Props> {
             <React.Fragment>
                 <span className="pg-ieo-page__header">{this.translate('page.body.trade.header.past')}</span>
                 <IEOListElement
-                    state={[ 'finished', 'released' ]}
+                    state={[ 'finished', 'released', 'cancelled_with_refund']}
                     ieo={listPast}
                     handleFetchIEO={this.handleFetchIEO}
                     currencies={this.props.currencies}
