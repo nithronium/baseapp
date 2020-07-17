@@ -109,7 +109,11 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
         const { currencies, markets, crypto, onChange } = this.props;
         let { fiat } = this.props;
         // tslint:disable-next-line:no-console
-        console.log('...........markets.length !== nextProps.markets.length', markets.length !== nextProps.markets.length, markets.length, nextProps.markets.length);
+        console.log('...........fiat', fiat);
+        // tslint:disable-next-line:no-console
+        console.log('...........currencies.length !== nextProps.currencies.length', currencies.length !== nextProps.currencies.length, currencies.length, " next:", nextProps.currencies.length);
+        // tslint:disable-next-line:no-console
+        console.log('...........markets.length !== nextProps.markets.length', markets.length !== nextProps.markets.length, markets.length, " next:", nextProps.markets.length);
         if (currencies.length !== nextProps.currencies.length ||
             markets.length !== nextProps.markets.length)
         {
