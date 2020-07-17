@@ -177,7 +177,7 @@ class IEOListContainer extends React.Component<Props> {
     };
 
     private handleFetchIEO = () => {
-        this.props.ieoFetch([ 'preparing', 'ongoing', 'distributing', 'finished', 'released' ]);
+        this.props.ieoFetch([ 'preparing', 'ongoing', 'distributing', 'finished', 'released', 'cancelled_with_refund']);
     };
 }
 
