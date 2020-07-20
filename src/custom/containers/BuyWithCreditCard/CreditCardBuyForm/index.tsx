@@ -216,7 +216,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
 
             return;
         }
-        if (user.level < 4 && user.profile && user.profile.address) {
+        if (user.level <= 4 && user.profile && !user.profile.address) {
             history.push(`/confirm?redirect_url=${encodeURIComponent('/buycrypto')}`);
 
             return;
@@ -414,7 +414,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     public getButtonTextKey = (): string => {
         const { userLoggedIn, user } = this.props;
         if (userLoggedIn) {
-            if (user.level >= 4) {
+            if (user.level >= 4 && user.profile && user.profile.address) {
                 return 'buyWithCard.form.buttonContinue';
             } else {
                 return 'buyWithCard.form.buttonNotVerified';
@@ -440,7 +440,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     public isButtonDisabled = (): boolean => {
         const { userLoggedIn, user } = this.props;
         const { fiat } = this.state;
-        if (!userLoggedIn || user.level < 4 || (user.profile && !user.profile.address) ) {
+        if (!userLoggedIn || user.level < 4 || (user.profile && !user.profile.address)) {
             return false;
         }
         const { fiatValue } = this.state;
