@@ -100,6 +100,7 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
                 if (item.name === `${crypto.toUpperCase()}/${fiat.toUpperCase()}`) {
                     return item;
                 }
+
                 return market;
             }, {}));
             onChange({
@@ -124,6 +125,7 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
                 if (item.name === `${nextProps.crypto.toUpperCase()}/${nextProps.fiat.toUpperCase()}`) {
                     return item;
                 }
+
                 return market;
             }, {}));
             if (!this.getAllCrypto(nextProps).includes(newCrypto)) {
