@@ -33,17 +33,17 @@ describe('withdrawLimitList reducer', () => {
             data: {
                 withdraw:
                 {
-                    limit: '10.0',
-                    period: 24,
+                    limit: '15000.0',
+                    period: 30,
                     amount: '0.0',
-                    currency: 'btc',
+                    currency: 'eur',
                 },
                 deposit:
                 {
-                    limit: '10',
+                    limit: '15000.0',
+                    period: 30,
                     amount: '0.0',
-                    period: 24,
-                    currency: 'btc',
+                    currency: 'eur',
                 },
             },
             loading: true,
@@ -66,17 +66,17 @@ describe('withdrawLimitList reducer', () => {
             data: {
                 withdraw:
                 {
-                    limit: '10.0',
-                    period: 24,
+                    limit: '15000.0',
+                    period: 30,
                     amount: '0.0',
-                    currency: 'btc',
+                    currency: 'eur',
                 },
                 deposit:
                 {
-                    limit: '10',
+                    limit: '15000.0',
+                    period: 30,
                     amount: '0.0',
-                    period: 24,
-                    currency: 'btc',
+                    currency: 'eur',
                 },
             },
             loading: false,

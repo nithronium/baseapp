@@ -12,7 +12,6 @@ import {
     WALLETS_DATA,
     WALLETS_ERROR,
     WALLETS_FETCH,
-    WALLETS_WITHDRAW_CCY_DATA,
     WALLETS_WITHDRAW_CCY_ERROR,
     WALLETS_WITHDRAW_CCY_FETCH,
 } from './constants';
@@ -337,67 +336,10 @@ describe('Wallets', () => {
             beneficiary_id: '2NCimTNGnbm92drX7ARcwBKw6rvr456VWym',
         };
 
-        const mockWalletsWithdrawCcyFetch = () => {
-            mockAxios.onPost('/private/withdraws').reply(201);
-        };
-
         const expectedWalletsWithdrawCcyFetch = {
             type: WALLETS_WITHDRAW_CCY_FETCH,
             payload: payload,
         };
-
-        it('should send withdraw', async () => {
-            const expectedWalletsWithdrawCcyData = {
-                type: WALLETS_WITHDRAW_CCY_DATA,
-            };
-
-            const expectedSuccessAlertPush = {
-                type: ALERT_PUSH,
-                payload: {
-                    message: ['success.withdraw.action'],
-                    type: 'success',
-                },
-            };
-
-            const expectedSuccessAlertData = {
-                type: ALERT_DATA,
-                payload: {
-                    message: ['success.withdraw.action'],
-                    type: 'success',
-                },
-            };
-
-            mockWalletsWithdrawCcyFetch();
-            const promise = new Promise(resolve => {
-                store.subscribe(() => {
-                    const actions = store.getActions();
-                    const lastAction = actions.slice(-1)[0];
-
-                    switch (actions.length) {
-                        case 1:
-                            expect(lastAction).toEqual(expectedWalletsWithdrawCcyFetch);
-                            break;
-                        case 2:
-                            expect(lastAction).toEqual(expectedWalletsWithdrawCcyData);
-                            break;
-                        case 3:
-                            expect(lastAction).toEqual(expectedSuccessAlertPush);
-                            break;
-                        case 4:
-                            expect(lastAction).toEqual(expectedSuccessAlertData);
-                            setTimeout(resolve, 0.01);
-                            break;
-
-                        default:
-                            fail(`Unexpected action: ${JSON.stringify(lastAction)}`);
-                            break;
-                    }
-                });
-            });
-            store.dispatch(walletsWithdrawCcyFetch(payload));
-
-            return promise;
-        });
 
         it('should handle withdraw error', async () => {
             const expectedWalletsWithdrawCcyError = {

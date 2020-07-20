@@ -5,6 +5,7 @@ import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../he
 import { alertPush, rootSaga } from '../../../../modules/index';
 import {
     ApiKeyDataInterface,
+    apiKeys2FAModal,
     apiKeysData,
     apiKeysFetch,
 } from '../actions';
@@ -30,7 +31,6 @@ describe('api keys saga', () => {
             algorithm: 'HS256',
             created_at: '2019-02-14T15:56:57Z',
             kid: '5c3933e8c8f97071',
-            scope: Array,
             state: 'active',
             updated_at: '2019-02-14T15:56:57Z',
         },
@@ -38,7 +38,6 @@ describe('api keys saga', () => {
             algorithm: 'HS256',
             created_at: '2019-02-14T15:58:06Z',
             kid: 'c6da7aa20353e449',
-            scope: Array,
             state: 'active',
             updated_at: '2019-02-14T15:58:06Z',
         },
@@ -57,6 +56,7 @@ describe('api keys saga', () => {
     const expectedApiKeysFetchSuccess = [
         apiKeysFetch(),
         apiKeysData(fakeApiKeys),
+        apiKeys2FAModal({active: false}),
     ];
 
     const expectedApiKeysFetchError = [

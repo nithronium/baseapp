@@ -1,7 +1,11 @@
 import MockAdapter from 'axios-mock-adapter';
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
-import { rootSaga } from '../../../..';
+import {
+    alertData,
+    alertPush,
+    rootSaga,
+} from '../../../../';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../../helpers/jest';
 import {
     editIdentity,
@@ -43,7 +47,6 @@ describe('Edit Identity Saga', () => {
     };
 
     const confirmIdentityResponse = {
-        data: confirmIdentityPayload,
         message: 'success.identity.accepted',
     };
 
@@ -54,6 +57,8 @@ describe('Edit Identity Saga', () => {
     const expectedActionsFetch = [
         editIdentity(confirmIdentityPayload),
         editIdentityData(confirmIdentityResponse),
+        alertPush({message: ['success.identity.accepted'], type: 'success'}),
+        alertData({message: ['success.identity.accepted'], type: 'success'}),
     ];
 
     const expectedActionsError = [editIdentity(confirmIdentityPayload), editIdentityError(fakeError)];

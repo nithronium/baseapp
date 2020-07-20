@@ -36,7 +36,7 @@ import {
 } from '../../../modules';
 import {buildPath} from '../../helpers';
 
-const logo = require('../../assets/images/logo.svg');
+const logo = require('../../../assets/images/logo.svg');
 
 export interface ReduxProps {
     colorTheme: string;

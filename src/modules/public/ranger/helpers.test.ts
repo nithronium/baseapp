@@ -185,6 +185,7 @@ describe('ranger helpers', () => {
 
             expect(streamsBuilder(true, [], undefined)).toEqual([
                 'global.tickers',
+                'ieo.tickers',
                 'order',
                 'trade',
                 'balances',

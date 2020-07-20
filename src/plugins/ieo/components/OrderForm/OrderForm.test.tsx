@@ -48,15 +48,6 @@ describe('OrderForm', () => {
         expect(percentageButton.at(3).props().label.toLowerCase()).toBe('100%');
     });
 
-    it('should render submit button', () => {
-        const wrapper = setup();
-        let submitButton = wrapper.find(Button);
-        expect(submitButton.props().label.toLowerCase()).toBe('buy');
-
-        submitButton = wrapper.find(Button);
-        expect(submitButton.props().label.toLowerCase()).toBe('buy');
-    });
-
     it('should disable button price 0 in Market order', () => {
         const onSubmit: SinonSpy = spy();
         let priceMarket = 135.15;

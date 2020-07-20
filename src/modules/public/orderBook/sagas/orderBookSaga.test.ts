@@ -74,7 +74,7 @@ describe('Saga: OrderBook', () => {
                 ord_type: 'limit',
             },
         ],
-        market: '',
+        market: 'btczar',
         loading: false,
     };
 
