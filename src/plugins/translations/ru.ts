@@ -32,6 +32,7 @@ export const ru = {
     'page.body.ieo.card.raised': 'Raised',
     'page.body.ieo.card.supply': 'Supply',
     'page.body.ieo.card.end': 'End',
+    'page.body.ieo.card.status.cancelled_with_refund': 'Возврат',
 
     'page.body.ieo.details.order.youWillGet': 'Цена за один токен',
     'page.body.ieo.details.order.youWillPay': 'Ордер',

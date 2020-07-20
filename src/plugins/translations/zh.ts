@@ -28,6 +28,7 @@ export const zh = {
   'page.body.ieo.card.raised': '上调',
   'page.body.ieo.card.supply': '供应',
   'page.body.ieo.card.end': '结束',
+  'page.body.ieo.card.status.cancelled_with_refund': '退款',
   'page.body.ieo.details.order.youWillGet': '每单位价格',
   'page.body.ieo.details.order.youWillPay': '代币订购',
   'page.body.ieo.details.order.content.blur.title': '销售将在之后开始',

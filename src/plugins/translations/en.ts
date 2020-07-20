@@ -32,6 +32,7 @@ export const en = {
     'page.body.ieo.card.raised': 'Raised',
     'page.body.ieo.card.supply': 'Supply',
     'page.body.ieo.card.end': 'End',
+    'page.body.ieo.card.status.cancelled_with_refund': 'Refund',
 
     'page.body.ieo.details.order.youWillGet': 'Price per unit',
     'page.body.ieo.details.order.youWillPay': 'Tokens ordered',

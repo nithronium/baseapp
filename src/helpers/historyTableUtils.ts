@@ -25,6 +25,7 @@ export const ieoColorMapping = {
     cancelled: 'var(--color-red)',
     purchased: 'var(--color-green)',
     closed: 'var(--color-red)',
+    cancelled_with_refund: 'var(--color-red)',
 };
 
 export const tradesColorMapping = {

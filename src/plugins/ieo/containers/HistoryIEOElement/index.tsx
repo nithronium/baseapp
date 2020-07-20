@@ -151,7 +151,7 @@ class HistoryComponent extends React.Component<Props> {
             `${tokens_received} ${base_currency && base_currency.toUpperCase()}`,
             `${tokens_locked} ${base_currency && base_currency.toUpperCase()}`,
             `${fee} ${base_currency && base_currency.toUpperCase()}`,
-            <span style={{ color: setIEOStatusColor(state)}} key={id}>{state}</span>,
+            <span style={{ color: setIEOStatusColor(state)}} key={id}>{['cancelled_with_refund'].includes(state) ? this.props.intl.formatMessage({id: 'page.body.ieo.card.status.cancelled_with_refund'}) : state}</span>,
         ];
     };
 

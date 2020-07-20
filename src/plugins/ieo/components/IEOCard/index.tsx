@@ -148,6 +148,7 @@ class IEOCardComponent extends React.Component<Props, State> {
                 return this.renderInProgress();
             case 'finished':
             case 'released':
+            case 'cancelled_with_refund':
                 return this.renderFinished();
             default:
                 return;
