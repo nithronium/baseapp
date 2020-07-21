@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
 import { FormattedMessage, InjectedIntlProps, injectIntl, intlShape } from 'react-intl';
 import { connect, MapDispatchToProps } from 'react-redux';
 // import { saveCode } from '../../api';
@@ -136,15 +137,17 @@ class ReferralProgramClass extends React.Component<Props> {
                             classNameLabel=""
                             classNameInput="cr-email-form__input"
                         />
-                        <button
-                            type="submit"
+                        <Button
+                            type="button"
                             className="ref-code-button cr-button"
                             onClick={() => {
                                 this.sendRefCode();
                             }}
+                            variant="primary"
+                            block
                         >
                             {this.translate('profile.save_code')}
-                        </button>
+                        </Button>
                     </div>
                 )}
             </div>

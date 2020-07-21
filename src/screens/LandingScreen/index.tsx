@@ -33,43 +33,6 @@ interface ReduxProps {
 type Props = ReduxProps & RouteProps & InjectedIntlProps;
 
 class Landing extends React.Component<Props> {
-    public renderHeader() {
-        if (this.props.isLoggedIn) {
-            return (
-                <div className="pg-landing-screen__header">
-                    <div className="pg-landing-screen__header__wrap">
-                        <div className="pg-landing-screen__header__wrap__left" onClick={e => this.handleScrollTop()}>
-                            <img src={LogoImage} alt="BaseApp Logo"/>
-                        </div>
-                        <div className="pg-landing-screen__header__wrap__right">
-                            <Link to="/profile" className="landing-button">
-                                {this.translate('page.body.landing.header.button1')}
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            );
-        }
-
-        return (
-            <div className="pg-landing-screen__header">
-                <div className="pg-landing-screen__header__wrap">
-                    <div className="pg-landing-screen__header__wrap__left" onClick={e => this.handleScrollTop()}>
-                        <img src={LogoImage} alt="BaseApp Logo"/>
-                    </div>
-                    <div className="pg-landing-screen__header__wrap__right">
-                        <Link to="/signin" className="landing-button landing-button--simple">
-                            {this.translate('page.body.landing.header.button2')}
-                        </Link>
-                        <Link to="/signup" className="landing-button">
-                            {this.translate('page.body.landing.header.button3')}
-                        </Link>
-                    </div>
-                </div>
-            </div>
-        );
-    }
-
     public renderMarketInfoBlock() {
         return (
             <div className="pg-landing-screen__market-info">
@@ -274,7 +237,6 @@ class Landing extends React.Component<Props> {
     public render() {
         return (
             <div className="pg-landing-screen">
-                {this.renderHeader()}
                 {this.renderMarketInfoBlock()}
                 {this.renderPlatformInfoBlock()}
                 {this.renderRegisterBlock()}

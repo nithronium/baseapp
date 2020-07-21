@@ -20,6 +20,7 @@ import {
 import {
     RootState,
     selectUserInfo,
+    toggle2faFetch,
     User,
 } from '../../../modules';
 import {
@@ -48,6 +49,7 @@ interface OnChangeEvent {
 interface DispatchProps {
     changePassword: typeof changePasswordFetch;
     clearPasswordChangeError: () => void;
+    toggle2fa: typeof toggle2faFetch;
 }
 
 interface ProfileProps {
@@ -64,6 +66,8 @@ interface State {
     newPasswordFocus: boolean;
     confirmPasswordFocus: boolean;
     isConfirm2faOpen: boolean;
+    code2FA: string;
+    code2FAFocus: boolean;
 }
 
 type Props = ReduxProps & DispatchProps & RouterProps & ProfileProps & InjectedIntlProps & OnChangeEvent;
@@ -83,6 +87,8 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
             newPasswordFocus: false,
             confirmPasswordFocus: false,
             isConfirm2faOpen: false,
+            code2FA: '',
+            code2FAFocus: false,
         };
     }
 
@@ -168,13 +174,13 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                     />
                 </div>
                 <div className="cr-email-form__button-wrapper">
-                    <button
+                    <Button
                         type="button"
                         className={this.isValidForm() ? 'cr-email-form__button' : 'cr-email-form__button cr-email-form__button--disabled'}
                         disabled={!this.isValidForm()}
                     >
                         {this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.button.change'})}
-                    </button>
+                    </Button>
                 </div>
             </div>
         );
@@ -227,12 +233,12 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
 
                 <div className="profile-2fa-mfa-popup">
                     <Modal
+                        className="pg-profile-page__disable-2fa-modal"
                         show={this.state.showModal}
                         header={this.renderModalHeader()}
                         content={this.renderModalBody()}
                         footer={this.renderModalFooter()}
                     />
-
                     <Modal
                         show={this.state.isConfirm2faOpen}
                         header={this.renderConfirm2faHeader()}
@@ -339,29 +345,61 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
 
     private renderModalHeader = () => {
         return (
-            <div className="pg-exchange-modal-submit-header">
-                <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.modalHeader"/>
+            <div className="cr-email-form__options-group">
+                <div className="cr-email-form__option">
+                    <div className="cr-email-form__option-inner">
+                        <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.modalHeader"/>
+                        <div className="cr-email-form__cros-icon" onClick={this.closeModal}>
+                            <img alt="close" src={require('./close.svg')}/>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     };
 
     private renderModalBody = () => {
+        const { code2FA, code2FAFocus } = this.state;
+
+        const code2FAClass = cr('cr-email-form__group', {
+            'cr-email-form__group--focused': code2FAFocus,
+        });
+
         return (
-            <div className="pg-exchange-modal-submit-body">
-                <h2>
-                    <FormattedMessage id="page.body.profile.header.account.content.twoFactorAuthentication.modalBody"/>
-                </h2>
+            <div className="pg-exchange-modal-submit-body pg-exchange-modal-submit-body-2fa">
+                <div className={code2FAClass}>
+                    <CustomInput
+                        type="text"
+                        label="2FA code"
+                        placeholder="2FA code"
+                        defaultLabel=""
+                        handleFocusInput={this.handleFieldFocus('code2FAFocus')}
+                        handleChangeInput={this.handleChange2FACode}
+                        inputValue={code2FA}
+                        classNameLabel="cr-email-form__label"
+                        classNameInput="cr-email-form__input"
+                        autoFocus={true}
+                    />
+                </div>
             </div>
         );
     };
 
     private renderModalFooter = () => {
+        const { code2FA } = this.state;
+        const isValid2FA = code2FA.match('^[0-9]{6}$');
+
         return (
             <div className="pg-exchange-modal-submit-footer">
                 <Button
-                    className="pg-exchange-modal-submit-footer__button-inverse"
-                    onClick={this.closeModal}
-                >OK</Button>
+                    block={true}
+                    disabled={!isValid2FA}
+                    onClick={this.handleDisable2FA}
+                    size="lg"
+                    variant="primary"
+                >
+                    {this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.twoFactorAuthentication.disable'})}
+                </Button>
             </div>
         );
     };
@@ -378,6 +416,21 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
             </div>
         </div>
     );
+
+    private handleChange2FACode = (value: string) => {
+        this.setState({
+            code2FA: value,
+        });
+    };
+
+    private handleDisable2FA = () => {
+        this.props.toggle2fa({
+            code: this.state.code2FA,
+            enable: false,
+        });
+        this.closeModal();
+        this.handleChange2FACode('');
+    };
 
     private handleChangePassword = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -466,6 +519,11 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                         confirmPasswordFocus: !this.state.confirmPasswordFocus,
                     });
                     break;
+                case 'code2FAFocus':
+                    this.setState({
+                        code2FAFocus: !this.state.code2FAFocus,
+                    });
+                    break;
                 default:
                     break;
             }
@@ -493,6 +551,7 @@ const mapStateToProps = (state: RootState): ReduxProps => ({
 const mapDispatchToProps = dispatch => ({
     changePassword: ({ old_password, new_password, confirm_password }) =>
         dispatch(changePasswordFetch({ old_password, new_password, confirm_password })),
+    toggle2fa: ({ code, enable }) => dispatch(toggle2faFetch({ code, enable })),
 });
 
 const ProfileAuthDetailsConnected = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ProfileAuthDetailsComponent));
