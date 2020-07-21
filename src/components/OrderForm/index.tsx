@@ -206,7 +206,7 @@ export class OrderForm extends React.Component<OrderFormProps, OrderFormState> {
                         <OrderInput
                             currency={from}
                             label={`${priceText}234234`}
-                            placeholder={`${priceText}111111111111`}
+                            placeholder={`${priceText}`}
                             value={handleSetValue(price, '')}
                             isFocused={priceFocused}
                             handleChangeValue={this.handlePriceChange}
