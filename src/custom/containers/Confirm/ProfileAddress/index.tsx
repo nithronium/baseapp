@@ -91,7 +91,7 @@ class ProfileAddressComponent extends React.Component<Props, State> {
                 this.props.changeUserProfileData({...editData, addAddress: true});
 
                 const redirectUrl = getRedirectUrl();
-                if (redirectUrl && ['chatello', 'buycrypto'].includes(redirectUrl)) {
+                if (redirectUrl && (redirectUrl.includes('buycrypto') || redirectUrl.includes('chatello'))) {
                     redirect(() => history.push(buildPath(redirectIfSpecified('/kyc-levels'), lang)));
 
                     return;
