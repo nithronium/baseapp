@@ -1495,6 +1495,8 @@ export const ru: LangType = {
     'buyWithCard.form.header': 'Buy with Credit Card',
     'buyWithCard.form.title': 'Buy Cryptocurrencies with Credit/Debit Card',
     'buyWithCard.form.buy': 'Купить',
+    'buyWithCard.form.pay': 'Pay',
+    'buyWithCard.form.receive': 'You receive',
     'buyWithCard.form.sell': 'Продать',
     'buyWithCard.form.fees': 'Credit/debit card deposit fee included*',
     'buyWithCard.form.help': 'Need help?',

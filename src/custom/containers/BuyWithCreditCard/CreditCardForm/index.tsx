@@ -91,7 +91,7 @@ class CreditCardFormComponent extends React.Component<Props> {
         return (
             <div className="buy-form__input-wrap">
                 <label className="buy-form__label">
-                    {this.translate('buyWithCard.form.buy')}
+                    {this.translate('buyWithCard.form.pay')}
                 </label>
                 <input
                     onChange={onCryptoValueChange}

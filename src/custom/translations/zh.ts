@@ -1228,6 +1228,8 @@ export const zh = {
     'buyWithCard.form.header': 'Buy with Credit Card',
     'buyWithCard.form.title': 'Buy Cryptocurrencies with Credit/Debit Card',
     'buyWithCard.form.buy': '购买',
+    'buyWithCard.form.receive': 'You receive',
+    'buyWithCard.form.pay': 'Pay',
     'buyWithCard.form.sell': '出售',
     'buyWithCard.form.fees': 'Credit/debit card deposit fee included*',
     'buyWithCard.form.help': 'Need help?',

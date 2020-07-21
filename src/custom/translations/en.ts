@@ -656,6 +656,8 @@ export const en = {
     'buyWithCard.form.header': 'Buy with Credit Card',
     'buyWithCard.form.title': 'Buy Cryptocurrencies with Credit/Debit Card',
     'buyWithCard.form.buy': 'Buy',
+    'buyWithCard.form.pay': 'Pay',
+    'buyWithCard.form.receive': 'You receive',
     'buyWithCard.form.sell': 'Sell',
     'buyWithCard.form.fees': 'Credit/debit card deposit fee included*',
     'buyWithCard.form.help': 'Need help?',
