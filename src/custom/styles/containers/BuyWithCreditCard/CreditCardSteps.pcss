@@ -34,6 +34,21 @@
       padding-top: 12px;
       text-align: center;
     }
+
+    .loading-animation {
+      animation: flash 1s infinite;
+    }
+
+    &__check {
+      display: flex;
+      justify-content: center;
+
+      div {
+        background-image: url(./assets/images/credit-card-big-check.png);
+        height: 64px;
+        width: 64px;
+      }
+    }
   }
 
   &__table {
@@ -199,4 +214,10 @@
       }
     }
   }
+}
+
+@keyframes flash {
+  0% { opacity: 1; }
+  50% { opacity: 0.1; }
+  100% { opacity: 1; }
 }

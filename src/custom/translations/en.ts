@@ -717,6 +717,7 @@ export const en = {
     'buyWithCard.steps.price': 'Price',
     'buyWithCard.steps.value': 'Value',
     'buyWithCard.steps.time': 'Time',
+    'buyWithCard.steps.loading': 'loading...',
 
     'buyWithCard.overlay1.header': 'Buy Crypto with Credit/Debit Card',
     'buyWithCard.overlay1.text1': 'Automatic conversion your fiat currency*',

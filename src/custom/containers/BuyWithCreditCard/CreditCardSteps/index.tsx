@@ -1,4 +1,3 @@
-import { Loader } from '@openware/components';
 import * as React from 'react';
 
 import classnames from 'classnames';
@@ -137,8 +136,8 @@ export class CreditCardStepsComponent extends React.Component<Props> {
                             <tr>
                                 <td>{this.translate(`buyWithCard.steps.amount`)}:</td>
                                 {isLoading
-                                    ? <td>
-                                        <Loader />
+                                    ? <td className="loading-animation">
+                                        {this.translate(`buyWithCard.steps.loading`)}
                                       </td>
                                     : <td>
                                           <span>{amount}</span> {crypto.toUpperCase()}
