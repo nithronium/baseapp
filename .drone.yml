@@ -41,6 +41,16 @@ steps:
       event:
         - push
 
+  - name: "Redeploy on stage"
+    image: rubykube/microkube:0.2.0
+    environment:
+      WEBHOOK_JWT_SECRET:
+        from_secret: emirex_webhook_secret
+    commands:
+    - export latest_image=reg.openware.work/emirex/baseapp:${DRONE_COMMIT_SHA:0:7}
+    - cd /home/app
+    - bundle exec rake payload:send[frontend,$latest_image,http://emirex.openware.work:1337]
+
   - name: "Notify staging"
     image: plugins/slack
     settings:
