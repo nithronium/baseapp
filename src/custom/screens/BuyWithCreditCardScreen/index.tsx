@@ -7,10 +7,13 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 
 import {
+    fetchHistory,
     RootState,
+    selectHistory,
     selectUserInfo,
     selectUserLoggedIn,
     User,
+    WalletHistoryList,
 } from '../../../modules';
 
 import {
@@ -60,6 +63,11 @@ const jsonLd = {
 interface ReduxProps {
     user: User;
     userLoggedIn: boolean;
+    list: WalletHistoryList;
+}
+
+interface DispatchProps {
+    fetchHistory: typeof fetchHistory;
 }
 
 interface State {
@@ -74,7 +82,7 @@ interface State {
     };
 }
 
-type Props = InjectedIntlProps;
+type Props = InjectedIntlProps & ReduxProps & DispatchProps;
 
 class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
     constructor(props) {
@@ -106,6 +114,7 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
         if (action === 'instex-success-ok' ||
             action === 'instex-success-close'
         ) {
+            this.props.fetchHistory({page:1, limit: 25});
             this.setState({
                 orderFinished: true,
             });
@@ -137,11 +146,9 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
     public render() {
         const title = this.props.intl.formatMessage({ id: 'buyWithCard.title' });
         const description = this.props.intl.formatMessage({ id: 'buyWithCard.description' });
-        const { userLoggedIn, user } = this.props;
+        const { userLoggedIn, user, list } = this.props;
         const { orderFinished, paymentData } = this.state;
         let step = 1;
-        // tslint:disable-next-line:no-console
-        console.log('...........paymentData', paymentData);
         if (orderFinished) {
             step = 4;
         } else if (user.level >= 4) {
@@ -168,7 +175,7 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
                 <div className="pg-buy-with-credit-card__container">
                     <CreditCardSteps
                         currentStep={step}
-                        paymentData={paymentData}
+                        paymentData={{...paymentData, amount: step === 4 && list[0] ? list[0].amount : paymentData.amount}}
                         onTryAgain={this.onTryAgain}
                     />
                     {step !== 4 && <CreditCardBuyForm
@@ -187,9 +194,11 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
 const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     user: selectUserInfo(state),
     userLoggedIn: selectUserLoggedIn(state),
+    list: selectHistory(state),
 });
 
-const mapDispatchToProps: MapDispatchToPropsFunction<{}, {}> = () => ({
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
+    fetchHistory: params => dispatch(fetchHistory(params)),
 });
 
 export const BuyWithCreditCardScreen = injectIntl(connect(mapStateToProps, mapDispatchToProps)(BuyWithCreditCardScreenComponent));
