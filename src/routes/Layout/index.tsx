@@ -124,6 +124,9 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
         const parsed = qs.parse(window.location.search, { ignoreQueryPrefix: true });
         if (parsed.redirect_url) {
             url = parsed.redirect_url;
+            if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
+                url += `&${parsed.fiat}&${parsed.crypto}&${parsed.fiatValue}`;
+            }
         }
         if (url === '/') {
             window.location.replace('/');
