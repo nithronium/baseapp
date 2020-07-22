@@ -489,6 +489,8 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
                                     {this.translate('buyWithCard.overlay1.text1')}
                                     <br />
                                     {this.translate('buyWithCard.overlay1.text3')}
+                                    <br />
+                                    {this.translate('buyWithCard.overlay1.text4')}
                                 </p>
                             </div>
                             <p className="buy-form__bottom-text--help">

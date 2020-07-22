@@ -1296,6 +1296,7 @@ export const zh = {
     'buyWithCard.overlay1.text1': 'Automatic conversion your fiat currency*',
     'buyWithCard.overlay1.text2': 'Credit/debit card deposit fee included*',
     'buyWithCard.overlay1.text3': '使用以任何其他货币指定的卡付款将转换为EUR',
+    'buyWithCard.overlay1.text4': 'The specified volume is calculated based on the volume per 100 USD',
     'buyWithCard.overlay1.button': 'Get Crypto',
     'buyWithCard.overlay2.footer': 'Prepare your passport or driving licence',
 

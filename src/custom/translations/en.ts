@@ -723,6 +723,7 @@ export const en = {
     'buyWithCard.overlay1.text1': 'Automatic conversion your fiat currency*',
     'buyWithCard.overlay1.text2': 'Credit/debit card deposit fee included*',
     'buyWithCard.overlay1.text3': 'Payment with a card nominated in any other currency will be converted into EUR',
+    'buyWithCard.overlay1.text4': 'The specified volume is calculated based on the volume per 100 USD',
     'buyWithCard.overlay1.button': 'Get Crypto',
     'buyWithCard.overlay2.footer': 'Prepare your passport or driving licence',
 
