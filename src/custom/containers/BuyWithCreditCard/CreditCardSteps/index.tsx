@@ -1,3 +1,4 @@
+import { Loader } from '@openware/components';
 import * as React from 'react';
 
 import classnames from 'classnames';
@@ -6,6 +7,7 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 export interface ReduxProps {
     currentStep: number;
+    isLoading: boolean;
     paymentData: {
         fiat: string;
         crypto: string;
@@ -106,7 +108,7 @@ export class CreditCardStepsComponent extends React.Component<Props> {
     };
 
     public renderStep4 = () => {
-        const { paymentData } = this.props;
+        const { paymentData, isLoading } = this.props;
         const { crypto, fiat, amount, value, time } = paymentData;
 
         return (
@@ -134,9 +136,14 @@ export class CreditCardStepsComponent extends React.Component<Props> {
                             </tr>
                             <tr>
                                 <td>{this.translate(`buyWithCard.steps.amount`)}:</td>
-                                <td>
-                                    <span>{amount}</span> {crypto.toUpperCase()}
-                                </td>
+                                {isLoading
+                                    ? <td>
+                                        <Loader />
+                                      </td>
+                                    : <td>
+                                          <span>{amount}</span> {crypto.toUpperCase()}
+                                      </td>
+                                }
                             </tr>
                             <tr>
                                 <td>{this.translate(`buyWithCard.steps.value`)}:</td>

@@ -175,6 +175,7 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
                 <div className="pg-buy-with-credit-card__container">
                     <CreditCardSteps
                         currentStep={step}
+                        isLoading={step === 4 && !list[0]}
                         paymentData={{...paymentData, amount: step === 4 && list[0] ? list[0].amount : paymentData.amount}}
                         onTryAgain={this.onTryAgain}
                     />
