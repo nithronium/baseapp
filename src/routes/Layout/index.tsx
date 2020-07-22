@@ -126,6 +126,7 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
             url = parsed.redirect_url;
             if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
                 url += `?fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
+                window.location.href = window.location.origin + url;
             }
         }
         if (url === '/') {
