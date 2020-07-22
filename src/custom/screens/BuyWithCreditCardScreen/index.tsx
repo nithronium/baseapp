@@ -140,7 +140,8 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
         const { userLoggedIn, user } = this.props;
         const { orderFinished, paymentData } = this.state;
         let step = 1;
-
+        // tslint:disable-next-line:no-console
+        console.log('...........paymentData', paymentData);
         if (orderFinished) {
             step = 4;
         } else if (user.level >= 4) {
