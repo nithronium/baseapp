@@ -5,6 +5,7 @@ export const buildPath = (path: string, lang: string) => {
   let _path = path;
   if (path.includes('http')) { _path = ''; }
   const url = lang.toLowerCase() === 'en' ? _path : `/${lang.toLowerCase()}${_path}`;
+
   return url;
 };
 
