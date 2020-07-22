@@ -253,6 +253,9 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
         const parsed = qs.parse(this.props.history.location.search, { ignoreQueryPrefix: true });
         if (parsed.redirect_url) {
             url = parsed.redirect_url;
+          if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
+              url += `&${parsed.fiat}&${parsed.crypto}&${parsed.fiatValue}`;
+          }
         }
         this.props.history.push(buildPath(url, this.props.currentLanguage));
         // this.props.history.push(buildPath('/profile', this.props.currentLanguage));

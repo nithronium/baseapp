@@ -120,6 +120,9 @@ class SignUp extends React.Component<Props> {
             const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
             if (parsed.redirect_url) {
                 redirectUrl = parsed.redirect_url;
+                if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
+                    redirectUrl += `&${parsed.fiat}&${parsed.crypto}&${parsed.fiatValue}`;
+                }
             }
             localStorage.setItem('redirect_url', redirectUrl);
             nextProps.history.push(buildPath(url, i18n), {email: this.state.email});
