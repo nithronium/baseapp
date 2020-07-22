@@ -1,17 +1,22 @@
 .pg-emailverification-container {
-  &__wrapper {
-    .cr-logo {
-      display: flex;
-      height: 150px;
-      justify-content: center;
-      margin-top: -200px;
-      width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-      img {
-        width: 250px;
-      }
+  .cr-logo {
+    display: flex;
+    height: 150px;
+    justify-content: center;
+    margin-top: -200px;
+    width: 100%;
+
+    img {
+      width: 250px;
     }
+  }
 
+  &__wrapper {
     .pg-emailverification {
       &-title {
         border-bottom: 1px solid var(--placeholder-text);

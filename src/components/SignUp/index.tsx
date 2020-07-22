@@ -181,7 +181,7 @@ export class SignUpForm extends React.Component<SignUpFormProps> {
                                 placeholder={referalCodeLabel || 'Referral code'}
                                 defaultLabel="Referral code"
                                 handleChangeInput={this.props.handleChangeRefId}
-                                inputValue={refId}
+                                inputValue={refId ? refId : ''}
                                 handleFocusInput={this.props.handleFocusRefId}
                                 classNameLabel="cr-sign-up-form__label"
                                 classNameInput="cr-sign-up-form__input"

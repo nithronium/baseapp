@@ -123,7 +123,6 @@ const PublicRoute: React.FunctionComponent<any> = ({ component: CustomComponent,
         if (parsed.redirect_url) {
             url = parsed.redirect_url;
         }
-        console.log('signin', url, window.location.href);
         if (url === '/') {
             window.location.replace('/');
             return null;
