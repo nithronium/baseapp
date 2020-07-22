@@ -20,26 +20,26 @@ steps:
       - yarn build
 
   - name: "Build enterprise customer image and push to reg.openware.work"
-      image: plugins/docker
-      environment:
-        BUILD_DOMAIN: ".openware.work"
-        REACT_APP_BUILD_VERSION: Enterprise
-      settings:
-        username:
-          from_secret: ow_registry_username
-        password:
-          from_secret: ow_registry_password
-        repo: reg.openware.work/emirex/baseapp
-        tags: ${DRONE_COMMIT:0:7}
-        build_args_from_env:
-          - REACT_APP_BUILD_VERSION
-          - BUILD_DOMAIN
-        registry: reg.openware.work
-      when:
-        branch:
-            - customer/emirex-2.5
-        event:
-            - push
+    image: plugins/docker
+    environment:
+      BUILD_DOMAIN: ".openware.work"
+      REACT_APP_BUILD_VERSION: Enterprise
+    settings:
+      username:
+        from_secret: ow_registry_username
+      password:
+        from_secret: ow_registry_password
+      repo: reg.openware.work/emirex/baseapp
+      tags: ${DRONE_COMMIT:0:7}
+      build_args_from_env:
+        - REACT_APP_BUILD_VERSION
+        - BUILD_DOMAIN
+      registry: reg.openware.work
+    when:
+      branch:
+        - customer/emirex-2.5
+      event:
+        - push
 
   - name: "Notify staging"
     image: plugins/slack
