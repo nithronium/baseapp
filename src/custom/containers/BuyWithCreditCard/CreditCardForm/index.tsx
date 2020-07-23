@@ -60,7 +60,7 @@ class CreditCardFormComponent extends React.Component<Props> {
         return (
             <div className="buy-form__input-wrap">
                 <label className="buy-form__label">
-                    {this.translate('buyWithCard.form.sell')}
+                    {this.translate('buyWithCard.form.pay')}
                 </label>
                 <input
                     onChange={onFiatValueChange}
@@ -91,7 +91,7 @@ class CreditCardFormComponent extends React.Component<Props> {
         return (
             <div className="buy-form__input-wrap">
                 <label className="buy-form__label">
-                    {this.translate('buyWithCard.form.pay')}
+                    {this.translate('buyWithCard.form.buy')}
                 </label>
                 <input
                     onChange={onCryptoValueChange}
