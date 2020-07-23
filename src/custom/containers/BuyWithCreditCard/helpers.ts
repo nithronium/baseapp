@@ -4,7 +4,8 @@ export const convert = (value: number, target: string, orderBook): number => {
 
     const getCumulativeTotal = proposals => {
         if (!proposals.length || (proposals[0].length < 2)) {
-            throw Error('Invalid market depth');
+            // tslint:disable-next-line:no-console
+            console.log('...........Invalid market depth');
         }
 
         let sum = 100;
@@ -24,7 +25,10 @@ export const convert = (value: number, target: string, orderBook): number => {
             }
         }
 
-        if (sum !== 0) {throw new Error('Not enough liquidity');}
+        if (sum !== 0) {
+            // tslint:disable-next-line:no-console
+            console.log('...........Not enough liquidity');
+        }
 
         return total;
     };
