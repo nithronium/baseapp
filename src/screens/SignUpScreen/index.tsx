@@ -118,12 +118,16 @@ class SignUp extends React.Component<Props> {
             const url = '/email-verification';
             let redirectUrl = '';
             const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+            // tslint:disable-next-line:no-console
+            console.log('...........parsed', parsed);
             if (parsed.redirect_url) {
                 redirectUrl = parsed.redirect_url;
                 if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
                     redirectUrl += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
                 }
             }
+            // tslint:disable-next-line:no-console
+            console.log('...........redirectUrl', redirectUrl);
             localStorage.setItem('redirect_url', redirectUrl);
             nextProps.history.push(buildPath(url, i18n), {email: this.state.email});
         }
