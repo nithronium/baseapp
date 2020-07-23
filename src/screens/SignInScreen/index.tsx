@@ -206,7 +206,7 @@ class SignIn extends React.Component<Props, SignInState> {
         if (parsed.redirect_url) {
             query = `?redirect_url=${parsed.redirect_url}`;
             if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
-                query += `&${parsed.fiat}&${parsed.crypto}&${parsed.fiatValue}`;
+                query += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
             }
         }
         this.props.history.push(buildPath(`/signup${query}`, this.props.currentLanguage));

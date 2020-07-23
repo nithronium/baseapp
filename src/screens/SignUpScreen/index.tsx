@@ -121,7 +121,7 @@ class SignUp extends React.Component<Props> {
             if (parsed.redirect_url) {
                 redirectUrl = parsed.redirect_url;
                 if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
-                    redirectUrl += `&${parsed.fiat}&${parsed.crypto}&${parsed.fiatValue}`;
+                    redirectUrl += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
                 }
             }
             localStorage.setItem('redirect_url', redirectUrl);
