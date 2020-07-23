@@ -6,7 +6,7 @@ import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redu
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
 import { SignInComponent, TwoFactorAuth } from '../../components';
-import { buildPath } from '../../custom/helpers';
+import {buildPath, buildUrlWithRedirect} from '../../custom/helpers';
 import { EMAIL_REGEX, ERROR_EMPTY_PASSWORD, ERROR_INVALID_EMAIL, setDocumentTitle } from '../../helpers';
 import {
     RootState,
@@ -71,10 +71,33 @@ class SignIn extends React.Component<Props, SignInState> {
         this.props.signUpRequireVerification({requireVerification: false});
     }
 
-    public componentWillReceiveProps(props: Props) {
-        const { currentLanguage } = this.props;
-        if (props.requireEmailVerification) {
-            props.history.push(buildPath('/email-verification', currentLanguage), { email: this.state.email });
+    public componentWillReceiveProps(nextProps: Props) {
+        const { currentLanguage, require2FA, history } = this.props;
+        const require2FAHistory = history.location.state && history.location.state.require2FA;
+        if (nextProps.requireEmailVerification) {
+            nextProps.history.push(buildPath('/email-verification', currentLanguage), { email: this.state.email });
+        }
+
+        console.log('componentWillReceiveProps', require2FA, nextProps.require2FA);
+        console.log('require2FAHistory', require2FAHistory);
+        if (require2FA !== nextProps.require2FA) {
+            let query = '';
+            const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+            if (parsed.redirect_url) {
+                query = `?redirect_url=${parsed.redirect_url}`;
+                if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
+                    query += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
+                }
+                history.push(
+                    buildPath(buildUrlWithRedirect(`/signin${query}`), currentLanguage),
+                    { require2FA: nextProps.require2FA },
+                );
+                return;
+            }
+            history.push(
+                buildPath(buildUrlWithRedirect('/signin'), currentLanguage),
+                { require2FA: nextProps.require2FA },
+            );
         }
     }
 
