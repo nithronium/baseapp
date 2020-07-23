@@ -118,16 +118,12 @@ class SignUp extends React.Component<Props> {
             const url = '/email-verification';
             let redirectUrl = '';
             const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
-            // tslint:disable-next-line:no-console
-            console.log('...........parsed', parsed);
             if (parsed.redirect_url) {
                 redirectUrl = parsed.redirect_url;
                 if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
                     redirectUrl += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
                 }
             }
-            // tslint:disable-next-line:no-console
-            console.log('...........redirectUrl', redirectUrl);
             localStorage.setItem('redirect_url', redirectUrl);
             nextProps.history.push(buildPath(url, i18n), {email: this.state.email});
         }
@@ -335,6 +331,9 @@ class SignUp extends React.Component<Props> {
         const parsed = qs.parse(this.props.location.search, { ignoreQueryPrefix: true });
         if (parsed.redirect_url) {
             query = `?redirect_url=${parsed.redirect_url}`;
+            if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
+                query += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
+            }
         }
         this.props.history.push(buildPath(`/signin${query}`, this.props.i18n));
     };
