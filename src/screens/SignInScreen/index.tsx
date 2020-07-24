@@ -89,7 +89,7 @@ class SignIn extends React.Component<Props, SignInState> {
                     query += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
                 }
                 history.push(
-                    buildPath(buildUrlWithRedirect(`/signin${query}`), currentLanguage),
+                    buildPath(`/signin${query}`, currentLanguage),
                     { require2FA: nextProps.require2FA },
                 );
                 return;
