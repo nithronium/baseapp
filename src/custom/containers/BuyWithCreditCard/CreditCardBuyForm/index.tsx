@@ -1,9 +1,14 @@
 import * as moment from 'moment';
-import * as qs from 'qs';
 import * as React from 'react';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
-import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
+
 import { RouteComponentProps, withRouter } from 'react-router';
+
+import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
+import {buildPath} from '../../../helpers';
+
+import * as qs from 'qs';
+
 import {
     Decimal,
     Modal,
@@ -222,7 +227,15 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
             return;
         }
 
-        history.push(`/confirm?redirect_url=${encodeURIComponent('/buycrypto')}`);
+        let query = '';
+        const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        if (parsed.redirect_url) {
+            query = `?redirect_url=${parsed.redirect_url}`;
+            if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
+                query += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
+            }
+        }
+        history.push(buildPath(`/confirm${query}`, this.props.currentLanguage));
     };
 
     public formatTime = () => {
