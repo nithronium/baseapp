@@ -73,13 +73,10 @@ class SignIn extends React.Component<Props, SignInState> {
 
     public componentWillReceiveProps(nextProps: Props) {
         const { currentLanguage, require2FA, history } = this.props;
-        const require2FAHistory = history.location.state && history.location.state.require2FA;
         if (nextProps.requireEmailVerification) {
             nextProps.history.push(buildPath('/email-verification', currentLanguage), { email: this.state.email });
         }
 
-        console.log('componentWillReceiveProps', require2FA, nextProps.require2FA);
-        console.log('require2FAHistory', require2FAHistory);
         if (require2FA !== nextProps.require2FA) {
             let query = '';
             const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
@@ -92,6 +89,7 @@ class SignIn extends React.Component<Props, SignInState> {
                     buildPath(`/signin${query}`, currentLanguage),
                     { require2FA: nextProps.require2FA },
                 );
+
                 return;
             }
             history.push(

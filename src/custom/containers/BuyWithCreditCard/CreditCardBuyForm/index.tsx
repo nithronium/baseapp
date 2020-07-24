@@ -216,14 +216,13 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
 
             return;
         }
-        if (user.level <= 4 && user.profile && !user.profile.address) {
-            history.push(`/confirm?redirect_url=${encodeURIComponent('/buycrypto')}`);
+        if (user.level >= 4 && user.profile && user.profile.address) {
+            this.setState({ showModal: true });
 
             return;
         }
-        this.setState({
-            showModal: true,
-        });
+
+        history.push(`/confirm?redirect_url=${encodeURIComponent('/buycrypto')}`);
     };
 
     public formatTime = () => {
@@ -440,7 +439,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     public isButtonDisabled = (): boolean => {
         const { userLoggedIn, user } = this.props;
         const { fiat } = this.state;
-        if (!userLoggedIn || user.level < 4 || (user.profile && !user.profile.address)) {
+        if (!userLoggedIn || user.level < 4 || !user.profile) {
             return false;
         }
         const { fiatValue } = this.state;
