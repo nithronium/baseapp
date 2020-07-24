@@ -1,23 +1,11 @@
-export const getRedirectUrl = () => {
-    // tslint:disable-next-line:no-console
-    console.log('...........location.search', location.search);
-    const parsed = location.search.slice(1).split('&').reduce((arr, item) => {
-        arr[item.split('=')[0]] = item.split('=')[1];
+import * as qs from 'qs';
 
-        return arr;
-    }, {});
-
-    // const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
-    // tslint:disable-next-line:no-console
-    console.log('...........parsed redirecturl', parsed);
-    //@ts-ignore
+export const getRedirectUrl = (isSpecific?) => {
+    const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
     if (parsed.redirect_url) {
-        //@ts-ignore
         let query = parsed.redirect_url;
-        //@ts-ignore
         if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
-            //@ts-ignore
-            query += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
+            query += `${isSpecific ? '?' : '&'}fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
         }
 
         return query;
@@ -27,7 +15,7 @@ export const getRedirectUrl = () => {
 };
 
 export const buildUrlWithRedirect = url => {
-    const redirectUrl = getRedirectUrl();
+    const redirectUrl = getRedirectUrl(false);
     if (redirectUrl) {
         return `${url}?redirect_url=${redirectUrl}`;
     }
@@ -36,7 +24,7 @@ export const buildUrlWithRedirect = url => {
 };
 
 export const redirectIfSpecified = url => {
-    const redirectUrl = getRedirectUrl();
+    const redirectUrl = getRedirectUrl(true);
     if (redirectUrl) {
         return redirectUrl;
     }
@@ -45,8 +33,9 @@ export const redirectIfSpecified = url => {
 };
 
 export const redirect = callback => {
-    if (getRedirectUrl() === '/') {
-        window.location.replace('/');
+    const redirectUrl = getRedirectUrl(true);
+    if (redirectUrl && redirectUrl.startsWith('/?')) {
+        location.replace(redirectUrl);
 
         return;
     }
