@@ -229,6 +229,8 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
 
         let query = '';
         const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        // tslint:disable-next-line:no-console
+        console.log('...........creditcartbuyform', parsed);
         if (parsed.redirect_url) {
             query = `?redirect_url=${parsed.redirect_url}`;
             if (parsed.fiat && parsed.crypto && parsed.fiatValue) {

@@ -251,6 +251,8 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
     private handleNavigateToProfile = () => {
         let url = '/profile';
         const parsed = qs.parse(this.props.history.location.search, { ignoreQueryPrefix: true });
+        // tslint:disable-next-line:no-console
+        console.log('...........parsed profule two auth', parsed);
         if (parsed.redirect_url) {
             url = parsed.redirect_url;
           if (parsed.fiat && parsed.crypto && parsed.fiatValue) {

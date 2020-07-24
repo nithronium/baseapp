@@ -3,6 +3,8 @@ import * as qs from 'qs';
 
 export const getRedirectUrl = () => {
     const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+    // tslint:disable-next-line:no-console
+    console.log('...........parsed redirecturl', parsed);
     if (parsed.redirect_url) {
         let query = parsed.redirect_url;
         if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
