@@ -149,6 +149,8 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
             }
             if (query.fiatValue) {
                 partialState.fiatValue = query.fiatValue;
+                // @ts-ignore
+                partialState.cryptoValue = null;
             }
             const marketCurrencies = this.getAllCurrencies(nextProps);
             const converted = await getExchangeRates(
