@@ -39,7 +39,7 @@
 
         .cr-tab {
           align-items: center;
-          color: var(--tab-panel-text-color);
+          color: var(--table-header-text-color);
           cursor: pointer;
           display: flex;
           justify-content: center;
@@ -76,7 +76,7 @@
 
           &__dropdown__label {
             background-color: var(--input-background-color);
-            color: var(--input-legend-color);
+            color: var(--table-text-color);
             font-size: calc(var(--gap) * 1.5);
             margin-left: calc(var(--gap) * 1.75);
             padding: 0 calc(var(--gap) * 0.75);
@@ -86,7 +86,7 @@
           .cr-order-input {
             &__fieldset,
             &__crypto-icon {
-              border-color: var(--input-border-color);
+              border-color: var(--table-text-color);
               margin-top: var(--gap);
             }
 
@@ -245,12 +245,15 @@
     &__buy,
     &__sell {
       width: 100%;
+
+      .cr-tab .cr-tab__active {
+        color: var(--table-header-text-color);
+      }
     }
 
     &__buy {
       .cr-tab-panel {
         &__navigation-container {
-          border-right: 1px solid var(--divider-color-level-2);
           border-top-right-radius: 0;
         }
 
@@ -279,7 +282,7 @@
     .cr-tab-panel {
       &__navigation-container {
         .cr-tab {
-          color: var(--tab-panel-text-color);
+          color: var(--table-header-text-color);
           cursor: default;
           justify-content: start;
           padding-left: calc(var(--gap) * 2);
@@ -363,6 +366,7 @@
           &__crypto-icon {
             border-bottom-right-radius: calc(var(--gap) * 0.761);
             border-top-right-radius: calc(var(--gap) * 0.761);
+            color: var(--table-text-color);
             font-size: calc(var(--gap) * 2.34);
             margin-top: calc(var(--gap) * 1.11);
           }
