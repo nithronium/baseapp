@@ -184,6 +184,7 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
         const baseURL = window.document.location.origin;
         const {openMenuType, openMobileMenu, isLogin} = this.state;
         const isMobileWith = this.headerRef.current && this.headerRef.current.clientWidth < 800;
+
         return (
             <div ref={this.headerRef} className={'pg-navbar'}>
                 <a href={currentLanguage === 'en' ? baseURL : `${baseURL}/${currentLanguage}`} className="pg-navbar__logo">
