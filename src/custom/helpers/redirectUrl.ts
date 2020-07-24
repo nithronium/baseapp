@@ -1,13 +1,22 @@
-
-import * as qs from 'qs';
-
 export const getRedirectUrl = () => {
-    const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+    // tslint:disable-next-line:no-console
+    console.log('...........location.search', location.search);
+    const parsed = location.search.slice(1).split('&').reduce((arr, item) => {
+        arr[item.split('=')[0]] = item.split('=')[1];
+
+        return arr;
+    }, {});
+
+    // const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
     // tslint:disable-next-line:no-console
     console.log('...........parsed redirecturl', parsed);
+    //@ts-ignore
     if (parsed.redirect_url) {
+        //@ts-ignore
         let query = parsed.redirect_url;
+        //@ts-ignore
         if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
+            //@ts-ignore
             query += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
         }
 
