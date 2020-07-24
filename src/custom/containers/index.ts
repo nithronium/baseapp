@@ -13,3 +13,4 @@ export * from './Balances';
 export * from './ProfileVerification';
 export * from './Header';
 export * from './NavBar';
+export * from './ToolBar';

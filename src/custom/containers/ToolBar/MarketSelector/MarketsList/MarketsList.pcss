@@ -5,20 +5,20 @@
   padding-right: 5px;
 
   .cr-table thead th {
+    background-color: var(--trading-header-list-background);
     top: 0;
   }
 
   .cr-table tbody td {
-    background-color: var(--market-selector-table-background-color);
-    color: var(--table-text-color);
+    background-color: var(--trading-header-list-background);
     width: calc(100% / 4);
   }
 
   .cr-table tbody .cr-table__row--selected td {
-    background-color: var(--market-selector-table-row-selector);
+    background-color: var(--header);
 
     &:first-child {
-      color: var(--market-selector-table-text-color-hover);
+      color: var(--bright-1);
     }
   }
 
@@ -35,23 +35,18 @@
 
   .cr-table tr {
     cursor: pointer;
-
-    &:hover {
-      background: transparent;
-
-      td {
-        background-color: var(--market-selector-table-row-selector-hover);
-        color: var(--market-selector-table-text-color-hover);
-      }
-    }
   }
 
   &__positive {
-    color: var(--bids);
+    color: var(--trading-header-positive);
   }
 
   &__negative {
-    color: var(--asks);
+    color: var(--trading-header-negative);
+  }
+
+  &__header-selected {
+    color: var(--bright-1);
   }
 
   .sort-icon {
@@ -63,7 +58,7 @@
       width: calc(var(--gap) * 2);
 
       path {
-        fill: var(--primary-text-color);
+        fill: var(--bright-1);
       }
     }
   }

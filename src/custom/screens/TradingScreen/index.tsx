@@ -3,9 +3,9 @@ import * as React from 'react';
 import { connect, MapDispatchToPropsFunction, MapStateToProps } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Grid } from '../../../components/Grid';
-import { ToolBar, TradingChart, WalletsFetch } from '../../../containers';
+import { TradingChart, WalletsFetch } from '../../../containers';
 import { OrderComponent } from '../../../containers/Order';
-import { OpenOrdersPanel, OrderBook } from '../../containers';
+import { OpenOrdersPanel, OrderBook, ToolBar } from '../../containers';
 
 import { Helmet } from 'react-helmet';
 import { saveParametersFromUrl } from '../../../custom/helpers';
