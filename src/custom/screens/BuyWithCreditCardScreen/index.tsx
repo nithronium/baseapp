@@ -143,6 +143,14 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
         this.setState({ paymentData });
     };
 
+    public trueFixed = num => {
+        if (num[num.length - 1] === '0') {
+            return this.trueFixed(num.slice(0, -1));
+        } else {
+            return num[num.length - 1] === '.' ? num.slice(0, -1) : num;
+        }
+    };
+
     public render() {
         const title = this.props.intl.formatMessage({ id: 'buyWithCard.title' });
         const description = this.props.intl.formatMessage({ id: 'buyWithCard.description' });
@@ -176,7 +184,7 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
                     <CreditCardSteps
                         currentStep={step}
                         isLoading={step === 4 && !list[0]}
-                        paymentData={{...paymentData, amount: step === 4 && list[0] ? list[0].amount - list[0].fee_amount : paymentData.amount}}
+                        paymentData={{...paymentData, amount: step === 4 && list[0] ? this.trueFixed(list[0].amount - list[0].fee_amount) : paymentData.amount}}
                         onTryAgain={this.onTryAgain}
                     />
                     {step !== 4 && <CreditCardBuyForm
