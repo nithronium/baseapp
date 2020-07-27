@@ -221,7 +221,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
 
             return;
         }
-        if (user.level >= 4 && user.profile && user.profile.address) {
+        if (user.level >= 4 && user.profile && user.profile.address !== null) {
             this.setState({ showModal: true });
 
             return;
@@ -426,7 +426,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     public getButtonTextKey = (): string => {
         const { userLoggedIn, user } = this.props;
         if (userLoggedIn) {
-            if (user.level >= 4 && user.profile && user.profile.address) {
+            if (user.level >= 4 && user.profile && user.profile.address !== null) {
                 return 'buyWithCard.form.buttonContinue';
             } else {
                 return 'buyWithCard.form.buttonNotVerified';
@@ -455,6 +455,9 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         if (!userLoggedIn || user.level < 4 || !user.profile) {
             return false;
         }
+        if (user.profile && user.profile.address === null) {
+            return true;
+        }
         const { fiatValue } = this.state;
         const fiatNumber = Number(fiatValue);
         if (fiat.toLowerCase() === 'aed') {
@@ -467,7 +470,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     public ableToBuy = () => {
         const { userLoggedIn, user } = this.props;
 
-        return userLoggedIn && user.level >= 4;
+        return userLoggedIn && user.level >= 4 && user.profile && user.profile.address;
     };
 
     public render() {
