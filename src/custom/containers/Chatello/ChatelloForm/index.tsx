@@ -164,12 +164,12 @@ class ChatelloFormComponent extends React.Component<Props, State> {
 
 
         if (!userLoggedIn) {
-            history.push(`/signup?redirect_url=${encodeURIComponent(url)}`);
+            history.push(`/signup?redirect_url='/chatello'`);
 
             return;
         }
         if (user.level < 4 && user.profile && user.profile.address) {
-            history.push(`/confirm?redirect_url=${encodeURIComponent(url)}`);
+            history.push(`/confirm?redirect_url='/chatello'`);
         }
         this.setState({
             showModal: true,

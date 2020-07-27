@@ -39,15 +39,13 @@ export class CreditCardOverlayComponent extends React.Component<Props> {
     public handleButton = () => {
         const { history, step } = this.props;
 
-        const url = '/buycrypto';
-
         if (step === 1) {
-            history.push(`/signup?redirect_url=${encodeURIComponent(url)}`);
+            history.push(`/signup?redirect_url=/buycrypto`);
 
             return;
         }
         if (step === 2) {
-            history.push(`/confirm?redirect_url=${encodeURIComponent(url)}`);
+            history.push(`/confirm?redirect_url=/buycrypto`);
         }
     };
 

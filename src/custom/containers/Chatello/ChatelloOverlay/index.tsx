@@ -47,12 +47,12 @@ export class ChatelloOverlayComponent extends React.Component<Props> {
         }
 
         if (step === 1) {
-            history.push(`/signup?redirect_url=${encodeURIComponent(url)}`);
+            history.push(`/signup?redirect_url=${url}`);
 
             return;
         }
         if (step === 2) {
-            history.push(`/confirm?redirect_url=${encodeURIComponent(url)}`);
+            history.push(`/confirm?redirect_url=${url}`);
         }
     };
 
