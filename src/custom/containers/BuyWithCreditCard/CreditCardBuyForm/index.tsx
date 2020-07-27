@@ -217,7 +217,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     public onSubmit = () => {
         const { userLoggedIn, history, user } = this.props;
         if (!userLoggedIn) {
-            history.push(`/signin?redirect_url=/buycrypto`);
+            history.push(buildPath(`/signin?redirect_url=/buycrypto`, this.props.currentLanguage));
 
             return;
         }
