@@ -24,6 +24,7 @@ import {
     OrderBookState,
     RootState,
     selectCurrencies,
+    selectCurrentLanguage,
     selectMarkets,
     selectOrderBook,
     selectUserInfo,
@@ -58,6 +59,7 @@ interface DispatchProps {
 
 type Props = InjectedIntlProps & ReduxProps & DispatchProps & RouteComponentProps & {
     isLoggedIn: boolean;
+    currentLanguage: boolean;
     onIframeClose: () => void;
     onPaymentDataChange: () => void;
 };
@@ -234,6 +236,11 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
             if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
                 query += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
             }
+        } else {
+            const {fiat, crypto, fiatValue} = this.state;
+            query = fiat && crypto && fiatValue
+                ? `?redirect_url=/buycrypto&fiat=${fiat}&crypto=${crypto}&fiatValue=${fiatValue}`
+                : `?redirect_url=/buycrypto`;
         }
         history.push(buildPath(`/confirm${query}`, this.props.currentLanguage));
     };
@@ -456,7 +463,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
             return false;
         }
         if (user.profile && user.profile.address === null) {
-            return true;
+            return false;
         }
         const { fiatValue } = this.state;
         const fiatNumber = Number(fiatValue);
@@ -671,6 +678,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
     orderBook: selectOrderBook(state),
     user: selectUserInfo(state),
     userLoggedIn: selectUserLoggedIn(state),
+    currentLanguage: selectCurrentLanguage(state),
     withdrawLimitData: selectWithdrawLimit(state),
     buyWithCreditCard: state.user.buyWithCreditCard,
 });
