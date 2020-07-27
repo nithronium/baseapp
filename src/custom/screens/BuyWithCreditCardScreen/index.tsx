@@ -184,7 +184,7 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
                     <CreditCardSteps
                         currentStep={step}
                         isLoading={step === 4 && !list[0]}
-                        paymentData={{...paymentData, amount: step === 4 && list[0] ? this.trueFixed(list[0].amount - list[0].fee_amount) : paymentData.amount}}
+                        paymentData={{...paymentData, amount: step === 4 && list[0] ? this.trueFixed((list[0].amount - list[0].fee_amount).toFixed(8)) : paymentData.amount}}
                         onTryAgain={this.onTryAgain}
                     />
                     {step !== 4 && <CreditCardBuyForm
