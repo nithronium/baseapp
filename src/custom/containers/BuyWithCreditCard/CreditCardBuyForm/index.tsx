@@ -221,7 +221,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
 
             return;
         }
-        if (user.level >= 4 && user.profile && user.profile.address !== null) {
+        if (user.level >= 4 && user.profile && user.profile.address) {
             this.setState({ showModal: true });
 
             return;
@@ -426,7 +426,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
     public getButtonTextKey = (): string => {
         const { userLoggedIn, user } = this.props;
         if (userLoggedIn) {
-            if (user.level >= 4 && user.profile && user.profile.address !== null) {
+            if (user.level >= 4 && user.profile && user.profile.address) {
                 return 'buyWithCard.form.buttonContinue';
             } else {
                 return 'buyWithCard.form.buttonNotVerified';
