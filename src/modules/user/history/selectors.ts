@@ -1,8 +1,11 @@
 import { RootState } from '../../index';
-import { WalletHistoryList } from './types';
+import { WalletHistoryElement, WalletHistoryList } from './types';
 
 export const selectHistory = (state: RootState): WalletHistoryList =>
     state.user.history.list;
+
+export const selectInstexPayment = (state: RootState): WalletHistoryElement =>
+    state.user.history.payment;
 
 export const selectCurrentPage = (state: RootState): number =>
     state.user.history.page;

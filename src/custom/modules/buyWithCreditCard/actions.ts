@@ -15,6 +15,7 @@ export interface CreateCardOrderRequest {
 
 export interface CreateCardOrderResponse {
     url?: string;
+    tid?: string;
 }
 
 export interface CreditCardOrderError {

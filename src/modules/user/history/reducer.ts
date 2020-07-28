@@ -6,14 +6,16 @@ import {
     HISTORY_FETCH,
     HISTORY_PUSH_FINISH,
     HISTORY_RESET,
+    INSTEX_PAYMENT_DATA,
 } from './constants';
-import { WalletHistoryList } from './types';
+import { WalletHistoryElement, WalletHistoryList } from './types';
 
 export interface HistoryState {
     list: WalletHistoryList;
     fetching: boolean;
     page: number;
     nextPageExists: boolean;
+    payment: WalletHistoryElement;
 }
 
 const initialState: HistoryState = {
@@ -21,6 +23,7 @@ const initialState: HistoryState = {
     fetching: false,
     page: 0,
     nextPageExists: false,
+    payment: {},
 };
 
 
@@ -47,6 +50,9 @@ export const historyReducer = (state = initialState, action: HistoryActions) => 
             list = getUnique(list, 'id');
 
             return { ...state, list: list };
+        }
+        case INSTEX_PAYMENT_DATA: {
+            return { ...state, payment: action.payload };
         }
         default:
             return state;

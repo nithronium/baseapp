@@ -5,8 +5,10 @@ import {
     HISTORY_PUSH_EMIT,
     HISTORY_PUSH_FINISH,
     HISTORY_RESET,
+    INSTEX_PAYMENT_DATA,
+    INSTEX_PAYMENT_FETCH,
 } from './constants';
-import { PrivateTradeEvent, WalletHistoryList } from './types';
+import {PrivateTradeEvent, WalletHistoryElement, WalletHistoryList} from './types';
 
 export interface HistoryFetchPayload {
     currency?: string;
@@ -16,6 +18,10 @@ export interface HistoryFetchPayload {
     market?: string;
     time_from?: string;
     time_to?: string;
+}
+
+export interface InstexPaymentPayload {
+    tid: string;
 }
 
 interface HistorySuccessPayload {
@@ -53,12 +59,23 @@ export interface HistoryPush {
     payload: PrivateTradeEvent;
 }
 
+export interface InstexPaymentFetch {
+    type: typeof INSTEX_PAYMENT_FETCH;
+    payload: InstexPaymentPayload;
+}
+
+export interface InstexPaymentPush {
+    type: typeof INSTEX_PAYMENT_DATA;
+    payload: WalletHistoryElement;
+}
+
 export type HistoryActions =
     HistoryFetch
     | HistoryData
     | HistoryError
     | HistoryReset
     | HistoryPush
+    | InstexPaymentPush
     | HistoryPushFinish;
 
 
@@ -88,5 +105,15 @@ export const pushHistoryEmit = (payload: PrivateTradeEvent): HistoryPush => ({
 
 export const pushHistoryFinish = (payload: WalletHistoryList): HistoryPushFinish => ({
     type: HISTORY_PUSH_FINISH,
+    payload,
+});
+
+export const pushInstexPayment = (payload: WalletHistoryElement): InstexPaymentPush => ({
+    type: INSTEX_PAYMENT_DATA,
+    payload,
+});
+
+export const fetchInstexPayment = (payload: InstexPaymentPayload): InstexPaymentFetch => ({
+    type: INSTEX_PAYMENT_FETCH,
     payload,
 });
