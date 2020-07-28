@@ -37,18 +37,11 @@ export class CreditCardOverlayComponent extends React.Component<Props> {
 
     public handleButton = () => {
         const { history, step } = this.props;
-        let query = '';
+        let query = `?redirect_url=buycrypto`;
         const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
-        if (parsed.redirect_url) {
-            query = `?redirect_url=${parsed.redirect_url}`;
-            if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
-                query += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
-            }
+        if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
+            query += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
         }
-        // tslint:disable-next-line:no-console
-        console.log('...........parsed', parsed);
-        // tslint:disable-next-line:no-console
-        console.log('...........query', query);
         if (step === 1) {
             history.push(`/signup${query}`);
 
