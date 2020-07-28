@@ -45,6 +45,10 @@ export class CreditCardOverlayComponent extends React.Component<Props> {
                 query += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
             }
         }
+        // tslint:disable-next-line:no-console
+        console.log('...........parsed', parsed);
+        // tslint:disable-next-line:no-console
+        console.log('...........query', query);
         if (step === 1) {
             history.push(`/signup${query}`);
 
