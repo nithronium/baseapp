@@ -116,7 +116,7 @@ class BuyWithCreditCardScreenComponent extends React.Component<Props, State> {
         if (action === 'instex-success-ok' ||
             action === 'instex-success-close'
         ) {
-            this.props.fetchInstexPayment({tid: this.props.buyWithCreditCard.tid});
+            this.props.fetchInstexPayment({tid: this.props.buyWithCreditCard.data.tid});
             this.setState({
                 orderFinished: true,
             });
