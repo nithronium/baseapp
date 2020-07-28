@@ -572,11 +572,11 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
                         <FormattedMessage id={'page.body.history.withdraw'}/>
                     </a>
                 </li>
-                {/* <li>
+                <li>
                     <a href={`${currentLanguage === 'en' ? '' : `/${currentLanguage}`}/buycrypto`} onClick={() => this.openDropdown('')}>
                         <FormattedMessage id={'page.header.buy_crypto'}/>
                     </a>
-                </li> */}
+                </li>
                 {/*<li>*/}
                 {/*    <Link to={'/buycrypto'} onClick={() => this.openDropdown('')}>*/}
                 {/*        <FormattedMessage id={'page.header.buy_crypto'}/>*/}

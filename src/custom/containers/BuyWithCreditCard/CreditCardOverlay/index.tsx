@@ -4,9 +4,8 @@ import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 import { RouteComponentProps, withRouter } from 'react-router';
 
-import {
-    User,
-} from '../../../../modules';
+import * as qs from 'qs';
+import {User} from '../../../../modules';
 
 type Props = InjectedIntlProps & RouteComponentProps & {
     step: number;
@@ -38,14 +37,21 @@ export class CreditCardOverlayComponent extends React.Component<Props> {
 
     public handleButton = () => {
         const { history, step } = this.props;
-
+        let query = '';
+        const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        if (parsed.redirect_url) {
+            query = `?redirect_url=${parsed.redirect_url}`;
+            if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
+                query += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
+            }
+        }
         if (step === 1) {
-            history.push(`/signup?redirect_url=/buycrypto`);
+            history.push(`/signup${query}`);
 
             return;
         }
         if (step === 2) {
-            history.push(`/confirm?redirect_url=/buycrypto`);
+            history.push(`/confirm${query}`);
         }
     };
 
