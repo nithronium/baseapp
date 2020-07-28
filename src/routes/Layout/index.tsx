@@ -9,6 +9,7 @@ import { connect, MapDispatchToProps, MapStateToProps } from 'react-redux';
 import { Route, Switch } from 'react-router';
 import { Redirect, withRouter } from 'react-router-dom';
 import {
+    BuyWithCreditCardScreen,
     // BuyWithCreditCardScreen,
     ChatelloScreen,
     InstantExchangeScreen,
@@ -454,30 +455,30 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
                         component={ReferralCommissionScreen}
                         currentLanguage={currentLanguage}
                     />
-                    {/*<PublicRoute*/}
-                    {/*    loading={userLoading}*/}
-                    {/*    isLogged={isLoggedIn}*/}
-                    {/*    noReditect={true}*/}
-                    {/*    path={'/buycrypto'}*/}
-                    {/*    component={BuyWithCreditCardScreen}*/}
-                    {/*    currentLanguage={currentLanguage}*/}
-                    {/*/>*/}
-                    {/*<PublicRoute*/}
-                    {/*    loading={userLoading}*/}
-                    {/*    isLogged={isLoggedIn}*/}
-                    {/*    noReditect={true}*/}
-                    {/*    path={'/ru/buycrypto'}*/}
-                    {/*    component={BuyWithCreditCardScreen}*/}
-                    {/*    currentLanguage={currentLanguage}*/}
-                    {/*/>*/}
-                    {/*<PublicRoute*/}
-                    {/*    loading={userLoading}*/}
-                    {/*    isLogged={isLoggedIn}*/}
-                    {/*    noReditect={true}*/}
-                    {/*    path={'/zh/buycrypto'}*/}
-                    {/*    component={BuyWithCreditCardScreen}*/}
-                    {/*    currentLanguage={currentLanguage}*/}
-                    {/*/>*/}
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        noReditect={true}
+                        path={'/buycrypto'}
+                        component={BuyWithCreditCardScreen}
+                        currentLanguage={currentLanguage}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        noReditect={true}
+                        path={'/ru/buycrypto'}
+                        component={BuyWithCreditCardScreen}
+                        currentLanguage={currentLanguage}
+                    />
+                    <PublicRoute
+                        loading={userLoading}
+                        isLogged={isLoggedIn}
+                        noReditect={true}
+                        path={'/zh/buycrypto'}
+                        component={BuyWithCreditCardScreen}
+                        currentLanguage={currentLanguage}
+                    />
 
                     <PrivateRoute
                         loading={userLoading}
