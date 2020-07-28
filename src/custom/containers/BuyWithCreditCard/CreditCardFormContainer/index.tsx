@@ -118,6 +118,8 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
         {
             if (!nextProps.markets.length || !nextProps.currencies.length) { return; }
             const query = qs.parse(location.search, { ignoreQueryPrefix: true });
+            // tslint:disable-next-line:no-console
+            console.log('...........query', query);
             let newCrypto = query.curr;
             const fiatList = this.getAvailableFiat(nextProps);
             const cryptoList = this.getAvailableCrypto(fiat, nextProps);
