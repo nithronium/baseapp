@@ -9,7 +9,7 @@ import { connect, MapDispatchToPropsFunction } from 'react-redux';
 import { incrementalOrderBook } from '../../api';
 import { Decimal } from '../../components/Decimal';
 import { Markets } from '../../components/Markets';
-import { RootState, selectUserInfo, setCurrentPrice, User } from '../../modules';
+import { orderBookFetch, RootState, selectUserInfo, setCurrentPrice, User } from '../../modules';
 import {
     Market,
     marketsTickersFetch,
@@ -111,9 +111,13 @@ class MarketsContainer extends React.Component<Props> {
 
         if (!currentMarket || currentMarket.id !== marketToSet.id) {
             this.props.setCurrentMarket(marketToSet);
+
             if (!incrementalOrderBook()) {
               this.props.depthFetch(marketToSet);
             }
+
+            this.props.depthFetch(marketToSet);
+            this.props.orderBookFetch(marketToSet);
         }
     };
 }
@@ -131,6 +135,7 @@ const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> =
         setCurrentMarket: (market: Market) => dispatch(setCurrentMarket(market)),
         walletsFetch: () => dispatch(walletsFetch()),
         depthFetch: (market: Market) => dispatch(depthFetch(market)),
+        orderBookFetch: payload => dispatch(orderBookFetch(payload)),
         tickers: () => dispatch(marketsTickersFetch()),
         setCurrentPrice: payload => dispatch(setCurrentPrice(payload)),
     });

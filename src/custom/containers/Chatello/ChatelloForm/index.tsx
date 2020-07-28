@@ -578,7 +578,7 @@ const mapStateToProps: MapStateToProps<ReduxProps, {}, RootState> = state => ({
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, {}> = dispatch => ({
     fetchCurrencies: () => dispatch(currenciesFetch()),
     fetchItemIEO: () => dispatch(fetchItemIEO(CHATELLA_IEO_ID)),
-    fetchOrderBook: (market: Market) => dispatch(orderBookFetch(market)),
+    fetchOrderBook: payload => dispatch(orderBookFetch(payload)),
     fetchMarkets: () => dispatch(marketsFetch()),
     fetchWithdrawLimit: () => dispatch(withdrawLimitFetch()),
     createCreditCardOrder: payload => dispatch(creditCardOrderFetch(payload)),
