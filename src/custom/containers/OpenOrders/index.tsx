@@ -137,7 +137,7 @@ export class OpenOrdersContainer extends React.Component<Props> {
     private handleCancel = (index: number) => {
         const { list } = this.props;
         const orderToDelete = list[index];
-        this.props.openOrdersCancelFetch({ id: orderToDelete.id, list });
+        this.props.openOrdersCancelFetch({ order: orderToDelete, list });
     };
 }
 
