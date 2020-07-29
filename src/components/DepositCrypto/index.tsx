@@ -97,7 +97,7 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
                     </div>
                     {notice ? <p style={{ color: '#e85e59', fontSize: '14px' }}>{notice} </p> : null}
                     <div>
-                        <form className={'cr-deposit-crypto__copyable'}>
+                        <div className={'cr-deposit-crypto__copyable'}>
                             <fieldset className={'cr-copyable-text-field'} onClick={onCopy}>
                                 <CopyableTextField
                                     className={'cr-deposit-crypto__copyable-area'}
@@ -108,7 +108,7 @@ const DepositCrypto: React.FunctionComponent<DepositCryptoProps> = (props: Depos
                                     label={copiableTextFieldText ? copiableTextFieldText : 'Deposit by Wallet Address'}
                                 />
                             </fieldset>
-                        </form>
+                        </div>
                     </div>
                 </>
             );
