@@ -1,14 +1,11 @@
 export const convert = (value: number, target: string, orderBook): number => {
-    const { asks } = orderBook;
-    const depth = asks.map(({ price, remaining_volume }) => [price, remaining_volume]);
-
-    const getCumulativeTotal = proposals => {
+    const getCumulativeTotal = (amount, proposals) => {
         if (!proposals.length || (proposals[0].length < 2)) {
-            // tslint:disable-next-line:no-console
-            console.log('...........Invalid market depth');
+           // tslint:disable-next-line:no-console
+           console.log('Invalid market depth');
         }
 
-        let sum = 100;
+        let sum = amount;
         let total = 0;
 
         for (const proposal of proposals) {
@@ -26,15 +23,19 @@ export const convert = (value: number, target: string, orderBook): number => {
         }
 
         if (sum !== 0) {
-            // tslint:disable-next-line:no-console
-            console.log('...........Not enough liquidity');
+           // tslint:disable-next-line:no-console
+           console.log('Not enough liquidity');
         }
 
         return total;
     };
 
-    const res = getCumulativeTotal(depth);
-    const weightedAverage = 100 / res;
+    const depth = orderBook.asks.map(({ price, remaining_volume }) => [price, remaining_volume]);
+    // tslint:disable-next-line
+    const depthSum = depth.reduce((acc, [price, amount]) => acc += parseFloat(price) * parseFloat(amount), 0);
+    const defaultSum = depthSum >= 100 ? 100 : depthSum;
+    const totalRes = getCumulativeTotal(defaultSum, depth);
+    const weightedAverage = defaultSum / totalRes;
 
     return target === 'fiat' ?
         value * weightedAverage :
