@@ -178,6 +178,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
                         type="button"
                         className={this.isValidForm() ? 'cr-email-form__button' : 'cr-email-form__button cr-email-form__button--disabled'}
                         disabled={!this.isValidForm()}
+                        onClick={e => this.handleChangePassword(e)}
                     >
                         {this.props.intl.formatMessage({id: 'page.body.profile.header.account.content.password.button.change'})}
                     </Button>
@@ -187,7 +188,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
 
         const modal = this.state.showChangeModal ? (
             <div className="cr-modal">
-              <form className="cr-email-form" onSubmit={this.handleChangePassword}>
+              <form className="cr-email-form">
                 <div className="pg-change-password-screen">
                   {this.renderChangeModalHeader()}
                   {changeModalBody}

@@ -1,6 +1,6 @@
 import { History } from 'history';
 import * as React from 'react';
-import { Spinner } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import {
     InjectedIntlProps,
     injectIntl,
@@ -69,7 +69,15 @@ class EmailVerificationComponent extends React.Component<Props> {
                     <div className="pg-emailverification-body">
                         <div className="pg-emailverification-body-text">{text}</div>
                         <div className="pg-emailverification-body-container">
-                            {emailVerificationLoading ? <Spinner animation="border" variant="primary" /> : <button className="pg-emailverification-body-container-button" onClick={this.handleClick}>{button}</button>}
+                            {emailVerificationLoading ? <Spinner animation="border" variant="primary" />
+                                : <Button
+                                    className="pg-emailverification-body-container-button"
+                                    onClick={this.handleClick}
+                                    block={true}
+                                    variant="primary"
+                                    size="lg">
+                                        {button}
+                                  </Button>}
                         </div>
                     </div>
                 </div>
