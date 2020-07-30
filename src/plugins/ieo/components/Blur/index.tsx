@@ -83,7 +83,7 @@ export class Blur extends React.Component<Props, State> {
             <div className={`pg-blur ${className}`}>
                 <div className="pg-blur__content">
                     {title ? <span className="pg-blur__content__title">{title}</span> : null}
-                    {ieo.state !== 'finished' ? <div className={countDownColorClass}>{countdownValue}</div> : null}
+                    {!['finished', 'cancelled_with_refund'].includes(ieo.state) ? <div className={countDownColorClass}>{countdownValue}</div> : null}
                 </div>
             </div>
         );

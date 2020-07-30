@@ -162,6 +162,7 @@ class IEOInfoComponent extends React.Component<Props, State> {
                     );
                 case 'finished':
                 case 'released':
+                case 'cancelled_with_refund':
                     return (
                         <Blur
                             title={this.props.intl.formatMessage({ id: 'page.body.ieo.details.order.content.blur.titleFinished' })}

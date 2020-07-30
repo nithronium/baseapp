@@ -21,7 +21,10 @@ class IEODetailsComponent extends React.Component<Props> {
     public render() {
         const { currentIEO, currencies } = this.props;
         const quoteCurrency = currencies.length && currencies.find(currency => currency.id && currency.id.toLowerCase() === currentIEO.pairs[0].quote_currency_id && currentIEO.pairs[0].quote_currency_id.toLowerCase());
-
+        // tslint:disable-next-line:no-console
+        console.log('...........currentIEO', currentIEO, 'currentIEO.supply, +currentIEO.metadata.precision', currentIEO.supply, +currentIEO.metadata.precision, 'Decimal.format(currentIEO.supply, +currentIEO.metadata.precision)', Decimal.format(currentIEO.supply, +currentIEO.metadata.precision));
+        // tslint:disable-next-line:no-console
+        console.log('...........currentIEO.metadata', currentIEO.metadata);
         return (
             <div className="ieo-profile-details">
                 <div className="ieo-profile-details__header">{this.translate('page.body.ieo.profile.details.header')}</div>
@@ -46,7 +49,7 @@ class IEODetailsComponent extends React.Component<Props> {
                                 {this.translate('page.body.ieo.profile.details.total.supply')}
                             </div>
                             <div className="ieo-profile-details__body__left__row__second-column">
-                                {currentIEO.metadata ? `${Decimal.format(currentIEO.metadata.total_supply, +currentIEO.metadata.precision)} ${currentIEO.currency_id && currentIEO.currency_id.toUpperCase()}` : '-'}
+                                {currentIEO.metadata ? `${Decimal.format(+currentIEO.metadata.total_supply, +currentIEO.metadata.precision)} ${currentIEO.currency_id && currentIEO.currency_id.toUpperCase()}` : '-'}
                             </div>
                         </div>
                         {/* <div className="ieo-profile-details__body__left__row">
