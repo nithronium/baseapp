@@ -2,6 +2,7 @@ import cr from 'classnames';
 import { History } from 'history';
 import * as countries from 'i18n-iso-countries';
 import * as React from 'react';
+import { Button } from 'react-bootstrap';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import MaskInput from 'react-maskinput';
 import {
@@ -10,6 +11,7 @@ import {
 } from 'react-redux';
 import { RouterProps } from 'react-router';
 import { withRouter } from 'react-router-dom';
+import { CustomInput, DropdownComponent } from '../../../../components';
 import { formatDate, isDateInFuture } from '../../../../helpers';
 import {
     alertPush,
@@ -27,11 +29,9 @@ import {
 } from '../../../../modules/user/kyc/identity';
 import { IdentityData } from '../../../../modules/user/kyc/identity/types';
 import { changeUserLevel, changeUserProfileData } from '../../../../modules/user/profile';
-import { Dropdown } from '../../../components';
 import { DISALLOWED_COUNTRIES } from '../../../constants';
 import { handleRedirectToConfirm } from '../../../helpers';
 import { isValidDate } from '../../../helpers/checkDate';
-
 
 interface ReduxProps {
     editData?: IdentityData;
@@ -194,9 +194,11 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         } = this.state;
 
 
-        const dateOfBirthGroupClass = cr('pg-confirm__content-profile-partial-col-row-content', {
+        const dateOfBirthGroupClass = cr('pg-confirm__content-identity-col-row-content', {
             'pg-confirm__content-identity-col-row-content--focused': dateOfBirthFocused,
+            'pg-confirm__content-identity-col-row-content--wrong': dateOfBirth && !this.handleValidateInput('dateOfBirth', dateOfBirth),
         });
+
 
         const firstNameGroupClass = cr('pg-confirm__content-profile-partial-col-row-content', {
             'pg-confirm__content-profile-partial-col-row-content--focused': firstNameFocused,
@@ -225,31 +227,29 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                   <div className="pg-confirm__content-profile-partial-col">
                       <div className="pg-confirm__content-profile-partial-col-row">
                         <fieldset className={firstNameGroupClass}>
-                            {firstName && <legend>{this.translate('page.body.kyc.identity.firstName')}</legend>}
-                                <input
-                                    className="pg-confirm__content-profile-partial-col-row-content-number"
-                                    type="string"
-                                    placeholder={this.translate('page.body.kyc.identity.firstName')}
-                                    value={firstName}
-                                    onChange={this.handleChange('firstName')}
-                                    onFocus={this.handleFieldFocus('firstName')}
-                                    onBlur={this.handleFieldFocus('firstName')}
-                                    autoFocus={true}
-                                />
+                            <CustomInput
+                                type="string"
+                                placeholder={this.translate('page.body.kyc.identity.firstName')}
+                                inputValue={firstName}
+                                handleChangeInput={e => this.handleChange(e, 'firstName')}
+                                handleFocusInput={this.handleFieldFocus('firstName')}
+                                autoFocus={true}
+                                label={this.translate('page.body.kyc.identity.firstName')}
+                                defaultLabel={this.translate('page.body.kyc.identity.firstName')}
+                            />
                         </fieldset>
                       </div>
                       <div className="pg-confirm__content-profile-partial-col-row">
                           <fieldset className={lastNameGroupClass}>
-                              {lastName && <legend>{this.translate('page.body.kyc.identity.lastName')}</legend>}
-                                  <input
-                                      className="pg-confirm__content-profile-partial-col-row-content-number"
-                                      type="string"
-                                      placeholder={this.translate('page.body.kyc.identity.lastName')}
-                                      value={lastName}
-                                      onChange={this.handleChange('lastName')}
-                                      onFocus={this.handleFieldFocus('lastName')}
-                                      onBlur={this.handleFieldFocus('lastName')}
-                                  />
+                                <CustomInput
+                                    type="string"
+                                    placeholder={this.translate('page.body.kyc.identity.lastName')}
+                                    inputValue={lastName}
+                                    handleChangeInput={e => this.handleChange(e, 'lastName')}
+                                    handleFocusInput={this.handleFieldFocus('lastName')}
+                                    label={this.translate('page.body.kyc.identity.lastName')}
+                                    defaultLabel={this.translate('page.body.kyc.identity.lastName')}
+                                />
                           </fieldset>
                       </div>
                       <div className="pg-confirm__content-profile-partial-col-row">
@@ -257,8 +257,8 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                               <div className="pg-confirm__content-profile-partial-col-row-content-label">
                                   {countryOfBirth && this.translate('page.body.kyc.identity.CoR')}
                               </div>
-                              <Dropdown
-                                  className="pg-confirm__content-documents-col-row-content-number"
+                              <DropdownComponent
+                                  className="pg-confirm__content-identity-col-row-content-number-dropdown"
                                   list={dataCountries}
                                   onSelect={value => this.selectCountry(listOfCountries, value)}
                                   placeholder={chosenCountry || countryOfBirth || this.translate('page.body.kyc.identity.CoR')}
@@ -270,8 +270,8 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                               <div className="pg-confirm__content-profile-partial-col-row-content-label">
                                   {metadata.nationality && this.translate('page.body.kyc.identity.nationality')}
                               </div>
-                              <Dropdown
-                                  className="pg-confirm__content-documents-col-row-content-number"
+                              <DropdownComponent
+                                  className="pg-confirm__content-identity-col-row-content-number-dropdown"
                                   list={dataCountries}
                                   onSelect={value => this.selectNationality(listOfCountries, value)}
                                   placeholder={chosenNationality || metadata.nationality || this.translate('page.body.kyc.identity.nationality')}
@@ -297,13 +297,17 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                   </div>
                 </div>
                 <div className="pg-confirm__content-deep">
-                    <button
+                    <Button
                         className={`cr-button pg-confirm__content-phone-deep-button ${buttonDisabled ? 'cr-button--disabled' : ''}`}
                         onClick={this.sendData}
                         disabled={buttonDisabled}
+                        size="lg"
+                        variant="primary"
+                        type="button"
+                        block={true}
                     >
                         {this.translate('page.body.kyc.next')}
-                    </button>
+                    </Button>
                 </div>
             </div>
         );
@@ -342,13 +346,11 @@ class ProfilePartialComponent extends React.Component<Props, State> {
         };
     }
 
-    private handleChange = (key: string) => {
-        return (e: OnChangeEvent) => {
-            // @ts-ignore
-            this.setState({
-                [key]: e.target.value,
-            });
-        };
+    private handleChange = (value: string, key: string) => {
+        // @ts-ignore
+        this.setState({
+            [key]: value,
+        });
     };
 
     private handleChangeDate = (e: OnChangeEvent) => {
