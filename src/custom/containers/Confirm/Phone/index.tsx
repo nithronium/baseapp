@@ -1,13 +1,14 @@
 import cr from 'classnames';
 import { History } from 'history';
 import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, InputGroup } from 'react-bootstrap';
 import { InjectedIntlProps, injectIntl } from 'react-intl';
 import {
     connect,
     MapDispatchToPropsFunction,
 } from 'react-redux';
 import {withRouter} from 'react-router';
+import { CustomInput } from '../../../../components';
 import { handleRedirectToConfirm } from '../../../../custom/helpers';
 import {
     labelFetch,
@@ -26,12 +27,6 @@ import { changeUserLevel } from '../../../../modules/user/profile';
 interface ReduxProps {
     verifyPhoneSuccess?: string;
     user: User;
-}
-
-interface OnChangeEvent {
-    target: {
-        value: string;
-    };
 }
 
 interface HistoryProps {
@@ -123,43 +118,47 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
                         1. {this.translate('page.body.kyc.phone.enterPhone')}
                     </div>
                     <fieldset className={phoneNumberFocusedClass}>
-                        {phoneNumber && <legend>{this.translate('page.body.kyc.phone.phoneNumber')}</legend>}
-                        <input
-                            className="pg-confirm__content-phone-col-content-number"
-                            type="string"
-                            placeholder={this.translate('page.body.kyc.phone.phoneNumber')}
-                            value={phoneNumber}
-                            onClick={this.addPlusSignToPhoneNumber}
-                            onChange={this.handleChangePhoneNumber}
-                            onFocus={this.handleFieldFocus('phoneNumber')}
-                            onBlur={this.handleFieldFocus('phoneNumber')}
-                            onKeyPress={this.handleSendEnterPress}
-                            autoFocus={true}
-                        />
-                        <button
-                            className={phoneNumber ? 'pg-confirm__content-phone-col-content-send' : 'pg-confirm__content-phone-col-content-send--disabled'}
-                            type="button"
-                            onClick={this.handleSendCode}
-                        >
-                            {this.state.resendCode ? this.translate('page.body.kyc.phone.resend') : this.translate('page.body.kyc.phone.send')}
-                        </button>
+                        <InputGroup>
+                            <CustomInput
+                                label={phoneNumber ? this.translate('page.body.kyc.phone.phoneNumber') : ''}
+                                defaultLabel={phoneNumber ? this.translate('page.body.kyc.phone.phoneNumber') : ''}
+                                placeholder={this.translate('page.body.kyc.phone.phoneNumber')}
+                                type="string"
+                                inputValue={phoneNumber}
+                                handleClick={this.addPlusSignToPhoneNumber}
+                                handleChangeInput={this.handleChangePhoneNumber}
+                                onKeyPress={this.handleSendEnterPress}
+                                autoFocus={true}
+                                handleFocusInput={this.handleFieldFocus('phoneNumber')}
+                            />
+                            <InputGroup.Append>
+                                <Button
+                                    block={true}
+                                    onClick={this.handleSendCode}
+                                    size="lg"
+                                    variant="primary"
+                                    disabled={!phoneNumber}
+                                >
+                                    {this.state.resendCode ? this.translate('page.body.kyc.phone.resend') : this.translate('page.body.kyc.phone.send')}
+                                </Button>
+                            </InputGroup.Append>
+                        </InputGroup>
                     </fieldset>
                 </div>
                 <div className="pg-confirm__content-phone-col">
-                    <div className="pg-confirm__content-phone-col-text">
+                <div className="pg-confirm__content-phone-col-text">
                         2. {this.translate('page.body.kyc.phone.enterCode')}
                     </div>
                     <fieldset className={confirmationCodeFocusedClass}>
-                        {confirmationCode && <legend>{this.translate('page.body.kyc.phone.code')}</legend>}
-                        <input
-                            className="pg-confirm__content-phone-col-content-number"
+                        <CustomInput
                             type="string"
-                            placeholder={this.translate('page.body.kyc.phone.code')}
-                            value={confirmationCode}
-                            onChange={this.handleChangeConfirmationCode}
-                            onFocus={this.handleFieldFocus('confirmationCode')}
-                            onBlur={this.handleFieldFocus('confirmationCode')}
+                            label={confirmationCode ? this.translate('page.body.kyc.phone.code') : ''}
+                            defaultLabel={confirmationCode ? this.translate('page.body.kyc.phone.code') : ''}
+                            handleChangeInput={this.handleChangeConfirmationCode}
                             onKeyPress={this.handleConfirmEnterPress}
+                            inputValue={confirmationCode}
+                            placeholder={this.translate('page.body.kyc.phone.code')}
+                            handleFocusInput={this.handleFieldFocus('confirmationCode')}
                         />
                     </fieldset>
                 </div>
@@ -168,11 +167,17 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
                     <Button
                         className="pg-confirm__content-deep-back"
                         onClick={this.backBtn}
+                        size="lg"
+                        variant="primary"
+                        block={true}
                     >{this.translate('page.body.kyc.back')}</Button>
                     <div className="pg-confirm__content-deep-margin" />
                     <Button
                         className="pg-confirm__content-phone-deep-button"
                         onClick={this.confirmPhone}
+                        size="lg"
+                        variant="primary"
+                        block={true}
                     >
                         {this.translate('page.body.kyc.next')}
                     </Button>
@@ -237,32 +242,32 @@ class PhoneComponent extends React.Component<Props, PhoneState> {
         }
     };
 
-    private handleChangePhoneNumber = (e: OnChangeEvent) => {
-        if (this.inputPhoneNumber(e)) {
+    private handleChangePhoneNumber = (value: string) => {
+        if (this.inputPhoneNumber(value)) {
             this.setState({
-                phoneNumber: e.target.value,
+                phoneNumber: value,
                 resendCode: false,
             });
         }
     };
 
-    private handleChangeConfirmationCode = (e: OnChangeEvent) => {
-        if (this.inputConfirmationCode(e)) {
+    private handleChangeConfirmationCode = (value: string) => {
+        if (this.inputConfirmationCode(value)) {
             this.setState({
-                confirmationCode: e.target.value,
+                confirmationCode: value,
             });
         }
     };
 
-    private inputPhoneNumber = (e: OnChangeEvent) => {
-        const convertedText = e.target.value.trim();
+    private inputPhoneNumber = (value: string) => {
+        const convertedText = value.trim();
         const condition = new RegExp('^\\+\\d*?$');
 
         return condition.test(convertedText);
     };
 
-    private inputConfirmationCode = (e: OnChangeEvent) => {
-        const convertedText = e.target.value.trim();
+    private inputConfirmationCode = (value: string) => {
+        const convertedText = value.trim();
         const condition = new RegExp('^\\d*?$');
 
         return condition.test(convertedText);
