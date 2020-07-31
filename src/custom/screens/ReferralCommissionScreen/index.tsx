@@ -493,14 +493,12 @@ class ReferralCommission extends React.Component<Props, State> {
                         </div>
                         <div>
                             <fieldset className={'copyable-text-field'} onClick={this.onCopy}>
-                                <legend className={'copyable-title'}>
-                                    Referral link
-                                </legend>
                                 <CopyableTextField
-                                    className={'cr-deposit-crypto__copyable-area'}
+                                    className="pg-copyable-text-field__input"
                                     value={`${window.location.origin}/signup?refid=${user.uid}`}
                                     fieldId={'copy_referral_link'}
                                     copyButtonText={'COPY'}
+                                    label="Referral link"
                                 />
                             </fieldset>
                         </div>
@@ -568,14 +566,12 @@ class ReferralCommission extends React.Component<Props, State> {
                         </div>
                         <div>
                             <fieldset className={'copyable-text-field'} onClick={this.onCopy}>
-                                <legend className={'copyable-title'}>
-                                    Referral link
-                                </legend>
                                 <CopyableTextField
-                                    className={'cr-deposit-crypto__copyable-area'}
+                                    className="pg-copyable-text-field__input"
                                     value={`${window.location.origin}/signup?refid=${user.uid}`}
                                     fieldId={'copy_referral_link'}
                                     copyButtonText={'COPY'}
+                                    label="Referral link"
                                 />
                             </fieldset>
                         </div>
