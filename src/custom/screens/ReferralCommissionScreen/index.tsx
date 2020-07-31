@@ -491,17 +491,15 @@ class ReferralCommission extends React.Component<Props, State> {
                                 usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(tradeConverted, activeCurrency), activeCurrency)} ${activeCurrency}`}
                             />
                         </div>
-                        <div>
-                            <fieldset className={'copyable-text-field'} onClick={this.onCopy}>
-                                <CopyableTextField
-                                    className="pg-copyable-text-field__input"
-                                    value={`${window.location.origin}/signup?refid=${user.uid}`}
-                                    fieldId={'copy_referral_link'}
-                                    copyButtonText={'COPY'}
-                                    label="Referral link"
-                                />
-                            </fieldset>
-                        </div>
+                        <fieldset className={'copyable-text-field'} onClick={this.onCopy}>
+                            <CopyableTextField
+                                className="pg-copyable-text-field__input"
+                                value={`${window.location.origin}/signup?refid=${user.uid}`}
+                                fieldId={'copy_referral_link'}
+                                copyButtonText={'COPY'}
+                                label="Referral link"
+                            />
+                        </fieldset>
                     </div>
 
                     <div className="section--transparent section--levels">
@@ -564,17 +562,15 @@ class ReferralCommission extends React.Component<Props, State> {
                                 usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(ieoConverted, activeCurrency), activeCurrency)} ${activeCurrency}`}
                             />
                         </div>
-                        <div>
-                            <fieldset className={'copyable-text-field'} onClick={this.onCopy}>
-                                <CopyableTextField
-                                    className="pg-copyable-text-field__input"
-                                    value={`${window.location.origin}/signup?refid=${user.uid}`}
-                                    fieldId={'copy_referral_link'}
-                                    copyButtonText={'COPY'}
-                                    label="Referral link"
-                                />
-                            </fieldset>
-                        </div>
+                        <fieldset className={'copyable-text-field'} onClick={this.onCopy}>
+                            <CopyableTextField
+                                className="pg-copyable-text-field__input"
+                                value={`${window.location.origin}/signup?refid=${user.uid}`}
+                                fieldId={'copy_referral_link'}
+                                copyButtonText={'COPY'}
+                                label="Referral link"
+                            />
+                        </fieldset>
                     </div>
 
                     <div className="section--transparent section--levels">
@@ -643,19 +639,15 @@ class ReferralCommission extends React.Component<Props, State> {
                                 usdConverted={`≈ ${this.trimNumber(this.getCoverteValue(referralConverted, activeCurrency), activeCurrency)} ${activeCurrency}`}
                             />
                         </div>
-                        <div>
-                            <fieldset className={'copyable-text-field'} onClick={this.onCopy}>
-                                <legend className={'copyable-title'}>
-                                    Referral link
-                                </legend>
-                                <CopyableTextField
-                                    className={'cr-deposit-crypto__copyable-area'}
-                                    value={`${window.location.origin}/signup?refid=${user.uid}`}
-                                    fieldId={'copy_referral_link'}
-                                    copyButtonText={'COPY'}
-                                />
-                            </fieldset>
-                        </div>
+                        <fieldset className={'copyable-text-field'} onClick={this.onCopy}>
+                            <CopyableTextField
+                                className="pg-copyable-text-field__input"
+                                value={`${window.location.origin}/signup?refid=${user.uid}`}
+                                fieldId={'copy_referral_link'}
+                                copyButtonText={'COPY'}
+                                label="Referral link"
+                            />
+                        </fieldset>
                     </div>
 
                     <div className="section--transparent section--levels">
