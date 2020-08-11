@@ -230,7 +230,7 @@ class CreditCardBuyFormWrapComponent extends React.Component<Props, State> {
         }
 
         let query = '';
-        const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        const parsed = qs.parse(window.location.search, { ignoreQueryPrefix: true });
         if (parsed.redirect_url) {
             query = `?redirect_url=${parsed.redirect_url}`;
             if (parsed.fiat && parsed.crypto && parsed.fiatValue) {

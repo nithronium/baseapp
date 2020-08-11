@@ -16,9 +16,6 @@ import { convert } from '../helpers';
 
 import { getExchangeRates } from '../../../../api';
 
-const excludedCurrencies = ['aed'];
-
-
 import {
     currenciesFetch,
     Currency,
@@ -32,6 +29,7 @@ import {
     selectOrderBook,
 } from '../../../../modules';
 
+const excludedCurrencies = ['aed'];
 
 interface ReduxProps {
     currencies: Currency[];
@@ -117,7 +115,7 @@ class CreditCardFormContainerLocal extends React.Component<Props, State> {
             markets.length !== nextProps.markets.length)
         {
             if (!nextProps.markets.length || !nextProps.currencies.length) { return; }
-            const query = qs.parse(location.search, { ignoreQueryPrefix: true });
+            const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
             let newCrypto = query.curr;
             const fiatList = this.getAvailableFiat(nextProps);
             const cryptoList = this.getAvailableCrypto(fiat, nextProps);

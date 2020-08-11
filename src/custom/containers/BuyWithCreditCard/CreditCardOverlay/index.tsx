@@ -38,7 +38,7 @@ export class CreditCardOverlayComponent extends React.Component<Props> {
     public handleButton = () => {
         const { history, step } = this.props;
         let query = `?redirect_url=buycrypto`;
-        const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+        const parsed = qs.parse(window.location.search, { ignoreQueryPrefix: true });
         if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
             query += `&fiat=${parsed.fiat}&crypto=${parsed.crypto}&fiatValue=${parsed.fiatValue}`;
         }

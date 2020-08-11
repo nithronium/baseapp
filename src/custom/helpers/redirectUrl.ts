@@ -1,7 +1,7 @@
 import * as qs from 'qs';
 
 export const getRedirectUrl = (isSpecific?) => {
-    const parsed = qs.parse(location.search, { ignoreQueryPrefix: true });
+    const parsed = qs.parse(window.location.search, { ignoreQueryPrefix: true });
     if (parsed.redirect_url) {
         let query = parsed.redirect_url;
         if (parsed.fiat && parsed.crypto && parsed.fiatValue) {
@@ -35,7 +35,7 @@ export const redirectIfSpecified = url => {
 export const redirect = callback => {
     const redirectUrl = getRedirectUrl(true);
     if (redirectUrl && redirectUrl.startsWith('/?')) {
-        location.replace(redirectUrl);
+        window.location.replace(redirectUrl);
 
         return;
     }
