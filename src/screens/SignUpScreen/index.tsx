@@ -253,7 +253,6 @@ class SignUp extends React.Component<Props> {
                 );
             default:
                 return null;
-
         }
     };
 

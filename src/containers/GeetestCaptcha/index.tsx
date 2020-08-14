@@ -44,7 +44,7 @@ class GeetestCaptchaComponent extends React.Component<Props> {
     }
 
     public componentWillReceiveProps(next: Props) {
-        if (this.props.geetestCaptchaKeys !== next.geetestCaptchaKeys && next.geetestCaptchaKeys !== undefined) {
+        if (this.props.geetestCaptchaKeys !== next.geetestCaptchaKeys && next.geetestCaptchaKeys !== undefined && !this.captchaContainerRef.current.children.length) {
             const {
                 geetestCaptchaKeys,
                 lang,
