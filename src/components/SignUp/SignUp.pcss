@@ -11,6 +11,7 @@
 
     a {
       color: white;
+      text-decoration: underline;
     }
   }
 
@@ -59,8 +60,8 @@
       &-input {
         &:checked ~ .custom-control-label {
           &::before {
-            background-color: var(--input-checkbox-background-color-active);
-            border-color: var(--input-border-color-active);
+            background-color: var(--input-background-color);
+            border-color: var(--primary-text-color);
             transition: 0.2s;
           }
         }
@@ -142,6 +143,10 @@
     left: 0;
     position: absolute;
     right: 0;
+
+    .btn {
+      text-transform: uppercase;
+    }
   }
 
   &__button-wrapper--empty {

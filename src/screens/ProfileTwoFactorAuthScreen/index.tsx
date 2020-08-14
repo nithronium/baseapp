@@ -135,9 +135,9 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
                             <div className="d-inline">
                                 <span>1   </span>
                                 {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.message.1')}
-                                <a target="_blank" rel="noopener noreferrer" href="https://itunes.apple.com/ru/app/google-authenticator/id388497605?mt=8">AppStore </a>
+                                <a className="pg-profile-two-factor-auth__links" target="_blank" rel="noopener noreferrer" href="https://itunes.apple.com/ru/app/google-authenticator/id388497605?mt=8">AppStore </a>
                                 {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.message.or')}
-                                <a target="_blank" rel="noopener noreferrer" href="https://apps.apple.com/us/app/authy/id494168017">Google play</a>
+                                <a className="pg-profile-two-factor-auth__links" target="_blank" rel="noopener noreferrer" href="https://apps.apple.com/us/app/authy/id494168017">Google play</a>
                                 {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.message.1-1')}
                             </div>
                         </div>
@@ -188,6 +188,7 @@ class ToggleTwoFactorAuthComponent extends React.Component<Props, State> {
                             variant="primary"
                             type="button"
                             block={true}
+                            className="pg-profile-two-factor-auth__button"
                         >
                             {this.translate('page.body.profile.header.account.content.twoFactorAuthentication.enable')}
                         </Button>

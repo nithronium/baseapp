@@ -698,7 +698,7 @@ class LayoutComponent extends React.Component<LayoutProps, LayoutState> {
                     />
                     {renderPluginsRoutes()}
                     {showLanding() && <Route exact={true} path="/" component={LandingScreen} />}
-                    <Route path="**"><Redirect to="/trading/" /></Route>
+                    <Route path="**"><Redirect to="/trading/:market" /></Route>
                 </Switch>
                 <LoginModal
                     classname={cx}

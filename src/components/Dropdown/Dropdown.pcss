@@ -28,6 +28,12 @@
         box-shadow: none !important;
         color: var(--dropdown-text-color-active) !important;
       }
+
+      &::after {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+      }
     }
 
     &-menu {
@@ -45,7 +51,7 @@
       &:hover,
       &:focus,
       &:active {
-        background: var(--dropdown-background-color-hover);
+        background: var(--table-header-text-color);
         outline: none;
         transition: 0.2s;
       }
