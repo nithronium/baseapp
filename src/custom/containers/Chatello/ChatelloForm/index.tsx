@@ -154,14 +154,7 @@ class ChatelloFormComponent extends React.Component<Props, State> {
     };
 
     public onSubmit = () => {
-        const { userLoggedIn, history, user, amount } = this.props;
-        let url = '/chatello';
-
-
-        if (amount) {
-            url = `${url}/${amount}`;
-        }
-
+        const { userLoggedIn, history, user } = this.props;
 
         if (!userLoggedIn) {
             history.push(`/signup?redirect_url='/chatello'`);

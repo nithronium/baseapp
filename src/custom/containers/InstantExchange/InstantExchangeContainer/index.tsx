@@ -231,7 +231,7 @@ class InstantExchangeContainerComponent extends React.Component<Props, State> {
                         <h2>
                             {this.translate('instantExchange.form.title')}
                             <div className="buy-form__bottom-text--help instant-exchange__form-help">
-                                <a target="_blank" href="https://kb.emirex.com/kb-tickets/new">
+                                <a target="_blank" rel="noopener noreferrer" href="https://kb.emirex.com/kb-tickets/new">
                                     {this.translate('buyWithCard.form.help')}
                                 </a>
                             </div>
@@ -291,6 +291,7 @@ class InstantExchangeContainerComponent extends React.Component<Props, State> {
             <iframe
                 src={buyWithCreditCard.data.url}
                 className="credit-card__iframe"
+                title="InstantExchangeIframe"
             />
         );
     };
