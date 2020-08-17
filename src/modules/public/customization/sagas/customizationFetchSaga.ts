@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
+import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
-import { alertPush } from '../../alert';
 import {
     customizationData,
     customizationError,
@@ -16,6 +16,6 @@ export function* customizationFetchSaga() {
         yield put(customizationData(customization));
     } catch (error) {
         yield put(customizationError(error));
-        yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+        yield put(sendError(error, 'alert'));
     }
 }

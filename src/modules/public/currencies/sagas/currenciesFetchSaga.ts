@@ -1,10 +1,7 @@
 import { call, put, takeLeading } from 'redux-saga/effects';
+import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
-import { alertPush } from '../../alert';
-import {
-    currenciesData,
-    currenciesError,
-} from '../actions';
+import { currenciesData, currenciesError } from '../actions';
 import { CURRENCIES_FETCH } from '../constants';
 
 const currenciesOptions: RequestOptions = {
@@ -21,6 +18,6 @@ export function* currenciesFetchSaga() {
         yield put(currenciesData(currencies));
     } catch (error) {
         yield put(currenciesError());
-        yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+        yield put(sendError(error, 'alert'));
     }
 }

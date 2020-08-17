@@ -1,10 +1,6 @@
-// tslint:disable-next-line
 import { call, put } from 'redux-saga/effects';
 import { API, RequestOptions } from '../../../../../api';
-import {
-    labelData,
-    labelError,
-} from '../actions';
+import { labelData, labelError } from '../actions';
 
 const userOptions: RequestOptions = {
     apiVersion: 'barong',

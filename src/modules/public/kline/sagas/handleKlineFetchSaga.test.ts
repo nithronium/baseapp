@@ -3,7 +3,7 @@ import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import { getTimestampPeriod } from '../../../../helpers';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
-import { alertPush, rootSaga } from '../../../index';
+import { rootSaga, sendError } from '../../../index';
 import {
     klineData,
     klineFetch,
@@ -60,7 +60,6 @@ describe('Kline', () => {
     const fakeError = {
         code: 500,
         message: ['Server error'],
-        type: 'error',
     };
 
     const mockKline = () => {
@@ -76,7 +75,7 @@ describe('Kline', () => {
 
     const expectedActionsError = [
         klineFetch(fakePayload),
-        alertPush(fakeError),
+        sendError(fakeError, 'alert'),
     ];
 
     it('should fetch kline in success flow', async () => {

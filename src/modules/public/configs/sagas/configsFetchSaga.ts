@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
+import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
-import { alertPush } from '../../alert';
 import { setBlocklistStatus } from '../../blocklistAccess';
 import { configsData, configsError } from '../actions';
 
@@ -15,6 +15,6 @@ export function* configsFetchSaga() {
         yield put(setBlocklistStatus({ status: 'allowed' }));
     } catch (error) {
         yield put(configsError(error));
-        yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+        yield put(sendError(error, 'alert'));
     }
 }

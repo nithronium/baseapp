@@ -2,8 +2,16 @@ import MockAdapter from 'axios-mock-adapter';
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import { rootSaga } from '../../..';
-import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
-import { emailVerificationData, emailVerificationError, emailVerificationFetch } from '../actions';
+import {
+    mockNetworkError,
+    setupMockAxios,
+    setupMockStore,
+} from '../../../../helpers/jest';
+import {
+    emailVerificationData,
+    emailVerificationError,
+    emailVerificationFetch,
+} from '../actions';
 
 describe('Email Verification Saga', () => {
     let store: MockStoreEnhanced;

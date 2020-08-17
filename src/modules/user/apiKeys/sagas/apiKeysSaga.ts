@@ -1,7 +1,7 @@
 // tslint:disable-next-line
 import { call, put } from 'redux-saga/effects';
+import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
-import { alertPush } from '../../../public/alert';
 import { apiKeys2FAModal, apiKeysData, ApiKeysFetch } from '../actions';
 
 const apiKeysOptions: RequestOptions = {
@@ -23,7 +23,7 @@ export function* apiKeysSaga(action: ApiKeysFetch) {
         }
         yield put(apiKeysData({ apiKeys, pageIndex, nextPageExists }));
     } catch (error) {
-        yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+        yield put(sendError(error, 'alert'));
     } finally {
         yield put(apiKeys2FAModal({active: false}));
     }

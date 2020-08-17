@@ -1,7 +1,7 @@
 // tslint:disable-next-line
 import { call, put } from 'redux-saga/effects';
+import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
-import { alertPush } from '../../../../modules/public/alert';
 import {
     beneficiariesData,
     beneficiariesError,
@@ -17,6 +17,6 @@ export function* beneficiariesSaga() {
         yield put(beneficiariesData(beneficiaries));
     } catch (error) {
         yield put(beneficiariesError(error));
-        yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+        yield put(sendError(error, 'alert'));
     }
 }

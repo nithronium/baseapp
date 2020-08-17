@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects';
+import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
-import { alertPush } from '../../../public/alert';
 import { changeLanguage } from '../../../public/i18n';
 import { userData } from '../../profile';
 import { signInError, SignInFetch, signInRequire2FA, signUpRequireVerification } from '../actions';
@@ -29,12 +29,12 @@ export function* signInSaga(action: SignInFetch) {
                 if (error.message.indexOf('identity.session.missing_otp') > -1) {
                     yield put(signInRequire2FA({ require2fa: true }));
                 } else {
-                    yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+                    yield put(sendError(error, 'alert'));
                 }
                 break;
             default:
                 yield put(signInError(error));
-                yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+                yield put(sendError(error, 'alert'));
         }
     }
 }

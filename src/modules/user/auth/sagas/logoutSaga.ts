@@ -1,7 +1,7 @@
 // tslint:disable-next-line
 import { call, put } from 'redux-saga/effects';
+import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
-import { alertPush } from '../../../public/alert';
 import { signInRequire2FA } from '../../auth';
 import { resetHistory } from '../../history';
 import { userOpenOrdersReset } from '../../openOrders';
@@ -22,6 +22,6 @@ export function* logoutSaga(action: LogoutFetch) {
         yield put(resetHistory());
     } catch (error) {
         yield put(logoutError(error));
-        yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+        yield put(sendError(error, 'alert'));
     }
 }

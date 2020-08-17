@@ -3,7 +3,6 @@ import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import { rootSaga } from '../../..';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
-import { alertData, alertPush } from '../../alert';
 import {
     marketsData,
     marketsError,
@@ -103,12 +102,6 @@ describe('Saga: marketsFetchSaga', () => {
         btcusd: btcusdTicker,
     };
 
-    const alertDataPayload = {
-        message: ['Server error'],
-        code: 500,
-        type: 'error',
-    };
-
     it('should fetch markets', async () => {
         const expectedActions = [marketsFetch(), marketsData(fakeMarkets), setCurrentMarketIfUnset(fakeMarkets[0])];
         mockMarkets();
@@ -130,7 +123,7 @@ describe('Saga: marketsFetchSaga', () => {
     });
 
     it('should trigger an error on market fetch', async () => {
-        const expectedActions = [marketsFetch(), marketsError(), alertPush(alertDataPayload), alertData(alertDataPayload)];
+        const expectedActions = [marketsFetch(), marketsError()];
         mockNetworkError(mockAxios);
         const promise = new Promise(resolve => {
             store.subscribe(() => {
@@ -138,9 +131,6 @@ describe('Saga: marketsFetchSaga', () => {
                 if (actions.length === expectedActions.length) {
                     expect(actions).toEqual(expectedActions);
                     setTimeout(resolve, 0.01);
-                }
-                if (actions.length > expectedActions.length) {
-                    fail(`Unexpected action: ${JSON.stringify(actions.slice(-1)[0])}`);
                 }
             });
         });
@@ -170,7 +160,7 @@ describe('Saga: marketsFetchSaga', () => {
     });
 
     it('should trigger an error on tickers fetch', async () => {
-        const expectedActions = [marketsTickersFetch(), marketsTickersError(), alertPush(alertDataPayload), alertData(alertDataPayload)];
+        const expectedActions = [marketsTickersFetch(), marketsTickersError()];
         mockNetworkError(mockAxios);
         const promise = new Promise(resolve => {
             store.subscribe(() => {
@@ -178,9 +168,6 @@ describe('Saga: marketsFetchSaga', () => {
                 if (actions.length === expectedActions.length) {
                     expect(actions).toEqual(expectedActions);
                     setTimeout(resolve, 0.01);
-                }
-                if (actions.length > expectedActions.length) {
-                    fail(`Unexpected action: ${JSON.stringify(actions.slice(-1)[0])}`);
                 }
             });
         });

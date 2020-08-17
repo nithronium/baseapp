@@ -1,5 +1,5 @@
 import { call, put } from 'redux-saga/effects';
-import { alertPush } from '../../..';
+import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
 import {
     userOrdersHistoryData,
@@ -29,6 +29,6 @@ export function* ordersHistorySaga(action: UserOrdersHistoryFetch) {
         yield put(userOrdersHistoryData({ list: data, nextPageExists, pageIndex }));
     } catch (error) {
         yield put(userOrdersHistoryError());
-        yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+        yield put(sendError(error, 'alert'));
     }
 }

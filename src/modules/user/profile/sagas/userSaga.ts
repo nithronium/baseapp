@@ -1,4 +1,5 @@
 import { call, put } from 'redux-saga/effects';
+import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
 import { userData, userError } from '../actions';
 
@@ -12,5 +13,6 @@ export function* userSaga() {
         yield put(userData({ user }));
     } catch (error) {
         yield put(userError(error));
+        yield put(sendError(error, 'alert'));
     }
 }

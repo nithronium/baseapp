@@ -1,8 +1,8 @@
 // tslint:disable-next-line
 import { call, put } from 'redux-saga/effects';
+import { sendError } from '../../../';
 import { API, RequestOptions } from '../../../../api';
 import { getCsrfToken } from '../../../../helpers';
-import { alertPush } from '../../../index';
 import { generate2faQRData, generate2faQRError } from '../actions';
 
 const generate2faQROptions = (csrfToken?: string): RequestOptions => {
@@ -26,6 +26,6 @@ export function* generate2faQRSaga() {
         yield put(generate2faQRData({ barcode, url }));
     } catch (error) {
         yield put(generate2faQRError(error));
-        yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+        yield put(sendError(error, 'alert'));
     }
 }

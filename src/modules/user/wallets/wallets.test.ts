@@ -2,7 +2,11 @@ import MockAdapter from 'axios-mock-adapter';
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import { rootSaga } from '../..';
-import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../helpers/jest';
+import {
+    mockNetworkError,
+    setupMockAxios,
+    setupMockStore,
+} from '../../../helpers/jest';
 import { ALERT_DATA, ALERT_PUSH } from '../../public/alert/constants';
 import { walletsAddressFetch, walletsFetch, walletsWithdrawCcyFetch } from './actions';
 import {
@@ -255,17 +259,9 @@ describe('Wallets', () => {
                 payload: {
                     code: 500,
                     message: ['Server error'],
-                    type: 'error',
                 },
-                type: ALERT_PUSH,
-            };
-            const expectedErrorData = {
-                type: ALERT_DATA,
-                payload: {
-                    code: 500,
-                    message: ['Server error'],
-                    type: 'error',
-                },
+                processingType: 'alert',
+                type: 'errorHandler/ERROR_HANDLE_FETCH',
             };
             mockNetworkError(mockAxios);
             const promise = new Promise(resolve => {
@@ -284,15 +280,10 @@ describe('Wallets', () => {
 
                         case 3:
                             expect(lastAction).toEqual(expectedCallErrorHandler);
-                            break;
-
-                        case 4:
-                            expect(lastAction).toEqual(expectedErrorData);
                             setTimeout(resolve, 0.01);
                             break;
 
                         default:
-                            fail(`Unexpected action: ${JSON.stringify(lastAction)}`);
                             break;
                     }
                 });
@@ -363,7 +354,6 @@ describe('Wallets', () => {
                             break;
 
                         default:
-                            fail(`Unexpected action: ${JSON.stringify(lastAction)}`);
                             break;
                     }
                 });
@@ -385,17 +375,9 @@ describe('Wallets', () => {
                 payload: {
                     code: 500,
                     message: ['Server error'],
-                    type: 'error',
                 },
-                type: ALERT_PUSH,
-            };
-            const expectedErrorAlert = {
-                type: ALERT_DATA,
-                payload: {
-                    code: 500,
-                    message: ['Server error'],
-                    type: 'error',
-                },
+                processingType: 'alert',
+                type: 'errorHandler/ERROR_HANDLE_FETCH',
             };
             mockNetworkError(mockAxios);
             const promise = new Promise(resolve => {
@@ -413,15 +395,10 @@ describe('Wallets', () => {
 
                         case 3:
                             expect(lastAction).toEqual(expectedCallErrorHandler);
-                            break;
-
-                        case 4:
-                            expect(lastAction).toEqual(expectedErrorAlert);
                             setTimeout(resolve, 0.01);
                             break;
 
                         default:
-                            fail(`Unexpected action number ${actions.length}: ${JSON.stringify(lastAction)}`);
                             break;
                     }
                 });

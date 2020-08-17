@@ -50,11 +50,11 @@ describe('KYC - Addresses', () => {
 
         const expectedCallErrorHandler = {
             payload: {
-                type: 'error',
                 code: 500,
                 message: ['Server error'],
             },
-            type: 'alert/ALERT_PUSH',
+            processingType: 'alert',
+            type: 'errorHandler/ERROR_HANDLE_FETCH',
         };
 
         const mockConfirmAddressesFetch = () => {

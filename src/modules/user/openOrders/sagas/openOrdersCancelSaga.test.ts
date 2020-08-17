@@ -2,7 +2,11 @@ import MockAdapter from 'axios-mock-adapter';
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import { rootSaga } from '../../..';
-import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
+import {
+    mockNetworkError,
+    setupMockAxios,
+    setupMockStore,
+} from '../../../../helpers/jest';
 import { alertPush } from '../../../public/alert';
 import { OrderCommon } from '../../../types';
 import { openOrdersCancelError, openOrdersCancelFetch } from '../actions';
@@ -22,12 +26,6 @@ describe('Open Orders Cancel', () => {
     afterEach(() => {
         mockAxios.reset();
     });
-
-    const fakeError = {
-        code: 500,
-        message: ['Server error'],
-        type: 'error',
-    };
 
     const fakeOrder: OrderCommon = {
         id: 16,
@@ -101,7 +99,6 @@ describe('Open Orders Cancel', () => {
     const expectedActionsError = [
         openOrdersCancelFetch(fakeFetchPayload),
         openOrdersCancelError(),
-        alertPush(fakeError),
     ];
 
     const expectedActionsFinexFetch = [

@@ -1,8 +1,8 @@
 // tslint:disable-next-line
 import { call, put } from 'redux-saga/effects';
+import { sendError } from '../../../';
 import { API, defaultStorageLimit, RequestOptions } from '../../../../api';
 import { getHistorySagaParam, sliceArray } from '../../../../helpers';
-import { alertPush } from '../../../public/alert';
 import { failHistory, HistoryFetch, successHistory } from '../actions';
 
 const config: RequestOptions = {
@@ -44,6 +44,6 @@ export function* historySaga(action: HistoryFetch) {
         yield put(successHistory({ list: updatedData, page, nextPageExists }));
     } catch (error) {
         yield put(failHistory([]));
-        yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+        yield put(sendError(error, 'alert'));
     }
 }

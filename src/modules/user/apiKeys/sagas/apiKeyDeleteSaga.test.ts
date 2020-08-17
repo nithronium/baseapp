@@ -2,7 +2,7 @@ import MockAdapter from 'axios-mock-adapter';
 import { MockStoreEnhanced } from 'redux-mock-store';
 import createSagaMiddleware, { SagaMiddleware } from 'redux-saga';
 import { mockNetworkError, setupMockAxios, setupMockStore } from '../../../../helpers/jest';
-import { alertPush, rootSaga } from '../../../../modules/index';
+import { rootSaga, sendError } from '../../../../modules/index';
 import { apiKeyDelete, apiKeyDeleteFetch } from '../actions';
 
 describe('api keys saga', () => {
@@ -29,7 +29,6 @@ describe('api keys saga', () => {
     const fakeError = {
         code: 500,
         message: ['Server error'],
-        type: 'error',
     };
 
     const url = `/resource/api_keys/${fakeKeyId}?totp_code=${fakeTotpCode}`;
@@ -45,7 +44,7 @@ describe('api keys saga', () => {
 
     const expectedpdateApiKeyFetchError = [
         apiKeyDeleteFetch(fakePayload),
-        alertPush(fakeError),
+        sendError(fakeError, 'alert'),
     ];
 
     it('should delete api key', async () => {
@@ -80,4 +79,3 @@ describe('api keys saga', () => {
         return promise;
     });
 });
-

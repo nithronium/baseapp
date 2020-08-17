@@ -1,8 +1,8 @@
 // tslint:disable-next-line
 import { call, put } from 'redux-saga/effects';
+import { alertPush, sendError } from '../../../';
 import { API, isFinexEnabled, RequestOptions } from '../../../../api';
 import { getCsrfToken, getOrderAPI } from '../../../../helpers';
-import { alertPush } from '../../../index';
 import { openOrdersCancelError, OpenOrdersCancelFetch } from '../actions';
 
 const ordersCancelOptions = (csrfToken?: string): RequestOptions => {
@@ -32,6 +32,6 @@ export function* openOrdersCancelSaga(action: OpenOrdersCancelFetch) {
         yield put(alertPush({ message: ['success.order.cancelling'], type: 'success'}));
     } catch (error) {
         yield put(openOrdersCancelError());
-        yield put(alertPush({message: error.message, code: error.code, type: 'error'}));
+        yield put(sendError(error, 'alert'));
     }
 }
