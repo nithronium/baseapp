@@ -467,6 +467,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                     nationality: metadata.nationality,
                     state: currentUserState,
                 }),
+                confirm: true,
             };
         } else {
             profileInfo = {
@@ -475,6 +476,7 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                 dob,
                 country: countryOfBirth,
                 metadata: JSON.stringify(metadata),
+                confirm: true,
             };
         }
 

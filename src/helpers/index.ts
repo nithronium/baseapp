@@ -36,3 +36,4 @@ export * from './geetest';
 export * from './getCsrfToken';
 export * from './cleanPositiveFloatInput';
 export * from './getOrderAPI';
+export * from './randomSecretHex';
