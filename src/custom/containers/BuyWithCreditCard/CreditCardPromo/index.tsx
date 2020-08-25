@@ -20,10 +20,11 @@ class CreditCardPromoComponent extends React.Component<Props> {
 
     public goToCommissions = () => {
         const { userLoggedIn, history } = this.props;
+        window.scrollTo(0, 0);
         if (userLoggedIn) {
-            history.location.assign('referral-commission');
+            history.push('/referral-commission');
         } else {
-            history.location.assign(`/signin?redirect_url=${encodeURIComponent('/referral-commission')}`);
+            history.push(`/signin?redirect_url=${encodeURIComponent('/referral-commission')}`);
         }
     };
 
