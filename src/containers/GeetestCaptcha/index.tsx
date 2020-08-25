@@ -30,9 +30,9 @@ interface DispatchProps {
 type Props = ReduxProps & DispatchProps & OwnProps;
 
 class GeetestCaptchaComponent extends React.Component<Props> {
-
     public constructor(props) {
         super(props);
+
         this.captchaContainerRef = React.createRef();
     }
 
@@ -44,11 +44,12 @@ class GeetestCaptchaComponent extends React.Component<Props> {
     }
 
     public componentWillReceiveProps(next: Props) {
-        if (this.props.geetestCaptchaKeys !== next.geetestCaptchaKeys && next.geetestCaptchaKeys !== undefined && !this.captchaContainerRef.current.children.length) {
+        if (!this.props.geetestCaptchaKeys && next.geetestCaptchaKeys) {
             const {
                 geetestCaptchaKeys,
                 lang,
             } = next;
+            this.reset();
             initGeetest({
                 gt: geetestCaptchaKeys.gt,
                 challenge: geetestCaptchaKeys.challenge,
