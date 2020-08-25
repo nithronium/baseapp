@@ -176,7 +176,7 @@ const linkBlock = {
 };
 
 const getOriginLink = (intl, href, mainsite) => {
-    return `${mainsite ? window.location.origin : ''}${intl === 'en' ? '' : '/'+intl}${href}`
+    return `${mainsite ? window.location.origin : ''}${intl ? intl === 'en' ? '' : '/' + intl : ''}${href}`
 };
 
 const LinksList = ({ links, intl }) => {
