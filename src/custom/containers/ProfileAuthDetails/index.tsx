@@ -22,6 +22,7 @@ import {
     selectUserInfo,
     toggle2faFetch,
     User,
+    userFetch,
 } from '../../../modules';
 import {
     changePasswordFetch,
@@ -50,6 +51,7 @@ interface DispatchProps {
     changePassword: typeof changePasswordFetch;
     clearPasswordChangeError: () => void;
     toggle2fa: typeof toggle2faFetch;
+    userFetch: typeof userFetch;
 }
 
 interface ProfileProps {
@@ -68,6 +70,7 @@ interface State {
     isConfirm2faOpen: boolean;
     code2FA: string;
     code2FAFocus: boolean;
+    is2faEnable: boolean;
 }
 
 type Props = ReduxProps & DispatchProps & RouterProps & ProfileProps & InjectedIntlProps & OnChangeEvent;
@@ -89,7 +92,14 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
             isConfirm2faOpen: false,
             code2FA: '',
             code2FAFocus: false,
+            is2faEnable: false,
         };
+    }
+
+    public componentDidMount() {
+        this.setState({
+            is2faEnable: this.props.user.otp,
+        });
     }
 
     public componentWillReceiveProps(next: Props) {
@@ -339,7 +349,7 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
     private renderProfileTwoFactor = () => {
         return (
             <div className="pg-profile-page__row">
-                <ProfileTwoFactorAuth is2faEnabled={this.props.user.otp} navigateTo2fa={this.handleNavigateTo2fa}/>
+                <ProfileTwoFactorAuth is2faEnabled={this.state.is2faEnable} navigateTo2fa={this.handleNavigateTo2fa}/>
             </div>
         );
     };
@@ -429,6 +439,9 @@ class ProfileAuthDetailsComponent extends React.Component<Props, State> {
             code: this.state.code2FA,
             enable: false,
         });
+
+        this.setState({ is2faEnable: false });
+
         this.closeModal();
         this.handleChange2FACode('');
     };
@@ -553,6 +566,7 @@ const mapDispatchToProps = dispatch => ({
     changePassword: ({ old_password, new_password, confirm_password }) =>
         dispatch(changePasswordFetch({ old_password, new_password, confirm_password })),
     toggle2fa: ({ code, enable }) => dispatch(toggle2faFetch({ code, enable })),
+    userFetch: () => dispatch(userFetch()),
 });
 
 const ProfileAuthDetailsConnected = injectIntl(connect(mapStateToProps, mapDispatchToProps)(ProfileAuthDetailsComponent));
