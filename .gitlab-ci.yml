@@ -1,30 +1,119 @@
-variables:
-  APP: "frontend"
-  ENVIRONMENT: "ce3422"
-  CONTEINER_REPO: "eu.gcr.io/emirex-preprod/ci-test"
-  CONTAINER_BACKUP_IMAGE: $CONTEINER_REPO/$CI_REGISTRY_IMAGE/$CI_BUILD_REF_SLUG:$CI_COMMIT_SHORT_SHA
-  CONTAINER_RELEASE_IMAGE: $CONTEINER_REPO/$CI_REGISTRY_IMAGE/$CI_BUILD_REF_SLUG:latest
-
 stages:
   - build
-  - deploy
+  - registry
+  - deploy:review
 
-compile:
+variables:
+  _toolbox_ref: dev
+  _toolbox_project_id: 18613495
+  _toolbox_job_name: package:emirex_apps
+  _img_repo: $CI_REGISTRY_IMAGE
+  _img_name: $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
+  _img_tag: $CI_COMMIT_SHORT_SHA
+  _build_img: $CI_REGISTRY_IMAGE/$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG:$CI_COMMIT_SHORT_SHA
+  _env_name: $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
+  _app_chart: frontend
+
+.mk_docker_config: &mk_docker_config
+  - rm ~/.docker/config.json
+  - echo $CI_DEPLOY_PASSWORD | docker login -u $CI_DEPLOY_USER --password-stdin $CI_REGISTRY
+
+.mk_registry_secret: &mk_registry_secret
+  - echo Running in $(pwd)
+  - echo HOME=$HOME
+  - |
+    ansible-playbook emirex-apps/ci-secrets.yaml -e env=$_env_name -e foreign_registry_config=$_gl_global_registry
+  - |
+    KUBECONFIG=$HOME/.kube/config kubectl \
+    --namespace $_env_name-app get secret $_env_name -o yaml > emirex-apps/environments/$_env_name.yaml
+
+.get_toolbox: &get_toolbox
+  - |
+    curl \
+    --location \
+    --verbose \
+    --silent \
+    --header "PRIVATE-TOKEN: $_toolbox_token" \
+    --output emirex-apps.zip \
+    https://gitlab.com/api/v4/projects/$_toolbox_project_id/jobs/artifacts/$_toolbox_ref/download?job=$_toolbox_job_name
+    unzip -u -o emirex-apps.zip
+    ls -la
+
+build:
   stage: build
+  before_script:
+    - *mk_docker_config
   script:
-    - docker build -t $CONTAINER_BACKUP_IMAGE -t $CONTAINER_RELEASE_IMAGE --build-arg REACT_APP_BUILD_VERSION=Enterprise --build-arg NPM_AUTH_TOKEN="$NPM_AUTH_TOKEN" --build-arg BUILD_DOMAIN=emirex.co .
-    - echo $CONTAINER_BACKUP_IMAGE
-    - docker push $CONTAINER_BACKUP_IMAGE
-    - echo $CONTAINER_RELEASE_IMAGE
-    - docker push $CONTAINER_RELEASE_IMAGE
+    - |
+      docker build -t $_img_repo/$_img_name:$_img_tag \
+      --build-arg REACT_APP_BUILD_VERSION=Enterprise \
+      --build-arg NPM_AUTH_TOKEN=$NPM_AUTH_TOKEN \
+      --build-arg BUILD_DOMAIN="$_env_name.emirex.co" \
+      .
   tags:
-    - staging
+    - hetzner
+    - shell
 
-deploy-to-review:
-  stage: deploy
+push:
+  stage: registry
+  variables:
+    GIT_STRATEGY: none
+  before_script:
+    - *mk_docker_config
   script:
-    - echo "Deploy \"$APP\" docker-image \"$CONTAINER_RELEASE_IMAGE\" to \"$ENVIRONMENT\""
-    - ansible-playbook ~/hetzner-cfg/emirex-apps/deploy.yaml --tags app -e env=$ENVIRONMENT -e charts=$APP
+    - docker push $_img_repo/$_img_name:$_img_tag
+    - docker tag  $_img_repo/$_img_name:$_img_tag $_img_repo/$_img_name:latest
+    - docker push $_img_repo/$_img_name:latest
   tags:
-    - staging
+    - hetzner
+    - shell
 
+deploy:review:
+  stage: deploy:review
+  variables:
+    GIT_STRATEGY: none
+  environment:
+    name: $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
+    url: https://$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG.emirex.co
+    auto_stop_in: 36 hours
+    on_stop: abandon
+  cache:
+    key: $_env_name-base
+    paths:
+      - emirex-apps/environments/$_env_name
+  before_script:
+    - *mk_docker_config
+    - *get_toolbox
+    - *mk_registry_secret
+  script:
+    - *get_toolbox
+    - export CMD_ANS="ansible-playbook emirex-apps/deploy.yaml -e env=$_env_name -e @$_inject_vars_26"
+    - echo "$CMD_ANS"
+    - eval "$CMD_ANS"
+  artifacts:
+    name: $_env_name-review
+    paths:
+      - emirex-apps/environments/$_env_name
+      - emirex-apps/environments/$_env_name.yaml
+  tags:
+    - hetzner
+    - shell
+
+abandon:
+  stage: deploy:review
+  variables:
+    GIT_STRATEGY: none
+  environment:
+    name: $CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG
+    url: https://$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG.emirex.co
+    action: stop
+  before_script:
+    - *mk_docker_config
+    - *get_toolbox
+  script:
+    - |
+      ansible-playbook emirex-apps/destroy.yaml -e env=$_env_name --tags wipeout,configdata
+  when: manual
+  tags:
+    - hetzner
+    - shell
