@@ -4,7 +4,7 @@ stages:
   - deploy:review
 
 variables:
-  _toolbox_ref: dev
+  _toolbox_ref: opendax-2.6
   _toolbox_project_id: 18613495
   _toolbox_job_name: package:emirex_apps
   _img_repo: $CI_REGISTRY_IMAGE
