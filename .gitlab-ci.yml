@@ -42,31 +42,31 @@ variables:
 build:
   stage: build
   before_script:
-    - *mk_docker_config
+  - *mk_docker_config
   script:
-    - |
-      docker build -t $_img_repo/$_img_name:$_img_tag \
-      --build-arg REACT_APP_BUILD_VERSION=Enterprise \
-      --build-arg NPM_AUTH_TOKEN=$NPM_AUTH_TOKEN \
-      --build-arg BUILD_DOMAIN="$_env_name.emirex.co" \
-      .
+  - |
+    docker build -t $_img_repo/$_img_name:$_img_tag \
+    --build-arg REACT_APP_BUILD_VERSION=Enterprise \
+    --build-arg NPM_AUTH_TOKEN=$NPM_AUTH_TOKEN \
+    --build-arg BUILD_DOMAIN="$_env_name.emirex.co" \
+    .
   tags:
-    - hetzner
-    - shell
+  - hetzner
+  - shell
 
 push:
   stage: registry
   variables:
     GIT_STRATEGY: none
   before_script:
-    - *mk_docker_config
+  - *mk_docker_config
   script:
-    - docker push $_img_repo/$_img_name:$_img_tag
-    - docker tag  $_img_repo/$_img_name:$_img_tag $_img_repo/$_img_name:latest
-    - docker push $_img_repo/$_img_name:latest
+  - docker push $_img_repo/$_img_name:$_img_tag
+  - docker tag  $_img_repo/$_img_name:$_img_tag $_img_repo/$_img_name:latest
+  - docker push $_img_repo/$_img_name:latest
   tags:
-    - hetzner
-    - shell
+  - hetzner
+  - shell
 
 deploy:review:
   stage: deploy:review
@@ -80,24 +80,22 @@ deploy:review:
   cache:
     key: $_env_name-base
     paths:
-      - emirex-apps/environments/$_env_name
+    - emirex-apps/environments/$_env_name
   before_script:
-    - *mk_docker_config
-    - *get_toolbox
-    - *mk_registry_secret
+  - *mk_docker_config
+  - *get_toolbox
+  - *mk_registry_secret
   script:
-    - *get_toolbox
-    - export CMD_ANS="ansible-playbook emirex-apps/deploy.yaml -e env=$_env_name -e @$_inject_vars_26"
-    - echo "$CMD_ANS"
-    - eval "$CMD_ANS"
+  - cat $_inject_vars_26 | jq .
+  - ansible-playbook emirex-apps/deploy.yaml -e env=$_env_name -e "@$_inject_vars_26"
   artifacts:
     name: $_env_name-review
     paths:
-      - emirex-apps/environments/$_env_name
-      - emirex-apps/environments/$_env_name.yaml
+    - emirex-apps/environments/$_env_name
+    - emirex-apps/environments/$_env_name.yaml
   tags:
-    - hetzner
-    - shell
+  - hetzner
+  - shell
 
 abandon:
   stage: deploy:review
@@ -108,11 +106,10 @@ abandon:
     url: https://$CI_PROJECT_NAME-$CI_COMMIT_REF_SLUG.emirex.co
     action: stop
   before_script:
-    - *mk_docker_config
-    - *get_toolbox
+  - *mk_docker_config
+  - *get_toolbox
   script:
-    - |
-      ansible-playbook emirex-apps/destroy.yaml -e env=$_env_name --tags wipeout,configdata
+  - ansible-playbook emirex-apps/destroy.yaml -e env=$_env_name --tags wipeout,configdata
   when: manual
   tags:
     - hetzner
