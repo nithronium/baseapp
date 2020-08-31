@@ -193,7 +193,6 @@ class ProfilePartialComponent extends React.Component<Props, State> {
             metadata,
         } = this.state;
 
-
         const dateOfBirthGroupClass = cr('pg-confirm__content-identity-col-row-content', {
             'pg-confirm__content-identity-col-row-content--focused': dateOfBirthFocused,
             'pg-confirm__content-identity-col-row-content--wrong': dateOfBirth && !this.handleValidateInput('dateOfBirth', dateOfBirth),
