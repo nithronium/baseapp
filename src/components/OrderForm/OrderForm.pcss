@@ -17,10 +17,21 @@
   }
 
   .dropdown-toggle {
-    font-size: calc(var(--gap) * 2);
+    font-size: 14px;
     height: calc(var(--gap) * 7);
     padding-left: calc(var(--gap) * 2);
     text-align: left;
+  }
+
+  .cr-dropdown .show > .btn-primary.dropdown-toggle {
+    border: 1px solid var(--table-text-color) !important;
+  }
+
+  .cr-dropdown .dropdown-toggle {
+    &:active,
+    &:focus {
+      border: 1px solid var(--table-text-color) !important;
+    }
   }
 
   &__dropdown__label {
