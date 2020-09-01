@@ -1,7 +1,6 @@
 .pg-wrapper {
   background: url(assets/images/background.svg);
   background-size: cover;
-  height: 100vh;
 
   .pg-logo {
     display: flex;
@@ -18,7 +17,9 @@
   align-items: center;
   display: flex;
   justify-content: center;
+  margin: 0 auto;
   margin-top: calc(var(--big-gap) * 1);
+  width: 560px;
 
   &__loader {
     align-items: center;
@@ -36,7 +37,7 @@
     box-shadow: 1px 1px 5px rgba(46, 76, 128, 0.2);
     display: block;
     margin: 0 auto;
-    max-height: calc(var(--big-gap) * 10);
+    max-height: max-content;
     max-width: calc(var(--big-gap) * 9.33);
     position: relative;
     width: 100%;
@@ -311,6 +312,7 @@
 
     input,
     button {
+      margin-right: 0 !important;
       outline: none;
     }
 
@@ -319,6 +321,15 @@
       justify-content: center;
       margin: 0 calc(var(--gap) * 4);
       padding-bottom: 30px;
+      width: auto;
+
+      &-back {
+        background: #e85e59 !important;
+      }
+
+      &-margin {
+        width: 50px;
+      }
     }
   }
 

@@ -302,6 +302,7 @@ class QuestionnaireContainer extends React.Component<Props, State> {
                     {this.renderQuestions()}
                     <div className="pg-questionnaire__button">
                         <Button
+                            size="lg"
                             className="pg-questionnaire__button__item"
                             onClick={this.handleClickConfirm}
                             disabled={questionnaire.length !== 18 || !this.handleValidateQuestionnaire(questionnaire)}

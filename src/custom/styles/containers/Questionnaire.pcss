@@ -3,7 +3,6 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin-bottom: 50px;
   max-height: 100%;
   width: 100%;
 
@@ -144,9 +143,11 @@
         width: 100%;
 
         legend {
-          background-color: var(--base-bright);
-          margin-top: -14px;
+          background-color: var(--body-background-color);
+          margin-top: -11px;
+          padding: 0 5px;
           position: absolute;
+          width: auto;
         }
 
         &__input {
@@ -185,18 +186,21 @@
       border-bottom: none;
       display: flex;
       flex-direction: column;
+      position: relative;
       width: 100%;
 
       legend {
-        background-color: var(--base-bright);
+        background-color: var(--body-background-color);
+        bottom: 119px;
         color: var(--kyc-grey);
         font-family: 'Noto Sans SC';
         font-size: 12px;
         font-style: normal;
         font-weight: normal;
-        margin-left: 13px;
-        margin-top: 30px;
+        left: 40px;
+        padding: 0 5px;
         position: absolute;
+        width: auto;
       }
 
       &__textarea {

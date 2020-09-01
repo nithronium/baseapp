@@ -21,6 +21,7 @@ import {
 import { IdentityData } from '../../../../modules/user/kyc/identity/types';
 import { changeUserProfileData } from '../../../../modules/user/profile';
 
+import { Button } from 'react-bootstrap';
 import { buildPath, getRedirectUrl, handleRedirectToConfirm, redirect, redirectIfSpecified } from '../../../helpers';
 
 
@@ -239,14 +240,15 @@ class ProfileAddressComponent extends React.Component<Props, State> {
                   </div>
                 </div>
                 <div className="pg-confirm__content-deep">
-                    <button
+                    <Button
                         className={`cr-button pg-confirm__content-phone-deep-button ${buttonDisabled ? 'cr-button--disabled' : ''}`}
                         onClick={this.sendData}
                         disabled={buttonDisabled}
-                        style={{ color: '#fff' }}
+                        size="lg"
+                        block={true}
                     >
                         {this.translate('page.body.kyc.next')}
-                    </button>
+                    </Button>
                 </div>
             </div>
         );
