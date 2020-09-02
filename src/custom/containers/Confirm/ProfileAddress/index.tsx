@@ -108,32 +108,34 @@ class ProfileAddressComponent extends React.Component<Props, State> {
 //tslint:disable
     public componentDidMount() {
         const { user } = this.props;
-        if (user.profile) {
+        const profile = user.profiles.length && user.profiles[user.profiles.length - 1];
+
+        if (profile) {
             const { city, postcode, residentialAddress, state } = this.state;
-            this.getAddress(user, city, postcode, residentialAddress, state);
+            this.getAddress(profile, city, postcode, residentialAddress, state);
         }
     }
 
-    public getAddress = (user, city, postcode, residentialAddress, state ) => {
-        if (user.profile.city && user.profile.city !== city) {
+    public getAddress = (profile, city, postcode, residentialAddress, state ) => {
+        if (profile.city && profile.city !== city) {
             this.setState({
-                city: user.profile.city,
+                city: profile.city,
             });
         }
 
-        if (user.profile.postcode && user.profile.postcode !== postcode) {
+        if (profile.postcode && profile.postcode !== postcode) {
             this.setState({
-                postcode: user.profile.postcode,
+                postcode: profile.postcode,
             });
         }
 
-        if (user.profile.address && user.profile.address !== residentialAddress) {
+        if (profile.address && profile.address !== residentialAddress) {
             this.setState({
-                residentialAddress: user.profile.address,
+                residentialAddress: profile.address,
             });
         }
 
-        const currentState = user.profile.metadata && JSON.parse(user.profile.metadata).state;
+        const currentState = profile.metadata && JSON.parse(profile.metadata).state;
         if (currentState && currentState !== state) {
             this.setState({
                 state: currentState,

@@ -431,6 +431,9 @@ class ConfirmComponent extends React.Component<Props, ConfirmState> {
         }
         this.handleCheckPendingLabels(labels);
         if (locationState === 'profilePartialStep') {
+            return <Documents />;
+        }
+        if (locationState === 'profilePartialStep') {
             return <ProfilePartial toggleBlockNationalityModal={this.handleToggleBlockNationalityModal} />;
         }
 

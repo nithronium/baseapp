@@ -199,12 +199,16 @@ class DocumentsComponent extends React.Component<Props, DocumentsState> {
                     <Button
                         className="pg-confirm__content-deep-back"
                         onClick={this.backBtn}
+                        size="lg"
+                        block={true}
                     >{this.translate('page.body.kyc.back')}</Button>
                     <div className="pg-confirm__content-deep-margin" />
                     <Button
                         className="pg-confirm__content-phone-deep-button"
                         onClick={this.sendDocuments}
                         disabled={buttonDisabled}
+                        size="lg"
+                        block={true}
                     >
                         {this.translate('page.body.kyc.next')}
                     </Button>
