@@ -141,21 +141,23 @@ class ProfilePartialComponent extends React.Component<Props, State> {
     public updateUserProfileInfo = () => {
         const { user } = this.props;
         const { firstName, lastName, dateOfBirth, countryOfBirth, metadata = {nationality: ''} } = this.state;
-        if (user.profile) {
-            if (user.profile.first_name && user.profile.first_name !== firstName) {
+
+        const profile = user.profiles.length && user.profiles[user.profiles.length - 1];
+        if (profile) {
+            if (profile.first_name && profile.first_name !== firstName) {
                 this.setState({
-                    firstName: user.profile.first_name,
+                    firstName: profile.first_name,
                 });
             }
 
-            if (user.profile.last_name && user.profile.last_name !== lastName) {
+            if (profile.last_name && profile.last_name !== lastName) {
                 this.setState({
-                    lastName: user.profile.last_name,
+                    lastName: profile.last_name,
                 });
             }
 
-            if (user.profile.dob) {
-                const tmp = user.profile.dob.split('-').reverse().join('/');
+            if (profile.dob) {
+                const tmp = profile.dob.split('-').reverse().join('/');
                 if (tmp !== dateOfBirth) {
                     this.setState({
                         dateOfBirth: tmp,
@@ -164,12 +166,12 @@ class ProfilePartialComponent extends React.Component<Props, State> {
                 }
             }
 
-            if (user.profile.country && user.profile.country !== countryOfBirth) {
+            if (profile.country && profile.country !== countryOfBirth) {
                 this.setState({
-                    countryOfBirth: user.profile.country,
+                    countryOfBirth: profile.country,
                 });
             }
-            const currentNationality = user.profile.metadata && JSON.parse(user.profile.metadata).nationality;
+            const currentNationality = profile.metadata && JSON.parse(profile.metadata).nationality;
             if (currentNationality && currentNationality !== metadata.nationality) {
                 this.setState({
                     metadata: {
