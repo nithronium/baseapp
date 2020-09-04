@@ -145,8 +145,11 @@ const linkBlock = {
         header: 'footer_headers_legal',
         body: [
             { key: '', href: '/terms', label: 'footer_headers_terms_of_use', mainsite: true },
+            { key: '', href: '/terms-defi', label: 'footer_headers_terms_of_use_defi', mainsite: true },
             { key: '', href: '/privacy', label: 'footer_headers_privacy', mainsite: true },
             { key: '', href: '/kyc_policy', label: 'footer_headers_KYC_AML_policy', mainsite: true },
+            { key: '', href: '/cookie', label: 'footer_headers_cookie', mainsite: true },
+
         ].map((link, index) => {
             link.key = `footer-link-${index}-${link.href}-${link.label}`;
             return link;
