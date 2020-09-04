@@ -182,6 +182,8 @@ class NavBarComponent extends React.Component<NavbarProps, NavbarState> {
             // location,
             user,
         } = this.props;
+        // tslint:disable-next-line:no-console
+        console.log('...........user', user);
         const baseURL = window.document.location.origin;
         const {openMenuType, openMobileMenu, isLogin} = this.state;
         const isMobileWith = this.headerRef.current && this.headerRef.current.clientWidth < 800;

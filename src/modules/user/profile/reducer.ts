@@ -12,6 +12,7 @@ import {
     PROFILE_GENERATE_2FA_QRCODE_ERROR,
     PROFILE_GENERATE_2FA_QRCODE_FETCH,
     PROFILE_RESET_USER,
+    PROFILE_SET_BALANCE,
     PROFILE_TOGGLE_2FA_DATA,
     PROFILE_TOGGLE_2FA_ERROR,
     PROFILE_TOGGLE_2FA_FETCH,
@@ -205,6 +206,17 @@ export const userReducer = (state: ProfileState['userData'], action: ProfileActi
                 },
                 success: false,
             };
+        case PROFILE_SET_BALANCE:
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    balance: action.payload.quote,
+                    cryptoCurrency: Object.keys(action.payload.quote)[0],
+                    activeCurrency: Object.keys(action.payload.quote)[1],
+                },
+            };
+
         default:
             return state;
     }
@@ -244,6 +256,7 @@ export const profileReducer = (state = initialStateProfile, action: ProfileActio
         case PROFILE_CHANGE_USER_FETCH:
         case PROFILE_CHANGE_USER_DATA:
         case PROFILE_CHANGE_USER_ERROR:
+        case PROFILE_SET_BALANCE:
             const userState = { ...state.userData };
 
             return {
