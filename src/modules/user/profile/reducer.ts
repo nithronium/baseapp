@@ -49,8 +49,12 @@ const defaultUser = {
     role: '',
     state: '',
     uid: '',
-    cryptoCurrency: '',
-    activeCurrency: '',
+    balance: {
+        USD: 0,
+        BTC: 0,
+    },
+    cryptoCurrency: 'BTC',
+    activeCurrency: 'USD',
     profiles: [],
 };
 
