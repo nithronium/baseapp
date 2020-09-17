@@ -2,10 +2,13 @@ import * as React from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useSelector } from 'react-redux';
 import { GeetestCaptcha } from '../../containers';
-import { selectConfigs } from '../../modules';
+import { useGeetestCaptchaSuccess, useRecaptchaSuccess, useSetShouldGeetestReset } from '../../hooks';
+import { selectConfigs, selectShouldGeetestReset } from '../../modules';
 
 export const CaptchaComponent = props => {
     const configs = useSelector(selectConfigs);
+    const shouldGeetestReset = useSelector(selectShouldGeetestReset);
+
     let reCaptchaRef;
 
     reCaptchaRef = React.useRef();
@@ -17,7 +20,7 @@ export const CaptchaComponent = props => {
                 reCaptchaRef.current.reset();
             }
             if (geetestCaptchaRef) {
-                props.setShouldGeetestReset(true);
+                useSetShouldGeetestReset(true);
             }
         }
     }, [props.error, props.success]);
@@ -30,7 +33,7 @@ export const CaptchaComponent = props => {
                         <ReCAPTCHA
                             ref={reCaptchaRef}
                             sitekey={configs.captcha_id}
-                            onChange={props.handleReCaptchaSuccess}
+                            onChange={useRecaptchaSuccess}
                         />
                     </div>
                 );
@@ -39,8 +42,8 @@ export const CaptchaComponent = props => {
                     <div className="pg-captcha--geetest">
                         <GeetestCaptcha
                             ref={geetestCaptchaRef}
-                            shouldCaptchaReset={props.shouldGeetestReset}
-                            onSuccess={props.handleGeetestCaptchaSuccess}
+                            shouldCaptchaReset={shouldGeetestReset}
+                            onSuccess={useGeetestCaptchaSuccess}
                         />
                     </div>
                 );

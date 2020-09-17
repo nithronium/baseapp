@@ -1,10 +1,14 @@
+import { GeetestCaptchaResponse } from '../..';
 import {
     CommonError,
 } from '../../types';
 import {
+    GEETEST_CAPTCHA_SUCCESS_DATA,
     GET_GEETEST_CAPTCHA_DATA,
     GET_GEETEST_CAPTCHA_ERROR,
     GET_GEETEST_CAPTCHA_FETCH,
+    RECAPTCHA_SUCCESS_DATA,
+    SHOULD_GEETEST_RESET_FETCH,
 } from './constants';
 
 export interface GeetestCaptchaKeys {
@@ -26,10 +30,28 @@ export interface GeetestCaptchaFetch {
     type: typeof GET_GEETEST_CAPTCHA_FETCH;
 }
 
+export interface GeetestCaptchaSuccess {
+    type: typeof GEETEST_CAPTCHA_SUCCESS_DATA;
+    payload?: GeetestCaptchaResponse;
+}
+
+export interface SetGeetestShouldReset {
+    type: typeof SHOULD_GEETEST_RESET_FETCH;
+    payload: boolean;
+}
+
+export interface RecaptchaSuccess {
+    type: typeof RECAPTCHA_SUCCESS_DATA;
+    payload: string;
+}
+
 export type GeetestCaptchaAction =
     GeetestCaptchaData
     | GeetestCaptchaError
-    | GeetestCaptchaFetch;
+    | GeetestCaptchaFetch
+    | GeetestCaptchaSuccess
+    | SetGeetestShouldReset
+    | RecaptchaSuccess;
 
 export const geetestCaptchaData = (keys: GeetestCaptchaKeys): GeetestCaptchaData => ({
     type: GET_GEETEST_CAPTCHA_DATA,
@@ -43,4 +65,19 @@ export const geetestCaptchaError = (error: CommonError): GeetestCaptchaError => 
 
 export const geetestCaptchaFetch = (): GeetestCaptchaFetch => ({
     type: GET_GEETEST_CAPTCHA_FETCH,
+});
+
+export const setGeetestCaptchaSuccess = (payload: GeetestCaptchaSuccess['payload']): GeetestCaptchaSuccess => ({
+    type: GEETEST_CAPTCHA_SUCCESS_DATA,
+    payload,
+});
+
+export const setShouldGeetestReset = (payload: boolean): SetGeetestShouldReset => ({
+    type: SHOULD_GEETEST_RESET_FETCH,
+    payload,
+});
+
+export const setRecaptchaSuccess = (payload: string): RecaptchaSuccess => ({
+    type: RECAPTCHA_SUCCESS_DATA,
+    payload,
 });
